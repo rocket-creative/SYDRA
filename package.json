@@ -2,6 +2,9 @@
   "name": "sydra-master",
   "private": true,
   "workspaces": ["web"],
+  "dependencies": {
+    "next": "16.2.5"
+  },
   "scripts": {
     "build": "npm run build -w web",
     "dev": "npm run dev -w web",
