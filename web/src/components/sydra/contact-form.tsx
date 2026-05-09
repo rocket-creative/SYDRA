@@ -3,6 +3,8 @@
 import type { FormEvent } from "react";
 import { useCallback, useState } from "react";
 
+import { contactMailtoHref, formatContactEmailMasked } from "@/lib/contact";
+
 type FormState =
   | { status: "idle" }
   | { status: "submitting" }
@@ -34,7 +36,7 @@ export function SydraContactForm() {
         setState({
           status: "error",
           message:
-            "Something went wrong. Please try again or email hello@sydrahealth.com.",
+            "Something went wrong. Please try again or use the email link below.",
         });
         return;
       }
@@ -49,9 +51,12 @@ export function SydraContactForm() {
   }, []);
 
   return (
-    <section className="bg-white py-16 md:py-24" id="contact">
+    <section className="bg-white py-16 md:py-24" id="contact" aria-labelledby="heading-contact">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-[640px] xl:px-8">
-        <h2 className="text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
+        <h2
+          className="text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl"
+          id="heading-contact"
+        >
           Ready to recover what insurers owe you?
         </h2>
         <p className="mt-5 text-center text-base leading-relaxed text-[#4A5568] md:text-[17px]">
@@ -74,8 +79,9 @@ export function SydraContactForm() {
               </label>
               <input
                 required
+                aria-required="true"
                 autoComplete="name"
-                className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-[15px] text-slate-900 outline-none ring-offset-2 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
+                className="mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
                 id="name"
                 name="name"
                 type="text"
@@ -90,8 +96,9 @@ export function SydraContactForm() {
               </label>
               <input
                 required
+                aria-required="true"
                 autoComplete="organization"
-                className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-[15px] text-slate-900 outline-none ring-offset-2 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
+                className="mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
                 id="practiceName"
                 name="practiceName"
                 type="text"
@@ -103,9 +110,11 @@ export function SydraContactForm() {
               </label>
               <input
                 required
+                aria-required="true"
                 autoComplete="email"
-                className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-[15px] text-slate-900 outline-none ring-offset-2 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
+                className="mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
                 id="email"
+                inputMode="email"
                 name="email"
                 type="email"
               />
@@ -116,8 +125,9 @@ export function SydraContactForm() {
               </label>
               <input
                 autoComplete="tel"
-                className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-[15px] text-slate-900 outline-none ring-offset-2 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
+                className="mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
                 id="phone"
+                inputMode="tel"
                 name="phone"
                 type="tel"
               />
@@ -130,21 +140,30 @@ export function SydraContactForm() {
                 What would you like to know?
               </label>
               <textarea
-                className="mt-1.5 min-h-[120px] w-full resize-y rounded-lg border border-slate-200 px-3 py-2.5 text-[15px] text-slate-900 outline-none ring-offset-2 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
+                className="mt-1.5 min-h-[120px] w-full resize-y rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
                 id="message"
+                inputMode="text"
                 name="message"
                 rows={4}
               />
             </div>
 
             {state.status === "error" ? (
-              <p className="text-sm text-red-600" role="alert">
-                {state.message}
-              </p>
+              <div className="text-sm text-red-600" role="alert">
+                <p>{state.message}</p>
+                <p className="mt-2">
+                  <a
+                    className="font-medium text-[#1A2B48] underline decoration-slate-300 underline-offset-2 transition-colors duration-300 hover:decoration-[#1A2B48]"
+                    href={contactMailtoHref()}
+                  >
+                    {formatContactEmailMasked()}
+                  </a>
+                </p>
+              </div>
             ) : null}
 
             <button
-              className="w-full rounded-lg bg-[#1A2B48] py-3 text-sm font-semibold text-white shadow-sm hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="min-h-12 w-full rounded-md bg-[#1A2B48] py-3 text-base font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:opacity-60 disabled:active:scale-100"
               disabled={state.status === "submitting"}
               type="submit"
             >

@@ -1,11 +1,14 @@
 export function SydraAbout() {
   return (
-    <section className="border-b border-slate-100 bg-white py-16 md:py-24" id="about">
+    <section aria-labelledby="heading-about" className="border-b border-slate-100 bg-white py-16 md:py-24" id="about">
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 xl:max-w-[720px] xl:px-8">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-blue-700 sm:text-xs">
           About Sydra
         </p>
-        <h2 className="mt-3 text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]">
+        <h2
+          className="mt-3 text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
+          id="heading-about"
+        >
           Built by a surgeon, not a billing company.
         </h2>
         <p className="mt-6 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">

@@ -1,13 +1,18 @@
+import { getContactEmail } from "@/lib/contact";
 import { siteUrl } from "@/lib/site";
 
 const BASE = () => siteUrl();
 
 export function HomepageJsonLd() {
   const base = BASE();
+  const orgId = `${base}/#organization`;
+  const websiteId = `${base}/#website`;
+  const webpageId = `${base}/#webpage`;
 
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": orgId,
     name: "Kronos Health",
     url: base,
     logo: `${base}/icon-sydra.svg`,
@@ -18,7 +23,7 @@ export function HomepageJsonLd() {
     contactPoint: [
       {
         "@type": "ContactPoint",
-        email: "hello@sydrahealth.com",
+        email: getContactEmail(),
         contactType: "customer support",
       },
     ],
@@ -28,11 +33,24 @@ export function HomepageJsonLd() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": websiteId,
     name: "Sydra",
     url: base,
     description:
       "AI drafted No Surprises Act IDR submissions for surgical practices.",
-    publisher: { "@type": "Organization", name: "Kronos Health" },
+    publisher: { "@id": orgId },
+  };
+
+  const webpage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": webpageId,
+    url: base,
+    name: "Sydra | AI drafted IDR submissions for surgical practices",
+    isPartOf: { "@id": websiteId },
+    about: { "@id": orgId },
+    description:
+      "Sydra drafts stronger No Surprises Act IDR submissions for surgical practices using AI trained on real determinations.",
   };
 
   const service = {
@@ -41,7 +59,7 @@ export function HomepageJsonLd() {
     name: "Sydra IDR submission drafting",
     description:
       "AI assisted drafting of Independent Dispute Resolution submissions for surgical providers.",
-    provider: { "@type": "Organization", name: "Kronos Health" },
+    provider: { "@id": orgId },
     areaServed: "United States",
     serviceType: "Healthcare revenue cycle and IDR",
   };
@@ -88,6 +106,7 @@ export function HomepageJsonLd() {
   const payload = [
     organization,
     website,
+    webpage,
     service,
     faq,
   ].map((o) => JSON.stringify(o));

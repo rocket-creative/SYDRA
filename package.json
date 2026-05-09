@@ -1,0 +1,14 @@
+{
+  "name": "sydra-master",
+  "private": true,
+  "workspaces": ["web"],
+  "scripts": {
+    "build": "npm run build -w web",
+    "dev": "npm run dev -w web",
+    "lint": "npm run lint -w web",
+    "start": "npm run start -w web"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

@@ -1,6 +1,9 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export const alt = "Sydra";
 
@@ -9,7 +12,15 @@ export const size = {
   height: 630,
 };
 
+function sydraLogoDataUrl(): string {
+  const filePath = join(process.cwd(), "public", "icon-sydra.svg");
+  const buf = readFileSync(filePath);
+  return `data:image/svg+xml;base64,${buf.toString("base64")}`;
+}
+
 export default function OgImage() {
+  const logoSrc = sydraLogoDataUrl();
+
   return new ImageResponse(
     (
       <div
@@ -37,21 +48,17 @@ export default function OgImage() {
             maxWidth: 920,
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element -- next/og ImageResponse requires img */}
+          <img
+            alt=""
+            height={101}
+            src={logoSrc}
+            style={{ objectFit: "contain" }}
+            width={480}
+          />
           <span
             style={{
-              fontSize: 82,
-              fontWeight: 700,
-              letterSpacing: -2,
-              color: "#1A2B48",
-              textAlign: "center",
-              lineHeight: 1.1,
-            }}
-          >
-            Sydra
-          </span>
-          <span
-            style={{
-              marginTop: 20,
+              marginTop: 28,
               fontSize: 32,
               color: "#4A5568",
               fontWeight: 500,

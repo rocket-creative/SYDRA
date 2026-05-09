@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import { FadeUp } from "@/components/motion/reveal";
+import { SydraHeroMock } from "@/components/sydra/hero-mock";
+
 function CheckItem({ children }: { children: React.ReactNode }) {
   return (
     <li className="flex gap-3 text-[15px] leading-relaxed text-slate-700 md:text-base">
@@ -16,14 +19,20 @@ function CheckItem({ children }: { children: React.ReactNode }) {
 
 export function SydraHero() {
   return (
-    <section className="border-b border-slate-100 bg-white pb-14 pt-12 md:pb-16 md:pt-16 lg:pt-20">
+    <section
+      aria-labelledby="heading-hero"
+      className="border-b border-slate-100 bg-[#FAFBFD] pb-16 pt-[max(3rem,env(safe-area-inset-top))] md:pb-20 md:pt-16 lg:pt-20"
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
-        <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-700 sm:text-xs">
+        <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgb(0,40,184)] sm:text-xs">
           For surgical practices fighting insurance underpayments
         </p>
-        <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-12 xl:gap-14">
-          <div className="lg:col-span-7">
-            <h1 className="text-[2rem] font-semibold leading-[1.12] tracking-tight text-[#1A2B48] sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+        <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 xl:gap-14">
+          <div className="lg:col-span-6">
+            <h1
+              className="text-[2rem] font-semibold leading-[1.12] tracking-tight text-[#1A2B48] sm:text-4xl md:text-[2.75rem] md:leading-[1.1]"
+              id="heading-hero"
+            >
               Win more IDR disputes.{` `}
               <span className="block">In minutes, not hours.</span>
             </h1>
@@ -35,13 +44,13 @@ export function SydraHero() {
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
-                className="inline-flex rounded-lg bg-[#1A2B48] px-5 py-3 text-center text-sm font-semibold text-white shadow-sm hover:opacity-90 sm:min-w-[10rem]"
+                className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#1A2B48] px-5 py-3 text-center text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.98] sm:min-w-[10rem]"
                 href="#contact"
               >
                 Request a demo
               </Link>
               <a
-                className="inline-flex rounded-lg border border-slate-200 bg-white px-5 py-3 text-center text-sm font-semibold text-[#1A2B48] hover:bg-slate-50"
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-5 py-3 text-center text-sm font-semibold text-[#1A2B48] transition duration-300 ease-out hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
                 href="#how-it-works"
               >
                 See how it works
@@ -53,31 +62,38 @@ export function SydraHero() {
             </p>
           </div>
 
-          <div className="mt-12 lg:col-span-5 lg:mt-2">
-            <div className="rounded-xl bg-[#F0F4F8] p-8 shadow-inner ring-1 ring-slate-200/70 md:p-9">
-              <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-700 sm:text-xs">
-                What Sydra produces
-              </h2>
-              <ul className="mt-6 space-y-5">
-                <CheckItem>
-                  Executive summary tailored to your CPT codes
-                </CheckItem>
-                <CheckItem>
-                  Market rate justification with comparable cases
-                </CheckItem>
-                <CheckItem>
-                  Citations from prior winning determinations
-                </CheckItem>
-                <CheckItem>
-                  Clinical necessity narrative drawn from your op notes
-                </CheckItem>
-                <CheckItem>
-                  Submission ready DOCX export with checklist
-                </CheckItem>
-              </ul>
-            </div>
+          <div className="mt-14 lg:col-span-6 lg:mt-0">
+            <SydraHeroMock />
           </div>
         </div>
+
+        <FadeUp className="mt-14 lg:mt-16">
+          <div className="rounded-xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] backdrop-blur-sm transition duration-500 ease-out hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] md:p-8">
+            <h2
+              className="text-[11px] font-bold uppercase tracking-[0.18em] text-[rgb(0,40,184)] sm:text-xs"
+              id="heading-produces"
+            >
+              What Sydra produces
+            </h2>
+            <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 lg:gap-6">
+              <CheckItem>
+                Executive summary tailored to your CPT codes
+              </CheckItem>
+              <CheckItem>
+                Market rate justification with comparable cases
+              </CheckItem>
+              <CheckItem>
+                Citations from prior winning determinations
+              </CheckItem>
+              <CheckItem>
+                Clinical necessity narrative drawn from your op notes
+              </CheckItem>
+              <CheckItem>
+                Submission ready DOCX export with checklist
+              </CheckItem>
+            </ul>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );

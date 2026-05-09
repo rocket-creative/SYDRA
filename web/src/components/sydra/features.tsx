@@ -1,3 +1,5 @@
+import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
+
 const features = [
   {
     title: "AI drafted submissions",
@@ -34,6 +36,7 @@ const features = [
 export function SydraFeatures() {
   return (
     <section
+      aria-labelledby="heading-features"
       className="border-b border-slate-100 bg-white py-16 md:py-24"
       id="features"
     >
@@ -41,19 +44,28 @@ export function SydraFeatures() {
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-blue-700 sm:text-xs">
           What you get
         </p>
-        <h2 className="mx-auto mt-3 max-w-3xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]">
+        <h2
+          className="mx-auto mt-3 max-w-3xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
+          id="heading-features"
+        >
           Built for the way surgical practices actually work
         </h2>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerParent className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.title}>
-              <h3 className="text-lg font-semibold text-[#1A2B48]">{f.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
-                {f.body}
-              </p>
-            </div>
+            <StaggerChild key={f.title}>
+              <div className="group h-full rounded-2xl border border-transparent bg-white/40 p-1 transition duration-300 ease-out hover:-translate-y-1 hover:border-slate-200/90 hover:bg-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
+                <div className="rounded-[14px] p-4 md:p-5">
+                  <h3 className="text-lg font-semibold text-[#1A2B48] transition-colors duration-300 group-hover:text-[rgb(0,40,184)]">
+                    {f.title}
+                  </h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
+                    {f.body}
+                  </p>
+                </div>
+              </div>
+            </StaggerChild>
           ))}
-        </div>
+        </StaggerParent>
       </div>
     </section>
   );

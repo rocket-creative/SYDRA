@@ -19,22 +19,25 @@ const faqs = [
 
 export function SydraFaq() {
   return (
-    <section className="border-b border-slate-100 bg-slate-50 py-16 md:py-24">
+    <section aria-labelledby="heading-faq" className="border-b border-slate-100 bg-slate-50 py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-[720px] xl:px-8">
-        <h2 className="text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
+        <h2
+          className="text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl"
+          id="heading-faq"
+        >
           Common questions
         </h2>
         <div className="mt-10 space-y-3">
           {faqs.map((item) => (
             <details
               key={item.q}
-              className="group rounded-xl border border-slate-200 bg-white px-4 py-1 shadow-sm open:shadow-md md:px-5"
+              className="group rounded-xl border border-slate-200 bg-white px-4 py-1 shadow-sm transition-all duration-300 ease-out open:border-slate-300 open:shadow-md hover:border-slate-300/90 md:px-5"
             >
-              <summary className="cursor-pointer list-none py-4 text-left text-base font-semibold text-[#1A2B48] outline-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-blue-600 md:text-[17px] [&::-webkit-details-marker]:hidden">
+              <summary className="cursor-pointer list-none py-4 text-left text-base font-semibold text-[#1A2B48] outline-none ring-offset-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-blue-600 md:text-[17px] [&::-webkit-details-marker]:hidden">
                 <span className="flex items-center justify-between gap-3">
                   {item.q}
                   <span
-                    className="text-slate-400 transition group-open:rotate-180"
+                    className="text-slate-400 transition-transform duration-300 ease-out group-open:rotate-180"
                     aria-hidden
                   >
                     ▼
