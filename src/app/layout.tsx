@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 const base = siteUrl();
 const canonical = `${base}/`;
 
-/** ~158 chars — primary keyword, CTA, within 150–160 SERP guideline */
+/** ~157 chars — platform positioning, within 150–160 SERP guideline */
 const description =
-  "Sydra drafts stronger No Surprises Act IDR submissions for surgical practices using AI trained on real determinations. Request a demo to recover more revenue.";
+  "The practice enhancement platform for surgical groups. Real-time eligibility, prior authorization, CPT assessment, compliance, and Federal & State IDR — in one place.";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -32,13 +32,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(base),
   title: {
-    default: "Sydra | AI drafted IDR submissions for surgical practices",
+    default: "Sydra | Practice enhancement platform for surgical groups",
     template: "%s · Sydra",
   },
   description,
   alternates: { canonical },
   openGraph: {
-    title: "Sydra | AI drafted IDR submissions for surgical practices",
+    title: "Sydra | Practice enhancement platform for surgical groups",
     description,
     url: canonical,
     siteName: "Sydra",
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Sydra — AI drafted IDR submissions for surgical practices",
+        alt: "Sydra — Practice enhancement platform for surgical groups",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sydra | AI drafted IDR submissions for surgical practices",
+    title: "Sydra | Practice enhancement platform for surgical groups",
     description,
     images: ["/opengraph-image"],
   },

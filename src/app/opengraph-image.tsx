@@ -67,7 +67,7 @@ export default function OgImage() {
               lineHeight: 1.4,
             }}
           >
-            AI drafted IDR submissions for surgical practices
+            Practice enhancement platform for surgical groups
           </span>
         </div>
       </div>

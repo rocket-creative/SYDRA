@@ -14,14 +14,16 @@ export function SydraAbout() {
         <p className="mt-6 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
           Sydra is a product of{" "}
           <strong className="font-semibold text-[#1A2B48]">Kronos Health</strong>
-          , an expert in Revenue Cycle Management and specifically the NSA IDR
-          process.
+          , built by{" "}
+          <strong className="font-semibold text-[#1A2B48]">Dr. John Abrahams</strong>
+          , a practicing neurosurgeon and expert in Revenue Cycle Management and
+          the NSA IDR process.
         </p>
         <p className="mt-4 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
           After watching insurers underpay his own cases case after case, and
-          seeing the legal hourly rate billing companies charge to handle IDR
-          submissions, he built Sydra for his practice and then opened it to
-          other surgical groups.
+          seeing the legal-hourly-rate billing companies charge to handle IDR
+          submissions, Dr. Abrahams built Sydra for his practice and then opened
+          it to other surgical groups.
         </p>
         <p className="mt-4 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
           Sydra runs in production today at NY Brain and Spine Surgery and is

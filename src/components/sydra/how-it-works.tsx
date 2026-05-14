@@ -3,21 +3,22 @@ import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
 const steps = [
   {
     n: "1",
-    title: "Upload your case",
+    title: "Connect your practice",
     body:
-      "Drop in EOBs, op notes, patient notes, radiology, or scan a denial letter. Sydra pulls structured data automatically: CPT codes, dates, charges, patient demographics, and matches it against your provider profile.",
+      "EMR (ModMed today, more coming), Stedi clearinghouse for real-time eligibility, and provider profiles including CVs — ingested once. Multi-tenant from day one, so your data is yours.",
   },
   {
     n: "2",
-    title: "Sydra drafts the submission",
+    title: "Run every patient through Sydra",
     body:
-      "Our AI, trained on hundreds of real IDR determinations, identifies the strongest argument for your specific CPT codes, cites prior wins, and assembles the executive summary, market rate analysis, and clinical narrative.",
+      "Verify eligibility (270/271) at intake. Draft prior auths against embedded payer policy and run an AI compliance check. Read op notes for CPT coding. Each step compounds into stronger documentation for the next.",
   },
   {
     n: "3",
-    title: "Review, export, submit",
+    title: "Win the IDR — or never need one",
+    highlight: true,
     body:
-      "You review the draft and edit anything you want. One click to copy for the IDRE portal or export as a submission ready DOCX with a guided checklist. Clearinghouse and EMR integration handles the upstream data flow.",
+      "When an out-of-network claim comes back underpaid, Sydra drafts a Federal or State IDR submission in minutes, citing real prior wins on your CPT codes. One-click DOCX export and a guided checklist for the IDRE portal.",
   },
 ] as const;
 
@@ -36,14 +37,24 @@ export function SydraHowItWorks() {
           className="mx-auto mt-3 max-w-2xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
           id="heading-how-it-works"
         >
-          Three steps from claim to submission
+          One workflow. Every step of the claim.
         </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-[#4A5568] md:text-[17px]">
+          Connect once. Run every patient through Sydra. IDR is the headline payoff, but the system earns its keep at every step before it.
+        </p>
         <StaggerParent className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
           {steps.map((s) => (
             <StaggerChild key={s.n}>
-              <article className="group h-full rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition duration-300 ease-out hover:-translate-y-1 hover:border-slate-200 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] md:p-8">
-                <div className="inline-flex size-9 items-center justify-center rounded-md bg-blue-100 text-sm font-bold text-[#1A2B48] transition-transform duration-300 ease-out group-hover:scale-110">
-                  {s.n}
+              <article className={`group h-full rounded-xl border p-6 shadow-sm transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] md:p-8 ${"highlight" in s && s.highlight ? "border-blue-200 bg-blue-50/40 ring-1 ring-blue-200 hover:border-blue-300" : "border-slate-100 bg-white hover:border-slate-200"}`}>
+                <div className="flex items-center justify-between">
+                  <div className={`inline-flex size-9 items-center justify-center rounded-md text-sm font-bold transition-transform duration-300 ease-out group-hover:scale-110 ${"highlight" in s && s.highlight ? "bg-[#1A2B48] text-white" : "bg-blue-100 text-[#1A2B48]"}`}>
+                    {s.n}
+                  </div>
+                  {"highlight" in s && s.highlight && (
+                    <span className="rounded-full border border-blue-200 bg-white px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700">
+                      Biggest payoff
+                    </span>
+                  )}
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-[#1A2B48] md:text-xl">
                   {s.title}

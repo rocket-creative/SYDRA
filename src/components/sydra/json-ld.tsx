@@ -37,7 +37,7 @@ export function HomepageJsonLd() {
     name: "Sydra",
     url: base,
     description:
-      "AI drafted No Surprises Act IDR submissions for surgical practices.",
+      "The practice enhancement platform for surgical groups — IDR-led, with real-time eligibility, prior authorization, CPT assessment, and compliance built in.",
     publisher: { "@id": orgId },
   };
 
@@ -46,22 +46,22 @@ export function HomepageJsonLd() {
     "@type": "WebPage",
     "@id": webpageId,
     url: base,
-    name: "Sydra | AI drafted IDR submissions for surgical practices",
+    name: "Sydra | Practice enhancement platform for surgical groups",
     isPartOf: { "@id": websiteId },
     about: { "@id": orgId },
     description:
-      "Sydra drafts stronger No Surprises Act IDR submissions for surgical practices using AI trained on real determinations.",
+      "Sydra is the practice enhancement platform for surgical groups. IDR-led. End-to-end. One platform. Real-time eligibility, prior authorization, CPT assessment, compliance, and Federal & State IDR.",
   };
 
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Sydra IDR submission drafting",
+    name: "Sydra practice enhancement platform",
     description:
-      "AI assisted drafting of Independent Dispute Resolution submissions for surgical providers.",
+      "AI-driven practice enhancement platform for surgical groups: real-time eligibility verification, prior authorization drafting, CPT assessment, compliance checks, and Federal & State IDR submission drafting.",
     provider: { "@id": orgId },
     areaServed: "United States",
-    serviceType: "Healthcare revenue cycle and IDR",
+    serviceType: "Healthcare revenue cycle management and IDR",
   };
 
   const faq = {
@@ -89,7 +89,15 @@ export function HomepageJsonLd() {
         name: "Is my data secure?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role based access for your staff. PHI is handled under HIPAA controls. We can walk through our security posture with your compliance team before signing.",
+          text: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role-based access for your staff. PHI is handled under HIPAA controls. We can walk through our security posture with your compliance team before signing.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What does Sydra do besides IDR?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sydra was built around IDR — that's still the biggest dollar win for most practices. But the same engine now drives real-time eligibility verification (270/271), prior authorization drafting with embedded payer policy, an AI compliance check against medical-necessity criteria, and a CPT assessor that reads your op notes directly. It's a practice-wide tool now, not just an IDR drafter.",
         },
       },
       {
@@ -97,7 +105,7 @@ export function HomepageJsonLd() {
         name: "Does Sydra replace my biller?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Sydra is the IDR layer specifically. Your biller still handles charge capture, claim submission, and standard accounts receivable follow up. When a denial qualifies for IDR, Sydra is the tool that drafts the submission faster and stronger than a biller can on their own.",
+          text: "No. Your biller still handles charge capture, claim submission, and standard accounts receivable follow-up. Sydra sits alongside them and handles the high-judgment work AI is uniquely good at: IDR submissions, prior auth narratives, peer-to-peer prep, compliance audits, and CPT review from op notes. Practices keep their biller and add Sydra.",
         },
       },
     ],

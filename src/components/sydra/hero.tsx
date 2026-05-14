@@ -25,7 +25,7 @@ export function SydraHero() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
         <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgb(0,40,184)] sm:text-xs">
-          For surgical practices fighting insurance underpayments
+          Practice enhancement platform for surgical groups
         </p>
         <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 xl:gap-14">
           <div className="lg:col-span-6">
@@ -34,13 +34,14 @@ export function SydraHero() {
               id="heading-hero"
             >
               Win more IDR disputes.{` `}
-              <span className="block">In minutes, not hours.</span>
+              <span className="block text-[rgb(0,40,184)]">Defend the whole claim.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.7]">
-              Sydra drafts your No Surprises Act IDR submissions using AI trained
-              on hundreds of real determinations, built by a practicing
-              neurosurgeon who grew tired of insurance companies underpaying his
-              cases.
+              Sydra drafts winning No Surprises Act IDR submissions in minutes
+              using AI trained on hundreds of real determinations — and the same
+              platform now runs your eligibility checks, prior authorizations,
+              CPT review, and compliance audits. Built by a practicing
+              neurosurgeon.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
@@ -57,8 +58,7 @@ export function SydraHero() {
               </a>
             </div>
             <p className="mt-8 text-sm text-slate-500 md:text-[15px]">
-              No setup fees. Integrates with your EMR and Clearinghouse. SOC 2
-              controls in place.
+              No setup fees. Integrates with your EMR and clearinghouse. HIPAA / SOC 2 controls in place.
             </p>
           </div>
 
@@ -73,23 +73,26 @@ export function SydraHero() {
               className="text-[11px] font-bold uppercase tracking-[0.18em] text-[rgb(0,40,184)] sm:text-xs"
               id="heading-produces"
             >
-              What Sydra produces
+              What Sydra delivers
             </h2>
-            <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 lg:gap-6">
+            <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 lg:gap-6">
               <CheckItem>
-                Executive summary tailored to your CPT codes
+                Real-time eligibility verification at intake (270/271)
               </CheckItem>
               <CheckItem>
-                Market rate justification with comparable cases
+                AI-drafted prior auth narratives and peer-to-peer prep
               </CheckItem>
               <CheckItem>
-                Citations from prior winning determinations
+                AI gap analysis against payer medical-necessity rules
               </CheckItem>
               <CheckItem>
-                Clinical necessity narrative drawn from your op notes
+                CPT codes proposed directly from your op notes
               </CheckItem>
               <CheckItem>
-                Submission ready DOCX export with checklist
+                Federal and State IDR submissions cited to real wins
+              </CheckItem>
+              <CheckItem>
+                Submission-ready DOCX export with guided checklist
               </CheckItem>
             </ul>
           </div>

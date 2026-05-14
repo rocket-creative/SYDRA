@@ -9,11 +9,15 @@ const faqs = [
   },
   {
     q: "Is my data secure?",
-    a: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role based access for your staff. PHI is handled under HIPAA controls. We are happy to walk through our security posture with your compliance team before signing.",
+    a: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role-based access for your staff. PHI is handled under HIPAA controls. We are happy to walk through our security posture with your compliance team before signing.",
+  },
+  {
+    q: "What does Sydra do besides IDR?",
+    a: "Sydra was built around IDR — that's still the biggest dollar win for most practices. But the same engine now drives real-time eligibility verification (270/271), prior authorization drafting with embedded payer policy, an AI compliance check against medical-necessity criteria, and a CPT assessor that reads your op notes directly. It's a practice-wide tool now, not just an IDR drafter.",
   },
   {
     q: "Does Sydra replace my biller?",
-    a: "No. Sydra is the IDR layer specifically. Your biller still handles charge capture, claim submission, and standard accounts receivable follow up. When a denial qualifies for IDR, Sydra is the tool that drafts the submission faster and stronger than a biller can on their own.",
+    a: "No. Your biller still handles charge capture, claim submission, and standard accounts receivable follow-up. Sydra sits alongside them and handles the high-judgment work AI is uniquely good at: IDR submissions, prior auth narratives, peer-to-peer prep, compliance audits, and CPT review from op notes. Practices keep their biller and add Sydra.",
   },
 ] as const;
 

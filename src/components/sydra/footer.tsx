@@ -21,8 +21,9 @@ export function SydraFooter() {
             />
           </div>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#4A5568]">
-            AI drafted IDR submissions for surgical practices. A product of
-            Kronos Health, built by Dr. John Abrahams.
+            The practice enhancement platform for surgical groups — IDR-led, with
+            real-time eligibility, prior authorization, CPT assessment, and
+            compliance in one place. A product of Kronos Health.
           </p>
         </div>
         <div className="lg:col-span-3 lg:col-start-7">
