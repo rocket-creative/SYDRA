@@ -25,6 +25,7 @@ export async function POST(request: Request) {
     );
   }
 
+  // Routes to demo@sydrahealth.com
   // Integrate CRM or email relay here; acknowledgement only for now.
   return NextResponse.json({ ok: true });
 }

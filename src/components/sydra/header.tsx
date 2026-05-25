@@ -9,7 +9,7 @@ const nav = [
   { href: "#contact", label: "Contact" },
 ] as const;
 
-const SIGN_IN = "https://idra-five.vercel.app/login";
+const SIGN_IN = "https://sydra.health/";
 
 export function SydraHeader() {
   return (

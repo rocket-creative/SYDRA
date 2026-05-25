@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { contactMailtoHref } from "@/lib/contact";
 
-const SIGN_IN = "https://idra-five.vercel.app/login";
+const SIGN_IN = "https://sydra.health/";
 
 export function SydraFooter() {
   return (

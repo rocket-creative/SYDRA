@@ -1,7 +1,7 @@
 const faqs = [
   {
     q: "What does Sydra cost?",
-    a: "Sydra is licensed per practice with annual pricing scaled to your submission volume. Most practices recover the license cost on their first 1 to 2 cases. Request a demo for a custom quote.",
+    a: "Sydra is available in three tiers. Basic is per claim — you pay when a claim is filed, no monthly commitment. Plus is a monthly subscription where your team operates the software with our support. Pro is fully managed — Kronos handles every claim end to end. Most practices recover the cost on their first one or two cases. Request a demo and we will quote based on your specialty, state, and estimated monthly volume.",
   },
   {
     q: "How long does setup take?",

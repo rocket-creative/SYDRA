@@ -57,7 +57,10 @@ export function SydraHero() {
                 See how it works
               </a>
             </div>
-            <p className="mt-8 text-sm text-slate-500 md:text-[15px]">
+            <p className="mt-6 text-sm font-medium text-[#1A2B48] md:text-[15px]">
+              Practices using Sydra keep more of every recovery — without giving 20% to an attorney.
+            </p>
+            <p className="mt-3 text-sm text-slate-500 md:text-[15px]">
               No setup fees. Integrates with your EMR and clearinghouse. HIPAA / SOC 2 controls in place.
             </p>
           </div>

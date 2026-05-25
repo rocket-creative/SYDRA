@@ -20,10 +20,19 @@ export function SydraAbout() {
           the NSA IDR process.
         </p>
         <p className="mt-4 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
-          After watching insurers underpay his own cases case after case, and
-          seeing the legal-hourly-rate billing companies charge to handle IDR
-          submissions, Dr. Abrahams built Sydra for his practice and then opened
-          it to other surgical groups.
+          Practices that want full-service claim management alongside the
+          software work directly with the Kronos Revenue team. The same
+          operation, two ways to engage.
+        </p>
+        <p className="mt-4 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
+          After watching insurers underpay his own cases and seeing law firms
+          take 20% of every recovery for handling IDR, Dr. Abrahams built
+          Sydra — for his practice first, then for other surgical groups.
+        </p>
+        <p className="mt-4 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
+          Sydra is currently serving practices in New York, Texas, California,
+          New Jersey, Florida, and Arizona, with national expansion planned for
+          2026.
         </p>
         <p className="mt-4 text-left text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
           Sydra runs in production today at NY Brain and Spine Surgery and is

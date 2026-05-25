@@ -1,4 +1,4 @@
-const DEFAULT_CONTACT_EMAIL = "jma@nybrainspine.com";
+const DEFAULT_CONTACT_EMAIL = "demo@sydrahealth.com";
 
 const MAILTO_SUBJECT = "FROM SYDRA";
 
