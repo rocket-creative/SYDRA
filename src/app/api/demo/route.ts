@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { sendDemoLeadEmail } from "@/lib/email/send-demo-lead";
+import { sendDemoLeadEmail, type LeadRequestType } from "@/lib/email/send-demo-lead";
 import { scoreDemoLead } from "@/lib/leads/score-demo-lead";
 import {
   demoRequestSchema,
@@ -57,7 +57,13 @@ export async function POST(request: Request) {
 
   const score = scoreDemoLead(lead);
 
-  const sendResult = await sendDemoLeadEmail(lead, score);
+  const rawType =
+    body && typeof body === "object" && "request_type" in body
+      ? String((body as { request_type?: string }).request_type)
+      : "demo";
+  const requestType: LeadRequestType = rawType === "security" ? "security" : "demo";
+
+  const sendResult = await sendDemoLeadEmail(lead, score, requestType);
 
   if (!sendResult.ok) {
     console.error("Demo lead email failed:", sendResult.error);

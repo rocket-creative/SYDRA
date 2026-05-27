@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { US_STATES } from "@/lib/constants/us-states";
 import { isValidTierId } from "@/lib/content/tiers";
-import { contactMailtoHref, formatContactEmailMasked } from "@/lib/contact";
+import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
 import {
   BEST_TIME_OPTIONS,
   DISPUTES_PER_MONTH_OPTIONS,
@@ -23,15 +23,15 @@ import {
 } from "@/lib/schemas/demo-request";
 
 const inputClass =
-  "mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30";
+  "mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus-visible:ring-2 focus-visible:ring-blue-500/30";
 
 const selectClass = `${inputClass} bg-white`;
 
 const buttonPrimaryClass =
-  "min-h-12 w-full rounded-md bg-[#1A2B48] py-3 text-base font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60";
+  "min-h-12 w-full rounded-md bg-[#1A2B48] py-3 text-base font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2";
 
 const buttonSecondaryClass =
-  "min-h-12 w-full rounded-md border border-slate-200 bg-white py-3 text-base font-semibold text-[#1A2B48] transition duration-300 ease-out hover:bg-slate-50 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60";
+  "min-h-12 w-full rounded-md border border-slate-200 bg-white py-3 text-base font-semibold text-[#1A2B48] transition duration-300 ease-out hover:bg-slate-50 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2";
 
 type Step = 1 | 2;
 
@@ -52,8 +52,15 @@ const initialStepOne: StepOneData = {
   practiceName: "",
 };
 
-export function DemoFunnelForm() {
+type DemoFunnelFormProps = {
+  intent?: "demo" | "security";
+};
+
+export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   const router = useRouter();
+  const requestType = intent === "security" ? "security" : "demo";
+  const submitLabel =
+    intent === "security" ? "Request security summary" : "Schedule a demo";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneData>(initialStepOne);
   const [state, setState] = useState<FormState>({ status: "idle" });
@@ -105,6 +112,7 @@ export function DemoFunnelForm() {
         utmSource,
         utmCampaign,
         website: formData.get("website") ?? "",
+        request_type: requestType,
       };
 
       try {
@@ -132,7 +140,7 @@ export function DemoFunnelForm() {
         });
       }
     },
-    [router, stepOne, utmCampaign, utmSource],
+    [requestType, router, stepOne, utmCampaign, utmSource],
   );
 
   return (
@@ -152,7 +160,7 @@ export function DemoFunnelForm() {
           2
         </div>
       </div>
-      <p className="text-center text-sm font-medium text-slate-500">
+      <p className="text-center text-sm font-medium text-slate-500" aria-live="polite">
         Step {step} of 2
       </p>
 
@@ -399,9 +407,9 @@ export function DemoFunnelForm() {
               <p className="mt-2">
                 <a
                   className="font-medium text-[#1A2B48] underline decoration-slate-300 underline-offset-2 hover:decoration-[#1A2B48]"
-                  href={contactMailtoHref()}
+                  href={salesMailtoHref()}
                 >
-                  {formatContactEmailMasked()}
+                  {getSalesEmail()}
                 </a>
               </p>
             </div>
@@ -413,7 +421,7 @@ export function DemoFunnelForm() {
               disabled={state.status === "submitting"}
               type="submit"
             >
-              {state.status === "submitting" ? "Submitting…" : "Schedule a demo"}
+              {state.status === "submitting" ? "Submitting…" : submitLabel}
             </button>
             <button
               className={`${buttonSecondaryClass} sm:flex-1`}

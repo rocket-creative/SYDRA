@@ -17,9 +17,9 @@ export function SydraProblem() {
             </p>
             <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
               The No Surprises Act gave providers the right to dispute underpayments through
-              Independent Dispute Resolution — the single highest-leverage recovery in
+              Independent Dispute Resolution, the highest value recovery step in
               the workflow. Most practices never file because each submission eats 30
-              minutes of biller time — or they hand the file to an attorney and
+              minutes of biller time, or they hand the file to an attorney and
               lose 20% of every win. Sydra cuts prep to under 5 and keeps the
               recovery with your team.
             </p>

@@ -24,6 +24,27 @@ html {
   scroll-behavior: smooth;
 }
 
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+}
+
+[id],
+main,
+input,
+select,
+textarea,
+button,
+summary,
+a {
+  scroll-margin-top: 6rem;
+}
+
 body {
   overflow-x: hidden;
   background: var(--background);

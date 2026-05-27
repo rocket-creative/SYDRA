@@ -24,7 +24,7 @@ const savings = [
   {
     value: "You keep it",
     label: "Recovery stays with the practice",
-    detail: "Software pricing on your demo call — structured below typical attorney contingency fees.",
+    detail: "Software pricing on your demo call, structured below typical attorney contingency fees.",
   },
 ] as const;
 
@@ -76,7 +76,7 @@ export function SydraCostSavings() {
           >
             {KRONOS_FULL_SERVICE_CTA}
           </a>{" "}
-          for Kronos Full-Service — zero ops, headcount eliminated, and priced so you keep more of each win than typical attorney contingency.
+          for Kronos Full-Service. Zero ops, headcount eliminated, and priced so you keep more of each win than typical attorney contingency.
         </p>
       </div>
     </section>

@@ -6,7 +6,7 @@ const steps = [
     title: "Upload your EOB",
     highlight: true,
     body:
-      "Paste or drag an EOB into Sydra. When an out-of-network claim comes back underpaid, this is where the IDR workflow starts — under 5 minutes to a draft, one claim per CPT.",
+      "Paste or drag an EOB into Sydra. When an out-of-network claim comes back underpaid, this is where the IDR workflow starts. Under 5 minutes to a draft, one claim per CPT.",
   },
   {
     n: "2",
@@ -19,7 +19,7 @@ const steps = [
     n: "3",
     title: "Use upstream tools when you need them",
     body:
-      "Optional: verify eligibility (270/271), draft prior auths, run compliance checks, and read op notes for CPT coding — all in the same platform if your practice wants them.",
+      "Optional: verify eligibility (270/271), draft prior auths, run compliance checks, and read op notes for CPT coding. All in the same platform if your practice wants them.",
   },
 ] as const;
 

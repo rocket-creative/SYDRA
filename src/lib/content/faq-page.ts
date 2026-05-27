@@ -42,6 +42,11 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
     a: "Yes. Most prospects who book a demo receive sandbox access on the call so they can try the workflow before deciding.",
   },
   {
+    category: "Getting started",
+    q: "Is my data secure?",
+    a: `Sydra is built to support HIPAA safeguards with BAA on request, AWS hosting, encryption, and tenant isolation. See the full security overview at ${siteUrl()}/security.`,
+  },
+  {
     category: "Pricing",
     q: "How does Sydra compare to using an IDR attorney?",
     a: ATTORNEY_COMPARISON_ANSWER,

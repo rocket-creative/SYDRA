@@ -58,7 +58,7 @@ const groups = [
       {
         title: "CPT assessor",
         badge: "New",
-        body: "Upload a PDF op note. Bedrock multimodal Converse reads the document directly and proposes the correct CPT codes — no OCR step.",
+        body: "Upload a PDF op note. Bedrock multimodal Converse reads the document directly and proposes the correct CPT codes. No OCR step.",
         icon: (
           <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5" />
@@ -126,7 +126,7 @@ const groups = [
       {
         title: "CPT-matched determination library",
         badge: null,
-        body: "213+ ingested determinations, over 90% provider wins. Drafts prioritize cases that share your CPT codes — deepest on spine and ortho.",
+        body: "213+ ingested determinations, over 90% provider wins. Drafts prioritize cases that share your CPT codes, deepest on spine and ortho.",
         icon: (
           <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -184,7 +184,7 @@ const groups = [
       {
         title: "Bedrock Claude Sonnet 4",
         badge: null,
-        body: "All generation runs on AWS Bedrock with HIPAA-eligible Claude Sonnet 4. PHI stays inside your AWS BAA scope — no external LLM calls.",
+        body: "All generation runs on AWS Bedrock with HIPAA-eligible Claude Sonnet 4. PHI stays inside your AWS BAA scope. No external LLM calls.",
         icon: (
           <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
@@ -221,7 +221,7 @@ export function SydraFeatures() {
           NSA IDR is the focus. The platform goes further when you need it.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          Most practices buy Sydra for federal and state IDR — under 5 minutes per
+          Most practices buy Sydra for federal and state IDR. Under 5 minutes per
           claim, specialty trained, one CPT per file. Eligibility, prior auth, CPT
           review, and compliance are included for teams that want upstream support
           in the same system.

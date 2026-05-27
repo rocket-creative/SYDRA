@@ -1,46 +1,52 @@
 import { pricingFaqAnswer, tierRoutingFaqAnswer } from "@/lib/content/tiers";
-import { KRONOS_HEALTH_ID, KRONOS_HEALTH_URL, kronosRevenueUrl } from "@/lib/kronos-revenue";
+import {
+  KRONOS_HEALTH_ID,
+  kronosRevenueUrl,
+} from "@/lib/kronos-revenue";
+import {
+  faqPageJsonLd,
+  kronosHealthOrganizationJsonLd,
+  softwareApplicationJsonLd,
+  sydraOrganizationJsonLd,
+  SYDRA_WEBSITE_ID,
+} from "@/lib/seo/json-ld";
 import { siteUrl } from "@/lib/site";
 
-const ATTORNEY_COMPARISON_ANSWER =
-  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
+import { PageJsonLd } from "@/components/sydra/page-json-ld";
 
-const BASE = () => siteUrl();
+const ATTORNEY_COMPARISON_ANSWER =
+  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, quoted on a demo call and structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
+
+/** Top homepage objections only — full FAQPage lives on /faq to avoid duplicate rich results. */
+const HOMEPAGE_FAQ = [
+  {
+    q: "What does Sydra cost?",
+    a: pricingFaqAnswer(),
+  },
+  {
+    q: "How long does setup take?",
+    a: "Most practices are up and running in under a week. We provision your tenant, import your provider profiles, connect your clearinghouse and EMR, and walk one billing lead through their first submission.",
+  },
+  {
+    q: "Is my data secure?",
+    a: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role based access for your staff. PHI is handled under HIPAA controls.",
+  },
+  {
+    q: "How does Sydra compare to using an IDR attorney?",
+    a: ATTORNEY_COMPARISON_ANSWER,
+  },
+  {
+    q: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
+    a: tierRoutingFaqAnswer(),
+  },
+];
 
 export function HomepageJsonLd() {
-  const base = BASE();
+  const base = siteUrl();
   const kronosRevenueBase = kronosRevenueUrl();
   const kronosRevenueId = `${kronosRevenueBase}/#organization`;
   const softwareId = `${base}/#software`;
-  const websiteId = `${base}/#website`;
   const webpageId = `${base}/#webpage`;
-
-  const parentOrganization = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": KRONOS_HEALTH_ID,
-    name: "Kronos Health",
-    url: KRONOS_HEALTH_URL,
-    subOrganization: [{ "@id": softwareId }, { "@id": kronosRevenueId }],
-  };
-
-  const softwareApplication = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "@id": softwareId,
-    name: "Sydra",
-    url: base,
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    description:
-      "AI software for federal and state IDR / NSA disputes for surgical billing teams. Primary focus: IDR submission drafting in under 5 minutes. Also offers eligibility verification, prior authorization drafting, CPT assessment, and compliance checks.",
-    provider: { "@id": KRONOS_HEALTH_ID },
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      seller: { "@id": KRONOS_HEALTH_ID },
-    },
-  };
 
   const kronosRevenueOrganization = {
     "@context": "https://schema.org",
@@ -56,11 +62,11 @@ export function HomepageJsonLd() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": websiteId,
+    "@id": SYDRA_WEBSITE_ID(),
     name: "Sydra",
     url: base,
     description:
-      "NSA / federal IDR software for surgical billing teams. Also includes eligibility, prior authorization, CPT assessment, and compliance tools.",
+      "NSA and federal IDR software for surgical billing teams. Eligibility, prior authorization, CPT assessment, and compliance tools included.",
     publisher: { "@id": KRONOS_HEALTH_ID },
   };
 
@@ -69,94 +75,38 @@ export function HomepageJsonLd() {
     "@type": "WebPage",
     "@id": webpageId,
     url: base,
-    name: "Sydra | NSA IDR software for surgical groups",
-    isPartOf: { "@id": websiteId },
+    name: "NSA IDR Software for Surgical Groups | Sydra",
+    isPartOf: { "@id": SYDRA_WEBSITE_ID() },
     about: { "@id": softwareId },
     description:
-      "Sydra is AI software for NSA / federal IDR disputes. File in under 5 minutes with specialty trained CPT coding. Also includes eligibility, prior auth, CPT review, and compliance.",
+      "Sydra is AI software for NSA and federal IDR disputes. File in under 5 minutes with specialty trained CPT coding.",
   };
 
-  const faq = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What does Sydra cost?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: pricingFaqAnswer(),
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How long does setup take?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Most practices are up and running in under a week. We provision your tenant, import your provider profiles, connect your clearinghouse and EMR, and walk one of your billing leads through their first submission.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Is my data secure?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role-based access for your staff. PHI is handled under HIPAA controls. We can walk through our security posture with your compliance team before signing.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How does Sydra compare to using an IDR attorney?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: ATTORNEY_COMPARISON_ANSWER,
-        },
-      },
-      {
-        "@type": "Question",
-        name: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: tierRoutingFaqAnswer(),
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What does Sydra do besides IDR?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "NSA IDR is the primary focus and the biggest dollar win for most practices. Sydra also includes eligibility verification (270/271), prior authorization drafting, CPT review from op notes, and compliance checks — supporting tools that strengthen the claim before and after IDR.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Does Sydra replace my biller?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "No. Your biller still handles charge capture, claim submission, and standard accounts receivable follow-up. Sydra leads with NSA IDR drafting. It also supports prior auth narratives, compliance audits, and CPT review from op notes when your team needs them. Practices keep their biller and add Sydra.",
-        },
-      },
-    ],
+  const softwareApplication = {
+    ...softwareApplicationJsonLd({
+      name: "Sydra",
+      description:
+        "AI software for federal and state IDR and NSA disputes for surgical billing teams. Primary focus: IDR submission drafting in under 5 minutes.",
+    }),
+    "@id": softwareId,
   };
 
-  const payload = [
-    parentOrganization,
-    softwareApplication,
-    kronosRevenueOrganization,
-    website,
-    webpage,
-    faq,
-  ].map((o) => JSON.stringify(o));
+  const kronosHealth = {
+    ...kronosHealthOrganizationJsonLd(),
+    subOrganization: [{ "@id": softwareId }, { "@id": kronosRevenueId }],
+  };
 
   return (
-    <>
-      {payload.map((json, i) => (
-        <script
-          dangerouslySetInnerHTML={{ __html: json }}
-          key={`ld-${String(i)}`}
-          type="application/ld+json"
-        />
-      ))}
-    </>
+    <PageJsonLd
+      data={[
+        kronosHealth,
+        sydraOrganizationJsonLd(),
+        softwareApplication,
+        kronosRevenueOrganization,
+        website,
+        webpage,
+        faqPageJsonLd(HOMEPAGE_FAQ),
+      ]}
+    />
   );
 }

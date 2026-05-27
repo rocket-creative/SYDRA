@@ -7,7 +7,7 @@ import {
 } from "@/lib/kronos-revenue";
 
 const ATTORNEY_COMPARISON_ANSWER =
-  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
+  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, quoted on a demo call and structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
 
 const FULL_SERVICE_ANSWER =
   "Practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end.";
@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: "What does Sydra do besides IDR?",
-    a: "NSA IDR is the primary focus. Sydra also includes eligibility verification, prior authorization drafting, CPT review from op notes, and compliance checks — supporting tools in the same platform when your team wants them.",
+    a: "NSA IDR is the primary focus. Sydra also includes eligibility verification, prior authorization drafting, CPT review from op notes, and compliance checks. Supporting tools in the same platform when your team wants them.",
   },
   {
     q: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
@@ -83,7 +83,7 @@ export function SydraFaq() {
                   <p className="mt-3">
                     <Link
                       className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
-                      href="/plans"
+                      href="/#plans"
                     >
                       Compare all plans
                     </Link>
@@ -93,7 +93,7 @@ export function SydraFaq() {
                   <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
                     <Link
                       className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
-                      href="/plans"
+                      href="/#plans"
                     >
                       See plans
                     </Link>

@@ -2,13 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { KronosRevenueBanner } from "@/components/sydra/kronos-revenue-banner";
-import { getContactEmail, getSalesEmail, getSupportEmail, contactMailtoHref, getContactPhoneDisplay } from "@/lib/contact";
+import {
+  getSalesEmail,
+  getSupportEmail,
+  salesMailtoHref,
+  getContactPhoneDisplay,
+  getContactPhoneTel,
+} from "@/lib/contact";
 import { KRONOS_PARENT_TAGLINE, kronosRevenueUrl } from "@/lib/kronos-revenue";
 
 const SIGN_IN = "https://sydra.health/";
 
 export function SydraFooter() {
   const phone = getContactPhoneDisplay();
+  const phoneTel = getContactPhoneTel();
 
   return (
     <footer className="border-t border-slate-200 bg-[#FAFBFD]">
@@ -35,21 +42,33 @@ export function SydraFooter() {
             </p>
             <ul className="mt-4 space-y-1 text-sm text-[#4A5568]">
               <li>
-                <a className="hover:text-[#1A2B48]" href={`mailto:${getContactEmail()}`}>
-                  {getContactEmail()}
-                </a>
-              </li>
-              <li>
-                <a className="hover:text-[#1A2B48]" href={`mailto:${getSalesEmail()}`}>
+                <a
+                  className="rounded-sm hover:text-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  href={salesMailtoHref()}
+                >
                   {getSalesEmail()}
                 </a>
+                <span className="text-slate-400"> · sales and demos</span>
               </li>
               <li>
-                <a className="hover:text-[#1A2B48]" href={`mailto:${getSupportEmail()}`}>
+                <a
+                  className="rounded-sm hover:text-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  href={`mailto:${getSupportEmail()}`}
+                >
                   {getSupportEmail()}
                 </a>
+                <span className="text-slate-400"> · existing customers</span>
               </li>
-              {phone ? <li>{phone}</li> : null}
+              {phone && phoneTel ? (
+                <li>
+                  <a
+                    className="rounded-sm hover:text-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    href={phoneTel}
+                  >
+                    {phone}
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </div>
           <div className="lg:col-span-3 lg:col-start-7">
@@ -63,7 +82,7 @@ export function SydraFooter() {
                 </Link>
               </li>
               <li>
-                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/plans">
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/#plans">
                   Plans
                 </Link>
               </li>
@@ -134,9 +153,9 @@ export function SydraFooter() {
             <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/security">
               Security
             </Link>
-            <a className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href={contactMailtoHref()}>
+            <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/contact">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </div>

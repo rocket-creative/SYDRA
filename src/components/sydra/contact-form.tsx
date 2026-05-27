@@ -1,9 +1,15 @@
 import Link from "next/link";
 
-import { contactMailtoHref, formatContactEmailMasked, getContactPhoneDisplay } from "@/lib/contact";
+import {
+  getContactPhoneDisplay,
+  getContactPhoneTel,
+  getSalesEmail,
+  salesMailtoHref,
+} from "@/lib/contact";
 
 export function SydraContactForm() {
   const phone = getContactPhoneDisplay();
+  const phoneTel = getContactPhoneTel();
 
   return (
     <section className="bg-white py-16 md:py-24" id="contact" aria-labelledby="heading-contact">
@@ -28,15 +34,20 @@ export function SydraContactForm() {
           Prefer email?{" "}
           <a
             className="font-medium text-[#1A2B48] underline decoration-slate-300 underline-offset-2 hover:decoration-[#1A2B48]"
-            href={contactMailtoHref()}
+            href={salesMailtoHref()}
           >
-            {formatContactEmailMasked()}
+            {getSalesEmail()}
           </a>
         </p>
-        {phone ? (
+        {phone && phoneTel ? (
           <p className="mt-3 text-sm text-slate-500">
             Or call{" "}
-            <span className="font-medium text-[#1A2B48]">{phone}</span>
+            <a
+              className="font-medium text-[#1A2B48] underline decoration-slate-300 underline-offset-2 hover:decoration-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              href={phoneTel}
+            >
+              {phone}
+            </a>
             {" · "}
             9:00 to 5:00 ET, Monday through Friday
           </p>

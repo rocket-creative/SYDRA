@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const nav = [
+  { href: "/", label: "Home", isRoute: true },
+  { href: "/#plans", label: "Plans", isRoute: true },
   { href: "/how-it-works", label: "How it works", isRoute: true },
-  { href: "/plans", label: "Plans", isRoute: true },
-  { href: "/security", label: "Security", isRoute: true },
   { href: "/about", label: "About", isRoute: true },
   { href: "/contact", label: "Contact", isRoute: true },
 ] as const;
@@ -46,7 +46,7 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
             {nav.map((item) => (
               <Link
                 key={item.href}
-                className="relative py-1 text-sm font-medium text-slate-600 transition-colors duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[#1A2B48] after:transition-transform after:duration-300 after:ease-out hover:text-[#1A2B48] hover:after:scale-x-100 md:text-[15px]"
+                className="relative rounded-sm py-1 text-sm font-medium text-slate-600 transition-colors duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[#1A2B48] after:transition-transform after:duration-300 after:ease-out hover:text-[#1A2B48] hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 md:text-[15px]"
                 href={item.href}
               >
                 {item.label}
@@ -59,7 +59,7 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
 
         <div className="ml-auto flex items-center gap-3 sm:gap-4 lg:gap-6">
           <a
-            className="text-sm font-medium text-slate-600 transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80"
+            className="rounded-sm text-sm font-medium text-slate-600 transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             href={SIGN_IN}
             rel="noopener noreferrer"
             target="_blank"
@@ -68,7 +68,7 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
           </a>
           {!isFunnel ? (
             <Link
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-[#1A2B48] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.98] md:px-5"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-[#1A2B48] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 md:px-5"
               href="/demo"
             >
               Schedule a demo
@@ -85,7 +85,7 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
           {nav.map((item) => (
             <Link
               key={item.href}
-              className="text-sm font-medium text-slate-600 transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-70"
+              className="rounded-sm text-sm font-medium text-slate-600 transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
               href={item.href}
             >
               {item.label}

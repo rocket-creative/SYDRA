@@ -1,42 +1,38 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 
 import { PricingTiers } from "@/components/sydra/pricing-tiers";
 import { PricingPageJsonLd } from "@/components/sydra/pricing-json-ld";
-import { SydraFooter } from "@/components/sydra/footer";
-import { SydraHeader } from "@/components/sydra/header";
-import { siteUrl } from "@/lib/site";
+import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
+import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
+import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
+import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
+import { PLANS_FAQ } from "@/lib/content/service-faqs";
+import { PAGE_METADATA } from "@/lib/seo/metadata";
 
-const description =
-  "Sydra Self-Serve, Sydra + Kronos Support, and Kronos Full-Service compared. No published pricing. Schedule a demo to find your fit.";
-
-export const metadata: Metadata = {
-  title: "Plans",
-  description,
-  alternates: { canonical: `${siteUrl()}/plans` },
-  openGraph: {
-    title: "Plans · Sydra",
-    description,
-    url: `${siteUrl()}/plans`,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Plans · Sydra",
-    description,
-  },
-};
+export const metadata = PAGE_METADATA.plans;
 
 export default function PlansPage() {
   return (
-    <div className="min-h-screen bg-stone-100 font-sans text-slate-900">
+    <>
       <PricingPageJsonLd />
-      <div className="mx-auto min-h-screen max-w-6xl bg-white shadow-sm xl:max-w-[1200px]">
-        <SydraHeader />
-        <main className="px-4 py-14 sm:px-6 md:py-20 xl:px-8">
-          <PricingTiers variant="full" />
-        </main>
-        <SydraFooter />
-      </div>
-    </div>
+      <SydraPageShell breadcrumb={[...BREADCRUMBS.plans]}>
+        <PricingTiers variant="full" />
+        <ServiceFaqSection
+          heading="What do practices ask about Sydra plans?"
+          id="heading-plans-faq"
+          items={PLANS_FAQ}
+        />
+        <div className="mx-auto mt-12 max-w-3xl text-center">
+          <Link
+            className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#1A2B48] px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            href="/demo"
+          >
+            Schedule a demo
+          </Link>
+          <CtaTrustSignals className="mt-4" />
+        </div>
+        <ServiceCrossLinks current="/plans" />
+      </SydraPageShell>
+    </>
   );
 }

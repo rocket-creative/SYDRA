@@ -19,6 +19,8 @@ import {
 
 type PricingTiersProps = {
   variant: "full" | "compact";
+  /** Use h2 when embedded on the homepage (hero keeps the page h1). */
+  headingLevel?: "h1" | "h2";
 };
 
 function ComparisonCellDisplay({ value }: { value: ComparisonCell }) {
@@ -174,16 +176,19 @@ function ComparisonTable() {
   );
 }
 
-export function PricingTiers({ variant }: PricingTiersProps) {
+export function PricingTiers({ variant, headingLevel }: PricingTiersProps) {
+  const HeadingTag =
+    headingLevel ?? (variant === "full" ? "h1" : "h2");
+
   return (
     <div>
       <div className="text-center">
-        <h2
+        <HeadingTag
           className="text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2rem]"
-          id={variant === "compact" ? "heading-pricing" : undefined}
+          id={variant === "compact" ? "heading-pricing" : "heading-plans"}
         >
           {PRICING_SECTION_HEADLINE}
-        </h2>
+        </HeadingTag>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#4A5568] md:text-[17px]">
           {PRICING_SECTION_SUBHEAD}
         </p>
@@ -228,7 +233,7 @@ export function PricingTiers({ variant }: PricingTiersProps) {
         <p className="mt-10 text-center">
           <Link
             className="text-sm font-semibold text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 transition hover:decoration-[rgb(0,40,184)]"
-            href="/plans"
+            href="/#plans"
           >
             See full pricing
           </Link>

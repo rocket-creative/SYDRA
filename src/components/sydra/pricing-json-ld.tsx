@@ -1,29 +1,20 @@
-import { KRONOS_HEALTH_ID } from "@/lib/kronos-revenue";
+import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { TIERS } from "@/lib/content/tiers";
-import { siteUrl } from "@/lib/site";
+import { PLANS_FAQ } from "@/lib/content/service-faqs";
+import { KRONOS_HEALTH_ID } from "@/lib/kronos-revenue";
+import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { PAGE_METADATA } from "@/lib/seo/metadata";
+
+function pageTitle(): string {
+  const meta = PAGE_METADATA.plans;
+  if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
+    return String(meta.title.absolute);
+  }
+  return "Sydra Plans";
+}
 
 export function PricingPageJsonLd() {
-  const base = siteUrl();
-
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: base,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Plans",
-        item: `${base}/plans`,
-      },
-    ],
-  };
-
   const offers = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -47,13 +38,28 @@ export function PricingPageJsonLd() {
 
   return (
     <>
-      <script
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-        type="application/ld+json"
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "" },
+          { name: "Plans", path: "/plans" },
+        ]}
       />
-      <script
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(offers) }}
-        type="application/ld+json"
+      <PageJsonLd
+        data={[
+          webPageJsonLd({
+            path: "/plans",
+            name: pageTitle(),
+            description: PAGE_METADATA.plans.description ?? "",
+          }),
+          serviceJsonLd({
+            name: "Sydra NSA IDR Software Plans",
+            description:
+              "Self Serve, Kronos Support, and Full Service tiers for surgical billing teams filing federal IDR and NSA disputes.",
+            serviceType: "Healthcare billing software",
+          }),
+          faqPageJsonLd(PLANS_FAQ),
+          offers,
+        ]}
       />
     </>
   );

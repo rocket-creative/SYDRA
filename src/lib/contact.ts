@@ -1,4 +1,3 @@
-const DEFAULT_DEMO_EMAIL = "demo@sydrahealth.com";
 const DEFAULT_SALES_EMAIL = "sales@sydrahealth.com";
 const DEFAULT_SUPPORT_EMAIL = "support@sydrahealth.com";
 
@@ -10,9 +9,9 @@ function readEnvEmail(key: string, fallback: string): string {
   return trimmed && trimmed.length > 0 ? trimmed : fallback;
 }
 
-/** Demo inbox for lead capture. */
+/** Primary public contact and form routing (sales inbox). */
 export function getContactEmail(): string {
-  return readEnvEmail("NEXT_PUBLIC_CONTACT_EMAIL", DEFAULT_DEMO_EMAIL);
+  return readEnvEmail("NEXT_PUBLIC_CONTACT_EMAIL", DEFAULT_SALES_EMAIL);
 }
 
 export function getSalesEmail(): string {
@@ -27,6 +26,14 @@ export function getSupportEmail(): string {
 export function getContactPhoneDisplay(): string | null {
   const raw = process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim();
   return raw && raw.length > 0 ? raw : null;
+}
+
+/** E.164 or tel:-safe href from display phone. Strips non-digits except leading +. */
+export function getContactPhoneTel(): string | null {
+  const display = getContactPhoneDisplay();
+  if (!display) return null;
+  const digits = display.replace(/[^\d+]/g, "");
+  return digits.length > 0 ? `tel:${digits}` : null;
 }
 
 export function formatContactEmailMasked(email: string = getContactEmail()): string {
@@ -46,6 +53,11 @@ export function contactMailtoHref(email: string = getContactEmail()): string {
 
 export function salesMailtoHref(): string {
   const subject = encodeURIComponent("FROM SYDRA — Sales inquiry");
+  return `mailto:${getSalesEmail()}?subject=${subject}`;
+}
+
+export function securityMailtoHref(): string {
+  const subject = encodeURIComponent("FROM SYDRA — Security one pager");
   return `mailto:${getSalesEmail()}?subject=${subject}`;
 }
 
