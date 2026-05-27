@@ -1,101 +1,140 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { contactMailtoHref } from "@/lib/contact";
+import { KronosRevenueBanner } from "@/components/sydra/kronos-revenue-banner";
+import { getContactEmail, getSalesEmail, getSupportEmail, contactMailtoHref, getContactPhoneDisplay } from "@/lib/contact";
+import { kronosRevenueUrl } from "@/lib/kronos-revenue";
 
 const SIGN_IN = "https://sydra.health/";
 
 export function SydraFooter() {
+  const phone = getContactPhoneDisplay();
+
   return (
-    <footer className="border-t border-slate-200 bg-[#FAFBFD] pb-16 pt-14 md:pb-14">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-12 xl:max-w-[1200px] xl:px-8">
-        <div className="sm:col-span-2 lg:col-span-5">
-          <div className="flex items-center">
-            <Image
-              alt=""
-              className="h-[72px] w-auto max-w-full sm:h-20 sm:w-auto"
-              height={80}
-              sizes="(max-width: 640px) 90vw, 320px"
-              src="/icon-sydra.svg"
-              width={378}
-            />
+    <footer className="border-t border-slate-200 bg-[#FAFBFD]">
+      <KronosRevenueBanner variant="subtle" />
+      <div className="pb-16 pt-14 md:pb-14">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-12 xl:max-w-[1200px] xl:px-8">
+          <div className="sm:col-span-2 lg:col-span-5">
+            <div className="flex items-center">
+              <Image
+                alt=""
+                className="h-[72px] w-auto max-w-full sm:h-20 sm:w-auto"
+                height={80}
+                sizes="(max-width: 640px) 90vw, 320px"
+                src="/icon-sydra.svg"
+                width={378}
+              />
+            </div>
+            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#4A5568]">
+              AI software for federal IDR / NSA disputes. Built by surgeons for
+              surgical billing teams. A product of Kronos Health.
+            </p>
+            <ul className="mt-4 space-y-1 text-sm text-[#4A5568]">
+              <li>
+                <a className="hover:text-[#1A2B48]" href={`mailto:${getContactEmail()}`}>
+                  {getContactEmail()}
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-[#1A2B48]" href={`mailto:${getSalesEmail()}`}>
+                  {getSalesEmail()}
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-[#1A2B48]" href={`mailto:${getSupportEmail()}`}>
+                  {getSupportEmail()}
+                </a>
+              </li>
+              {phone ? <li>{phone}</li> : null}
+            </ul>
           </div>
-          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#4A5568]">
-            The practice enhancement platform for surgical groups — IDR-led, with
-            real-time eligibility, prior authorization, CPT assessment, and
-            compliance in one place. A product of Kronos Health.
-          </p>
+          <div className="lg:col-span-3 lg:col-start-7">
+            <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Product
+            </h3>
+            <ul className="mt-4 space-y-2 text-[15px]">
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/how-it-works">
+                  How it works
+                </Link>
+              </li>
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/plans">
+                  Plans
+                </Link>
+              </li>
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/security">
+                  Security
+                </Link>
+              </li>
+              <li>
+                <a
+                  className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]"
+                  href={SIGN_IN}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Sign in
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="lg:col-span-3">
+            <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Company
+            </h3>
+            <ul className="mt-4 space-y-2 text-[15px]">
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/about">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/faq">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/contact">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/demo">
+                  Schedule a demo
+                </Link>
+              </li>
+              <li>
+                <a
+                  className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]"
+                  href={kronosRevenueUrl()}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Kronos Revenue
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="lg:col-span-3 lg:col-start-7">
-          <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Product
-          </h3>
-          <ul className="mt-4 space-y-2 text-[15px]">
-            <li>
-              <a className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80" href="#how-it-works">
-                How it works
-              </a>
-            </li>
-            <li>
-              <a className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80" href="#features">
-                Features
-              </a>
-            </li>
-            <li>
-              <a className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80" href="#proof">
-                Why it works
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80"
-                href={SIGN_IN}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Sign in
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="lg:col-span-3">
-          <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Company
-          </h3>
-          <ul className="mt-4 space-y-2 text-[15px]">
-            <li>
-              <a className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80" href="#about">
-                About
-              </a>
-            </li>
-            <li>
-              <a className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80" href="#contact">
-                Request demo
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80"
-                href={contactMailtoHref()}
-              >
-                Contact us
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="mx-auto mt-12 flex max-w-6xl flex-col gap-4 border-t border-slate-200 px-4 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 xl:max-w-[1200px] xl:px-8">
-        <p>© {new Date().getFullYear()} Kronos Health. All rights reserved.</p>
-        <div className="flex flex-wrap gap-4">
-          <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="#privacy">
-            Privacy
-          </Link>
-          <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="#terms">
-            Terms
-          </Link>
-          <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="#security">
-            Security
-          </Link>
+        <div className="mx-auto mt-12 flex max-w-6xl flex-col gap-4 border-t border-slate-200 px-4 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 xl:max-w-[1200px] xl:px-8">
+          <p>© {new Date().getFullYear()} Kronos Health. All rights reserved.</p>
+          <div className="flex flex-wrap gap-4">
+            <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/privacy">
+              Privacy
+            </Link>
+            <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/terms">
+              Terms
+            </Link>
+            <Link className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/security">
+              Security
+            </Link>
+            <a className="transition-colors duration-300 ease-out hover:text-[#1A2B48]" href={contactMailtoHref()}>
+              Contact
+            </a>
+          </div>
         </div>
       </div>
     </footer>

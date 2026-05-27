@@ -1,4 +1,5 @@
 import { getContactEmail } from "@/lib/contact";
+import { pricingFaqAnswer } from "@/lib/content/tiers";
 import { siteUrl } from "@/lib/site";
 
 const BASE = () => siteUrl();
@@ -73,7 +74,7 @@ export function HomepageJsonLd() {
         name: "What does Sydra cost?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Sydra is available in three tiers. Basic is per claim — you pay when a claim is filed, no monthly commitment. Plus is a monthly subscription where your team operates the software with our support. Pro is fully managed — Kronos handles every claim end to end. Most practices recover the cost on their first one or two cases. Request a demo and we will quote based on your specialty, state, and estimated monthly volume.",
+          text: pricingFaqAnswer(),
         },
       },
       {

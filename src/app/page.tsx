@@ -1,4 +1,6 @@
 import { SectionReveal } from "@/components/motion/reveal";
+import { SydraPricingTeaser } from "@/components/sydra/pricing-teaser";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { SydraAbout } from "@/components/sydra/about";
 import { SydraContactForm } from "@/components/sydra/contact-form";
 import { SydraFaq } from "@/components/sydra/faq";
@@ -11,6 +13,7 @@ import { HomepageJsonLd } from "@/components/sydra/json-ld";
 import { MobileCtaBar } from "@/components/sydra/mobile-cta-bar";
 import { SydraProblem } from "@/components/sydra/problem";
 import { SydraProof } from "@/components/sydra/proof";
+import { SydraValueProps } from "@/components/sydra/value-props";
 
 export default function HomePage() {
   return (
@@ -30,6 +33,9 @@ export default function HomePage() {
       >
         <SydraHero />
         <SectionReveal>
+          <SydraValueProps />
+        </SectionReveal>
+        <SectionReveal>
           <SydraProblem />
         </SectionReveal>
         <SectionReveal>
@@ -40,6 +46,12 @@ export default function HomePage() {
         </SectionReveal>
         <SectionReveal>
           <SydraProof />
+        </SectionReveal>
+        <SectionReveal>
+          <SydraPricingTeaser />
+        </SectionReveal>
+        <SectionReveal>
+          <SydraCtaBand />
         </SectionReveal>
         <SectionReveal>
           <SydraAbout />

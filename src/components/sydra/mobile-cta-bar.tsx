@@ -9,9 +9,9 @@ export function MobileCtaBar() {
       >
         <Link
           className="flex min-h-12 w-full items-center justify-center rounded-md bg-[#1A2B48] text-center text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-200 [font-size:16px] active:opacity-90"
-          href="#contact"
+          href="/demo"
         >
-          Request demo
+          Schedule a demo
         </Link>
       </div>
     </div>

@@ -1,13 +1,31 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 
-const demoRequestSchema = z.object({
-  name: z.string().trim().min(1).max(200),
-  practiceName: z.string().trim().min(1).max(200),
-  email: z.string().trim().email().max(254),
-  phone: z.union([z.string().trim().max(50), z.literal("")]).optional(),
-  message: z.union([z.string().trim().max(5000), z.literal("")]).optional(),
-});
+import { sendDemoLeadEmail } from "@/lib/email/send-demo-lead";
+import { scoreDemoLead } from "@/lib/leads/score-demo-lead";
+import {
+  demoRequestSchema,
+  legacyDemoRequestSchema,
+  type DemoRequest,
+  type LegacyDemoRequest,
+} from "@/lib/schemas/demo-request";
+
+function isHoneypotFilled(website: string | undefined): boolean {
+  const trimmed = website?.trim();
+  return Boolean(trimmed && trimmed.length > 0);
+}
+
+function legacyToDemoRequest(data: LegacyDemoRequest): DemoRequest {
+  return {
+    ...data,
+    specialty: "other_surgical",
+    state: "NY",
+    disputesPerMonth: "0-2",
+    role: "other",
+    timeline: "researching",
+    tierInterest: "not_sure",
+    bestTimeToReach: "flexible",
+  };
+}
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -17,15 +35,41 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const parsed = demoRequestSchema.safeParse(body);
-  if (!parsed.success) {
+  const fullParsed = demoRequestSchema.safeParse(body);
+  let lead: DemoRequest;
+
+  if (fullParsed.success) {
+    lead = fullParsed.data;
+  } else {
+    const legacyParsed = legacyDemoRequestSchema.safeParse(body);
+    if (!legacyParsed.success) {
+      return NextResponse.json(
+        { error: "Validation failed", details: fullParsed.error.flatten() },
+        { status: 400 },
+      );
+    }
+    lead = legacyToDemoRequest(legacyParsed.data);
+  }
+
+  if (isHoneypotFilled(lead.website)) {
+    return NextResponse.json({ ok: true, redirect: "/demo/thank-you" });
+  }
+
+  const score = scoreDemoLead(lead);
+
+  const sendResult = await sendDemoLeadEmail(lead, score);
+
+  if (!sendResult.ok) {
+    console.error("Demo lead email failed:", sendResult.error);
     return NextResponse.json(
-      { error: "Validation failed", details: parsed.error.flatten() },
-      { status: 400 },
+      { error: "Unable to submit request. Please try again or contact us by email." },
+      { status: 502 },
     );
   }
 
-  // Routes to demo@sydrahealth.com
-  // Integrate CRM or email relay here; acknowledgement only for now.
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({
+    ok: true,
+    redirect: "/demo/thank-you",
+    priority: score.priority,
+  });
 }

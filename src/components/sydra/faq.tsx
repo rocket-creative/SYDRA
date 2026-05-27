@@ -1,23 +1,29 @@
+import Link from "next/link";
+
+import { pricingFaqAnswer } from "@/lib/content/tiers";
+
 const faqs = [
   {
     q: "What does Sydra cost?",
-    a: "Sydra is available in three tiers. Basic is per claim — you pay when a claim is filed, no monthly commitment. Plus is a monthly subscription where your team operates the software with our support. Pro is fully managed — Kronos handles every claim end to end. Most practices recover the cost on their first one or two cases. Request a demo and we will quote based on your specialty, state, and estimated monthly volume.",
+    hasPlansLink: true,
+    a: pricingFaqAnswer(),
+  },
+  {
+    q: "How long does the demo take?",
+    a: "About 15 minutes for the walkthrough, plus 5 to 10 minutes of Q&A if you want it. A Kronos specialist runs the call, with Chelsea joining for software focused questions.",
   },
   {
     q: "How long does setup take?",
-    a: "Most practices are up and running in under a week. We provision your tenant, import your provider profiles, connect your clearinghouse and EMR, and walk one of your billing leads through their first submission.",
+    a: "Most practices are up and running in under a week. We provision your tenant, connect your clearinghouse, and walk one billing lead through their first submission.",
   },
   {
     q: "Is my data secure?",
-    a: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role-based access for your staff. PHI is handled under HIPAA controls. We are happy to walk through our security posture with your compliance team before signing.",
+    a: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role based access for your staff. PHI is handled under HIPAA controls.",
   },
   {
-    q: "What does Sydra do besides IDR?",
-    a: "Sydra was built around IDR — that's still the biggest dollar win for most practices. But the same engine now drives real-time eligibility verification (270/271), prior authorization drafting with embedded payer policy, an AI compliance check against medical-necessity criteria, and a CPT assessor that reads your op notes directly. It's a practice-wide tool now, not just an IDR drafter.",
-  },
-  {
-    q: "Does Sydra replace my biller?",
-    a: "No. Your biller still handles charge capture, claim submission, and standard accounts receivable follow-up. Sydra sits alongside them and handles the high-judgment work AI is uniquely good at: IDR submissions, prior auth narratives, peer-to-peer prep, compliance audits, and CPT review from op notes. Practices keep their biller and add Sydra.",
+    q: "When should we look at Kronos Full-Service?",
+    hasKronosLink: true,
+    a: "High volume practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end.",
   },
 ] as const;
 
@@ -48,12 +54,30 @@ export function SydraFaq() {
                   </span>
                 </span>
               </summary>
-              <p className="border-t border-slate-100 pb-4 pt-2 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
-                {item.a}
-              </p>
+              <div className="border-t border-slate-100 pb-4 pt-2 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
+                <p>{item.a}</p>
+                {"hasPlansLink" in item && item.hasPlansLink ? (
+                  <p className="mt-3">
+                    <Link
+                      className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+                      href="/plans"
+                    >
+                      Compare all plans
+                    </Link>
+                  </p>
+                ) : null}
+              </div>
             </details>
           ))}
         </div>
+        <p className="mt-8 text-center">
+          <Link
+            className="text-sm font-semibold text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+            href="/faq"
+          >
+            See all FAQs →
+          </Link>
+        </p>
       </div>
     </section>
   );

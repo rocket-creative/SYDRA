@@ -3,7 +3,7 @@ import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
 const stats = [
   { value: "213+", label: "Determinations analyzed" },
   { value: "> 90%", label: "Provider win rate in our library" },
-  { value: "15 min", label: "Average time to draft" },
+  { value: "Under 5 min", label: "Average time to file" },
   { value: "CPT", label: "Heavy spine and ortho coverage" },
 ] as const;
 
