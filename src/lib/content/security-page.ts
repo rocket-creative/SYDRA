@@ -1,3 +1,5 @@
+import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
+
 export type SecurityTrustCard = {
   id: string;
   title: string;
@@ -110,7 +112,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
     title: "Documentation for procurement",
     paragraphs: [
       "Qualified prospects can request a security summary one pager, SOC 2 report under NDA, and BAA template during evaluation.",
-      "Use the form below or email sales@sydrahealth.com with your compliance contact copied. We typically respond within one business day.",
+      `Use the form below or email ${SALES_EMAIL_FALLBACK} with your compliance contact copied. We typically respond within one business day.`,
     ],
   },
 ];

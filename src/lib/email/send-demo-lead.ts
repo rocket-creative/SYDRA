@@ -9,11 +9,12 @@ import {
   TIER_LABELS,
   type DemoRequest,
 } from "@/lib/schemas/demo-request";
+import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
 import type { LeadScoreResult } from "@/lib/leads/score-demo-lead";
 
 export type LeadRequestType = "demo" | "security";
 
-const DEFAULT_INBOX = "sales@sydrahealth.com";
+const DEFAULT_INBOX = SALES_EMAIL_FALLBACK;
 const DEFAULT_FROM = "notifications@sydrahealth.com";
 
 function getInboxEmail(): string {

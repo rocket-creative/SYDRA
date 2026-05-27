@@ -1,3 +1,5 @@
+import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
+
 export type ServiceFaqItem = { q: string; a: string };
 
 export const HOW_IT_WORKS_FAQ: ServiceFaqItem[] = [
@@ -54,7 +56,7 @@ export const SECURITY_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "Can we get a security summary for our compliance team?",
-    a: "Yes. Use the form on this page or email sales@sydrahealth.com. We send the one pager and schedule a walkthrough if you need one.",
+    a: `Yes. Use the form on this page or email ${SALES_EMAIL_FALLBACK}. We send the one pager and schedule a walkthrough if you need one.`,
   },
 ];
 

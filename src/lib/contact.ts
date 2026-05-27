@@ -1,5 +1,7 @@
-const DEFAULT_SALES_EMAIL = "sales@sydrahealth.com";
-const DEFAULT_SUPPORT_EMAIL = "support@sydrahealth.com";
+export const SALES_EMAIL_FALLBACK = "sales@sydrahealth.com";
+
+const DEFAULT_SALES_EMAIL = SALES_EMAIL_FALLBACK;
+const DEFAULT_SUPPORT_EMAIL = SALES_EMAIL_FALLBACK;
 
 const MAILTO_SUBJECT = "FROM SYDRA";
 
