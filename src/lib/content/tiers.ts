@@ -74,12 +74,12 @@ export const TIERS: TierDefinition[] = [
       "Kronos team operates every claim",
       "Specialty trained, custom coded submissions",
       "Dedicated specialist and quarterly recovery review",
-      "Materially less than a 20% attorney contingency",
+      "Materially less than typical 20% attorney contingency",
     ],
     compactInclusions: [
       "Fully outsourced on Kronos Revenue",
       "Dedicated specialist on every file",
-      "Lawyer replacement tier",
+      "Alternative to IDR attorneys",
     ],
   },
 ];

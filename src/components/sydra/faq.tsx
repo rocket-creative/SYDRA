@@ -21,6 +21,14 @@ const faqs = [
     a: "Yes. Strict tenant isolation, encrypted at rest and in transit, AWS BAA in place, role based access for your staff. PHI is handled under HIPAA controls.",
   },
   {
+    q: "How does Sydra compare to using an IDR attorney?",
+    a: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win. If you want every claim handled for you, Kronos Full-Service on Kronos Revenue is the outsourced option.",
+  },
+  {
+    q: "What does Sydra do besides IDR?",
+    a: "NSA IDR is the primary focus. Sydra also includes eligibility verification, prior authorization drafting, CPT review from op notes, and compliance checks — supporting tools in the same platform when your team wants them.",
+  },
+  {
     q: "When should we look at Kronos Full-Service?",
     hasKronosLink: true,
     a: "High volume practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end.",

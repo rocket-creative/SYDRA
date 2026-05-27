@@ -67,7 +67,7 @@ export default function OgImage() {
               lineHeight: 1.4,
             }}
           >
-            Practice enhancement platform for surgical groups
+            NSA IDR software for surgical billing teams
           </span>
         </div>
       </div>

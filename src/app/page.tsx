@@ -13,6 +13,7 @@ import { HomepageJsonLd } from "@/components/sydra/json-ld";
 import { MobileCtaBar } from "@/components/sydra/mobile-cta-bar";
 import { SydraProblem } from "@/components/sydra/problem";
 import { SydraProof } from "@/components/sydra/proof";
+import { SydraCostSavings } from "@/components/sydra/cost-savings";
 import { SydraValueProps } from "@/components/sydra/value-props";
 
 export default function HomePage() {
@@ -34,6 +35,9 @@ export default function HomePage() {
         <SydraHero />
         <SectionReveal>
           <SydraValueProps />
+        </SectionReveal>
+        <SectionReveal>
+          <SydraCostSavings />
         </SectionReveal>
         <SectionReveal>
           <SydraProblem />

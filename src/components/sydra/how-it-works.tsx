@@ -3,22 +3,23 @@ import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
 const steps = [
   {
     n: "1",
-    title: "Connect your practice",
+    title: "Upload your EOB",
+    highlight: true,
     body:
-      "EMR (ModMed today, more coming), Stedi clearinghouse for real-time eligibility, and provider profiles including CVs — ingested once. Multi-tenant from day one, so your data is yours.",
+      "Paste or drag an EOB into Sydra. When an out-of-network claim comes back underpaid, this is where the IDR workflow starts — under 5 minutes to a draft, one claim per CPT.",
   },
   {
     n: "2",
-    title: "Run every patient through Sydra",
+    title: "Review and submit the IDR",
+    highlight: true,
     body:
-      "Verify eligibility (270/271) at intake. Draft prior auths against embedded payer policy and run an AI compliance check. Read op notes for CPT coding. Each step compounds into stronger documentation for the next.",
+      "Sydra drafts a Federal or State IDR submission citing real prior wins on your codes. Your team reviews, approves, and exports to the IDRE portal with a guided checklist.",
   },
   {
     n: "3",
-    title: "Win the IDR — or never need one",
-    highlight: true,
+    title: "Use upstream tools when you need them",
     body:
-      "When an out-of-network claim comes back underpaid, Sydra drafts a Federal or State IDR submission in minutes, citing real prior wins on your CPT codes. One-click DOCX export and a guided checklist for the IDRE portal.",
+      "Optional: verify eligibility (270/271), draft prior auths, run compliance checks, and read op notes for CPT coding — all in the same platform if your practice wants them.",
   },
 ] as const;
 
@@ -37,10 +38,12 @@ export function SydraHowItWorks() {
           className="mx-auto mt-3 max-w-2xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
           id="heading-how-it-works"
         >
-          One workflow. Every step of the claim.
+          One workflow. NSA IDR at the center.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          Connect once. Run every patient through Sydra. IDR is the headline payoff, but the system earns its keep at every step before it.
+          Upload an EOB, draft the IDR, submit. That is what most teams come for.
+          Connect once and you also get eligibility, prior auth, CPT, and compliance
+          when your workflow needs them.
         </p>
         <StaggerParent className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
           {steps.map((s) => (
@@ -52,7 +55,7 @@ export function SydraHowItWorks() {
                   </div>
                   {"highlight" in s && s.highlight && (
                     <span className="rounded-full border border-blue-200 bg-white px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700">
-                      Biggest payoff
+                      Primary
                     </span>
                   )}
                 </div>

@@ -212,16 +212,19 @@ export function SydraFeatures() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-blue-700 sm:text-xs">
-          What you get
+          Also included
         </p>
         <h2
           className="mx-auto mt-3 max-w-3xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
           id="heading-features"
         >
-          A complete claim-defense stack — from eligibility to determination
+          NSA IDR is the focus. The platform goes further when you need it.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          Sydra started as the IDR drafter. It&apos;s now the system surgical practices use across the whole claim — before the visit, at coding, and when an insurer underpays.
+          Most practices buy Sydra for federal and state IDR — under 5 minutes per
+          claim, specialty trained, one CPT per file. Eligibility, prior auth, CPT
+          review, and compliance are included for teams that want upstream support
+          in the same system.
         </p>
 
         {/* Pill nav */}

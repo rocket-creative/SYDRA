@@ -18,11 +18,13 @@ export function SydraProblem() {
             <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
               The No Surprises Act gave providers the right to dispute underpayments through
               Independent Dispute Resolution — the single highest-leverage recovery in
-              the workflow. Sydra wins those disputes in minutes instead of hours, and brings
-              the same AI rigor to the pre-visit, coding, and compliance steps that lead up to them.
+              the workflow. Most practices never file because each submission eats 30
+              minutes of biller time — or they hand the file to an attorney and
+              lose 20% of every win. Sydra cuts prep to under 5 and keeps the
+              recovery with your team.
             </p>
             <p className="mt-4 text-base font-semibold text-[#1A2B48] md:text-[17px]">
-              IDR-led. End-to-end. One platform.
+              Less labor. More retained. Same specialty depth.
             </p>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7">
@@ -31,12 +33,12 @@ export function SydraProblem() {
             </p>
             <ul className="space-y-3">
               {[
-                "Real-time eligibility verification at intake (270/271)",
-                "AI-drafted prior auth narratives and peer-to-peer prep",
-                "AI gap analysis against payer medical-necessity rules",
-                "CPT codes proposed directly from your op notes",
                 "Federal and State IDR submissions cited to real wins",
                 "Submission-ready DOCX export with guided checklist",
+                "Specialty trained, one claim per CPT",
+                "Real-time eligibility verification at intake (270/271)",
+                "AI-drafted prior auth narratives and peer-to-peer prep",
+                "CPT codes proposed directly from your op notes",
               ].map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-relaxed text-[#4A5568] md:text-[15px]">
                   <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded bg-blue-600/15 text-[11px] font-bold text-blue-700" aria-hidden>

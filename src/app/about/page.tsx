@@ -69,8 +69,9 @@ export default function AboutPage() {
             <aside className="mt-14 rounded-xl border border-slate-200 bg-slate-50 p-6 md:p-8">
               <h2 className="text-lg font-semibold text-[#1A2B48]">Sister offering</h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-                Need every claim handled end to end? Kronos Revenue replaces your IDR
-                attorney on high volume files.
+                Need every claim handled end to end? Kronos Revenue runs every file
+                for high volume practices that do not want to operate software
+                themselves.
               </p>
               <a
                 className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-100"

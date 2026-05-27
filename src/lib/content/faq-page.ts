@@ -39,6 +39,11 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     category: "Pricing",
+    q: "How does Sydra compare to using an IDR attorney?",
+    a: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, quoted on a demo call and structured below typical contingency fees. You keep the workflow and more of the win.",
+  },
+  {
+    category: "Pricing",
     q: "What does Sydra cost?",
     a: pricingFaqAnswer(),
   },

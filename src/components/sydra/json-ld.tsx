@@ -38,7 +38,7 @@ export function HomepageJsonLd() {
     name: "Sydra",
     url: base,
     description:
-      "The practice enhancement platform for surgical groups — IDR-led, with real-time eligibility, prior authorization, CPT assessment, and compliance built in.",
+      "NSA / federal IDR software for surgical billing teams. Also includes eligibility, prior authorization, CPT assessment, and compliance tools.",
     publisher: { "@id": orgId },
   };
 
@@ -47,22 +47,22 @@ export function HomepageJsonLd() {
     "@type": "WebPage",
     "@id": webpageId,
     url: base,
-    name: "Sydra | Practice enhancement platform for surgical groups",
+    name: "Sydra | NSA IDR software for surgical groups",
     isPartOf: { "@id": websiteId },
     about: { "@id": orgId },
     description:
-      "Sydra is the practice enhancement platform for surgical groups. IDR-led. End-to-end. One platform. Real-time eligibility, prior authorization, CPT assessment, compliance, and Federal & State IDR.",
+      "Sydra is AI software for NSA / federal IDR disputes. File in under 5 minutes with specialty trained CPT coding. Also includes eligibility, prior auth, CPT review, and compliance.",
   };
 
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Sydra practice enhancement platform",
+    name: "Sydra NSA IDR software",
     description:
-      "AI-driven practice enhancement platform for surgical groups: real-time eligibility verification, prior authorization drafting, CPT assessment, compliance checks, and Federal & State IDR submission drafting.",
+      "AI software for federal and state IDR / NSA disputes for surgical billing teams. Primary focus: IDR submission drafting in under 5 minutes. Also offers eligibility verification, prior authorization drafting, CPT assessment, and compliance checks.",
     provider: { "@id": orgId },
     areaServed: "United States",
-    serviceType: "Healthcare revenue cycle management and IDR",
+    serviceType: "No Surprises Act IDR submission software",
   };
 
   const faq = {
@@ -95,10 +95,18 @@ export function HomepageJsonLd() {
       },
       {
         "@type": "Question",
+        name: "How does Sydra compare to using an IDR attorney?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win.",
+        },
+      },
+      {
+        "@type": "Question",
         name: "What does Sydra do besides IDR?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Sydra was built around IDR — that's still the biggest dollar win for most practices. But the same engine now drives real-time eligibility verification (270/271), prior authorization drafting with embedded payer policy, an AI compliance check against medical-necessity criteria, and a CPT assessor that reads your op notes directly. It's a practice-wide tool now, not just an IDR drafter.",
+          text: "NSA IDR is the primary focus and the biggest dollar win for most practices. Sydra also includes eligibility verification (270/271), prior authorization drafting, CPT review from op notes, and compliance checks — supporting tools that strengthen the claim before and after IDR.",
         },
       },
       {
@@ -106,7 +114,7 @@ export function HomepageJsonLd() {
         name: "Does Sydra replace my biller?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Your biller still handles charge capture, claim submission, and standard accounts receivable follow-up. Sydra sits alongside them and handles the high-judgment work AI is uniquely good at: IDR submissions, prior auth narratives, peer-to-peer prep, compliance audits, and CPT review from op notes. Practices keep their biller and add Sydra.",
+          text: "No. Your biller still handles charge capture, claim submission, and standard accounts receivable follow-up. Sydra leads with NSA IDR drafting. It also supports prior auth narratives, compliance audits, and CPT review from op notes when your team needs them. Practices keep their biller and add Sydra.",
         },
       },
     ],

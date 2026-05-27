@@ -21,7 +21,11 @@ export function SydraHero() {
             >
               NSA claims, filed in under 5 minutes each.
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.7]">
+            <p className="mt-5 max-w-xl text-base font-medium leading-relaxed text-[#1A2B48] md:text-[17px]">
+              Cut IDR prep from 30 minutes to under 5 per claim — and keep more of
+              every recovery instead of routing files through a 20% attorney.
+            </p>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.7]">
               Sydra is the specialty trained AI software for federal IDR / NSA
               disputes. Built by surgeons. Used by orthopedic, neurosurgery,
               spine, and plastic surgery billing teams. Your team operates the

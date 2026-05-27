@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 const base = siteUrl();
 const canonical = `${base}/`;
 
-/** ~157 chars — platform positioning, within 150–160 SERP guideline */
+/** ~157 chars — NSA IDR first; supporting RCM tools secondary */
 const description =
-  "The practice enhancement platform for surgical groups. Real-time eligibility, prior authorization, CPT assessment, compliance, and Federal & State IDR — in one place.";
+  "NSA / federal IDR software for surgical billing teams. File disputes in under 5 minutes. Also includes eligibility, prior auth, CPT, and compliance tools.";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -32,13 +32,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(base),
   title: {
-    default: "Sydra | Practice enhancement platform for surgical groups",
+    default: "Sydra | NSA IDR software for surgical groups",
     template: "%s · Sydra",
   },
   description,
   alternates: { canonical },
   openGraph: {
-    title: "Sydra | Practice enhancement platform for surgical groups",
+    title: "Sydra | NSA IDR software for surgical groups",
     description,
     url: canonical,
     siteName: "Sydra",
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Sydra — Practice enhancement platform for surgical groups",
+        alt: "Sydra — NSA IDR software for surgical groups",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sydra | Practice enhancement platform for surgical groups",
+    title: "Sydra | NSA IDR software for surgical groups",
     description,
     images: ["/opengraph-image"],
   },
