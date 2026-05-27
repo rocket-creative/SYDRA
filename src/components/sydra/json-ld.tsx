@@ -1,34 +1,56 @@
-import { getContactEmail } from "@/lib/contact";
-import { pricingFaqAnswer } from "@/lib/content/tiers";
+import { pricingFaqAnswer, tierRoutingFaqAnswer } from "@/lib/content/tiers";
+import { KRONOS_HEALTH_ID, KRONOS_HEALTH_URL, kronosRevenueUrl } from "@/lib/kronos-revenue";
 import { siteUrl } from "@/lib/site";
+
+const ATTORNEY_COMPARISON_ANSWER =
+  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
 
 const BASE = () => siteUrl();
 
 export function HomepageJsonLd() {
   const base = BASE();
-  const orgId = `${base}/#organization`;
+  const kronosRevenueBase = kronosRevenueUrl();
+  const kronosRevenueId = `${kronosRevenueBase}/#organization`;
+  const softwareId = `${base}/#software`;
   const websiteId = `${base}/#website`;
   const webpageId = `${base}/#webpage`;
 
-  const organization = {
+  const parentOrganization = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": orgId,
+    "@id": KRONOS_HEALTH_ID,
     name: "Kronos Health",
+    url: KRONOS_HEALTH_URL,
+    subOrganization: [{ "@id": softwareId }, { "@id": kronosRevenueId }],
+  };
+
+  const softwareApplication = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": softwareId,
+    name: "Sydra",
     url: base,
-    logo: `${base}/icon-sydra.svg`,
-    brand: {
-      "@type": "Brand",
-      name: "Sydra",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description:
+      "AI software for federal and state IDR / NSA disputes for surgical billing teams. Primary focus: IDR submission drafting in under 5 minutes. Also offers eligibility verification, prior authorization drafting, CPT assessment, and compliance checks.",
+    provider: { "@id": KRONOS_HEALTH_ID },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      seller: { "@id": KRONOS_HEALTH_ID },
     },
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        email: getContactEmail(),
-        contactType: "customer support",
-      },
-    ],
-    sameAs: [] as string[],
+  };
+
+  const kronosRevenueOrganization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": kronosRevenueId,
+    name: "Kronos Revenue",
+    url: kronosRevenueBase,
+    description:
+      "Full service revenue cycle management and No Surprises Act IDR for surgical practices.",
+    parentOrganization: { "@id": KRONOS_HEALTH_ID },
   };
 
   const website = {
@@ -39,7 +61,7 @@ export function HomepageJsonLd() {
     url: base,
     description:
       "NSA / federal IDR software for surgical billing teams. Also includes eligibility, prior authorization, CPT assessment, and compliance tools.",
-    publisher: { "@id": orgId },
+    publisher: { "@id": KRONOS_HEALTH_ID },
   };
 
   const webpage = {
@@ -49,20 +71,9 @@ export function HomepageJsonLd() {
     url: base,
     name: "Sydra | NSA IDR software for surgical groups",
     isPartOf: { "@id": websiteId },
-    about: { "@id": orgId },
+    about: { "@id": softwareId },
     description:
       "Sydra is AI software for NSA / federal IDR disputes. File in under 5 minutes with specialty trained CPT coding. Also includes eligibility, prior auth, CPT review, and compliance.",
-  };
-
-  const service = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Sydra NSA IDR software",
-    description:
-      "AI software for federal and state IDR / NSA disputes for surgical billing teams. Primary focus: IDR submission drafting in under 5 minutes. Also offers eligibility verification, prior authorization drafting, CPT assessment, and compliance checks.",
-    provider: { "@id": orgId },
-    areaServed: "United States",
-    serviceType: "No Surprises Act IDR submission software",
   };
 
   const faq = {
@@ -98,7 +109,15 @@ export function HomepageJsonLd() {
         name: "How does Sydra compare to using an IDR attorney?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win.",
+          text: ATTORNEY_COMPARISON_ANSWER,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: tierRoutingFaqAnswer(),
         },
       },
       {
@@ -121,10 +140,11 @@ export function HomepageJsonLd() {
   };
 
   const payload = [
-    organization,
+    parentOrganization,
+    softwareApplication,
+    kronosRevenueOrganization,
     website,
     webpage,
-    service,
     faq,
   ].map((o) => JSON.stringify(o));
 

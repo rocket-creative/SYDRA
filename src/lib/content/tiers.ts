@@ -18,8 +18,21 @@ export const PRICING_QUALITATIVE_LINE =
 
 export const PRICING_SECTION_HEADLINE = "Three ways to handle NSA";
 
+export const TIER_ROUTING_HEADLINE =
+  "The right fit depends on who operates the workflow, not claim volume alone.";
+
+export const TIER_ROUTING_LINES = [
+  "Comfortable running software → Sydra Self-Serve (any volume)",
+  "Software plus a backstop → Sydra + Kronos Support",
+  "Zero ops / fully outsourced → Kronos Full-Service (any volume)",
+] as const;
+
 export const PRICING_SECTION_SUBHEAD =
   "Same specialty depth across every tier. Schedule a demo and we will recommend the fit for your practice.";
+
+export function tierRoutingFaqAnswer(): string {
+  return `${TIER_ROUTING_HEADLINE} ${TIER_ROUTING_LINES.join(". ")}.`;
+}
 
 export const DEMO_TRUST_BLOCK =
   "A 15 minute call with a Kronos specialist. We walk through Sydra live on a real claim, ask about your specialty and OON volume, and recommend the tier that fits. You leave with a quote, a sandbox account if you want one, and zero pressure.";
@@ -29,7 +42,7 @@ export const TIERS: TierDefinition[] = [
     id: "basic",
     name: "Sydra Self-Serve",
     tagline: "The software, run by your team.",
-    bestFor: "Low to moderate OON volume. Comfortable operating software in house.",
+    bestFor: "Your team runs the software in house.",
     inclusions: [
       "Full Sydra software access for your billing team",
       "Unlimited claims in the platform",
@@ -47,7 +60,7 @@ export const TIERS: TierDefinition[] = [
     id: "plus",
     name: "Sydra + Kronos Support",
     tagline: "The software, with a Kronos specialist on call.",
-    bestFor: "Steady OON volume. Software you operate, plus a backstop on tricky cases.",
+    bestFor: "Software you operate, plus a backstop on tricky cases.",
     recommended: true,
     inclusions: [
       "Everything in Self-Serve",
@@ -67,7 +80,7 @@ export const TIERS: TierDefinition[] = [
     id: "pro",
     name: "Kronos Full-Service",
     tagline: "Every claim handled end to end.",
-    bestFor: "High volume practices that want Kronos to run every file without adding headcount.",
+    bestFor: "You want every claim handled without operating software.",
     externalOnly: true,
     inclusions: [
       "Lives on the Kronos Revenue site",
@@ -134,7 +147,7 @@ export const TIER_COMPARISON: ComparisonRow[] = [
     feature: "How to start",
     basic: "Schedule a demo",
     plus: "Schedule a demo",
-    pro: "See Kronos Revenue",
+    pro: "Get a free NSA IDR review",
   },
 ];
 

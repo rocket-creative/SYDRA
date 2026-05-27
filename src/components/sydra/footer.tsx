@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { KronosRevenueBanner } from "@/components/sydra/kronos-revenue-banner";
 import { getContactEmail, getSalesEmail, getSupportEmail, contactMailtoHref, getContactPhoneDisplay } from "@/lib/contact";
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
+import { KRONOS_PARENT_TAGLINE, kronosRevenueUrl } from "@/lib/kronos-revenue";
 
 const SIGN_IN = "https://sydra.health/";
 
@@ -28,7 +28,10 @@ export function SydraFooter() {
             </div>
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#4A5568]">
               AI software for federal IDR / NSA disputes. Built by surgeons for
-              surgical billing teams. A product of Kronos Health.
+              surgical billing teams.
+            </p>
+            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#4A5568]">
+              {KRONOS_PARENT_TAGLINE}
             </p>
             <ul className="mt-4 space-y-1 text-sm text-[#4A5568]">
               <li>

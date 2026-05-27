@@ -1,5 +1,6 @@
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
-import { pricingFaqAnswer } from "@/lib/content/tiers";
+import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
+import { pricingFaqAnswer, tierRoutingFaqAnswer } from "@/lib/content/tiers";
+import { siteUrl } from "@/lib/site";
 
 export type FaqItem = {
   q: string;
@@ -15,6 +16,9 @@ export const FAQ_CATEGORIES = [
   "Support",
   "When Sydra is not enough",
 ] as const;
+
+const ATTORNEY_COMPARISON_ANSWER =
+  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, quoted on a demo call and structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
 
 export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
@@ -40,7 +44,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
     category: "Pricing",
     q: "How does Sydra compare to using an IDR attorney?",
-    a: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, quoted on a demo call and structured below typical contingency fees. You keep the workflow and more of the win.",
+    a: ATTORNEY_COMPARISON_ANSWER,
   },
   {
     category: "Pricing",
@@ -55,7 +59,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
     category: "Pricing",
     q: "Can we switch tiers later?",
-    a: "Yes. Many practices start Self-Serve and move to Sydra + Kronos Support as volume grows, or move to Kronos Full-Service when they want full outsourcing.",
+    a: "Yes. Many practices start Self-Serve and move to Sydra + Kronos Support as they want more hands-on support, or move to Kronos Full-Service when they want full outsourcing.",
   },
   {
     category: "Workflow",
@@ -89,7 +93,12 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     category: "When Sydra is not enough",
+    q: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
+    a: `${tierRoutingFaqAnswer()} Compare plans at ${siteUrl()}/plans, schedule a demo for software tiers, or get a free NSA IDR review at ${kronosCaseReviewUrl()}.`,
+  },
+  {
+    category: "When Sydra is not enough",
     q: "When should we look at Kronos Full-Service instead?",
-    a: `High volume practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end. See ${kronosRevenueUrl()}.`,
+    a: `Practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end. Get a free NSA IDR review at ${kronosCaseReviewUrl()}.`,
   },
 ];

@@ -4,7 +4,11 @@ import Link from "next/link";
 import { SydraFooter } from "@/components/sydra/footer";
 import { SydraHeader } from "@/components/sydra/header";
 import { KronosRevenueBanner } from "@/components/sydra/kronos-revenue-banner";
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
+import {
+  KRONOS_FULL_SERVICE_CTA,
+  KRONOS_PARENT_TAGLINE,
+  kronosCaseReviewUrl,
+} from "@/lib/kronos-revenue";
 import { siteUrl } from "@/lib/site";
 
 const description =
@@ -29,9 +33,9 @@ const team = [
     bio: "Practicing neurosurgeon. Built Sydra after watching billing teams lose hours per claim on IDR and insurers underpay out of network surgical cases.",
   },
   {
-    name: "Hayes",
+    name: "Heisha Rivera",
     role: "Director of Revenue Cycle",
-    bio: "Leads the operators who trained Sydra on real determinations and supports Tier 2 customers on disputed claims and account reviews.",
+    bio: "Director of Revenue Cycle with 20+ years of healthcare billing and dispute experience. She runs the day to day IDR operation and supports Tier 2 customers on disputed claims and account reviews.",
   },
   {
     name: "Chelsea",
@@ -53,7 +57,7 @@ export default function AboutPage() {
             <p className="mt-6 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
               Kronos Health is a real RCM operation. Sydra is its software arm,
               built by surgeons and billing operators who file NSA disputes every
-              week, not a generic software shop.
+              week, not a generic software shop. {KRONOS_PARENT_TAGLINE}
             </p>
 
             <div className="mt-12 space-y-10">
@@ -69,17 +73,16 @@ export default function AboutPage() {
             <aside className="mt-14 rounded-xl border border-slate-200 bg-slate-50 p-6 md:p-8">
               <h2 className="text-lg font-semibold text-[#1A2B48]">Sister offering</h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-                Need every claim handled end to end? Kronos Revenue runs every file
-                for high volume practices that do not want to operate software
-                themselves.
+                Need every claim handled end to end? Kronos Full-Service runs every file
+                for practices that do not want to operate software themselves.
               </p>
               <a
                 className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-100"
-                href={kronosRevenueUrl()}
+                href={kronosCaseReviewUrl()}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                See Kronos Revenue →
+                {KRONOS_FULL_SERVICE_CTA} →
               </a>
             </aside>
 

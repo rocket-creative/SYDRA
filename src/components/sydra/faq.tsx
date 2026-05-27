@@ -1,6 +1,16 @@
 import Link from "next/link";
 
-import { pricingFaqAnswer } from "@/lib/content/tiers";
+import { pricingFaqAnswer, tierRoutingFaqAnswer } from "@/lib/content/tiers";
+import {
+  KRONOS_FULL_SERVICE_CTA,
+  kronosCaseReviewUrl,
+} from "@/lib/kronos-revenue";
+
+const ATTORNEY_COMPARISON_ANSWER =
+  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
+
+const FULL_SERVICE_ANSWER =
+  "Practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end.";
 
 const faqs = [
   {
@@ -22,16 +32,21 @@ const faqs = [
   },
   {
     q: "How does Sydra compare to using an IDR attorney?",
-    a: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs — quoted on a demo call, structured below typical contingency fees. You keep the workflow and more of the win. If you want every claim handled for you, Kronos Full-Service on Kronos Revenue is the outsourced option.",
+    a: ATTORNEY_COMPARISON_ANSWER,
   },
   {
     q: "What does Sydra do besides IDR?",
     a: "NSA IDR is the primary focus. Sydra also includes eligibility verification, prior authorization drafting, CPT review from op notes, and compliance checks — supporting tools in the same platform when your team wants them.",
   },
   {
+    q: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
+    hasTierChoiceLinks: true,
+    a: tierRoutingFaqAnswer(),
+  },
+  {
     q: "When should we look at Kronos Full-Service?",
     hasKronosLink: true,
-    a: "High volume practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end.",
+    a: FULL_SERVICE_ANSWER,
   },
 ] as const;
 
@@ -72,6 +87,42 @@ export function SydraFaq() {
                     >
                       Compare all plans
                     </Link>
+                  </p>
+                ) : null}
+                {"hasTierChoiceLinks" in item && item.hasTierChoiceLinks ? (
+                  <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                    <Link
+                      className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+                      href="/plans"
+                    >
+                      See plans
+                    </Link>
+                    <Link
+                      className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+                      href="/demo"
+                    >
+                      Schedule a demo
+                    </Link>
+                    <a
+                      className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+                      href={kronosCaseReviewUrl()}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {KRONOS_FULL_SERVICE_CTA}
+                    </a>
+                  </p>
+                ) : null}
+                {"hasKronosLink" in item && item.hasKronosLink ? (
+                  <p className="mt-3">
+                    <a
+                      className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+                      href={kronosCaseReviewUrl()}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {KRONOS_FULL_SERVICE_CTA}
+                    </a>
                   </p>
                 ) : null}
               </div>

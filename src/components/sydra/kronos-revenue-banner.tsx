@@ -1,24 +1,27 @@
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
+import {
+  KRONOS_FULL_SERVICE_CTA,
+  kronosCaseReviewUrl,
+} from "@/lib/kronos-revenue";
 
 type KronosRevenueBannerProps = {
   variant?: "default" | "subtle";
 };
 
 export function KronosRevenueBanner({ variant = "default" }: KronosRevenueBannerProps) {
-  const url = kronosRevenueUrl();
+  const url = kronosCaseReviewUrl();
 
   if (variant === "subtle") {
     return (
       <aside className="border-t border-slate-200 bg-slate-50 px-4 py-8 text-center sm:px-6">
         <p className="text-[15px] leading-relaxed text-[#4A5568]">
-          High volume practice? Do not want to operate the software yourself?{" "}
+          Do not want to operate the software yourself?{" "}
           <a
             className="font-semibold text-[#1A2B48] underline decoration-slate-300 underline-offset-4 hover:decoration-[#1A2B48]"
             href={url}
             rel="noopener noreferrer"
             target="_blank"
           >
-            See Kronos Revenue →
+            {KRONOS_FULL_SERVICE_CTA} →
           </a>
         </p>
       </aside>
@@ -35,10 +38,10 @@ export function KronosRevenueBanner({ variant = "default" }: KronosRevenueBanner
           className="text-lg font-semibold text-[#1A2B48] md:text-xl"
           id="heading-kronos-revenue"
         >
-          High volume practice?
+          Want every claim handled for you?
         </h2>
         <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
-          Do not want to operate the software yourself? Kronos Revenue handles every
+          Do not want to operate the software yourself? Kronos Full-Service handles every
           claim end to end on our sister site.
         </p>
         <a
@@ -47,7 +50,7 @@ export function KronosRevenueBanner({ variant = "default" }: KronosRevenueBanner
           rel="noopener noreferrer"
           target="_blank"
         >
-          See Kronos Revenue →
+          {KRONOS_FULL_SERVICE_CTA} →
         </a>
       </div>
     </aside>

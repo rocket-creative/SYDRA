@@ -6,11 +6,16 @@ import {
   PRICING_SECTION_HEADLINE,
   PRICING_SECTION_SUBHEAD,
   TIER_COMPARISON,
+  TIER_ROUTING_HEADLINE,
+  TIER_ROUTING_LINES,
   TIERS,
   type ComparisonCell,
   type TierDefinition,
 } from "@/lib/content/tiers";
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
+import {
+  KRONOS_FULL_SERVICE_CTA,
+  kronosCaseReviewUrl,
+} from "@/lib/kronos-revenue";
 
 type PricingTiersProps = {
   variant: "full" | "compact";
@@ -93,11 +98,11 @@ function TierCard({
           isExternal ? (
             <a
               className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#1A2B48] transition duration-300 ease-out hover:bg-slate-50 active:scale-[0.98]"
-              href={kronosRevenueUrl()}
+              href={kronosCaseReviewUrl()}
               rel="noopener noreferrer"
               target="_blank"
             >
-              See Kronos Revenue →
+              {KRONOS_FULL_SERVICE_CTA} →
             </a>
           ) : (
             <Link
@@ -114,10 +119,10 @@ function TierCard({
         ) : (
           <Link
             className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#1A2B48] transition duration-300 ease-out hover:bg-slate-50 active:scale-[0.98]"
-            href={isExternal ? kronosRevenueUrl() : `/plans#${tier.id}`}
+            href={isExternal ? kronosCaseReviewUrl() : `/plans#${tier.id}`}
             {...(isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {})}
           >
-            {isExternal ? "See Kronos Revenue" : "Learn more"}
+            {isExternal ? KRONOS_FULL_SERVICE_CTA : "Learn more"}
           </Link>
         )}
       </div>
@@ -182,6 +187,21 @@ export function PricingTiers({ variant }: PricingTiersProps) {
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#4A5568] md:text-[17px]">
           {PRICING_SECTION_SUBHEAD}
         </p>
+        {variant === "full" ? (
+          <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-slate-200 bg-slate-50 px-6 py-6 text-left md:px-8">
+            <p className="text-[15px] font-semibold text-[#1A2B48]">{TIER_ROUTING_HEADLINE}</p>
+            <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-[#4A5568]">
+              {TIER_ROUTING_LINES.map((line) => (
+                <li key={line} className="flex gap-2">
+                  <span aria-hidden className="text-[rgb(0,40,184)]">
+                    →
+                  </span>
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-3 lg:gap-6 xl:gap-8">

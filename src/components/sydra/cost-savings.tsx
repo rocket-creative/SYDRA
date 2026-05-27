@@ -1,6 +1,9 @@
 import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
 
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
+import {
+  KRONOS_FULL_SERVICE_CTA,
+  kronosCaseReviewUrl,
+} from "@/lib/kronos-revenue";
 
 const savings = [
   {
@@ -67,13 +70,13 @@ export function SydraCostSavings() {
           Do not want to run software at all?{" "}
           <a
             className="font-medium text-slate-200 underline decoration-slate-500 underline-offset-2 hover:text-white"
-            href={kronosRevenueUrl()}
+            href={kronosCaseReviewUrl()}
             rel="noopener noreferrer"
             target="_blank"
           >
-            Kronos Revenue
+            {KRONOS_FULL_SERVICE_CTA}
           </a>{" "}
-          handles every claim end to end.
+          for Kronos Full-Service — zero ops, headcount eliminated, and priced so you keep more of each win than typical attorney contingency.
         </p>
       </div>
     </section>

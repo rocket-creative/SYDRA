@@ -1,3 +1,4 @@
+import { KRONOS_HEALTH_ID } from "@/lib/kronos-revenue";
 import { TIERS } from "@/lib/content/tiers";
 import { siteUrl } from "@/lib/site";
 
@@ -36,6 +37,7 @@ export function PricingPageJsonLd() {
         description: `${tier.tagline} ${tier.bestFor}`,
         seller: {
           "@type": "Organization",
+          "@id": KRONOS_HEALTH_ID,
           name: "Kronos Health",
         },
         availability: "https://schema.org/InStock",

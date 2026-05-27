@@ -1,7 +1,11 @@
 import Link from "next/link";
 
 import { KronosRevenueBanner } from "@/components/sydra/kronos-revenue-banner";
-import { kronosRevenueUrl } from "@/lib/kronos-revenue";
+import {
+  KRONOS_FULL_SERVICE_CTA,
+  KRONOS_PARENT_TAGLINE,
+  kronosCaseReviewUrl,
+} from "@/lib/kronos-revenue";
 
 export function SydraAbout() {
   return (
@@ -27,8 +31,11 @@ export function SydraAbout() {
           </p>
           <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
             The Kronos Revenue Cycle team trained the system on real determinations.
-            Chelsea leads software and integrations. Hayes leads revenue cycle
+            Chelsea leads software and integrations. Heisha Rivera leads revenue cycle
             operations and the specialists who support Tier 2 customers.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
+            {KRONOS_PARENT_TAGLINE}
           </p>
           <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.75]">
             Sydra is in production at NY Brain and Spine Surgery and rolling out to
@@ -39,11 +46,11 @@ export function SydraAbout() {
             Need it fully handled?{" "}
             <a
               className="font-semibold text-[#1A2B48] underline decoration-slate-300 underline-offset-4 hover:decoration-[#1A2B48]"
-              href={kronosRevenueUrl()}
+              href={kronosCaseReviewUrl()}
               rel="noopener noreferrer"
               target="_blank"
             >
-              See Kronos Revenue →
+              {KRONOS_FULL_SERVICE_CTA} →
             </a>
           </p>
           <p className="mt-6">
