@@ -1,7 +1,7 @@
-export const SALES_EMAIL_FALLBACK = "sales@sydrahealth.com";
+export const SALES_EMAIL_FALLBACK = "sales@kronosrevenue.health";
 
 const DEFAULT_SALES_EMAIL = SALES_EMAIL_FALLBACK;
-const DEFAULT_SUPPORT_EMAIL = SALES_EMAIL_FALLBACK;
+const DEFAULT_SUPPORT_EMAIL = "support@sydrahealth.com";
 
 const MAILTO_SUBJECT = "FROM SYDRA";
 
