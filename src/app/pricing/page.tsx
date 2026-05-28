@@ -26,7 +26,7 @@ export default function PricingPage() {
             </span>
           </h1>
           <p className="mt-6 text-base leading-relaxed text-[#4A5568] md:text-lg">
-            We do not publish a list price because the right number depends on your specialty,
+            We don&apos;t publish a list price because the right number depends on your specialty,
             state, and monthly out of network claim volume. Every tier is structured below the
             typical 20% attorney contingency fee. You keep more of every recovery.
           </p>
@@ -53,7 +53,7 @@ export default function PricingPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#1A2B48]">If you are not filing IDR</h3>
+              <h3 className="font-semibold text-[#1A2B48]">If you&apos;re not filing IDR</h3>
               <p className="mt-2">
                 Zero attorney fees. Zero IDR recovery. The gap between the insurer&apos;s initial
                 payment and what IDR would award stays with the insurer.
@@ -90,7 +90,7 @@ export default function PricingPage() {
               account if you want one, and no obligation.
             </p>
             <p>
-              If your practice volume is low enough that the platform economics do not work, we
+              If your practice volume is low enough that the platform economics don&apos;t work, we
               tell you and direct you to Kronos Revenue Full Service as a better fit.
             </p>
           </div>

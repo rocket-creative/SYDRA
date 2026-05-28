@@ -42,8 +42,8 @@ export function HomepageSecurity() {
           </p>
           <p>
             <strong className="text-[#1A2B48]">SOC 2:</strong> In progress. Not yet complete. We
-            will tell you the timeline when you ask. We are not going to claim a certification
-            we have not finished.
+            will tell you the timeline when you ask. We&apos;re not going to claim a certification
+            we haven&apos;t finished.
           </p>
         </div>
         <p className="mt-8">

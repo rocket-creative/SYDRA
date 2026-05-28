@@ -30,10 +30,10 @@ export const SOC2_SECTION: SecuritySection = {
   id: "heading-soc2",
   title: "SOC 2 status — read this first.",
   paragraphs: [
-    "Sydra is SOC 2 aligned. We have not completed a formal SOC 2 Type II audit.",
-    "We are in the process of completing the audit. We will not tell you we have a certification we do not have, and we will not bury this information in a footnote.",
-    "SOC 2 aligned means: our controls are designed to meet SOC 2 requirements. We have documented policies, access controls, audit logging, incident response procedures, and vendor management processes that a SOC 2 auditor would review. We have not yet had a third party auditor certify those controls as operating effectively over a defined period.",
-    "If a completed SOC 2 Type II report is a hard requirement for your procurement process, tell us. We will give you the current timeline and let you decide.",
+    "Sydra is SOC 2 aligned. We haven't completed a formal SOC 2 Type II audit.",
+    "We're in the process of completing the audit. We won't tell you we have a certification we don't have, and we won't bury this information in a footnote.",
+    "SOC 2 aligned means: our controls are designed to meet SOC 2 requirements. We have documented policies, access controls, audit logging, incident response procedures, and vendor management processes that a SOC 2 auditor would review. We haven't yet had a third party auditor certify those controls as operating effectively over a defined period.",
+    "If a completed SOC 2 Type II report is a hard requirement for your procurement process, tell us. We'll give you the current timeline and let you decide.",
   ],
 };
 
@@ -55,7 +55,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
       "Hosting: Sydra production workloads run on AWS infrastructure in US regions.",
       "Encryption at rest: Documents are stored in Amazon S3 with AES 256 server side encryption. Keys managed through AWS Key Management Service (KMS).",
       "Encryption in transit: All data between your browser and Sydra's servers is transmitted over TLS 1.2 or higher.",
-      "Document access: Documents are not accessible through persistent public URLs. Retrieval uses signed URLs with short expiry windows (minutes, not days).",
+      "Document access: Documents aren't accessible through persistent public URLs. Retrieval uses signed URLs with short expiry windows (minutes, not days).",
       "Database: PHI is stored with row level security. Each practice has a unique tenant identifier. Queries are scoped to the authenticated practice's tenant by default.",
     ],
   },
@@ -87,7 +87,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
     id: "heading-incident",
     title: "Incident response.",
     paragraphs: [
-      "Documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI: We notify you per the timeline in your BAA. We have not had a reportable incident involving customer PHI.",
+      "Documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI: We notify you per the timeline in your BAA. We haven't had a reportable incident involving customer PHI.",
     ],
   },
   {

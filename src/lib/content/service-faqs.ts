@@ -71,7 +71,7 @@ export const PRICING_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "Can we switch tiers?",
-    a: "Yes. Many practices start Self Serve and add Kronos Support or move to Full Service. Tier switches do not require a new onboarding process.",
+    a: "Yes. Many practices start Self Serve and add Kronos Support or move to Full Service. Tier switches don't require a new onboarding process.",
   },
   {
     q: "How does Sydra pricing compare to an attorney at 20%?",

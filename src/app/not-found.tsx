@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata = buildPageMetadata({
   title: "Page Not Found | Sydra",
   description:
-    "The page you requested was not found on the Sydra marketing site. Return to the homepage or schedule a demo to see NSA IDR software for surgical billing teams.",
+    "The page you requested wasn't found on the Sydra marketing site. Return to the homepage or schedule a demo to see NSA IDR software for surgical billing teams.",
   path: "/404",
   robots: { index: false, follow: false },
 });
@@ -31,7 +31,7 @@ export default function NotFound() {
             Page not found
           </h1>
           <p className="mt-5 max-w-md text-base leading-relaxed text-[#4A5568]">
-            That URL is not on this site. Head back to the homepage or schedule a demo
+            That URL isn&apos;t on this site. Head back to the homepage or schedule a demo
             to see Sydra on a real denied claim.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">

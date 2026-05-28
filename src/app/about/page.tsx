@@ -53,7 +53,7 @@ export default function AboutPage() {
               practicing neurosurgeon in New York.
             </p>
             <p>
-              The software was not built first. The billing operation was built first. Dr.
+              The software wasn&apos;t built first. The billing operation was built first. Dr.
               Abrahams built the IDR process for his own neurosurgical practice, trained an RCM
               team on it, and then built Sydra to make the documentation step faster for billing
               teams who wanted to run the same workflow in house.
@@ -95,9 +95,9 @@ export default function AboutPage() {
               Why this origin matters for your practice.
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-              Sydra is not the first software platform to claim it can prepare IDR submissions.
-              It is the first one built by a practicing neurosurgeon whose team files IDR claims
-              every day on the same platform. That is the reason we ask you to run the demo on a
+              Sydra isn&apos;t the first software platform to claim it can prepare IDR submissions.
+              It&apos;s the first one built by a practicing neurosurgeon whose team files IDR claims
+              every day on the same platform. That&apos;s the reason we ask you to run the demo on a
               real denied claim, not a sample claim.
             </p>
             <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">

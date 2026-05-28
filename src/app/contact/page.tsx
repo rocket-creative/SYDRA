@@ -100,7 +100,7 @@ export default function ContactPage() {
                 Want every claim handled without running software
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                That is Kronos Revenue Full Service on our sister site.{" "}
+                That&apos;s Kronos Revenue Full Service on our sister site.{" "}
                 <a
                   className="font-medium text-[rgb(0,40,184)] underline"
                   href={kronosCaseReviewUrl()}

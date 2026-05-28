@@ -14,7 +14,7 @@ const savings = [
   {
     value: "25+ min",
     label: "Saved per dispute",
-    detail: "At 10 files a month, that is 4+ hours of labor cost recovered.",
+    detail: "At 10 files a month, that's 4+ hours of labor cost recovered.",
   },
   {
     value: "No 20% cut",
@@ -67,7 +67,7 @@ export function SydraCostSavings() {
 
         <p className="mx-auto mt-10 max-w-2xl text-center text-xs leading-relaxed text-slate-400 md:text-sm">
           Time savings based on typical single CPT IDR prep with documents on file.
-          Do not want to run software at all?{" "}
+          Don&apos;t want to run software at all?{" "}
           <a
             className="font-medium text-slate-200 underline decoration-slate-500 underline-offset-2 hover:text-white"
             href={kronosCaseReviewUrl()}

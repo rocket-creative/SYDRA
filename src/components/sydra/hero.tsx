@@ -18,7 +18,7 @@ export function SydraHero() {
             >
               Your billing team is spending 30 minutes per NSA IDR claim.
               <span className="mt-2 block">
-                That is not a workflow problem. That is a software problem.
+                That&apos;s not a workflow problem. That&apos;s a software problem.
               </span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.7]">

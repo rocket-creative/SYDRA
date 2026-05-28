@@ -21,17 +21,17 @@ export function SydraTimeCost() {
           <li>30 claims per month = 15 hours.</li>
         </ul>
         <p className="mt-6 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          Most billing teams do not have 15 hours per month for a single workflow. So they
+          Most billing teams don&apos;t have 15 hours per month for a single workflow. So they
           file fewer claims than they should. Or none at all. CMS data shows only about 10%
           of eligible claims reach IDR. ACEP analysis.
         </p>
         <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          The other 90% are either not filed or not reaching arbitration. The insurer keeps
+          The other 90% aren&apos;t filed or aren&apos;t reaching arbitration. The insurer keeps
           the underpayment. Every month.
         </p>
         <p className="mt-6 text-base font-semibold leading-relaxed text-[#1A2B48] md:text-[17px]">
           Sydra reduces the prep step to under 5 minutes per claim. The same 30 claims per
-          month becomes under 2.5 hours of billing team time. The claims that were not being
+          month becomes under 2.5 hours of billing team time. The claims that weren&apos;t being
           filed start getting filed.
         </p>
       </div>

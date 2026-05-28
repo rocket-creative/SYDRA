@@ -60,7 +60,7 @@ const preBookingFaq = [
   },
   {
     q: "What if I just want pricing without a demo?",
-    a: `Email ${getSalesEmail()} with your specialty and estimated monthly OON volume. We will send a pricing range.`,
+    a: `Email ${getSalesEmail()} with your specialty and estimated monthly OON volume. We'll send a pricing range.`,
   },
   {
     q: "How long does setup take after we decide to proceed?",
@@ -92,7 +92,7 @@ export default function DemoPage() {
                   What happens on the call
                 </h2>
                 <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-                  This is not a slide deck. A Kronos specialist opens Sydra in a shared screen and
+                  This isn&apos;t a slide deck. A Kronos specialist opens Sydra in a shared screen and
                   runs a real denied claim from your specialty through the full workflow.
                 </p>
                 <ol className="mt-6 list-decimal space-y-3 pl-5 text-[15px] leading-relaxed text-[#4A5568]">
@@ -155,7 +155,7 @@ export default function DemoPage() {
                 Schedule your 15 minute demo.
               </h2>
               <p className="mt-2 text-sm text-[#4A5568]">
-                Send us an EOB before the call and we will run the demo on your actual claim.
+                Send us an EOB before the call and we&apos;ll run the demo on your actual claim.
               </p>
               <div className="mt-6">
                 <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-100" />}>

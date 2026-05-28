@@ -49,17 +49,17 @@ export default function PrivacyPage() {
           <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
             When you schedule a demo or contact us, we collect the information you
             provide: name, work email, practice name, specialty, state, and related
-            qualification fields. We do not collect payment information on this site.
+            qualification fields. We don&apos;t collect payment information on this site.
           </p>
           <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">How we use it</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
             We use submitted information to respond to inquiries, schedule demos,
-            and evaluate whether Sydra is a fit for your practice. We do not sell
+            and evaluate whether Sydra is a fit for your practice. We don&apos;t sell
             contact information to third parties.
           </p>
           <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">PHI on this site</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            Do not submit protected health information through this marketing site.
+            Don&apos;t submit protected health information through this marketing site.
             PHI belongs in the Sydra application under a signed BAA.
           </p>
           <p className="mt-10 text-sm text-slate-500">

@@ -14,7 +14,7 @@ export function KronosRevenueBanner({ variant = "default" }: KronosRevenueBanner
     return (
       <aside className="border-t border-slate-200 bg-slate-50 px-4 py-8 text-center sm:px-6">
         <p className="text-[15px] leading-relaxed text-[#4A5568]">
-          Do not want to operate the software yourself?{" "}
+          Don&apos;t want to operate the software yourself?{" "}
           <a
             className="font-semibold text-[#1A2B48] underline decoration-slate-300 underline-offset-4 hover:decoration-[#1A2B48]"
             href={url}
@@ -41,7 +41,7 @@ export function KronosRevenueBanner({ variant = "default" }: KronosRevenueBanner
           Want every claim handled for you?
         </h2>
         <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
-          Do not want to operate the software yourself? Kronos Full-Service handles every
+          Don&apos;t want to operate the software yourself? Kronos Full-Service handles every
           claim end to end on our sister site.
         </p>
         <a

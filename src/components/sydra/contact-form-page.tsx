@@ -50,7 +50,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <p className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-[15px] text-emerald-900">
-        We will reply to {email} within one business day.
+        We&apos;ll reply to {email} within one business day.
       </p>
     );
   }

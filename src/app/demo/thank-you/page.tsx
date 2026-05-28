@@ -22,7 +22,7 @@ export default function DemoThankYouPage() {
         Request received
       </h1>
       <p className="mt-5 max-w-md text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-        Our team reviews every request. If your practice is a fit, we will
+        Our team reviews every request. If your practice is a fit, we&apos;ll
         follow up within one business day at the time you selected to
         schedule your denied claim walkthrough.
       </p>

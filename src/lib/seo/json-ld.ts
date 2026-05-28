@@ -217,7 +217,7 @@ export function kronosHealthOrganizationJsonLd() {
 /** Part 1C — homepage FAQ schema subset */
 export const HOMEPAGE_FAQ_SCHEMA = [
   {
-    q: "What is Sydra and who is it for?",
+    q: "What's Sydra and who is it for?",
     a: "Sydra is AI software for federal IDR and NSA dispute resolution, built for surgical billing teams at orthopedic, neurosurgery, spine, and plastic surgery practices. Your billing team operates the software in house, reducing IDR claim preparation from 30 minutes to under 5 minutes per claim. Sydra is built by Kronos Health and runs on AWS Bedrock with HIPAA controls and BAA available.",
   },
   {
@@ -233,7 +233,7 @@ export const HOMEPAGE_FAQ_SCHEMA = [
     a: "Yes. Sydra runs on AWS healthcare workloads with HIPAA eligible Claude Sonnet 4 on AWS Bedrock. A Business Associate Agreement is available for covered entities. Documents are encrypted in transit and at rest. Strict per practice tenant isolation is enforced at every database table. PHI never leaves the AWS HIPAA eligible service boundary during AI generation.",
   },
   {
-    q: "What is the difference between Sydra Self Serve, Sydra plus Kronos Support, and Kronos Full Service?",
+    q: "What's the difference between Sydra Self Serve, Sydra plus Kronos Support, and Kronos Full Service?",
     a: "Sydra Self Serve is software your billing team operates independently. Sydra plus Kronos Support adds live specialist support, monthly account reviews, and escalation on edge cases. Kronos Full Service, available at kronosrevenue.health, is fully outsourced: the Kronos Revenue team handles every claim end to end. The right fit depends on who operates the workflow, not claim volume alone.",
   },
 ];

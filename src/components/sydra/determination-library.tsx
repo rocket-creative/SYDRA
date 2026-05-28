@@ -31,7 +31,7 @@ export function DeterminationLibrary() {
           <p>
             Sydra&apos;s library contains 213+ ingested IDR determinations, over 90% provider wins,
             weighted toward spine and orthopedic CPT codes. When Sydra drafts a submission for
-            CPT 22612 (posterior lumbar fusion), it does not generate a generic argument. It
+            CPT 22612 (posterior lumbar fusion), it doesn&apos;t generate a generic argument. It
             cites the specific prior determinations that match your code, your state, and your
             procedure complexity.
           </p>

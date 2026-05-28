@@ -32,7 +32,7 @@ export function SydraEconomics() {
               specialty and volume.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-slate-300">
-              If your practice is not filing IDR at all: Providers win 88% of properly filed
+              If your practice isn&apos;t filing IDR at all: Providers win 88% of properly filed
               IDR disputes. CMS Q1/Q2 2025 Public Use File. Median awards come in at
               approximately 4.5 times the insurer&apos;s qualifying payment amount.
               Georgetown CHIR, March 2026. Run your numbers below.

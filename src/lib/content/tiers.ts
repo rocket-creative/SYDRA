@@ -28,7 +28,7 @@ export const TIER_ROUTING_LINES = [
 ] as const;
 
 export const PRICING_SECTION_SUBHEAD =
-  "Same specialty depth across every tier. Schedule a demo and we will recommend the fit for your practice.";
+  "Same specialty depth across every tier. Schedule a demo and we'll recommend the fit for your practice.";
 
 export function tierRoutingFaqAnswer(): string {
   return `${TIER_ROUTING_HEADLINE} ${TIER_ROUTING_LINES.join(". ")}.`;

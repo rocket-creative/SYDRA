@@ -9,11 +9,11 @@ export type FaqItem = {
 export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
     q: "How long does it actually take to prepare an IDR submission in Sydra?",
-    a: "Under 5 minutes for a standard single CPT claim where the operative note is already uploaded and the provider profile is built. The time breaks down: 30 to 60 seconds to upload the EOB and run the eligibility check. 60 to 90 seconds to review the automatically generated draft. 30 seconds to approve and export the DOCX. After the first five to ten submissions, experienced billers report the process taking closer to 3 minutes per claim. The 30 minute comparison is based on the manual process: pulling the EOB, looking up QPA, drafting a market rate argument from scratch, writing a clinical narrative, gathering credentials, and formatting for the portal. Sydra automates the documentation step. The review is still human. The drafting is not.",
+    a: "Under 5 minutes for a standard single CPT claim where the operative note is already uploaded and the provider profile is built. The time breaks down: 30 to 60 seconds to upload the EOB and run the eligibility check. 60 to 90 seconds to review the automatically generated draft. 30 seconds to approve and export the DOCX. After the first five to ten submissions, experienced billers report the process taking closer to 3 minutes per claim. The 30 minute comparison is based on the manual process: pulling the EOB, looking up QPA, drafting a market rate argument from scratch, writing a clinical narrative, gathering credentials, and formatting for the portal. Sydra automates the documentation step. The review is still human. The drafting isn't.",
   },
   {
     q: "Does Sydra batch CPT codes?",
-    a: "No. Sydra files one claim per eligible CPT code. If your EOB contains three CPT codes, Sydra generates three separate submission packets. Each with a procedure specific payment offer, CPT specific market rate justification, clinical narrative specific to that procedure, and the provider credentials relevant to that code. The one CPT per claim structure is not configurable. Federal IDR is final offer arbitration. A batched offer covering three CPT codes cannot be matched cleanly to any single prior determination. CMS data shows providers win 88% of IDR disputes industry wide (H1 2025). The practices reaching that win rate are filing correctly. Batched filings underperform it.",
+    a: "No. Sydra files one claim per eligible CPT code. If your EOB contains three CPT codes, Sydra generates three separate submission packets. Each with a procedure specific payment offer, CPT specific market rate justification, clinical narrative specific to that procedure, and the provider credentials relevant to that code. The one CPT per claim structure isn't configurable. Federal IDR is final offer arbitration. A batched offer covering three CPT codes can't be matched cleanly to any single prior determination. CMS data shows providers win 88% of IDR disputes industry wide (H1 2025). The practices reaching that win rate are filing correctly. Batched filings underperform it.",
   },
   {
     q: "What CPT codes does Sydra's determination library cover?",
@@ -36,7 +36,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
     a: "Most practices are operational within one week of signing the BAA. Day 1 to 2: We provision your practice tenant and send login credentials. Day 2 to 3: Your billing lead uploads the first provider CV and we build the provider profile. Day 3 to 4: ModMed integration configured if applicable. Day 4 to 5: First claim run in the platform with your billing lead watching. Day 5 to 7: Second and third claims run independently.",
   },
   {
-    q: "What if my practice does not want to run software at all?",
+    q: "What if my practice doesn't want to run software at all?",
     a: "Kronos Full Service on our sister site handles every IDR claim end to end. Your practice forwards EOBs. The Kronos Revenue team handles eligibility, documentation, submission, and tracking. Zero software for your billing team to operate. Get a free IDR review at " + kronosCaseReviewUrl() + ".",
   },
 ];

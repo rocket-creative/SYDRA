@@ -46,7 +46,7 @@ export function SydraProof() {
         <p className="mx-auto mt-10 max-w-3xl text-center text-xs leading-relaxed text-slate-500 md:text-sm">
           Time to draft is for a typical single CPT submission with documents
           already on file. Win rate reflects the determinations in our reference
-          library; it is not a guarantee of future results.
+          library; it isn&apos;t a guarantee of future results.
         </p>
       </div>
     </section>

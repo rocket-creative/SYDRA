@@ -241,7 +241,7 @@ export const metadata = {
 
 ## H1
 Your billing team is spending 30 minutes per NSA IDR claim.
-That is not a workflow problem. That is a software problem.
+That's not a workflow problem. That's a software problem.
 
 ## Hero subhead
 Sydra prepares a complete federal IDR submission packet in under 5 minutes per claim.

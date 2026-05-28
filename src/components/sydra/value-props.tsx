@@ -3,7 +3,7 @@ import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
 const props = [
   {
     title: "Faster",
-    body: "30 minutes per claim down to under 5. At 10 disputes a month, that is 4+ hours of biller time recovered, without hiring or outsourcing.",
+    body: "30 minutes per claim down to under 5. At 10 disputes a month, that's 4+ hours of biller time recovered, without hiring or outsourcing.",
   },
   {
     title: "Smarter",

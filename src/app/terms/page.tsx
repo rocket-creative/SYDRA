@@ -47,12 +47,12 @@ export default function TermsPage() {
           </p>
           <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">No medical or legal advice</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            Content on this site is not medical, legal, or billing advice. Outcomes
+            Content on this site isn&apos;t medical, legal, or billing advice. Outcomes
             depend on payer behavior, IDRE decisions, and your documentation.
           </p>
           <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">Accuracy</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            We strive to keep product descriptions current but do not guarantee
+            We strive to keep product descriptions current but don&apos;t guarantee
             every statement reflects the latest release. Demo calls confirm fit and
             capabilities for your practice.
           </p>
