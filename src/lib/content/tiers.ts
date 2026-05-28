@@ -16,7 +16,7 @@ export type TierDefinition = {
 export const PRICING_QUALITATIVE_LINE =
   "Pricing is shared on your demo call after we learn your specialty, state, and volume. No published list prices.";
 
-export const PRICING_SECTION_HEADLINE = "Three ways to handle NSA";
+export const PRICING_SECTION_HEADLINE = "Three ways to handle NSA IDR. Same specialty depth. Different operator.";
 
 export const TIER_ROUTING_HEADLINE =
   "The right fit depends on who operates the workflow, not claim volume alone.";

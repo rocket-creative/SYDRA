@@ -4,19 +4,20 @@ import { siteUrl } from "@/lib/site";
 
 const SITE_NAME = "Sydra";
 
-function ogImageUrl(): string {
-  return `${siteUrl()}/opengraph-image`;
+export const DEFAULT_OG_IMAGE_ALT =
+  "Sydra — NSA IDR software for surgical billing teams. Under 5 minutes per claim.";
+
+function ogImageUrl(path = ""): string {
+  const base = siteUrl();
+  return path ? `${base}${path}/opengraph-image` : `${base}/opengraph-image`;
 }
 
-const OG_IMAGE_ALT = "Sydra NSA IDR software for surgical groups";
-
 type PageMetadataInput = {
-  /** Full page title, 50–60 chars, keyword first, brand last */
   title: string;
-  /** Meta description, 150–160 chars */
   description: string;
-  /** Path without domain, e.g. `/about` or `` for homepage */
   path: string;
+  ogImageAlt?: string;
+  ogImagePath?: string;
   robots?: Metadata["robots"];
 };
 
@@ -24,10 +25,12 @@ export function buildPageMetadata({
   title,
   description,
   path,
+  ogImageAlt = DEFAULT_OG_IMAGE_ALT,
+  ogImagePath,
   robots = { index: true, follow: true },
 }: PageMetadataInput): Metadata {
   const canonical = `${siteUrl()}${path === "" ? "" : path}`;
-  const ogImage = ogImageUrl();
+  const ogImage = ogImagePath ? ogImageUrl(ogImagePath) : ogImageUrl();
 
   return {
     title: { absolute: title },
@@ -45,7 +48,7 @@ export function buildPageMetadata({
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: OG_IMAGE_ALT,
+          alt: ogImageAlt,
         },
       ],
     },
@@ -59,55 +62,60 @@ export function buildPageMetadata({
   };
 }
 
-/** Homepage metadata (also used as root layout default). */
 export const HOME_METADATA = buildPageMetadata({
-  title: "NSA IDR Software for Surgical Groups | Sydra",
+  title: "NSA IDR Software for Surgical Billing Teams | Sydra",
   description:
-    "NSA and federal IDR software for surgical billing teams. File disputes in under 5 minutes. Eligibility, prior auth, CPT review, and compliance tools included.",
+    "Sydra prepares federal IDR submissions in under 5 minutes per claim. Specialty trained for orthopedic, neurosurgery, spine, and plastics. HIPAA controls. BAA available. Free demo.",
   path: "",
 });
 
 export const PAGE_METADATA = {
   about: buildPageMetadata({
-    title: "About Sydra | Built by Surgeons and RCM Operators",
+    title: "About Sydra — Built by Kronos Health | Dr. John M. Abrahams, MD | Sydra",
     description:
-      "Meet the Kronos Health team behind Sydra. Dr. John Abrahams, Heisha Rivera, and Chelsea built NSA IDR software used by surgical billing teams nationwide.",
+      "Sydra is built by Kronos Health, founded by Dr. John M. Abrahams, a practicing board certified neurosurgeon. The software was built from a working RCM operation, not a technology startup.",
     path: "/about",
+    ogImagePath: "/about",
   }),
-  plans: buildPageMetadata({
-    title: "Sydra Plans | Self Serve, Support, and Full Service",
+  pricing: buildPageMetadata({
+    title: "Sydra Pricing — NSA IDR Software Plans | Sydra",
     description:
-      "Compare Sydra Self Serve, Sydra plus Kronos Support, and Kronos Full Service. No published pricing. Schedule a demo to find the right tier for your practice.",
-    path: "/plans",
+      "Sydra pricing is quoted on your demo call based on specialty and monthly OON volume. Structured below typical 20% attorney contingency. Three tiers: Self Serve, Support, Full Service.",
+    path: "/pricing",
+    ogImagePath: "/pricing",
+    ogImageAlt: "Sydra pricing — NSA IDR software plans for surgical billing teams.",
   }),
   demo: buildPageMetadata({
-    title: "Schedule a Sydra Demo | NSA IDR Walkthrough Live",
+    title: "Schedule a Sydra Demo — 15 Minutes on a Real Denied Claim | Sydra",
     description:
-      "Book a 15 minute Sydra demo on a real denied claim. Built for surgical billing teams filing federal IDR and NSA disputes. Sandbox access available on the call.",
+      "We walk through Sydra on an actual denied claim from your specialty. Eligibility check, draft generation, DOCX export in real time. You see the output before you commit to anything.",
     path: "/demo",
+    ogImagePath: "/demo",
   }),
   howItWorks: buildPageMetadata({
-    title: "How Sydra Works | NSA IDR Software Step by Step",
+    title: "How Sydra Prepares an NSA IDR Submission | Step by Step | Sydra",
     description:
-      "See Sydra on a real claim end to end. Upload an EOB, draft an IDR in under 5 minutes, and submit with your billing team in control. ModMed supported today.",
+      "From EOB upload to IDRE portal submission. Eligibility check, AI draft generation, clinical narrative from op note, prior determination citations, DOCX export. Under 5 minutes.",
     path: "/how-it-works",
+    ogImagePath: "/how-it-works",
   }),
   security: buildPageMetadata({
-    title: "Sydra Security | HIPAA Safeguards and Trust",
+    title: "Sydra Security — HIPAA Controls, BAA, AWS Bedrock, PHI Handling | Sydra",
     description:
-      "Built to support HIPAA safeguards. BAA on request, AWS hosting, encryption, tenant isolation, audit logging, and SOC 2 aligned controls for surgical billing teams using Sydra.",
+      "Sydra handles PHI under HIPAA controls. AWS Bedrock with HIPAA eligible Claude Sonnet 4. Encryption at rest and in transit. BAA available. SOC 2 in progress, not yet certified.",
     path: "/security",
+    ogImagePath: "/security",
   }),
   faq: buildPageMetadata({
-    title: "Sydra FAQ | NSA IDR Pricing, Onboarding, Support",
+    title: "Sydra FAQ — NSA IDR Software Questions Answered | Sydra",
     description:
-      "Answers about Sydra onboarding, pricing, workflow, claims, support tiers, and when to choose Kronos Full Service instead of Sydra software for your practice.",
+      "Detailed answers to billing team and practice administrator questions about Sydra's NSA IDR software. Eligibility, CPT coding, HIPAA, integration, pricing, and more.",
     path: "/faq",
   }),
   contact: buildPageMetadata({
-    title: "Contact Sydra | Demo, Sales, and Support Channels",
+    title: "Contact Sydra — Sales, Demos, and Support | Sydra",
     description:
-      "Schedule a demo, contact sales, or reach customer support. Hours 9:00 to 5:00 ET, Monday through Friday. Email response within 24 business hours.",
+      "Schedule a demo, ask a pricing question, or reach customer support. Sales: sales@kronosrevenue.health. Support: support@sydrahealth.com. Responses within one business day.",
     path: "/contact",
   }),
   privacy: buildPageMetadata({
@@ -130,3 +138,6 @@ export const PAGE_METADATA = {
     robots: { index: false, follow: false },
   }),
 } as const;
+
+/** @deprecated Use PAGE_METADATA.pricing */
+export const PLANS_METADATA = PAGE_METADATA.pricing;

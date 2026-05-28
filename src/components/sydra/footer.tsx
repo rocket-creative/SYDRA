@@ -82,8 +82,8 @@ export function SydraFooter() {
                 </Link>
               </li>
               <li>
-                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/#plans">
-                  Plans
+                <Link className="text-[#4A5568] transition-colors duration-300 ease-out hover:text-[#1A2B48]" href="/pricing">
+                  Pricing
                 </Link>
               </li>
               <li>

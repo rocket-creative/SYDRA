@@ -1,24 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useState } from "react";
 
 import { US_STATES } from "@/lib/constants/us-states";
 import { isValidTierId } from "@/lib/content/tiers";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
 import {
-  BEST_TIME_OPTIONS,
   DISPUTES_PER_MONTH_OPTIONS,
-  ROLE_OPTIONS,
+  DISPUTES_LABELS,
+  IDR_APPROACH_OPTIONS,
+  IDR_APPROACH_LABELS,
   SPECIALTY_OPTIONS,
+  SPECIALTY_LABELS,
   SUPPORTED_STATES,
   TIER_INTEREST_OPTIONS,
-  TIMELINE_OPTIONS,
-  BEST_TIME_LABELS,
-  DISPUTES_LABELS,
-  ROLE_LABELS,
-  SPECIALTY_LABELS,
-  TIMELINE_LABELS,
   TIER_LABELS,
 } from "@/lib/schemas/demo-request";
 
@@ -58,25 +54,18 @@ type DemoFunnelFormProps = {
 
 export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const requestType = intent === "security" ? "security" : "demo";
   const submitLabel =
-    intent === "security" ? "Request security summary" : "Schedule a demo";
+    intent === "security" ? "Request security summary" : "Schedule my demo";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneData>(initialStepOne);
   const [state, setState] = useState<FormState>({ status: "idle" });
-  const [utmSource, setUtmSource] = useState("");
-  const [utmCampaign, setUtmCampaign] = useState("");
-  const [preselectedTier, setPreselectedTier] = useState<string>("");
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setUtmSource(params.get("utm_source") ?? "");
-    setUtmCampaign(params.get("utm_campaign") ?? "");
-    const tier = params.get("tier");
-    if (isValidTierId(tier)) {
-      setPreselectedTier(tier);
-    }
-  }, []);
+  const utmSource = searchParams.get("utm_source") ?? "";
+  const utmCampaign = searchParams.get("utm_campaign") ?? "";
+  const tierParam = searchParams.get("tier");
+  const preselectedTier = isValidTierId(tierParam) ? tierParam : "";
 
   const handleStepOneSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -98,17 +87,19 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
       event.preventDefault();
       setState({ status: "submitting" });
       const formData = new FormData(event.currentTarget);
+      const eobFile = formData.get("eobFile");
+      const eobFileName =
+        eobFile instanceof File && eobFile.size > 0 ? eobFile.name : "";
 
       const payload = {
         ...stepOne,
         specialty: formData.get("specialty"),
         state: formData.get("state"),
         disputesPerMonth: formData.get("disputesPerMonth"),
-        role: formData.get("role"),
-        timeline: formData.get("timeline"),
+        idrApproach: formData.get("idrApproach"),
         tierInterest: formData.get("tierInterest") || undefined,
-        bestTimeToReach: formData.get("bestTimeToReach"),
-        phone: formData.get("phone") ?? "",
+        message: formData.get("message") ?? "",
+        eobFileName,
         utmSource,
         utmCampaign,
         website: formData.get("website") ?? "",
@@ -172,7 +163,6 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </label>
             <input
               required
-              aria-required="true"
               autoComplete="name"
               className={inputClass}
               defaultValue={stepOne.name}
@@ -187,7 +177,6 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </label>
             <input
               required
-              aria-required="true"
               autoComplete="email"
               className={inputClass}
               defaultValue={stepOne.email}
@@ -198,15 +187,11 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             />
           </div>
           <div>
-            <label
-              className="block text-sm font-medium text-[#1A2B48]"
-              htmlFor="practiceName"
-            >
-              Practice or group name
+            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="practiceName">
+              Practice name
             </label>
             <input
               required
-              aria-required="true"
               autoComplete="organization"
               className={inputClass}
               defaultValue={stepOne.practiceName}
@@ -229,13 +214,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="specialty">
               Specialty
             </label>
-            <select
-              required
-              aria-required="true"
-              className={selectClass}
-              id="specialty"
-              name="specialty"
-            >
+            <select required className={selectClass} id="specialty" name="specialty">
               <option value="">Select specialty</option>
               {SPECIALTY_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -247,9 +226,9 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
 
           <div>
             <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="state">
-              Primary practice state
+              State
             </label>
-            <select required aria-required="true" className={selectClass} id="state" name="state">
+            <select required className={selectClass} id="state" name="state">
               <option value="">Select state</option>
               <optgroup label="Supported pathways (2026)">
                 {US_STATES.filter((s) =>
@@ -273,19 +252,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           </div>
 
           <div>
-            <label
-              className="block text-sm font-medium text-[#1A2B48]"
-              htmlFor="disputesPerMonth"
-            >
-              OON / IDR disputes per month
+            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="disputesPerMonth">
+              Monthly OON claim estimate
             </label>
-            <select
-              required
-              aria-required="true"
-              className={selectClass}
-              id="disputesPerMonth"
-              name="disputesPerMonth"
-            >
+            <select required className={selectClass} id="disputesPerMonth" name="disputesPerMonth">
               <option value="">Select volume</option>
               {DISPUTES_PER_MONTH_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -296,88 +266,49 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="role">
-              Your role
+            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="idrApproach">
+              Current IDR approach
             </label>
-            <select required aria-required="true" className={selectClass} id="role" name="role">
-              <option value="">Select role</option>
-              {ROLE_OPTIONS.map((value) => (
+            <select required className={selectClass} id="idrApproach" name="idrApproach">
+              <option value="">Select approach</option>
+              {IDR_APPROACH_OPTIONS.map((value) => (
                 <option key={value} value={value}>
-                  {ROLE_LABELS[value]}
+                  {IDR_APPROACH_LABELS[value]}
                 </option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="timeline">
-              Timeline
-            </label>
-            <select
-              required
-              aria-required="true"
-              className={selectClass}
-              id="timeline"
-              name="timeline"
-            >
-              <option value="">Select timeline</option>
-              {TIMELINE_OPTIONS.map((value) => (
-                <option key={value} value={value}>
-                  {TIMELINE_LABELS[value]}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="phone">
-              Phone (optional)
+            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="eobFile">
+              Upload an EOB for the demo (optional)
             </label>
             <input
-              autoComplete="tel"
-              className={inputClass}
-              id="phone"
-              inputMode="tel"
-              name="phone"
-              placeholder="(555) 123 4567"
-              type="tel"
+              accept=".pdf,image/*"
+              className="mt-1.5 block w-full text-sm text-slate-600 file:mr-4 file:rounded-md file:border-0 file:bg-slate-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[#1A2B48]"
+              id="eobFile"
+              name="eobFile"
+              type="file"
             />
             <p className="mt-1.5 text-xs text-slate-500">
-              Include if you want us to call rather than email first.
+              PDF or image. We review it before the call if you upload one.
             </p>
           </div>
 
           <div>
-            <label
-              className="block text-sm font-medium text-[#1A2B48]"
-              htmlFor="bestTimeToReach"
-            >
-              Best time to reach you
+            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="message">
+              Or describe your situation (optional)
             </label>
-            <select
-              required
-              aria-required="true"
-              className={selectClass}
-              id="bestTimeToReach"
-              name="bestTimeToReach"
-            >
-              <option value="">Select a window</option>
-              {BEST_TIME_OPTIONS.map((value) => (
-                <option key={value} value={value}>
-                  {BEST_TIME_LABELS[value]}
-                </option>
-              ))}
-            </select>
-            <p className="mt-1.5 text-xs text-slate-500">
-              Business hours are 9 to 5 ET, Monday through Friday.
-            </p>
+            <textarea
+              className={`${inputClass} min-h-[100px] resize-y`}
+              id="message"
+              name="message"
+              rows={4}
+            />
           </div>
 
           <div>
-            <label
-              className="block text-sm font-medium text-[#1A2B48]"
-              htmlFor="tierInterest"
-            >
+            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="tierInterest">
               Tier interest (optional)
             </label>
             <select
@@ -395,7 +326,6 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </select>
           </div>
 
-          {/* Honeypot */}
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
             <label htmlFor="website">Website</label>
             <input autoComplete="off" id="website" name="website" tabIndex={-1} type="text" />
@@ -405,10 +335,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             <div className="text-sm text-red-600" role="alert">
               <p>{state.message}</p>
               <p className="mt-2">
-                <a
-                  className="font-medium text-[#1A2B48] underline decoration-slate-300 underline-offset-2 hover:decoration-[#1A2B48]"
-                  href={salesMailtoHref()}
-                >
+                <a className="font-medium text-[#1A2B48] underline" href={salesMailtoHref()}>
                   {getSalesEmail()}
                 </a>
               </p>
@@ -432,10 +359,6 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               Back
             </button>
           </div>
-          <p className="text-center text-xs text-slate-500 md:text-sm">
-            By submitting you agree to be contacted by Kronos Health about Sydra.
-            We do not share your information.
-          </p>
         </form>
       )}
     </div>

@@ -46,9 +46,9 @@ export const BREADCRUMBS = {
     { name: "Home", path: "" },
     { name: "About", path: "/about" },
   ],
-  plans: [
+  pricing: [
     { name: "Home", path: "" },
-    { name: "Plans", path: "/plans" },
+    { name: "Pricing", path: "/pricing" },
   ],
   demo: [
     { name: "Home", path: "" },

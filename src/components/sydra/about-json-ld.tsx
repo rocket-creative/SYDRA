@@ -10,6 +10,7 @@ type TeamMember = {
   bio: string;
   isPhysician?: boolean;
   medicalSpecialty?: string;
+  url?: string;
 };
 
 type AboutPageJsonLdProps = {
@@ -25,6 +26,24 @@ function pageTitle(): string {
 }
 
 export function AboutPageJsonLd({ team }: AboutPageJsonLdProps) {
+  const abrahams = team.find((m) => m.isPhysician);
+
+  const physicianSchema = abrahams
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        name: abrahams.name,
+        jobTitle: "Founder, Board Certified Neurosurgeon",
+        medicalSpecialty: abrahams.medicalSpecialty ?? "Neurosurgery",
+        worksFor: {
+          "@type": "MedicalOrganization",
+          name: "Kronos Health",
+          url: "https://www.sydrahealth.com",
+        },
+        url: abrahams.url ?? "https://www.kronosrevenue.health/team#person-john-abrahams",
+      }
+    : null;
+
   return (
     <>
       <BreadcrumbJsonLd items={[...BREADCRUMBS.about]} />
@@ -35,15 +54,16 @@ export function AboutPageJsonLd({ team }: AboutPageJsonLdProps) {
             name: pageTitle(),
             description: PAGE_METADATA.about.description ?? "",
           }),
-          ...team.map((member) =>
-            personJsonLd({
-              name: member.name,
-              jobTitle: member.role,
-              description: member.bio,
-              isPhysician: member.isPhysician,
-              medicalSpecialty: member.medicalSpecialty,
-            }),
-          ),
+          ...(physicianSchema ? [physicianSchema] : []),
+          ...team
+            .filter((m) => !m.isPhysician)
+            .map((member) =>
+              personJsonLd({
+                name: member.name,
+                jobTitle: member.role,
+                description: member.bio,
+              }),
+            ),
         ]}
       />
     </>

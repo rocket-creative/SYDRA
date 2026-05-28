@@ -19,3 +19,11 @@ export function kronosRevenueUrl(): string {
 export function kronosCaseReviewUrl(): string {
   return `${kronosRevenueUrl()}/case-review`;
 }
+
+export function kronosTeamUrl(): string {
+  return `${kronosRevenueUrl()}/team`;
+}
+
+export function kronosFullServiceLinkLabel(): string {
+  return "Get a free IDR review at Kronos Revenue";
+}

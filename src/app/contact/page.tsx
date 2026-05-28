@@ -1,17 +1,17 @@
 import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
-import { DemoFunnelForm } from "@/components/sydra/demo-funnel-form";
+import { ContactForm } from "@/components/sydra/contact-form-page";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
+import { SourcesReferences } from "@/components/sydra/sources-references";
 import {
-  getContactPhoneDisplay,
-  getContactPhoneTel,
   getSalesEmail,
   getSupportEmail,
   salesMailtoHref,
   supportMailtoHref,
 } from "@/lib/contact";
+import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
 import { organizationContactPoint, sydraOrganizationJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
@@ -47,91 +47,118 @@ function ContactPageJsonLd() {
 }
 
 export default function ContactPage() {
-  const phone = getContactPhoneDisplay();
-  const phoneTel = getContactPhoneTel();
   const salesEmail = getSalesEmail();
+  const supportEmail = getSupportEmail();
 
   return (
     <>
       <ContactPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.contact]}>
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl">
           <h1 className="text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
-            Contact and support
+            Contact Sydra.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-[#4A5568]">
-            Hours: 9:00 to 5:00 ET, Monday through Friday. Form submissions and
-            sales inquiries go to {salesEmail}. You will receive a confirmation at
-            your work email within a few minutes.
+            Different questions go to different places. Use the guide below.
           </p>
-          {phone && phoneTel ? (
-            <p className="mt-3 text-base font-medium text-[#1A2B48]">
-              <a
-                className="underline decoration-slate-300 underline-offset-2 hover:decoration-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                href={phoneTel}
-              >
-                {phone}
-              </a>
-            </p>
-          ) : null}
-        </div>
 
-        <div className="mx-auto mt-14 max-w-3xl">
-          <section aria-labelledby="heading-demo-contact">
-            <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-demo-contact">
-              Schedule a demo
-            </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-              Tell us about your practice. Our sales team reviews every request and
-              replies within one business day.
-            </p>
-            <div className="mt-6">
-              <DemoFunnelForm />
-            </div>
-          </section>
-
-          <div className="mt-14 grid gap-10 border-t border-slate-200 pt-14 sm:grid-cols-2">
-            <section aria-labelledby="heading-sales">
-              <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-sales">
-                Sales inquiry
+          <div className="mt-10 space-y-8">
+            <section aria-labelledby="routing-new">
+              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-new">
+                New to Sydra — want a demo or pricing
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                Plans, pricing quotes, partnerships, or security documentation for
-                procurement.
+                Use the form below or email {salesEmail}. Response within one business day.
+                Include your specialty and estimated monthly OON claim volume for a pricing range.
               </p>
-              <a
-                className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                href={salesMailtoHref()}
-              >
-                Email {salesEmail}
-              </a>
             </section>
 
-            <section aria-labelledby="heading-support">
-              <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-support">
-                Existing customers
+            <section aria-labelledby="routing-procurement">
+              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-procurement">
+                Evaluating for procurement — need security docs
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                Tier 1 and Tier 2 support: {getSupportEmail()}
+                Email {salesEmail} with your compliance contact copied. Subject line: Security
+                package request. We send the BAA template, security one pager, and subprocessor
+                list the same business day.
               </p>
-              <a
-                className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                href={supportMailtoHref()}
-              >
-                Email support
-              </a>
-              <p className="mt-6 text-sm text-slate-500">
-                <Link
-                  className="font-medium text-[#1A2B48] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  href="https://sydra.health/"
+            </section>
+
+            <section aria-labelledby="routing-support">
+              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-support">
+                Existing customers — support
+              </h2>
+              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
+                Email {supportEmail} for platform questions. Hours: 9 to 5 ET, Monday through
+                Friday. Sydra + Kronos Support customers: your Kronos specialist is your first
+                call on claim level questions.
+              </p>
+            </section>
+
+            <section aria-labelledby="routing-full-service">
+              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-full-service">
+                Want every claim handled without running software
+              </h2>
+              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
+                That is Kronos Revenue Full Service on our sister site.{" "}
+                <a
+                  className="font-medium text-[rgb(0,40,184)] underline"
+                  href={kronosCaseReviewUrl()}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  Sign in to Sydra
-                </Link>
+                  Get a free IDR review
+                </a>
+                . Phone: (914) 705 6830 · intake@kronosrevenue.com
               </p>
             </section>
           </div>
+
+          <section aria-labelledby="heading-contact-form" className="mt-14">
+            <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-contact-form">
+              Schedule a demo or ask a question.
+            </h2>
+            <div className="mt-6 rounded-xl border border-slate-200 bg-white p-6 md:p-8">
+              <ContactForm />
+            </div>
+          </section>
+
+          <section aria-labelledby="heading-direct" className="mt-14 border-t border-slate-200 pt-10">
+            <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-direct">
+              Direct contacts
+            </h2>
+            <ul className="mt-4 space-y-2 text-[15px] text-[#4A5568]">
+              <li>
+                Sales and demos:{" "}
+                <a className="font-medium text-[rgb(0,40,184)] underline" href={salesMailtoHref()}>
+                  {salesEmail}
+                </a>
+              </li>
+              <li>
+                Customer support:{" "}
+                <a className="font-medium text-[rgb(0,40,184)] underline" href={supportMailtoHref()}>
+                  {supportEmail}
+                </a>
+              </li>
+              <li>Kronos Revenue full service IDR: intake@kronosrevenue.com</li>
+              <li>Phone (Kronos Revenue): (914) 705 6830</li>
+              <li>Hours: 9 to 5 ET, Monday through Friday</li>
+              <li>
+                Mailing: Kronos Health · 244 Westchester Ave, Suite 209 · West Harrison, NY
+                10604
+              </li>
+            </ul>
+            <p className="mt-6">
+              <Link
+                className="text-sm font-semibold text-[rgb(0,40,184)] underline"
+                href="/demo"
+              >
+                Or schedule a demo directly →
+              </Link>
+            </p>
+          </section>
+
+          <SourcesReferences className="mt-12" />
         </div>
       </SydraPageShell>
     </>

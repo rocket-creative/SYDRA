@@ -1,21 +1,20 @@
 import { SectionReveal } from "@/components/motion/reveal";
 import { SydraPlansSection } from "@/components/sydra/plans-section";
-import { TrustStrip } from "@/components/sydra/trust-strip";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { SydraAbout } from "@/components/sydra/about";
 import { SydraContactForm } from "@/components/sydra/contact-form";
+import { DeterminationLibrary } from "@/components/sydra/determination-library";
+import { SydraEconomics } from "@/components/sydra/economics";
 import { SydraFaq } from "@/components/sydra/faq";
-import { SydraFeatures } from "@/components/sydra/features";
 import { SydraFooter } from "@/components/sydra/footer";
 import { SydraHeader } from "@/components/sydra/header";
 import { SydraHero } from "@/components/sydra/hero";
 import { SydraHowItWorks } from "@/components/sydra/how-it-works";
+import { HomepageSecurity } from "@/components/sydra/homepage-security";
 import { HomepageJsonLd } from "@/components/sydra/json-ld";
 import { MobileCtaBar } from "@/components/sydra/mobile-cta-bar";
-import { SydraProblem } from "@/components/sydra/problem";
-import { SydraProof } from "@/components/sydra/proof";
-import { SydraCostSavings } from "@/components/sydra/cost-savings";
-import { SydraValueProps } from "@/components/sydra/value-props";
+import { SourcesReferences } from "@/components/sydra/sources-references";
+import { SydraTimeCost } from "@/components/sydra/time-cost";
 import { SkipLink } from "@/components/sydra/skip-link";
 
 export default function HomePage() {
@@ -30,27 +29,23 @@ export default function HomePage() {
         tabIndex={-1}
       >
         <SydraHero />
-        <TrustStrip />
         <SectionReveal>
-          <SydraPlansSection />
-        </SectionReveal>
-        <SectionReveal>
-          <SydraValueProps />
-        </SectionReveal>
-        <SectionReveal>
-          <SydraCostSavings />
-        </SectionReveal>
-        <SectionReveal>
-          <SydraProblem />
+          <SydraTimeCost />
         </SectionReveal>
         <SectionReveal>
           <SydraHowItWorks />
         </SectionReveal>
         <SectionReveal>
-          <SydraFeatures />
+          <SydraEconomics />
         </SectionReveal>
         <SectionReveal>
-          <SydraProof />
+          <DeterminationLibrary />
+        </SectionReveal>
+        <SectionReveal>
+          <SydraPlansSection />
+        </SectionReveal>
+        <SectionReveal>
+          <HomepageSecurity />
         </SectionReveal>
         <SectionReveal>
           <SydraCtaBand />
@@ -63,6 +58,11 @@ export default function HomePage() {
         </SectionReveal>
         <SectionReveal>
           <SydraContactForm />
+        </SectionReveal>
+        <SectionReveal>
+          <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 xl:max-w-[1200px] xl:px-8">
+            <SourcesReferences />
+          </div>
         </SectionReveal>
       </main>
       <SydraFooter />

@@ -10,7 +10,7 @@ export function SydraPlansSection() {
       style={{ scrollMarginTop: "5.5rem" }}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
-        <PricingTiers variant="full" headingLevel="h2" />
+        <PricingTiers variant="compact" headingLevel="h2" />
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import {
   DISPUTES_LABELS,
+  IDR_APPROACH_LABELS,
   ROLE_LABELS,
   SPECIALTY_LABELS,
   SUPPORTED_STATES,
@@ -17,7 +18,13 @@ export type LeadScoreResult = {
   subjectSummary: string;
 };
 
-const SURGICAL_SPECIALTIES = new Set(["spine", "ortho", "neuro"]);
+const SURGICAL_SPECIALTIES = new Set([
+  "orthopedic_surgery",
+  "neurosurgery",
+  "spine_surgery",
+  "plastic_surgery",
+  "general_surgery",
+]);
 
 function priorityFromScore(score: number): LeadPriority {
   if (score >= 70) return "HIGH";
@@ -32,9 +39,9 @@ export function scoreDemoLead(data: DemoRequest): LeadScoreResult {
   if (SURGICAL_SPECIALTIES.has(data.specialty)) {
     score += 25;
     breakdown.push(`Specialty (${SPECIALTY_LABELS[data.specialty]}): +25`);
-  } else if (data.specialty === "other_surgical") {
-    score += 10;
-    breakdown.push("Specialty (other surgical): +10");
+  } else if (data.specialty === "multiple_specialties") {
+    score += 15;
+    breakdown.push("Specialty (multiple): +15");
   }
 
   if ((SUPPORTED_STATES as readonly string[]).includes(data.state)) {
@@ -42,12 +49,17 @@ export function scoreDemoLead(data: DemoRequest): LeadScoreResult {
     breakdown.push(`State (${data.state}): +20`);
   }
 
-  if (data.disputesPerMonth === "6-15" || data.disputesPerMonth === "16+") {
+  if (data.disputesPerMonth === "15_to_30" || data.disputesPerMonth === "more_than_30") {
     score += 25;
     breakdown.push(`Volume (${DISPUTES_LABELS[data.disputesPerMonth]}/mo): +25`);
-  } else if (data.disputesPerMonth === "3-5") {
+  } else if (data.disputesPerMonth === "5_to_15") {
     score += 15;
     breakdown.push(`Volume (${DISPUTES_LABELS[data.disputesPerMonth]}/mo): +15`);
+  }
+
+  if (data.idrApproach === "contingency_attorney" || data.idrApproach === "in_house_manual") {
+    score += 15;
+    breakdown.push(`IDR approach (${IDR_APPROACH_LABELS[data.idrApproach]}): +15`);
   }
 
   if (data.role === "physician_owner" || data.role === "billing_lead") {
@@ -70,7 +82,7 @@ export function scoreDemoLead(data: DemoRequest): LeadScoreResult {
     SPECIALTY_LABELS[data.specialty],
     data.state,
     `${DISPUTES_LABELS[data.disputesPerMonth]}/mo`,
-    ROLE_LABELS[data.role],
+    IDR_APPROACH_LABELS[data.idrApproach],
   ].join(" | ");
 
   return { score, priority, breakdown, subjectSummary };

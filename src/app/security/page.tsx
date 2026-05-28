@@ -1,21 +1,19 @@
+import Link from "next/link";
+
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
-import { ClinicalReferences } from "@/components/sydra/clinical-trust";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
-import { DemoFunnelForm } from "@/components/sydra/demo-funnel-form";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
-import { ReviewHighlight } from "@/components/sydra/review-highlight";
-import { SecurityTrustGrid } from "@/components/sydra/security-trust-grid";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
-import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
-import { securityMailtoHref } from "@/lib/contact";
+import { SourcesReferences } from "@/components/sydra/sources-references";
+import { salesMailtoHref } from "@/lib/contact";
 import {
   SECURITY_CTA,
   SECURITY_HERO,
   SECURITY_SECTIONS,
+  SOC2_SECTION,
 } from "@/lib/content/security-page";
-import { SECURITY_FAQ } from "@/lib/content/service-faqs";
-import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
 export const metadata = PAGE_METADATA.security;
@@ -41,11 +39,9 @@ function SecurityPageJsonLd() {
           }),
           serviceJsonLd({
             name: "Sydra security and HIPAA safeguards",
-            description:
-              "Built to support HIPAA safeguards, BAA on request, AWS hosting, encryption, tenant isolation, audit logging, and SOC 2 aligned controls for surgical billing teams.",
+            description: PAGE_METADATA.security.description ?? "",
             serviceType: "Healthcare data security",
           }),
-          faqPageJsonLd(SECURITY_FAQ),
         ]}
       />
     </>
@@ -58,70 +54,67 @@ export default function SecurityPage() {
       <SecurityPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.security]}>
         <div className="mx-auto max-w-3xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgb(0,40,184)]">
-            {SECURITY_HERO.eyebrow}
-          </p>
-          <h1 className="mt-4 text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
-            <ReviewHighlight>{SECURITY_HERO.title}</ReviewHighlight>
+          <h1 className="text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
+            {SECURITY_HERO.title}
           </h1>
           <p className="mt-5 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
             {SECURITY_HERO.intro}
           </p>
 
-          <SecurityTrustGrid />
+          <section aria-labelledby={SOC2_SECTION.id} className="mt-10 rounded-xl border-2 border-amber-200 bg-amber-50 p-6 md:p-8">
+            <h2 className="text-lg font-semibold text-[#1A2B48]" id={SOC2_SECTION.id}>
+              {SOC2_SECTION.title}
+            </h2>
+            {SOC2_SECTION.paragraphs.map((p) => (
+              <p key={p.slice(0, 40)} className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
+                {p}
+              </p>
+            ))}
+          </section>
 
-          <div className="mt-16 space-y-12">
+          <div className="mt-12 space-y-12">
             {SECURITY_SECTIONS.map((section) => (
               <section key={section.id} aria-labelledby={section.id}>
                 <h2 className="text-lg font-semibold text-[#1A2B48]" id={section.id}>
-                  <ReviewHighlight>{section.title}</ReviewHighlight>
+                  {section.title}
                 </h2>
-                {section.paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph.slice(0, 40)}
-                    className="mt-3 text-[15px] leading-relaxed text-[#4A5568]"
-                  >
-                    {paragraph}
+                {section.paragraphs.map((p) => (
+                  <p key={p.slice(0, 40)} className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
+                    {p}
                   </p>
                 ))}
+                {section.list ? (
+                  <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-[#4A5568]">
+                    {section.list.map((item) => (
+                      <li key={item.slice(0, 40)} className="flex gap-2">
+                        <span aria-hidden className="text-[rgb(0,40,184)]">→</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </section>
             ))}
           </div>
 
-          <div
-            className="mt-16 rounded-xl border border-slate-200 bg-slate-50 p-6 md:p-10"
-            id="security-request"
-          >
-            <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-security-request">
-              <ReviewHighlight>{SECURITY_CTA.formHeading}</ReviewHighlight>
-            </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-              {SECURITY_CTA.formIntro}
-            </p>
-            <div className="mt-8">
-              <DemoFunnelForm intent="security" />
-            </div>
-            <p className="mt-8 text-center text-sm text-slate-500">or</p>
-            <div className="mt-4 flex justify-center">
-              <a
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                href={securityMailtoHref()}
-              >
-                {SECURITY_CTA.mailtoLabel}
-              </a>
-            </div>
-            <CtaTrustSignals className="mt-6 text-center" />
+          <div className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Link
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#1A2B48] px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+              href="/demo"
+            >
+              {SECURITY_CTA.demoLabel}
+            </Link>
+            <a
+              className="inline-flex min-h-12 items-center justify-center rounded-md border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-50"
+              href={salesMailtoHref()}
+            >
+              {SECURITY_CTA.mailtoLabel}
+            </a>
           </div>
-
-          <ServiceFaqSection
-            heading="What do compliance teams ask about Sydra security?"
-            id="heading-security-faq"
-            items={SECURITY_FAQ}
-          />
-
-          <ClinicalReferences />
+          <CtaTrustSignals className="mt-6 text-center" />
 
           <ServiceCrossLinks current="/security" />
+          <SourcesReferences className="mt-12" />
         </div>
       </SydraPageShell>
     </>

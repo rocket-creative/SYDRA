@@ -1,25 +1,19 @@
-import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
-
 const steps = [
   {
     n: "1",
-    title: "Upload your EOB",
-    highlight: true,
-    body:
-      "Paste or drag an EOB into Sydra. When an out-of-network claim comes back underpaid, this is where the IDR workflow starts. Under 5 minutes to a draft, one claim per CPT.",
+    title: "Upload the EOB",
+    body: "Paste or drag the EOB into Sydra. If your practice uses ModMed, the EOB data flows directly from your EMR through the Stedi clearinghouse integration. No copy paste. Sydra immediately runs an eligibility check: Is this claim NSA eligible? Is the plan type covered? Is there an active cooling off period for this CPT and payer combination? Has open negotiation been properly initiated?",
+    note: "44% of 2024 IDR disputes were challenged as ineligible by payers. CMS data, Zelis analysis, March 2026. Eligibility errors are the leading cause of IDR processing delays. Sydra surfaces these before the submission, not after.",
   },
   {
     n: "2",
-    title: "Review and submit the IDR",
-    highlight: true,
-    body:
-      "Sydra drafts a Federal or State IDR submission citing real prior wins on your codes. Your team reviews, approves, and exports to the IDRE portal with a guided checklist.",
+    title: "Review the draft",
+    body: "Sydra generates a complete IDR submission packet using Claude Sonnet 4 on AWS Bedrock: executive summary, market rate justification from 213+ ingested determinations weighted toward surgical specialties, clinical necessity narrative drafted from your uploaded operative note (Bedrock multimodal reads the PDF directly), and provider credentials from your profile. Your billing team reads the draft, makes edits, and signs off. Nothing leaves the practice until a human has reviewed and approved it.",
   },
   {
     n: "3",
-    title: "Use upstream tools when you need them",
-    body:
-      "Optional: verify eligibility (270/271), draft prior auths, run compliance checks, and read op notes for CPT coding. All in the same platform if your practice wants them.",
+    title: "Export and submit",
+    body: "One click DOCX export. The guided submission checklist walks your biller through the IDRE portal field by field. Track status in the Sydra dashboard. Total time on a standard single CPT claim with documents on file: under 5 minutes.",
   },
 ] as const;
 
@@ -31,44 +25,35 @@ export function SydraHowItWorks() {
       id="how-it-works"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
-        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-blue-700 sm:text-xs">
-          How it works
-        </p>
         <h2
-          className="mx-auto mt-3 max-w-2xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
+          className="mx-auto max-w-3xl text-center text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2.1rem]"
           id="heading-how-it-works"
         >
-          One workflow. NSA IDR at the center.
+          What your billing team actually does in Sydra.
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          Upload an EOB, draft the IDR, submit. That is what most teams come for.
-          Connect once and you also get eligibility, prior auth, CPT, and compliance
-          when your workflow needs them.
-        </p>
-        <StaggerParent className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
+        <div className="mt-12 space-y-8">
           {steps.map((s) => (
-            <StaggerChild key={s.n}>
-              <article className={`group h-full rounded-xl border p-6 shadow-sm transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] md:p-8 ${"highlight" in s && s.highlight ? "border-blue-200 bg-blue-50/40 ring-1 ring-blue-200 hover:border-blue-300" : "border-slate-100 bg-white hover:border-slate-200"}`}>
-                <div className="flex items-center justify-between">
-                  <div className={`inline-flex size-9 items-center justify-center rounded-md text-sm font-bold transition-transform duration-300 ease-out group-hover:scale-110 ${"highlight" in s && s.highlight ? "bg-[#1A2B48] text-white" : "bg-blue-100 text-[#1A2B48]"}`}>
-                    {s.n}
-                  </div>
-                  {"highlight" in s && s.highlight && (
-                    <span className="rounded-full border border-blue-200 bg-white px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700">
-                      Primary
-                    </span>
-                  )}
-                </div>
-                <h3 className="mt-5 text-lg font-semibold text-[#1A2B48] md:text-xl">
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
-                  {s.body}
+            <article
+              key={s.n}
+              className="rounded-xl border border-slate-200 bg-white p-6 md:p-8"
+            >
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[rgb(0,40,184)]">
+                Step {s.n}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-[#1A2B48] md:text-2xl">
+                {s.title}
+              </h3>
+              <p className="mt-4 text-[15px] leading-relaxed text-[#4A5568] md:text-base">
+                {s.body}
+              </p>
+              {"note" in s && s.note ? (
+                <p className="mt-4 text-sm leading-relaxed text-slate-600 italic">
+                  {s.note}
                 </p>
-              </article>
-            </StaggerChild>
+              ) : null}
+            </article>
           ))}
-        </StaggerParent>
+        </div>
       </div>
     </section>
   );

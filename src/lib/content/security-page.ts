@@ -10,116 +10,97 @@ export type SecuritySection = {
   id: string;
   title: string;
   paragraphs: string[];
+  list?: string[];
 };
 
 export const SECURITY_HERO = {
-  eyebrow: "Security and compliance",
-  title: "Built for HIPAA and PHI",
+  title: "How Sydra handles protected health information.",
   intro:
-    "Billing leaders and compliance reviewers use this page before they book a demo. Sydra is designed for practices that handle protected health information under HIPAA, with a Business Associate Agreement available on request.",
+    "An NSA IDR submission contains your patient's name, date of service, diagnosis, procedure codes, operative note excerpts, and disputed claim amounts. Every document uploaded to Sydra is protected health information under HIPAA. This page describes how we handle PHI specifically.",
 };
 
 export const SECURITY_TRUST_CARDS: SecurityTrustCard[] = [
-  {
-    id: "baa",
-    title: "BAA on request",
-    summary:
-      "Business Associate Agreements for covered entities and their billing teams, executed as part of contracting.",
-  },
-  {
-    id: "aws",
-    title: "AWS hosting",
-    summary:
-      "Production workloads on AWS with region appropriate data residency for healthcare workloads.",
-  },
-  {
-    id: "encryption",
-    title: "Encryption",
-    summary: "TLS in transit and encryption at rest through cloud provider controls.",
-  },
-  {
-    id: "access",
-    title: "Access control",
-    summary:
-      "Role based access, least privilege, and strict tenant isolation between practices.",
-  },
-  {
-    id: "audit",
-    title: "Audit logging",
-    summary: "Sensitive operations are logged for review and accountability.",
-  },
-  {
-    id: "soc2",
-    title: "SOC 2 aligned",
-    summary:
-      "Controls aligned with SOC 2. Formal report available to qualified prospects under NDA.",
-  },
+  { id: "baa", title: "BAA available", summary: "For covered entities on request during contracting." },
+  { id: "bedrock", title: "AWS Bedrock", summary: "Claude Sonnet 4 on HIPAA eligible infrastructure." },
+  { id: "encryption", title: "Encryption", summary: "AES 256 at rest, TLS 1.2+ in transit." },
+  { id: "isolation", title: "Tenant isolation", summary: "Strict per practice row level security." },
 ];
+
+export const SOC2_SECTION: SecuritySection = {
+  id: "heading-soc2",
+  title: "SOC 2 status — read this first.",
+  paragraphs: [
+    "Sydra is SOC 2 aligned. We have not completed a formal SOC 2 Type II audit.",
+    "We are in the process of completing the audit. We will not tell you we have a certification we do not have, and we will not bury this information in a footnote.",
+    "SOC 2 aligned means: our controls are designed to meet SOC 2 requirements. We have documented policies, access controls, audit logging, incident response procedures, and vendor management processes that a SOC 2 auditor would review. We have not yet had a third party auditor certify those controls as operating effectively over a defined period.",
+    "If a completed SOC 2 Type II report is a hard requirement for your procurement process, tell us. We will give you the current timeline and let you decide.",
+  ],
+};
 
 export const SECURITY_SECTIONS: SecuritySection[] = [
   {
-    id: "heading-hipaa",
-    title: "HIPAA and Business Associate Agreements",
+    id: "heading-bedrock",
+    title: "How Sydra's AI generation handles PHI.",
     paragraphs: [
-      "Sydra is built to support HIPAA safeguards for electronic protected health information your billing team processes in the NSA IDR workflow.",
-      "We provide a Business Associate Agreement on request for covered entities and business associates. The BAA is executed during contracting, not published on this marketing site.",
-      "Workforce members with access to production systems complete HIPAA awareness training as part of onboarding.",
+      "Sydra uses Claude Sonnet 4, accessed through AWS Bedrock, for IDR submission drafting.",
+      "AWS Bedrock is a HIPAA eligible service. AWS's HIPAA BAA covers Amazon Bedrock when used in the context of a covered healthcare workload. Sydra operates within that BAA scope.",
+      "When Sydra generates an IDR draft from your operative note: The operative note is processed by Claude Sonnet 4 on AWS Bedrock. PHI in that document stays inside the AWS HIPAA eligible service boundary. No PHI is transmitted to Anthropic's systems or any other third party during generation. No data is used to train the Claude model or any other model.",
     ],
   },
   {
-    id: "heading-hosting",
-    title: "Infrastructure and data residency",
-    paragraphs: [
-      "Production runs on AWS infrastructure designed for healthcare workloads. Data residency follows region appropriate hosting for U.S. practices.",
-      "Cloud providers in scope maintain their own BAAs where PHI is processed. We review subprocessors as part of vendor management.",
+    id: "heading-infrastructure",
+    title: "Infrastructure and encryption.",
+    paragraphs: [],
+    list: [
+      "Hosting: Sydra production workloads run on AWS infrastructure in US regions.",
+      "Encryption at rest: Documents are stored in Amazon S3 with AES 256 server side encryption. Keys managed through AWS Key Management Service (KMS).",
+      "Encryption in transit: All data between your browser and Sydra's servers is transmitted over TLS 1.2 or higher.",
+      "Document access: Documents are not accessible through persistent public URLs. Retrieval uses signed URLs with short expiry windows (minutes, not days).",
+      "Database: PHI is stored with row level security. Each practice has a unique tenant identifier. Queries are scoped to the authenticated practice's tenant by default.",
     ],
   },
   {
-    id: "heading-application",
-    title: "Application safeguards",
+    id: "heading-access",
+    title: "Access control and isolation.",
     paragraphs: [
-      "Each practice operates in a logically isolated tenant. Your data does not mingle with another customer’s claims or submissions.",
-      "Role based access lets billing leads, admins, and physicians see only what their role requires. We apply least privilege by default for internal operations as well.",
-      "Authentication supports modern session controls on the production application. Ask sales for current MFA options during evaluation.",
+      "Within your practice: Role based access control. You define which staff members can view, draft, approve, or export. Permissions are granted explicitly, not inherited by default.",
+      "Between practices: Strict tenant isolation enforced at multiple layers: application logic, API authorization, database row level security, and audit logging.",
+      "Within Kronos Health: Software engineering team access is governed by internal HIPAA training. Kronos Revenue RCM team access to PHI only for practices using Sydra + Kronos Support. Leadership access for quality review and escalated cases. No PHI accessible to sales or marketing without an operational need.",
     ],
   },
   {
-    id: "heading-integrations",
-    title: "Integrations and PHI in workflow",
+    id: "heading-audit",
+    title: "Audit logging.",
     paragraphs: [
-      "ModMed and Stedi integrations move claim and EOB data through controlled paths. Your team reviews drafts before federal IDR submission.",
-      "Customer PHI is not used to train third party foundation models without explicit contractual consent.",
+      "Every log entry captures: user name, email, user ID, timestamp (UTC to the second), action performed, record affected (submission ID, document ID), IP address, session identifier. Logs are available to your account administrator on request.",
     ],
   },
   {
-    id: "heading-retention",
-    title: "Retention, backup, and deletion",
+    id: "heading-baa",
+    title: "Business Associate Agreement.",
     paragraphs: [
-      "Retention follows your agreement and applicable regulations. Backups support continuity and recovery within our infrastructure program.",
-      "Deletion requests are honored on written instruction from authorized practice contacts after identity verification.",
+      "A BAA is available for all covered entities and business associates using Sydra to process PHI. The BAA is executed during contracting. What the BAA covers: permitted uses and disclosures of PHI, our obligation to safeguard PHI, breach notification timelines (60 day notification per HIPAA), your right to audit our compliance, data return or destruction on termination, subprocessor obligations.",
+      `If you want to review the BAA template before booking a demo, email ${SALES_EMAIL_FALLBACK}. We send it the same business day.`,
     ],
   },
   {
     id: "heading-incident",
-    title: "Incident response",
+    title: "Incident response.",
     paragraphs: [
-      "We maintain documented incident response procedures covering detection, escalation, containment, and customer notification where required by contract or law.",
-      "Security events involving customer data are triaged by our operations team and leadership. Material incidents are communicated according to your BAA terms.",
+      "Documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI: We notify you per the timeline in your BAA. We have not had a reportable incident involving customer PHI.",
     ],
   },
   {
-    id: "heading-procurement",
-    title: "Documentation for procurement",
+    id: "heading-docs",
+    title: "Requesting security documentation.",
     paragraphs: [
-      "Qualified prospects can request a security summary one pager, SOC 2 report under NDA, and BAA template during evaluation.",
-      `Use the form below or email ${SALES_EMAIL_FALLBACK} with your compliance contact copied. We typically respond within one business day.`,
+      "Available to qualified prospects during evaluation: BAA template, security one pager, subprocessor list (AWS, Stedi, ModMed, and others in scope), AWS Bedrock HIPAA eligibility documentation, SOC 2 status update.",
+      `Request: email ${SALES_EMAIL_FALLBACK} with your compliance contact copied. Response within one business day.`,
     ],
   },
 ];
 
 export const SECURITY_CTA = {
-  formHeading: "Request security summary and demo",
-  formIntro:
-    "Submit your details and our sales team will send the security one pager and schedule a walkthrough if you need one.",
-  mailtoLabel: "Email security one pager request",
+  demoLabel: "Schedule a demo",
+  mailtoLabel: "Email the security package request",
 };

@@ -60,29 +60,24 @@ export const SECURITY_FAQ: ServiceFaqItem[] = [
   },
 ];
 
-export const PLANS_FAQ: ServiceFaqItem[] = [
+export const PRICING_FAQ: ServiceFaqItem[] = [
   {
-    q: "What Sydra plans are available?",
-    a: "Three tiers: Sydra Self Serve for teams that want software only, Sydra plus Kronos Support for hands on help on tricky claims, and Kronos Full Service for full outsourcing.",
+    q: "Are there setup fees?",
+    a: "No setup fees on Self Serve or Sydra + Kronos Support.",
   },
   {
-    q: "Is Sydra pricing published online?",
-    a: "No. Pricing is quoted on your demo call based on volume and tier. There are no setup fees on Self Serve or Sydra plus Kronos Support.",
+    q: "Is there a minimum contract term?",
+    a: "No. Month to month available on all Sydra tiers.",
   },
   {
-    q: "Which plan is right for a small surgical practice?",
-    a: "Most practices start Self Serve if they have billing staff and want to keep recoveries in house. Schedule a demo and we recommend the right tier on your volume.",
+    q: "Can we switch tiers?",
+    a: "Yes. Many practices start Self Serve and add Kronos Support or move to Full Service. Tier switches do not require a new onboarding process.",
   },
   {
-    q: "Can we switch tiers later?",
-    a: "Yes. Many practices start Self Serve and move to Sydra plus Kronos Support as they want more hands on support, or move to Kronos Full Service when they want full outsourcing.",
-  },
-  {
-    q: "How does Sydra compare to using an IDR attorney?",
-    a: "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, structured below typical contingency fees. You keep the workflow and more of the win.",
-  },
-  {
-    q: "When should we choose Kronos Full Service instead?",
-    a: "Practices that do not want to operate software themselves should look at Kronos Full Service. Kronos runs every claim end to end on the sister site.",
+    q: "How does Sydra pricing compare to an attorney at 20%?",
+    a: "For a practice with 20 claims per month, $15,000 average disputed amount, 88% win rate: Attorney at 20%: $31,680 in annual fees on recoveries. Sydra platform fee: quoted to your volume, structured below that figure. The exact comparison is part of what we show you on the demo call.",
   },
 ];
+
+/** @deprecated Use PRICING_FAQ */
+export const PLANS_FAQ = PRICING_FAQ;

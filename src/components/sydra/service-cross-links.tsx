@@ -4,7 +4,7 @@ import { ReviewHighlight } from "@/components/sydra/review-highlight";
 
 const LINKS = [
   { href: "/how-it-works", label: "How Sydra works" },
-  { href: "/plans", label: "Compare plans" },
+  { href: "/pricing", label: "Compare pricing" },
   { href: "/security", label: "Security and HIPAA" },
   { href: "/faq", label: "Full FAQ" },
 ] as const;

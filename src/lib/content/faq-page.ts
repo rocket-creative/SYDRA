@@ -1,109 +1,45 @@
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
-import { pricingFaqAnswer, tierRoutingFaqAnswer } from "@/lib/content/tiers";
 import { siteUrl } from "@/lib/site";
 
 export type FaqItem = {
   q: string;
   a: string;
-  category: string;
 };
-
-export const FAQ_CATEGORIES = [
-  "Getting started",
-  "Pricing",
-  "Workflow",
-  "Claims",
-  "Support",
-  "When Sydra is not enough",
-] as const;
-
-const ATTORNEY_COMPARISON_ANSWER =
-  "Attorneys typically take 20% of every recovery. Sydra is software your billing team runs, quoted on a demo call and structured below typical contingency fees. You keep the workflow and more of the win. If you want zero ops, Kronos Full-Service eliminates headcount and is priced so you keep more of each win than typical attorney contingency.";
 
 export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
-    category: "Getting started",
-    q: "How long is onboarding?",
-    a: "Most practices are live within a week. We provision your tenant, connect your clearinghouse, and walk a billing lead through their first submission.",
+    q: "How long does it actually take to prepare an IDR submission in Sydra?",
+    a: "Under 5 minutes for a standard single CPT claim where the operative note is already uploaded and the provider profile is built. The time breaks down: 30 to 60 seconds to upload the EOB and run the eligibility check. 60 to 90 seconds to review the automatically generated draft. 30 seconds to approve and export the DOCX. After the first five to ten submissions, experienced billers report the process taking closer to 3 minutes per claim. The 30 minute comparison is based on the manual process: pulling the EOB, looking up QPA, drafting a market rate argument from scratch, writing a clinical narrative, gathering credentials, and formatting for the portal. Sydra automates the documentation step. The review is still human. The drafting is not.",
   },
   {
-    category: "Getting started",
-    q: "Do I need IT to set up Sydra?",
-    a: "No dedicated IT project. If your team can copy EOB data today, they can run Sydra. We handle tenant setup and integration guidance.",
+    q: "Does Sydra batch CPT codes?",
+    a: "No. Sydra files one claim per eligible CPT code. If your EOB contains three CPT codes, Sydra generates three separate submission packets. Each with a procedure specific payment offer, CPT specific market rate justification, clinical narrative specific to that procedure, and the provider credentials relevant to that code. The one CPT per claim structure is not configurable. Federal IDR is final offer arbitration. A batched offer covering three CPT codes cannot be matched cleanly to any single prior determination. CMS data shows providers win 88% of IDR disputes industry wide (H1 2025). The practices reaching that win rate are filing correctly. Batched filings underperform it.",
   },
   {
-    category: "Getting started",
-    q: "How long is the demo?",
-    a: "About 15 minutes for the walkthrough, plus 5 to 10 minutes of Q&A if you want it.",
+    q: "What CPT codes does Sydra's determination library cover?",
+    a: "Sydra has ingested 213+ IDR determinations. The library is weighted toward surgical specialties: Spine: 22612, 22630, 22633, 22840, 22842, 63030, 63047, 63055, and related add ons. Orthopedic: 27447, 27130, 29881, 29882, 23412, 29806, 29827, 27570, and related codes. Neurosurgery: 61510, 61512, 61520, 63047, 63055, and selected cranial procedure codes. Plastics and hand: 25447, 26356, 26115, 19364, and selected reconstructive codes. For codes not in the library at a state specific level: Sydra uses national comparison data and flags lower library confidence on the market rate section. Complete current coverage available to review on your demo call.",
   },
   {
-    category: "Getting started",
-    q: "Can I get a sandbox account after the demo?",
-    a: "Yes. Most prospects who book a demo receive sandbox access on the call so they can try the workflow before deciding.",
-  },
-  {
-    category: "Getting started",
-    q: "Is my data secure?",
-    a: `Sydra is built to support HIPAA safeguards with BAA on request, AWS hosting, encryption, and tenant isolation. See the full security overview at ${siteUrl()}/security.`,
-  },
-  {
-    category: "Pricing",
-    q: "How does Sydra compare to using an IDR attorney?",
-    a: ATTORNEY_COMPARISON_ANSWER,
-  },
-  {
-    category: "Pricing",
     q: "What does Sydra cost?",
-    a: pricingFaqAnswer(),
+    a: "Pricing is shared on your demo call after we understand your specialty, state, and monthly OON claim volume. What we can tell you: Sydra's platform fee is structured below typical 20% attorney contingency fees for most practices at most claim volumes. Exact quote on your demo call. No obligation.",
   },
   {
-    category: "Pricing",
-    q: "Are there setup fees?",
-    a: "No setup fees on Self-Serve or Sydra + Kronos Support. Kronos Full-Service terms are quoted on the Kronos Revenue site.",
+    q: "How does Sydra handle HIPAA and patient data security?",
+    a: "IDR submissions contain PHI. Sydra handles PHI under these controls: AI processing runs on Claude Sonnet 4 on AWS Bedrock. PHI stays inside the AWS HIPAA eligible service boundary during generation. No data is sent to Anthropic's infrastructure. Storage: Amazon S3, AES 256 encryption at rest. TLS 1.2 or higher for all data in transit. Strict per practice tenant isolation at the database row level. BAA: Standard BAA available for covered entities. Email support@sydrahealth.com. SOC 2: In progress. Not yet complete. See the full security page at " + siteUrl() + "/security.",
   },
   {
-    category: "Pricing",
-    q: "Can we switch tiers later?",
-    a: "Yes. Many practices start Self-Serve and move to Sydra + Kronos Support as they want more hands-on support, or move to Kronos Full-Service when they want full outsourcing.",
+    q: "What happens if an IDR dispute loses?",
+    a: "A determination against the provider's offer means the insurer's offer was selected. Both parties pay the IDRE administrative fee (currently $50 per dispute). Sydra tracks adverse determinations in your dashboard. After the 90 calendar day cooling off period, the same code and payer combination is eligible for re filing. If you have Sydra + Kronos Support, your Kronos specialist reviews adverse determinations with you at the monthly account review. CMS data shows 88% of properly filed disputes result in provider wins.",
   },
   {
-    category: "Workflow",
-    q: "Does Sydra integrate with our EMR?",
-    a: "ModMed is supported today with more EMRs on the roadmap. If you copy EOB data out of your system today, Sydra works with that workflow now.",
+    q: "How long does it take to get set up on Sydra?",
+    a: "Most practices are operational within one week of signing the BAA. Day 1 to 2: We provision your practice tenant and send login credentials. Day 2 to 3: Your billing lead uploads the first provider CV and we build the provider profile. Day 3 to 4: ModMed integration configured if applicable. Day 4 to 5: First claim run in the platform with your billing lead watching. Day 5 to 7: Second and third claims run independently.",
   },
   {
-    category: "Workflow",
-    q: "Can multiple users access the platform?",
-    a: "Yes. Role based access for billing leads, admins, and physicians. Multi tenant isolation keeps your data separate from other practices.",
-  },
-  {
-    category: "Claims",
-    q: "What if a claim loses at IDR?",
-    a: "Sydra documents the submission and outcome. Your team can revise and refile where the pathway allows. Tier 2 adds Kronos escalation on disputed cases.",
-  },
-  {
-    category: "Claims",
-    q: "How is QPA calculated?",
-    a: "Sydra applies qualified payment amounts by geography and service type using the data in your EOB and payer rules. Operators review before submit.",
-  },
-  {
-    category: "Support",
-    q: "What support does Self-Serve include?",
-    a: "Documentation, knowledge base, and community forum. No live phone queue on Tier 1.",
-  },
-  {
-    category: "Support",
-    q: "What does Sydra + Kronos Support add?",
-    a: "Live support 9 to 5 ET Monday through Friday, 24 hour email on escalations, monthly account review, and a specialist on tricky claims.",
-  },
-  {
-    category: "When Sydra is not enough",
-    q: "When should we choose Sydra vs Sydra + Support vs Kronos Full-Service?",
-    a: `${tierRoutingFaqAnswer()} Compare plans at ${siteUrl()}/plans, schedule a demo for software tiers, or get a free NSA IDR review at ${kronosCaseReviewUrl()}.`,
-  },
-  {
-    category: "When Sydra is not enough",
-    q: "When should we look at Kronos Full-Service instead?",
-    a: `Practices that do not want to operate software themselves should look at Kronos Full-Service on our sister site. Kronos runs every claim end to end. Get a free NSA IDR review at ${kronosCaseReviewUrl()}.`,
+    q: "What if my practice does not want to run software at all?",
+    a: "Kronos Full Service on our sister site handles every IDR claim end to end. Your practice forwards EOBs. The Kronos Revenue team handles eligibility, documentation, submission, and tracking. Zero software for your billing team to operate. Get a free IDR review at " + kronosCaseReviewUrl() + ".",
   },
 ];
+
+/** @deprecated Categories removed in spec Part 6 */
+export const FAQ_CATEGORIES = ["All"] as const;

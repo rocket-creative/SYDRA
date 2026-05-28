@@ -9,13 +9,13 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { PLANS_FAQ } from "@/lib/content/service-faqs";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
-export const metadata = PAGE_METADATA.plans;
+export const metadata = PAGE_METADATA.pricing;
 
 export default function PlansPage() {
   return (
     <>
       <PricingPageJsonLd />
-      <SydraPageShell breadcrumb={[...BREADCRUMBS.plans]}>
+      <SydraPageShell breadcrumb={[...BREADCRUMBS.pricing]}>
         <PricingTiers variant="full" />
         <ServiceFaqSection
           heading="What do practices ask about Sydra plans?"
@@ -31,7 +31,7 @@ export default function PlansPage() {
           </Link>
           <CtaTrustSignals className="mt-4" />
         </div>
-        <ServiceCrossLinks current="/plans" />
+        <ServiceCrossLinks current="/pricing" />
       </SydraPageShell>
     </>
   );

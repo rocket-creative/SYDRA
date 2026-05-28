@@ -17,9 +17,10 @@ function isHoneypotFilled(website: string | undefined): boolean {
 function legacyToDemoRequest(data: LegacyDemoRequest): DemoRequest {
   return {
     ...data,
-    specialty: "other_surgical",
+    specialty: "other",
     state: "NY",
-    disputesPerMonth: "0-2",
+    disputesPerMonth: "fewer_than_5",
+    idrApproach: "not_filing",
     role: "other",
     timeline: "researching",
     tierInterest: "not_sure",

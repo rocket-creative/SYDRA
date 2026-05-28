@@ -121,7 +121,7 @@ function TierCard({
         ) : (
           <Link
             className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#1A2B48] transition duration-300 ease-out hover:bg-slate-50 active:scale-[0.98]"
-            href={isExternal ? kronosCaseReviewUrl() : `/plans#${tier.id}`}
+            href={isExternal ? kronosCaseReviewUrl() : `/pricing#${tier.id}`}
             {...(isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {})}
           >
             {isExternal ? KRONOS_FULL_SERVICE_CTA : "Learn more"}
@@ -233,7 +233,7 @@ export function PricingTiers({ variant, headingLevel }: PricingTiersProps) {
         <p className="mt-10 text-center">
           <Link
             className="text-sm font-semibold text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 transition hover:decoration-[rgb(0,40,184)]"
-            href="/#plans"
+            href="/pricing"
           >
             See full pricing
           </Link>

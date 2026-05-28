@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import {
   BEST_TIME_LABELS,
   DISPUTES_LABELS,
+  IDR_APPROACH_LABELS,
   ROLE_LABELS,
   SPECIALTY_LABELS,
   TIMELINE_LABELS,
@@ -64,9 +65,14 @@ function buildPlainBody(
     `Specialty: ${SPECIALTY_LABELS[data.specialty]}`,
     `State: ${data.state}`,
     `OON / IDR disputes per month: ${DISPUTES_LABELS[data.disputesPerMonth]}`,
+    `Current IDR approach: ${IDR_APPROACH_LABELS[data.idrApproach]}`,
     `Role: ${ROLE_LABELS[data.role]}`,
     `Timeline: ${TIMELINE_LABELS[data.timeline]}`,
     `Tier interest: ${data.tierInterest ? TIER_LABELS[data.tierInterest] : "—"}`,
+    "",
+    "Notes",
+    `Message: ${formatOptional(data.message)}`,
+    `EOB file: ${formatOptional(data.eobFileName)}`,
     "",
     "Score breakdown",
     ...score.breakdown.map((line) => `  ${line}`),
@@ -100,7 +106,7 @@ function buildHtmlBody(
 
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong style="color:${priorityColor}">[SYDRA ${typePrefix}]</strong> ${escapeHtml(requestLabel(requestType))} — ${escapeHtml(score.subjectSummary)}</p>
-<table style="border-collapse:collapse;width:100%">${row("Name", data.name)}${row("Email", data.email)}${row("Phone", formatOptional(data.phone))}${row("Best time to reach", BEST_TIME_LABELS[data.bestTimeToReach])}${row("Practice", data.practiceName)}${row("Specialty", SPECIALTY_LABELS[data.specialty])}${row("State", data.state)}${row("Disputes / month", DISPUTES_LABELS[data.disputesPerMonth])}${row("Role", ROLE_LABELS[data.role])}${row("Timeline", TIMELINE_LABELS[data.timeline])}${row("Tier interest", data.tierInterest ? TIER_LABELS[data.tierInterest] : "—")}${row("UTM source", formatOptional(data.utmSource))}${row("UTM campaign", formatOptional(data.utmCampaign))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Name", data.name)}${row("Email", data.email)}${row("Phone", formatOptional(data.phone))}${row("Best time to reach", BEST_TIME_LABELS[data.bestTimeToReach])}${row("Practice", data.practiceName)}${row("Specialty", SPECIALTY_LABELS[data.specialty])}${row("State", data.state)}${row("Disputes / month", DISPUTES_LABELS[data.disputesPerMonth])}${row("IDR approach", IDR_APPROACH_LABELS[data.idrApproach])}${row("Role", ROLE_LABELS[data.role])}${row("Timeline", TIMELINE_LABELS[data.timeline])}${row("Tier interest", data.tierInterest ? TIER_LABELS[data.tierInterest] : "—")}${row("Message", formatOptional(data.message))}${row("EOB file", formatOptional(data.eobFileName))}${row("UTM source", formatOptional(data.utmSource))}${row("UTM campaign", formatOptional(data.utmCampaign))}</table>
 <p style="margin:16px 0 8px;font-size:13px;color:#64748b"><strong>Score:</strong> ${score.score} points</p>
 <ul style="margin:0 0 16px;padding-left:20px;font-size:13px;color:#64748b">${score.breakdown.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
