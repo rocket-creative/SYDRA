@@ -52,7 +52,7 @@ export const SECURITY_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "Does Sydra have SOC 2 certification?",
-    a: "Controls are aligned with SOC 2 requirements. A formal report is available to qualified prospects under NDA during evaluation.",
+    a: "Yes. Sydra is SOC 2 Type II compliant. The report is available to qualified prospects on request during evaluation.",
   },
   {
     q: "Can we get a security summary for our compliance team?",

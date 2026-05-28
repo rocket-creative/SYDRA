@@ -14,6 +14,7 @@ import {
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
 import { organizationContactPoint, sydraOrganizationJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.contact;
 
@@ -54,112 +55,109 @@ export default function ContactPage() {
     <>
       <ContactPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.contact]}>
-        <div className="mx-auto max-w-3xl">
-          <h1 className="text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
-            Contact Sydra.
-          </h1>
-          <p className="mt-4 text-base leading-relaxed text-[#4A5568]">
+        <header>
+          <h1 className={textStyles.pageTitle}>Contact Sydra.</h1>
+          <p className={textStyles.pageLead}>
             Different questions go to different places. Use the guide below.
           </p>
+        </header>
 
-          <div className="mt-10 space-y-8">
-            <section aria-labelledby="routing-new">
-              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-new">
-                New to Sydra — want a demo or pricing
-              </h2>
-              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                Use the form below or email {salesEmail}. Response within one business day.
-                Include your specialty and estimated monthly OON claim volume for a pricing range.
-              </p>
-            </section>
-
-            <section aria-labelledby="routing-procurement">
-              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-procurement">
-                Evaluating for procurement — need security docs
-              </h2>
-              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                Email {salesEmail} with your compliance contact copied. Subject line: Security
-                package request. We send the BAA template, security one pager, and subprocessor
-                list the same business day.
-              </p>
-            </section>
-
-            <section aria-labelledby="routing-support">
-              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-support">
-                Existing customers — support
-              </h2>
-              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                Email {supportEmail} for platform questions. Hours: 9 to 5 ET, Monday through
-                Friday. Sydra + Kronos Support customers: your Kronos specialist is your first
-                call on claim level questions.
-              </p>
-            </section>
-
-            <section aria-labelledby="routing-full-service">
-              <h2 className="text-lg font-semibold text-[#1A2B48]" id="routing-full-service">
-                Want every claim handled without running software
-              </h2>
-              <p className="mt-2 text-[15px] leading-relaxed text-[#4A5568]">
-                That&apos;s Kronos Revenue Full Service on our sister site.{" "}
-                <a
-                  className="font-medium text-[rgb(0,40,184)] underline"
-                  href={kronosCaseReviewUrl()}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Get a free IDR review
-                </a>
-                . Phone: (914) 705 6830 · intake@kronosrevenue.com
-              </p>
-            </section>
-          </div>
-
-          <section aria-labelledby="heading-contact-form" className="mt-14">
-            <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-contact-form">
-              Schedule a demo or ask a question.
+        <div className="mt-10 space-y-8 prose-measure">
+          <section aria-labelledby="routing-new">
+            <h2 className={textStyles.subsectionTitle} id="routing-new">
+              New to Sydra: demo or pricing
             </h2>
-            <div className="mt-6 rounded-xl border border-slate-200 bg-white p-6 md:p-8">
-              <ContactForm />
-            </div>
-          </section>
-
-          <section aria-labelledby="heading-direct" className="mt-14 border-t border-slate-200 pt-10">
-            <h2 className="text-lg font-semibold text-[#1A2B48]" id="heading-direct">
-              Direct contacts
-            </h2>
-            <ul className="mt-4 space-y-2 text-[15px] text-[#4A5568]">
-              <li>
-                Sales and demos:{" "}
-                <a className="font-medium text-[rgb(0,40,184)] underline" href={salesMailtoHref()}>
-                  {salesEmail}
-                </a>
-              </li>
-              <li>
-                Customer support:{" "}
-                <a className="font-medium text-[rgb(0,40,184)] underline" href={supportMailtoHref()}>
-                  {supportEmail}
-                </a>
-              </li>
-              <li>Kronos Revenue full service IDR: intake@kronosrevenue.com</li>
-              <li>Phone (Kronos Revenue): (914) 705 6830</li>
-              <li>Hours: 9 to 5 ET, Monday through Friday</li>
-              <li>
-                Mailing: Kronos Health · 244 Westchester Ave, Suite 209 · West Harrison, NY
-                10604
-              </li>
-            </ul>
-            <p className="mt-6">
-              <Link
-                className="text-sm font-semibold text-[rgb(0,40,184)] underline"
-                href="/demo"
-              >
-                Or schedule a demo directly →
-              </Link>
+            <p className={`${textStyles.body} mt-2`}>
+              Use the form below or email {salesEmail}. Response within one business day. Include
+              your specialty and estimated monthly OON claim volume for a pricing range.
             </p>
           </section>
 
-          <SourcesReferences className="mt-12" />
+          <section aria-labelledby="routing-procurement">
+            <h2 className={textStyles.subsectionTitle} id="routing-procurement">
+              Evaluating for procurement: security docs
+            </h2>
+            <p className={`${textStyles.body} mt-2`}>
+              Email {salesEmail} with your compliance contact copied. Subject line: Security package
+              request. We send the BAA template, security one pager, and subprocessor list the same
+              business day.
+            </p>
+          </section>
+
+          <section aria-labelledby="routing-support">
+            <h2 className={textStyles.subsectionTitle} id="routing-support">
+              Existing customers: support
+            </h2>
+            <p className={`${textStyles.body} mt-2`}>
+              Email {supportEmail} for platform questions. Hours: 9 to 5 ET, Monday through Friday.
+              Sydra + Kronos Support customers: your Kronos specialist is your first call on claim
+              level questions.
+            </p>
+          </section>
+
+          <section aria-labelledby="routing-full-service">
+            <h2 className={textStyles.subsectionTitle} id="routing-full-service">
+              Want every claim handled without running software
+            </h2>
+            <p className={`${textStyles.body} mt-2`}>
+              That&apos;s Kronos Revenue Full Service on our sister site.{" "}
+              <a
+                className={textStyles.textLink}
+                href={kronosCaseReviewUrl()}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Get a free IDR review
+              </a>
+              . Phone: (914) 705 6830 · intake@kronosrevenue.com
+            </p>
+          </section>
         </div>
+
+        <section aria-labelledby="heading-contact-form" className="prose-measure mt-14">
+          <h2 className={textStyles.sectionTitle} id="heading-contact-form">
+            Schedule a demo or ask a question.
+          </h2>
+          <div className="mt-6 border-t border-rule pt-8">
+            <ContactForm />
+          </div>
+        </section>
+
+        <section
+          aria-labelledby="heading-direct"
+          className="prose-measure mt-14 border-t border-rule pt-10"
+        >
+          <h2 className={textStyles.sectionTitle} id="heading-direct">
+            Direct contacts
+          </h2>
+          <ul className={`${textStyles.listNone} mt-4`}>
+            <li>
+              Sales and demos:{" "}
+              <a className={textStyles.textLink} href={salesMailtoHref()}>
+                {salesEmail}
+              </a>
+            </li>
+            <li>
+              Customer support:{" "}
+              <a className={textStyles.textLink} href={supportMailtoHref()}>
+                {supportEmail}
+              </a>
+            </li>
+            <li>Kronos Revenue full service IDR: intake@kronosrevenue.com</li>
+            <li>Phone (Kronos Revenue): (914) 705 6830</li>
+            <li>Hours: 9 to 5 ET, Monday through Friday</li>
+            <li>
+              Mailing: Kronos Health · 244 Westchester Ave, Suite 209 · West Harrison, NY 10604
+            </li>
+          </ul>
+          <p className="mt-6">
+            <Link className={textStyles.textLink} href="/demo">
+              Or schedule a demo directly
+            </Link>
+          </p>
+        </section>
+
+        <SourcesReferences className="mt-12" />
       </SydraPageShell>
     </>
   );

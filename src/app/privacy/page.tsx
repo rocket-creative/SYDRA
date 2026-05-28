@@ -5,6 +5,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.privacy;
 
@@ -38,36 +39,33 @@ export default function PrivacyPage() {
     <>
       <PrivacyPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.privacy]} headerVariant="funnel">
-        <article className="prose-slate mx-auto max-w-3xl">
-          <h1 className="text-[1.75rem] font-semibold text-[#1A2B48] sm:text-3xl">Privacy policy</h1>
-          <p className="mt-6 text-[15px] leading-relaxed text-[#4A5568]">
-            Kronos Health operates the Sydra marketing site. This policy describes
-            how we handle information submitted through demo requests, contact
-            forms, and email links on this site.
+        <article className="prose-measure">
+          <h1 className={textStyles.pageTitle}>Privacy policy</h1>
+          <p className={textStyles.pageLead}>
+            Kronos Health operates the Sydra marketing site. This policy describes how we handle
+            information submitted through demo requests, contact forms, and email links on this
+            site.
           </p>
-          <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">Information we collect</h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            When you schedule a demo or contact us, we collect the information you
-            provide: name, work email, practice name, specialty, state, and related
-            qualification fields. We don&apos;t collect payment information on this site.
+          <h2 className={`${textStyles.sectionTitle} mt-10`}>Information we collect</h2>
+          <p className={`${textStyles.body} mt-3`}>
+            When you schedule a demo or contact us, we collect the information you provide: name,
+            work email, practice name, specialty, state, and related qualification fields. We
+            don&apos;t collect payment information on this site.
           </p>
-          <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">How we use it</h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            We use submitted information to respond to inquiries, schedule demos,
-            and evaluate whether Sydra is a fit for your practice. We don&apos;t sell
-            contact information to third parties.
+          <h2 className={`${textStyles.sectionTitle} mt-10`}>How we use it</h2>
+          <p className={`${textStyles.body} mt-3`}>
+            We use submitted information to respond to inquiries, schedule demos, and evaluate
+            whether Sydra is a fit for your practice. We don&apos;t sell contact information to
+            third parties.
           </p>
-          <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">PHI on this site</h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            Don&apos;t submit protected health information through this marketing site.
-            PHI belongs in the Sydra application under a signed BAA.
+          <h2 className={`${textStyles.sectionTitle} mt-10`}>PHI on this site</h2>
+          <p className={`${textStyles.body} mt-3`}>
+            Don&apos;t submit protected health information through this marketing site. PHI belongs
+            in the Sydra application under a signed BAA.
           </p>
-          <p className="mt-10 text-sm text-slate-500">
+          <p className={`${textStyles.meta} mt-10`}>
             Questions?{" "}
-            <Link
-              className="font-medium text-[#1A2B48] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              href="/contact"
-            >
+            <Link className={textStyles.textLink} href="/contact">
               Contact us
             </Link>
             .

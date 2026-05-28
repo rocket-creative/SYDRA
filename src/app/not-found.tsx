@@ -1,8 +1,5 @@
-import Link from "next/link";
-
-import { SkipLink } from "@/components/sydra/skip-link";
-import { SydraFooter } from "@/components/sydra/footer";
-import { SydraHeader } from "@/components/sydra/header";
+import { MagazineShell } from "@/components/ui/magazine-shell";
+import { Button } from "@/components/ui/button";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = buildPageMetadata({
@@ -15,42 +12,25 @@ export const metadata = buildPageMetadata({
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-stone-100 font-sans text-slate-900">
-      <SkipLink />
-      <div className="mx-auto min-h-screen max-w-6xl bg-white shadow-sm xl:max-w-[1200px]">
-        <SydraHeader />
-        <main
-          className="flex flex-col items-center px-4 py-20 text-center sm:px-6 md:py-28 xl:px-8"
-          id="main-content"
-          tabIndex={-1}
-        >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgb(0,40,184)]">
-            404
+    <MagazineShell>
+      <div className="px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-xl">
+          <p className="type-caption text-[var(--color-accent)]">404</p>
+          <h1 className="type-h2 mt-4 text-brand">Page not found</h1>
+          <p className="mt-6 type-body text-body">
+            That URL isn&apos;t on this site. Head back to the homepage or schedule a demo to see
+            Sydra on a real denied claim.
           </p>
-          <h1 className="mt-4 text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
-            Page not found
-          </h1>
-          <p className="mt-5 max-w-md text-base leading-relaxed text-[#4A5568]">
-            That URL isn&apos;t on this site. Head back to the homepage or schedule a demo
-            to see Sydra on a real denied claim.
-          </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#1A2B48] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              href="/"
-            >
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <Button href="/" showArrow>
               Back to homepage
-            </Link>
-            <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              href="/demo"
-            >
+            </Button>
+            <Button href="/demo" showArrow variant="ghost">
               Schedule a demo
-            </Link>
+            </Button>
           </div>
-        </main>
-        <SydraFooter />
+        </div>
       </div>
-    </div>
+    </MagazineShell>
   );
 }

@@ -1,40 +1,72 @@
+import { Section } from "@/components/ui/section";
+import { textStyles } from "@/lib/typography";
+
+const prepSteps = [
+  "Pull and parse the EOB",
+  "Verify eligibility and cooling off period status",
+  "Build a CPT specific payment offer",
+  "Draft clinical necessity from the operative note",
+  "Match market rates to prior determinations",
+  "Prepare provider credentials",
+  "Format for the IDRE portal",
+] as const;
+
 export function SydraTimeCost() {
   return (
-    <section aria-labelledby="heading-time-cost" className="border-b border-slate-100 bg-white py-14 md:py-20">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-[720px] xl:px-8">
-        <h2
-          className="text-[1.55rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl md:text-[2rem]"
-          id="heading-time-cost"
-        >
+    <Section
+      ariaLabelledby="heading-time-cost"
+      id="time-cost"
+      sidebarLabel="Time cost"
+      tone="white"
+    >
+      <header className="prose-measure border-b border-rule pb-8">
+        <h2 className="type-h2 text-brand" id="heading-time-cost">
           What 30 minutes per claim actually costs at scale.
         </h2>
-        <p className="mt-6 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          A single federal IDR submission requires pulling and parsing the EOB, verifying
-          eligibility and cooling off period status, building a CPT specific payment offer,
-          drafting a clinical necessity narrative from the operative note, identifying market
-          rate comparisons from prior determinations, preparing provider credentials, and
-          formatting everything for the IDRE portal.
+        <p className="mt-4 type-body text-body">
+          Every federal IDR submission is manual work before your team ever reaches the portal.
         </p>
-        <ul className="mt-6 space-y-2 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          <li>At 30 minutes per claim: 10 claims per month = 5 hours of biller time monthly on IDR prep alone.</li>
-          <li>20 claims per month = 10 hours.</li>
-          <li>30 claims per month = 15 hours.</li>
-        </ul>
-        <p className="mt-6 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          Most billing teams don&apos;t have 15 hours per month for a single workflow. So they
-          file fewer claims than they should. Or none at all. CMS data shows only about 10%
-          of eligible claims reach IDR. ACEP analysis.
-        </p>
-        <p className="mt-4 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-          The other 90% aren&apos;t filed or aren&apos;t reaching arbitration. The insurer keeps
-          the underpayment. Every month.
-        </p>
-        <p className="mt-6 text-base font-semibold leading-relaxed text-[#1A2B48] md:text-[17px]">
-          Sydra reduces the prep step to under 5 minutes per claim. The same 30 claims per
-          month becomes under 2.5 hours of billing team time. The claims that weren&apos;t being
-          filed start getting filed.
+      </header>
+
+      <div className={`${textStyles.bodyStack} mt-10 space-y-10`}>
+        <div>
+          <h3 className="type-caption text-[var(--color-accent)]">What one submission includes</h3>
+          <ul className="mt-4 space-y-2 type-body text-body">
+            {prepSteps.map((step) => (
+              <li key={step} className="flex gap-3">
+                <span aria-hidden className="mt-[0.55rem] size-1 shrink-0 bg-[var(--color-hero)]" />
+                <span className="min-w-0">{step}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="type-caption text-[var(--color-accent)]">At 30 minutes per claim</h3>
+          <ul className="mt-4 space-y-2 type-body text-body">
+            <li>10 claims per month → 5 hours of biller time on IDR prep alone</li>
+            <li>20 claims per month → 10 hours</li>
+            <li>30 claims per month → 15 hours</li>
+          </ul>
+        </div>
+
+        <div className="space-y-4 type-body text-body">
+          <p>
+            Most billing teams do not have 15 hours per month for a single workflow. They file
+            fewer claims than they should, or none at all. CMS data shows only about 10% of
+            eligible claims reach IDR (ACEP analysis).
+          </p>
+          <p>
+            The other 90% are not filed or never reach arbitration. The insurer keeps the
+            underpayment, every month.
+          </p>
+        </div>
+
+        <p className="border-t border-rule pt-8 text-[17px] font-medium leading-relaxed text-brand">
+          Sydra reduces prep to under 5 minutes per claim. Thirty claims per month becomes under
+          2.5 hours of billing team time. Claims that were not being filed start getting filed.
         </p>
       </div>
-    </section>
+    </Section>
   );
 }

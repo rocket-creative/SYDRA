@@ -2,14 +2,17 @@
 
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import {
+  editorialInputClass,
+  editorialSelectClass,
+  FormField,
+} from "@/components/ui/form-field";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
 import {
   CONTACT_INTENT_OPTIONS,
   CONTACT_INTENT_LABELS,
 } from "@/lib/schemas/contact-request";
-
-const inputClass =
-  "mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -49,37 +52,31 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <p className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-[15px] text-emerald-900">
+      <p className="border-l-2 border-[var(--color-hero)] py-2 pl-4 text-[15px] text-brand">
         We&apos;ll reply to {email} within one business day.
       </p>
     );
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <div>
-        <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="contact-name">
-          Full name
-        </label>
-        <input required className={inputClass} id="contact-name" name="name" type="text" />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="contact-email">
-          Work email
-        </label>
-        <input required className={inputClass} id="contact-email" name="email" type="email" />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="contact-practice">
-          Practice name
-        </label>
-        <input required className={inputClass} id="contact-practice" name="practiceName" type="text" />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="contact-intent">
-          What can we help with?
-        </label>
-        <select required className={`${inputClass} bg-white`} id="contact-intent" name="intent">
+    <form className="space-y-8" onSubmit={handleSubmit}>
+      <FormField id="contact-name" label="Full name">
+        <input required className={editorialInputClass} id="contact-name" name="name" type="text" />
+      </FormField>
+      <FormField id="contact-email" label="Work email">
+        <input required className={editorialInputClass} id="contact-email" name="email" type="email" />
+      </FormField>
+      <FormField id="contact-practice" label="Practice name">
+        <input
+          required
+          className={editorialInputClass}
+          id="contact-practice"
+          name="practiceName"
+          type="text"
+        />
+      </FormField>
+      <FormField id="contact-intent" label="What can we help with?">
+        <select required className={editorialSelectClass} id="contact-intent" name="intent">
           <option value="">Select topic</option>
           {CONTACT_INTENT_OPTIONS.map((value) => (
             <option key={value} value={value}>
@@ -87,36 +84,34 @@ export function ContactForm() {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="contact-message">
-          Message (optional)
-        </label>
+      </FormField>
+      <FormField id="contact-message" label="Message (optional)">
         <textarea
-          className={`${inputClass} min-h-[120px] resize-y`}
+          className={`${editorialInputClass} min-h-[120px] resize-y`}
           id="contact-message"
           name="message"
           rows={4}
         />
-      </div>
+      </FormField>
       <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
         <input name="website" tabIndex={-1} type="text" />
       </div>
       {status === "error" ? (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="text-sm text-red-700" role="alert">
           Something went wrong. Email{" "}
           <a className="underline" href={salesMailtoHref()}>
             {getSalesEmail()}
           </a>
         </p>
       ) : null}
-      <button
-        className="min-h-12 w-full rounded-md bg-[#1A2B48] py-3 text-base font-semibold text-white disabled:opacity-60"
+      <Button
+        className="w-full sm:w-auto"
         disabled={status === "submitting"}
+        showArrow
         type="submit"
       >
         {status === "submitting" ? "Sending…" : "Send message"}
-      </button>
+      </Button>
     </form>
   );
 }

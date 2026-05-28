@@ -22,9 +22,9 @@ export const TIER_ROUTING_HEADLINE =
   "The right fit depends on who operates the workflow, not claim volume alone.";
 
 export const TIER_ROUTING_LINES = [
-  "Comfortable running software → Sydra Self-Serve (any volume)",
+  "Comfortable running software → Sydra Self Serve (any volume)",
   "Software plus a backstop → Sydra + Kronos Support",
-  "Zero ops / fully outsourced → Kronos Full-Service (any volume)",
+  "Zero ops / fully outsourced → Kronos Full Service (any volume)",
 ] as const;
 
 export const PRICING_SECTION_SUBHEAD =
@@ -40,7 +40,7 @@ export const DEMO_TRUST_BLOCK =
 export const TIERS: TierDefinition[] = [
   {
     id: "basic",
-    name: "Sydra Self-Serve",
+    name: "Sydra Self Serve",
     tagline: "The software, run by your team.",
     bestFor: "Your team runs the software in house.",
     inclusions: [
@@ -63,7 +63,7 @@ export const TIERS: TierDefinition[] = [
     bestFor: "Software you operate, plus a backstop on tricky cases.",
     recommended: true,
     inclusions: [
-      "Everything in Self-Serve",
+      "Everything in Self Serve",
       "Live support 9 to 5 ET, Monday through Friday",
       "24 hour email response on escalations",
       "Monthly account review with your team",
@@ -71,14 +71,14 @@ export const TIERS: TierDefinition[] = [
       "Training included for new billers",
     ],
     compactInclusions: [
-      "Everything in Self-Serve",
+      "Everything in Self Serve",
       "Live support and monthly account review",
       "Escalation on disputed claims",
     ],
   },
   {
     id: "pro",
-    name: "Kronos Full-Service",
+    name: "Kronos Full Service",
     tagline: "Every claim handled end to end.",
     bestFor: "You want every claim handled without operating software.",
     externalOnly: true,
@@ -160,7 +160,7 @@ export function getTierById(id: TierId): TierDefinition {
 }
 
 export function pricingFaqAnswer(): string {
-  return `${PRICING_SECTION_HEADLINE}. Self-Serve is software your team runs in house. Sydra + Kronos Support adds live specialists and monthly reviews. Kronos Full-Service is fully outsourced on our sister site. ${PRICING_QUALITATIVE_LINE}`;
+  return `${PRICING_SECTION_HEADLINE}. Self Serve is software your team runs in house. Sydra + Kronos Support adds live specialists and monthly reviews. Kronos Full Service is fully outsourced on our sister site. ${PRICING_QUALITATIVE_LINE}`;
 }
 
 export function isValidTierId(value: string | null): value is TierId {

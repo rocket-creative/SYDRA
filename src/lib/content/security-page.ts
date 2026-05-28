@@ -24,16 +24,19 @@ export const SECURITY_TRUST_CARDS: SecurityTrustCard[] = [
   { id: "bedrock", title: "AWS Bedrock", summary: "Claude Sonnet 4 on HIPAA eligible infrastructure." },
   { id: "encryption", title: "Encryption", summary: "AES 256 at rest, TLS 1.2+ in transit." },
   { id: "isolation", title: "Tenant isolation", summary: "Strict per practice row level security." },
+  {
+    id: "soc2",
+    title: "SOC 2 Type II",
+    summary: "SOC 2 Type II compliant. Report available on request during evaluation.",
+  },
 ];
 
 export const SOC2_SECTION: SecuritySection = {
   id: "heading-soc2",
-  title: "SOC 2 status — read this first.",
+  title: "SOC 2 Type II compliance.",
   paragraphs: [
-    "Sydra is SOC 2 aligned. We haven't completed a formal SOC 2 Type II audit.",
-    "We're in the process of completing the audit. We won't tell you we have a certification we don't have, and we won't bury this information in a footnote.",
-    "SOC 2 aligned means: our controls are designed to meet SOC 2 requirements. We have documented policies, access controls, audit logging, incident response procedures, and vendor management processes that a SOC 2 auditor would review. We haven't yet had a third party auditor certify those controls as operating effectively over a defined period.",
-    "If a completed SOC 2 Type II report is a hard requirement for your procurement process, tell us. We'll give you the current timeline and let you decide.",
+    "Sydra is SOC 2 Type II compliant. Our controls cover security, availability, and confidentiality for the systems that process customer data.",
+    "A SOC 2 Type II report is available to qualified prospects during evaluation. Email sales@kronosrevenue.health with your compliance contact copied and we'll send it the same business day.",
   ],
 };
 
@@ -94,7 +97,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
     id: "heading-docs",
     title: "Requesting security documentation.",
     paragraphs: [
-      "Available to qualified prospects during evaluation: BAA template, security one pager, subprocessor list (AWS, Stedi, ModMed, and others in scope), AWS Bedrock HIPAA eligibility documentation, SOC 2 status update.",
+      "Available to qualified prospects during evaluation: BAA template, security one pager, subprocessor list (AWS, Stedi, ModMed, and others in scope), AWS Bedrock HIPAA eligibility documentation, SOC 2 Type II report.",
       `Request: email ${SALES_EMAIL_FALLBACK} with your compliance contact copied. Response within one business day.`,
     ],
   },

@@ -1,9 +1,7 @@
 import type { ReactNode } from "react";
 
+import { MagazineShell } from "@/components/ui/magazine-shell";
 import { BreadcrumbNav } from "@/components/sydra/breadcrumb-nav";
-import { SkipLink } from "@/components/sydra/skip-link";
-import { SydraFooter } from "@/components/sydra/footer";
-import { SydraHeader } from "@/components/sydra/header";
 
 type SydraPageShellProps = {
   children: ReactNode;
@@ -11,7 +9,6 @@ type SydraPageShellProps = {
   headerVariant?: "default" | "funnel";
   footerExtra?: ReactNode;
   mainClassName?: string;
-  showMobileCta?: boolean;
 };
 
 export function SydraPageShell({
@@ -19,25 +16,19 @@ export function SydraPageShell({
   breadcrumb,
   headerVariant = "default",
   footerExtra,
-  mainClassName = "px-4 py-14 sm:px-6 md:py-20 xl:px-8",
+  mainClassName = "px-6 py-14 md:px-10 md:py-20",
 }: SydraPageShellProps) {
   return (
-    <div className="min-h-screen bg-stone-100 font-sans text-slate-900">
-      <SkipLink />
-      <div className="mx-auto min-h-screen max-w-6xl bg-white shadow-sm xl:max-w-[1200px]">
-        <SydraHeader variant={headerVariant} />
-        <main className={mainClassName} id="main-content" tabIndex={-1}>
-          {breadcrumb ? (
-            <div className="mx-auto mb-8 max-w-6xl xl:max-w-[1200px]">
-              <BreadcrumbNav items={breadcrumb} />
-            </div>
-          ) : null}
-          {children}
-        </main>
-        {footerExtra}
-        <SydraFooter />
+    <MagazineShell footerExtra={footerExtra} headerVariant={headerVariant}>
+      <div className={mainClassName}>
+        {breadcrumb ? (
+          <div className="mx-auto mb-8 max-w-[1280px]">
+            <BreadcrumbNav items={breadcrumb} />
+          </div>
+        ) : null}
+        <div className="mx-auto max-w-[1280px]">{children}</div>
       </div>
-    </div>
+    </MagazineShell>
   );
 }
 

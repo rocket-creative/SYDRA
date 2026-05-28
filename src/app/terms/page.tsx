@@ -5,6 +5,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.terms;
 
@@ -38,30 +39,26 @@ export default function TermsPage() {
     <>
       <TermsPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.terms]} headerVariant="funnel">
-        <article className="mx-auto max-w-3xl">
-          <h1 className="text-[1.75rem] font-semibold text-[#1A2B48] sm:text-3xl">Terms of use</h1>
-          <p className="mt-6 text-[15px] leading-relaxed text-[#4A5568]">
-            By using this website you agree to these terms. This site is for
-            informational and lead capture purposes. Use of the Sydra software is
-            governed by separate customer agreements and BAAs.
+        <article className="prose-measure">
+          <h1 className={textStyles.pageTitle}>Terms of use</h1>
+          <p className={textStyles.pageLead}>
+            By using this website you agree to these terms. This site is for informational and lead
+            capture purposes. Use of the Sydra software is governed by separate customer agreements
+            and BAAs.
           </p>
-          <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">No medical or legal advice</h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            Content on this site isn&apos;t medical, legal, or billing advice. Outcomes
-            depend on payer behavior, IDRE decisions, and your documentation.
+          <h2 className={`${textStyles.sectionTitle} mt-10`}>No medical or legal advice</h2>
+          <p className={`${textStyles.body} mt-3`}>
+            Content on this site isn&apos;t medical, legal, or billing advice. Outcomes depend on
+            payer behavior, IDRE decisions, and your documentation.
           </p>
-          <h2 className="mt-10 text-lg font-semibold text-[#1A2B48]">Accuracy</h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-            We strive to keep product descriptions current but don&apos;t guarantee
-            every statement reflects the latest release. Demo calls confirm fit and
-            capabilities for your practice.
+          <h2 className={`${textStyles.sectionTitle} mt-10`}>Accuracy</h2>
+          <p className={`${textStyles.body} mt-3`}>
+            We strive to keep product descriptions current but don&apos;t guarantee every statement
+            reflects the latest release. Demo calls confirm fit and capabilities for your practice.
           </p>
-          <p className="mt-10 text-sm text-slate-500">
+          <p className={`${textStyles.meta} mt-10`}>
             Questions?{" "}
-            <Link
-              className="font-medium text-[#1A2B48] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              href="/contact"
-            >
+            <Link className={textStyles.textLink} href="/contact">
               Contact us
             </Link>
             .

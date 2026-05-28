@@ -1,9 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  /* UXUI animation tokens — primary ease for entrances */
+  --background: #ebe8e2;
+  --foreground: #1a1a1a;
+
+  /* Brand */
+  --color-hero: #1a2b48;
+  --color-hero-deep: #0a1525;
+  --color-hero-mid: #152238;
+  --color-hero-light: #243a5c;
+  --color-text: #1a2b48;
+  --color-body: #4a5568;
+  --color-neutral: #e8eaef;
+  --color-surface-muted: #c8c5bc;
+  --color-accent: #0028b8;
+  --color-inverse: #ffffff;
+  --color-rule: #d4d0c8;
+  --gradient-hero: linear-gradient(
+    165deg,
+    var(--color-hero-deep) 0%,
+    var(--color-hero-mid) 42%,
+    var(--color-hero) 72%,
+    var(--color-hero-light) 100%
+  );
+
+  /* Typography scale (readable on marketing pages, not billboard scale) */
+  --type-display: clamp(2rem, 4.5vw, 3.25rem);
+  --type-h1: clamp(1.75rem, 3.5vw, 2.75rem);
+  --type-h2: clamp(1.375rem, 2.5vw, 2rem);
+  --type-stat: clamp(2.5rem, 5vw, 4rem);
+  --type-body: 1.0625rem;
+  --type-caption: 0.6875rem;
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 128px;
+  --space-section: clamp(80px, 10vw, 160px);
+
+  /* Sticky header clearance (logo row + mobile nav strip) */
+  --header-offset: calc(5.75rem + env(safe-area-inset-top));
+
+  /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-hover: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -16,8 +58,42 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-hero: var(--color-hero);
+  --color-text: var(--color-text);
+  --color-body: var(--color-body);
+  --color-neutral: var(--color-neutral);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-accent: var(--color-accent);
+  --color-inverse: var(--color-inverse);
+  --color-rule: var(--color-rule);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --spacing-section: var(--space-section);
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
+  --spacing-3xl: var(--space-3xl);
+
+  /*
+   * Layout max-widths (Tailwind defaults).
+   * Required so max-w-md / max-w-2xl etc. are not resolved from --spacing-* (8–128px).
+   */
+  --max-width-xs: 20rem;
+  --max-width-sm: 24rem;
+  --max-width-md: 28rem;
+  --max-width-lg: 32rem;
+  --max-width-xl: 36rem;
+  --max-width-2xl: 42rem;
+  --max-width-3xl: 48rem;
+  --max-width-4xl: 56rem;
+  --max-width-5xl: 64rem;
+  --max-width-6xl: 72rem;
+  --max-width-7xl: 80rem;
 }
 
 html {
@@ -31,7 +107,8 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: none;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 [id],
@@ -56,8 +133,280 @@ body {
 p,
 li {
   overflow-wrap: break-word;
-  word-break: break-word;
 }
+
+/* Editorial typography utilities */
+.type-display {
+  font-size: var(--type-display);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.type-h1 {
+  font-size: var(--type-h1);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.type-h2 {
+  font-size: var(--type-h2);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+.type-stat {
+  font-size: var(--type-stat);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 300;
+}
+
+.type-body {
+  font-size: var(--type-body);
+  line-height: 1.7;
+}
+
+/* Shared readable column width for headings + copy */
+.prose-measure {
+  width: 100%;
+  max-width: 42rem;
+  min-width: 0;
+}
+
+/* Short horizontal rule under stat figures (not max-w-xs — that maps to 8px spacing) */
+.rule-measure {
+  width: 12rem;
+  max-width: 100%;
+}
+
+/* Inner page typography (prefer textStyles from @/lib/typography in TSX) */
+.page-title {
+  font-size: var(--type-h1);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-text);
+  max-width: 42rem;
+}
+
+.page-lead {
+  font-size: var(--type-body);
+  line-height: 1.7;
+  color: var(--color-body);
+  max-width: 42rem;
+}
+
+.page-section-title {
+  font-size: var(--type-h2);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  color: var(--color-text);
+  max-width: 42rem;
+}
+
+.page-subsection-title {
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.page-body {
+  font-size: var(--type-body);
+  line-height: 1.7;
+  color: var(--color-body);
+}
+
+.page-body-measure {
+  font-size: var(--type-body);
+  line-height: 1.7;
+  color: var(--color-body);
+  max-width: 42rem;
+}
+
+.text-link {
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.text-link:hover {
+  color: var(--color-hero);
+}
+
+/* Homepage: pull first section under transparent header so nav/logo sit on hero navy */
+.main--header-over-hero > :first-child {
+  margin-top: calc(-1 * var(--header-offset));
+  padding-top: var(--header-offset);
+}
+
+.type-caption {
+  font-size: var(--type-caption);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.text-body {
+  color: var(--color-body);
+}
+
+.text-brand {
+  color: var(--color-text);
+}
+
+.border-rule {
+  border-color: var(--color-rule);
+}
+
+.bg-neutral-section {
+  background-color: var(--color-neutral);
+}
+
+.bg-hero-gradient {
+  background: var(--gradient-hero);
+  color: var(--color-inverse);
+}
+
+.bg-surface-muted {
+  background-color: var(--color-surface-muted);
+}
+
+/* ─── Animation keyframes ─────────────────────────────────────────────────── */
+
+@keyframes nav-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(105%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes image-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes rule-in {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes focus-ring-in {
+  to { box-shadow: 0 0 0 2px var(--color-accent); }
+}
+
+/* ─── Animation utility classes ──────────────────────────────────────────── */
+
+.animate-nav-in {
+  animation: nav-in 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-word-in {
+  display: inline-block;
+  animation: word-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-eyebrow {
+  animation: fade-up 500ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+}
+
+.hero-sub {
+  animation: fade-up 600ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
+}
+
+.hero-bold {
+  animation: fade-up 600ms cubic-bezier(0.16, 1, 0.3, 1) 640ms both;
+}
+
+.hero-cta {
+  animation: fade-up 600ms cubic-bezier(0.16, 1, 0.3, 1) 760ms both;
+}
+
+.hero-note {
+  animation: fade-up 600ms cubic-bezier(0.16, 1, 0.3, 1) 880ms both;
+}
+
+.hero-image-in {
+  animation: image-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+}
+
+.rule-draw {
+  transform-origin: left center;
+  animation: rule-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+}
+
+.image-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Nav link — underline draws left to right on hover */
+.nav-link {
+  position: relative;
+  transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* CTA link — gap expands on hover via gap transition */
+.cta-link {
+  transition: gap 200ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta-link svg,
+.cta-link [data-arrow] {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-link:hover {
+  gap: 0.875rem;
+}
+
+.cta-link:hover svg,
+.cta-link:hover [data-arrow] {
+  transform: translateX(4px);
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   html {

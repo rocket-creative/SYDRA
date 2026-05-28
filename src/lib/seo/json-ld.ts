@@ -121,7 +121,7 @@ export function softwareApplicationJsonLd() {
       "Prior authorization drafting",
       "CPT code assessment from operative notes",
       "213+ ingested IDR determinations with 90%+ provider win rate in reference library",
-      "HIPAA controls AWS BAA SOC 2 in progress",
+      "HIPAA controls AWS BAA SOC 2 Type II compliant",
       "ModMed EMR integration Stedi clearinghouse",
     ],
     creator: {

@@ -1,49 +1,46 @@
+import { Section } from "@/components/ui/section";
 import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
 
 export function SydraEconomics() {
   return (
-    <section
-      aria-labelledby="heading-economics"
-      className="border-b border-slate-100 bg-[#1A2B48] py-14 md:py-16"
-    >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
-        <h2
-          className="text-center text-[1.55rem] font-semibold tracking-tight text-white sm:text-3xl md:text-[2rem]"
-          id="heading-economics"
-        >
-          Two ways Sydra changes the financial picture.
-        </h2>
+    <Section ariaLabelledby="heading-economics" id="economics" sidebarLabel="Economics" tone="hero">
+      <h2 className="type-h2 prose-measure text-white" id="heading-economics">
+        Two ways Sydra changes the financial picture.
+      </h2>
 
-        <div className="mx-auto mt-10 grid max-w-4xl gap-8 md:grid-cols-2">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 md:p-8">
-            <h3 className="text-lg font-semibold text-white">Time savings</h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-slate-300">
-              30 minutes per claim becomes under 5. At 20 claims per month: roughly 8 hours
-              of biller time returned monthly. That time goes back to denial follow up, prior
-              authorization, AR aging.
-            </p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 md:p-8">
-            <h3 className="text-lg font-semibold text-white">Recovery economics</h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-slate-300">
-              If your practice files IDR through an attorney at 20% contingency: Sydra lets
-              your billing team run the workflow in house. Platform fee is structured below
-              typical 20% contingency. Exact quote on your demo call after we understand your
-              specialty and volume.
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-slate-300">
-              If your practice isn&apos;t filing IDR at all: Providers win 88% of properly filed
-              IDR disputes. CMS Q1/Q2 2025 Public Use File. Median awards come in at
-              approximately 4.5 times the insurer&apos;s qualifying payment amount.
-              Georgetown CHIR, March 2026. Run your numbers below.
-            </p>
-          </div>
+      <div className="mt-12 grid gap-12 md:grid-cols-2 md:gap-16">
+        <div className="min-w-0 w-full">
+          <div className="border-t border-white/20 pt-6" aria-hidden />
+          <p className="type-stat mt-4 text-white">8h</p>
+          <div className="rule-measure my-4 border-t border-white/20" aria-hidden />
+          <p className="type-caption text-white/60">Time returned monthly</p>
+          <p className="prose-measure mt-6 text-[15px] leading-relaxed text-white/85">
+            30 minutes per claim becomes under 5. At 20 claims per month: roughly 8 hours of
+            biller time returned monthly. That time goes back to denial follow up, prior
+            authorization, AR aging.
+          </p>
         </div>
-
-        <div className="mx-auto mt-12 max-w-2xl">
-          <RecoveryCalculator />
+        <div className="min-w-0 w-full">
+          <div className="border-t border-white/20 pt-6" aria-hidden />
+          <p className="type-stat mt-4 text-white">4.5×</p>
+          <div className="rule-measure my-4 border-t border-white/20" aria-hidden />
+          <p className="type-caption text-white/60">Median award vs QPA</p>
+          <p className="prose-measure mt-6 text-[15px] leading-relaxed text-white/85">
+            If your practice files IDR through an attorney at 20% contingency: Sydra lets your
+            billing team run the workflow in house. Platform fee is structured below typical 20%
+            contingency. Exact quote on your demo call after we understand your specialty and
+            volume.
+          </p>
+          <p className="prose-measure mt-4 text-[15px] leading-relaxed text-white/85">
+            Providers win 88% of properly filed IDR disputes. CMS Q1/Q2 2025 Public Use File.
+            Georgetown CHIR, March 2026. Run your numbers below.
+          </p>
         </div>
       </div>
-    </section>
+
+      <div className="prose-measure mt-14 border-t border-white/20 pt-10">
+        <RecoveryCalculator variant="onDark" />
+      </div>
+    </Section>
   );
 }

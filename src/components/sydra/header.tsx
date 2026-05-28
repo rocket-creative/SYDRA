@@ -1,52 +1,83 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
 
 const nav = [
-  { href: "/", label: "Home", isRoute: true },
-  { href: "/pricing", label: "Pricing", isRoute: true },
-  { href: "/how-it-works", label: "How it works", isRoute: true },
-  { href: "/about", label: "About", isRoute: true },
-  { href: "/contact", label: "Contact", isRoute: true },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 const SIGN_IN = "https://sydra.health/";
 
 type SydraHeaderProps = {
   variant?: "default" | "funnel";
+  /** Transparent over hero until scroll (homepage only) */
+  overHero?: boolean;
 };
 
-export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
+export function SydraHeader({ variant = "default", overHero = false }: SydraHeaderProps) {
   const isFunnel = variant === "funnel";
-  const logoHref = isFunnel ? "/" : "/";
+  const [scrolled, setScrolled] = useState(!overHero);
+
+  useEffect(() => {
+    if (!overHero) return;
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [overHero]);
+
+  const onHero = overHero && !scrolled;
+
+  const shellClass = onHero
+    ? "border-b border-white/15 bg-transparent"
+    : "border-b border-rule bg-white";
+
+  const linkClass = onHero
+    ? "text-white/90 hover:text-white"
+    : "text-[var(--color-body)] hover:text-[var(--color-hero)]";
+
+  const mobileNavBorder = onHero ? "border-white/15" : "border-rule";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 pt-[max(0.5rem,env(safe-area-inset-top))] backdrop-blur-md transition-[box-shadow] duration-300 ease-out supports-[backdrop-filter]:bg-white/85">
-      <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 pb-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
+    <header
+      className={`animate-nav-in sticky top-0 z-[100] pt-[max(0.5rem,env(safe-area-inset-top))] transition-[background-color,border-color] duration-300 ${shellClass}`}
+    >
+      <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-6 py-4 md:px-10">
         <Link
-          className="flex shrink-0 items-center transition duration-300 ease-out hover:opacity-90 active:scale-[0.98]"
-          href={logoHref}
           aria-label="Sydra home"
+          className="flex shrink-0 items-center gap-3 transition-opacity duration-300 hover:opacity-90"
+          href="/"
         >
           <Image
-            src="/sydra-logo-nav.svg"
             alt=""
-            width={220}
+            className={`h-8 w-auto sm:h-9 ${onHero ? "brightness-0 invert" : ""}`}
             height={36}
-            className="h-8 w-auto sm:h-9"
             priority
             sizes="(max-width: 1024px) 180px, 220px"
+            src="/sydra-logo-nav.svg"
+            width={220}
           />
+          <span
+            aria-hidden
+            className={`hidden type-caption tracking-[0.16em] sm:block ${onHero ? "text-white/60" : "text-body/50"}`}
+          >
+            NSA&nbsp;·&nbsp;IDR&nbsp;·&nbsp;SIMPLIFIED
+          </span>
         </Link>
 
         {!isFunnel ? (
-          <nav
-            aria-label="Primary"
-            className="hidden flex-1 items-center justify-center gap-6 lg:flex lg:gap-8"
-          >
+          <nav aria-label="Primary" className="hidden flex-1 items-center justify-end gap-8 lg:flex">
             {nav.map((item) => (
               <Link
                 key={item.href}
-                className="relative rounded-sm py-1 text-sm font-medium text-slate-600 transition-colors duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[#1A2B48] after:transition-transform after:duration-300 after:ease-out hover:text-[#1A2B48] hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 md:text-[15px]"
+                className={`nav-link type-caption transition-colors duration-300 ${linkClass}`}
                 href={item.href}
               >
                 {item.label}
@@ -54,12 +85,12 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
             ))}
           </nav>
         ) : (
-          <div className="flex-1" aria-hidden />
+          <div aria-hidden className="flex-1" />
         )}
 
-        <div className="ml-auto flex items-center gap-3 sm:gap-4 lg:gap-6">
+        <div className="ml-auto flex items-center gap-4 sm:gap-6">
           <a
-            className="rounded-sm text-sm font-medium text-slate-600 transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            className={`type-caption transition-colors duration-300 ${linkClass}`}
             href={SIGN_IN}
             rel="noopener noreferrer"
             target="_blank"
@@ -67,12 +98,13 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
             Sign in
           </a>
           {!isFunnel ? (
-            <Link
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-[#1A2B48] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 md:px-5"
+            <Button
               href="/demo"
+              showArrow
+              variant={onHero ? "ghostOnDark" : "solid"}
             >
               Schedule a demo
-            </Link>
+            </Button>
           ) : null}
         </div>
       </div>
@@ -80,12 +112,12 @@ export function SydraHeader({ variant = "default" }: SydraHeaderProps) {
       {!isFunnel ? (
         <nav
           aria-label="Primary mobile"
-          className="flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-100 px-4 py-3 sm:px-6 lg:hidden xl:max-w-[1200px] xl:mx-auto"
+          className={`flex flex-wrap gap-x-5 gap-y-2 border-t px-6 py-3 lg:hidden md:px-10 ${mobileNavBorder}`}
         >
           {nav.map((item) => (
             <Link
               key={item.href}
-              className="rounded-sm text-sm font-medium text-slate-600 transition-colors duration-300 ease-out hover:text-[#1A2B48] active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              className={`nav-link type-caption transition-colors duration-300 ${linkClass}`}
               href={item.href}
             >
               {item.label}

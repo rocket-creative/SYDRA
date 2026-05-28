@@ -3,6 +3,12 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import {
+  editorialInputClass,
+  editorialSelectClass,
+  FormField,
+} from "@/components/ui/form-field";
 import { US_STATES } from "@/lib/constants/us-states";
 import { isValidTierId } from "@/lib/content/tiers";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
@@ -17,17 +23,6 @@ import {
   TIER_INTEREST_OPTIONS,
   TIER_LABELS,
 } from "@/lib/schemas/demo-request";
-
-const inputClass =
-  "mt-1.5 min-h-12 w-full rounded-md border border-slate-200 px-3 py-2.5 text-base text-slate-900 outline-none ring-offset-2 transition-colors duration-200 focus:border-blue-400 focus-visible:ring-2 focus-visible:ring-blue-500/30";
-
-const selectClass = `${inputClass} bg-white`;
-
-const buttonPrimaryClass =
-  "min-h-12 w-full rounded-md bg-[#1A2B48] py-3 text-base font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2";
-
-const buttonSecondaryClass =
-  "min-h-12 w-full rounded-md border border-slate-200 bg-white py-3 text-base font-semibold text-[#1A2B48] transition duration-300 ease-out hover:bg-slate-50 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2";
 
 type Step = 1 | 2;
 
@@ -135,86 +130,59 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   );
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-      <div className="mb-6 flex items-center gap-3">
-        <div
-          className={`flex size-8 items-center justify-center rounded-full text-sm font-semibold ${step === 1 ? "bg-[#1A2B48] text-white" : "bg-emerald-100 text-emerald-800"}`}
-          aria-hidden
-        >
-          {step === 1 ? "1" : "✓"}
-        </div>
-        <div className="h-px flex-1 bg-slate-200" aria-hidden />
-        <div
-          className={`flex size-8 items-center justify-center rounded-full text-sm font-semibold ${step === 2 ? "bg-[#1A2B48] text-white" : "bg-slate-100 text-slate-400"}`}
-          aria-hidden
-        >
-          2
-        </div>
-      </div>
-      <p className="text-center text-sm font-medium text-slate-500" aria-live="polite">
+    <div className="border-t border-rule pt-8">
+      <p className="type-caption text-body/60" aria-live="polite">
         Step {step} of 2
       </p>
 
       {step === 1 ? (
-        <form className="mt-6 space-y-5" onSubmit={handleStepOneSubmit}>
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="name">
-              Full name
-            </label>
+        <form className="mt-8 space-y-8" onSubmit={handleStepOneSubmit}>
+          <FormField id="name" label="Full name">
             <input
               required
               autoComplete="name"
-              className={inputClass}
+              className={editorialInputClass}
               defaultValue={stepOne.name}
               id="name"
               name="name"
               type="text"
             />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="email">
-              Work email
-            </label>
+          </FormField>
+          <FormField id="email" label="Work email">
             <input
               required
               autoComplete="email"
-              className={inputClass}
+              className={editorialInputClass}
               defaultValue={stepOne.email}
               id="email"
               inputMode="email"
               name="email"
               type="email"
             />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="practiceName">
-              Practice name
-            </label>
+          </FormField>
+          <FormField id="practiceName" label="Practice name">
             <input
               required
               autoComplete="organization"
-              className={inputClass}
+              className={editorialInputClass}
               defaultValue={stepOne.practiceName}
               id="practiceName"
               name="practiceName"
               type="text"
             />
-          </div>
-          <button className={buttonPrimaryClass} type="submit">
+          </FormField>
+          <Button className="w-full sm:w-auto" showArrow type="submit">
             Continue
-          </button>
+          </Button>
         </form>
       ) : (
-        <form className="relative mt-6 space-y-5" onSubmit={handleStepTwoSubmit}>
-          <p className="rounded-md bg-slate-50 px-3 py-2 text-sm text-slate-600">
+        <form className="relative mt-8 space-y-8" onSubmit={handleStepTwoSubmit}>
+          <p className="border-l-2 border-rule py-1 pl-4 text-sm text-body">
             {stepOne.name} · {stepOne.practiceName}
           </p>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="specialty">
-              Specialty
-            </label>
-            <select required className={selectClass} id="specialty" name="specialty">
+          <FormField id="specialty" label="Specialty">
+            <select required className={editorialSelectClass} id="specialty" name="specialty">
               <option value="">Select specialty</option>
               {SPECIALTY_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -222,13 +190,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
                 </option>
               ))}
             </select>
-          </div>
+          </FormField>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="state">
-              State
-            </label>
-            <select required className={selectClass} id="state" name="state">
+          <FormField id="state" label="State">
+            <select required className={editorialSelectClass} id="state" name="state">
               <option value="">Select state</option>
               <optgroup label="Supported pathways (2026)">
                 {US_STATES.filter((s) =>
@@ -249,13 +214,15 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
                 ))}
               </optgroup>
             </select>
-          </div>
+          </FormField>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="disputesPerMonth">
-              Monthly OON claim estimate
-            </label>
-            <select required className={selectClass} id="disputesPerMonth" name="disputesPerMonth">
+          <FormField id="disputesPerMonth" label="Monthly OON claim estimate">
+            <select
+              required
+              className={editorialSelectClass}
+              id="disputesPerMonth"
+              name="disputesPerMonth"
+            >
               <option value="">Select volume</option>
               {DISPUTES_PER_MONTH_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -263,13 +230,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
                 </option>
               ))}
             </select>
-          </div>
+          </FormField>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="idrApproach">
-              Current IDR approach
-            </label>
-            <select required className={selectClass} id="idrApproach" name="idrApproach">
+          <FormField id="idrApproach" label="Current IDR approach">
+            <select required className={editorialSelectClass} id="idrApproach" name="idrApproach">
               <option value="">Select approach</option>
               {IDR_APPROACH_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -277,42 +241,33 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
                 </option>
               ))}
             </select>
-          </div>
+          </FormField>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="eobFile">
-              Upload an EOB for the demo (optional)
-            </label>
+          <FormField id="eobFile" label="Upload an EOB for the demo (optional)">
             <input
               accept=".pdf,image/*"
-              className="mt-1.5 block w-full text-sm text-slate-600 file:mr-4 file:rounded-md file:border-0 file:bg-slate-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[#1A2B48]"
+              className="mt-2 block w-full text-sm text-body file:mr-4 file:border file:border-rule file:bg-transparent file:px-4 file:py-2 file:text-[13px] file:uppercase file:tracking-[0.08em] file:text-brand"
               id="eobFile"
               name="eobFile"
               type="file"
             />
-            <p className="mt-1.5 text-xs text-slate-500">
+            <p className="mt-2 text-xs text-body/70">
               PDF or image. We review it before the call if you upload one.
             </p>
-          </div>
+          </FormField>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="message">
-              Or describe your situation (optional)
-            </label>
+          <FormField id="message" label="Or describe your situation (optional)">
             <textarea
-              className={`${inputClass} min-h-[100px] resize-y`}
+              className={`${editorialInputClass} min-h-[100px] resize-y`}
               id="message"
               name="message"
               rows={4}
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="tierInterest">
-              Tier interest (optional)
-            </label>
+          <FormField id="tierInterest" label="Tier interest (optional)">
             <select
-              className={selectClass}
+              className={editorialSelectClass}
               defaultValue={preselectedTier}
               id="tierInterest"
               name="tierInterest"
@@ -324,7 +279,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
                 </option>
               ))}
             </select>
-          </div>
+          </FormField>
 
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
             <label htmlFor="website">Website</label>
@@ -332,32 +287,34 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           </div>
 
           {state.status === "error" ? (
-            <div className="text-sm text-red-600" role="alert">
+            <div className="text-sm text-red-700" role="alert">
               <p>{state.message}</p>
               <p className="mt-2">
-                <a className="font-medium text-[#1A2B48] underline" href={salesMailtoHref()}>
+                <a className="text-brand underline" href={salesMailtoHref()}>
                   {getSalesEmail()}
                 </a>
               </p>
             </div>
           ) : null}
 
-          <div className="flex flex-col gap-3 sm:flex-row-reverse">
-            <button
-              className={`${buttonPrimaryClass} sm:flex-1`}
+          <div className="flex flex-col gap-4 sm:flex-row-reverse">
+            <Button
+              className="sm:flex-1"
               disabled={state.status === "submitting"}
+              showArrow
               type="submit"
             >
               {state.status === "submitting" ? "Submitting…" : submitLabel}
-            </button>
-            <button
-              className={`${buttonSecondaryClass} sm:flex-1`}
+            </Button>
+            <Button
+              className="sm:flex-1"
               disabled={state.status === "submitting"}
               type="button"
+              variant="ghost"
               onClick={() => setStep(1)}
             >
               Back
-            </button>
+            </Button>
           </div>
         </form>
       )}

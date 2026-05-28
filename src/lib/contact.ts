@@ -69,9 +69,9 @@ export function supportMailtoHref(): string {
 }
 
 const TIER_PRICING_LABELS = {
-  basic: "Self-Serve",
+  basic: "Self Serve",
   plus: "Kronos Support",
-  pro: "Full-Service",
+  pro: "Full Service",
 } as const;
 
 export function pricingMailtoHref(tier: keyof typeof TIER_PRICING_LABELS): string {

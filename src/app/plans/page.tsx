@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { Button } from "@/components/ui/button";
 import { PricingTiers } from "@/components/sydra/pricing-tiers";
 import { PricingPageJsonLd } from "@/components/sydra/pricing-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
@@ -22,13 +21,10 @@ export default function PlansPage() {
           id="heading-plans-faq"
           items={PLANS_FAQ}
         />
-        <div className="mx-auto mt-12 max-w-3xl text-center">
-          <Link
-            className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#1A2B48] px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            href="/demo"
-          >
+        <div className="prose-measure mt-12">
+          <Button href="/demo" showArrow>
             Schedule a demo
-          </Link>
+          </Button>
           <CtaTrustSignals className="mt-4" />
         </div>
         <ServiceCrossLinks current="/pricing" />

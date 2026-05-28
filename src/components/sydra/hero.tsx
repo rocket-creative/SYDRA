@@ -1,82 +1,72 @@
-import Link from "next/link";
-
-import { FadeUp } from "@/components/motion/reveal";
+import { Button } from "@/components/ui/button";
+import { CtaLink } from "@/components/ui/cta-link";
 import { SydraHeroMock } from "@/components/sydra/hero-mock";
+import { SplitHeadline } from "@/components/motion/split-headline";
+
+const trustItems = [
+  "HIPAA controls in place · BAA on request",
+  "AWS Bedrock · Claude Sonnet 4 · PHI stays inside AWS HIPAA eligible boundary",
+  "ModMed integration today · Stedi clearinghouse",
+  "Built by Kronos Health · Dr. John M. Abrahams, MD, neurosurgeon founder",
+] as const;
 
 export function SydraHero() {
   return (
     <section
       aria-labelledby="heading-hero"
-      className="border-b border-slate-100 bg-[#FAFBFD] pb-16 pt-[max(3rem,env(safe-area-inset-top))] md:pb-20 md:pt-16 lg:pt-20"
+      className="relative border-b border-rule bg-white"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:max-w-[1200px] xl:px-8">
-        <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 xl:gap-14">
-          <div className="lg:col-span-6">
-            <h1
-              className="text-[2rem] font-semibold leading-[1.12] tracking-tight text-[#1A2B48] sm:text-4xl md:text-[2.75rem] md:leading-[1.1]"
-              id="heading-hero"
-            >
-              Your billing team is spending 30 minutes per NSA IDR claim.
-              <span className="mt-2 block">
-                That&apos;s not a workflow problem. That&apos;s a software problem.
-              </span>
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#4A5568] md:text-[17px] md:leading-[1.7]">
-              Sydra prepares a complete federal IDR submission packet in under 5 minutes
-              per claim. Clinical narrative drafted from your operative note. Market rate
-              comparisons from 213+ ingested prior determinations. One claim per CPT, never
-              batched.
-            </p>
-            <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-[#1A2B48] md:text-[17px]">
-              Your team reviews. Your team submits. You keep the recovery.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
-              <Link
-                className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#1A2B48] px-5 py-3 text-center text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition duration-300 ease-out hover:opacity-[0.92] active:scale-[0.98] sm:min-w-[10rem]"
-                href="/demo"
-              >
-                See Sydra on a real denied claim
-              </Link>
-              <Link
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-200 bg-white px-5 py-3 text-center text-sm font-semibold text-[#1A2B48] transition duration-300 ease-out hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
-                href="/how-it-works"
-              >
-                How it works
-              </Link>
-            </div>
-            <p className="mt-4 text-sm text-slate-500">
-              15 minutes. Your specialty. No commitment.
-            </p>
+      <div className="grid lg:min-h-[min(100dvh,56rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <div className="flex min-w-0 flex-col justify-center px-6 py-14 md:px-10 md:py-16 lg:py-20 lg:pr-12">
+          <p className="hero-eyebrow type-caption text-body/70">Federal IDR / NSA</p>
+          <h1
+            className="type-display prose-measure mt-4 text-brand"
+            id="heading-hero"
+          >
+            <SplitHeadline
+              delay={180}
+              stagger={55}
+              text="Your billing team spends 30 minutes per NSA IDR claim."
+            />
+          </h1>
+          <p className="hero-sub type-body prose-measure mt-6 text-body">
+            Sydra prepares a complete federal IDR submission packet in under 5 minutes per claim.
+            Clinical narrative drafted from your operative note. Market rate comparisons from 213+
+            ingested prior determinations. One claim per CPT, never batched.
+          </p>
+          <p className="hero-bold prose-measure mt-4 text-[15px] font-medium leading-relaxed text-brand md:text-[17px]">
+            Your team reviews. Your team submits. You keep the recovery.
+          </p>
+          <div className="hero-cta mt-10 flex flex-wrap items-center gap-4">
+            <Button href="/demo" showArrow variant="solid">
+              See Sydra on a real denied claim
+            </Button>
+            <CtaLink href="/how-it-works">How it works</CtaLink>
           </div>
-
-          <div className="mt-14 lg:col-span-6 lg:mt-0">
-            <SydraHeroMock />
-          </div>
+          <p className="hero-note mt-6 text-sm text-body/80">
+            15 minutes. Your specialty. No commitment.
+          </p>
         </div>
 
-        <FadeUp className="mt-14 lg:mt-16">
-          <ul className="flex flex-col gap-3 rounded-xl border border-slate-200/80 bg-white/90 p-6 shadow-sm sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-6 md:p-8">
-            {[
-              "HIPAA controls in place · BAA on request",
-              "AWS Bedrock · Claude Sonnet 4 · PHI stays inside AWS HIPAA eligible boundary",
-              "ModMed integration today · Stedi clearinghouse",
-              "Built by Kronos Health · Dr. John M. Abrahams, MD, neurosurgeon founder",
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2 text-sm text-[#4A5568] sm:text-[15px]"
-              >
-                <span
-                  aria-hidden
-                  className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[11px] font-bold text-emerald-700"
-                >
-                  ✓
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </FadeUp>
+        <div className="hero-image-in flex items-center justify-center border-t border-rule px-6 py-12 lg:min-h-[min(100dvh,56rem)] lg:border-t-0 lg:border-l lg:px-10 lg:py-16">
+          <SydraHeroMock />
+        </div>
+      </div>
+
+      <div className="border-t border-rule bg-neutral-section px-6 py-8 md:px-10">
+        <ul className="mx-auto grid max-w-[1280px] items-center gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {trustItems.map((item, i) => (
+            <li
+              key={item}
+              className="flex items-center border-l border-rule pl-4 text-sm leading-relaxed text-body sm:text-[15px]"
+              style={{
+                animation: `fade-up 500ms cubic-bezier(0.16,1,0.3,1) ${1000 + i * 80}ms both`,
+              }}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

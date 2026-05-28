@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { CtaLink } from "@/components/ui/cta-link";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -42,33 +41,31 @@ export default function FaqPage() {
     <>
       <FaqPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.faq]}>
-        <div className="mx-auto max-w-3xl">
-          <h1 className="text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
+        <div className="max-w-2xl">
+          <h1 className="type-h1 text-brand">
             Questions about Sydra.
-            <span className="mt-2 block text-xl font-medium text-[#4A5568]">
-              Answered specifically.
-            </span>
+            <span className="mt-4 block type-h2 text-body">Answered specifically.</span>
           </h1>
 
-          <div className="mt-10 space-y-3">
+          <div className="mt-10 divide-y divide-[var(--color-rule)] border-y border-rule">
             {FAQ_PAGE_ITEMS.map((item) => (
-              <details
-                key={item.q}
-                className="group rounded-xl border border-slate-200 bg-white px-4 py-1 shadow-sm open:border-slate-300 md:px-5"
-              >
-                <summary className="cursor-pointer list-none py-4 text-left text-base font-semibold text-[#1A2B48] outline-none focus-visible:ring-2 focus-visible:ring-blue-600 md:text-[17px] [&::-webkit-details-marker]:hidden">
-                  {item.q}
+              <details key={item.q} className="group py-0">
+                <summary className="cursor-pointer list-none py-6 text-left text-base font-normal text-brand md:text-[17px] [&::-webkit-details-marker]:hidden">
+                  <span className="flex items-start justify-between gap-6">
+                    {item.q}
+                    <span
+                      aria-hidden
+                      className="type-caption shrink-0 text-body transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </span>
                 </summary>
-                <div className="border-t border-slate-100 pb-4 pt-2 text-[15px] leading-relaxed text-[#4A5568]">
+                <div className="border-t border-rule pb-6 pt-2 text-[15px] leading-relaxed text-body">
                   <p>{item.a}</p>
                   {item.q.includes("cost") ? (
-                    <p className="mt-3">
-                      <Link
-                        className="font-medium text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4"
-                        href="/demo"
-                      >
-                        Schedule a demo for pricing →
-                      </Link>
+                    <p className="mt-4">
+                      <CtaLink href="/demo">Schedule a demo for pricing</CtaLink>
                     </p>
                   ) : null}
                 </div>

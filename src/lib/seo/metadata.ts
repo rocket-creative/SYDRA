@@ -102,7 +102,7 @@ export const PAGE_METADATA = {
   security: buildPageMetadata({
     title: "Sydra Security — HIPAA Controls, BAA, AWS Bedrock, PHI Handling | Sydra",
     description:
-      "Sydra handles PHI under HIPAA controls. AWS Bedrock with HIPAA eligible Claude Sonnet 4. Encryption at rest and in transit. BAA available. SOC 2 in progress, not yet certified.",
+      "Sydra handles PHI under HIPAA controls. AWS Bedrock with HIPAA eligible Claude Sonnet 4. Encryption at rest and in transit. BAA available. SOC 2 Type II compliant.",
     path: "/security",
     ogImagePath: "/security",
   }),

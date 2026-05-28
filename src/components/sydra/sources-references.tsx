@@ -1,3 +1,5 @@
+import { textStyles } from "@/lib/typography";
+
 const REFERENCES = [
   {
     title: "CMS Federal IDR Q1/Q2 2025 Public Use File",
@@ -6,7 +8,8 @@ const REFERENCES = [
   },
   {
     title: "Georgetown University CHIR · Health Affairs webinar",
-    detail: "March 2026 — 3.4 million disputes through June 2025; 88% win rate; median award ~4.5x in network rate",
+    detail:
+      "March 2026 — 3.4 million disputes through June 2025; 88% win rate; median award ~4.5x in network rate",
   },
   {
     title: "Zelis — NSA IDR Eligibility Challenges",
@@ -50,32 +53,29 @@ export function SourcesReferences({ className = "" }: SourcesReferencesProps) {
   return (
     <section
       aria-labelledby="heading-sources"
-      className={`mx-auto max-w-3xl border-t border-slate-200 pt-10 ${className}`}
+      className={`prose-measure border-t border-rule pt-10 ${className}`}
     >
       <details className="group">
-        <summary className="cursor-pointer list-none text-sm font-semibold text-[#1A2B48] marker:content-none [&::-webkit-details-marker]:hidden">
+        <summary className="cursor-pointer list-none text-sm font-medium text-brand marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="inline-flex items-center gap-2">
             Sourced references
-            <span
-              aria-hidden
-              className="text-slate-400 transition group-open:rotate-180"
-            >
+            <span aria-hidden className="text-body/50 transition group-open:rotate-180">
               ▾
             </span>
           </span>
         </summary>
-        <ol className="mt-4 space-y-3 text-sm leading-relaxed text-[#4A5568]" id="heading-sources">
+        <ol className={`${textStyles.listNone} mt-4 text-sm`} id="heading-sources">
           {REFERENCES.map((ref, index) => (
             <li key={ref.title}>
-              <span className="font-medium text-slate-700">
+              <span className="font-medium text-brand">
                 {index + 1}. {ref.title}
               </span>
               {"detail" in ref && ref.detail ? (
-                <span className="mt-0.5 block text-slate-600">{ref.detail}</span>
+                <span className={`${textStyles.meta} mt-0.5 block`}>{ref.detail}</span>
               ) : null}
               {"url" in ref && ref.url ? (
                 <a
-                  className="mt-0.5 block text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-2 hover:decoration-[rgb(0,40,184)]"
+                  className={`${textStyles.textLink} mt-0.5 block text-sm`}
                   href={ref.url}
                   rel="noopener noreferrer"
                   target="_blank"

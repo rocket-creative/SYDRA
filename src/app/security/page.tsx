@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
@@ -15,6 +14,7 @@ import {
 } from "@/lib/content/security-page";
 import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.security;
 
@@ -53,69 +53,64 @@ export default function SecurityPage() {
     <>
       <SecurityPageJsonLd />
       <SydraPageShell breadcrumb={[...BREADCRUMBS.security]}>
-        <div className="mx-auto max-w-3xl">
-          <h1 className="text-[1.75rem] font-semibold tracking-tight text-[#1A2B48] sm:text-3xl">
-            {SECURITY_HERO.title}
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-[#4A5568] md:text-[17px]">
-            {SECURITY_HERO.intro}
-          </p>
+        <header>
+          <h1 className={textStyles.pageTitle}>{SECURITY_HERO.title}</h1>
+          <p className={textStyles.pageLead}>{SECURITY_HERO.intro}</p>
+        </header>
 
-          <section aria-labelledby={SOC2_SECTION.id} className="mt-10 rounded-xl border-2 border-amber-200 bg-amber-50 p-6 md:p-8">
-            <h2 className="text-lg font-semibold text-[#1A2B48]" id={SOC2_SECTION.id}>
-              {SOC2_SECTION.title}
-            </h2>
-            {SOC2_SECTION.paragraphs.map((p) => (
-              <p key={p.slice(0, 40)} className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-                {p}
-              </p>
-            ))}
-          </section>
+        <section
+          aria-labelledby={SOC2_SECTION.id}
+          className="prose-measure mt-10 border-l-2 border-[var(--color-accent)] py-1 pl-6"
+        >
+          <h2 className={textStyles.subsectionTitle} id={SOC2_SECTION.id}>
+            {SOC2_SECTION.title}
+          </h2>
+          {SOC2_SECTION.paragraphs.map((p) => (
+            <p key={p.slice(0, 40)} className={`${textStyles.body} mt-3`}>
+              {p}
+            </p>
+          ))}
+        </section>
 
-          <div className="mt-12 space-y-12">
-            {SECURITY_SECTIONS.map((section) => (
-              <section key={section.id} aria-labelledby={section.id}>
-                <h2 className="text-lg font-semibold text-[#1A2B48]" id={section.id}>
-                  {section.title}
-                </h2>
-                {section.paragraphs.map((p) => (
-                  <p key={p.slice(0, 40)} className="mt-3 text-[15px] leading-relaxed text-[#4A5568]">
-                    {p}
-                  </p>
-                ))}
-                {section.list ? (
-                  <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-[#4A5568]">
-                    {section.list.map((item) => (
-                      <li key={item.slice(0, 40)} className="flex gap-2">
-                        <span aria-hidden className="text-[rgb(0,40,184)]">→</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </section>
-            ))}
-          </div>
-
-          <div className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#1A2B48] px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
-              href="/demo"
-            >
-              {SECURITY_CTA.demoLabel}
-            </Link>
-            <a
-              className="inline-flex min-h-12 items-center justify-center rounded-md border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-[#1A2B48] transition hover:bg-slate-50"
-              href={salesMailtoHref()}
-            >
-              {SECURITY_CTA.mailtoLabel}
-            </a>
-          </div>
-          <CtaTrustSignals className="mt-6 text-center" />
-
-          <ServiceCrossLinks current="/security" />
-          <SourcesReferences className="mt-12" />
+        <div className="mt-12 space-y-12 prose-measure">
+          {SECURITY_SECTIONS.map((section) => (
+            <section key={section.id} aria-labelledby={section.id}>
+              <h2 className={textStyles.subsectionTitle} id={section.id}>
+                {section.title}
+              </h2>
+              {section.paragraphs.map((p) => (
+                <p key={p.slice(0, 40)} className={`${textStyles.body} mt-3`}>
+                  {p}
+                </p>
+              ))}
+              {section.list ? (
+                <ul className={`${textStyles.listNone} mt-4`}>
+                  {section.list.map((item) => (
+                    <li key={item.slice(0, 40)} className="flex gap-3">
+                      <span aria-hidden className="type-caption text-[var(--color-accent)]">
+                        →
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+          ))}
         </div>
+
+        <div className="prose-measure mt-14 flex flex-col gap-4 sm:flex-row">
+          <Button href="/demo" showArrow>
+            {SECURITY_CTA.demoLabel}
+          </Button>
+          <Button href={salesMailtoHref()} variant="ghost">
+            {SECURITY_CTA.mailtoLabel}
+          </Button>
+        </div>
+        <CtaTrustSignals className="prose-measure mt-6" />
+
+        <ServiceCrossLinks current="/security" />
+        <SourcesReferences className="mt-12" />
       </SydraPageShell>
     </>
   );

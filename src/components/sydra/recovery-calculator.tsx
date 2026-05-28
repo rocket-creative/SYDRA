@@ -2,14 +2,20 @@
 
 import { useMemo, useState } from "react";
 
-import Link from "next/link";
+import { CtaLink } from "@/components/ui/cta-link";
+import { editorialInputClass, FormField } from "@/components/ui/form-field";
 
 const WIN_RATE = 0.88;
 const AWARD_MULTIPLIER = 4.5;
 
-export function RecoveryCalculator() {
+type RecoveryCalculatorProps = {
+  variant?: "light" | "onDark";
+};
+
+export function RecoveryCalculator({ variant = "light" }: RecoveryCalculatorProps) {
   const [claimsPerMonth, setClaimsPerMonth] = useState(20);
   const [avgDisputedAmount, setAvgDisputedAmount] = useState(15000);
+  const onDark = variant === "onDark";
 
   const estimate = useMemo(() => {
     const monthlyRecovery =
@@ -23,15 +29,19 @@ export function RecoveryCalculator() {
     };
   }, [claimsPerMonth, avgDisputedAmount]);
 
+  const labelClass = onDark ? "text-white/70" : "text-brand";
+  const valueClass = onDark ? "text-white" : "text-brand";
+  const mutedClass = onDark ? "text-white/55" : "text-body";
+  const inputClass = onDark
+    ? `${editorialInputClass} border-white/25 text-white placeholder:text-white/40 focus:border-white`
+    : editorialInputClass;
+
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 md:p-8">
-      <div className="grid gap-6 md:grid-cols-2">
-        <div>
-          <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="calc-claims">
-            IDR eligible claims per month
-          </label>
+    <div>
+      <div className="grid gap-8 md:grid-cols-2">
+        <FormField id="calc-claims" label="IDR eligible claims per month">
           <input
-            className="mt-2 w-full rounded-md border border-slate-200 px-3 py-2 text-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className={inputClass}
             id="calc-claims"
             max={100}
             min={1}
@@ -39,13 +49,10 @@ export function RecoveryCalculator() {
             type="number"
             value={claimsPerMonth}
           />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-[#1A2B48]" htmlFor="calc-amount">
-            Average disputed amount per claim ($)
-          </label>
+        </FormField>
+        <FormField id="calc-amount" label="Average disputed amount per claim ($)">
           <input
-            className="mt-2 w-full rounded-md border border-slate-200 px-3 py-2 text-[#1A2B48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className={inputClass}
             id="calc-amount"
             max={500000}
             min={1000}
@@ -54,48 +61,41 @@ export function RecoveryCalculator() {
             type="number"
             value={avgDisputedAmount}
           />
-        </div>
+        </FormField>
       </div>
 
-      <dl className="mt-8 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-lg bg-slate-50 p-4">
-          <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Est. monthly recovery
-          </dt>
-          <dd className="mt-1 text-2xl font-semibold text-[#1A2B48]">
-            ${estimate.monthlyRecovery.toLocaleString()}
-          </dd>
-        </div>
-        <div className="rounded-lg bg-slate-50 p-4">
-          <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Est. annual recovery
-          </dt>
-          <dd className="mt-1 text-2xl font-semibold text-[#1A2B48]">
-            ${estimate.annualRecovery.toLocaleString()}
-          </dd>
-        </div>
-        <div className="rounded-lg bg-slate-50 p-4">
-          <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            At 20% attorney fee
-          </dt>
-          <dd className="mt-1 text-2xl font-semibold text-[#1A2B48]">
-            ${estimate.attorneyFees.toLocaleString()}/yr
-          </dd>
-        </div>
+      <dl className="mt-10 grid gap-10 sm:grid-cols-3">
+        {[
+          { label: "Est. monthly recovery", value: estimate.monthlyRecovery },
+          { label: "Est. annual recovery", value: estimate.annualRecovery },
+          { label: "At 20% attorney fee", value: estimate.attorneyFees, suffix: "/yr" },
+        ].map((row) => (
+          <div key={row.label} className="min-w-0">
+            <div className={`border-t ${onDark ? "border-white/20" : "border-rule"} pt-4`} aria-hidden />
+            <dt className={`type-caption mt-4 ${labelClass}`}>{row.label}</dt>
+            <dd
+              className={`mt-2 font-light leading-none tracking-[-0.03em] ${valueClass}`}
+              style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)" }}
+            >
+              ${row.value.toLocaleString()}
+              {row.suffix ?? ""}
+            </dd>
+          </div>
+        ))}
       </dl>
 
-      <p className="mt-6 text-xs leading-relaxed text-slate-500">
-        Uses CMS published win rates (88%) and Georgetown CHIR median award benchmarks.
-        Not a Sydra performance claim.
+      <p className={`mt-8 text-xs leading-relaxed ${mutedClass}`}>
+        Uses CMS published win rates (88%) and Georgetown CHIR median award benchmarks. Not a
+        Sydra performance claim.
       </p>
 
-      <p className="mt-4">
-        <Link
-          className="text-sm font-semibold text-[rgb(0,40,184)] underline decoration-blue-200 underline-offset-4 hover:decoration-[rgb(0,40,184)]"
+      <p className="mt-6">
+        <CtaLink
+          className={onDark ? "!text-white hover:!text-white/80" : ""}
           href="/demo"
         >
-          Schedule a demo to see your numbers on a real claim →
-        </Link>
+          Schedule a demo for your numbers
+        </CtaLink>
       </p>
     </div>
   );
