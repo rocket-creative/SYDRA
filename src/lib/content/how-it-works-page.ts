@@ -27,6 +27,9 @@ export const SUBMISSION_REQUIREMENTS: HowItWorksSection = {
   ],
 };
 
+export const DEMO_CTA_LEAD =
+  "On a demo call, you watch this entire sequence run live on a real denied claim from your specialty: EOB upload to finished IDR submission packet, start to finish, in under 5 minutes.";
+
 export const SUBMISSION_FOOTNOTE =
   "Building all six from scratch on a single claim: 25 to 40 minutes. Sydra handles elements 1 through 4. Your team provides the EOB and operative note. Your team reviews and submits.";
 

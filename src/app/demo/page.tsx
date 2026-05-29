@@ -6,7 +6,7 @@ import { DemoFunnelForm } from "@/components/sydra/demo-funnel-form";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { PRODUCT_SCREENS } from "@/components/sydra/product-screens";
 import { CtaLink } from "@/components/ui/cta-link";
 import { getSalesEmail } from "@/lib/contact";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
@@ -42,10 +42,10 @@ function DemoPageJsonLd() {
 }
 
 const callSteps = [
-  "EOB uploaded to Sydra. Eligibility check runs.",
-  "Sydra generates the IDR draft: executive summary, market rate justification from prior determinations, clinical narrative from the operative note, provider credentials.",
-  "Draft reviewed. We walk through each section: what Sydra wrote, where each element came from, what a billing team would verify or edit.",
-  "DOCX export. You see the final submission ready document and the guided IDRE portal checklist.",
+  "We enter your denied claim live and run the eligibility check while you watch.",
+  "Sydra drafts the complete IDR submission packet in real time, in front of you: executive summary, market rate justification from prior determinations, clinical narrative from the operative note, provider credentials.",
+  "We read through each section together: what Sydra wrote, where every element came from, what a billing team would verify or edit.",
+  "DOCX export. You see the finished submission ready packet and the guided IDRE portal checklist, generated start to finish on the call.",
 ] as const;
 
 const preBookingFaq = [
@@ -96,8 +96,9 @@ export default function DemoPage() {
                 What happens on the call
               </h2>
               <p className={`${textStyles.body} mt-3`}>
-                This isn&apos;t a slide deck. A Kronos specialist opens Sydra in a shared screen
-                and runs a real denied claim from your specialty through the full workflow.
+                This isn&apos;t a slide deck. On a live call, a Kronos specialist enters a real
+                denied claim from your specialty and Sydra builds the complete IDR submission packet
+                in real time while you watch, start to finish.
               </p>
               <ol className={textStyles.list}>
                 {callSteps.map((step) => (
@@ -106,8 +107,9 @@ export default function DemoPage() {
               </ol>
               <p className={`${textStyles.body} mt-6`}>
                 Total: under 5 minutes for the claim, 10 minutes for the walkthrough and questions.
-                You leave with the actual Sydra output, a pricing quote, and a sandbox account if
-                you want one. No pressure to sign anything on the call.
+                You watch the packet get built before any pricing comes up. You leave with the actual
+                Sydra output, a pricing quote, and a sandbox account if you want one. No pressure to
+                sign anything on the call.
               </p>
             </section>
 
@@ -116,12 +118,12 @@ export default function DemoPage() {
                 Product preview
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-3">
-                {[1, 2, 3, 4].map((n) => (
-                  <ImagePlaceholder key={n} aspect="16/9" />
+                {PRODUCT_SCREENS.map((Screen) => (
+                  <Screen key={Screen.name} />
                 ))}
               </div>
               <p className={`${textStyles.meta} mt-3`}>
-                Product screenshots placeholder. Live demo uses your claim data.
+                Representative product UI. Live demo runs on your actual claim data.
               </p>
             </section>
 

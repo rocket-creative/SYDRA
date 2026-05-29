@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { textStyles } from "@/lib/typography";
 
 const prepSteps = [
@@ -27,6 +28,14 @@ export function SydraTimeCost() {
           Every federal IDR submission is manual work before your team ever reaches the portal.
         </p>
       </header>
+
+      <EditorialImage
+        alt="Billing team reviewing claim volume together on a laptop in a modern office"
+        aspect="16/9"
+        className="mt-10"
+        sizes="(max-width: 1280px) 100vw, 1280px"
+        src="/images/editorial/team-laptop-meeting.png"
+      />
 
       <div className={`${textStyles.bodyStack} mt-10 space-y-10`}>
         <div>

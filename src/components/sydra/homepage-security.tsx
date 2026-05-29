@@ -1,10 +1,20 @@
 import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { textStyles } from "@/lib/typography";
 
 export function HomepageSecurity() {
   return (
     <Section ariaLabelledby="heading-home-security" sidebarLabel="Security" tone="white">
+      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-16">
+        <EditorialImage
+          alt="Accountant and colleague handling protected claim documents at a desk"
+          aspect="4/5"
+          className="lg:sticky lg:top-24"
+          sizes="(max-width: 1024px) 100vw, 40vw"
+          src="/images/editorial/accountant-desk-review.png"
+        />
+        <div className="min-w-0">
       <h2 className="type-h2 prose-measure text-brand" id="heading-home-security">
         PHI in an IDR submission. How Sydra handles it.
       </h2>
@@ -41,6 +51,8 @@ export function HomepageSecurity() {
       <p className="mt-8">
         <CtaLink href="/security">Full security overview</CtaLink>
       </p>
+        </div>
+      </div>
     </Section>
   );
 }

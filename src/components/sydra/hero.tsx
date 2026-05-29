@@ -44,7 +44,8 @@ export function SydraHero() {
             <CtaLink href="/how-it-works">How it works</CtaLink>
           </div>
           <p className="hero-note mt-6 text-sm text-body/80">
-            15 minutes. Your specialty. No commitment.
+            15 minutes on a live call. Watch Sydra build a complete IDR packet on a real claim in
+            real time. No commitment.
           </p>
         </div>
 

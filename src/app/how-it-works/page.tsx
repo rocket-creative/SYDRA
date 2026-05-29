@@ -6,6 +6,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import {
+  DEMO_CTA_LEAD,
   DOCX_SECTION,
   HOW_IT_WORKS_HERO,
   ONE_PER_CPT_SECTION,
@@ -109,6 +110,7 @@ export default function HowItWorksPage() {
         ))}
 
         <div className="prose-measure mt-14">
+          <p className={`${textStyles.body} mb-6`}>{DEMO_CTA_LEAD}</p>
           <Button href="/demo" showArrow>
             Schedule a demo
           </Button>

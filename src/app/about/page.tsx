@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { AboutPageJsonLd } from "@/components/sydra/about-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -72,6 +73,15 @@ export default function AboutPage() {
             </p>
           </div>
         </header>
+
+        <EditorialImage
+          alt="Kronos Health colleagues reviewing a document together in the office"
+          aspect="16/9"
+          className="mt-10"
+          priority
+          sizes="(max-width: 1024px) 100vw, 768px"
+          src="/images/editorial/colleagues-document.png"
+        />
 
         <div className="mt-12 space-y-12 prose-measure">
           {team.map((person) => (

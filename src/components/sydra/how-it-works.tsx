@@ -1,6 +1,6 @@
 import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { EditorialImage } from "@/components/ui/editorial-image";
 
 const steps = [
   {
@@ -30,7 +30,13 @@ export function SydraHowItWorks() {
       tone="neutral"
     >
       <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-        <ImagePlaceholder aspect="4/5" className="lg:sticky lg:top-24" />
+        <EditorialImage
+          alt="Billing team lead reviewing an IDR submission with a colleague at a workstation"
+          aspect="4/5"
+          className="lg:sticky lg:top-24"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          src="/images/editorial/managers-working.png"
+        />
         <div className="min-w-0">
           <h2 className="type-h2 prose-measure text-brand" id="heading-how-it-works">
             What your billing team actually does in Sydra.

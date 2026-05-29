@@ -1,10 +1,16 @@
 import { Section } from "@/components/ui/section";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { EditorialImage } from "@/components/ui/editorial-image";
 
 export function DeterminationLibrary() {
   return (
     <Section ariaLabelledby="heading-determination-library" sidebarLabel="Library" tone="white" topRule>
-      <ImagePlaceholder aspect="16/9" className="mb-10" />
+      <EditorialImage
+        alt="Two revenue cycle analysts comparing determination data and reports in a meeting room"
+        aspect="16/9"
+        className="mb-10"
+        sizes="(max-width: 1280px) 100vw, 1280px"
+        src="/images/editorial/analysts-comparing-reports.png"
+      />
       <h2 className="type-h2 prose-measure text-brand" id="heading-determination-library">
         Why prior determinations win IDR cases.
       </h2>
