@@ -74,6 +74,9 @@ export default function ResourcesPage() {
                 </Link>
               </li>
             ))}
+            {RESOURCE_ARTICLES.length % 2 === 1 ? (
+              <li aria-hidden="true" className="hidden bg-white sm:block" />
+            ) : null}
           </ul>
         </Section>
 
