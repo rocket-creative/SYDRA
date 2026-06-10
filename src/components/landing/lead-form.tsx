@@ -70,7 +70,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
   const headingClass = isCard ? "text-xl font-medium text-brand" : "type-h2 prose-measure text-brand";
   const formClass = isCard
     ? "relative mt-6 space-y-6"
-    : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-8 md:p-10";
+    : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-6 md:p-10";
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -156,7 +156,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
       </p>
 
       <form className={formClass} onSubmit={handleSubmit}>
-        <FormField id="practiceName" label="Practice name">
+        <FormField id="practiceName" label="Practice name" required>
           <input
             required
             aria-required="true"
@@ -168,7 +168,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           />
         </FormField>
 
-        <FormField id="name" label="Your name">
+        <FormField id="name" label="Your name" required>
           <input
             required
             aria-required="true"
@@ -180,7 +180,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           />
         </FormField>
 
-        <FormField id="role" label="Role">
+        <FormField id="role" label="Role" required>
           <select
             required
             aria-required="true"
@@ -200,7 +200,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           </select>
         </FormField>
 
-        <FormField id="email" label="Email">
+        <FormField id="email" label="Email" required>
           <input
             required
             aria-required="true"
@@ -213,7 +213,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           />
         </FormField>
 
-        <FormField id="phone" label="Phone">
+        <FormField id="phone" label="Phone" required>
           <input
             required
             aria-required="true"
@@ -226,7 +226,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           />
         </FormField>
 
-        <FormField id="state" label="State">
+        <FormField id="state" label="State" required>
           <select
             required
             aria-required="true"
@@ -259,7 +259,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           </select>
         </FormField>
 
-        <FormField id="disputesPerMonth" label="Monthly out of network claim volume">
+        <FormField id="disputesPerMonth" label="Monthly out of network claim volume" required>
           <select
             required
             aria-required="true"

@@ -5,13 +5,20 @@ type FormFieldProps = {
   label: string;
   children: ReactNode;
   className?: string;
+  required?: boolean;
 };
 
-export function FormField({ id, label, children, className = "" }: FormFieldProps) {
+export function FormField({ id, label, children, className = "", required = false }: FormFieldProps) {
   return (
     <div className={className}>
       <label className="type-caption text-brand" htmlFor={id}>
         {label}
+        {required ? (
+          <span className="text-[var(--color-accent)]">
+            <span aria-hidden> *</span>
+            <span className="sr-only"> required</span>
+          </span>
+        ) : null}
       </label>
       {children}
     </div>

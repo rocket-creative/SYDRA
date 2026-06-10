@@ -26,28 +26,28 @@ export const SECURITY_TRUST_CARDS: SecurityTrustCard[] = [
   { id: "isolation", title: "Tenant isolation", summary: "Strict per practice row level security." },
   {
     id: "soc2",
-    title: "SOC 2 Type II",
-    summary: "SOC 2 Type II compliant. Report available on request during evaluation.",
+    title: "SOC 2 aligned",
+    summary: "SOC 2 aligned controls. Report available under NDA during evaluation.",
   },
 ];
 
 export const SOC2_SECTION: SecuritySection = {
   id: "heading-soc2",
-  title: "SOC 2 Type II compliance.",
+  title: "SOC 2 alignment.",
   paragraphs: [
-    "Sydra is SOC 2 Type II compliant. Our controls cover security, availability, and confidentiality for the systems that process customer data.",
-    "A SOC 2 Type II report is available to qualified prospects during evaluation. Email sales@kronosrevenue.health with your compliance contact copied and we'll send it the same business day.",
+    "Sydra's controls are SOC 2 aligned, covering security, availability, and confidentiality for the systems that process customer data.",
+    "A SOC 2 report is available under NDA to qualified prospects during evaluation. Email sales@kronosrevenue.health with your compliance contact copied and we'll send it the same business day.",
   ],
 };
 
 export const SECURITY_SECTIONS: SecuritySection[] = [
   {
     id: "heading-bedrock",
-    title: "How Sydra's AI generation handles PHI.",
+    title: "How Claude via Amazon Bedrock handles your PHI.",
     paragraphs: [
-      "Sydra uses Claude Sonnet 4, accessed through AWS Bedrock, for IDR submission drafting.",
+      "Sydra runs on Claude via Amazon Bedrock. Claude is contractually barred from training on your PHI, and Bedrock is covered under our AWS Business Associate Agreement. Your claim data is processed inside the same HIPAA aligned boundary as the rest of your workflow.",
       "AWS Bedrock is a HIPAA eligible service. AWS's HIPAA BAA covers Amazon Bedrock when used in the context of a covered healthcare workload. Sydra operates within that BAA scope.",
-      "When Sydra generates an IDR draft from your operative note: The operative note is processed by Claude Sonnet 4 on AWS Bedrock. PHI in that document stays inside the AWS HIPAA eligible service boundary. No PHI is transmitted to Anthropic's systems or any other third party during generation. No data is used to train the Claude model or any other model.",
+      "When Sydra generates an IDR draft from your operative note: the operative note is processed by Claude via Amazon Bedrock. PHI in that document stays inside the AWS HIPAA eligible service boundary. No PHI is transmitted to Anthropic's systems or any other third party during generation. No data is used to train the Claude model or any other model.",
     ],
   },
   {
@@ -97,7 +97,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
     id: "heading-docs",
     title: "Requesting security documentation.",
     paragraphs: [
-      "Available to qualified prospects during evaluation: BAA template, security one pager, subprocessor list (AWS, Stedi, ModMed, and others in scope), AWS Bedrock HIPAA eligibility documentation, SOC 2 Type II report.",
+      "Available to qualified prospects during evaluation: BAA template, security one pager, subprocessor list (AWS, Stedi, ModMed, and others in scope), AWS Bedrock HIPAA eligibility documentation, SOC 2 report under NDA.",
       `Request: email ${SALES_EMAIL_FALLBACK} with your compliance contact copied. Response within one business day.`,
     ],
   },

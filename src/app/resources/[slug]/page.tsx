@@ -14,7 +14,7 @@ import {
   RESOURCE_SLUGS,
   type ResourceArticle,
 } from "@/lib/content/resources/articles";
-import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
+import { articleJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -24,6 +24,15 @@ type PageProps = {
 
 export function generateStaticParams() {
   return RESOURCE_SLUGS.map((slug) => ({ slug }));
+}
+
+function formatArticleDate(iso: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${iso}T00:00:00Z`));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -90,7 +99,6 @@ export default async function ResourceArticlePage({ params }: PageProps) {
             dateModified: article.dateModified,
           }),
           faqPageJsonLd(article.faqs),
-          breadcrumbJsonLd(crumbs),
         ]}
       />
       <SydraPageShell banded breadcrumb={crumbs}>
@@ -101,6 +109,20 @@ export default async function ResourceArticlePage({ params }: PageProps) {
               <span className={textStyles.pageSubtitle}>{article.subtitle}</span>
             </h1>
             <p className={textStyles.pageLead}>{article.lead}</p>
+            <p className="type-caption mt-6 text-body">
+              Published{" "}
+              <time dateTime={article.datePublished}>
+                {formatArticleDate(article.datePublished)}
+              </time>
+              {article.dateModified && article.dateModified !== article.datePublished ? (
+                <>
+                  {" · "}Last updated{" "}
+                  <time dateTime={article.dateModified}>
+                    {formatArticleDate(article.dateModified)}
+                  </time>
+                </>
+              ) : null}
+            </p>
           </header>
         </Section>
 

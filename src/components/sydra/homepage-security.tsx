@@ -44,8 +44,8 @@ export function HomepageSecurity() {
           Contact support@sydrahealth.com.
         </p>
         <p>
-          <strong className="text-brand">SOC 2:</strong> SOC 2 Type II compliant. Report available
-          to qualified prospects on request during evaluation.
+          <strong className="text-brand">SOC 2:</strong> SOC 2 aligned controls. Report available
+          under NDA to qualified prospects during evaluation.
         </p>
       </div>
       <p className="mt-8">

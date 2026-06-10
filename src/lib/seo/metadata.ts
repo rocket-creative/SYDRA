@@ -99,10 +99,34 @@ export const PAGE_METADATA = {
     path: "/how-it-works",
     ogImagePath: "/how-it-works",
   }),
+  whatIsIdr: buildPageMetadata({
+    title: "What Is Federal IDR? The No Surprises Act Dispute Path | Sydra",
+    description:
+      "Federal IDR is the No Surprises Act process for disputing low out of network payments. Learn what IDR and the NSA are, who qualifies, the deadlines, and 2026 fee changes.",
+    path: "/what-is-idr",
+    ogImageAlt:
+      "What federal IDR is under the No Surprises Act, explained for surgical billing teams.",
+  }),
+  sydraVsAttorney: buildPageMetadata({
+    title: "Sydra vs an IDR Attorney | Keep the 20% You Would Pay | Sydra",
+    description:
+      "IDR attorneys keep about 20 percent of every recovery. Compare the fee math against Sydra software your billing team runs in house, and see exactly what you keep.",
+    path: "/sydra-vs-idr-attorney",
+    ogImageAlt:
+      "Sydra software compared with an IDR attorney on the 20 percent contingency fee.",
+  }),
+  inHouseIdr: buildPageMetadata({
+    title: "In House IDR | Scale Federal Disputes Without Headcount | Sydra",
+    description:
+      "Filing federal IDR by hand takes 25 to 40 minutes per claim. See what that labor costs at your volume and how Sydra adds capacity without adding staff.",
+    path: "/in-house-idr",
+    ogImageAlt:
+      "Running federal IDR in house at scale without adding billing headcount.",
+  }),
   security: buildPageMetadata({
     title: "Sydra Security — HIPAA Controls, BAA, AWS Bedrock, PHI Handling | Sydra",
     description:
-      "Sydra handles PHI under HIPAA controls. AWS Bedrock with HIPAA eligible Claude Sonnet 4. Encryption at rest and in transit. BAA available. SOC 2 Type II compliant.",
+      "Sydra handles PHI under HIPAA controls. AWS Bedrock with HIPAA eligible Claude Sonnet 4. Encryption at rest and in transit. BAA available. SOC 2 aligned, report under NDA.",
     path: "/security",
     ogImagePath: "/security",
   }),
@@ -111,18 +135,23 @@ export const PAGE_METADATA = {
     description:
       "Detailed answers to billing team and practice administrator questions about Sydra's NSA IDR software. Eligibility, CPT coding, HIPAA, integration, pricing, and more.",
     path: "/faq",
+    ogImageAlt:
+      "Answers to common questions about Sydra NSA IDR software for surgical billing teams.",
   }),
   resources: buildPageMetadata({
     title: "Resources — Federal IDR and No Surprises Act Guides | Sydra",
     description:
       "Practical guides for surgical billing teams on the federal IDR process, eligibility, deadlines, fees, win rates, and the No Surprises Act. Written for providers, not patients.",
     path: "/resources",
+    ogImageAlt:
+      "Federal IDR and No Surprises Act guides for surgical billing teams.",
   }),
   contact: buildPageMetadata({
     title: "Contact Sydra — Sales, Demos, and Support | Sydra",
     description:
       "Schedule a demo, ask a pricing question, or reach customer support. Sales: sales@kronosrevenue.health. Support: support@sydrahealth.com. Responses within one business day.",
     path: "/contact",
+    ogImageAlt: "Contact Sydra for sales, demos, and customer support.",
   }),
   privacy: buildPageMetadata({
     title: "Sydra Privacy Policy | Kronos Health Website Data",
@@ -144,6 +173,3 @@ export const PAGE_METADATA = {
     robots: { index: false, follow: false },
   }),
 } as const;
-
-/** @deprecated Use PAGE_METADATA.pricing */
-export const PLANS_METADATA = PAGE_METADATA.pricing;

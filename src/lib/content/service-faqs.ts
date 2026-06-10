@@ -51,8 +51,8 @@ export const SECURITY_FAQ: ServiceFaqItem[] = [
     a: "The production application supports modern session controls. MFA options for your practice are confirmed during onboarding and documented in the security summary.",
   },
   {
-    q: "Does Sydra have SOC 2 certification?",
-    a: "Yes. Sydra is SOC 2 Type II compliant. The report is available to qualified prospects on request during evaluation.",
+    q: "Is Sydra SOC 2 aligned?",
+    a: "Sydra's controls are SOC 2 aligned. The report is available under NDA to qualified prospects during evaluation.",
   },
   {
     q: "Can we get a security summary for our compliance team?",
@@ -78,6 +78,3 @@ export const PRICING_FAQ: ServiceFaqItem[] = [
     a: "For a practice with 20 claims per month, $15,000 average disputed amount, 88% win rate: Attorney at 20%: $31,680 in annual fees on recoveries. Sydra platform fee: quoted to your volume, structured below that figure. The exact comparison is part of what we show you on the demo call.",
   },
 ];
-
-/** @deprecated Use PRICING_FAQ */
-export const PLANS_FAQ = PRICING_FAQ;

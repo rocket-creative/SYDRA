@@ -2,12 +2,14 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS } from "@/components/sydra/page-shell";
 import { personJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { KRONOS_HEALTH_ID } from "@/lib/kronos-revenue";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
 type TeamMember = {
   name: string;
   role: string;
   bio: string;
+  credentials?: string;
   isPhysician?: boolean;
   medicalSpecialty?: string;
   url?: string;
@@ -33,12 +35,13 @@ export function AboutPageJsonLd({ team }: AboutPageJsonLdProps) {
         "@context": "https://schema.org",
         "@type": "Physician",
         name: abrahams.name,
-        jobTitle: "Founder, Board Certified Neurosurgeon",
+        jobTitle: abrahams.role,
+        description: abrahams.bio,
         medicalSpecialty: abrahams.medicalSpecialty ?? "Neurosurgery",
-        worksFor: {
+        worksFor: { "@id": KRONOS_HEALTH_ID },
+        memberOf: {
           "@type": "MedicalOrganization",
-          name: "Kronos Health",
-          url: "https://www.sydrahealth.com",
+          name: "American Association of Neurological Surgeons",
         },
         url: abrahams.url ?? "https://www.kronosrevenue.health/team#person-john-abrahams",
       }

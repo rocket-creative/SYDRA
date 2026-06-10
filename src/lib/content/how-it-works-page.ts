@@ -38,7 +38,7 @@ export const SYDRA_ELEMENTS: HowItWorksSection[] = [
     id: "element-1",
     title: "Element 1 — Payment offer",
     paragraphs: [
-      "Sydra identifies the correct CPT code from the EOB and prepares the formal offer statement. One claim per CPT. If the EOB contains multiple CPT codes, Sydra generates a separate submission packet for each. Never batched.",
+      "Claude, the AI built by Anthropic and run via Amazon Bedrock, identifies the correct CPT code from the EOB, and Sydra prepares the formal offer statement. One claim per CPT. If the EOB contains multiple CPT codes, Sydra generates a separate submission packet for each. Never batched. Your billing team reviews every decision before anything is filed.",
       "The one CPT per claim structure isn't configurable. It's how federal IDR was designed, and it's what the data shows produces the best outcomes for providers.",
     ],
   },
@@ -53,7 +53,7 @@ export const SYDRA_ELEMENTS: HowItWorksSection[] = [
     id: "element-3",
     title: "Element 3 — Clinical necessity narrative",
     paragraphs: [
-      "Upload the operative note as a PDF. Sydra's Bedrock multimodal layer reads the document using Claude Sonnet 4. No OCR. No copy paste. The PDF is processed directly.",
+      "Upload the operative note as a PDF. Claude via Amazon Bedrock reads the document directly through its multimodal layer. No OCR. No copy paste. The PDF is processed directly.",
       "Sydra extracts: the procedure performed, surgical approach, clinical indication, surgeon's documentation of complexity, intraoperative findings relevant to clinical justification, and technique specific details that distinguish this case from a templated submission.",
       "The narrative draft is built from those extracted elements, not from a template. Your billing team reviews. If something in the operative note strengthens the clinical argument, Sydra surfaces it. If the biller sees something that needs adjustment, they edit it. The draft is a starting point. The human is still the reviewer.",
     ],

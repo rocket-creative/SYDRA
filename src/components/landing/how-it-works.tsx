@@ -9,8 +9,8 @@ const steps = [
   },
   {
     n: "02",
-    title: "Review the auto built IDR packet.",
-    body: "Sydra assembles the federal submission in about five minutes.",
+    title: "Review the Claude built IDR packet.",
+    body: "Claude, the AI built by Anthropic and run through Amazon Bedrock, identifies every eligible CPT, calculates qualified payment amounts by geography, and flags specialty specific exceptions. Your billing team reviews every decision before anything is filed.",
   },
   {
     n: "03",

@@ -35,7 +35,7 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
         Same specialty depth. Different operator.
       </h2>
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <article className="editorial-card bg-white p-8">
+        <article className="editorial-card bg-white p-6 sm:p-8">
           <p className="type-caption text-body/70">Run it in house</p>
           <h3 className="mt-3 text-xl font-medium text-brand">Sydra</h3>
           <p className="mt-4 type-body text-body">
@@ -50,7 +50,7 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
         </article>
 
         <article
-          className="editorial-card bg-white p-8"
+          className="editorial-card bg-white p-6 sm:p-8"
           id="kronos-path"
           style={{ "--card-accent": "var(--color-kronos-green)" } as CSSProperties}
         >

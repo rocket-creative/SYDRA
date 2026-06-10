@@ -31,7 +31,7 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
   return (
     <section
       aria-labelledby="landing-hero-heading"
-      className="relative isolate flex min-h-[clamp(34rem,86vh,52rem)] flex-col overflow-hidden bg-white text-brand"
+      className="relative isolate flex min-h-[clamp(34rem,86dvh,52rem)] flex-col overflow-hidden bg-white text-brand"
     >
       <div aria-hidden className="absolute inset-0 z-0">
         <Image
@@ -49,7 +49,7 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
           photo stays visible above it and reads through the band itself (the right
           side carries no text), while the blur keeps the dark copy legible. */}
       <div className="relative z-10 mt-auto w-full md:bg-white/50 md:backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none">
-        <div className="mx-auto w-full max-w-[1280px] px-6 pb-12 pt-6 md:px-10 md:pb-16 md:pt-8">
+        <div className="mx-auto w-full max-w-[1280px] px-5 pb-12 pt-6 md:px-10 md:pb-16 md:pt-8">
           <div className="max-w-3xl">
             <div aria-hidden className="rule-draw mb-5 h-px w-16 bg-[var(--color-accent)]" />
             <p className="hero-eyebrow font-mono text-[11px] uppercase tracking-[0.14em] text-body/70">

@@ -1,5 +1,7 @@
 import { Cursor } from "@/components/motion/cursor";
 import { SectionReveal } from "@/components/motion/reveal";
+import { AudiencePaths } from "@/components/landing/audience-paths";
+import { BuiltOnClaude } from "@/components/landing/built-on-claude";
 import { ClosingCta } from "@/components/landing/closing-cta";
 import { Faq } from "@/components/landing/faq";
 import { FounderNote } from "@/components/landing/founder-note";
@@ -67,7 +69,7 @@ export function PostcardLanding({
   ];
 
   return (
-    <MagazineShell headerBorderless mainClassName="landing-compact">
+    <MagazineShell hasMobileCtaBar headerBorderless mainClassName="landing-compact">
       <PageJsonLd data={jsonLd} />
       <Cursor />
       <TrackingProvider path={path} tracking={tracking} />
@@ -79,7 +81,13 @@ export function PostcardLanding({
         <HowItWorks />
       </SectionReveal>
       <SectionReveal>
+        <BuiltOnClaude />
+      </SectionReveal>
+      <SectionReveal>
         <RecoverySection tracking={tracking} />
+      </SectionReveal>
+      <SectionReveal>
+        <AudiencePaths />
       </SectionReveal>
       <SectionReveal>
         <FounderNote />

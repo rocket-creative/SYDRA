@@ -32,7 +32,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
     <header
       className={`animate-nav-in sticky top-0 z-[100] pt-[max(0.5rem,env(safe-area-inset-top))] transition-[background-color,border-color] duration-300 ${shellClass}`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-6 py-4 md:px-10">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-5 py-4 md:px-10">
         <Link
           aria-label="Sydra home"
           className="flex shrink-0 items-center gap-3 transition-opacity duration-300 hover:opacity-90"
@@ -57,7 +57,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
 
         <div className="ml-auto flex items-center gap-4 sm:gap-6">
           <a
-            className={`type-caption transition-colors duration-300 ${linkClass}`}
+            className={`inline-flex min-h-[44px] select-none items-center type-caption transition-colors duration-300 ${linkClass}`}
             href={SIGN_IN}
             rel="noopener noreferrer"
             target="_blank"
@@ -75,12 +75,12 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       {!isFunnel ? (
         <nav
           aria-label="Primary"
-          className={`mx-auto flex max-w-[1280px] flex-wrap gap-x-6 gap-y-2 border-t px-6 py-3 md:px-10 ${mobileNavBorder}`}
+          className={`mx-auto flex max-w-[1280px] select-none flex-wrap gap-x-6 gap-y-1 border-t px-5 py-1.5 md:px-10 lg:py-3 ${mobileNavBorder}`}
         >
           {nav.map((item) => (
             <Link
               key={item.href}
-              className={`nav-link type-caption transition-colors duration-300 ${linkClass}`}
+              className={`nav-link inline-flex min-h-[44px] items-center type-caption transition-colors duration-300 lg:min-h-0 ${linkClass}`}
               href={item.href}
             >
               {item.label}

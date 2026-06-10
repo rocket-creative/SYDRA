@@ -60,23 +60,24 @@ export function ContactForm() {
 
   return (
     <form className="space-y-8" onSubmit={handleSubmit}>
-      <FormField id="contact-name" label="Full name">
-        <input required className={editorialInputClass} id="contact-name" name="name" type="text" />
+      <FormField id="contact-name" label="Full name" required>
+        <input required aria-required="true" className={editorialInputClass} id="contact-name" name="name" type="text" />
       </FormField>
-      <FormField id="contact-email" label="Work email">
-        <input required className={editorialInputClass} id="contact-email" name="email" type="email" />
+      <FormField id="contact-email" label="Work email" required>
+        <input required aria-required="true" className={editorialInputClass} id="contact-email" name="email" type="email" />
       </FormField>
-      <FormField id="contact-practice" label="Practice name">
+      <FormField id="contact-practice" label="Practice name" required>
         <input
           required
+          aria-required="true"
           className={editorialInputClass}
           id="contact-practice"
           name="practiceName"
           type="text"
         />
       </FormField>
-      <FormField id="contact-intent" label="What can we help with?">
-        <select required className={editorialSelectClass} id="contact-intent" name="intent">
+      <FormField id="contact-intent" label="What can we help with?" required>
+        <select required aria-required="true" className={editorialSelectClass} id="contact-intent" name="intent">
           <option value="">Select topic</option>
           {CONTACT_INTENT_OPTIONS.map((value) => (
             <option key={value} value={value}>

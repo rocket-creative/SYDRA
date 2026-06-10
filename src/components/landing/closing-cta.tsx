@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { Section } from "@/components/ui/section";
 import { trackCtaClick } from "@/lib/landing/analytics-client";
 import type { CampaignTracking } from "@/lib/landing/tracking";
@@ -28,6 +29,7 @@ export function ClosingCta({ tracking }: ClosingCtaProps) {
           Book a five minute demo
         </Button>
       </div>
+      <CtaTrustSignals className="prose-measure mt-6" />
     </Section>
   );
 }

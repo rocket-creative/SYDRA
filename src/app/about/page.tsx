@@ -80,7 +80,7 @@ export default function AboutPage() {
             alt="Kronos Health colleagues reviewing a document together in the office"
             aspect="16/9"
             className="mt-10"
-            priority
+            eager
             sizes="(max-width: 1024px) 100vw, 768px"
             src="/images/editorial/colleagues-document.png"
           />

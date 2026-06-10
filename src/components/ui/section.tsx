@@ -44,7 +44,7 @@ export function Section({
           {sidebarLabel}
         </span>
       ) : null}
-      <div className="relative mx-auto w-full min-w-0 max-w-[1280px] px-6 md:px-10">
+      <div className="relative mx-auto w-full min-w-0 max-w-[1280px] px-5 md:px-10">
         {sidebarLabel ? (
           <p
             className={`type-caption mb-6 lg:hidden ${tone === "hero" ? "text-white/60" : "text-body/70"}`}

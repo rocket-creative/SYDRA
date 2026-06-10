@@ -167,7 +167,7 @@ export function softwareApplicationJsonLd() {
       "Prior authorization drafting",
       "CPT code assessment from operative notes",
       "213+ ingested IDR determinations with 90%+ provider win rate in reference library",
-      "HIPAA controls AWS BAA SOC 2 Type II compliant",
+      "HIPAA controls AWS BAA SOC 2 aligned",
       "ModMed EMR integration Stedi clearinghouse",
     ],
     creator: {
@@ -203,6 +203,38 @@ export function personJsonLd(person: PersonInput) {
     ...(person.isPhysician && person.medicalSpecialty
       ? { medicalSpecialty: person.medicalSpecialty }
       : {}),
+  };
+}
+
+export const SYDRA_LOCALBUSINESS_ID = () => `${siteUrl()}/#localbusiness`;
+
+/**
+ * Contact-page LocalBusiness node. All fields mirror the NAP that already
+ * renders on /contact and in the footer, linked to the parent organization.
+ */
+export function localBusinessJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "@id": SYDRA_LOCALBUSINESS_ID(),
+    name: "Kronos Health",
+    url: siteUrl(),
+    telephone: "+19147056830",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "244 Westchester Ave, Suite 209",
+      addressLocality: "West Harrison",
+      addressRegion: "NY",
+      postalCode: "10604",
+      addressCountry: "US",
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "17:00",
+    },
+    parentOrganization: { "@id": KRONOS_HEALTH_ID },
   };
 }
 

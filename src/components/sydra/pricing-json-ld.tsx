@@ -1,8 +1,6 @@
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
-import { TIERS } from "@/lib/content/tiers";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
-import { KRONOS_HEALTH_ID } from "@/lib/kronos-revenue";
 import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
@@ -15,27 +13,6 @@ function pageTitle(): string {
 }
 
 export function PricingPageJsonLd() {
-  const offers = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Sydra pricing tiers",
-    itemListElement: TIERS.map((tier, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Offer",
-        name: tier.name,
-        description: `${tier.tagline} ${tier.bestFor}`,
-        seller: {
-          "@type": "Organization",
-          "@id": KRONOS_HEALTH_ID,
-          name: "Kronos Health",
-        },
-        availability: "https://schema.org/InStock",
-      },
-    })),
-  };
-
   return (
     <>
       <BreadcrumbJsonLd
@@ -58,7 +35,6 @@ export function PricingPageJsonLd() {
             serviceType: "Healthcare billing software",
           }),
           faqPageJsonLd(PRICING_FAQ),
-          offers,
         ]}
       />
     </>

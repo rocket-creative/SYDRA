@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
+import { trackDemoConversion } from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -117,6 +118,8 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           return;
         }
 
+        trackDemoConversion();
+
         const data = (await res.json()) as { redirect?: string };
         router.push(data.redirect ?? "/demo/thank-you");
       } catch {
@@ -131,15 +134,16 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
 
   return (
     <div className="border-t border-rule pt-8">
-      <p className="type-caption text-body/60" aria-live="polite">
+      <p className="type-caption text-body" aria-live="polite">
         Step {step} of 2
       </p>
 
       {step === 1 ? (
         <form className="mt-8 space-y-8" onSubmit={handleStepOneSubmit}>
-          <FormField id="name" label="Full name">
+          <FormField id="name" label="Full name" required>
             <input
               required
+              aria-required="true"
               autoComplete="name"
               className={editorialInputClass}
               defaultValue={stepOne.name}
@@ -148,9 +152,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               type="text"
             />
           </FormField>
-          <FormField id="email" label="Work email">
+          <FormField id="email" label="Work email" required>
             <input
               required
+              aria-required="true"
               autoComplete="email"
               className={editorialInputClass}
               defaultValue={stepOne.email}
@@ -160,9 +165,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               type="email"
             />
           </FormField>
-          <FormField id="practiceName" label="Practice name">
+          <FormField id="practiceName" label="Practice name" required>
             <input
               required
+              aria-required="true"
               autoComplete="organization"
               className={editorialInputClass}
               defaultValue={stepOne.practiceName}
@@ -181,8 +187,8 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             {stepOne.name} · {stepOne.practiceName}
           </p>
 
-          <FormField id="specialty" label="Specialty">
-            <select required className={editorialSelectClass} id="specialty" name="specialty">
+          <FormField id="specialty" label="Specialty" required>
+            <select required aria-required="true" className={editorialSelectClass} id="specialty" name="specialty">
               <option value="">Select specialty</option>
               {SPECIALTY_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -192,8 +198,8 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </select>
           </FormField>
 
-          <FormField id="state" label="State">
-            <select required className={editorialSelectClass} id="state" name="state">
+          <FormField id="state" label="State" required>
+            <select required aria-required="true" className={editorialSelectClass} id="state" name="state">
               <option value="">Select state</option>
               <optgroup label="Supported pathways (2026)">
                 {US_STATES.filter((s) =>
@@ -216,9 +222,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </select>
           </FormField>
 
-          <FormField id="disputesPerMonth" label="Monthly OON claim estimate">
+          <FormField id="disputesPerMonth" label="Monthly OON claim estimate" required>
             <select
               required
+              aria-required="true"
               className={editorialSelectClass}
               id="disputesPerMonth"
               name="disputesPerMonth"
@@ -232,8 +239,8 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </select>
           </FormField>
 
-          <FormField id="idrApproach" label="Current IDR approach">
-            <select required className={editorialSelectClass} id="idrApproach" name="idrApproach">
+          <FormField id="idrApproach" label="Current IDR approach" required>
+            <select required aria-required="true" className={editorialSelectClass} id="idrApproach" name="idrApproach">
               <option value="">Select approach</option>
               {IDR_APPROACH_OPTIONS.map((value) => (
                 <option key={value} value={value}>
@@ -251,7 +258,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               name="eobFile"
               type="file"
             />
-            <p className="mt-2 text-xs text-body/70">
+            <p className="mt-2 text-xs text-body">
               PDF or image. We review it before the call if you upload one.
             </p>
           </FormField>

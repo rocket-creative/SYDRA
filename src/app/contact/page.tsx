@@ -13,7 +13,12 @@ import {
   supportMailtoHref,
 } from "@/lib/contact";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
-import { organizationContactPoint, sydraOrganizationJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  localBusinessJsonLd,
+  organizationContactPoint,
+  sydraOrganizationJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -42,6 +47,7 @@ function ContactPageJsonLd() {
             ...sydraOrganizationJsonLd(),
             contactPoint: organizationContactPoint(),
           },
+          localBusinessJsonLd(),
         ]}
       />
     </>
@@ -115,7 +121,11 @@ export default function ContactPage() {
               >
                 Get a free IDR review
               </a>
-              . Phone: (914) 705 6830 · intake@kronosrevenue.com
+              . Phone:{" "}
+              <a className={textStyles.textLink} href="tel:+19147056830">
+                (914) 705 6830
+              </a>{" "}
+              · intake@kronosrevenue.com
             </p>
           </section>
         </div>
@@ -151,7 +161,12 @@ export default function ContactPage() {
               </a>
             </li>
             <li>Kronos Revenue full service IDR: intake@kronosrevenue.com</li>
-            <li>Phone (Kronos Revenue): (914) 705 6830</li>
+            <li>
+              Phone (Kronos Revenue):{" "}
+              <a className={textStyles.textLink} href="tel:+19147056830">
+                (914) 705 6830
+              </a>
+            </li>
             <li>Hours: 9 to 5 ET, Monday through Friday</li>
             <li>
               Mailing: Kronos Health · 244 Westchester Ave, Suite 209 · West Harrison, NY 10604

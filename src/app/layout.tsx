@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
+import { GoogleAdsTag } from "@/components/analytics/google-ads";
 import { HOME_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
 import { PageTransition } from "@/components/motion/page-transition";
@@ -38,6 +39,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
         <PageTransition>{children}</PageTransition>
+        <GoogleAdsTag />
       </body>
     </html>
   );

@@ -7,8 +7,8 @@ type EditorialImageProps = {
   alt: string;
   aspect?: Aspect;
   className?: string;
-  /** Above-the-fold images should set priority to skip lazy loading. */
-  priority?: boolean;
+  /** Above-the-fold images should set eager to skip lazy loading and preload. */
+  eager?: boolean;
   /** Responsive sizes hint for next/image. */
   sizes?: string;
 };
@@ -25,7 +25,7 @@ export function EditorialImage({
   alt,
   aspect = "16/9",
   className = "",
-  priority = false,
+  eager = false,
   sizes = "(max-width: 1024px) 100vw, 50vw",
 }: EditorialImageProps) {
   const ratio = aspect === "fill" ? "size-full min-h-[12rem]" : aspectClass[aspect];
@@ -36,7 +36,7 @@ export function EditorialImage({
         alt={alt}
         className="object-cover"
         fill
-        priority={priority}
+        {...(eager ? { loading: "eager" as const, fetchPriority: "high" as const } : {})}
         sizes={sizes}
         src={src}
       />

@@ -11,6 +11,8 @@ type MagazineShellProps = {
   footerExtra?: ReactNode;
   showSiteFooter?: boolean;
   mainClassName?: string;
+  /** Reserve bottom space on mobile for the sticky CTA bar. Only the landing funnel renders one. */
+  hasMobileCtaBar?: boolean;
 };
 
 /** Unified magazine frame: stone field + white spread (max 1440 / content 1280). */
@@ -21,14 +23,19 @@ export function MagazineShell({
   footerExtra,
   showSiteFooter = true,
   mainClassName = "",
+  hasMobileCtaBar = false,
 }: MagazineShellProps) {
+  const bottomSpacing = hasMobileCtaBar
+    ? "pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0"
+    : "";
+
   return (
-    <div className="min-h-screen bg-[var(--background)] font-sans text-[var(--color-text)]">
+    <div className="min-h-dvh bg-[var(--background)] font-sans text-[var(--color-text)]">
       <SkipLink />
-      <div className="mx-auto min-h-screen max-w-[1440px] bg-white">
+      <div className="mx-auto min-h-dvh max-w-[1440px] bg-white">
         <SydraHeader borderless={headerBorderless} variant={headerVariant} />
         <main
-          className={`pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0 ${mainClassName}`}
+          className={`${bottomSpacing} ${mainClassName}`.trim()}
           id="main-content"
           tabIndex={-1}
         >

@@ -33,7 +33,7 @@ export function SydraPageShell({
       >
         {breadcrumb ? (
           <div className="bg-white">
-            <div className="mx-auto max-w-[1280px] px-6 pt-8 md:px-10 md:pt-10">
+            <div className="mx-auto max-w-[1280px] px-5 pt-8 md:px-10 md:pt-10">
               <BreadcrumbNav items={breadcrumb} />
             </div>
           </div>
@@ -45,7 +45,7 @@ export function SydraPageShell({
 
   return (
     <MagazineShell footerExtra={footerExtra} headerVariant={headerVariant}>
-      <div className={mainClassName ?? "px-6 py-14 md:px-10 md:py-20"}>
+      <div className={mainClassName ?? "px-5 py-14 md:px-10 md:py-20"}>
         {breadcrumb ? (
           <div className="mx-auto mb-8 max-w-[1280px]">
             <BreadcrumbNav items={breadcrumb} />
@@ -73,6 +73,18 @@ export const BREADCRUMBS = {
   howItWorks: [
     { name: "Home", path: "" },
     { name: "How it works", path: "/how-it-works" },
+  ],
+  whatIsIdr: [
+    { name: "Home", path: "" },
+    { name: "What is IDR", path: "/what-is-idr" },
+  ],
+  sydraVsAttorney: [
+    { name: "Home", path: "" },
+    { name: "Sydra vs an IDR attorney", path: "/sydra-vs-idr-attorney" },
+  ],
+  inHouseIdr: [
+    { name: "Home", path: "" },
+    { name: "In house IDR", path: "/in-house-idr" },
   ],
   security: [
     { name: "Home", path: "" },

@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type CountUpProps = {
   end: number;
@@ -11,8 +13,11 @@ type CountUpProps = {
 };
 
 /**
- * Counts from 0 to `end` when the element enters the viewport.
- * Respects prefers-reduced-motion.
+ * Renders `end` on the server and the first client paint, so the number is
+ * always correct without JavaScript and for crawlers. When motion is allowed,
+ * it resets to 0 before paint and counts up to `end` once the element enters
+ * the viewport. The animation is a progressive enhancement, never a dependency
+ * for the value being visible.
  */
 export function CountUp({
   end,
@@ -22,19 +27,22 @@ export function CountUp({
   className,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end);
   const [started, setStarted] = useState(false);
+
+  useIsomorphicLayoutEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-paint reset so the count-up has a starting point; SSR value stays correct
+    setCount(0);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync to final value when motion is disabled
-      setCount(end);
-      return;
-    }
+    if (prefersReduced) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -47,7 +55,7 @@ export function CountUp({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [end, started]);
+  }, [started]);
 
   useEffect(() => {
     if (!started) return;

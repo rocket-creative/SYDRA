@@ -12,6 +12,6 @@ export const textStyles = {
   listNone: "prose-measure mt-4 w-full min-w-0 space-y-2 type-body text-body",
   textLink:
     "font-medium text-[var(--color-accent)] underline decoration-rule underline-offset-4 transition-colors hover:text-[var(--color-hero)]",
-  meta: "text-sm text-body/80",
-  trustLine: "text-sm leading-relaxed text-body/80",
+  meta: "text-sm text-body",
+  trustLine: "text-sm leading-relaxed text-body",
 } as const;
