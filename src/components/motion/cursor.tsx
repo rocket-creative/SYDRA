@@ -19,6 +19,7 @@ export function Cursor() {
   useEffect(() => {
     const isPointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!isPointer) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-time gate for pointer-capable devices (client only)
     setVisible(true);
 
     const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });

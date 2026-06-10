@@ -76,6 +76,52 @@ export function faqPageJsonLd(questions: { q: string; a: string }[]) {
   };
 }
 
+export function articleJsonLd({
+  path,
+  headline,
+  description,
+  datePublished,
+  dateModified,
+}: {
+  path: string;
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+}) {
+  const base = siteUrl();
+  const url = `${base}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}/#article`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    headline,
+    description,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    inLanguage: "en-US",
+    isPartOf: { "@id": SYDRA_WEBSITE_ID() },
+    author: { "@id": SYDRA_ORG_ID() },
+    publisher: { "@id": SYDRA_ORG_ID() },
+    image: SYDRA_LOGO_URL(),
+  };
+}
+
+export function itemListJsonLd(items: { name: string; path: string }[]) {
+  const base = siteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: `${base}${item.path}`,
+    })),
+  };
+}
+
 export function serviceJsonLd({
   name,
   description,

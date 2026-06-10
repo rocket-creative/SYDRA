@@ -37,10 +37,17 @@ export function Section({
       {topRule ? (
         <div aria-hidden className="absolute inset-x-0 top-0 border-t border-rule" />
       ) : null}
+      {sidebarLabel ? (
+        <span
+          className={`type-caption pointer-events-none absolute left-5 top-[var(--space-section)] hidden rotate-180 [writing-mode:vertical-rl] lg:block ${tone === "hero" ? "text-white/50" : "text-body/60"}`}
+        >
+          {sidebarLabel}
+        </span>
+      ) : null}
       <div className="relative mx-auto w-full min-w-0 max-w-[1280px] px-6 md:px-10">
         {sidebarLabel ? (
           <p
-            className={`type-caption mb-6 ${tone === "hero" ? "text-white/60" : "text-body/70"}`}
+            className={`type-caption mb-6 lg:hidden ${tone === "hero" ? "text-white/60" : "text-body/70"}`}
           >
             {sidebarLabel}
           </p>

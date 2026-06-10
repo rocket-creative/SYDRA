@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/sydra/contact-form-page";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { Section } from "@/components/ui/section";
 import {
   getSalesEmail,
   getSupportEmail,
@@ -54,15 +55,20 @@ export default function ContactPage() {
   return (
     <>
       <ContactPageJsonLd />
-      <SydraPageShell breadcrumb={[...BREADCRUMBS.contact]}>
-        <header>
-          <h1 className={textStyles.pageTitle}>Contact Sydra.</h1>
-          <p className={textStyles.pageLead}>
-            Different questions go to different places. Use the guide below.
-          </p>
-        </header>
+      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.contact]}>
+        <Section ariaLabelledby="heading-contact" tone="white">
+          <header className="prose-measure">
+            <h1 className={textStyles.pageTitle} id="heading-contact">
+              Contact Sydra.
+            </h1>
+            <p className={textStyles.pageLead}>
+              Different questions go to different places. Use the guide below.
+            </p>
+          </header>
+        </Section>
 
-        <div className="mt-10 space-y-8 prose-measure">
+        <Section sidebarLabel="Routing" tone="neutral">
+        <div className="space-y-8 prose-measure">
           <section aria-labelledby="routing-new">
             <h2 className={textStyles.subsectionTitle} id="routing-new">
               New to Sydra: demo or pricing
@@ -113,8 +119,10 @@ export default function ContactPage() {
             </p>
           </section>
         </div>
+        </Section>
 
-        <section aria-labelledby="heading-contact-form" className="prose-measure mt-14">
+        <Section sidebarLabel="Demo" tone="white">
+        <section aria-labelledby="heading-contact-form" className="prose-measure">
           <h2 className={textStyles.sectionTitle} id="heading-contact-form">
             Schedule a demo or ask a question.
           </h2>
@@ -122,11 +130,10 @@ export default function ContactPage() {
             <ContactForm />
           </div>
         </section>
+        </Section>
 
-        <section
-          aria-labelledby="heading-direct"
-          className="prose-measure mt-14 border-t border-rule pt-10"
-        >
+        <Section tone="neutral">
+        <section aria-labelledby="heading-direct" className="prose-measure">
           <h2 className={textStyles.sectionTitle} id="heading-direct">
             Direct contacts
           </h2>
@@ -156,8 +163,8 @@ export default function ContactPage() {
             </Link>
           </p>
         </section>
-
-        <SourcesReferences className="mt-12" />
+          <SourcesReferences className="mt-12" />
+        </Section>
       </SydraPageShell>
     </>
   );

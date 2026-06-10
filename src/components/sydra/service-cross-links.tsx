@@ -7,13 +7,12 @@ const LINKS = [
   { href: "/how-it-works", label: "How Sydra works" },
   { href: "/pricing", label: "Compare pricing" },
   { href: "/security", label: "Security and HIPAA" },
+  { href: "/resources", label: "IDR resources" },
   { href: "/faq", label: "Full FAQ" },
 ] as const;
 
-type ServiceLinkHref = (typeof LINKS)[number]["href"];
-
 type ServiceCrossLinksProps = {
-  current: ServiceLinkHref | "/about" | "/contact" | "/demo";
+  current: string;
 };
 
 export function ServiceCrossLinks({ current }: ServiceCrossLinksProps) {

@@ -31,6 +31,7 @@ export function CountUp({
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync to final value when motion is disabled
       setCount(end);
       return;
     }

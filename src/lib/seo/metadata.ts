@@ -112,6 +112,12 @@ export const PAGE_METADATA = {
       "Detailed answers to billing team and practice administrator questions about Sydra's NSA IDR software. Eligibility, CPT coding, HIPAA, integration, pricing, and more.",
     path: "/faq",
   }),
+  resources: buildPageMetadata({
+    title: "Resources — Federal IDR and No Surprises Act Guides | Sydra",
+    description:
+      "Practical guides for surgical billing teams on the federal IDR process, eligibility, deadlines, fees, win rates, and the No Surprises Act. Written for providers, not patients.",
+    path: "/resources",
+  }),
   contact: buildPageMetadata({
     title: "Contact Sydra — Sales, Demos, and Support | Sydra",
     description:

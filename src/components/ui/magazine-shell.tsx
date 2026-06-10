@@ -7,8 +7,9 @@ import { SydraHeader } from "@/components/sydra/header";
 type MagazineShellProps = {
   children: ReactNode;
   headerVariant?: "default" | "funnel";
-  headerOverHero?: boolean;
+  headerBorderless?: boolean;
   footerExtra?: ReactNode;
+  showSiteFooter?: boolean;
   mainClassName?: string;
 };
 
@@ -16,24 +17,25 @@ type MagazineShellProps = {
 export function MagazineShell({
   children,
   headerVariant = "default",
-  headerOverHero = false,
+  headerBorderless = false,
   footerExtra,
+  showSiteFooter = true,
   mainClassName = "",
 }: MagazineShellProps) {
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-[var(--color-text)]">
       <SkipLink />
       <div className="mx-auto min-h-screen max-w-[1440px] bg-white">
-        <SydraHeader overHero={headerOverHero} variant={headerVariant} />
+        <SydraHeader borderless={headerBorderless} variant={headerVariant} />
         <main
-          className={`pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0 ${headerOverHero ? "main--header-over-hero" : ""} ${mainClassName}`}
+          className={`pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0 ${mainClassName}`}
           id="main-content"
           tabIndex={-1}
         >
           {children}
         </main>
         {footerExtra}
-        <SydraFooter />
+        {showSiteFooter ? <SydraFooter /> : null}
       </div>
     </div>
   );

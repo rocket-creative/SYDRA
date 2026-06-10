@@ -9,6 +9,11 @@ type SydraPageShellProps = {
   headerVariant?: "default" | "funnel";
   footerExtra?: ReactNode;
   mainClassName?: string;
+  /**
+   * Render children as full-bleed alternating Section bands instead of a single
+   * padded white article column. Children should be <Section> elements.
+   */
+  banded?: boolean;
 };
 
 export function SydraPageShell({
@@ -16,11 +21,31 @@ export function SydraPageShell({
   breadcrumb,
   headerVariant = "default",
   footerExtra,
-  mainClassName = "px-6 py-14 md:px-10 md:py-20",
+  mainClassName,
+  banded = false,
 }: SydraPageShellProps) {
+  if (banded) {
+    return (
+      <MagazineShell
+        footerExtra={footerExtra}
+        headerVariant={headerVariant}
+        mainClassName={`landing-compact ${mainClassName ?? ""}`}
+      >
+        {breadcrumb ? (
+          <div className="bg-white">
+            <div className="mx-auto max-w-[1280px] px-6 pt-8 md:px-10 md:pt-10">
+              <BreadcrumbNav items={breadcrumb} />
+            </div>
+          </div>
+        ) : null}
+        {children}
+      </MagazineShell>
+    );
+  }
+
   return (
     <MagazineShell footerExtra={footerExtra} headerVariant={headerVariant}>
-      <div className={mainClassName}>
+      <div className={mainClassName ?? "px-6 py-14 md:px-10 md:py-20"}>
         {breadcrumb ? (
           <div className="mx-auto mb-8 max-w-[1280px]">
             <BreadcrumbNav items={breadcrumb} />
@@ -57,6 +82,10 @@ export const BREADCRUMBS = {
     { name: "Home", path: "" },
     { name: "FAQ", path: "/faq" },
   ],
+  resources: [
+    { name: "Home", path: "" },
+    { name: "Resources", path: "/resources" },
+  ],
   contact: [
     { name: "Home", path: "" },
     { name: "Contact", path: "/contact" },
@@ -70,3 +99,12 @@ export const BREADCRUMBS = {
     { name: "Terms", path: "/terms" },
   ],
 } as const;
+
+/** Home > Resources > <article> trail for an individual resource article. */
+export function articleBreadcrumb(name: string, slug: string): { name: string; path: string }[] {
+  return [
+    { name: "Home", path: "" },
+    { name: "Resources", path: "/resources" },
+    { name, path: `/resources/${slug}` },
+  ];
+}

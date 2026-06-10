@@ -5,6 +5,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { Section } from "@/components/ui/section";
 import {
   DEMO_CTA_LEAD,
   DOCX_SECTION,
@@ -55,70 +56,81 @@ export default function HowItWorksPage() {
   return (
     <>
       <HowItWorksJsonLd />
-      <SydraPageShell breadcrumb={[...BREADCRUMBS.howItWorks]}>
-        <header>
-          <h1 className={textStyles.pageTitle}>
-            {HOW_IT_WORKS_HERO.title}
-            <span className={textStyles.pageSubtitle}>{HOW_IT_WORKS_HERO.subtitle}</span>
-          </h1>
-          <p className={textStyles.pageLead}>{HOW_IT_WORKS_HERO.lead}</p>
-        </header>
+      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.howItWorks]}>
+        <Section ariaLabelledby="heading-how-it-works" tone="white">
+          <header className="prose-measure">
+            <h1 className={textStyles.pageTitle} id="heading-how-it-works">
+              {HOW_IT_WORKS_HERO.title}
+              <span className={textStyles.pageSubtitle}>{HOW_IT_WORKS_HERO.subtitle}</span>
+            </h1>
+            <p className={textStyles.pageLead}>{HOW_IT_WORKS_HERO.lead}</p>
+          </header>
+        </Section>
 
-        <section aria-labelledby={SUBMISSION_REQUIREMENTS.id} className="mt-14">
-          <h2 className={textStyles.sectionTitle} id={SUBMISSION_REQUIREMENTS.id}>
-            {SUBMISSION_REQUIREMENTS.title}
-          </h2>
-          {SUBMISSION_REQUIREMENTS.list ? (
-            <ol className={textStyles.list}>
-              {SUBMISSION_REQUIREMENTS.list.map((item) => (
-                <li key={item.slice(0, 40)}>{item}</li>
-              ))}
-            </ol>
-          ) : null}
-          <p className={`${textStyles.bodyMeasure} mt-6`}>{SUBMISSION_FOOTNOTE}</p>
-        </section>
-
-        <section aria-labelledby="heading-sydra-elements" className="mt-14">
-          <h2 className={textStyles.sectionTitle} id="heading-sydra-elements">
-            What Sydra does on each element.
-          </h2>
-          <div className="mt-8 space-y-10 prose-measure">
-            {SYDRA_ELEMENTS.map((section) => (
-              <div key={section.id}>
-                <h3 className={textStyles.subsectionTitle}>{section.title}</h3>
-                {section.paragraphs.map((p) => (
-                  <p key={p.slice(0, 40)} className={`${textStyles.body} mt-3`}>
-                    {p}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {[DOCX_SECTION, ONE_PER_CPT_SECTION].map((section) => (
-          <section key={section.id} aria-labelledby={section.id} className="mt-14">
-            <h2 className={textStyles.sectionTitle} id={section.id}>
-              {section.title}
+        <Section sidebarLabel="Requirements" tone="neutral">
+          <section aria-labelledby={SUBMISSION_REQUIREMENTS.id}>
+            <h2 className={textStyles.sectionTitle} id={SUBMISSION_REQUIREMENTS.id}>
+              {SUBMISSION_REQUIREMENTS.title}
             </h2>
-            <div className={textStyles.bodyStack}>
-              {section.paragraphs.map((p) => (
-                <p key={p.slice(0, 40)}>{p}</p>
+            {SUBMISSION_REQUIREMENTS.list ? (
+              <ol className={textStyles.list}>
+                {SUBMISSION_REQUIREMENTS.list.map((item) => (
+                  <li key={item.slice(0, 40)}>{item}</li>
+                ))}
+              </ol>
+            ) : null}
+            <p className={`${textStyles.bodyMeasure} mt-6`}>{SUBMISSION_FOOTNOTE}</p>
+          </section>
+        </Section>
+
+        <Section sidebarLabel="Elements" tone="white">
+          <section aria-labelledby="heading-sydra-elements">
+            <h2 className={textStyles.sectionTitle} id="heading-sydra-elements">
+              What Sydra does on each element.
+            </h2>
+            <div className="mt-8 space-y-10 prose-measure">
+              {SYDRA_ELEMENTS.map((section) => (
+                <div key={section.id}>
+                  <h3 className={textStyles.subsectionTitle}>{section.title}</h3>
+                  {section.paragraphs.map((p) => (
+                    <p key={p.slice(0, 40)} className={`${textStyles.body} mt-3`}>
+                      {p}
+                    </p>
+                  ))}
+                </div>
               ))}
             </div>
           </section>
-        ))}
+        </Section>
 
-        <div className="prose-measure mt-14">
-          <p className={`${textStyles.body} mb-6`}>{DEMO_CTA_LEAD}</p>
-          <Button href="/demo" showArrow>
-            Schedule a demo
-          </Button>
-          <CtaTrustSignals className="mt-4" />
-        </div>
+        <Section tone="neutral">
+          <div className="space-y-14">
+            {[DOCX_SECTION, ONE_PER_CPT_SECTION].map((section) => (
+              <section key={section.id} aria-labelledby={section.id}>
+                <h2 className={textStyles.sectionTitle} id={section.id}>
+                  {section.title}
+                </h2>
+                <div className={textStyles.bodyStack}>
+                  {section.paragraphs.map((p) => (
+                    <p key={p.slice(0, 40)}>{p}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </Section>
 
-        <ServiceCrossLinks current="/how-it-works" />
-        <SourcesReferences className="mt-12" />
+        <Section tone="white">
+          <div className="prose-measure">
+            <p className={`${textStyles.body} mb-6`}>{DEMO_CTA_LEAD}</p>
+            <Button href="/demo" showArrow>
+              Schedule a demo
+            </Button>
+            <CtaTrustSignals className="mt-4" />
+          </div>
+          <ServiceCrossLinks current="/how-it-works" />
+          <SourcesReferences className="mt-12" />
+        </Section>
       </SydraPageShell>
     </>
   );

@@ -16,6 +16,8 @@
   --color-accent: #0028b8;
   --color-inverse: #ffffff;
   --color-rule: #d4d0c8;
+  --color-kronos-green: #00843d;
+  --color-kronos-green-dark: #00542a;
   --gradient-hero: linear-gradient(
     165deg,
     var(--color-hero-deep) 0%,
@@ -42,9 +44,6 @@
   --space-3xl: 128px;
   --space-section: clamp(80px, 10vw, 160px);
 
-  /* Sticky header clearance (logo row + mobile nav strip) */
-  --header-offset: calc(5.75rem + env(safe-area-inset-top));
-
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
@@ -66,6 +65,8 @@
   --color-accent: var(--color-accent);
   --color-inverse: var(--color-inverse);
   --color-rule: var(--color-rule);
+  --color-kronos-green: var(--color-kronos-green);
+  --color-kronos-green-dark: var(--color-kronos-green-dark);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -78,6 +79,12 @@
   --spacing-xl: var(--space-xl);
   --spacing-2xl: var(--space-2xl);
   --spacing-3xl: var(--space-3xl);
+
+  /* Safe area insets (require viewportFit: "cover") → pt-safe-top, pb-safe-bottom, etc. */
+  --spacing-safe-top: env(safe-area-inset-top);
+  --spacing-safe-right: env(safe-area-inset-right);
+  --spacing-safe-bottom: env(safe-area-inset-bottom);
+  --spacing-safe-left: env(safe-area-inset-left);
 
   /*
    * Layout max-widths (Tailwind defaults).
@@ -98,6 +105,14 @@
 
 html {
   scroll-behavior: smooth;
+  /* iOS 26 translucent Safari chrome samples the page behind it. */
+  background: var(--background);
+}
+
+/* clip (not hidden) as the horizontal-overflow safety net so sticky descendants keep working. */
+html,
+body {
+  overflow-x: clip;
 }
 
 a:focus-visible,
@@ -123,7 +138,6 @@ a {
 }
 
 body {
-  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -241,12 +255,6 @@ li {
   color: var(--color-hero);
 }
 
-/* Homepage: pull first section under transparent header so nav/logo sit on hero navy */
-.main--header-over-hero > :first-child {
-  margin-top: calc(-1 * var(--header-offset));
-  padding-top: var(--header-offset);
-}
-
 .type-caption {
   font-size: var(--type-caption);
   letter-spacing: 0.1em;
@@ -277,6 +285,11 @@ li {
 
 .bg-surface-muted {
   background-color: var(--color-surface-muted);
+}
+
+/* Landing page only: tighter vertical rhythm than the rest of the site. */
+.landing-compact {
+  --space-section: clamp(48px, 6vw, 96px);
 }
 
 /* ─── Animation keyframes ─────────────────────────────────────────────────── */
@@ -313,6 +326,11 @@ li {
 
 @keyframes focus-ring-in {
   to { box-shadow: 0 0 0 2px var(--color-accent); }
+}
+
+@keyframes fade-only {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ─── Animation utility classes ──────────────────────────────────────────── */
@@ -353,6 +371,31 @@ li {
 .rule-draw {
   transform-origin: left center;
   animation: rule-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+}
+
+/*
+ * Scroll-reveal rule line — draws itself left to right as it enters view.
+ * Zero JS in Chrome/Safari via scroll-driven animations; everywhere else the
+ * rule simply renders static (scaleX 1). Transform only, never width.
+ */
+.rule-reveal {
+  transform-origin: left center;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rule-reveal {
+      animation: rule-in 600ms var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+/* Defer rendering of long below-the-fold sections until they near the viewport. */
+.section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .image-skeleton {
@@ -407,6 +450,45 @@ li {
   transform: translateX(4px);
 }
 
+/*
+ * Editorial card — no shadow, no radius. A single accent rule draws across the
+ * top on hover (scaleX, not width) and the border deepens. Override the accent
+ * per card with the --card-accent custom property.
+ */
+.editorial-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-rule);
+  transition: border-color 200ms var(--ease-hover);
+}
+
+.editorial-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--card-accent, var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms var(--ease-out);
+}
+
+.editorial-card:hover {
+  border-color: var(--color-text);
+}
+
+.editorial-card:hover::before {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-card::before {
+    transition: none;
+  }
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -419,5 +501,26 @@ li {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * Granular reduced-motion: reduce, do not remove. Motion-bearing entrances keep
+ * a safe opacity fade and drop all translation/scale. Declared after the safety
+ * net above so it wins for these specific classes (the net remains the floor for
+ * everything else).
+ */
+@media (prefers-reduced-motion: reduce) {
+  .animate-word-in,
+  .hero-eyebrow,
+  .hero-sub,
+  .hero-bold,
+  .hero-cta,
+  .hero-note,
+  .hero-image-in,
+  .rule-draw,
+  .rule-reveal {
+    animation: fade-only 300ms ease both !important;
+    transform: none !important;
   }
 }

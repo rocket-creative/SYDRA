@@ -1,25 +1,41 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 
 import { CtaLink } from "@/components/ui/cta-link";
-import { editorialInputClass, FormField } from "@/components/ui/form-field";
 
 const WIN_RATE = 0.88;
 const AWARD_MULTIPLIER = 4.5;
 
+const CLAIMS_MIN = 1;
+const CLAIMS_MAX = 100;
+const AMOUNT_MIN = 1000;
+const AMOUNT_MAX = 200000;
+const AMOUNT_STEP = 1000;
+
 type RecoveryCalculatorProps = {
   variant?: "light" | "onDark";
+  ctaHref?: string;
+  ctaLabel?: string;
+  onCtaClick?: () => void;
 };
 
-export function RecoveryCalculator({ variant = "light" }: RecoveryCalculatorProps) {
+const usd = (n: number) => `$${Math.round(n).toLocaleString()}`;
+
+export function RecoveryCalculator({
+  variant = "light",
+  ctaHref = "/demo",
+  ctaLabel = "Schedule a demo for your numbers",
+  onCtaClick,
+}: RecoveryCalculatorProps) {
   const [claimsPerMonth, setClaimsPerMonth] = useState(20);
   const [avgDisputedAmount, setAvgDisputedAmount] = useState(15000);
   const onDark = variant === "onDark";
+  const claimsId = useId();
+  const amountId = useId();
 
   const estimate = useMemo(() => {
-    const monthlyRecovery =
-      claimsPerMonth * avgDisputedAmount * WIN_RATE * AWARD_MULTIPLIER;
+    const monthlyRecovery = claimsPerMonth * avgDisputedAmount * WIN_RATE * AWARD_MULTIPLIER;
     const annualRecovery = monthlyRecovery * 12;
     const attorneyFees = annualRecovery * 0.2;
     return {
@@ -29,74 +45,111 @@ export function RecoveryCalculator({ variant = "light" }: RecoveryCalculatorProp
     };
   }, [claimsPerMonth, avgDisputedAmount]);
 
-  const labelClass = onDark ? "text-white/70" : "text-brand";
+  const labelClass = onDark ? "text-white/70" : "text-body";
   const valueClass = onDark ? "text-white" : "text-brand";
-  const mutedClass = onDark ? "text-white/55" : "text-body";
-  const inputClass = onDark
-    ? `${editorialInputClass} border-white/25 text-white placeholder:text-white/40 focus:border-white`
-    : editorialInputClass;
+  const mutedClass = onDark ? "text-white/55" : "text-body/70";
+  const trackClass = onDark ? "border-white/20" : "border-rule";
+  const sliderClass = onDark ? "accent-white" : "accent-[var(--color-accent)]";
+  const panelClass = onDark
+    ? "border border-white/15 bg-white/5"
+    : "border border-rule bg-neutral-section";
 
   return (
-    <div>
-      <div className="grid gap-8 md:grid-cols-2">
-        <FormField id="calc-claims" label="IDR eligible claims per month">
+    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      {/* Controls */}
+      <div className="space-y-10">
+        <div>
+          <div className="flex items-baseline justify-between gap-4">
+            <label className={`type-caption ${labelClass}`} htmlFor={claimsId}>
+              IDR eligible claims per month
+            </label>
+            <span className={`text-2xl font-light tabular-nums leading-none ${valueClass}`}>
+              {claimsPerMonth}
+            </span>
+          </div>
           <input
-            className={inputClass}
-            id="calc-claims"
-            max={100}
-            min={1}
+            className={`mt-4 h-2 w-full cursor-pointer ${sliderClass}`}
+            id={claimsId}
+            max={CLAIMS_MAX}
+            min={CLAIMS_MIN}
             onChange={(e) => setClaimsPerMonth(Number(e.target.value))}
-            type="number"
+            type="range"
             value={claimsPerMonth}
           />
-        </FormField>
-        <FormField id="calc-amount" label="Average disputed amount per claim ($)">
+          <div className={`mt-2 flex justify-between text-xs ${mutedClass}`}>
+            <span>{CLAIMS_MIN}</span>
+            <span>{CLAIMS_MAX}+</span>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-baseline justify-between gap-4">
+            <label className={`type-caption ${labelClass}`} htmlFor={amountId}>
+              Average disputed amount per claim
+            </label>
+            <span className={`text-2xl font-light tabular-nums leading-none ${valueClass}`}>
+              {usd(avgDisputedAmount)}
+            </span>
+          </div>
           <input
-            className={inputClass}
-            id="calc-amount"
-            max={500000}
-            min={1000}
-            step={500}
+            className={`mt-4 h-2 w-full cursor-pointer ${sliderClass}`}
+            id={amountId}
+            max={AMOUNT_MAX}
+            min={AMOUNT_MIN}
             onChange={(e) => setAvgDisputedAmount(Number(e.target.value))}
-            type="number"
+            step={AMOUNT_STEP}
+            type="range"
             value={avgDisputedAmount}
           />
-        </FormField>
+          <div className={`mt-2 flex justify-between text-xs ${mutedClass}`}>
+            <span>{usd(AMOUNT_MIN)}</span>
+            <span>{usd(AMOUNT_MAX)}+</span>
+          </div>
+        </div>
+
+        <p className={`text-xs leading-relaxed ${mutedClass}`}>
+          Uses CMS published win rates (88%) and Georgetown CHIR median award benchmarks. Not a
+          Sydra performance claim.
+        </p>
       </div>
 
-      <dl className="mt-10 grid gap-10 sm:grid-cols-3">
-        {[
-          { label: "Est. monthly recovery", value: estimate.monthlyRecovery },
-          { label: "Est. annual recovery", value: estimate.annualRecovery },
-          { label: "At 20% attorney fee", value: estimate.attorneyFees, suffix: "/yr" },
-        ].map((row) => (
-          <div key={row.label} className="min-w-0">
-            <div className={`border-t ${onDark ? "border-white/20" : "border-rule"} pt-4`} aria-hidden />
-            <dt className={`type-caption mt-4 ${labelClass}`}>{row.label}</dt>
-            <dd
-              className={`mt-2 font-light leading-none tracking-[-0.03em] ${valueClass}`}
-              style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)" }}
-            >
-              ${row.value.toLocaleString()}
-              {row.suffix ?? ""}
-            </dd>
-          </div>
-        ))}
-      </dl>
-
-      <p className={`mt-8 text-xs leading-relaxed ${mutedClass}`}>
-        Uses CMS published win rates (88%) and Georgetown CHIR median award benchmarks. Not a
-        Sydra performance claim.
-      </p>
-
-      <p className="mt-6">
-        <CtaLink
-          className={onDark ? "!text-white hover:!text-white/80" : ""}
-          href="/demo"
+      {/* Result */}
+      <div className={`flex flex-col justify-center rounded-[2px] p-8 ${panelClass}`}>
+        <p className={`type-caption ${labelClass}`}>Estimated annual recovery</p>
+        <p
+          className={`mt-3 font-light leading-none tracking-[-0.03em] ${valueClass}`}
+          style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
         >
-          Schedule a demo for your numbers
-        </CtaLink>
-      </p>
+          {usd(estimate.annualRecovery)}
+        </p>
+
+        <div className={`mt-8 grid grid-cols-2 gap-6 border-t ${trackClass} pt-6`}>
+          <div className="min-w-0">
+            <p className={`type-caption ${labelClass}`}>Per month</p>
+            <p className={`mt-2 text-xl font-light tabular-nums ${valueClass}`}>
+              {usd(estimate.monthlyRecovery)}
+            </p>
+          </div>
+          <div className="min-w-0">
+            <p className={`type-caption ${labelClass}`}>A 20% attorney would take</p>
+            <p className={`mt-2 text-xl font-light tabular-nums ${valueClass}`}>
+              {usd(estimate.attorneyFees)}
+              <span className={`text-sm ${mutedClass}`}>/yr</span>
+            </p>
+            <p className={`mt-1 text-xs ${mutedClass}`}>You keep it with Sydra.</p>
+          </div>
+        </div>
+
+        <p className="mt-8">
+          <CtaLink
+            className={onDark ? "!text-white hover:!text-white/80" : ""}
+            href={ctaHref}
+            onClick={onCtaClick}
+          >
+            {ctaLabel}
+          </CtaLink>
+        </p>
+      </div>
     </div>
   );
 }

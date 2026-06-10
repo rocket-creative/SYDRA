@@ -12,6 +12,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fade-out on route change, restored on next frame
     setVisible(false);
     const t = setTimeout(() => setVisible(true), 40);
     return () => clearTimeout(t);

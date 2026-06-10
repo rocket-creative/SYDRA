@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
 const nav = [
   { href: "/pricing", label: "Pricing" },
   { href: "/how-it-works", label: "How it works" },
+  { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -17,33 +17,16 @@ const SIGN_IN = "https://sydra.health/";
 
 type SydraHeaderProps = {
   variant?: "default" | "funnel";
-  /** Transparent over hero until scroll (homepage only) */
-  overHero?: boolean;
+  /** Drop the bottom hairline (landing page) */
+  borderless?: boolean;
 };
 
-export function SydraHeader({ variant = "default", overHero = false }: SydraHeaderProps) {
+export function SydraHeader({ variant = "default", borderless = false }: SydraHeaderProps) {
   const isFunnel = variant === "funnel";
-  const [scrolled, setScrolled] = useState(!overHero);
 
-  useEffect(() => {
-    if (!overHero) return;
-    const onScroll = () => setScrolled(window.scrollY > 48);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [overHero]);
-
-  const onHero = overHero && !scrolled;
-
-  const shellClass = onHero
-    ? "border-b border-white/15 bg-transparent"
-    : "border-b border-rule bg-white";
-
-  const linkClass = onHero
-    ? "text-white/90 hover:text-white"
-    : "text-[var(--color-body)] hover:text-[var(--color-hero)]";
-
-  const mobileNavBorder = onHero ? "border-white/15" : "border-rule";
+  const shellClass = borderless ? "bg-white" : "border-b border-rule bg-white";
+  const linkClass = "text-[var(--color-body)] hover:text-[var(--color-hero)]";
+  const mobileNavBorder = "border-rule";
 
   return (
     <header
@@ -57,36 +40,20 @@ export function SydraHeader({ variant = "default", overHero = false }: SydraHead
         >
           <Image
             alt=""
-            className={`h-8 w-auto sm:h-9 ${onHero ? "brightness-0 invert" : ""}`}
+            className="h-8 w-auto sm:h-9"
             height={36}
-            priority
+            loading="eager"
             sizes="(max-width: 1024px) 180px, 220px"
             src="/sydra-logo-nav.svg"
             width={220}
           />
           <span
             aria-hidden
-            className={`hidden type-caption tracking-[0.16em] sm:block ${onHero ? "text-white/60" : "text-body/50"}`}
+            className="hidden type-caption tracking-[0.16em] text-body/50 sm:block"
           >
             NSA&nbsp;·&nbsp;IDR&nbsp;·&nbsp;SIMPLIFIED
           </span>
         </Link>
-
-        {!isFunnel ? (
-          <nav aria-label="Primary" className="hidden flex-1 items-center justify-end gap-8 lg:flex">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                className={`nav-link type-caption transition-colors duration-300 ${linkClass}`}
-                href={item.href}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        ) : (
-          <div aria-hidden className="flex-1" />
-        )}
 
         <div className="ml-auto flex items-center gap-4 sm:gap-6">
           <a
@@ -98,11 +65,7 @@ export function SydraHeader({ variant = "default", overHero = false }: SydraHead
             Sign in
           </a>
           {!isFunnel ? (
-            <Button
-              href="/demo"
-              showArrow
-              variant={onHero ? "ghostOnDark" : "solid"}
-            >
+            <Button href="/demo" showArrow variant="solid">
               Schedule a demo
             </Button>
           ) : null}
@@ -111,8 +74,8 @@ export function SydraHeader({ variant = "default", overHero = false }: SydraHead
 
       {!isFunnel ? (
         <nav
-          aria-label="Primary mobile"
-          className={`flex flex-wrap gap-x-5 gap-y-2 border-t px-6 py-3 lg:hidden md:px-10 ${mobileNavBorder}`}
+          aria-label="Primary"
+          className={`mx-auto flex max-w-[1280px] flex-wrap gap-x-6 gap-y-2 border-t px-6 py-3 md:px-10 ${mobileNavBorder}`}
         >
           {nav.map((item) => (
             <Link

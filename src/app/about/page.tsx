@@ -7,6 +7,7 @@ import { AboutPageJsonLd } from "@/components/sydra/about-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { Section } from "@/components/ui/section";
 import { kronosTeamUrl } from "@/lib/kronos-revenue";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -42,9 +43,10 @@ export default function AboutPage() {
   return (
     <>
       <AboutPageJsonLd team={team} />
-      <SydraPageShell breadcrumb={[...BREADCRUMBS.about]}>
-        <header>
-          <h1 className={textStyles.pageTitle}>
+      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.about]}>
+        <Section ariaLabelledby="heading-about" tone="white">
+        <header className="prose-measure">
+          <h1 className={textStyles.pageTitle} id="heading-about">
             Built by a surgeon who ran the workflow.
             <span className={textStyles.pageSubtitle}>
               Not a technology startup that discovered healthcare.
@@ -74,69 +76,78 @@ export default function AboutPage() {
           </div>
         </header>
 
-        <EditorialImage
-          alt="Kronos Health colleagues reviewing a document together in the office"
-          aspect="16/9"
-          className="mt-10"
-          priority
-          sizes="(max-width: 1024px) 100vw, 768px"
-          src="/images/editorial/colleagues-document.png"
-        />
+          <EditorialImage
+            alt="Kronos Health colleagues reviewing a document together in the office"
+            aspect="16/9"
+            className="mt-10"
+            priority
+            sizes="(max-width: 1024px) 100vw, 768px"
+            src="/images/editorial/colleagues-document.png"
+          />
+        </Section>
 
-        <div className="mt-12 space-y-12 prose-measure">
-          {team.map((person) => (
-            <section
-              key={person.name}
-              aria-labelledby={`team-${person.name.replace(/\s/g, "-")}`}
-            >
-              <h2 className={textStyles.subsectionTitle} id={`team-${person.name.replace(/\s/g, "-")}`}>
-                {person.name}
-              </h2>
-              <p className={`${textStyles.meta} mt-1 font-medium text-[var(--color-accent)]`}>
-                {person.role}
-              </p>
-              {person.credentials ? (
-                <p className={`${textStyles.meta} mt-1`}>{person.credentials}</p>
-              ) : null}
-              <p className={`${textStyles.body} mt-3`}>{person.bio}</p>
-            </section>
-          ))}
-        </div>
+        <Section sidebarLabel="Team" tone="neutral">
+          <div className="space-y-12 prose-measure">
+            {team.map((person) => (
+              <section
+                key={person.name}
+                aria-labelledby={`team-${person.name.replace(/\s/g, "-")}`}
+              >
+                <h2
+                  className={textStyles.subsectionTitle}
+                  id={`team-${person.name.replace(/\s/g, "-")}`}
+                >
+                  {person.name}
+                </h2>
+                <p className={`${textStyles.meta} mt-1 font-medium text-[var(--color-accent)]`}>
+                  {person.role}
+                </p>
+                {person.credentials ? (
+                  <p className={`${textStyles.meta} mt-1`}>{person.credentials}</p>
+                ) : null}
+                <p className={`${textStyles.body} mt-3`}>{person.bio}</p>
+              </section>
+            ))}
+          </div>
+        </Section>
 
-        <section aria-labelledby="heading-why-origin" className="mt-14 prose-measure">
-          <h2 className={textStyles.sectionTitle} id="heading-why-origin">
-            Why this origin matters for your practice.
-          </h2>
-          <p className={`${textStyles.body} mt-4`}>
-            Sydra isn&apos;t the first software platform to claim it can prepare IDR submissions.
-            It&apos;s the first one built by a practicing neurosurgeon whose team files IDR claims
-            every day on the same platform. That&apos;s the reason we ask you to run the demo on a
-            real denied claim, not a sample claim.
-          </p>
-          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-            <Link className={textStyles.textLink} href="/how-it-works">
-              How Sydra works
-            </Link>
-            <a
-              className={textStyles.textLink}
-              href={kronosTeamUrl()}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Full team story at Kronos Revenue
-            </a>
-          </p>
-        </section>
+        <Section sidebarLabel="Why us" tone="white">
+          <section aria-labelledby="heading-why-origin" className="prose-measure">
+            <h2 className={textStyles.sectionTitle} id="heading-why-origin">
+              Why this origin matters for your practice.
+            </h2>
+            <p className={`${textStyles.body} mt-4`}>
+              Sydra isn&apos;t the first software platform to claim it can prepare IDR submissions.
+              It&apos;s the first one built by a practicing neurosurgeon whose team files IDR claims
+              every day on the same platform. That&apos;s the reason we ask you to run the demo on a
+              real denied claim, not a sample claim.
+            </p>
+            <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+              <Link className={textStyles.textLink} href="/how-it-works">
+                How Sydra works
+              </Link>
+              <a
+                className={textStyles.textLink}
+                href={kronosTeamUrl()}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Full team story at Kronos Revenue
+              </a>
+            </p>
+          </section>
+        </Section>
 
-        <div className="prose-measure mt-12">
-          <Button href="/demo" showArrow>
-            Schedule a demo
-          </Button>
-          <CtaTrustSignals className="mt-4" />
-        </div>
-
-        <ServiceCrossLinks current="/about" />
-        <SourcesReferences className="mt-12" />
+        <Section tone="neutral">
+          <div className="prose-measure">
+            <Button href="/demo" showArrow>
+              Schedule a demo
+            </Button>
+            <CtaTrustSignals className="mt-4" />
+          </div>
+          <ServiceCrossLinks current="/about" />
+          <SourcesReferences className="mt-12" />
+        </Section>
       </SydraPageShell>
     </>
   );

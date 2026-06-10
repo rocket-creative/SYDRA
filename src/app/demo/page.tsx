@@ -7,6 +7,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { PRODUCT_SCREENS } from "@/components/sydra/product-screens";
+import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { getSalesEmail } from "@/lib/contact";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
@@ -75,11 +76,8 @@ export default function DemoPage() {
   return (
     <>
       <DemoPageJsonLd />
-      <SydraPageShell
-        breadcrumb={[...BREADCRUMBS.demo]}
-        headerVariant="default"
-        mainClassName="px-6 py-10 md:px-10 md:py-14"
-      >
+      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.demo]} headerVariant="default">
+        <Section tone="white">
         <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-12">
           <div className="lg:col-span-6">
             <header>
@@ -165,8 +163,11 @@ export default function DemoPage() {
             </p>
           </div>
         </div>
+        </Section>
 
-        <SourcesReferences className="mt-16" />
+        <Section tone="neutral">
+          <SourcesReferences />
+        </Section>
       </SydraPageShell>
     </>
   );

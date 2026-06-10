@@ -7,6 +7,7 @@ import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
+import { Section } from "@/components/ui/section";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -17,25 +18,28 @@ export default function PricingPage() {
   return (
     <>
       <PricingPageJsonLd />
-      <SydraPageShell breadcrumb={[...BREADCRUMBS.pricing]}>
-        <header className="max-w-2xl">
-          <h1 className="type-h1 text-brand">
-            Sydra pricing.
-            <span className="mt-4 block type-h2 text-body">
-              Quoted to your volume. Not a percentage of every recovery.
-            </span>
-          </h1>
-          <p className="mt-6 type-body text-body">
-            We don&apos;t publish a list price because the right number depends on your specialty,
-            state, and monthly out of network claim volume. Every tier is structured below the
-            typical 20% attorney contingency fee. You keep more of every recovery.
-          </p>
-          <p className="mt-4 type-body text-body">
-            Schedule a 15 minute demo and we quote on the call. No commitment to proceed.
-          </p>
-        </header>
+      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.pricing]}>
+        <Section ariaLabelledby="heading-pricing" tone="white">
+          <header className="max-w-2xl">
+            <h1 className="type-h1 text-brand" id="heading-pricing">
+              Sydra pricing.
+              <span className="mt-4 block type-h2 text-body">
+                Quoted to your volume. Not a percentage of every recovery.
+              </span>
+            </h1>
+            <p className="mt-6 type-body text-body">
+              We don&apos;t publish a list price because the right number depends on your specialty,
+              state, and monthly out of network claim volume. Every tier is structured below the
+              typical 20% attorney contingency fee. You keep more of every recovery.
+            </p>
+            <p className="mt-4 type-body text-body">
+              Schedule a 15 minute demo and we quote on the call. No commitment to proceed.
+            </p>
+          </header>
+        </Section>
 
-        <section aria-labelledby="heading-comparison" className="mt-14 max-w-2xl">
+        <Section sidebarLabel="Compare" tone="neutral">
+        <section aria-labelledby="heading-comparison" className="max-w-2xl">
           <h2 className="type-h2 text-brand" id="heading-comparison">
             The comparison that matters.
           </h2>
@@ -65,10 +69,14 @@ export default function PricingPage() {
             </div>
           </div>
         </section>
+        </Section>
 
-        <PricingTiers variant="full" />
+        <Section tone="white">
+          <PricingTiers variant="full" />
+        </Section>
 
-        <section aria-labelledby="heading-demo-process" className="mt-16 max-w-2xl">
+        <Section sidebarLabel="The demo" tone="neutral">
+        <section aria-labelledby="heading-demo-process" className="max-w-2xl">
           <h2 className="type-h2 text-brand" id="heading-demo-process">
             What happens on the demo.
           </h2>
@@ -89,23 +97,27 @@ export default function PricingPage() {
             </p>
           </div>
         </section>
+        </Section>
 
-        <ServiceFaqSection heading="Pricing FAQ" id="heading-pricing-faq" items={PRICING_FAQ} />
+        <Section tone="white">
+          <ServiceFaqSection heading="Pricing FAQ" id="heading-pricing-faq" items={PRICING_FAQ} />
+        </Section>
 
-        <div className="mt-12 max-w-xl">
-          <Button href="/demo" showArrow>
-            Schedule my demo
-          </Button>
-          <p className="mt-6">
-            <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
-              Not ready to run software? Get a free IDR review at Kronos Revenue
-            </CtaLink>
-          </p>
-          <CtaTrustSignals className="mt-6" />
-        </div>
-
-        <ServiceCrossLinks current="/pricing" />
-        <SourcesReferences className="mt-12" />
+        <Section tone="neutral">
+          <div className="max-w-xl">
+            <Button href="/demo" showArrow>
+              Schedule my demo
+            </Button>
+            <p className="mt-6">
+              <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
+                Not ready to run software? Get a free IDR review at Kronos Revenue
+              </CtaLink>
+            </p>
+            <CtaTrustSignals className="mt-6" />
+          </div>
+          <ServiceCrossLinks current="/pricing" />
+          <SourcesReferences className="mt-12" />
+        </Section>
       </SydraPageShell>
     </>
   );
