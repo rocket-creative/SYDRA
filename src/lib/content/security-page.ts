@@ -36,7 +36,7 @@ export const SOC2_SECTION: SecuritySection = {
   title: "SOC 2 alignment.",
   paragraphs: [
     "Sydra's controls are SOC 2 aligned, covering security, availability, and confidentiality for the systems that process customer data.",
-    "A SOC 2 report is available under NDA to qualified prospects during evaluation. Email sales@kronosrevenue.health with your compliance contact copied and we'll send it the same business day.",
+    "A SOC 2 report is available under NDA to qualified prospects during evaluation. Email sales@sydrahealth.com with your compliance contact copied and we'll send it the same business day.",
   ],
 };
 

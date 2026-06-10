@@ -261,7 +261,7 @@ export function sydraOrganizationJsonLd() {
     logo: SYDRA_LOGO_URL(),
     description:
       "AI software for federal IDR and NSA disputes. Built by surgeons for surgical billing teams.",
-    email: "sales@kronosrevenue.health",
+    email: "sales@sydrahealth.com",
     parentOrganization: { "@id": KRONOS_HEALTH_ID },
     ...(sameAs.length > 0 ? { sameAs } : {}),
   };

@@ -41,7 +41,7 @@ export function HomepageSecurity() {
         </p>
         <p>
           <strong className="text-brand">BAA:</strong> Available for covered entities on request.
-          Contact support@sydrahealth.com.
+          Contact sales@sydrahealth.com.
         </p>
         <p>
           <strong className="text-brand">SOC 2:</strong> SOC 2 aligned controls. Report available

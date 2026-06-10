@@ -25,7 +25,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "How does Sydra handle HIPAA and patient data security?",
-    a: "IDR submissions contain PHI. Sydra handles PHI under these controls: AI processing runs on Claude Sonnet 4 on AWS Bedrock. PHI stays inside the AWS HIPAA eligible service boundary during generation. No data is sent to Anthropic's infrastructure. Storage: Amazon S3, AES 256 encryption at rest. TLS 1.2 or higher for all data in transit. Strict per practice tenant isolation at the database row level. BAA: Standard BAA available for covered entities. Email support@sydrahealth.com. SOC 2: SOC 2 aligned controls. Report available under NDA on request. See the full security page at " + siteUrl() + "/security.",
+    a: "IDR submissions contain PHI. Sydra handles PHI under these controls: AI processing runs on Claude Sonnet 4 on AWS Bedrock. PHI stays inside the AWS HIPAA eligible service boundary during generation. No data is sent to Anthropic's infrastructure. Storage: Amazon S3, AES 256 encryption at rest. TLS 1.2 or higher for all data in transit. Strict per practice tenant isolation at the database row level. BAA: Standard BAA available for covered entities. Email sales@sydrahealth.com. SOC 2: SOC 2 aligned controls. Report available under NDA on request. See the full security page at " + siteUrl() + "/security.",
   },
   {
     q: "What happens if an IDR dispute loses?",
