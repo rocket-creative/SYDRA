@@ -280,7 +280,13 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
         </FormField>
 
         <fieldset>
-          <legend className="type-caption text-brand">Which are you after?</legend>
+          <legend className="text-sm font-medium text-brand">
+            What are you interested in?
+            <span className="text-[var(--color-accent)]">
+              <span aria-hidden> *</span>
+              <span className="sr-only"> required</span>
+            </span>
+          </legend>
           <div className="mt-4 space-y-3">
             {LANDING_PRODUCT_OPTIONS.map((value) => (
               <label
@@ -288,7 +294,6 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
                 className="flex cursor-pointer items-center gap-3 text-base text-body"
               >
                 <input
-                  aria-required="true"
                   className="h-4 w-4 accent-[var(--color-accent)]"
                   name="productInterest"
                   required

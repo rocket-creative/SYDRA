@@ -86,7 +86,7 @@ export function ContactForm() {
           ))}
         </select>
       </FormField>
-      <FormField id="contact-message" label="Message (optional)">
+      <FormField id="contact-message" label="Message">
         <textarea
           className={`${editorialInputClass} min-h-[120px] resize-y`}
           id="contact-message"

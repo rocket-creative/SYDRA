@@ -134,8 +134,16 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
 
   return (
     <div className="border-t border-rule pt-8">
-      <p className="type-caption text-body" aria-live="polite">
-        Step {step} of 2
+      <div className="flex items-center gap-2" aria-hidden="true">
+        <span
+          className={`h-1 flex-1 transition-colors ${step >= 1 ? "bg-[var(--color-hero)]" : "bg-rule"}`}
+        />
+        <span
+          className={`h-1 flex-1 transition-colors ${step >= 2 ? "bg-[var(--color-hero)]" : "bg-rule"}`}
+        />
+      </div>
+      <p className="mt-3 type-caption text-body" aria-live="polite">
+        Step {step} of 2 · {step === 1 ? "Your details" : "Your practice"}
       </p>
 
       {step === 1 ? (
@@ -250,20 +258,21 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             </select>
           </FormField>
 
-          <FormField id="eobFile" label="Upload an EOB for the demo (optional)">
+          <FormField
+            id="eobFile"
+            label="Upload an EOB for the demo"
+            hint="PDF or image. We review it before the call if you upload one."
+          >
             <input
               accept=".pdf,image/*"
-              className="mt-2 block w-full text-sm text-body file:mr-4 file:border file:border-rule file:bg-transparent file:px-4 file:py-2 file:text-[13px] file:uppercase file:tracking-[0.08em] file:text-brand"
+              className="mt-2 block w-full text-sm text-body file:mr-4 file:border file:border-rule file:bg-transparent file:px-4 file:py-2 file:text-[13px] file:uppercase file:tracking-[0.08em] file:text-brand hover:file:border-body/40"
               id="eobFile"
               name="eobFile"
               type="file"
             />
-            <p className="mt-2 text-xs text-body">
-              PDF or image. We review it before the call if you upload one.
-            </p>
           </FormField>
 
-          <FormField id="message" label="Or describe your situation (optional)">
+          <FormField id="message" label="Describe your situation">
             <textarea
               className={`${editorialInputClass} min-h-[100px] resize-y`}
               id="message"
@@ -272,7 +281,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             />
           </FormField>
 
-          <FormField id="tierInterest" label="Tier interest (optional)">
+          <FormField id="tierInterest" label="Tier interest">
             <select
               className={editorialSelectClass}
               defaultValue={preselectedTier}
