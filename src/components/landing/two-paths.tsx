@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import { trackCtaClick } from "@/lib/landing/analytics-client";
-import { kronosCaseReviewCalendlyUrl } from "@/lib/landing/calendly";
+import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 type TwoPathsProps = {
@@ -64,7 +64,7 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
           <div className="mt-8 flex flex-col gap-3">
             <Button
               className="w-full !border-[var(--color-kronos-green-dark)] !bg-[var(--color-kronos-green-dark)] hover:!bg-[#003d1f]"
-              href={kronosCaseReviewCalendlyUrl()}
+              href={kronosCaseReviewUrl()}
               rel="noopener noreferrer"
               showArrow
               target="_blank"
