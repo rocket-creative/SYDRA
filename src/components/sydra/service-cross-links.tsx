@@ -4,6 +4,7 @@ import { ReviewHighlight } from "@/components/sydra/review-highlight";
 import { textStyles } from "@/lib/typography";
 
 const LINKS = [
+  { href: "/idr", label: "Federal IDR benchmarks" },
   { href: "/how-it-works", label: "How Sydra works" },
   { href: "/pricing", label: "Compare pricing" },
   { href: "/security", label: "Security and HIPAA" },

@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
+import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
 import { trackCtaClick } from "@/lib/landing/analytics-client";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
 import type { CampaignTracking } from "@/lib/landing/tracking";
@@ -75,9 +76,9 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
             <p className="text-sm text-body">
               <a
                 className="text-link font-medium text-[var(--color-kronos-green-dark)] underline decoration-rule underline-offset-4"
-                href="mailto:heisha@nybrainspine.com"
+                href={salesMailtoHref()}
               >
-                heisha@nybrainspine.com
+                {getSalesEmail()}
               </a>
             </p>
           </div>

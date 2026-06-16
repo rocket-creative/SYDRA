@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
+
 const ADDRESS = "244 Westchester Ave, Ste 209, West Harrison, NY 10604";
 const PHONE_DISPLAY = "(914) 705 6830";
 const PHONE_TEL = "tel:+19147056830";
-const EMAIL = "heisha@nybrainspine.com";
 
 const footerLink =
   "underline decoration-rule underline-offset-4 transition-colors hover:text-[var(--color-hero)]";
 
 export function SydraFooter() {
+  const email = getSalesEmail();
   return (
     <footer className="border-t border-rule bg-white px-5 py-14 text-brand md:px-10">
       <div className="mx-auto max-w-[1280px]">
@@ -29,8 +31,8 @@ export function SydraFooter() {
             {PHONE_DISPLAY}
           </a>
           <br />
-          <a className={footerLink} href={`mailto:${EMAIL}`}>
-            {EMAIL}
+          <a className={footerLink} href={salesMailtoHref()}>
+            {email}
           </a>
         </address>
         <p className="mt-8 max-w-3xl text-sm leading-relaxed text-body/80">

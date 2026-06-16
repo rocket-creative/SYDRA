@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
@@ -65,6 +66,13 @@ export default function IdrIndexPage() {
             subtitle="By code, state, payer, and specialty."
             lead="The code is the spine; the dollar figures are public, mandated data. Browse payer benchmarks, eligibility, and dispute win rates for the out of network surgical claims your team disputes most."
           />
+          <p className={`${textStyles.meta} mt-6`}>
+            New to this? Start with{" "}
+            <Link className={textStyles.textLink} href="/what-is-idr">
+              what federal IDR is
+            </Link>
+            .
+          </p>
         </Section>
 
         <Section tone="neutral">

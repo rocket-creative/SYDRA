@@ -105,7 +105,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
         if (!res.ok) {
           setState({
             status: "error",
-            message: "Something went wrong. Please try again or email heisha@nybrainspine.com.",
+            message: "Something went wrong. Please try again or email sales@sydrahealth.com.",
           });
           return;
         }
