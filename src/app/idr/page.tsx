@@ -8,9 +8,11 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { US_STATES } from "@/lib/constants/us-states";
 import { GUIDES } from "@/lib/idr/guides";
+import { PROOF_POINTS } from "@/lib/idr/proof-points";
 import { idrSpecialtyPath, idrStatePath } from "@/lib/idr/seo";
-import { LAUNCH_STATES, SPECIALTIES } from "@/lib/idr/taxonomy";
+import { SPECIALTIES } from "@/lib/idr/taxonomy";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
@@ -33,7 +35,7 @@ export default function IdrIndexPage() {
     name: s.name,
     href: idrSpecialtyPath(s.slug),
   }));
-  const stateLinks = LAUNCH_STATES.map((s) => ({
+  const stateLinks = US_STATES.map((s) => ({
     name: s.name,
     href: idrStatePath(s.code),
   }));
@@ -74,6 +76,31 @@ export default function IdrIndexPage() {
         </Section>
 
         <Section tone="neutral">
+          <h2 className={textStyles.sectionTitle}>By the numbers.</h2>
+          <p className={`${textStyles.body} mt-3 prose-measure`}>
+            The public federal IDR record on win rates, award multiples, and
+            volume. Every figure is sourced and dated, and is reverified against
+            the current CMS public use file before it drives a benchmark page.
+          </p>
+          <dl className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {PROOF_POINTS.map((point) => (
+              <div key={point.id}>
+                <dt
+                  className="font-light leading-none tracking-[-0.03em] tabular-nums text-brand text-balance"
+                  style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
+                >
+                  {point.value}
+                </dt>
+                <dd className={`${textStyles.body} mt-3`}>{point.claim}</dd>
+                <dd className={`${textStyles.meta} mt-3`}>
+                  {point.source}. As of {point.asOf}.
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Section>
+
+        <Section tone="white">
           <h2 className={textStyles.sectionTitle}>Guides.</h2>
           <p className={`${textStyles.body} mt-3 prose-measure`}>
             How the federal IDR process works for surgical practices.

@@ -84,8 +84,13 @@ export default async function PayerHubPage({ params }: PageProps) {
             eyebrow="Federal IDR · Payer overview"
             title={`Federal IDR disputes with ${payerName}.`}
             subtitle="Out of network surgical claims."
-            lead={`When ${payerName} pays a surgical claim below the market rate out of network, the No Surprises Act federal IDR process is how practices recover the gap. Sydra prepares the ${payerName} dispute packet from an uploaded EOB.`}
+            lead={`${payerMeta.note ? `${payerMeta.note} ` : ""}When ${payerName} pays a surgical claim below the market rate out of network, the No Surprises Act federal IDR process is how practices recover the gap. Sydra prepares the ${payerName} dispute packet from an uploaded EOB.`}
           />
+          {payerMeta.aka && payerMeta.aka.length > 0 ? (
+            <p className={`${textStyles.meta} mt-6`}>
+              Also searched as {payerMeta.aka.join(", ")}.
+            </p>
+          ) : null}
         </Section>
 
         <Section tone="neutral">

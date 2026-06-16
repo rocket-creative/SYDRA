@@ -1,8 +1,12 @@
 import "server-only";
 
 import { getSupabase } from "@/lib/idr/db";
-import { SEED_BENCHMARKS, SEED_STATE_PROFILES } from "@/lib/idr/seed-data";
-import { getCodeMeta, getStateName } from "@/lib/idr/taxonomy";
+import {
+  ALL_STATE_CODES,
+  seedBenchmark,
+  seedStateProfile,
+} from "@/lib/idr/seed-data";
+import { IDR_PAYERS, getCodeMeta, getStateName } from "@/lib/idr/taxonomy";
 import type { IdrBenchmark, IdrStateProfile } from "@/lib/idr/types";
 
 /**
@@ -80,10 +84,7 @@ export async function getCodeStateBenchmark(
       .maybeSingle();
     return data ? mapBenchmark(data as BenchmarkRow) : null;
   }
-  const seed = SEED_BENCHMARKS.find(
-    (b) => b.code === code && b.state === state && b.payerSlug === null,
-  );
-  return seed ?? null;
+  return seedBenchmark(code, state, null);
 }
 
 /** All payer-level benchmark rows for a code x state (drives the spread table). */
@@ -102,9 +103,9 @@ export async function getPayerBenchmarks(
       .order("payer_slug", { ascending: true });
     return (data ?? []).map((row) => mapBenchmark(row as BenchmarkRow));
   }
-  return SEED_BENCHMARKS.filter(
-    (b) => b.code === code && b.state === state && b.payerSlug !== null,
-  );
+  return IDR_PAYERS.filter((p) => p.hasMrf)
+    .map((p) => seedBenchmark(code, state, p.slug))
+    .filter((row): row is NonNullable<typeof row> => row !== null);
 }
 
 /** A single code x state x payer cell, gated to payers we hold data for. */
@@ -124,10 +125,7 @@ export async function getCodeStatePayerBenchmark(
       .maybeSingle();
     return data ? mapBenchmark(data as BenchmarkRow) : null;
   }
-  const seed = SEED_BENCHMARKS.find(
-    (b) => b.code === code && b.state === state && b.payerSlug === payerSlug,
-  );
-  return seed ?? null;
+  return seedBenchmark(code, state, payerSlug);
 }
 
 export async function getStateProfile(
@@ -142,8 +140,7 @@ export async function getStateProfile(
       .maybeSingle();
     return data ? mapStateProfile(data as StateProfileRow) : null;
   }
-  const seed = SEED_STATE_PROFILES.find((s) => s.state === state);
-  return seed ?? null;
+  return seedStateProfile(state);
 }
 
 /** States that have an aggregate benchmark for a code (powers the code hub). */
@@ -158,9 +155,9 @@ export async function getStatesForCode(code: string): Promise<string[]> {
       .order("state", { ascending: true });
     return (data ?? []).map((row) => (row as { state: string }).state);
   }
-  return SEED_BENCHMARKS.filter((b) => b.code === code && b.payerSlug === null)
-    .map((b) => b.state)
-    .sort();
+  // Seed coverage exists for every jurisdiction, so a known code links to all
+  // 51 states. Real data later narrows the indexable subset via the sitemap.
+  return getCodeMeta(code) ? [...ALL_STATE_CODES].sort() : [];
 }
 
 type CodeStatePair = { code: string; state: string };
@@ -175,10 +172,9 @@ export async function getAllCodeStates(): Promise<CodeStatePair[]> {
       .is("payer_slug", null);
     return (data ?? []).map((row) => row as CodeStatePair);
   }
-  return SEED_BENCHMARKS.filter((b) => b.payerSlug === null).map((b) => ({
-    code: b.code,
-    state: b.state,
-  }));
+  // Not enumerated in seed-only environments; the indexable variant below is
+  // what the sitemap consumes.
+  return [];
 }
 
 /** Only indexable (real-data) code x state pairs. Used by the sitemap. */
@@ -193,9 +189,7 @@ export async function getIndexableCodeStates(): Promise<CodeStatePair[]> {
     return (data ?? []).map((row) => row as CodeStatePair);
   }
   // Seed-only environments have nothing indexable by design.
-  return SEED_BENCHMARKS.filter(
-    (b) => b.payerSlug === null && b.dataSource !== "seed",
-  ).map((b) => ({ code: b.code, state: b.state }));
+  return [];
 }
 
 type CodeStatePayerTriple = CodeStatePair & { payerSlug: string };
@@ -213,9 +207,8 @@ export async function getIndexableCodeStatePayers(): Promise<CodeStatePayerTripl
       return { code: r.code, state: r.state, payerSlug: r.payer_slug };
     });
   }
-  return SEED_BENCHMARKS.filter(
-    (b) => b.payerSlug !== null && b.dataSource !== "seed",
-  ).map((b) => ({ code: b.code, state: b.state, payerSlug: b.payerSlug as string }));
+  // Seed-only environments have nothing indexable by design.
+  return [];
 }
 
 /** Convenience: resolve a code x state page's full context in one call. */

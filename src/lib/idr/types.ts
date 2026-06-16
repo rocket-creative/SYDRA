@@ -26,7 +26,11 @@ export type SpecialtySlug =
   | "orthopedics"
   | "neurosurgery"
   | "plastics"
-  | "hand";
+  | "hand"
+  | "pain";
+
+/** Internal prioritization heuristic. Never published on a page. */
+export type ValueTier = "high" | "medium" | "standard";
 
 export type IdrCode = {
   code: string;
@@ -39,6 +43,22 @@ export type IdrCode = {
   specialty: SpecialtySlug;
   /** Whether this code is in the IDR-relevant launch set. */
   isRelevant: boolean;
+  /**
+   * Original plain-language wording written for Sydra (NOT the AMA long
+   * descriptor), safe to publish before the AMA license is in place.
+   */
+  shortDescription?: string;
+  /** Anatomical region, for on-page context. */
+  bodyRegion?: string;
+  /** Typical site of service. */
+  setting?: string;
+  /** Add-on code billed alongside a primary procedure. */
+  addOn?: boolean;
+  /** Sibling codes for internal linking. */
+  relatedCodes?: string[];
+  /** Why the code is disputed out of network. Surfaced on the code hub. */
+  disputeContext?: string;
+  valueTier?: ValueTier;
 };
 
 export type IdrPayer = {
@@ -46,6 +66,10 @@ export type IdrPayer = {
   name: string;
   /** Whether we hold this payer's machine-readable file data. */
   hasMrf: boolean;
+  /** Alternate names buyers search. */
+  aka?: string[];
+  /** Plain-language context surfaced on the payer hub. */
+  note?: string;
 };
 
 export type IdrSpecialty = {

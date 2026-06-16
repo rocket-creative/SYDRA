@@ -10,7 +10,12 @@
 import { createClient } from "@supabase/supabase-js";
 
 import { IDR_CODES, IDR_PAYERS } from "@/lib/idr/taxonomy";
-import { SEED_BENCHMARKS, SEED_STATE_PROFILES } from "@/lib/idr/seed-data";
+import {
+  ALL_STATE_CODES,
+  seedBenchmark,
+  seedStateProfile,
+} from "@/lib/idr/seed-data";
+import type { IdrBenchmark, IdrStateProfile } from "@/lib/idr/types";
 
 async function main() {
   const url = process.env.SUPABASE_URL?.trim();
@@ -47,9 +52,14 @@ async function main() {
   );
   if (payersErr) throw payersErr;
 
-  console.log(`Seeding ${SEED_STATE_PROFILES.length} state profiles…`);
+  // Build placeholder state profiles for every jurisdiction (50 states + DC).
+  const stateProfiles: IdrStateProfile[] = ALL_STATE_CODES.map((s) =>
+    seedStateProfile(s),
+  ).filter((p): p is IdrStateProfile => p !== null);
+
+  console.log(`Seeding ${stateProfiles.length} state profiles…`);
   const { error: profErr } = await db.from("idr_state_profiles").upsert(
-    SEED_STATE_PROFILES.map((s) => ({
+    stateProfiles.map((s) => ({
       state: s.state,
       nsa_pathway: s.nsaPathway,
       state_law_summary: s.stateLawSummary,
@@ -61,8 +71,23 @@ async function main() {
   );
   if (profErr) throw profErr;
 
-  console.log(`Seeding ${SEED_BENCHMARKS.length} benchmark rows…`);
-  const rows = SEED_BENCHMARKS.map((b) => ({
+  // Build placeholder benchmarks across every code x state, plus a row per MRF
+  // payer. All rows carry data_source='seed' so the pages stay noindex.
+  const mrfPayerSlugs = IDR_PAYERS.filter((p) => p.hasMrf).map((p) => p.slug);
+  const benchmarks: IdrBenchmark[] = [];
+  for (const codeMeta of IDR_CODES) {
+    for (const state of ALL_STATE_CODES) {
+      const aggregate = seedBenchmark(codeMeta.code, state, null);
+      if (aggregate) benchmarks.push(aggregate);
+      for (const payerSlug of mrfPayerSlugs) {
+        const payerRow = seedBenchmark(codeMeta.code, state, payerSlug);
+        if (payerRow) benchmarks.push(payerRow);
+      }
+    }
+  }
+
+  console.log(`Seeding ${benchmarks.length} benchmark rows…`);
+  const rows = benchmarks.map((b) => ({
     code: b.code,
     state: b.state,
     payer_slug: b.payerSlug,
