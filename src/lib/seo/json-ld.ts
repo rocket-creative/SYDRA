@@ -122,6 +122,37 @@ export function itemListJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+/**
+ * Dataset schema for an entity page's benchmark table. Signals to Google and AI
+ * crawlers that the page carries a real data unit, not thin scaled content.
+ */
+export function datasetJsonLd({
+  path,
+  name,
+  description,
+  dateModified,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  dateModified?: string;
+}) {
+  const base = siteUrl();
+  const url = `${base}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${url}/#dataset`,
+    name,
+    description,
+    url,
+    isPartOf: { "@id": SYDRA_WEBSITE_ID() },
+    creator: { "@id": SYDRA_ORG_ID() },
+    license: "https://www.sydrahealth.com/terms",
+    ...(dateModified ? { dateModified } : {}),
+  };
+}
+
 export function serviceJsonLd({
   name,
   description,

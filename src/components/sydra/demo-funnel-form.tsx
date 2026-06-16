@@ -63,6 +63,17 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   const tierParam = searchParams.get("tier");
   const preselectedTier = isValidTierId(tierParam) ? tierParam : "";
 
+  // Entity-page context: a code x state page links here with ?code=&state= so
+  // the demo runs on the visitor's actual claim and sales sees the context.
+  const entityCode = (searchParams.get("code") ?? "").trim();
+  const entityStateRaw = (searchParams.get("state") ?? "").trim().toUpperCase();
+  const entityState = US_STATES.some((s) => s.code === entityStateRaw)
+    ? entityStateRaw
+    : "";
+  const entityMessage = entityCode
+    ? `Interested in CPT ${entityCode}${entityState ? ` in ${entityState}` : ""}.`
+    : "";
+
   const handleStepOneSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -207,7 +218,14 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           </FormField>
 
           <FormField id="state" label="State" required>
-            <select required aria-required="true" className={editorialSelectClass} id="state" name="state">
+            <select
+              required
+              aria-required="true"
+              className={editorialSelectClass}
+              defaultValue={entityState}
+              id="state"
+              name="state"
+            >
               <option value="">Select state</option>
               <optgroup label="Supported pathways (2026)">
                 {US_STATES.filter((s) =>
@@ -275,6 +293,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           <FormField id="message" label="Describe your situation">
             <textarea
               className={`${editorialInputClass} min-h-[100px] resize-y`}
+              defaultValue={entityMessage}
               id="message"
               name="message"
               rows={4}

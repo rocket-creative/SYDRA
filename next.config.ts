@@ -25,7 +25,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net",
       "font-src 'self' data:",
-      "connect-src 'self' https://calendly.com https://*.calendly.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net",
+      "connect-src 'self' https://*.supabase.co https://calendly.com https://*.calendly.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net",
       "frame-src 'self' https://calendly.com https://*.calendly.com https://td.doubleclick.net https://*.doubleclick.net",
       "frame-ancestors 'none'",
       "base-uri 'self'",

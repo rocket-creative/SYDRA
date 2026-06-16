@@ -18,18 +18,32 @@ type RecoveryCalculatorProps = {
   ctaHref?: string;
   ctaLabel?: string;
   onCtaClick?: () => void;
+  /** Optional prefill, e.g. from an entity page's benchmark data. */
+  defaultClaimsPerMonth?: number;
+  defaultAvgDisputedAmount?: number;
 };
 
 const usd = (n: number) => `$${Math.round(n).toLocaleString()}`;
+
+function clampInitial(value: number, min: number, max: number, step: number): number {
+  const stepped = Math.round(value / step) * step;
+  return Math.min(max, Math.max(min, stepped));
+}
 
 export function RecoveryCalculator({
   variant = "light",
   ctaHref = "/demo",
   ctaLabel = "Schedule a demo for your numbers",
   onCtaClick,
+  defaultClaimsPerMonth = 20,
+  defaultAvgDisputedAmount = 15000,
 }: RecoveryCalculatorProps) {
-  const [claimsPerMonth, setClaimsPerMonth] = useState(20);
-  const [avgDisputedAmount, setAvgDisputedAmount] = useState(15000);
+  const [claimsPerMonth, setClaimsPerMonth] = useState(
+    clampInitial(defaultClaimsPerMonth, CLAIMS_MIN, CLAIMS_MAX, 1),
+  );
+  const [avgDisputedAmount, setAvgDisputedAmount] = useState(
+    clampInitial(defaultAvgDisputedAmount, AMOUNT_MIN, AMOUNT_MAX, AMOUNT_STEP),
+  );
   const onDark = variant === "onDark";
   const claimsId = useId();
   const amountId = useId();

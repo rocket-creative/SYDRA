@@ -1,0 +1,20 @@
+{
+  "name": "sydra-data-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Entity-SEO data pipeline for Sydra: ingest CMS IDR Public Use Files + Transparency-in-Coverage MRFs into staging tables and publish real benchmark/outcome data into the app's idr_benchmarks / idr_state_profiles (flipping data_source seed -> puf/mrf).",
+  "scripts": {
+    "db:schema": "psql \"$DATABASE_URL\" -f ../supabase/migrations/0002_idr_pipeline_staging.sql",
+    "idr:load": "node scripts/02_load_idr_outcomes.mjs",
+    "mrf:parse": "node scripts/03_parse_mrf.mjs",
+    "publish": "node scripts/04_publish.mjs",
+    "pipeline:all": "npm run idr:load && npm run publish"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0",
+    "stream-json": "^1.8.0"
+  }
+}
