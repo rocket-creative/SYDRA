@@ -15,11 +15,18 @@ import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { codeStateFaqs, codeStateLead } from "@/lib/idr/content";
 import { getCodeStateContext } from "@/lib/idr/queries";
-import { codeStateMetadata, idrCodePath, idrStatePath } from "@/lib/idr/seo";
+import {
+  codeStateMetadata,
+  idrCodePath,
+  idrCodeStatePath,
+  idrCodeStatePayerPath,
+  idrStatePath,
+} from "@/lib/idr/seo";
 import {
   getCodeMeta,
   getPayerMeta,
   getSpecialtyMeta,
+  stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
 import {
   datasetJsonLd,
@@ -34,15 +41,11 @@ type PageProps = {
   params: Promise<{ code: string; state: string }>;
 };
 
-function normalizeState(state: string): string {
-  return state.toUpperCase();
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { code, state: rawState } = await params;
-  const state = normalizeState(rawState);
-  const ctx = await getCodeStateContext(code, state);
-  if (!ctx) {
+  const state = stateCodeFromSlug(rawState);
+  const ctx = state ? await getCodeStateContext(code, state) : null;
+  if (!state || !ctx) {
     return { title: "Not found | Sydra", robots: { index: false, follow: false } };
   }
   return codeStateMetadata({
@@ -56,14 +59,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CodeStatePage({ params }: PageProps) {
   const { code, state: rawState } = await params;
-  const state = normalizeState(rawState);
-  const ctx = await getCodeStateContext(code, state);
-  if (!ctx) notFound();
+  const state = stateCodeFromSlug(rawState);
+  const ctx = state ? await getCodeStateContext(code, state) : null;
+  if (!state || !ctx) notFound();
 
   const codeMeta = getCodeMeta(code);
   const { codeLabel, stateName, benchmark, payerBenchmarks, stateProfile } = ctx;
   const isSeed = benchmark.dataSource === "seed";
-  const path = `/idr/cpt/${code}/${state}`;
+  const path = idrCodeStatePath(code, state);
 
   const crumbs = [
     { name: "Home", path: "" },
@@ -79,7 +82,7 @@ export default async function CodeStatePage({ params }: PageProps) {
     .filter((row) => row.payerSlug && getPayerMeta(row.payerSlug)?.hasMrf)
     .map((row) => ({
       name: `${getPayerMeta(row.payerSlug ?? "")?.name ?? row.payerSlug}`,
-      href: `/idr/cpt/${code}/${state}/${row.payerSlug}`,
+      href: idrCodeStatePayerPath(code, state, row.payerSlug ?? ""),
     }));
 
   const specialty = codeMeta ? getSpecialtyMeta(codeMeta.specialty) : null;

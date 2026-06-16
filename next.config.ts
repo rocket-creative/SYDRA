@@ -45,6 +45,12 @@ const nextConfig: NextConfig = {
         destination: "/pricing",
         permanent: true,
       },
+      {
+        // Canonical topic lives at the root page; avoid two pages competing.
+        source: "/compare/sydra-vs-idr-attorney",
+        destination: "/sydra-vs-idr-attorney",
+        permanent: true,
+      },
     ];
   },
   async headers() {

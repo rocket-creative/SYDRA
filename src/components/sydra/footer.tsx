@@ -40,6 +40,12 @@ export function SydraFooter() {
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-body">
           <Link
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/idr"
+          >
+            Federal IDR
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
             href="/resources"
           >
             Resources

@@ -16,32 +16,10 @@ export type Comparison = {
 };
 
 export const COMPARISONS: Comparison[] = [
-  {
-    slug: "sydra-vs-idr-attorney",
-    alternative: "an IDR attorney",
-    title: "Sydra vs an IDR attorney.",
-    metaTitle: "Sydra vs an IDR Attorney | Keep the 20% You Would Pay | Sydra",
-    metaDescription:
-      "Compare Sydra software your billing team runs in house against an IDR attorney who keeps about 20% of every recovery. See the fee math and what you keep.",
-    lead: "An IDR attorney typically keeps about 20% of every recovery, indefinitely. Sydra is software your billing team runs in house for a platform fee structured below that. Here is the comparison.",
-    rows: [
-      { label: "Who operates the workflow", sydra: "Your billing team", other: "The attorney's firm" },
-      { label: "Cost structure", sydra: "Platform fee, below 20% contingency", other: "About 20% of every recovery" },
-      { label: "Who keeps the recovery", sydra: "Your practice", other: "Practice, less the contingency" },
-      { label: "Claims per CPT", sydra: "One claim per CPT", other: "Often batched" },
-      { label: "Control of the submission", sydra: "Your team reviews and submits", other: "Handled by the firm" },
-    ],
-    faqs: [
-      {
-        q: "Is Sydra cheaper than an IDR attorney?",
-        a: "For most practices at most volumes, yes. Attorneys keep about 20% of every recovery; Sydra is a platform fee structured below that, with an exact quote on the demo call.",
-      },
-      {
-        q: "Do I lose support by moving off an attorney?",
-        a: "Sydra plus Kronos Support adds a live specialist for complex or high value disputes, so your team keeps an escalation path while running the workflow in house.",
-      },
-    ],
-  },
+  // Note: the sydra-vs-idr-attorney topic lives at the canonical root page
+  // /sydra-vs-idr-attorney. The /compare/sydra-vs-idr-attorney variant 301s to
+  // it (see next.config.ts redirects) to avoid two pages competing for the same
+  // query, so it is intentionally not minted here.
   {
     slug: "sydra-vs-in-house-manual",
     alternative: "manual in house filing",

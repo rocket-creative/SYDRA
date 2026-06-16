@@ -17,9 +17,15 @@ import { getCodeStatePayerBenchmark } from "@/lib/idr/queries";
 import {
   codeStatePayerMetadata,
   idrCodeStatePath,
+  idrCodeStatePayerPath,
   idrPayerPath,
 } from "@/lib/idr/seo";
-import { getCodeMeta, getPayerMeta, getStateName } from "@/lib/idr/taxonomy";
+import {
+  getCodeMeta,
+  getPayerMeta,
+  getStateName,
+  stateCodeFromSlug,
+} from "@/lib/idr/taxonomy";
 import { datasetJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
 
@@ -32,11 +38,11 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { code, state: rawState, payer } = await params;
-  const state = rawState.toUpperCase();
+  const state = stateCodeFromSlug(rawState);
   const codeMeta = getCodeMeta(code);
   const payerMeta = getPayerMeta(payer);
-  const stateName = getStateName(state);
-  if (!codeMeta || !payerMeta || !stateName) {
+  const stateName = state ? getStateName(state) : null;
+  if (!state || !codeMeta || !payerMeta || !stateName) {
     return { title: "Not found | Sydra", robots: { index: false, follow: false } };
   }
   const benchmark = await getCodeStatePayerBenchmark(code, state, payer);
@@ -56,14 +62,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CodeStatePayerPage({ params }: PageProps) {
   const { code, state: rawState, payer } = await params;
-  const state = rawState.toUpperCase();
+  const state = stateCodeFromSlug(rawState);
   const codeMeta = getCodeMeta(code);
   const payerMeta = getPayerMeta(payer);
-  const stateName = getStateName(state);
+  const stateName = state ? getStateName(state) : null;
 
   // Never render a code x payer page without that payer's data for that code
   // (playbook section 11: otherwise thin + wrong).
-  if (!codeMeta || !payerMeta || !stateName || !payerMeta.hasMrf) notFound();
+  if (!state || !codeMeta || !payerMeta || !stateName || !payerMeta.hasMrf) {
+    notFound();
+  }
 
   const benchmark = await getCodeStatePayerBenchmark(code, state, payer);
   if (!benchmark) notFound();
@@ -71,7 +79,7 @@ export default async function CodeStatePayerPage({ params }: PageProps) {
   const codeLabel = codeMeta.shortLabel;
   const payerName = payerMeta.name;
   const isSeed = benchmark.dataSource === "seed";
-  const path = `/idr/cpt/${code}/${state}/${payer}`;
+  const path = idrCodeStatePayerPath(code, state, payer);
   const spread = benchmark.inNetworkMedian - benchmark.oonAllowed;
 
   const crumbs = [

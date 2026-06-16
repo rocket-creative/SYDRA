@@ -16,6 +16,9 @@ type PageMetadataInput = {
   title: string;
   description: string;
   path: string;
+  /** Override the canonical URL when this page should defer to another (e.g. a
+   *  guide variant that points at the primary explainer). Defaults to `path`. */
+  canonicalPath?: string;
   ogImageAlt?: string;
   ogImagePath?: string;
   robots?: Metadata["robots"];
@@ -25,11 +28,13 @@ export function buildPageMetadata({
   title,
   description,
   path,
+  canonicalPath,
   ogImageAlt = DEFAULT_OG_IMAGE_ALT,
   ogImagePath,
   robots = { index: true, follow: true },
 }: PageMetadataInput): Metadata {
-  const canonical = `${siteUrl()}${path === "" ? "" : path}`;
+  const canonicalTarget = canonicalPath ?? path;
+  const canonical = `${siteUrl()}${canonicalTarget === "" ? "" : canonicalTarget}`;
   const ogImage = ogImagePath ? ogImageUrl(ogImagePath) : ogImageUrl();
 
   return {

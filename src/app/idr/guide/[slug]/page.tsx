@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { EntityFaq } from "@/components/idr/entity-faq";
@@ -18,6 +19,15 @@ import { textStyles } from "@/lib/typography";
 export const dynamicParams = true;
 export const revalidate = 86400;
 
+/**
+ * Guide slugs whose topic is already owned by a primary page. They stay live and
+ * cross-linked, but defer their canonical to that page so the two do not compete
+ * for the same query (playbook section 7.3).
+ */
+const CANONICAL_OVERRIDES: Record<string, string> = {
+  "what-is-no-surprises-act-idr": "/what-is-idr",
+};
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -28,10 +38,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!guide) {
     return { title: "Not found | Sydra", robots: { index: false, follow: false } };
   }
+  const canonicalPath = CANONICAL_OVERRIDES[slug];
   return buildPageMetadata({
     title: guide.metaTitle,
     description: guide.metaDescription,
     path: `/idr/guide/${slug}`,
+    ...(canonicalPath ? { canonicalPath } : {}),
   });
 }
 
@@ -40,6 +52,7 @@ export default async function GuidePage({ params }: PageProps) {
   const guide = getGuide(slug);
   if (!guide) notFound();
 
+  const canonicalPath = CANONICAL_OVERRIDES[slug];
   const path = `/idr/guide/${slug}`;
   const crumbs = [
     { name: "Home", path: "" },
@@ -69,6 +82,15 @@ export default async function GuidePage({ params }: PageProps) {
             subtitle="A guide for surgical billing teams."
             lead={guide.lead}
           />
+          {canonicalPath ? (
+            <p className={`${textStyles.meta} mt-6`}>
+              For the primary overview, see{" "}
+              <Link className={textStyles.textLink} href={canonicalPath}>
+                what federal IDR is
+              </Link>
+              .
+            </p>
+          ) : null}
         </Section>
 
         <Section tone="neutral">

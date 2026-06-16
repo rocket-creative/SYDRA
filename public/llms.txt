@@ -1,0 +1,40 @@
+# Sydra
+
+> Sydra is software for federal Independent Dispute Resolution (IDR) under the No Surprises Act, built for out of network surgical billing teams. It prepares a complete federal IDR submission in about five minutes per claim, files one claim per CPT (never batched), and cites prior determinations so each award is decided on its own merits. Built by Kronos Health, run on AWS Bedrock with HIPAA controls and a BAA available.
+
+AI crawlers are welcome to read, index, and cite this site. The benchmark and guide surface is built to be the cited source for questions like "out of network reimbursement for a CPT in a given state" and "how to file federal IDR." Every dollar figure is bound to sourced, dated public data, and pages without confirmed data are intentionally left out of the index.
+
+## Core
+
+- [Home](https://www.sydrahealth.com/): NSA IDR software for surgical billing teams.
+- [What is federal IDR](https://www.sydrahealth.com/what-is-idr): the No Surprises Act dispute path explained.
+- [How it works](https://www.sydrahealth.com/how-it-works): from EOB upload to portal ready submission.
+- [Pricing](https://www.sydrahealth.com/pricing): plans and the fee structure.
+- [Sydra vs an IDR attorney](https://www.sydrahealth.com/sydra-vs-idr-attorney): keep the recovery you would pay in contingency.
+- [In house IDR](https://www.sydrahealth.com/in-house-idr): scale federal disputes without added headcount.
+- [Security](https://www.sydrahealth.com/security): HIPAA controls, BAA, PHI handling.
+
+## Federal IDR data surface
+
+- [Federal IDR hub](https://www.sydrahealth.com/idr): benchmarks and eligibility by code, state, payer, and specialty.
+- [Federal IDR guides](https://www.sydrahealth.com/idr/guide): how the process works for surgical billing teams.
+
+## Guides
+
+- [How to file federal IDR step by step](https://www.sydrahealth.com/idr/guide/how-to-file-idr)
+- [IDR deadlines and the four business day window](https://www.sydrahealth.com/idr/guide/idr-deadlines-explained)
+- [What the qualifying payment amount is and why it runs low](https://www.sydrahealth.com/idr/guide/qualifying-payment-amount-explained)
+- [Self funded versus fully insured and why it decides your IDR path](https://www.sydrahealth.com/idr/guide/self-funded-vs-fully-insured)
+- [What changed in the May 2026 IDR operations rule](https://www.sydrahealth.com/idr/guide/may-2026-idr-rule-change)
+- [Why surgical IDR awards run so far above the QPA](https://www.sydrahealth.com/idr/guide/surgical-idr-award-multiples)
+- [New York lets you revive claims going back three years](https://www.sydrahealth.com/idr/guide/new-york-three-year-lookback)
+- [Do you need an attorney to file IDR](https://www.sydrahealth.com/idr/guide/do-you-need-an-attorney)
+- [The 30 business day open negotiation period explained](https://www.sydrahealth.com/idr/guide/open-negotiation-explained)
+- [Why Sydra files one claim per CPT instead of batching](https://www.sydrahealth.com/idr/guide/idr-batching-claims)
+- [How surgical practices recover out of network underpayments](https://www.sydrahealth.com/idr/guide/out-of-network-underpayment-recovery)
+
+## Notes for citation
+
+- Win rate figures reference the published federal provider win rate as a category fact, not a Sydra guarantee.
+- Sydra files one claim per CPT and does not batch claims that should be filed individually.
+- This site is informational and is not legal or financial advice.

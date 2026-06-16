@@ -7,7 +7,14 @@ import {
   getIndexableCodeStatePayers,
   getIndexableCodeStates,
 } from "@/lib/idr/queries";
+import {
+  idrCodePath,
+  idrCodeStatePath,
+  idrCodeStatePayerPath,
+  idrStatePath,
+} from "@/lib/idr/seo";
 import { SPECIALTIES } from "@/lib/idr/taxonomy";
+import { US_STATES } from "@/lib/constants/us-states";
 import { siteUrl } from "@/lib/site";
 
 type Entry = {
@@ -47,13 +54,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Entity hub pages (always linkable; priority per playbook section 7).
   const idrIndex: Entry[] = [
     { path: "/idr", priority: 0.86, changeFrequency: "weekly" },
+    { path: "/idr/guide", priority: 0.78, changeFrequency: "weekly" },
   ];
   const specialtyPages: Entry[] = SPECIALTIES.map((s) => ({
     path: `/idr/specialty/${s.slug}`,
     priority: 0.84,
     changeFrequency: "monthly",
   }));
-  const guidePages: Entry[] = GUIDE_SLUGS.map((slug) => ({
+  // Guides whose canonical defers to a primary page are excluded so the sitemap
+  // emits only canonical URLs (playbook section 7.3).
+  const NON_CANONICAL_GUIDE_SLUGS = new Set(["what-is-no-surprises-act-idr"]);
+  const guidePages: Entry[] = GUIDE_SLUGS.filter(
+    (slug) => !NON_CANONICAL_GUIDE_SLUGS.has(slug),
+  ).map((slug) => ({
     path: `/idr/guide/${slug}`,
     priority: 0.7,
     changeFrequency: "monthly",
@@ -75,31 +88,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const codeStatePages: Entry[] = [];
   for (const { code, state } of codeStates) {
     codeStatePages.push({
-      path: `/idr/cpt/${code}/${state}`,
+      path: idrCodeStatePath(code, state),
       priority: 0.9,
       changeFrequency: "monthly",
     });
     codeHubPaths.set(code, {
-      path: `/idr/cpt/${code}`,
+      path: idrCodePath(code),
       priority: 0.86,
       changeFrequency: "monthly",
     });
   }
-  const statePages: Entry[] = [];
-  const seenStates = new Set<string>();
-  for (const { state } of codeStates) {
-    if (seenStates.has(state)) continue;
-    seenStates.add(state);
-    statePages.push({
-      path: `/idr/state/${state}`,
-      priority: 0.84,
-      changeFrequency: "monthly",
-    });
-  }
+
+  // State hubs carry reviewed eligibility content and are always indexable, so
+  // every state is emitted regardless of benchmark data tier.
+  const statePages: Entry[] = US_STATES.map((s) => ({
+    path: idrStatePath(s.code),
+    priority: 0.84,
+    changeFrequency: "monthly",
+  }));
 
   const codeStatePayerPages: Entry[] = codeStatePayers.map(
     ({ code, state, payerSlug }) => ({
-      path: `/idr/cpt/${code}/${state}/${payerSlug}`,
+      path: idrCodeStatePayerPath(code, state, payerSlug),
       priority: 0.88,
       changeFrequency: "monthly",
     }),

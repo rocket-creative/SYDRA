@@ -93,7 +93,7 @@ export const PROOF_POINTS: ProofPoint[] = [
     id: "total-volume",
     value: "~4.8 million",
     claim: "About 4.8 million disputes were filed through the end of 2025, against the roughly 17,000 per year Congress expected. Most eligible claims are never disputed.",
-    source: "Georgetown CHIR; CMS bi-monthly updates",
+    source: "Georgetown CHIR; CMS bimonthly updates",
     asOf: "through Dec 2025",
     verifyBeforePublish: true,
   },

@@ -80,6 +80,24 @@ export default function ResourcesPage() {
           </ul>
         </Section>
 
+        <Section tone="white">
+          <div className="prose-measure">
+            <h2 className={textStyles.sectionTitle}>Federal IDR benchmarks and guides.</h2>
+            <p className={`${textStyles.body} mt-3`}>
+              Browse payment benchmarks, eligibility, and dispute outcomes by CPT
+              code, state, and payer on the{" "}
+              <Link className={textStyles.textLink} href="/idr">
+                Federal IDR hub
+              </Link>
+              , or read the full set of{" "}
+              <Link className={textStyles.textLink} href="/idr/guide">
+                step by step IDR guides
+              </Link>
+              .
+            </p>
+          </div>
+        </Section>
+
         <SydraCtaBand />
 
         <Section tone="white">

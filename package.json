@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run check:copy && next build",
     "start": "next start",
     "lint": "eslint",
+    "check:copy": "node scripts/check-copy-hyphens.mjs",
     "seed": "tsx supabase/seed.ts"
   },
   "dependencies": {
@@ -21,10 +22,12 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.5",
+    "pg": "^8.21.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"

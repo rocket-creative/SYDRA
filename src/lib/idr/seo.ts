@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { stateSlug } from "@/lib/idr/taxonomy";
 import type { DataSource } from "@/lib/idr/types";
 
 /**
@@ -30,7 +31,7 @@ export function idrCodePath(code: string): string {
 }
 
 export function idrCodeStatePath(code: string, state: string): string {
-  return `/idr/cpt/${code}/${state}`;
+  return `/idr/cpt/${code}/${stateSlug(state)}`;
 }
 
 export function idrCodeStatePayerPath(
@@ -38,7 +39,7 @@ export function idrCodeStatePayerPath(
   state: string,
   payerSlug: string,
 ): string {
-  return `/idr/cpt/${code}/${state}/${payerSlug}`;
+  return `/idr/cpt/${code}/${stateSlug(state)}/${payerSlug}`;
 }
 
 export function idrPayerPath(payerSlug: string): string {
@@ -46,7 +47,7 @@ export function idrPayerPath(payerSlug: string): string {
 }
 
 export function idrStatePath(state: string): string {
-  return `/idr/state/${state}`;
+  return `/idr/state/${stateSlug(state)}`;
 }
 
 export function idrSpecialtyPath(slug: string): string {
@@ -113,13 +114,15 @@ export function stateHubMetadata(input: {
   stateName: string;
   dataSource: DataSource | null;
 }): Metadata {
-  const { state, stateName, dataSource } = input;
+  const { state, stateName } = input;
   return buildPageMetadata({
     title: `Federal IDR in ${stateName} | NSA Surprise Billing Disputes | Sydra`,
     description: `How the No Surprises Act and federal IDR work for out of network surgical claims in ${stateName}: eligibility, the state pathway, and dispute win rates.`,
     path: idrStatePath(state),
     ogImageAlt: `Federal IDR and surprise billing disputes in ${stateName}.`,
-    robots: dataSource ? robotsFor(dataSource) : NOINDEX_ROBOTS,
+    // State hubs carry reviewed eligibility content (pathway + state law), so
+    // they are always indexable, independent of benchmark data tier.
+    robots: INDEXABLE_ROBOTS,
   });
 }
 

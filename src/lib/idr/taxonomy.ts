@@ -263,6 +263,35 @@ export function getStateName(state: string): string | null {
   return STATE_INDEX.get(state) ?? null;
 }
 
+function toStateSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, "-");
+}
+
+const STATE_CODE_TO_SLUG = new Map<string, string>(
+  US_STATES.map((row) => [row.code, toStateSlug(row.name)]),
+);
+const STATE_SLUG_TO_CODE = new Map<string, string>(
+  US_STATES.map((row) => [toStateSlug(row.name), row.code]),
+);
+
+/** Two-letter code (e.g. "NY") -> readable URL slug (e.g. "new-york"). */
+export function stateSlug(code: string): string {
+  return STATE_CODE_TO_SLUG.get(code.toUpperCase()) ?? code.toLowerCase();
+}
+
+/**
+ * Resolve a route param to a canonical 2-letter code. Accepts a readable slug
+ * ("new-york") or a 2-letter code ("NY"/"ny") for backward compatibility, so
+ * old code-based URLs still resolve while the slug form is canonical.
+ */
+export function stateCodeFromSlug(input: string): string | null {
+  const raw = input.trim().toLowerCase();
+  const fromSlug = STATE_SLUG_TO_CODE.get(raw);
+  if (fromSlug) return fromSlug;
+  const upper = raw.toUpperCase();
+  return STATE_INDEX.has(upper) ? upper : null;
+}
+
 export function codesForSpecialty(slug: SpecialtySlug): IdrCode[] {
   return IDR_CODES.filter((row) => row.specialty === slug);
 }

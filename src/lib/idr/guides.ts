@@ -94,7 +94,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Running it at volume.",
         paragraphs: [
-          "These five steps are the easy part to understand. The hard part is running them across a full claim volume without a single window slipping, and that is the part that loses practices money. Sydra builds the packet, cites the supporting determinations, batches eligible claims, and keeps both clocks visible for every claim at once, so knowing the steps turns into actually getting paid.",
+          "These five steps are the easy part to understand. The hard part is running them across a full claim volume without a single window slipping, and that is the part that loses practices money. Sydra builds the packet, cites the supporting determinations, files one claim per CPT, and keeps both clocks visible for every claim at once, so knowing the steps turns into actually getting paid.",
         ],
       },
     ],
@@ -104,8 +104,8 @@ export const GUIDES: Guide[] = [
         a: "Missing the four business day window to initiate IDR after open negotiation closes. The clock is short and unforgiving, which is why Sydra tracks it automatically.",
       },
       {
-        q: "Can claims be batched?",
-        a: "Yes. Similar claims involving the same parties can be batched into one dispute, which lowers the per claim administrative fee.",
+        q: "Should claims be batched?",
+        a: "Federal rules allow batching similar claims into one dispute, but for high multiple surgical claims it can drag a strong award toward the weakest claim in the batch. Sydra files one claim per CPT so each award is decided on its own merits.",
       },
     ],
   },
@@ -465,45 +465,46 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "idr-batching-claims",
-    title: "How batching multiple claims lowers your IDR cost",
-    metaTitle: "How batching multiple claims lowers your IDR cost | Sydra",
+    title: "Why Sydra files one claim per CPT instead of batching",
+    metaTitle: "Batching IDR Claims vs One Claim per CPT | Sydra",
     metaDescription:
-      "When similar out of network claims can be combined into one dispute, and how batching reduces the per claim administrative fee so filing at volume pays.",
-    lead: "Batching lets you combine similar claims involving the same parties into a single IDR dispute. Because the administrative fee is charged per dispute rather than per claim, batching spreads that cost across many claims and improves the economics of filing at volume. For a busy surgical practice, batching is the difference between filing everything and filing only the largest claims.",
+      "Batching saves a small administrative fee but can drag a high multiple surgical award down to the weakest claim in the batch. Why Sydra files one claim per CPT to protect each award.",
+    lead: "Batching combines similar out of network claims into a single IDR dispute to spread the administrative fee across many claims. For low value, near identical claims that can make sense. For surgical claims it usually does not, because baseball style arbitration picks one number for the whole batch, so a strong, high multiple claim gets dragged toward the weakest claim it is grouped with. Sydra files one claim per CPT so every award is decided on its own merits.",
     sections: [
       {
-        heading: "The quiet reason claims go unfiled.",
+        heading: "What batching actually does.",
         paragraphs: [
-          "The administrative fee is the quiet reason many practices only dispute their biggest claims. If filing one claim costs a fixed fee, small and mid size underpayments can feel like they are not worth the trouble. Batching fixes that.",
+          "Federal rules let you combine similar claims involving the same provider and plan into one dispute, within defined criteria for service type and time period. The administrative fee attaches to the dispute, not to each claim inside it, so a batch carries that fee once rather than many times. The appeal is simple: lower per claim cost.",
         ],
       },
       {
-        heading: "How batching works.",
+        heading: "Why it hurts surgical awards.",
         paragraphs: [
-          "Federal rules let you combine similar claims involving the same provider and plan into a single dispute, within defined criteria for service type and time period. The administrative fee attaches to the dispute, not to each claim inside it. So a batch of many claims carries the fee once, not many times.",
+          "IDR is baseball style arbitration. The arbitrator picks one offer for the entire dispute, not a separate number for each claim inside it. When you batch a high multiple surgical CPT together with routine, lower multiple claims, you force one number to cover all of them. The strong claim no longer stands on its own strongest comparable determinations; it gets averaged against the weakest claim in the group.",
+          "For surgical practices that spread is the whole point. The administrative fee you save by batching is small. The award you compress by batching can be many multiples of the qualifying payment amount. Trading a large protected award for a small fee saving is a bad bargain.",
         ],
       },
       {
-        heading: "What it does to the economics.",
+        heading: "The Sydra position: one claim per CPT.",
         paragraphs: [
-          "The effect on the economics is large. Suddenly the routine claims that did not justify a solo filing become worth disputing as part of a batch. For a surgical practice with steady out of network volume, batching turns a thin trickle of large claim recoveries into a full stream across the whole book.",
+          "Sydra files one claim per CPT. Each claim is submitted on its own, cited to the prior determinations that are closest to it, so each award is decided on its own merits. Nothing strong gets pulled down by something weak. This is the same position the product holds across the site, and it is why surgical awards run as high as they do when claims are filed individually.",
         ],
       },
       {
-        heading: "Grouping claims correctly.",
+        heading: "When the fee is not the deciding factor.",
         paragraphs: [
-          "The catch is that grouping claims correctly under the batching rules by hand is tedious and error prone. Sydra identifies which of your claims qualify to batch together and assembles them into compliant disputes, so you capture the fee savings without the manual sorting.",
+          "The reason practices reach for batching is the per claim fee on routine underpayments. Sydra removes that pressure a different way: it prepares each submission in about five minutes, so filing every CPT on its own is fast enough that the fee stops being the thing that decides whether a claim is worth pursuing. You file the whole book, one claim per CPT, and protect every award.",
         ],
       },
     ],
     faqs: [
       {
-        q: "Which claims can be batched?",
-        a: "Claims that share the same provider and plan and meet the federal batching criteria for the service type and period. Sydra groups eligible claims for you.",
+        q: "Should I batch my surgical IDR claims?",
+        a: "Generally no. Federal rules allow batching, but because the arbitrator picks one number for the whole dispute, batching a high multiple surgical claim with weaker claims drags the strong award down. Sydra files one claim per CPT so each award is decided on its own merits.",
       },
       {
-        q: "Why does batching matter?",
-        a: "It lowers the per claim fee, which makes it worth filing routine and mid size claims, not just the largest ones.",
+        q: "Does filing one claim per CPT cost more in administrative fees?",
+        a: "Slightly, because the fee attaches per dispute. But on surgical claims the protected award is many multiples of the qualifying payment amount, which dwarfs the small fee difference. Sydra also prepares each claim in about five minutes, so per claim filing stays practical at volume.",
       },
     ],
   },
@@ -536,7 +537,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "How software removes the barriers.",
         paragraphs: [
-          "Software removes both barriers. Sydra assembles the federal packet, cites prior determinations on the code, batches eligible claims to cut fees, and tracks every deadline. The practice files its full volume in minutes per claim and keeps the entire recovery. The hidden line item stops being a loss.",
+          "Software removes both barriers. Sydra assembles the federal packet, cites prior determinations on the code, files one claim per CPT to protect each award, and tracks every deadline. The practice files its full volume in minutes per claim and keeps the entire recovery. The hidden line item stops being a loss.",
         ],
       },
     ],

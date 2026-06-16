@@ -13,8 +13,18 @@ import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { pathwayLabel, percent } from "@/lib/idr/format";
 import { getStateProfile } from "@/lib/idr/queries";
-import { idrCodeStatePath, idrSpecialtyPath, stateHubMetadata } from "@/lib/idr/seo";
-import { IDR_CODES, SPECIALTIES, getStateName } from "@/lib/idr/taxonomy";
+import {
+  idrCodeStatePath,
+  idrSpecialtyPath,
+  idrStatePath,
+  stateHubMetadata,
+} from "@/lib/idr/seo";
+import {
+  IDR_CODES,
+  SPECIALTIES,
+  getStateName,
+  stateCodeFromSlug,
+} from "@/lib/idr/taxonomy";
 import type { IdrBenchmark } from "@/lib/idr/types";
 import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
@@ -28,9 +38,9 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { state: rawState } = await params;
-  const state = rawState.toUpperCase();
-  const stateName = getStateName(state);
-  if (!stateName) {
+  const state = stateCodeFromSlug(rawState);
+  const stateName = state ? getStateName(state) : null;
+  if (!state || !stateName) {
     return { title: "Not found | Sydra", robots: { index: false, follow: false } };
   }
   const profile = await getStateProfile(state);
@@ -43,14 +53,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function StateHubPage({ params }: PageProps) {
   const { state: rawState } = await params;
-  const state = rawState.toUpperCase();
-  const stateName = getStateName(state);
-  if (!stateName) notFound();
+  const state = stateCodeFromSlug(rawState);
+  const stateName = state ? getStateName(state) : null;
+  if (!state || !stateName) notFound();
 
   const profile = await getStateProfile(state);
   if (!profile) notFound();
 
-  const path = `/idr/state/${state}`;
+  const path = idrStatePath(state);
   const crumbs = [
     { name: "Home", path: "" },
     { name: "Federal IDR", path: "/idr" },
