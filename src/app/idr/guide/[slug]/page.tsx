@@ -81,6 +81,8 @@ export default async function GuidePage({ params }: PageProps) {
             title={guide.title}
             subtitle="A guide for surgical billing teams."
             lead={guide.lead}
+            ctaHref="/demo"
+            ctaLabel="Schedule a demo"
           />
           {canonicalPath ? (
             <p className={`${textStyles.meta} mt-6`}>

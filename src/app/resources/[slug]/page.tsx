@@ -8,6 +8,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { articleBreadcrumb, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import {
   getArticleBySlug,
@@ -123,6 +124,11 @@ export default async function ResourceArticlePage({ params }: PageProps) {
                 </>
               ) : null}
             </p>
+            <div className="mt-8">
+              <Button href="/demo" showArrow>
+                Schedule a demo
+              </Button>
+            </div>
           </header>
         </Section>
 

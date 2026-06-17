@@ -65,6 +65,8 @@ export default async function ComparePage({ params }: PageProps) {
             title={comparison.title}
             subtitle={`Sydra against ${comparison.alternative}.`}
             lead={comparison.lead}
+            ctaHref="/demo"
+            ctaLabel="Schedule a demo"
           />
         </Section>
 
