@@ -4,32 +4,33 @@ import { notFound } from "next/navigation";
 import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
-import { LegalFooter } from "@/components/idr/legal-footer";
-import { IdrOutcomeStat } from "@/components/idr/idr-outcome-stat";
+import {
+  DenialCta,
+  PromiseAndDisclaimer,
+  StatePathwayBlock,
+  WaitHookBlock,
+} from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
-import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
-import { stateHubFaqs } from "@/lib/idr/content";
-import { pathwayLabel, percent } from "@/lib/idr/format";
-import { getStateProfile } from "@/lib/idr/queries";
+import { isIndexable } from "@/lib/idr/indexable";
+import { h1State, stateHubFaqsPain, stateHubMeta } from "@/lib/idr/pain-content";
 import {
+  demoDeepLink,
   idrCodeStatePath,
-  idrSpecialtyPath,
   idrStatePath,
-  stateHubMetadata,
+  idrStateSpecialtyPath,
 } from "@/lib/idr/seo";
+import { getStatePathway } from "@/lib/idr/state-pathways";
 import {
   IDR_CODES,
   SPECIALTIES,
   getStateName,
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
-import type { IdrBenchmark } from "@/lib/idr/types";
-import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
-import { textStyles } from "@/lib/typography";
+import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -40,60 +41,48 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { state: rawState } = await params;
-  const state = stateCodeFromSlug(rawState);
-  const stateName = state ? getStateName(state) : null;
-  if (!state || !stateName) {
+  const code = stateCodeFromSlug(rawState);
+  const stateName = code ? getStateName(code) : null;
+  if (!code || !stateName) {
     return { title: "Not found | Sydra", robots: { index: false, follow: false } };
   }
-  const profile = await getStateProfile(state);
-  return stateHubMetadata({
-    state,
-    stateName,
-    dataSource: profile?.dataSource ?? null,
+  const pathway = getStatePathway(code);
+  const indexable = isIndexable({
+    tier: "state",
+    hasStatePathway: !!pathway,
+    stateCode: code,
+    isLaunchState: pathway?.isLaunch ?? false,
   });
+  return stateHubMeta({ stateCode: code, stateName, indexable });
 }
 
 export default async function StateHubPage({ params }: PageProps) {
   const { state: rawState } = await params;
-  const state = stateCodeFromSlug(rawState);
-  const stateName = state ? getStateName(state) : null;
-  if (!state || !stateName) notFound();
+  const code = stateCodeFromSlug(rawState);
+  const stateName = code ? getStateName(code) : null;
+  if (!code || !stateName) notFound();
 
-  const profile = await getStateProfile(state);
-  if (!profile) notFound();
+  const pathway = getStatePathway(code);
+  if (!pathway) notFound();
 
-  const path = idrStatePath(state);
+  const path = idrStatePath(code);
   const crumbs = [
     { name: "Home", path: "" },
     { name: "Federal IDR", path: "/idr" },
     { name: stateName, path },
   ];
 
-  // Outcome stat reuses the benchmark shape with state-level aggregates.
-  const stateBenchmark: IdrBenchmark = {
-    code: "",
-    state,
-    payerSlug: null,
-    inNetworkMedian: 0,
-    oonAllowed: 0,
-    medicareRate: 0,
-    idrWinRate: profile.idrWinRate,
-    idrMedianPctQpa: profile.idrMedianPctQpa,
-    dataSource: profile.dataSource,
-    updatedAt: "",
-  };
+  const specialtyLinks = SPECIALTIES.map((s) => ({
+    name: `${s.name} denials in ${stateName}`,
+    href: idrStateSpecialtyPath(code, s.slug),
+  }));
 
   const codeLinks = IDR_CODES.slice(0, 24).map((c) => ({
-    name: `${c.shortLabel} (CPT ${c.code})`,
-    href: idrCodeStatePath(c.code, state),
+    name: `${c.shortLabel} denials in ${stateName}`,
+    href: idrCodeStatePath(c.code, code),
   }));
 
-  const specialtyLinks = SPECIALTIES.map((s) => ({
-    name: s.name,
-    href: idrSpecialtyPath(s.slug),
-  }));
-
-  const faqs = stateHubFaqs(profile, stateName);
+  const faqs = stateHubFaqsPain(code, stateName);
 
   return (
     <>
@@ -102,13 +91,8 @@ export default async function StateHubPage({ params }: PageProps) {
         data={[
           webPageJsonLd({
             path,
-            name: `Federal IDR in ${stateName}`,
-            description: `No Surprises Act and federal IDR for out of network surgical claims in ${stateName}.`,
-          }),
-          serviceJsonLd({
-            name: "Sydra NSA IDR software",
-            description: `Software for preparing federal IDR submissions in ${stateName}.`,
-            serviceType: "Healthcare revenue cycle software",
+            name: `Out of network surgical denials in ${stateName}`,
+            description: `Federal IDR for out of network surgical claims in ${stateName}.`,
           }),
           faqPageJsonLd(faqs),
         ]}
@@ -116,44 +100,40 @@ export default async function StateHubPage({ params }: PageProps) {
       <SydraPageShell banded breadcrumb={crumbs}>
         <Section tone="white">
           <EntityHero
-            eyebrow="Federal IDR · State overview"
-            title={`Federal IDR in ${stateName}.`}
-            subtitle="Eligibility pathway and dispute outcomes."
-            lead={`In ${stateName}, the predominant pathway for out of network surgical disputes is ${pathwayLabel(
-              profile.nsaPathway,
-            ).toLowerCase()}, and providers win about ${percent(
-              profile.idrWinRate,
-            )} of disputes. Select a procedure to see payer benchmarks for that code in ${stateName}.`}
+            title={h1State(stateName)}
+            subtitle="Federal IDR for out of network surgical claims."
+            lead={`Out of network surgical claims in ${stateName} are routinely paid below the billed charge. The state pathway plus federal IDR is how surgical practices recover that gap, one denial at a time.`}
           />
         </Section>
 
         <Section tone="neutral">
-          <div className="prose-measure">
-            <h2 className={textStyles.sectionTitle}>
-              How surprise billing disputes work in {stateName}.
-            </h2>
-            <p className={`${textStyles.body} mt-4`}>{profile.stateLawSummary}</p>
-            <LegalFooter className="mt-8" />
-          </div>
+          <StatePathwayBlock pathway={pathway} />
         </Section>
 
         <Section tone="white">
-          <IdrOutcomeStat
-            benchmark={stateBenchmark}
-            codeLabel="surgical disputes"
-            stateName={stateName}
-          />
+          <PromiseAndDisclaimer />
         </Section>
 
         <Section tone="neutral">
+          <WaitHookBlock />
+        </Section>
+
+        <Section tone="white">
           <EntityLinks
-            inline
-            links={codeLinks}
-            title={`Procedure benchmarks in ${stateName}`}
+            links={specialtyLinks}
+            title={`Denials by specialty in ${stateName}`}
           />
           <div className="mt-10">
-            <EntityLinks links={specialtyLinks} title="By specialty" />
+            <EntityLinks
+              inline
+              links={codeLinks}
+              title={`Common procedure denials in ${stateName}`}
+            />
           </div>
+        </Section>
+
+        <Section tone="neutral">
+          <DenialCta href={demoDeepLink({ stateCode: code })} />
         </Section>
 
         <Section tone="white">
@@ -161,7 +141,6 @@ export default async function StateHubPage({ params }: PageProps) {
             heading={`Federal IDR in ${stateName}: common questions.`}
             items={faqs}
           />
-          <SourcesReferences className="mt-12" />
         </Section>
 
         <SydraCtaBand />

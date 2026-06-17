@@ -1,22 +1,42 @@
 import type { MetadataRoute } from "next";
 
-import { RESOURCE_SLUGS } from "@/lib/content/resources/articles";
+import { US_STATES } from "@/lib/constants/us-states";
 import { COMPARISON_SLUGS } from "@/lib/idr/comparisons";
+import { composeDenialReasons, payerAngleIsDistinct } from "@/lib/idr/denial-engine";
+import { NAMED_PAYER_SLUGS } from "@/lib/idr/denial-reasons";
 import { GUIDE_SLUGS } from "@/lib/idr/guides";
-import {
-  getIndexableCodeStatePayers,
-  getIndexableCodeStates,
-} from "@/lib/idr/queries";
+import { CURRENT_WAVE, isIndexable } from "@/lib/idr/indexable";
+import { plainLineLength } from "@/lib/idr/pain-content";
+import { RESOURCE_SLUGS } from "@/lib/content/resources/articles";
 import {
   idrCodePath,
   idrCodeStatePath,
   idrCodeStatePayerPath,
+  idrSpecialtyPath,
   idrStatePath,
+  idrStateSpecialtyPath,
 } from "@/lib/idr/seo";
-import { SPECIALTIES, stateSlug } from "@/lib/idr/taxonomy";
-import { US_STATES } from "@/lib/constants/us-states";
-import { RELEASED_CPT_WAVES, isReleasedCptWave } from "@/lib/seo/phasing";
+import { getStatePathway } from "@/lib/idr/state-pathways";
+import {
+  IDR_CODES,
+  SPECIALTIES,
+  codesForSpecialty,
+  stateSlug,
+} from "@/lib/idr/taxonomy";
+import { RELEASED_CPT_WAVES } from "@/lib/seo/phasing";
 import { siteUrl } from "@/lib/site";
+
+/**
+ * Sitemap index (build spec section 5.4). Child sitemaps split by tier. Each
+ * child lists ONLY pages where isIndexable is true, so the file content is the
+ * single source of truth for what Google may index. As CURRENT_WAVE rises, more
+ * URLs appear automatically. A noindex URL is never listed.
+ *
+ * Deep CPT tiers are large, so they are emitted per released state (each state
+ * carries about 190 code by state pages plus roughly 2,280 code by state by
+ * payer pages, well under the 50,000 URL ceiling). They only appear once wave 3
+ * is live, which keeps the index free of empty children before then.
+ */
 
 type Entry = {
   path: string;
@@ -24,29 +44,27 @@ type Entry = {
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 };
 
-// Guides whose canonical defers to a primary page are excluded so the sitemap
-// emits only canonical URLs (playbook section 7.3).
 const NON_CANONICAL_GUIDE_SLUGS = new Set(["what-is-no-surprises-act-idr"]);
-
 const CPT_ID_PREFIX = "cpt-";
+const NAMED_PAYERS = [...NAMED_PAYER_SLUGS];
 
-/**
- * Split the flat sitemap into a grouped sitemap index. Next auto-creates the
- * index at /sitemap.xml; each child resolves to /sitemap/<id>.xml. Released CPT
- * waves each get their own child (cpt-<stateSlug>), so an unreleased state is
- * absent from the index entirely rather than emitting an empty file.
- */
 export async function generateSitemaps() {
-  const cptWaves = [...RELEASED_CPT_WAVES].map((code) => ({
-    id: `${CPT_ID_PREFIX}${stateSlug(code)}`,
-  }));
-  return [
+  const children: { id: string }[] = [
     { id: "core" },
-    { id: "states" },
     { id: "specialties" },
     { id: "guides" },
-    ...cptWaves,
+    { id: "states" },
   ];
+
+  // The deep CPT tiers only carry indexable URLs once wave 3 is live.
+  if (CURRENT_WAVE >= 3) {
+    children.push({ id: "cpt" });
+    for (const code of RELEASED_CPT_WAVES) {
+      children.push({ id: `${CPT_ID_PREFIX}${stateSlug(code)}` });
+    }
+  }
+
+  return children;
 }
 
 function toSitemap(base: string, now: Date, entries: Entry[]): MetadataRoute.Sitemap {
@@ -59,12 +77,6 @@ function toSitemap(base: string, now: Date, entries: Entry[]): MetadataRoute.Sit
 }
 
 function coreEntries(): Entry[] {
-  const articlePages: Entry[] = RESOURCE_SLUGS.map((slug) => ({
-    path: `/resources/${slug}`,
-    priority: 0.6,
-    changeFrequency: "monthly",
-  }));
-
   const marketingPages: Entry[] = [
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/demo", priority: 0.9, changeFrequency: "monthly" },
@@ -80,14 +92,15 @@ function coreEntries(): Entry[] {
     { path: "/contact", priority: 0.75, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
-    ...articlePages,
-  ];
-
-  // Entity hub pages (always linkable; priority per playbook section 7).
-  const idrIndex: Entry[] = [
     { path: "/idr", priority: 0.86, changeFrequency: "weekly" },
     { path: "/idr/guide", priority: 0.78, changeFrequency: "weekly" },
   ];
+
+  const articlePages: Entry[] = RESOURCE_SLUGS.map((slug) => ({
+    path: `/resources/${slug}`,
+    priority: 0.6,
+    changeFrequency: "monthly",
+  }));
 
   const comparisonPages: Entry[] = COMPARISON_SLUGS.map((slug) => ({
     path: `/compare/${slug}`,
@@ -95,22 +108,13 @@ function coreEntries(): Entry[] {
     changeFrequency: "monthly",
   }));
 
-  return [...marketingPages, ...idrIndex, ...comparisonPages];
-}
-
-function stateEntries(): Entry[] {
-  // State hubs carry reviewed eligibility content and are always indexable, so
-  // every state is emitted regardless of benchmark data tier.
-  return US_STATES.map((s) => ({
-    path: idrStatePath(s.code),
-    priority: 0.84,
-    changeFrequency: "monthly",
-  }));
+  return [...marketingPages, ...articlePages, ...comparisonPages];
 }
 
 function specialtyEntries(): Entry[] {
+  if (!isIndexable({ tier: "specialty" })) return [];
   return SPECIALTIES.map((s) => ({
-    path: `/idr/specialty/${s.slug}`,
+    path: idrSpecialtyPath(s.slug),
     priority: 0.84,
     changeFrequency: "monthly",
   }));
@@ -118,7 +122,8 @@ function specialtyEntries(): Entry[] {
 
 function guideEntries(): Entry[] {
   return GUIDE_SLUGS.filter(
-    (slug) => !NON_CANONICAL_GUIDE_SLUGS.has(slug),
+    (slug) =>
+      !NON_CANONICAL_GUIDE_SLUGS.has(slug) && isIndexable({ tier: "guide" }),
   ).map((slug) => ({
     path: `/idr/guide/${slug}`,
     priority: 0.7,
@@ -126,46 +131,120 @@ function guideEntries(): Entry[] {
   }));
 }
 
-async function cptEntries(targetStateSlug: string): Promise<Entry[]> {
-  // Only emit data-backed (indexable) entity pages. Seed-only environments
-  // contribute nothing here, which is the intended gating behavior.
-  const [codeStates, codeStatePayers] = await Promise.all([
-    getIndexableCodeStates(),
-    getIndexableCodeStatePayers(),
-  ]);
+/** State hubs plus specialty by state pages, indexable only. */
+function stateEntries(): Entry[] {
+  const entries: Entry[] = [];
+  for (const s of US_STATES) {
+    const pathway = getStatePathway(s.code);
+    const isLaunch = pathway?.isLaunch ?? false;
 
-  const inWave = (state: string) =>
-    stateSlug(state) === targetStateSlug && isReleasedCptWave(state);
+    if (
+      isIndexable({
+        tier: "state",
+        hasStatePathway: !!pathway,
+        stateCode: s.code,
+        isLaunchState: isLaunch,
+      })
+    ) {
+      entries.push({
+        path: idrStatePath(s.code),
+        priority: 0.84,
+        changeFrequency: "monthly",
+      });
+    }
 
-  const codeHubPaths = new Map<string, Entry>();
-  const codeStatePages: Entry[] = [];
-  for (const { code, state } of codeStates) {
-    if (!inWave(state)) continue;
-    codeStatePages.push({
-      path: idrCodeStatePath(code, state),
-      priority: 0.9,
-      changeFrequency: "monthly",
-    });
-    codeHubPaths.set(code, {
-      path: idrCodePath(code),
-      priority: 0.86,
-      changeFrequency: "monthly",
-    });
+    for (const specialty of SPECIALTIES) {
+      const codes = codesForSpecialty(specialty.slug);
+      const first = codes[0];
+      const reasonCount = first
+        ? composeDenialReasons({ code: first.code, stateName: s.name }).reasons
+            .length
+        : 0;
+      if (
+        isIndexable({
+          tier: "specialtyState",
+          hasStatePathway: !!pathway,
+          reasonCount,
+          stateCode: s.code,
+          isLaunchState: isLaunch,
+        })
+      ) {
+        entries.push({
+          path: idrStateSpecialtyPath(s.code, specialty.slug),
+          priority: 0.82,
+          changeFrequency: "monthly",
+        });
+      }
+    }
   }
+  return entries;
+}
 
-  const codeStatePayerPages: Entry[] = codeStatePayers
-    .filter(({ state }) => inWave(state))
-    .map(({ code, state, payerSlug }) => ({
-      path: idrCodeStatePayerPath(code, state, payerSlug),
-      priority: 0.88,
-      changeFrequency: "monthly",
-    }));
+/** CPT all states hubs, indexable only (wave 3+). */
+function cptHubEntries(): Entry[] {
+  return IDR_CODES.filter((c) =>
+    isIndexable({ tier: "cpt", plainLineLength: plainLineLength(c.code) }),
+  ).map((c) => ({
+    path: idrCodePath(c.code),
+    priority: 0.86,
+    changeFrequency: "monthly",
+  }));
+}
 
-  return [
-    ...Array.from(codeHubPaths.values()),
-    ...codeStatePages,
-    ...codeStatePayerPages,
-  ];
+/** CPT by state and CPT by state by payer for one released state, indexable only. */
+function cptStateEntries(targetStateSlug: string): Entry[] {
+  const state = US_STATES.find((s) => stateSlug(s.code) === targetStateSlug);
+  if (!state) return [];
+  const pathway = getStatePathway(state.code);
+  const entries: Entry[] = [];
+
+  for (const c of IDR_CODES) {
+    const code = c.code;
+    const pll = plainLineLength(code);
+    const reasonCount = composeDenialReasons({ code, stateName: state.name })
+      .reasons.length;
+
+    if (
+      isIndexable({
+        tier: "cptState",
+        hasStatePathway: !!pathway,
+        reasonCount,
+        plainLineLength: pll,
+        stateCode: state.code,
+      })
+    ) {
+      entries.push({
+        path: idrCodeStatePath(code, state.code),
+        priority: 0.9,
+        changeFrequency: "monthly",
+      });
+    }
+
+    for (const payer of NAMED_PAYERS) {
+      const payerReasonCount = composeDenialReasons({
+        code,
+        stateName: state.name,
+        payerSlug: payer,
+      }).reasons.length;
+      if (
+        isIndexable({
+          tier: "cptStatePayer",
+          hasStatePathway: !!pathway,
+          reasonCount: payerReasonCount,
+          plainLineLength: pll,
+          stateCode: state.code,
+          payerAngleIsDistinct: payerAngleIsDistinct(code, payer),
+        })
+      ) {
+        entries.push({
+          path: idrCodeStatePayerPath(code, state.code, payer),
+          priority: 0.88,
+          changeFrequency: "monthly",
+        });
+      }
+    }
+  }
+  return entries;
 }
 
 export default async function sitemap(props: {
@@ -176,13 +255,13 @@ export default async function sitemap(props: {
   const now = new Date();
 
   if (id === "core") return toSitemap(base, now, coreEntries());
-  if (id === "states") return toSitemap(base, now, stateEntries());
   if (id === "specialties") return toSitemap(base, now, specialtyEntries());
   if (id === "guides") return toSitemap(base, now, guideEntries());
+  if (id === "states") return toSitemap(base, now, stateEntries());
+  if (id === "cpt") return toSitemap(base, now, cptHubEntries());
 
   if (id.startsWith(CPT_ID_PREFIX)) {
-    const targetStateSlug = id.slice(CPT_ID_PREFIX.length);
-    return toSitemap(base, now, await cptEntries(targetStateSlug));
+    return toSitemap(base, now, cptStateEntries(id.slice(CPT_ID_PREFIX.length)));
   }
 
   return [];

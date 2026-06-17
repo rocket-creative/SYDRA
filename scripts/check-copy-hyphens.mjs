@@ -25,6 +25,9 @@ const FILES = [
   "src/lib/idr/guides.ts",
   "src/lib/idr/comparisons.ts",
   "src/lib/idr/proof-points.ts",
+  "src/lib/idr/denial-reasons.ts",
+  "src/lib/idr/state-pathways.ts",
+  "src/lib/idr/pain-content.ts",
 ];
 
 /** Spaceless tokens: slugs, ids, and import specifiers. Never rendered prose. */

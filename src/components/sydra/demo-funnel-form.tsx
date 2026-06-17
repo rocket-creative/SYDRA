@@ -71,9 +71,14 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   const entityState = US_STATES.some((s) => s.code === entityStateRaw)
     ? entityStateRaw
     : "";
+  const entityPayer = (searchParams.get("payer") ?? "").trim();
   const entityMessage = entityCode
-    ? `Interested in CPT ${entityCode}${entityState ? ` in ${entityState}` : ""}.`
-    : "";
+    ? `Interested in CPT ${entityCode}${entityState ? ` in ${entityState}` : ""}${
+        entityPayer ? ` denied by ${entityPayer}` : ""
+      }.`
+    : entityPayer
+      ? `Interested in disputing ${entityPayer} denials.`
+      : "";
 
   const handleStepOneSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {

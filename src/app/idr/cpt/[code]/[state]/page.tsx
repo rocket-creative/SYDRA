@@ -1,38 +1,48 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { BenchmarkTable } from "@/components/idr/benchmark-table";
-import { EligibilityBlock } from "@/components/idr/eligibility-block";
-import { EntityConversion } from "@/components/idr/entity-conversion";
 import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
-import { IdrOutcomeStat } from "@/components/idr/idr-outcome-stat";
+import {
+  CodeLine,
+  DenialCta,
+  DenialReasons,
+  PromiseAndDisclaimer,
+  StatePathwayBlock,
+  WaitHookBlock,
+} from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
-import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
-import { codeStateFaqs, codeStateLead } from "@/lib/idr/content";
-import { getCodeStateContext } from "@/lib/idr/queries";
+import { isNamedPayer } from "@/lib/idr/denial-reasons";
+import { isIndexable } from "@/lib/idr/indexable";
 import {
-  codeStateMetadata,
+  composeDenialReasons,
+  cptStateFaqs,
+  cptStateMeta,
+  h1CptState,
+  painCodeLine,
+  plainLineLength,
+} from "@/lib/idr/pain-content";
+import {
+  demoDeepLink,
   idrCodePath,
   idrCodeStatePath,
   idrCodeStatePayerPath,
   idrStatePath,
+  idrStateSpecialtyPath,
 } from "@/lib/idr/seo";
+import { getStatePathway } from "@/lib/idr/state-pathways";
 import {
   getCodeMeta,
-  getPayerMeta,
   getSpecialtyMeta,
+  getStateName,
+  IDR_PAYERS,
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
-import {
-  datasetJsonLd,
-  faqPageJsonLd,
-  serviceJsonLd,
-} from "@/lib/seo/json-ld";
+import { faqPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -41,117 +51,127 @@ type PageProps = {
   params: Promise<{ code: string; state: string }>;
 };
 
+const NOT_FOUND_META: Metadata = {
+  title: "Not found | Sydra",
+  robots: { index: false, follow: false },
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { code, state: rawState } = await params;
-  const state = stateCodeFromSlug(rawState);
-  const ctx = state ? await getCodeStateContext(code, state) : null;
-  if (!state || !ctx) {
-    return { title: "Not found | Sydra", robots: { index: false, follow: false } };
+  const stateCode = stateCodeFromSlug(rawState);
+  const codeMeta = getCodeMeta(code);
+  const stateName = stateCode ? getStateName(stateCode) : null;
+  if (!stateCode || !codeMeta || !stateName) {
+    return NOT_FOUND_META;
   }
-  return codeStateMetadata({
-    code,
-    state,
-    codeLabel: ctx.codeLabel,
-    stateName: ctx.stateName,
-    dataSource: ctx.benchmark.dataSource,
+
+  const proc = codeMeta.shortLabel;
+  const pathway = getStatePathway(stateCode);
+  const reasonCount = composeDenialReasons({ code, stateName }).reasons.length;
+  const indexable = isIndexable({
+    tier: "cptState",
+    hasStatePathway: !!pathway,
+    reasonCount,
+    plainLineLength: plainLineLength(code),
+    stateCode,
   });
+
+  return cptStateMeta({ code, stateCode, proc, stateName, indexable });
 }
 
-export default async function CodeStatePage({ params }: PageProps) {
+export default async function CptStatePage({ params }: PageProps) {
   const { code, state: rawState } = await params;
-  const state = stateCodeFromSlug(rawState);
-  const ctx = state ? await getCodeStateContext(code, state) : null;
-  if (!state || !ctx) notFound();
-
+  const stateCode = stateCodeFromSlug(rawState);
   const codeMeta = getCodeMeta(code);
-  const { codeLabel, stateName, benchmark, payerBenchmarks, stateProfile } = ctx;
-  const isSeed = benchmark.dataSource === "seed";
-  const path = idrCodeStatePath(code, state);
+  const stateName = stateCode ? getStateName(stateCode) : null;
+
+  if (!stateCode || !codeMeta || !stateName) {
+    notFound();
+  }
+
+  const pathway = getStatePathway(stateCode);
+  if (!pathway) notFound();
+
+  const proc = codeMeta.shortLabel;
+  const specialtySlug = codeMeta.specialty;
+  const specialtyMeta = getSpecialtyMeta(specialtySlug);
+  const denial = composeDenialReasons({ code, stateName });
 
   const crumbs = [
     { name: "Home", path: "" },
     { name: "Federal IDR", path: "/idr" },
-    { name: `${codeLabel} (CPT ${code})`, path: idrCodePath(code) },
-    { name: stateName, path },
+    { name: `${proc} (CPT ${code})`, path: idrCodePath(code) },
+    { name: stateName, path: idrCodeStatePath(code, stateCode) },
   ];
 
-  const faqs = codeStateFaqs(ctx);
+  const faqs = cptStateFaqs({ proc, code, stateName, stateCode });
 
-  // Payer pages we hold data for + sibling states for crawl depth.
-  const payerLinks = payerBenchmarks
-    .filter((row) => row.payerSlug && getPayerMeta(row.payerSlug)?.hasMrf)
-    .map((row) => ({
-      name: `${getPayerMeta(row.payerSlug ?? "")?.name ?? row.payerSlug}`,
-      href: idrCodeStatePayerPath(code, state, row.payerSlug ?? ""),
-    }));
+  const payerLinks = IDR_PAYERS.filter((p) => isNamedPayer(p.slug)).map((p) => ({
+    name: `${p.name} denials on this code in ${stateName}`,
+    href: idrCodeStatePayerPath(code, stateCode, p.slug),
+  }));
 
-  const specialty = codeMeta ? getSpecialtyMeta(codeMeta.specialty) : null;
+  const keepExploringLinks = [
+    { name: `${proc} denied in any state`, href: idrCodePath(code) },
+    {
+      name: `All out of network surgical denials in ${stateName}`,
+      href: idrStatePath(stateCode),
+    },
+    ...(specialtyMeta
+      ? [
+          {
+            name: `${specialtyMeta.name} denials in ${stateName}`,
+            href: idrStateSpecialtyPath(stateCode, specialtySlug),
+          },
+        ]
+      : []),
+  ];
 
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          datasetJsonLd({
-            path,
-            name: `${codeLabel} (CPT ${code}) payment benchmarks in ${stateName}`,
-            description: `In network median, Medicare rate, out of network allowed amount, and federal IDR outcomes for ${codeLabel} in ${stateName}.`,
-            dateModified: benchmark.updatedAt,
-          }),
+          faqPageJsonLd(faqs),
           serviceJsonLd({
             name: "Sydra NSA IDR software",
-            description: `Software that prepares the federal IDR submission for ${codeLabel} (CPT ${code}) disputes.`,
+            description: `Software that prepares the federal IDR submission for ${proc} disputes.`,
             serviceType: "Healthcare revenue cycle software",
           }),
-          faqPageJsonLd(faqs),
         ]}
       />
       <SydraPageShell banded breadcrumb={crumbs}>
         <Section tone="white">
           <EntityHero
             eyebrow={`Federal IDR · ${stateName}`}
-            title={`Federal IDR for ${codeLabel} (CPT ${code}) in ${stateName}.`}
-            subtitle="Payer benchmarks, eligibility, and dispute outcomes."
-            lead={codeStateLead(ctx)}
+            title={h1CptState(proc, stateName)}
+            subtitle="The denial, the code, and the path to recovery."
+            lead={`When an out of network ${proc} claim in ${stateName} is paid below the billed charge or denied outright, that gap is what federal independent dispute resolution exists to recover. We prepare the submission and you keep the recovery.`}
           />
         </Section>
 
         <Section tone="neutral">
-          <BenchmarkTable
-            aggregate={benchmark}
-            codeLabel={codeLabel}
-            isSeed={isSeed}
-            payerRows={payerBenchmarks}
-            stateName={stateName}
-          />
+          <CodeLine line={painCodeLine(code)} />
         </Section>
 
         <Section tone="white">
-          <IdrOutcomeStat
-            benchmark={benchmark}
-            codeLabel={codeLabel}
-            stateName={stateName}
-          />
+          <DenialReasons denial={denial} />
         </Section>
 
         <Section tone="neutral">
-          <EligibilityBlock
-            codeLabel={codeLabel}
-            profile={stateProfile}
-            stateName={stateName}
-          />
+          <PromiseAndDisclaimer />
         </Section>
 
         <Section tone="white">
-          <EntityConversion
-            code={code}
-            codeLabel={codeLabel}
-            defaultAvgDisputedAmount={
-              benchmark.inNetworkMedian - benchmark.oonAllowed
-            }
-            state={state}
-            stateName={stateName}
-          />
+          <WaitHookBlock />
+        </Section>
+
+        <Section tone="neutral">
+          <StatePathwayBlock pathway={pathway} />
+        </Section>
+
+        <Section tone="white">
+          <DenialCta href={demoDeepLink({ code, stateCode })} />
         </Section>
 
         <Section tone="neutral">
@@ -163,26 +183,11 @@ export default async function CodeStatePage({ params }: PageProps) {
             {payerLinks.length > 0 ? (
               <EntityLinks
                 links={payerLinks}
-                title={`Compare payers for CPT ${code} in ${stateName}`}
+                title={`Named payers denying ${proc} in ${stateName}`}
               />
             ) : null}
-            <EntityLinks
-              links={[
-                { name: `${codeLabel} in all states`, href: idrCodePath(code) },
-                { name: `All federal IDR in ${stateName}`, href: idrStatePath(state) },
-                ...(specialty
-                  ? [
-                      {
-                        name: `${specialty.name} IDR codes`,
-                        href: `/idr/specialty/${specialty.slug}`,
-                      },
-                    ]
-                  : []),
-              ]}
-              title="Keep exploring"
-            />
+            <EntityLinks links={keepExploringLinks} title="Keep exploring" />
           </div>
-          <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>
     </>

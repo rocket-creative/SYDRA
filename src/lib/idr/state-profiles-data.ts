@@ -38,7 +38,7 @@ export const STATE_PROFILE_INPUTS: Record<string, StateProfileInput> = {
     pathway: "mixed",
     winRate: 0.85,
     lawSummary:
-      "Fully insured commercial plans may fall under California's state process. Self funded ERISA plans route to federal IDR. Split the page by plan type. California's AB 72 governs many fully insured disputes, so plan type decides the path. Self funded plans still route to federal IDR.",
+      "Fully insured commercial plans may fall under California's state process. Self funded ERISA plans route to federal IDR. California's AB 72 governs many fully insured disputes, so plan type decides the path. Self funded plans still route to federal IDR.",
   },
   CO: {
     pathway: "mixed",
@@ -206,7 +206,7 @@ export const STATE_PROFILE_INPUTS: Record<string, StateProfileInput> = {
     pathway: "mixed",
     winRate: 0.81,
     lawSummary:
-      "New York's surprise bill law uses baseball arbitration and references the FAIR Health 80th percentile benchmark. It allows a three year lookback on commercial claims. Self funded plans route to federal IDR; fully insured commercial disputes may fall under the New York process. Split the page by plan type and lead with the three year window. New York lets providers challenge payments going back three years. Claims a practice wrote off as dead can be revived. This is the headline of the New York surface.",
+      "New York's surprise bill law uses baseball arbitration and references the FAIR Health 80th percentile benchmark. It allows a three year lookback on commercial claims. Self funded plans route to federal IDR; fully insured commercial disputes may fall under the New York process. New York lets providers challenge payments going back three years. Claims a practice wrote off as dead can be revived. This is the headline of the New York surface.",
   },
   NC: {
     pathway: "federal",
@@ -272,7 +272,7 @@ export const STATE_PROFILE_INPUTS: Record<string, StateProfileInput> = {
     pathway: "mixed",
     winRate: 0.9,
     lawSummary:
-      "Texas has a state arbitration process for many fully insured plans, while self funded ERISA plans route to federal IDR. Federal win rates here are among the highest in the country. Split the page by plan type. Texas drives huge federal IDR volume and provider win rates run roughly 89 to 91 percent. The state also runs its own process for many fully insured plans, so plan type decides the path.",
+      "Texas has a state arbitration process for many fully insured plans, while self funded ERISA plans route to federal IDR. Federal win rates here are among the highest in the country. Texas drives huge federal IDR volume and provider win rates run roughly 89 to 91 percent. The state also runs its own process for many fully insured plans, so plan type decides the path.",
   },
   UT: {
     pathway: "federal",

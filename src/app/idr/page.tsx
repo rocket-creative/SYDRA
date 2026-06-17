@@ -10,6 +10,7 @@ import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { US_STATES } from "@/lib/constants/us-states";
+import { DISCLAIMER } from "@/lib/idr/copy";
 import { GUIDES } from "@/lib/idr/guides";
 import { PROOF_POINTS } from "@/lib/idr/proof-points";
 import { idrSpecialtyPath, idrStatePath } from "@/lib/idr/seo";
@@ -19,11 +20,11 @@ import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Federal IDR Benchmarks by Code, State, and Payer | Sydra",
+  title: "Out of network surgical claims denied? | Federal IDR | Sydra",
   description:
-    "Payment benchmarks, eligibility, and dispute win rates for surgical out of network claims under the No Surprises Act. Browse federal IDR data by CPT code, state, payer, and specialty.",
+    "Out of network surgical claims get underpaid and denied. See why these claims get denied and how federal IDR recovers the gap, by procedure, state, and payer. We file it, you keep the recovery.",
   path: "/idr",
-  ogImageAlt: "Federal IDR benchmarks by code, state, and payer.",
+  ogImageAlt: "Out of network surgical denials and federal IDR by code, state, and payer.",
 });
 
 const crumbs = [
@@ -62,9 +63,9 @@ export default function IdrIndexPage() {
         <Section tone="white">
           <EntityHero
             eyebrow="No Surprises Act"
-            title="Federal IDR benchmarks for surgical billing teams."
-            subtitle="By code, state, payer, and specialty."
-            lead="The code is the spine; the dollar figures are public, mandated data. Browse payer benchmarks, eligibility, and dispute win rates for the out of network surgical claims your team disputes most."
+            title="Out of network surgical claims denied or underpaid?"
+            subtitle="Federal IDR, by code, state, payer, and specialty."
+            lead="Out of network surgical claims are routinely paid below the billed charge or denied outright. Find your procedure, state, and payer to see why these claims get denied and how federal IDR recovers the gap. We build the submission and you keep the recovery."
           />
           <p className={`${textStyles.meta} mt-6`}>
             New to this? Start with{" "}
@@ -84,11 +85,11 @@ export default function IdrIndexPage() {
         </Section>
 
         <Section tone="neutral">
-          <h2 className={textStyles.sectionTitle}>By the numbers.</h2>
+          <h2 className={textStyles.sectionTitle}>The federal record.</h2>
           <p className={`${textStyles.body} mt-3 prose-measure`}>
-            The public federal IDR record on win rates, award multiples, and
-            volume. Every figure is sourced and dated, and is reverified against
-            the current CMS public use file before it drives a benchmark page.
+            The published federal IDR record across all disputes. These are
+            aggregate federal figures, sourced and dated, not a prediction about
+            any one claim.
           </p>
           <dl className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {PROOF_POINTS.map((point) => (
@@ -106,6 +107,7 @@ export default function IdrIndexPage() {
               </div>
             ))}
           </dl>
+          <p className={`${textStyles.meta} mt-8 prose-measure`}>{DISCLAIMER}</p>
         </Section>
 
         <Section tone="white">

@@ -1,33 +1,47 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { EntityConversion } from "@/components/idr/entity-conversion";
 import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
-import { IdrOutcomeStat } from "@/components/idr/idr-outcome-stat";
-import { LegalFooter } from "@/components/idr/legal-footer";
+import {
+  CodeLine,
+  DenialCta,
+  DenialReasons,
+  PromiseAndDisclaimer,
+  StatePathwayBlock,
+  WaitHookBlock,
+} from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
-import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
-import { multiple, percent, usd } from "@/lib/idr/format";
-import { getCodeStatePayerBenchmark } from "@/lib/idr/queries";
+import { payerAngleIsDistinct } from "@/lib/idr/denial-engine";
+import { isNamedPayer } from "@/lib/idr/denial-reasons";
+import { isIndexable } from "@/lib/idr/indexable";
 import {
-  codeStatePayerMetadata,
+  composeDenialReasons,
+  cptStatePayerFaqs,
+  cptStatePayerMeta,
+  h1CptStatePayer,
+  painCodeLine,
+  plainLineLength,
+} from "@/lib/idr/pain-content";
+import {
+  demoDeepLink,
+  idrCodePath,
   idrCodeStatePath,
   idrCodeStatePayerPath,
-  idrPayerPath,
 } from "@/lib/idr/seo";
+import { getStatePathway } from "@/lib/idr/state-pathways";
 import {
   getCodeMeta,
   getPayerMeta,
   getStateName,
+  IDR_PAYERS,
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
-import { datasetJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
-import { textStyles } from "@/lib/typography";
+import { faqPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -36,79 +50,90 @@ type PageProps = {
   params: Promise<{ code: string; state: string; payer: string }>;
 };
 
+const NOT_FOUND_META: Metadata = {
+  title: "Not found | Sydra",
+  robots: { index: false, follow: false },
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { code, state: rawState, payer } = await params;
-  const state = stateCodeFromSlug(rawState);
+  const stateCode = stateCodeFromSlug(rawState);
   const codeMeta = getCodeMeta(code);
   const payerMeta = getPayerMeta(payer);
-  const stateName = state ? getStateName(state) : null;
-  if (!state || !codeMeta || !payerMeta || !stateName) {
-    return { title: "Not found | Sydra", robots: { index: false, follow: false } };
+  const stateName = stateCode ? getStateName(stateCode) : null;
+  if (!stateCode || !codeMeta || !payerMeta || !stateName || !isNamedPayer(payer)) {
+    return NOT_FOUND_META;
   }
-  const benchmark = await getCodeStatePayerBenchmark(code, state, payer);
-  if (!benchmark) {
-    return { title: "Not found | Sydra", robots: { index: false, follow: false } };
-  }
-  return codeStatePayerMetadata({
+
+  const proc = codeMeta.shortLabel;
+  const pathway = getStatePathway(stateCode);
+  const reasonCount = composeDenialReasons({
     code,
-    state,
-    payerSlug: payer,
-    payerName: payerMeta.name,
-    codeLabel: codeMeta.shortLabel,
     stateName,
-    dataSource: benchmark.dataSource,
+    payerSlug: payer,
+  }).reasons.length;
+  const indexable = isIndexable({
+    tier: "cptStatePayer",
+    hasStatePathway: !!pathway,
+    reasonCount,
+    plainLineLength: plainLineLength(code),
+    stateCode,
+    payerAngleIsDistinct: payerAngleIsDistinct(code, payer),
+  });
+
+  return cptStatePayerMeta({
+    code,
+    stateCode,
+    payerSlug: payer,
+    proc,
+    stateName,
+    payerName: payerMeta.name,
+    indexable,
   });
 }
 
-export default async function CodeStatePayerPage({ params }: PageProps) {
+export default async function CptStatePayerPage({ params }: PageProps) {
   const { code, state: rawState, payer } = await params;
-  const state = stateCodeFromSlug(rawState);
+  const stateCode = stateCodeFromSlug(rawState);
   const codeMeta = getCodeMeta(code);
   const payerMeta = getPayerMeta(payer);
-  const stateName = state ? getStateName(state) : null;
+  const stateName = stateCode ? getStateName(stateCode) : null;
 
-  // Never render a code x payer page without that payer's data for that code
-  // (playbook section 11: otherwise thin + wrong).
-  if (!state || !codeMeta || !payerMeta || !stateName || !payerMeta.hasMrf) {
+  if (!stateCode || !codeMeta || !payerMeta || !stateName || !isNamedPayer(payer)) {
     notFound();
   }
 
-  const benchmark = await getCodeStatePayerBenchmark(code, state, payer);
-  if (!benchmark) notFound();
+  const pathway = getStatePathway(stateCode);
+  if (!pathway) notFound();
 
-  const codeLabel = codeMeta.shortLabel;
+  const proc = codeMeta.shortLabel;
   const payerName = payerMeta.name;
-  const isSeed = benchmark.dataSource === "seed";
-  const path = idrCodeStatePayerPath(code, state, payer);
-  const spread = benchmark.inNetworkMedian - benchmark.oonAllowed;
+  const denial = composeDenialReasons({ code, stateName, payerSlug: payer });
 
+  const path = idrCodeStatePayerPath(code, stateCode, payer);
   const crumbs = [
     { name: "Home", path: "" },
     { name: "Federal IDR", path: "/idr" },
-    { name: `${codeLabel} (CPT ${code})`, path: `/idr/cpt/${code}` },
-    { name: stateName, path: idrCodeStatePath(code, state) },
+    { name: `${proc} (CPT ${code})`, path: idrCodePath(code) },
+    { name: stateName, path: idrCodeStatePath(code, stateCode) },
     { name: payerName, path },
   ];
 
-  const faqs = [
+  const faqs = cptStatePayerFaqs({ proc, code, stateName, stateCode, payerName });
+
+  const otherPayerLinks = IDR_PAYERS.filter(
+    (p) => isNamedPayer(p.slug) && p.slug !== payer,
+  ).map((p) => ({
+    name: `${p.name} denials on this code in ${stateName}`,
+    href: idrCodeStatePayerPath(code, stateCode, p.slug),
+  }));
+
+  const keepExploringLinks = [
     {
-      q: `How does ${payerName} pay CPT ${code} out of network in ${stateName}?`,
-      a: `${payerName} allows roughly ${usd(
-        benchmark.oonAllowed,
-      )} out of network for ${codeLabel} in ${stateName}, against an in network median near ${usd(
-        benchmark.inNetworkMedian,
-      )} and a Medicare benchmark of ${usd(
-        benchmark.medicareRate,
-      )}. The gap is the basis for a federal IDR dispute.`,
+      name: `All payers denying ${proc} in ${stateName}`,
+      href: idrCodeStatePath(code, stateCode),
     },
-    {
-      q: `What are the odds of winning an IDR dispute against ${payerName}?`,
-      a: `For comparable ${codeLabel} disputes in ${stateName}, providers prevail in about ${percent(
-        benchmark.idrWinRate,
-      )} of cases, with median awards around ${multiple(
-        benchmark.idrMedianPctQpa,
-      )} the qualifying payment amount.`,
-    },
+    { name: `${proc} denied in any state`, href: idrCodePath(code) },
   ];
 
   return (
@@ -116,94 +141,62 @@ export default async function CodeStatePayerPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          datasetJsonLd({
-            path,
-            name: `${payerName} payment benchmarks for ${codeLabel} (CPT ${code}) in ${stateName}`,
-            description: `${payerName} out of network allowed amount, in network median, Medicare rate, and federal IDR outcomes for ${codeLabel} in ${stateName}.`,
-            dateModified: benchmark.updatedAt,
-          }),
           faqPageJsonLd(faqs),
+          serviceJsonLd({
+            name: "Sydra NSA IDR software",
+            description: `Software that prepares the federal IDR submission for ${proc} disputes.`,
+            serviceType: "Healthcare revenue cycle software",
+          }),
         ]}
       />
       <SydraPageShell banded breadcrumb={crumbs}>
         <Section tone="white">
           <EntityHero
             eyebrow={`${payerName} · ${stateName}`}
-            title={`${payerName} IDR for ${codeLabel} (CPT ${code}) in ${stateName}.`}
-            subtitle="What this payer allows and what IDR awards."
-            lead={`${payerName} allows around ${usd(
-              benchmark.oonAllowed,
-            )} out of network for ${codeLabel} in ${stateName}, about ${usd(
-              spread,
-            )} below the in network median. Federal IDR is how surgical practices recover that gap.`}
+            title={h1CptStatePayer(proc, stateName, payerName)}
+            subtitle="The denial, the code, and the path to recovery."
+            lead={`${payerName} paid your out of network ${proc} in ${stateName} below the billed charge, or denied it outright. That gap is what federal independent dispute resolution exists to recover, and we prepare the submission for you.`}
           />
         </Section>
 
         <Section tone="neutral">
-          <h2 className={textStyles.sectionTitle}>
-            {payerName} benchmarks for CPT {code}.
-          </h2>
-          <dl className="mt-8 grid gap-px overflow-hidden border border-rule bg-rule sm:grid-cols-3">
-            <div className="bg-white p-6">
-              <dt className="type-caption text-body">In network median</dt>
-              <dd className="mt-3 text-2xl font-light tabular-nums text-brand">
-                {usd(benchmark.inNetworkMedian)}
-              </dd>
-            </div>
-            <div className="bg-white p-6">
-              <dt className="type-caption text-body">Medicare rate</dt>
-              <dd className="mt-3 text-2xl font-light tabular-nums text-brand">
-                {usd(benchmark.medicareRate)}
-              </dd>
-            </div>
-            <div className="bg-white p-6">
-              <dt className="type-caption text-body">{payerName} OON allowed</dt>
-              <dd className="mt-3 text-2xl font-light tabular-nums text-brand">
-                {usd(benchmark.oonAllowed)}
-              </dd>
-            </div>
-          </dl>
-          <p className={`${textStyles.meta} mt-4`}>
-            {isSeed
-              ? "Illustrative placeholder figures pending machine readable file ingestion. Not real negotiated rates."
-              : `Source: ${payerName} Transparency in Coverage machine readable files and CMS Physician Fee Schedule.`}
-          </p>
+          <CodeLine line={painCodeLine(code)} />
         </Section>
 
         <Section tone="white">
-          <IdrOutcomeStat
-            benchmark={benchmark}
-            codeLabel={codeLabel}
-            stateName={stateName}
-          />
+          <DenialReasons denial={denial} />
         </Section>
 
         <Section tone="neutral">
-          <EntityConversion
-            code={code}
-            codeLabel={codeLabel}
-            defaultAvgDisputedAmount={spread}
-            state={state}
-            stateName={stateName}
-          />
+          <PromiseAndDisclaimer />
         </Section>
 
         <Section tone="white">
+          <WaitHookBlock />
+        </Section>
+
+        <Section tone="neutral">
+          <StatePathwayBlock pathway={pathway} />
+        </Section>
+
+        <Section tone="white">
+          <DenialCta href={demoDeepLink({ code, stateCode, payerSlug: payer })} />
+        </Section>
+
+        <Section tone="neutral">
           <EntityFaq items={faqs} />
-          <div className="mt-12">
-            <EntityLinks
-              links={[
-                {
-                  name: `All payers for ${codeLabel} in ${stateName}`,
-                  href: idrCodeStatePath(code, state),
-                },
-                { name: `${payerName} IDR disputes`, href: idrPayerPath(payer) },
-              ]}
-              title="Keep exploring"
-            />
+        </Section>
+
+        <Section tone="white">
+          <div className="grid gap-12 md:grid-cols-2">
+            {otherPayerLinks.length > 0 ? (
+              <EntityLinks
+                links={otherPayerLinks}
+                title={`Other payers denying this code in ${stateName}`}
+              />
+            ) : null}
+            <EntityLinks links={keepExploringLinks} title="Keep exploring" />
           </div>
-          <LegalFooter className="mt-10" />
-          <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>
     </>

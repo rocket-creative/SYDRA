@@ -54,6 +54,24 @@ export function idrSpecialtyPath(slug: string): string {
   return `/idr/specialty/${slug}`;
 }
 
+export function idrStateSpecialtyPath(state: string, specialtySlug: string): string {
+  return `/idr/state/${stateSlug(state)}/${specialtySlug}`;
+}
+
+/** Prefilled demo deep link carrying the page's claim context (spec section 3.8). */
+export function demoDeepLink(input: {
+  code?: string;
+  stateCode?: string;
+  payerSlug?: string;
+}): string {
+  const params = new URLSearchParams();
+  if (input.code) params.set("code", input.code);
+  if (input.stateCode) params.set("state", input.stateCode);
+  if (input.payerSlug) params.set("payer", input.payerSlug);
+  const qs = params.toString();
+  return qs ? `/demo?${qs}` : "/demo";
+}
+
 // --- Metadata factories ---
 
 export function codeStateMetadata(input: {
