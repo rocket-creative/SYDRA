@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
 import { LegalFooter } from "@/components/idr/legal-footer";
@@ -11,6 +12,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { stateHubFaqs } from "@/lib/idr/content";
 import { pathwayLabel, percent } from "@/lib/idr/format";
 import { getStateProfile } from "@/lib/idr/queries";
 import {
@@ -26,7 +28,7 @@ import {
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
 import type { IdrBenchmark } from "@/lib/idr/types";
-import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
 
 export const dynamicParams = true;
@@ -91,6 +93,8 @@ export default async function StateHubPage({ params }: PageProps) {
     href: idrSpecialtyPath(s.slug),
   }));
 
+  const faqs = stateHubFaqs(profile, stateName);
+
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
@@ -106,6 +110,7 @@ export default async function StateHubPage({ params }: PageProps) {
             description: `Software for preparing federal IDR submissions in ${stateName}.`,
             serviceType: "Healthcare revenue cycle software",
           }),
+          faqPageJsonLd(faqs),
         ]}
       />
       <SydraPageShell banded breadcrumb={crumbs}>
@@ -152,7 +157,11 @@ export default async function StateHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <SourcesReferences />
+          <EntityFaq
+            heading={`Federal IDR in ${stateName}: common questions.`}
+            items={faqs}
+          />
+          <SourcesReferences className="mt-12" />
         </Section>
 
         <SydraCtaBand />

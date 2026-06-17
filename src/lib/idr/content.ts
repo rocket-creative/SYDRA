@@ -1,6 +1,7 @@
 import type { EntityFaqItem } from "@/components/idr/entity-faq";
-import { multiple, percent, usd } from "@/lib/idr/format";
+import { multiple, pathwayLabel, percent, usd } from "@/lib/idr/format";
 import type { CodeStateContext } from "@/lib/idr/queries";
+import type { IdrStateProfile } from "@/lib/idr/types";
 
 /**
  * Page copy generated from the data atom. The numbers come from the benchmark,
@@ -47,6 +48,37 @@ export function codeStateFaqs(ctx: CodeStateContext): EntityFaqItem[] {
     {
       q: `What is the deadline to file IDR for this claim?`,
       a: `After open negotiation ends, the No Surprises Act sets a limited window to initiate IDR. Missing it forfeits the dispute, so most teams track the negotiation and initiation deadlines per claim. Sydra flags eligibility and deadline issues before drafting a submission.`,
+    },
+  ];
+}
+
+/**
+ * State hub FAQs. Every answer mirrors data already shown on the state hub page:
+ * the predominant pathway and law summary (eligibility section), and the win
+ * rate and median award multiple (outcome stat). No figures are invented here.
+ */
+export function stateHubFaqs(
+  profile: IdrStateProfile,
+  stateName: string,
+): EntityFaqItem[] {
+  return [
+    {
+      q: `Which IDR pathway applies to out of network surgical claims in ${stateName}?`,
+      a: `In ${stateName}, the predominant pathway for out of network surgical disputes is ${pathwayLabel(
+        profile.nsaPathway,
+      ).toLowerCase()}. ${profile.stateLawSummary}`,
+    },
+    {
+      q: `How often do providers win federal IDR disputes in ${stateName}?`,
+      a: `Providers prevail in about ${percent(
+        profile.idrWinRate,
+      )} of federal IDR disputes in ${stateName}, with median awards landing around ${multiple(
+        profile.idrMedianPctQpa,
+      )} the insurer qualifying payment amount.`,
+    },
+    {
+      q: `How do I confirm whether a specific claim routes to federal or state IDR in ${stateName}?`,
+      a: `Self funded ERISA plans follow the federal IDR process, while some fully insured plans follow a state pathway. Confirm the plan type for your specific claim against the CMS applicability chart before initiating a dispute.`,
     },
   ];
 }

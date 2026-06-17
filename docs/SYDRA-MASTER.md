@@ -587,8 +587,6 @@ outcomes, not what a product team thought an IDR submission should look like.
 
 ## H2: Dr. John M. Abrahams, MD — Founder
 
-[PHOTO: Real headshot. Required. Not placeholder.]
-
 Dr. John M. Abrahams, MD
 Board Certified Neurosurgeon · Fellow, American Association of Neurological Surgeons (FAANS)
 Past President, Brain and Spine Surgeons of New York · Founder, Kronos Health
@@ -621,7 +619,6 @@ Add Person schema for Dr. Abrahams on this page:
 
 ## H2: Heisha Rivera — Director of Revenue Cycle
 
-[PHOTO: available on kronosrevenue.health — use same image]
 Heisha Rivera · Director of Revenue Cycle Operations · Kronos Health
 
 Heisha leads the RCM operation at Kronos Revenue and the Sydra + Kronos Support team.
