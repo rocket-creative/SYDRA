@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 
 import type { ReactNode } from "react";
 
+import { trackLeadGA4 } from "@/lib/analytics/ga4";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -78,6 +79,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
       setState({ status: "submitting" });
 
       const formData = new FormData(event.currentTarget);
+      const productInterest = formData.get("productInterest");
       const payload = {
         practiceName: formData.get("practiceName"),
         name: formData.get("name"),
@@ -86,7 +88,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
         phone: formData.get("phone"),
         state: formData.get("state"),
         disputesPerMonth: formData.get("disputesPerMonth"),
-        productInterest: formData.get("productInterest"),
+        productInterest,
         state_tracking: tracking.state,
         utm_source: tracking.utm_source,
         utm_medium: tracking.utm_medium,
@@ -110,6 +112,9 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           return;
         }
 
+        trackLeadGA4(
+          typeof productInterest === "string" ? productInterest : undefined,
+        );
         setState({ status: "success" });
       } catch {
         setState({

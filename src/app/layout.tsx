@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 import { GoogleAdsTag } from "@/components/analytics/google-ads";
+import { GA4_ID } from "@/lib/analytics/ga4";
 import { HOME_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
 import { PageTransition } from "@/components/motion/page-transition";
@@ -25,9 +27,14 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   ...HOME_METADATA,
+  ...(gscVerification
+    ? { verification: { google: gscVerification } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -40,6 +47,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col antialiased">
         <PageTransition>{children}</PageTransition>
         <GoogleAdsTag />
+        {GA4_ID ? <GoogleAnalytics gaId={GA4_ID} /> : null}
       </body>
     </html>
   );

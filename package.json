@@ -11,6 +11,7 @@
     "seed": "tsx supabase/seed.ts"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.9",
     "@supabase/supabase-js": "^2.108.2",
     "framer-motion": "^12.38.0",
     "next": "16.2.5",

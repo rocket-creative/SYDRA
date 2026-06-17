@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
+import { trackLeadGA4 } from "@/lib/analytics/ga4";
 import { trackDemoConversion } from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
@@ -98,13 +99,15 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
       const eobFileName =
         eobFile instanceof File && eobFile.size > 0 ? eobFile.name : "";
 
+      const tierInterest = formData.get("tierInterest");
+
       const payload = {
         ...stepOne,
         specialty: formData.get("specialty"),
         state: formData.get("state"),
         disputesPerMonth: formData.get("disputesPerMonth"),
         idrApproach: formData.get("idrApproach"),
-        tierInterest: formData.get("tierInterest") || undefined,
+        tierInterest: tierInterest || undefined,
         message: formData.get("message") ?? "",
         eobFileName,
         utmSource,
@@ -130,6 +133,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         }
 
         trackDemoConversion();
+        trackLeadGA4(typeof tierInterest === "string" ? tierInterest : undefined);
 
         const data = (await res.json()) as { redirect?: string };
         router.push(data.redirect ?? "/demo/thank-you");

@@ -12,7 +12,7 @@ export function organizationSameAs(): string[] {
   const raw = process.env.NEXT_PUBLIC_ORG_SAME_AS?.trim();
   if (!raw) {
     return [
-      "https://linkedin.com/company/kronos-health",
+      "https://www.linkedin.com/company/kronos-health",
       "https://www.kronosrevenue.health",
     ];
   }
@@ -293,6 +293,15 @@ export function sydraOrganizationJsonLd() {
     description:
       "AI software for federal IDR and NSA disputes. Built by surgeons for surgical billing teams.",
     email: "sales@sydrahealth.com",
+    telephone: "+19147056830",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "244 Westchester Ave, Suite 209",
+      addressLocality: "West Harrison",
+      addressRegion: "NY",
+      postalCode: "10604",
+      addressCountry: "US",
+    },
     parentOrganization: { "@id": KRONOS_HEALTH_ID },
     ...(sameAs.length > 0 ? { sameAs } : {}),
   };

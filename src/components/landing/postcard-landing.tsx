@@ -22,6 +22,7 @@ import {
   kronosHealthOrganizationJsonLd,
   personJsonLd,
   serviceJsonLd,
+  softwareApplicationJsonLd,
   sydraOrganizationJsonLd,
   sydraWebsiteJsonLd,
   webPageJsonLd,
@@ -44,6 +45,7 @@ export function PostcardLanding({
   const jsonLd = [
     kronosHealthOrganizationJsonLd(),
     sydraOrganizationJsonLd(),
+    softwareApplicationJsonLd(),
     sydraWebsiteJsonLd(),
     webPageJsonLd({
       path: "",

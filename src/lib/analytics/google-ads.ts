@@ -22,7 +22,6 @@ type GtagCommand = "js" | "config" | "event" | "set";
 
 declare global {
   interface Window {
-    dataLayer?: unknown[];
     gtag?: (command: GtagCommand, ...args: unknown[]) => void;
   }
 }
