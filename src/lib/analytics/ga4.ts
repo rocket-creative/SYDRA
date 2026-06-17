@@ -7,7 +7,10 @@
  */
 import { sendGAEvent } from "@next/third-parties/google";
 
-export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID ?? "";
+/** GA4 measurement ID for the "Sydra Web" data stream (www.sydrahealth.com). */
+const DEFAULT_GA4_ID = "G-7KPTH8W6N3";
+
+export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID?.trim() || DEFAULT_GA4_ID;
 
 /**
  * Report a demo / lead form submission to GA4 as a `generate_lead` event. Mark
