@@ -9,7 +9,7 @@ export default function DemoThankYouPage() {
     <SydraPageShell
       breadcrumb={[...BREADCRUMBS.demo, { name: "Thank you", path: "/demo/thank-you" }]}
       headerVariant="funnel"
-      mainClassName="px-6 py-16 md:px-10 md:py-24"
+      mainClassName="px-5 py-16 md:px-10 md:py-24"
     >
       <div className="mx-auto max-w-xl">
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>

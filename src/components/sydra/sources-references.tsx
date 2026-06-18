@@ -56,7 +56,7 @@ export function SourcesReferences({ className = "" }: SourcesReferencesProps) {
       className={`prose-measure border-t border-rule pt-10 ${className}`}
     >
       <details className="group">
-        <summary className="cursor-pointer list-none text-sm font-medium text-brand marker:content-none [&::-webkit-details-marker]:hidden">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center text-sm font-medium text-brand marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="inline-flex items-center gap-2">
             Sourced references
             <span aria-hidden className="text-body/50 transition group-open:rotate-180">

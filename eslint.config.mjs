@@ -14,6 +14,11 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Standalone ETL tool with its own package.json; not part of the app build.
     "data-pipeline/**",
+    // Generated mobile-harness artifacts (HTML report, screenshots, traces).
+    "tests/mobile/report/**",
+    "tests/mobile/__screenshots__/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 

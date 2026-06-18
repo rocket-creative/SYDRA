@@ -115,7 +115,7 @@ export default function DemoPage() {
               <h2 className={textStyles.subsectionTitle} id="heading-preview">
                 Product preview
               </h2>
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {PRODUCT_SCREENS.map((Screen) => (
                   <Screen key={Screen.name} />
                 ))}

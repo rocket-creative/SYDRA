@@ -61,15 +61,33 @@ export function ContactForm() {
   return (
     <form className="space-y-8" onSubmit={handleSubmit}>
       <FormField id="contact-name" label="Full name" required>
-        <input required aria-required="true" className={editorialInputClass} id="contact-name" name="name" type="text" />
+        <input
+          required
+          aria-required="true"
+          autoComplete="name"
+          className={editorialInputClass}
+          id="contact-name"
+          name="name"
+          type="text"
+        />
       </FormField>
       <FormField id="contact-email" label="Work email" required>
-        <input required aria-required="true" className={editorialInputClass} id="contact-email" name="email" type="email" />
+        <input
+          required
+          aria-required="true"
+          autoComplete="email"
+          className={editorialInputClass}
+          id="contact-email"
+          inputMode="email"
+          name="email"
+          type="email"
+        />
       </FormField>
       <FormField id="contact-practice" label="Practice name" required>
         <input
           required
           aria-required="true"
+          autoComplete="organization"
           className={editorialInputClass}
           id="contact-practice"
           name="practiceName"

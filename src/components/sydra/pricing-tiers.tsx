@@ -188,7 +188,7 @@ export function PricingTiers({ variant, headingLevel }: PricingTiersProps) {
         </div>
       ) : null}
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-10">
+      <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
         {TIERS.map((tier) => (
           <TierBlock key={tier.id} tier={tier} variant={variant} />
         ))}

@@ -30,6 +30,13 @@ yarn-error.log*
 
 *.tsbuildinfo
 
+# Playwright mobile-harness artifacts (regenerate with `npm run test:mobile`)
+/test-results/
+/playwright-report/
+/tests/mobile/report/
+/tests/mobile/__screenshots__/
+/.last-run.json
+
 .vercel
 next-env.d.ts
 

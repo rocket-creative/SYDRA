@@ -72,7 +72,7 @@ export function LaborCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-6 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
             id={claimsId}
             max={CLAIMS_MAX}
             min={CLAIMS_MIN}
@@ -96,7 +96,7 @@ export function LaborCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-6 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
             id={minutesId}
             max={MINUTES_MAX}
             min={MINUTES_MIN}
@@ -120,7 +120,7 @@ export function LaborCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-6 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
             id={rateId}
             max={RATE_MAX}
             min={RATE_MIN}
@@ -150,7 +150,7 @@ export function LaborCalculator({
           {usd(estimate.annualLaborCost)}
         </p>
 
-        <div className={`mt-8 grid grid-cols-2 gap-4 border-t sm:gap-6 ${trackClass} pt-6`}>
+        <div className={`mt-8 grid grid-cols-1 gap-4 border-t sm:grid-cols-2 sm:gap-6 ${trackClass} pt-6`}>
           <div className="min-w-0">
             <p className={`type-caption ${labelClass}`}>By hand, per month</p>
             <p className={`mt-2 break-words text-lg font-light tabular-nums sm:text-xl ${valueClass}`}>

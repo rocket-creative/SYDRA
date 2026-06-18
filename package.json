@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "check:copy": "node scripts/check-copy-hyphens.mjs",
-    "seed": "tsx supabase/seed.ts"
+    "seed": "tsx supabase/seed.ts",
+    "test:mobile": "playwright test",
+    "test:mobile:ui": "playwright test --ui"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.9",
@@ -21,6 +23,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.20.0",

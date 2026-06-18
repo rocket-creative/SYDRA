@@ -36,7 +36,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-5 py-4 md:px-10">
         <Link
           aria-label="Sydra home"
-          className="flex shrink-0 items-center gap-3 transition-opacity duration-300 hover:opacity-90"
+          className="flex min-h-11 shrink-0 items-center gap-3 transition-opacity duration-300 hover:opacity-90"
           href="/"
         >
           <Image

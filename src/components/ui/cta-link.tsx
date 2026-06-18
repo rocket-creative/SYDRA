@@ -10,7 +10,7 @@ type CtaLinkProps = ComponentPropsWithoutRef<typeof Link> & {
 export function CtaLink({ children, className = "", direction = "right", ...props }: CtaLinkProps) {
   return (
     <Link
-      className={`cta-link group inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.08em] text-[var(--color-hero)] transition-colors hover:text-[var(--color-accent)] ${className}`}
+      className={`cta-link group inline-flex min-h-11 items-center gap-2 text-[13px] font-normal uppercase tracking-[0.08em] text-[var(--color-hero)] transition-colors hover:text-[var(--color-accent)] ${className}`}
       {...props}
     >
       <span>{children}</span>

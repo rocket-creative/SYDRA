@@ -82,7 +82,7 @@ export function RecoveryCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-6 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
             id={claimsId}
             max={CLAIMS_MAX}
             min={CLAIMS_MIN}
@@ -106,7 +106,7 @@ export function RecoveryCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-6 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
             id={amountId}
             max={AMOUNT_MAX}
             min={AMOUNT_MIN}
@@ -137,7 +137,7 @@ export function RecoveryCalculator({
           {usd(estimate.annualRecovery)}
         </p>
 
-        <div className={`mt-8 grid grid-cols-2 gap-4 border-t sm:gap-6 ${trackClass} pt-6`}>
+        <div className={`mt-8 grid grid-cols-1 gap-4 border-t sm:grid-cols-2 sm:gap-6 ${trackClass} pt-6`}>
           <div className="min-w-0">
             <p className={`type-caption ${labelClass}`}>Per month</p>
             <p className={`mt-2 break-words text-lg font-light tabular-nums sm:text-xl ${valueClass}`}>

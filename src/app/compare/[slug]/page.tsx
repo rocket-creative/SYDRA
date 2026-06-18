@@ -71,8 +71,33 @@ export default async function ComparePage({ params }: PageProps) {
         </Section>
 
         <Section tone="neutral">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[560px] border-collapse text-left">
+          {/* Mobile: relabeled stacked rows so a three column table never forces
+              horizontal page overflow at 360px. */}
+          <div className="space-y-4 md:hidden">
+            {comparison.rows.map((row) => (
+              <div className="border border-rule p-5" key={row.label}>
+                <p className="type-caption uppercase tracking-[0.08em] text-body/70">
+                  {row.label}
+                </p>
+                <dl className="mt-3 space-y-3">
+                  <div>
+                    <dt className="text-sm font-medium text-brand">Sydra</dt>
+                    <dd className="mt-1 break-words text-sm text-brand">{row.sydra}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm font-medium text-body">
+                      {comparison.alternative}
+                    </dt>
+                    <dd className="mt-1 break-words text-sm text-body">{row.other}</dd>
+                  </div>
+                </dl>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: full comparison table. */}
+          <div className="hidden overflow-x-auto md:block">
+            <table className="w-full border-collapse text-left">
               <caption className="sr-only">{comparison.title}</caption>
               <thead>
                 <tr className="border-b border-rule">

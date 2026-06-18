@@ -179,7 +179,7 @@ export default async function CptStatePage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <div className="grid gap-12 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 md:gap-12">
             {payerLinks.length > 0 ? (
               <EntityLinks
                 links={payerLinks}

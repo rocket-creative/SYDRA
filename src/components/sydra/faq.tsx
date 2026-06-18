@@ -38,7 +38,7 @@ export function SydraFaq() {
                   <CtaLink href="/pricing">See pricing</CtaLink>
                   <CtaLink href="/demo">Schedule a demo</CtaLink>
                   <a
-                    className="cta-link group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-hero)] hover:text-[var(--color-accent)]"
+                    className="cta-link group inline-flex min-h-11 items-center gap-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-hero)] hover:text-[var(--color-accent)]"
                     href={kronosCaseReviewUrl()}
                     rel="noopener noreferrer"
                     target="_blank"

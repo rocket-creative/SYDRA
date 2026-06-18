@@ -296,7 +296,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
             {LANDING_PRODUCT_OPTIONS.map((value) => (
               <label
                 key={value}
-                className="flex cursor-pointer items-center gap-3 text-base text-body"
+                className="flex min-h-[44px] cursor-pointer select-none items-center gap-3 text-base text-body"
               >
                 <input
                   className="h-4 w-4 accent-[var(--color-accent)]"

@@ -75,7 +75,7 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
             </Button>
             <p className="text-sm text-body">
               <a
-                className="text-link font-medium text-[var(--color-kronos-green-dark)] underline decoration-rule underline-offset-4"
+                className="text-link inline-flex min-h-[44px] items-center font-medium text-[var(--color-kronos-green-dark)] underline decoration-rule underline-offset-4"
                 href={salesMailtoHref()}
               >
                 {getSalesEmail()}
