@@ -38,6 +38,16 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async rewrites() {
+    return {
+      // Serve the sitemap index at the canonical /sitemap.xml. Next reserves
+      // that path for the generateSitemaps metadata route (which 404s the bare
+      // path), so a beforeFiles rewrite intercepts it before app routing.
+      beforeFiles: [{ source: "/sitemap.xml", destination: "/sitemap-index.xml" }],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async redirects() {
     return [
       {
