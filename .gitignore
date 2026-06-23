@@ -37,6 +37,10 @@ yarn-error.log*
 /tests/mobile/__screenshots__/
 /.last-run.json
 
+# Lighthouse CI reports (regenerate with `npm run perf:lighthouse`)
+/tests/lighthouse/
+/.lighthouseci/
+
 .vercel
 next-env.d.ts
 

@@ -30,7 +30,7 @@ import {
 } from "@/lib/idr/seo";
 import { getCodeMeta, getSpecialtyMeta } from "@/lib/idr/taxonomy";
 import { US_STATES } from "@/lib/constants/us-states";
-import { serviceJsonLd } from "@/lib/seo/json-ld";
+import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -93,6 +93,11 @@ export default async function CptHubPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
+          webPageJsonLd({
+            path: idrCodePath(code),
+            name: `${proc} (CPT ${code}) federal IDR`,
+            description: `Out of network ${proc} (CPT ${code}) is routinely paid below billed charges or denied. Federal IDR recovers that gap, and Sydra prepares the submission.`,
+          }),
           serviceJsonLd({
             name: "Sydra NSA IDR software",
             description: `Software that prepares the federal IDR submission for ${proc} disputes.`,

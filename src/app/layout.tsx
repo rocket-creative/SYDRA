@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 import { GoogleAdsTag } from "@/components/analytics/google-ads";
+import { WebVitalsReporter } from "@/components/analytics/web-vitals-reporter";
 import { GA4_ID } from "@/lib/analytics/ga4";
 import { HOME_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
         <PageTransition>{children}</PageTransition>
+        <WebVitalsReporter />
         <GoogleAdsTag />
         {GA4_ID ? <GoogleAnalytics gaId={GA4_ID} /> : null}
       </body>

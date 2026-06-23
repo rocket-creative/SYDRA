@@ -33,7 +33,7 @@ import {
   getSpecialtyMeta,
 } from "@/lib/idr/taxonomy";
 import type { SpecialtySlug } from "@/lib/idr/types";
-import { faqPageJsonLd, itemListJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -90,6 +90,11 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
+          webPageJsonLd({
+            path,
+            name: `${meta.name} federal IDR`,
+            description: meta.blurb,
+          }),
           itemListJsonLd(
             codes.map((c) => ({
               name: `${c.shortLabel} (CPT ${c.code})`,

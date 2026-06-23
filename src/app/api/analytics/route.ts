@@ -2,13 +2,17 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const analyticsSchema = z.object({
-  event: z.enum(["page_view", "cta_click"]),
+  event: z.enum(["page_view", "cta_click", "web_vital"]),
   product: z.enum(["sydra", "kronos"]).optional(),
   state: z.string().max(10).optional(),
   utm_source: z.string().max(200).optional(),
   utm_medium: z.string().max(200).optional(),
   utm_content: z.string().max(200).optional(),
   path: z.string().max(500).optional(),
+  metric: z.enum(["LCP", "INP", "CLS", "FCP", "TTFB"]).optional(),
+  value: z.number().nonnegative().max(3_600_000).optional(),
+  rating: z.enum(["good", "needs-improvement", "poor"]).optional(),
+  metric_id: z.string().max(100).optional(),
 });
 
 export async function POST(request: Request) {

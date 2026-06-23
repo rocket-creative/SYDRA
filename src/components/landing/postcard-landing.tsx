@@ -19,6 +19,7 @@ import type { CampaignTracking } from "@/lib/landing/tracking";
 import { buildFaqs } from "@/lib/landing/faqs";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import {
+  breadcrumbJsonLd,
   faqPageJsonLd,
   kronosHealthOrganizationJsonLd,
   personJsonLd,
@@ -44,6 +45,7 @@ export function PostcardLanding({
 }: PostcardLandingProps) {
   const faqs = buildFaqs(stateDisplay);
   const jsonLd = [
+    breadcrumbJsonLd([{ name: "Home", path: "" }]),
     kronosHealthOrganizationJsonLd(),
     sydraOrganizationJsonLd(),
     softwareApplicationJsonLd(),
