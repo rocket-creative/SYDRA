@@ -4,6 +4,7 @@ import { AudiencePaths } from "@/components/landing/audience-paths";
 import { BuiltOnClaude } from "@/components/landing/built-on-claude";
 import { ClosingCta } from "@/components/landing/closing-cta";
 import { Faq } from "@/components/landing/faq";
+import { FederalIdrExplainer } from "@/components/landing/federal-idr-explainer";
 import { FounderNote } from "@/components/landing/founder-note";
 import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/how-it-works";
@@ -81,6 +82,9 @@ export function PostcardLanding({
       </SectionReveal>
       <SectionReveal>
         <HowItWorks />
+      </SectionReveal>
+      <SectionReveal>
+        <FederalIdrExplainer />
       </SectionReveal>
       <SectionReveal>
         <BuiltOnClaude />

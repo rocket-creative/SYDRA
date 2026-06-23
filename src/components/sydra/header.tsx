@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 
 const nav = [
   { href: "/pricing", label: "Pricing" },
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/idr", label: "Federal IDR" },
+  { href: "/how-it-works", label: "How Sydra works" },
+  { href: "/idr", label: "Federal IDR guide" },
   { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -40,7 +40,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           href="/"
         >
           <Image
-            alt=""
+            alt="Sydra - NSA IDR Software"
             className="h-8 w-auto sm:h-9"
             height={36}
             loading="eager"

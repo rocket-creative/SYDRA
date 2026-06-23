@@ -16,17 +16,24 @@ export function buildPostcardMetadata(stateParam?: string): Metadata {
   const stateDisplay = resolveStateDisplay(stateParam);
 
   const title = stateDisplay
-    ? `Stop writing off out of network claims in ${stateDisplay} | Sydra`
-    : "Stop writing off out of network claims | Sydra";
+    ? `NSA IDR Software for Surgical Practices in ${stateDisplay} | Sydra`
+    : "NSA IDR Software for Surgical Practices | Sydra";
 
   const description = stateDisplay
-    ? `Surgeon built NSA IDR software for ${stateDisplay} surgical practices. Your billing team prepares federal IDR submissions in five minutes per claim. Book a free demo.`
-    : "Surgeon built NSA IDR software your billing team runs in five minutes per claim. Prepare federal IDR submissions, keep the recovery, and book a free demo.";
+    ? `Federal IDR software for out-of-network surgical claims in ${stateDisplay}. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Book a free demo.`
+    : "Federal IDR software for out-of-network surgical claims. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Book a free demo.";
 
   return buildPageMetadata({
     title,
     description,
     path: "",
+    keywords: [
+      "NSA IDR software",
+      "No Surprises Act billing",
+      "federal IDR claims",
+      "out-of-network surgical billing",
+      "independent dispute resolution software",
+    ],
     ogImageAlt:
       "Sydra — surgeon built NSA IDR software for surgical practices. Five minutes per claim.",
   });

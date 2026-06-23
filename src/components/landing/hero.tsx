@@ -33,9 +33,9 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
       aria-labelledby="landing-hero-heading"
       className="relative isolate flex min-h-[clamp(34rem,86dvh,52rem)] flex-col overflow-hidden bg-white text-brand"
     >
-      <div aria-hidden className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
         <Image
-          alt=""
+          alt="Surgical practice billing team preparing out-of-network claims for federal IDR"
           className="object-cover object-right"
           fetchPriority="high"
           fill
@@ -59,8 +59,9 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
               <SplitHeadline text="Stop writing off out of network claims." />
             </h1>
             <p className="hero-sub prose-measure mt-5 type-body text-body">
-              The No Surprises Act gets them paid through federal IDR. Surgeon built software your
-              billing team runs in five minutes per claim.
+              The No Surprises Act gets them paid through federal independent dispute resolution
+              (IDR). Surgeon built NSA IDR software your billing team runs in five minutes per
+              claim, turning written off out-of-network claims into recovered revenue.
             </p>
             <p className="hero-bold prose-measure mt-3 text-[15px] font-medium leading-relaxed text-brand md:text-[17px]">
               Your team reviews. Your team submits. You keep the recovery.

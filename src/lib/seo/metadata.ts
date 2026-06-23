@@ -21,6 +21,7 @@ type PageMetadataInput = {
   canonicalPath?: string;
   ogImageAlt?: string;
   ogImagePath?: string;
+  keywords?: string[];
   robots?: Metadata["robots"];
 };
 
@@ -31,15 +32,17 @@ export function buildPageMetadata({
   canonicalPath,
   ogImageAlt = DEFAULT_OG_IMAGE_ALT,
   ogImagePath,
+  keywords,
   robots = { index: true, follow: true },
 }: PageMetadataInput): Metadata {
   const canonicalTarget = canonicalPath ?? path;
-  const canonical = `${siteUrl()}${canonicalTarget === "" ? "" : canonicalTarget}`;
+  const canonical = `${siteUrl()}${canonicalTarget === "" ? "/" : canonicalTarget}`;
   const ogImage = ogImagePath ? ogImageUrl(ogImagePath) : ogImageUrl();
 
   return {
     title: { absolute: title },
     description,
+    ...(keywords && keywords.length > 0 ? { keywords } : {}),
     alternates: { canonical },
     openGraph: {
       title,
