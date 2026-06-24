@@ -23,6 +23,7 @@ type GtagCommand = "js" | "config" | "event" | "set";
 declare global {
   interface Window {
     gtag?: (command: GtagCommand, ...args: unknown[]) => void;
+    gtagSendEvent?: (url: string) => boolean;
   }
 }
 

@@ -137,11 +137,17 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           return;
         }
 
-        trackDemoConversion();
         trackLeadGA4(typeof tierInterest === "string" ? tierInterest : undefined);
 
         const data = (await res.json()) as { redirect?: string };
-        router.push(data.redirect ?? "/demo/thank-you");
+        const redirectUrl = data.redirect ?? "/demo/thank-you";
+
+        if (typeof window.gtagSendEvent === "function") {
+          window.gtagSendEvent(redirectUrl);
+        } else {
+          trackDemoConversion();
+          router.push(redirectUrl);
+        }
       } catch {
         setState({
           status: "error",
