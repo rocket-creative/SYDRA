@@ -7,7 +7,7 @@ export function ProofBar() {
       <h2 className="sr-only" id="heading-proof">
         Recovery proof points
       </h2>
-      <div className="grid gap-12 sm:grid-cols-3 sm:gap-8">
+      <div className="grid gap-8 sm:grid-cols-3 sm:gap-6">
         <StatFigure
           caption="Source: Georgetown University CHIR, March 2026"
           countTo={88}

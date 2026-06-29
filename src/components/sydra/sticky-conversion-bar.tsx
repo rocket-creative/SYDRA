@@ -3,19 +3,20 @@
 import { useEffect, useState } from "react";
 
 import { Arrow } from "@/components/ui/arrow";
-import { trackCtaClick } from "@/lib/landing/analytics-client";
-import type { CampaignTracking } from "@/lib/landing/tracking";
 
 const PHONE_TEL = "tel:+19147056830";
 
-type MobileCtaBarProps = {
-  tracking: CampaignTracking;
-  /** Element id to scroll to for the primary action. Defaults to lead-form. */
-  scrollTargetId?: string;
+type StickyConversionBarProps = {
+  /** Element id to scroll to for the primary action. */
+  scrollTargetId: string;
+  primaryLabel?: string;
 };
 
-/** Sticky bottom action bar shown on mobile only. Hides when the target form is in view. */
-export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileCtaBarProps) {
+/** Sticky bottom CTA for high intent pages (demo, contact). Hides when target is in view. */
+export function StickyConversionBar({
+  scrollTargetId,
+  primaryLabel = "Book demo",
+}: StickyConversionBarProps) {
   const [targetVisible, setTargetVisible] = useState(false);
 
   useEffect(() => {
@@ -30,8 +31,7 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
     return () => observer.disconnect();
   }, [scrollTargetId]);
 
-  const handleDemo = () => {
-    trackCtaClick("sydra", tracking);
+  const handlePrimary = () => {
     document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -63,10 +63,10 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
         </a>
         <button
           className="cta-link flex min-h-[56px] flex-1 select-none items-center justify-center gap-2 bg-[var(--color-hero)] text-[13px] uppercase tracking-[0.08em] text-white"
-          onClick={handleDemo}
+          onClick={handlePrimary}
           type="button"
         >
-          Book demo
+          {primaryLabel}
           <Arrow className="shrink-0" />
         </button>
       </div>

@@ -9,6 +9,8 @@ type SydraPageShellProps = {
   headerVariant?: "default" | "funnel";
   footerExtra?: ReactNode;
   mainClassName?: string;
+  /** Reserve bottom space on mobile for a sticky conversion bar. */
+  hasMobileCtaBar?: boolean;
   /**
    * Render children as full-bleed alternating Section bands instead of a single
    * padded white article column. Children should be <Section> elements.
@@ -22,12 +24,14 @@ export function SydraPageShell({
   headerVariant = "default",
   footerExtra,
   mainClassName,
+  hasMobileCtaBar = false,
   banded = false,
 }: SydraPageShellProps) {
   if (banded) {
     return (
       <MagazineShell
         footerExtra={footerExtra}
+        hasMobileCtaBar={hasMobileCtaBar}
         headerVariant={headerVariant}
         mainClassName={`landing-compact ${mainClassName ?? ""}`}
       >

@@ -78,40 +78,49 @@ export function PostcardLanding({
       <PageJsonLd data={jsonLd} />
       <Cursor />
       <TrackingProvider path={path} tracking={tracking} />
-      <Hero stateDisplay={stateDisplay} tracking={tracking} />
-      <SectionReveal>
-        <ProofBar />
-      </SectionReveal>
-      <SectionReveal>
-        <HowItWorks />
-      </SectionReveal>
-      <SectionReveal>
-        <FederalIdrExplainer />
-      </SectionReveal>
-      <SectionReveal>
-        <BuiltOnClaude />
-      </SectionReveal>
-      <SectionReveal>
-        <RecoverySection tracking={tracking} />
-      </SectionReveal>
-      <SectionReveal>
-        <AudiencePaths />
-      </SectionReveal>
-      <SectionReveal>
-        <FounderNote />
-      </SectionReveal>
-      <SectionReveal>
-        <TwoPaths tracking={tracking} />
-      </SectionReveal>
-      <SectionReveal>
-        <Faq stateDisplay={stateDisplay} />
-      </SectionReveal>
-      <SectionReveal>
-        <ClosingCta tracking={tracking} />
-      </SectionReveal>
-      <SectionReveal>
-        <LeadForm defaultState={stateCode} tracking={tracking} variant="section" />
-      </SectionReveal>
+      <div className="flex flex-col">
+        <div className="order-1">
+          <Hero stateDisplay={stateDisplay} tracking={tracking} />
+        </div>
+        <SectionReveal className="order-2 lg:order-3 lg:hidden">
+          <div className="mx-auto w-full max-w-[1280px] px-5 md:px-10">
+            <LeadForm defaultState={stateCode} tracking={tracking} variant="card" />
+          </div>
+        </SectionReveal>
+        <SectionReveal className="order-3 lg:order-2">
+          <ProofBar />
+        </SectionReveal>
+        <SectionReveal className="order-4 lg:order-3">
+          <HowItWorks />
+        </SectionReveal>
+        <SectionReveal className="order-5 lg:order-4">
+          <FederalIdrExplainer />
+        </SectionReveal>
+        <SectionReveal className="order-6 lg:order-5">
+          <BuiltOnClaude />
+        </SectionReveal>
+        <SectionReveal className="order-7 lg:order-6">
+          <RecoverySection tracking={tracking} />
+        </SectionReveal>
+        <SectionReveal className="order-8 lg:order-7">
+          <AudiencePaths />
+        </SectionReveal>
+        <SectionReveal className="order-9 lg:order-8">
+          <FounderNote />
+        </SectionReveal>
+        <SectionReveal className="order-10 lg:order-9">
+          <TwoPaths tracking={tracking} />
+        </SectionReveal>
+        <SectionReveal className="order-11 lg:order-10">
+          <Faq stateDisplay={stateDisplay} />
+        </SectionReveal>
+        <SectionReveal className="order-12 lg:order-11">
+          <ClosingCta tracking={tracking} />
+        </SectionReveal>
+        <SectionReveal className="hidden lg:order-12 lg:block">
+          <LeadForm defaultState={stateCode} tracking={tracking} variant="section" />
+        </SectionReveal>
+      </div>
       <MobileCtaBar tracking={tracking} />
     </MagazineShell>
   );

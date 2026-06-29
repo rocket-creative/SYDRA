@@ -7,6 +7,7 @@ import { DemoFunnelForm } from "@/components/sydra/demo-funnel-form";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { StickyConversionBar } from "@/components/sydra/sticky-conversion-bar";
 import { PRODUCT_SCREENS } from "@/components/sydra/product-screens";
 import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
@@ -78,99 +79,115 @@ export default function DemoPage() {
     <>
       <GtagSendEventHelper />
       <DemoPageJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.demo]} headerVariant="default">
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.demo]}
+        hasMobileCtaBar
+        headerVariant="default"
+      >
         <Section tone="white">
-        <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-12">
-          <div className="lg:col-span-6">
-            <header>
-              <h1 className={textStyles.pageTitle}>
-                See Sydra prepare a real NSA IDR submission.
-                <span className={textStyles.pageSubtitle}>
-                  15 minutes. Your specialty. Your actual CPT codes if you send one.
-                </span>
-              </h1>
-            </header>
+          <div className="flex flex-col lg:grid lg:grid-cols-12 lg:items-start lg:gap-12">
+            <div className="order-2 lg:order-1 lg:col-span-6">
+              <header className="hidden lg:block">
+                <h1 className={textStyles.pageTitle}>
+                  See Sydra prepare a real NSA IDR submission.
+                  <span className={textStyles.pageSubtitle}>
+                    15 minutes. Your specialty. Your actual CPT codes if you send one.
+                  </span>
+                </h1>
+              </header>
 
-            <section aria-labelledby="heading-call" className="mt-10 prose-measure">
-              <h2 className={textStyles.subsectionTitle} id="heading-call">
-                What happens on the call
-              </h2>
-              <p className={`${textStyles.body} mt-3`}>
-                This isn&apos;t a slide deck. On a live call, a Kronos specialist enters a real
-                denied claim from your specialty and Sydra builds the complete IDR submission packet
-                in real time while you watch, start to finish.
-              </p>
-              <ol className={textStyles.list}>
-                {callSteps.map((step) => (
-                  <li key={step.slice(0, 40)}>{step}</li>
-                ))}
-              </ol>
-              <p className={`${textStyles.body} mt-6`}>
-                Total: under 5 minutes for the claim, 10 minutes for the walkthrough and questions.
-                You watch the packet get built before any pricing comes up. You leave with the actual
-                Sydra output, a pricing quote, and a sandbox account if you want one. No pressure to
-                sign anything on the call.
-              </p>
-            </section>
+              <section aria-labelledby="heading-call" className="mt-0 prose-measure lg:mt-10">
+                <h2 className={textStyles.subsectionTitle} id="heading-call">
+                  What happens on the call
+                </h2>
+                <p className={`${textStyles.body} mt-3`}>
+                  This isn&apos;t a slide deck. On a live call, a Kronos specialist enters a real
+                  denied claim from your specialty and Sydra builds the complete IDR submission
+                  packet in real time while you watch, start to finish.
+                </p>
+                <ol className={textStyles.list}>
+                  {callSteps.map((step) => (
+                    <li key={step.slice(0, 40)}>{step}</li>
+                  ))}
+                </ol>
+                <p className={`${textStyles.body} mt-6`}>
+                  Total: under 5 minutes for the claim, 10 minutes for the walkthrough and
+                  questions. You watch the packet get built before any pricing comes up. You leave
+                  with the actual Sydra output, a pricing quote, and a sandbox account if you want
+                  one. No pressure to sign anything on the call.
+                </p>
+              </section>
 
-            <section aria-labelledby="heading-preview" className="mt-10 prose-measure">
-              <h2 className={textStyles.subsectionTitle} id="heading-preview">
-                Product preview
-              </h2>
-              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {PRODUCT_SCREENS.map((Screen) => (
-                  <Screen key={Screen.name} />
-                ))}
-              </div>
-              <p className={`${textStyles.meta} mt-3`}>
-                Representative product UI. Live demo runs on your actual claim data.
-              </p>
-            </section>
+              <section aria-labelledby="heading-preview" className="mt-10 prose-measure">
+                <h2 className={textStyles.subsectionTitle} id="heading-preview">
+                  Product preview
+                </h2>
+                <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {PRODUCT_SCREENS.map((Screen) => (
+                    <Screen key={Screen.name} />
+                  ))}
+                </div>
+                <p className={`${textStyles.meta} mt-3`}>
+                  Representative product UI. Live demo runs on your actual claim data.
+                </p>
+              </section>
 
-            <section aria-labelledby="heading-pre-faq" className="mt-10 prose-measure">
-              <h2 className={textStyles.subsectionTitle} id="heading-pre-faq">
-                Before you book
-              </h2>
-              <div className="mt-4 divide-y divide-[var(--color-rule)] border-y border-rule">
-                {preBookingFaq.map((item) => (
-                  <details key={item.q} className="group py-0">
-                    <summary className="cursor-pointer list-none py-4 text-sm font-normal text-brand [&::-webkit-details-marker]:hidden">
-                      {item.q}
-                    </summary>
-                    <p className={`${textStyles.body} border-t border-rule pb-4 pt-2 text-sm`}>
-                      {item.a}
-                    </p>
-                  </details>
-                ))}
-              </div>
-            </section>
+              <section aria-labelledby="heading-pre-faq" className="mt-10 prose-measure">
+                <h2 className={textStyles.subsectionTitle} id="heading-pre-faq">
+                  Before you book
+                </h2>
+                <div className="mt-4 divide-y divide-[var(--color-rule)] border-y border-rule">
+                  {preBookingFaq.map((item) => (
+                    <details key={item.q} className="group py-0">
+                      <summary className="cursor-pointer list-none py-4 text-sm font-normal text-brand [&::-webkit-details-marker]:hidden">
+                        {item.q}
+                      </summary>
+                      <p className={`${textStyles.body} border-t border-rule pb-4 pt-2 text-sm`}>
+                        {item.a}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </section>
 
-            <CtaTrustSignals className="mt-8" />
-          </div>
-
-          <div className="mt-10 lg:col-span-6 lg:mt-0">
-            <h2 className={textStyles.subsectionTitle}>Schedule your 15 minute demo.</h2>
-            <p className={`${textStyles.body} mt-2`}>
-              Send us an EOB before the call and we&apos;ll run the demo on your actual claim.
-            </p>
-            <div className="mt-6">
-              <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
-                <DemoFunnelForm />
-              </Suspense>
+              <CtaTrustSignals className="mt-8" />
             </div>
-            <p className="prose-measure mt-4">
-              <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
-                Not ready for software? Get a free IDR review
-              </CtaLink>
-            </p>
+
+            <div className="order-1 lg:order-2 lg:col-span-6" id="demo-form">
+              <header className="prose-measure lg:hidden">
+                <h1 className={textStyles.pageTitle}>
+                  See Sydra prepare a real NSA IDR submission.
+                  <span className={textStyles.pageSubtitle}>
+                    15 minutes. Your specialty. Your actual CPT codes if you send one.
+                  </span>
+                </h1>
+              </header>
+              <h2 className={`${textStyles.subsectionTitle} mt-6 lg:mt-0`}>
+                Schedule your 15 minute demo.
+              </h2>
+              <p className={`${textStyles.body} mt-2`}>
+                Send us an EOB before the call and we&apos;ll run the demo on your actual claim.
+              </p>
+              <div className="mt-6">
+                <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+                  <DemoFunnelForm />
+                </Suspense>
+              </div>
+              <p className="prose-measure mt-4">
+                <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
+                  Not ready for software? Get a free IDR review
+                </CtaLink>
+              </p>
+            </div>
           </div>
-        </div>
         </Section>
 
         <Section tone="neutral">
           <SourcesReferences />
         </Section>
       </SydraPageShell>
+      <StickyConversionBar primaryLabel="Schedule demo" scrollTargetId="demo-form" />
     </>
   );
 }

@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { MobileNavDrawer } from "@/components/sydra/mobile-nav-drawer";
 import { Button } from "@/components/ui/button";
 
-const nav = [
+export const PRIMARY_NAV = [
   { href: "/pricing", label: "Pricing" },
   { href: "/how-it-works", label: "How Sydra works" },
   { href: "/idr", label: "Federal IDR guide" },
@@ -27,24 +28,23 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
 
   const shellClass = borderless ? "bg-white" : "border-b border-rule bg-white";
   const linkClass = "text-[var(--color-body)] hover:text-[var(--color-hero)]";
-  const mobileNavBorder = "border-rule";
 
   return (
     <header
       className={`animate-nav-in sticky top-0 z-[100] pt-[max(0.5rem,env(safe-area-inset-top))] transition-[background-color,border-color] duration-300 ${shellClass}`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-5 py-4 md:px-10">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-2 px-5 py-3 sm:gap-3 md:gap-6 md:px-10 md:py-4">
         <Link
           aria-label="Sydra home"
-          className="flex min-h-11 shrink-0 items-center gap-3 transition-opacity duration-300 hover:opacity-90"
+          className="flex min-h-11 min-w-0 shrink items-center gap-2 transition-opacity duration-300 hover:opacity-90 sm:gap-3"
           href="/"
         >
           <Image
             alt="Sydra - NSA IDR Software"
-            className="h-8 w-auto sm:h-9"
+            className="h-7 w-auto sm:h-9"
             height={36}
             loading="eager"
-            sizes="(max-width: 1024px) 180px, 220px"
+            sizes="(max-width: 1024px) 140px, 220px"
             src="/sydra-logo-nav.svg"
             width={220}
           />
@@ -56,9 +56,9 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           </span>
         </Link>
 
-        <div className="ml-auto flex items-center gap-4 sm:gap-6">
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 md:gap-6">
           <a
-            className={`inline-flex min-h-[44px] select-none items-center type-caption transition-colors duration-300 ${linkClass}`}
+            className={`hidden min-h-[44px] select-none items-center type-caption transition-colors duration-300 lg:inline-flex ${linkClass}`}
             href={SIGN_IN}
             rel="noopener noreferrer"
             target="_blank"
@@ -66,9 +66,13 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
             Sign in
           </a>
           {!isFunnel ? (
-            <Button href="/demo" showArrow variant="solid">
-              Schedule a demo
-            </Button>
+            <>
+              <Button className="px-4 sm:px-6" href="/demo" showArrow variant="solid">
+                <span className="hidden sm:inline">Schedule a demo</span>
+                <span className="sm:hidden">Demo</span>
+              </Button>
+              <MobileNavDrawer linkClass={linkClass} nav={PRIMARY_NAV} signInHref={SIGN_IN} />
+            </>
           ) : null}
         </div>
       </div>
@@ -76,12 +80,12 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       {!isFunnel ? (
         <nav
           aria-label="Primary"
-          className={`mx-auto flex max-w-[1280px] select-none flex-wrap gap-x-6 gap-y-1 border-t px-5 py-1.5 md:px-10 lg:py-3 ${mobileNavBorder}`}
+          className="mx-auto hidden max-w-[1280px] select-none gap-x-6 border-t border-rule px-5 py-1.5 md:px-10 lg:flex lg:py-3"
         >
-          {nav.map((item) => (
+          {PRIMARY_NAV.map((item) => (
             <Link
               key={item.href}
-              className={`nav-link inline-flex min-h-[44px] items-center type-caption transition-colors duration-300 lg:min-h-0 ${linkClass}`}
+              className={`nav-link inline-flex items-center type-caption transition-colors duration-300 ${linkClass}`}
               href={item.href}
             >
               {item.label}

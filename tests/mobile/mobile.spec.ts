@@ -146,5 +146,31 @@ for (const route of ROUTES) {
       smallTargets,
       `Sub-44px tap targets on ${route.path} at ${width}px: ${JSON.stringify(smallTargets, null, 2)}`,
     ).toEqual([]);
+
+    if (route.path === "/") {
+      const leadFormPlacement = await page.evaluate(() => {
+        const form = document.getElementById("lead-form");
+        const viewportHeight = window.innerHeight;
+        if (!form) return { found: false, top: null, viewportHeight };
+        const rect = form.getBoundingClientRect();
+        return { found: true, top: Math.round(rect.top), viewportHeight };
+      });
+
+      expect(leadFormPlacement.found, "Homepage should render #lead-form on mobile").toBe(true);
+      expect(
+        leadFormPlacement.top,
+        `#lead-form should start within 1.5 viewport heights on ${route.path} at ${width}px`,
+      ).toBeLessThan(Math.round((leadFormPlacement.viewportHeight ?? 800) * 1.5));
+
+      const menuButton = page.getByRole("button", { name: /open menu/i });
+      await expect(menuButton).toBeVisible();
+      await menuButton.scrollIntoViewIfNeeded();
+      await menuButton.click();
+      const drawerNav = page.getByRole("navigation", { name: /primary mobile/i });
+      await expect(drawerNav).toBeVisible();
+      const pricingLink = drawerNav.getByRole("link", { name: "Pricing" });
+      await expect(pricingLink).toBeVisible();
+      await expect(pricingLink).toHaveCSS("min-height", "44px");
+    }
   });
 }
