@@ -64,11 +64,7 @@ export default function ContactPage() {
       <ContactPageJsonLd />
       <SydraPageShell banded breadcrumb={[...BREADCRUMBS.contact]} hasMobileCtaBar>
         <div className="flex flex-col">
-          <Section
-            ariaLabelledby="heading-contact"
-            className="order-1 hidden lg:block"
-            tone="white"
-          >
+          <Section ariaLabelledby="heading-contact" className="order-1" tone="white">
             <header className="prose-measure">
               <h1 className={textStyles.pageTitle} id="heading-contact">
                 Contact Sydra.
@@ -81,15 +77,7 @@ export default function ContactPage() {
 
           <Section className="order-2 lg:order-3" sidebarLabel="Demo" tone="white">
             <section aria-labelledby="heading-contact-form" className="prose-measure" id="contact-form">
-              <header className="lg:hidden">
-                <h1 className={textStyles.pageTitle} id="heading-contact-mobile">
-                  Contact Sydra.
-                </h1>
-                <p className={textStyles.pageLead}>
-                  Schedule a demo or ask a question. We respond within one business day.
-                </p>
-              </header>
-              <h2 className={`${textStyles.sectionTitle} mt-6 lg:mt-0`} id="heading-contact-form">
+              <h2 className={textStyles.sectionTitle} id="heading-contact-form">
                 Schedule a demo or ask a question.
               </h2>
               <div className="mt-6 border-t border-rule pt-8">
@@ -100,9 +88,6 @@ export default function ContactPage() {
 
           <Section className="order-3 lg:order-2" sidebarLabel="Routing" tone="neutral">
             <div className="space-y-8 prose-measure">
-              <p className={`${textStyles.body} lg:hidden`}>
-                Different questions go to different places. Use the guide below.
-              </p>
               <section aria-labelledby="routing-new">
                 <h2 className={textStyles.subsectionTitle} id="routing-new">
                   New to Sydra: demo or pricing

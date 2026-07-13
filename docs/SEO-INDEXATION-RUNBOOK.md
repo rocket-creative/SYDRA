@@ -140,11 +140,42 @@ Favor contextual links from the body of a real page over footer or sidebar links
 Run this checklist before every deploy that touches indexable surface.
 
 - [ ] `robots.txt` blocks nothing indexable. The current `src/app/robots.ts` allows `/` and disallows only `/api/` and query string facets (`/*?*`), which is correct. Confirm no new broad disallow slipped in.
+- [ ] **Query string disallow is intentional and safe.** `Disallow: /*?*` blocks UTM, demo prefill (`code`, `state`, `payer`, `tier`), and other tracking parameters from being indexed as duplicate URLs. No indexable content depends on query strings: resources use `/resources/[slug]`, IDR pages use clean path segments (`/idr/state/...`, `/idr/specialty/...`), and postcard landings use path state (`/r/[state]`) with canonicals pointing at clean paths. Do not introduce filtered resource or content pages that require `?` to be reachable.
 - [ ] No leaked editorial lines in templates: no placeholder copy, no internal notes, and no "swap the numbers" text left in any rendered page.
 - [ ] JSON-LD is present and valid: Organization and SoftwareApplication on the marketing surface, FAQPage where an FAQ renders, and BreadcrumbList on the deeper pages. Breadcrumb and FAQ schema appear on the programmatic CPT and state pages.
 - [ ] Validate a sample of pages in the Rich Results test before pushing.
+- [ ] Spot-check the state and specialty sample matrix in section 7.1 after any change to `pain-content.ts` or IDR entity templates.
 
 Sequencing note: JSON-LD compounds after indexation, not before it. Structured data helps Google understand and enrich a page it has already crawled and indexed; it does not get a page indexed. So the schema work follows the indexation fixes in Steps 1 through 4, it does not precede them. Ship the indexation unlocks first, then let JSON-LD compound on the pages Google is already crawling.
+
+### 7.1 Sample QA — state and specialty uniqueness
+
+After template or metadata changes, open these four URLs (or View Source / Rich Results) and confirm each check.
+
+| URL | Role |
+|-----|------|
+| `/idr/state/texas` | State hub |
+| `/idr/state/california` | State hub (second launch state) |
+| `/idr/specialty/spine` | Specialty hub |
+| `/idr/state/texas/spine` | Specialty × state |
+
+Per URL:
+
+- [ ] `<title>` is unique across the four pages.
+- [ ] Visible `<h1>` is unique across the four pages.
+- [ ] Title lead (before `| Sydra` / `| Federal IDR | Sydra`) matches the `<h1>` text.
+- [ ] WebPage JSON-LD `name` equals the `<h1>` text.
+- [ ] BreadcrumbList JSON-LD is present.
+- [ ] FAQPage JSON-LD is present.
+- [ ] Canonical is absolute and matches the clean path (no query string).
+- [ ] `robots` meta matches the index gate for the current `SEO_CURRENT_WAVE` (indexable launch pages should allow index/follow).
+
+Known scale risks (document only; do not treat as blockers for this checklist):
+
+- The shared Sydra process FAQ answer (`SYDRA_PROCESS_ANSWER` in `pain-content.ts`) is identical across many entity pages; questions vary.
+- Specialty × state denial blocks currently compose from the specialty's first CPT code, so procedure/reason sets can repeat across states for the same specialty.
+
+A later content pass should differentiate those answers and denial sets if Search Console shows thin or duplicate signals on the programmatic set.
 
 ## 8. Ongoing monitoring
 

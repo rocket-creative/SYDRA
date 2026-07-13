@@ -133,7 +133,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
         data={[
           webPageJsonLd({
             path,
-            name: `${specialtyMeta.name} out of network denials in ${stateName}`,
+            name: h1SpecialtyState(painLabel, stateName),
             description: `Federal IDR for ${painLabel} in ${stateName}.`,
           }),
           faqPageJsonLd(faqs),

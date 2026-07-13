@@ -11,6 +11,7 @@ import { Section } from "@/components/ui/section";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.pricing;
 
@@ -21,9 +22,9 @@ export default function PricingPage() {
       <SydraPageShell banded breadcrumb={[...BREADCRUMBS.pricing]}>
         <Section ariaLabelledby="heading-pricing" tone="white">
           <header className="max-w-2xl">
-            <h1 className="type-h1 text-brand" id="heading-pricing">
+            <h1 className={textStyles.pageTitle} id="heading-pricing">
               Sydra pricing.
-              <span className="mt-4 block type-h2 text-body">
+              <span className={textStyles.pageSubtitle}>
                 Quoted to your volume. Not a percentage of every recovery.
               </span>
             </h1>

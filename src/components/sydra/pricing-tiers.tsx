@@ -17,6 +17,7 @@ import {
   KRONOS_FULL_SERVICE_CTA,
   kronosCaseReviewUrl,
 } from "@/lib/kronos-revenue";
+import { textStyles } from "@/lib/typography";
 
 type PricingTiersProps = {
   variant: "full" | "compact";
@@ -121,7 +122,7 @@ function TierBlock({
 function ComparisonTable() {
   return (
     <div className="mt-16 overflow-x-auto border-t border-rule pt-12">
-      <h3 className="type-h2 text-brand">Compare plans</h3>
+      <h3 className={textStyles.subsectionTitle}>Compare plans</h3>
       <table className="mt-8 w-full min-w-[640px] border-collapse text-left text-sm">
         <thead>
           <tr className="border-b border-rule">
@@ -161,13 +162,14 @@ function ComparisonTable() {
 }
 
 export function PricingTiers({ variant, headingLevel }: PricingTiersProps) {
-  const HeadingTag = headingLevel ?? (variant === "full" ? "h1" : "h2");
+  // Always a section heading under the page hero; default h2 for both variants.
+  const HeadingTag = headingLevel ?? "h2";
 
   const inner = (
     <>
       <HeadingTag
         className="type-h2 prose-measure text-brand"
-        id={variant === "compact" ? "heading-plans" : "heading-plans"}
+        id="heading-plans"
       >
         {PRICING_SECTION_HEADLINE}
       </HeadingTag>

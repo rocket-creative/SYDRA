@@ -188,8 +188,9 @@ export function specialtyHubMeta(input: {
   indexable: boolean;
 }): Metadata {
   const { slug, name, painLabel, indexable } = input;
+  const titleLead = h1Specialty(painLabel);
   return buildPageMetadata({
-    title: `${name} claims denied out of network? | Federal IDR | Sydra`,
+    title: `${titleLead} | Federal IDR | Sydra`,
     description: `${capitalize(painLabel)} gets underpaid and denied. See why these claims get denied and how federal IDR recovers the gap. We file it, you keep the recovery.`,
     path: idrSpecialtyPath(slug),
     ogImageAlt: `${name} out of network denials and federal IDR.`,

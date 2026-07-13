@@ -92,7 +92,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
         data={[
           webPageJsonLd({
             path,
-            name: `${meta.name} federal IDR`,
+            name: h1Specialty(painLabel),
             description: meta.blurb,
           }),
           itemListJsonLd(

@@ -86,18 +86,18 @@ export default function DemoPage() {
         headerVariant="default"
       >
         <Section tone="white">
-          <div className="flex flex-col lg:grid lg:grid-cols-12 lg:items-start lg:gap-12">
-            <div className="order-2 lg:order-1 lg:col-span-6">
-              <header className="hidden lg:block">
-                <h1 className={textStyles.pageTitle}>
-                  See Sydra prepare a real NSA IDR submission.
-                  <span className={textStyles.pageSubtitle}>
-                    15 minutes. Your specialty. Your actual CPT codes if you send one.
-                  </span>
-                </h1>
-              </header>
+          <header className="prose-measure">
+            <h1 className={textStyles.pageTitle} id="heading-demo">
+              See Sydra prepare a real NSA IDR submission.
+              <span className={textStyles.pageSubtitle}>
+                15 minutes. Your specialty. Your actual CPT codes if you send one.
+              </span>
+            </h1>
+          </header>
 
-              <section aria-labelledby="heading-call" className="mt-0 prose-measure lg:mt-10">
+          <div className="mt-10 flex flex-col lg:grid lg:grid-cols-12 lg:items-start lg:gap-12">
+            <div className="order-2 lg:order-1 lg:col-span-6">
+              <section aria-labelledby="heading-call" className="prose-measure">
                 <h2 className={textStyles.subsectionTitle} id="heading-call">
                   What happens on the call
                 </h2>
@@ -155,15 +155,7 @@ export default function DemoPage() {
             </div>
 
             <div className="order-1 lg:order-2 lg:col-span-6" id="demo-form">
-              <header className="prose-measure lg:hidden">
-                <h1 className={textStyles.pageTitle}>
-                  See Sydra prepare a real NSA IDR submission.
-                  <span className={textStyles.pageSubtitle}>
-                    15 minutes. Your specialty. Your actual CPT codes if you send one.
-                  </span>
-                </h1>
-              </header>
-              <h2 className={`${textStyles.subsectionTitle} mt-6 lg:mt-0`}>
+              <h2 className={textStyles.subsectionTitle}>
                 Schedule your 15 minute demo.
               </h2>
               <p className={`${textStyles.body} mt-2`}>

@@ -91,7 +91,7 @@ export default async function StateHubPage({ params }: PageProps) {
         data={[
           webPageJsonLd({
             path,
-            name: `Out of network surgical denials in ${stateName}`,
+            name: h1State(stateName),
             description: `Federal IDR for out of network surgical claims in ${stateName}.`,
           }),
           faqPageJsonLd(faqs),
