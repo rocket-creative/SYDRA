@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
-import { trackDemoConversion } from "@/lib/analytics/google-ads";
+import { reportLeadFormConversion } from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -50,7 +50,6 @@ type DemoFunnelFormProps = {
 };
 
 export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const requestType = intent === "security" ? "security" : "demo";
   const submitLabel =
@@ -142,11 +141,16 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         const data = (await res.json()) as { redirect?: string };
         const redirectUrl = data.redirect ?? "/demo/thank-you";
 
-        if (typeof window.gtagSendEvent === "function") {
-          window.gtagSendEvent(redirectUrl);
+        // Google Ads "Submit lead form" conversion; navigates after the hit.
+        if (typeof window.gtag_report_conversion === "function") {
+          window.gtag_report_conversion(redirectUrl);
+          window.setTimeout(() => {
+            if (window.location.pathname !== "/demo/thank-you") {
+              window.location.assign(redirectUrl);
+            }
+          }, 2000);
         } else {
-          trackDemoConversion();
-          router.push(redirectUrl);
+          reportLeadFormConversion(redirectUrl);
         }
       } catch {
         setState({
@@ -155,7 +159,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         });
       }
     },
-    [requestType, router, stepOne, utmCampaign, utmSource],
+    [requestType, stepOne, utmCampaign, utmSource],
   );
 
   return (

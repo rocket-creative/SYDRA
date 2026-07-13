@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
 
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
+import { reportLeadFormConversion } from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -115,6 +116,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
         trackLeadGA4(
           typeof productInterest === "string" ? productInterest : undefined,
         );
+        reportLeadFormConversion();
         setState({ status: "success" });
       } catch {
         setState({

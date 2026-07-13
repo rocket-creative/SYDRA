@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 
-import { GtagSendEventHelper } from "@/components/analytics/gtag-send-event";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { DemoFunnelForm } from "@/components/sydra/demo-funnel-form";
@@ -77,7 +76,6 @@ const preBookingFaq = [
 export default function DemoPage() {
   return (
     <>
-      <GtagSendEventHelper />
       <DemoPageJsonLd />
       <SydraPageShell
         banded

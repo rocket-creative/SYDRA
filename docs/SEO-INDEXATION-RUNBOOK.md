@@ -177,6 +177,27 @@ Known scale risks (document only; do not treat as blockers for this checklist):
 
 A later content pass should differentiate those answers and denial sets if Search Console shows thin or duplicate signals on the programmatic set.
 
+### 7.2 `/pricing` crawled but not indexed
+
+Investigation (codebase, 2026-07):
+
+- **No accidental noindex.** `PAGE_METADATA.pricing` uses default `robots: { index: true, follow: true }`.
+- **Canonical is clean.** Absolute canonical to `/pricing`. Sitemap `core` includes `/pricing` at priority 0.9.
+- **Internal links exist.** Header nav, FAQ CTA, service cross links, breadcrumbs, and a homepage body link ("See Sydra pricing" in the Two paths section).
+- **Not a thin duplicate of another route.** `/plans` 301s to `/pricing`; there is no competing pricing URL.
+
+If Search Console still shows "Crawled, currently not indexed," request indexing on `/pricing` after deploy and wait for the next crawl. Soften title/description only if impressions stay high with zero clicks for several weeks.
+
+### 7.3 CPT × Arizona × payer noindex (intentional)
+
+Pages under `/idr/cpt/.../arizona/...` (and other states) for payers such as HCSC and Kaiser are **intentionally noindex** at the default wave:
+
+1. `cpt` / `cptState` require `SEO_CURRENT_WAVE >= 3`.
+2. `cptStatePayer` requires wave `>= 4` plus `payerAngleIsDistinct`.
+3. Payer hub routes (`/idr/payer/hcsc`, `/idr/payer/kaiser`) are hardcoded noindex (paid / nav surface only).
+
+Do not flip these to index without raising `SEO_CURRENT_WAVE` and confirming leaf uniqueness. They are not a mistaken robots tag.
+
 ## 8. Ongoing monitoring
 
 Check Search Console weekly and act on what it shows.

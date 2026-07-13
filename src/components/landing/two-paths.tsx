@@ -41,7 +41,14 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
           <h3 className="mt-3 text-xl font-medium text-brand">Sydra</h3>
           <p className="mt-4 type-body text-body">
             Software your billing team operates. Best when you want to keep the workflow and the
-            margin.
+            margin.{" "}
+            <a
+              className="font-medium text-[var(--color-accent)] underline decoration-rule underline-offset-4 transition-colors hover:text-[var(--color-hero)]"
+              href="/pricing"
+            >
+              See Sydra pricing
+            </a>
+            .
           </p>
           <div className="mt-8">
             <Button className="w-full" showArrow type="button" onClick={() => scrollToForm("sydra")}>

@@ -108,12 +108,12 @@ export const PAGE_METADATA = {
     ogImagePath: "/how-it-works",
   }),
   whatIsIdr: buildPageMetadata({
-    title: "What Is Federal IDR? The No Surprises Act Dispute Path | Sydra",
+    title: "What Is IDR? No Surprises Act Dispute Resolution | Sydra",
     description:
-      "Federal IDR is the No Surprises Act process for disputing low out of network payments. Learn what IDR and the NSA are, who qualifies, the deadlines, and 2026 fee changes.",
+      "IDR means Independent Dispute Resolution under the No Surprises Act. See who qualifies, deadlines and fees, and how surgical billing teams recover underpaid out of network claims.",
     path: "/what-is-idr",
     ogImageAlt:
-      "What federal IDR is under the No Surprises Act, explained for surgical billing teams.",
+      "What IDR means under the No Surprises Act, explained for surgical billing teams.",
   }),
   sydraVsAttorney: buildPageMetadata({
     title: "Sydra vs an IDR Attorney | Keep the 20% You Would Pay | Sydra",

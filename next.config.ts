@@ -61,6 +61,23 @@ const nextConfig: NextConfig = {
         destination: "/sydra-vs-idr-attorney",
         permanent: true,
       },
+      {
+        // Legacy WordPress / Squarespace style legal URLs from Search Console 404s.
+        source: "/terms-and-conditions",
+        destination: "/terms",
+        permanent: true,
+      },
+      {
+        source: "/privacy-policy",
+        destination: "/privacy",
+        permanent: true,
+      },
+      {
+        // Google Ads sitelink pointed here; canonical page is /how-it-works.
+        source: "/how-sydra-works",
+        destination: "/how-it-works",
+        permanent: true,
+      },
     ];
   },
   async headers() {
