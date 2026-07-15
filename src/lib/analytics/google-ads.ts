@@ -15,6 +15,14 @@ export const GOOGLE_ADS_ID = "AW-18244375722";
 export const GOOGLE_ADS_CONVERSION_SEND_TO =
   "AW-18244375722/MhI6CKKQz8scEKqpzPtD";
 
+/**
+ * sessionStorage key holding a one-time token set by a lead form on a
+ * successful (200) submit that redirects to a thank-you page. The thank-you
+ * page consumes the token to fire the conversion exactly once, so refreshes,
+ * back-navigation, and direct/organic visits never fire it.
+ */
+export const LEAD_CONVERSION_FLAG_KEY = "sydra_pending_lead_conversion";
+
 type GtagCommand = "js" | "config" | "event" | "set";
 
 declare global {
@@ -56,6 +64,13 @@ export function reportLeadFormConversion(url?: string): boolean {
     return false;
   }
 
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[analytics] Google Ads conversion", {
+      send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
+      url,
+    });
+  }
+
   window.gtag("event", "conversion", {
     send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
     value: 1.0,
@@ -68,6 +83,48 @@ export function reportLeadFormConversion(url?: string): boolean {
   }
 
   return false;
+}
+
+/**
+ * Set the one-time flag that tells the thank-you page a real lead submit just
+ * happened, so it (and only it) fires the Ads conversion after navigation.
+ * Call this right before redirecting to the thank-you page.
+ */
+export function markLeadConversionPending(): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+  try {
+    const token =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : String(Date.now());
+    window.sessionStorage.setItem(LEAD_CONVERSION_FLAG_KEY, token);
+  } catch {
+    // sessionStorage can throw (private mode / disabled). The 2s navigation
+    // fallback and gtag guards still keep the flow working without a flag.
+  }
+}
+
+/**
+ * Consume the pending-conversion flag. Returns true (and clears the flag) only
+ * when a lead submit set it. Removing the flag before firing guards against
+ * refresh, back-navigation, and React StrictMode double-invokes.
+ */
+export function consumeLeadConversionPending(): boolean {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  try {
+    const token = window.sessionStorage.getItem(LEAD_CONVERSION_FLAG_KEY);
+    if (!token) {
+      return false;
+    }
+    window.sessionStorage.removeItem(LEAD_CONVERSION_FLAG_KEY);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /** @deprecated Use reportLeadFormConversion */

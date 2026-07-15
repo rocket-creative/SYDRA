@@ -1,6 +1,8 @@
 /**
- * One-off check: demo form submit fires Google Ads conversion on /demo.
- * Usage: node scripts/test-google-ads-conversion.mjs [baseUrl]
+ * One-off check: submitting the demo form redirects to /demo/thank-you and the
+ * Google Ads "Submit lead form" conversion fires there (once), driven by the
+ * sessionStorage hand-off. Usage:
+ *   node scripts/test-google-ads-conversion.mjs [baseUrl]
  */
 import { chromium } from "@playwright/test";
 
@@ -58,16 +60,21 @@ await page.locator("#disputesPerMonth").selectOption("5_to_15");
 await page.locator("#idrApproach").selectOption("in_house_manual");
 await page.getByRole("button", { name: "Schedule my demo" }).click();
 
-await page.waitForTimeout(2500);
+// The conversion now fires on the thank-you page (after navigation), not in
+// the submit handler. Wait for that navigation, then let the mount effect run.
+let landedOnThankYou = true;
+try {
+  await page.waitForURL("**/demo/thank-you", { timeout: 10000 });
+} catch {
+  landedOnThankYou = false;
+}
+await page.waitForTimeout(1500);
 
 const dataLayer = await page.evaluate(() =>
   Array.from(window.dataLayer ?? []).map((entry) => Array.from(entry)),
 );
 
 const allCalls = [...gtagCalls, ...dataLayer];
-const leadFormEvent = allCalls.find(
-  (args) => args[0] === "event" && args[1] === "conversion_event_submit_lead_form_1",
-);
 const conversionEvent = allCalls.find(
   (args) =>
     args[0] === "event" &&
@@ -77,9 +84,8 @@ const conversionEvent = allCalls.find(
 
 console.log(JSON.stringify({
   baseUrl,
-  landedOnThankYou: page.url().includes("/demo/thank-you"),
+  landedOnThankYou: landedOnThankYou && page.url().includes("/demo/thank-you"),
   gtagCallCount: allCalls.length,
-  legacyLeadFormEventFired: Boolean(leadFormEvent),
   explicitConversionFired: Boolean(conversionEvent),
   googleRequestCount: googleRequests.length,
   googleRequests: googleRequests.slice(-5),
@@ -90,8 +96,11 @@ console.log(JSON.stringify({
 await browser.close();
 
 if (!conversionEvent) {
-  console.error("FAIL: expected Google Ads conversion event with send_to", expectedSendTo);
+  console.error(
+    "FAIL: expected Google Ads conversion event on /demo/thank-you with send_to",
+    expectedSendTo,
+  );
   process.exit(1);
 }
 
-console.log("PASS: Google Ads conversion signal detected on demo submit.");
+console.log("PASS: Google Ads conversion fired on /demo/thank-you.");

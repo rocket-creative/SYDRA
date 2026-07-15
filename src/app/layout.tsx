@@ -1,11 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 import { GoogleAdsTag } from "@/components/analytics/google-ads";
 import { WebVitalsReporter } from "@/components/analytics/web-vitals-reporter";
-import { GA4_ID } from "@/lib/analytics/ga4";
 import { HOME_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
 import { PageTransition } from "@/components/motion/page-transition";
@@ -49,7 +47,6 @@ export default function RootLayout({
         <PageTransition>{children}</PageTransition>
         <WebVitalsReporter />
         <GoogleAdsTag />
-        {GA4_ID ? <GoogleAnalytics gaId={GA4_ID} /> : null}
       </body>
     </html>
   );

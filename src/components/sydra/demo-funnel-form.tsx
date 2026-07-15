@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
-import { reportLeadFormConversion } from "@/lib/analytics/google-ads";
+import { markLeadConversionPending } from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -141,17 +141,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         const data = (await res.json()) as { redirect?: string };
         const redirectUrl = data.redirect ?? "/demo/thank-you";
 
-        // Google Ads "Submit lead form" conversion; navigates after the hit.
-        if (typeof window.gtag_report_conversion === "function") {
-          window.gtag_report_conversion(redirectUrl);
-          window.setTimeout(() => {
-            if (window.location.pathname !== "/demo/thank-you") {
-              window.location.assign(redirectUrl);
-            }
-          }, 2000);
-        } else {
-          reportLeadFormConversion(redirectUrl);
-        }
+        // Flag the submit so the thank-you page fires the Ads conversion once
+        // after it fully loads (more reliable than firing pre-navigation).
+        markLeadConversionPending();
+        window.location.assign(redirectUrl);
       } catch {
         setState({
           status: "error",

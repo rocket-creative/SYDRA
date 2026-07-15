@@ -1,15 +1,20 @@
 import Script from "next/script";
 
+import { GA4_ID } from "@/lib/analytics/ga4";
 import {
   GOOGLE_ADS_CONVERSION_SEND_TO,
   GOOGLE_ADS_ID,
 } from "@/lib/analytics/google-ads";
 
 /**
- * Global Google Ads site tag (gtag.js) plus the Ads conversion helper.
- * Rendered once in the root layout so it is present on every page and not
- * duplicated. Uses afterInteractive so the tag is available by the time a
- * lead form can submit.
+ * Single global gtag.js tag configuring BOTH the Google Ads account
+ * (AW-…) and the GA4 stream (G-…) from one script load. Rendered once in the
+ * root layout so it is present on every page and not duplicated. Loading a
+ * single gtag.js configuring both IDs avoids the duplicate/conflicting tag
+ * setups that leave Ads conversion actions "not verified".
+ *
+ * Uses afterInteractive so the tag is available by the time a lead form can
+ * submit.
  */
 export function GoogleAdsTag() {
   return (
@@ -25,6 +30,7 @@ export function GoogleAdsTag() {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', '${GOOGLE_ADS_ID}');
+${GA4_ID ? `          gtag('config', '${GA4_ID}');\n` : ""}
 
           function gtag_report_conversion(url) {
             var callback = function () {

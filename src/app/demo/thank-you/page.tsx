@@ -1,3 +1,4 @@
+import { LeadConversionOnMount } from "@/components/analytics/lead-conversion-on-mount";
 import { Button } from "@/components/ui/button";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -11,6 +12,7 @@ export default function DemoThankYouPage() {
       headerVariant="funnel"
       mainClassName="px-5 py-16 md:px-10 md:py-24"
     >
+      <LeadConversionOnMount />
       <div className="mx-auto max-w-xl">
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
         <h1 className="type-h2 mt-4 text-brand">Request received</h1>
