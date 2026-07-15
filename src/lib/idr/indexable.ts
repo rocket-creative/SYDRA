@@ -22,10 +22,16 @@ export type CatalogTier =
 /**
  * The single config value SEO raises over time. Raising it flips eligible pages
  * to index automatically, with no content redeploy. Driven by SEO_CURRENT_WAVE.
+ *
+ * Default is wave 3: state hubs, specialty-by-state, CPT hubs, and CPT-by-state
+ * (for released geos) are indexable. The deepest CPT-by-state-by-payer tier
+ * (wave 4) stays noindex until its per-payer angle passes a distinctness review.
  */
+export const DEFAULT_WAVE = 3;
+
 export const CURRENT_WAVE: number = (() => {
   const raw = Number(process.env.SEO_CURRENT_WAVE);
-  return Number.isFinite(raw) && raw >= 1 ? Math.floor(raw) : 1;
+  return Number.isFinite(raw) && raw >= 1 ? Math.floor(raw) : DEFAULT_WAVE;
 })();
 
 /** Which wave each tier belongs to (build spec section 5.2). */

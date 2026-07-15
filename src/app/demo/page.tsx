@@ -12,7 +12,7 @@ import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { getSalesEmail } from "@/lib/contact";
 import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
-import { webPageJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -37,6 +37,7 @@ function DemoPageJsonLd() {
             name: pageTitle(),
             description: PAGE_METADATA.demo.description ?? "",
           }),
+          faqPageJsonLd(preBookingFaq.map(({ q, a }) => ({ q, a }))),
         ]}
       />
     </>
