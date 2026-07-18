@@ -96,15 +96,22 @@ export default function WhatIsIdrPage() {
               Go deeper:{" "}
               <Link className={textStyles.textLink} href="/resources/federal-idr-process">
                 the full federal IDR process
-              </Link>{" "}
-              and{" "}
+              </Link>
+              ,{" "}
               <Link
                 className={textStyles.textLink}
                 href="/resources/idr-eligibility-deadlines-fees"
               >
                 eligibility, deadlines, and fees
               </Link>
-              .
+              , and how the{" "}
+              <Link
+                className={textStyles.textLink}
+                href="/idr/guide/what-is-no-surprises-act-idr"
+              >
+                no surprises act IDR process
+              </Link>{" "}
+              works under the law.
             </p>
           </div>
           <ServiceFaqSection

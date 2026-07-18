@@ -86,7 +86,7 @@ export const PAGE_METADATA = {
     ogImagePath: "/about",
   }),
   pricing: buildPageMetadata({
-    title: "Sydra Pricing — NSA IDR Software Plans | Sydra",
+    title: "NSA IDR Software Pricing for Surgical Billing Teams | Sydra",
     description:
       "Sydra pricing is quoted on your demo call based on specialty and monthly OON volume. Structured below typical 20% attorney contingency. Three tiers: Self Serve, Support, Full Service.",
     path: "/pricing",
@@ -94,14 +94,14 @@ export const PAGE_METADATA = {
     ogImageAlt: "Sydra pricing — NSA IDR software plans for surgical billing teams.",
   }),
   demo: buildPageMetadata({
-    title: "Schedule a Sydra Demo — 15 Minutes on a Real Denied Claim | Sydra",
+    title: "NSA IDR Software Demo on a Real Denied Claim | Sydra",
     description:
       "We walk through Sydra on an actual denied claim from your specialty. Eligibility check, draft generation, DOCX export in real time. You see the output before you commit to anything.",
     path: "/demo",
     ogImagePath: "/demo",
   }),
   howItWorks: buildPageMetadata({
-    title: "How Sydra Prepares an NSA IDR Submission | Step by Step | Sydra",
+    title: "How to File an NSA IDR Submission, Step by Step | Sydra",
     description:
       "From EOB upload to IDRE portal submission. Eligibility check, AI draft generation, clinical narrative from op note, prior determination citations, DOCX export. Under 5 minutes.",
     path: "/how-it-works",

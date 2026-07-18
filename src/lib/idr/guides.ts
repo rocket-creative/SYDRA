@@ -12,64 +12,113 @@ export type Guide = {
   lead: string;
   sections: { heading: string; paragraphs: string[] }[];
   faqs: EntityFaqItem[];
+  /**
+   * Anchor text to use when this guide is linked from browse lists (for example
+   * the /idr how-to guides list). Lets the on-page H1 stay readable while the
+   * internal link matches the exact query string it targets.
+   */
+  listLabel?: string;
+  /**
+   * Ordered steps for HowTo structured data. Present only on procedural guides
+   * whose sections describe a start to finish sequence.
+   */
+  howToSteps?: { name: string; text: string }[];
+  /**
+   * Contextual link up to the primary pillar page this guide supports. Rendered
+   * near the top of the guide so the two pages reinforce rather than compete.
+   */
+  crossLink?: { href: string; anchor: string; intro: string };
 };
 
 export const GUIDES: Guide[] = [
   {
     slug: "what-is-no-surprises-act-idr",
-    title: "What is No Surprises Act IDR",
-    metaTitle: "What is No Surprises Act IDR | Sydra",
+    title: "No Surprises Act IDR: how the law creates the dispute path",
+    listLabel: "what is no surprises act IDR",
+    crossLink: {
+      href: "/what-is-idr",
+      anchor: "what is IDR",
+      intro: "For the plain definition and who qualifies, start with",
+    },
+    metaTitle: "No Surprises Act IDR: How the Law Works | Sydra",
     metaDescription:
-      "A plain explanation of the federal Independent Dispute Resolution process and how out of network surgical practices use it to recover underpayments fast.",
-    lead: "Independent Dispute Resolution, or IDR, is the federal process created by the No Surprises Act to settle payment disputes between out of network providers and health plans. When a plan pays a surgical claim below market, the provider can take it to a neutral arbitrator who picks one final number. Providers win most properly filed disputes, and surgical awards run far above the insurer's qualifying payment amount.",
+      "How the No Surprises Act creates and governs federal IDR: the statutory basis, which plans route to the federal process, the QPA anchor, and the 2026 operations rule.",
+    lead: "No Surprises Act IDR is the arbitration mechanism the statute itself created to replace balance billing. The law does more than name a process. It sets who is covered, which plans route to the federal forum, what evidence an arbitrator may weigh, and the clocks that gate a filing. This page explains those regulatory mechanics, so it pairs with the definitional overview of what federal IDR is.",
     sections: [
       {
-        heading: "What the No Surprises Act changed.",
+        heading: "The statute that created the process.",
         paragraphs: [
-          "The No Surprises Act took effect in 2022 and changed how out of network bills get paid. Patients can no longer be balance billed for most emergency care and for many services at in network facilities. That protection is good for patients, but it left providers with a question: when the plan underpays, how do you recover the difference?",
+          "The No Surprises Act was enacted as part of the Consolidated Appropriations Act of 2021 and took effect in 2022. Alongside the patient protections, it directed federal agencies to build an independent dispute resolution process, and those agencies implemented it through regulations at 45 CFR Part 149. IDR is not a private service a provider opts into. It is the remedy the law wrote in place of balance billing.",
+          "That distinction matters for how a claim is argued. Because IDR is a creature of the statute and its rules, eligibility, timing, and evidence all trace back to specific regulatory requirements rather than to negotiation custom.",
         ],
       },
       {
-        heading: "How Independent Dispute Resolution works.",
+        heading: "Which plans the federal process governs.",
         paragraphs: [
-          "The answer is Independent Dispute Resolution. IDR is baseball style arbitration. The provider submits one offer, the plan submits one offer, and a neutral entity picks one of the two. There is no splitting the difference, which rewards the side whose number is closest to fair market value.",
+          "The federal IDR process governs disputes the No Surprises Act reaches: out of network emergency care, out of network care at an in network facility, and air ambulance services. Whether a specific claim uses the federal forum or a state one turns on plan type.",
+          "Self funded employer plans are governed by federal law, so they route to federal IDR in every state. Fully insured plans can fall under a state surprise billing law where one exists, and in that case the state process controls and the federal one steps aside. Confirming plan type is the first regulatory question on any claim, because filing in the wrong forum wastes the window.",
         ],
       },
       {
-        heading: "Why the data favors providers.",
+        heading: "What the arbitrator is allowed to weigh.",
         paragraphs: [
-          "The data favors providers who file. Across recent reporting periods, the prevailing offer beat the insurer's qualifying payment amount in the large majority of determinations, and surgical specialties have seen the widest spreads of any category. Most eligible claims are never disputed, which means most underpayments are simply absorbed.",
+          "The rules define the qualifying payment amount, or QPA, as the plan's median contracted rate for the service in the area, and they make it the starting anchor in a dispute. The regulations also list the additional factors an arbitrator may consider, including the complexity of the service, the provider's training and experience, and prior determinations on the same code.",
+          "This is the regulatory reason surgical awards run high. The statute does not cap the award at the QPA. It requires the arbitrator to weigh the QPA against credible evidence, and for complex operative work that evidence pulls the fair number well above the plan's anchor.",
         ],
       },
       {
-        heading: "Closing the recovery gap.",
+        heading: "The statutory gate and the 2026 rule.",
         paragraphs: [
-          "Sydra exists to close that gap. The process is public, but absorbing the loss is easier than fighting each claim by hand, so most practices absorb it. Sydra makes filing fast enough to work the whole book: your billing team checks eligibility, assembles the federal packet, and submits in about five minutes per claim. You keep the full recovery instead of handing a contingency attorney a fifth of it.",
+          "Before a claim can reach arbitration, the law requires a 30 business day open negotiation period, and once it closes a provider has four business days to initiate IDR. These are not soft targets. They are regulatory deadlines, and missing the four business day window forecloses the claim.",
+          "A federal operations rule finalized in 2026 tightened the mechanics further. Open negotiation moved into the federal portal, disputes now carry registration numbers, and a structured eligibility review happens early. The economics that favor providers did not change, but the documentation bar did.",
         ],
       },
     ],
     faqs: [
       {
-        q: "Who can use federal IDR?",
-        a: "Out of network providers and facilities with claims covered by the No Surprises Act, once the open negotiation requirement is met. Self funded plans route to federal IDR in every state.",
+        q: "Is No Surprises Act IDR a federal law or a service?",
+        a: "It is a process the federal statute created and that regulations at 45 CFR Part 149 govern. It replaced balance billing with a defined arbitration remedy, so eligibility, timing, and evidence all trace to regulatory requirements.",
       },
       {
-        q: "Is IDR the same as balance billing?",
-        a: "No. Balance billing the patient is what the No Surprises Act stops. IDR is how the provider recovers the difference from the plan instead of the patient.",
+        q: "How does the No Surprises Act decide federal versus state IDR?",
+        a: "Plan type decides. Self funded employer plans are governed by federal law and route to federal IDR in every state. Fully insured plans can fall under a state surprise billing process where one exists, and that state pathway then controls.",
       },
       {
-        q: "How long does IDR take?",
-        a: "The arbitrator issues a determination within 30 business days of selection in most cases. The packet itself takes minutes to assemble on Sydra.",
+        q: "Does the No Surprises Act cap the award at the QPA?",
+        a: "No. The rules make the qualifying payment amount the anchor, but they require the arbitrator to weigh it against other factors such as service complexity, provider training, and prior determinations, which is why surgical awards frequently land above the QPA.",
       },
     ],
   },
   {
     slug: "how-to-file-idr",
     title: "How to file federal IDR step by step",
+    listLabel: "federal IDR process",
     metaTitle: "How to file federal IDR step by step | Sydra",
     metaDescription:
       "The exact sequence to dispute an underpaid out of network claim through the No Surprises Act IDR process, with the deadlines that decide the outcome.",
     lead: "To file federal IDR, first confirm the claim is eligible, then complete the 30 business day open negotiation period, then initiate IDR within four business days of that period closing. Select a certified dispute resolution entity, submit your offer with supporting data, and the arbitrator picks one final number. Miss the four business day window and the claim is lost.",
+    howToSteps: [
+      {
+        name: "Confirm the claim is eligible",
+        text: "Verify the claim is out of network and within the scope of the No Surprises Act. Plan type matters: self funded employer plans route to federal IDR everywhere, while fully insured plans may route to a state process in states that have one.",
+      },
+      {
+        name: "Complete the 30 business day open negotiation period",
+        text: "Send the open negotiation notice and run the required 30 business day period during which you and the plan try to settle directly. Most disputes do not settle, but the period is required before IDR can begin.",
+      },
+      {
+        name: "Initiate IDR within four business days",
+        text: "After open negotiation closes, you have only four business days to initiate IDR through the federal portal. This is the window where most recoverable claims quietly die when a practice gets busy.",
+      },
+      {
+        name: "Submit one offer backed by evidence",
+        text: "Submit a single payment offer supported by benchmark data and prior determinations on the same code. File one claim per CPT so each award is decided on its own merits rather than dragged toward the weakest claim in a batch.",
+      },
+      {
+        name: "Receive the arbitrator's determination",
+        text: "A certified dispute resolution entity picks one of the two offers. There is no splitting the difference, so the offer best supported by the evidence prevails, and the plan pays the determined amount.",
+      },
+    ],
     sections: [
       {
         heading: "Timing decides the outcome.",

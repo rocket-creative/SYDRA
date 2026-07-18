@@ -41,10 +41,16 @@ export default function IdrIndexPage() {
     name: s.name,
     href: idrStatePath(s.code),
   }));
-  const guideLinks = GUIDES.map((g) => ({
-    name: g.title,
-    href: `/idr/guide/${g.slug}`,
-  }));
+  const guideLinks = [
+    ...GUIDES.map((g) => ({
+      name: g.listLabel ?? g.title,
+      href: `/idr/guide/${g.slug}`,
+    })),
+    {
+      name: "IDR eligibility, deadlines, and fees",
+      href: "/resources/idr-eligibility-deadlines-fees",
+    },
+  ];
 
   return (
     <>
@@ -71,6 +77,18 @@ export default function IdrIndexPage() {
             New to this? Start with{" "}
             <Link className={textStyles.textLink} href="/what-is-idr">
               what federal IDR is
+            </Link>
+            , see{" "}
+            <Link className={textStyles.textLink} href="/how-it-works">
+              how Sydra files a claim
+            </Link>
+            , review{" "}
+            <Link className={textStyles.textLink} href="/pricing">
+              pricing
+            </Link>
+            , or{" "}
+            <Link className={textStyles.textLink} href="/demo">
+              book a demo
             </Link>
             .
           </p>
@@ -107,6 +125,16 @@ export default function IdrIndexPage() {
               </div>
             ))}
           </dl>
+          <p className={`${textStyles.body} mt-8 prose-measure`}>
+            See the full{" "}
+            <Link
+              className={textStyles.textLink}
+              href="/resources/sydra-idr-win-rate-award-benchmark"
+            >
+              IDR win rate and award benchmark
+            </Link>{" "}
+            for every figure, sourced and dated.
+          </p>
           <p className={`${textStyles.meta} mt-8 prose-measure`}>{DISCLAIMER}</p>
         </Section>
 

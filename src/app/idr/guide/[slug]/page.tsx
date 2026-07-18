@@ -12,7 +12,7 @@ import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { getGuide } from "@/lib/idr/guides";
-import { articleJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
+import { articleJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -23,10 +23,12 @@ export const revalidate = 86400;
  * Guide slugs whose topic is already owned by a primary page. They stay live and
  * cross-linked, but defer their canonical to that page so the two do not compete
  * for the same query (playbook section 7.3).
+ *
+ * The NSA-IDR guide was de-cannibalized: it now owns the narrow "no surprises act
+ * IDR" regulatory-mechanics query while /what-is-idr stays the definitional
+ * pillar, so it self-canonicalizes and is no longer listed here.
  */
-const CANONICAL_OVERRIDES: Record<string, string> = {
-  "what-is-no-surprises-act-idr": "/what-is-idr",
-};
+const CANONICAL_OVERRIDES: Record<string, string> = {};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -52,7 +54,6 @@ export default async function GuidePage({ params }: PageProps) {
   const guide = getGuide(slug);
   if (!guide) notFound();
 
-  const canonicalPath = CANONICAL_OVERRIDES[slug];
   const path = `/idr/guide/${slug}`;
   const crumbs = [
     { name: "Home", path: "" },
@@ -70,7 +71,18 @@ export default async function GuidePage({ params }: PageProps) {
             headline: guide.title.replace(/\.$/, ""),
             description: guide.metaDescription,
             datePublished: "2026-06-01",
+            dateModified: "2026-07-18",
           }),
+          ...(guide.howToSteps
+            ? [
+                howToJsonLd({
+                  path,
+                  name: guide.title.replace(/\.$/, ""),
+                  description: guide.metaDescription,
+                  steps: guide.howToSteps,
+                }),
+              ]
+            : []),
           faqPageJsonLd(guide.faqs),
         ]}
       />
@@ -84,11 +96,11 @@ export default async function GuidePage({ params }: PageProps) {
             ctaHref="/demo"
             ctaLabel="Schedule a demo"
           />
-          {canonicalPath ? (
+          {guide.crossLink ? (
             <p className={`${textStyles.meta} mt-6`}>
-              For the primary overview, see{" "}
-              <Link className={textStyles.textLink} href={canonicalPath}>
-                what federal IDR is
+              {guide.crossLink.intro}{" "}
+              <Link className={textStyles.textLink} href={guide.crossLink.href}>
+                {guide.crossLink.anchor}
               </Link>
               .
             </p>

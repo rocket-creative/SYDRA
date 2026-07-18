@@ -91,6 +91,28 @@ export function FederalIdrExplainer() {
           <Arrow className="shrink-0" />
         </Link>
       </p>
+
+      <nav aria-label="Explore federal IDR" className="mt-6">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 type-caption text-body">
+          {[
+            { href: "/idr", label: "Federal IDR by state and specialty" },
+            { href: "/resources/sydra-idr-win-rate-award-benchmark", label: "IDR win rate and award benchmark" },
+            { href: "/how-it-works", label: "How it works" },
+            { href: "/resources/idr-eligibility-deadlines-fees", label: "Eligibility, deadlines, and fees" },
+            { href: "/pricing", label: "Pricing" },
+            { href: "/demo", label: "Book a demo" },
+          ].map((item) => (
+            <li key={item.href}>
+              <Link
+                className="inline-flex min-h-[44px] items-center text-brand underline decoration-rule underline-offset-4 transition-colors hover:decoration-[var(--color-hero)]"
+                href={item.href}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </Section>
   );
 }

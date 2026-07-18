@@ -44,7 +44,10 @@ type Entry = {
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 };
 
-const NON_CANONICAL_GUIDE_SLUGS = new Set(["what-is-no-surprises-act-idr"]);
+// Guides whose canonical defers to a primary page and so must stay out of the
+// index. The NSA-IDR guide was de-cannibalized (it now owns its own query), so
+// this set is currently empty and every guide is eligible.
+const NON_CANONICAL_GUIDE_SLUGS = new Set<string>([]);
 const CPT_ID_PREFIX = "cpt-";
 const NAMED_PAYERS = [...NAMED_PAYER_SLUGS];
 

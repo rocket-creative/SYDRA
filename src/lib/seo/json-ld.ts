@@ -108,6 +108,34 @@ export function articleJsonLd({
   };
 }
 
+export function howToJsonLd({
+  path,
+  name,
+  description,
+  steps,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  steps: { name: string; text: string }[];
+}) {
+  const base = siteUrl();
+  const url = `${base}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": `${url}/#howto`,
+    name,
+    description,
+    step: steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+    })),
+  };
+}
+
 export function itemListJsonLd(items: { name: string; path: string }[]) {
   const base = siteUrl();
   return {

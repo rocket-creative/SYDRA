@@ -138,6 +138,7 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
   metaDescription:
     "Which claims qualify for federal IDR, the business day deadlines that govern every step, the fees both parties pay, and the most common reasons a claim is ruled ineligible.",
   datePublished: "2026-06-10",
+  dateModified: "2026-07-18",
   excerpt:
     "Eligibility rules, the business day deadline sequence, the fee structure, and the batching rules that decide whether a claim survives arbitration.",
   lead: "More than four in ten federal IDR disputes are challenged as ineligible by the other party. Eligibility, timing, and fees decide whether a claim ever reaches a determination. This page covers which claims qualify, the deadlines that govern each step, what the process costs, and how batching works.",
@@ -475,12 +476,114 @@ const NO_SURPRISES_ACT_FOR_SURGEONS: ResourceArticle = {
   related: ["federal-idr-process", "idr-win-rates-and-awards", "idr-eligibility-deadlines-fees"],
 };
 
+const IDR_WIN_RATE_AWARD_BENCHMARK: ResourceArticle = {
+  slug: "sydra-idr-win-rate-award-benchmark",
+  title: "Sydra IDR win rate and award benchmark.",
+  subtitle: "The federal IDR record for providers, in one place.",
+  metaTitle: "IDR Win Rate and Award Benchmark for Providers | Sydra",
+  metaDescription:
+    "A citable benchmark of federal IDR outcomes: provider win rates, how awards compare to the QPA, surgical and neurology award multiples, dispute volume, and the sources behind each figure.",
+  datePublished: "2026-07-18",
+  dateModified: "2026-07-18",
+  excerpt:
+    "One standalone reference for federal IDR outcomes: win rates, award multiples over the QPA, and dispute volume, each figure sourced and dated.",
+  lead: "This benchmark aggregates the published federal IDR record into one citable page. Every figure below is drawn from CMS Public Use Files and independent analyses by Georgetown CHIR, the Congressional Research Service, and others, with the source and reporting period noted. These are aggregate federal figures, not a prediction about any one claim, and they move as new public use files publish.",
+  sections: [
+    {
+      id: "win-rate",
+      heading: "Provider win rate.",
+      paragraphs: [
+        "Providers win the large majority of properly filed federal IDR disputes. Analysis of CMS figures found providers prevailing in about 88 percent of resolved disputes through the first half of 2025, and separate review put 2024 determinations at about 85 percent in the provider's favor.",
+      ],
+      list: [
+        "About 88 percent provider win rate. Source: CMS Federal IDR Public Use Files and Georgetown University CHIR analysis. As of H1 2025.",
+        "About 85 percent of 2024 determinations decided for the provider. Source: Congressional Research Service R48738. As of 2024.",
+      ],
+    },
+    {
+      id: "awards-vs-qpa",
+      heading: "Awards versus the qualifying payment amount.",
+      paragraphs: [
+        "The qualifying payment amount, or QPA, is the plan's median contracted rate and its anchor in a dispute. In practice the prevailing offer beats the QPA in the large majority of determinations.",
+      ],
+      list: [
+        "In about 88 percent of determinations, the prevailing offer beat the qualifying payment amount. Source: CMS Federal IDR Public Use Files. As of 2024 to 2025.",
+        "Independent review found the prevailing offer exceeded the QPA in about 87 percent of awards, with a median award several times the in network rate. Source: American College of Radiology analysis of CMS data. As of January 2026.",
+      ],
+    },
+    {
+      id: "specialty-multiples",
+      heading: "Award multiples by specialty.",
+      paragraphs: [
+        "The averages hide the real story, which is how far surgical awards run above the QPA compared with the high volume specialties. Surgery and neurology recover the widest multiples in the dataset.",
+      ],
+      list: [
+        "Surgical disputes have awarded roughly 970 percent to over 1,700 percent of the QPA across recent reporting periods. Source: CMS PUF, CRS R48738, and Georgetown CHIR. As of 2024 to 2025.",
+        "Neurology and neuromuscular disputes have awarded over 1,200 percent of the QPA. Source: CMS PUF and Georgetown CHIR. As of 2024.",
+        "Radiology disputes award around 559 to 594 percent of the QPA. Source: Georgetown CHIR and CMS PUF. As of 2024 to 2025.",
+        "Emergency disputes award far smaller multiples, around 257 percent of the QPA. Source: Georgetown CHIR and CMS PUF. As of H1 2024.",
+      ],
+    },
+    {
+      id: "volume",
+      heading: "Dispute volume and who files.",
+      paragraphs: [
+        "Volume is dominated by a handful of high frequency filers, while the highest value specialties file rarely. That gap is why the surgical lane stays open.",
+      ],
+      list: [
+        "About 4.8 million disputes were filed through the end of 2025, against the roughly 17,000 per year Congress expected. Source: Georgetown CHIR and CMS bimonthly updates. As of December 2025.",
+        "Surgery and neurology together were only about 9 percent of resolved cases, yet they win the largest multiples. Source: Georgetown CHIR. As of 2024.",
+        "An estimated 10 percent of eligible claims ever reach IDR arbitration. Source: ACEP analysis of CMS data.",
+      ],
+    },
+    {
+      id: "routing",
+      heading: "Plan routing context.",
+      paragraphs: [
+        "How a claim routes shapes the benchmark that applies. Self funded plans are the dominant path to the federal process.",
+      ],
+      list: [
+        "About 65 percent of covered workers are in self funded plans, which route to federal IDR regardless of state. Source: Peterson KFF Health System Tracker. 2021 baseline.",
+        "About 22 states have a specified state law that can govern fully insured disputes instead of the federal process. Source: Commonwealth Fund. As of 2024 to 2025.",
+      ],
+    },
+    {
+      id: "how-to-cite",
+      heading: "How to cite this benchmark.",
+      paragraphs: [
+        "Each figure above links back to a primary source in the references below. When citing, name the underlying source and its reporting period rather than this page alone, since the figures update as new CMS Public Use Files publish. Sydra maintains this page against the current public use files.",
+        "For the methodology behind the process these figures describe, see the federal IDR process walkthrough and the eligibility, deadlines, and fees reference.",
+      ],
+    },
+  ],
+  faqs: [
+    {
+      q: "What is the provider win rate in federal IDR?",
+      a: "Analysis of CMS data found providers prevailing in about 88 percent of resolved federal IDR disputes through the first half of 2025, and about 85 percent of 2024 determinations were decided for the provider. Win rate reflects the pattern across many determinations and is not a guarantee on any single claim.",
+    },
+    {
+      q: "How much higher than the QPA are IDR awards?",
+      a: "The prevailing offer beat the qualifying payment amount in roughly 87 to 88 percent of determinations. Surgical disputes have awarded about 970 percent to over 1,700 percent of the QPA, and neurology disputes over 1,200 percent, far above emergency disputes at around 257 percent.",
+    },
+    {
+      q: "How many IDR disputes have been filed?",
+      a: "About 4.8 million disputes were filed through the end of 2025, against the roughly 17,000 per year Congress originally expected. Surgery and neurology were only about 9 percent of resolved cases despite winning the largest multiples.",
+    },
+    {
+      q: "Are these Sydra performance figures?",
+      a: "No. These are aggregate federal figures from CMS Public Use Files and independent analyses, not Sydra outcomes. They describe the federal IDR record across all disputes and update as new public use files publish.",
+    },
+  ],
+  related: ["idr-win-rates-and-awards", "federal-idr-process", "idr-eligibility-deadlines-fees"],
+};
+
 export const RESOURCE_ARTICLES: ResourceArticle[] = [
   FEDERAL_IDR_PROCESS,
   IDR_ELIGIBILITY_DEADLINES_FEES,
   IDR_WIN_RATES_AND_AWARDS,
   IDR_ATTORNEY_VS_SOFTWARE,
   NO_SURPRISES_ACT_FOR_SURGEONS,
+  IDR_WIN_RATE_AWARD_BENCHMARK,
 ];
 
 export const RESOURCE_SLUGS = RESOURCE_ARTICLES.map((article) => article.slug);

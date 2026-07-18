@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
@@ -75,6 +76,8 @@ export default function TermsPage() {
             </p>
           </article>
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );
