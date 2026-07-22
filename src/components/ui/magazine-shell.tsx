@@ -13,6 +13,8 @@ type MagazineShellProps = {
   mainClassName?: string;
   /** Reserve bottom space on mobile for the sticky CTA bar. Only the landing funnel renders one. */
   hasMobileCtaBar?: boolean;
+  /** Breakpoint at which mobile CTA bar hides. Default "lg" (landing bars), "md" for programmatic sticky. */
+  mobileCtaBreakpoint?: "md" | "lg";
 };
 
 /** Unified magazine frame: stone field + white spread (max 1440 / content 1280). */
@@ -24,9 +26,12 @@ export function MagazineShell({
   showSiteFooter = true,
   mainClassName = "",
   hasMobileCtaBar = false,
+  mobileCtaBreakpoint = "lg",
 }: MagazineShellProps) {
   const bottomSpacing = hasMobileCtaBar
-    ? "pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0"
+    ? mobileCtaBreakpoint === "md"
+      ? "pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-0"
+      : "pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0"
     : "";
 
   return (

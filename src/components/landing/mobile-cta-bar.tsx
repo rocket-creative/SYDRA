@@ -17,6 +17,7 @@ type MobileCtaBarProps = {
 /** Sticky bottom action bar shown on mobile only. Hides when the target form is in view. */
 export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileCtaBarProps) {
   const [targetVisible, setTargetVisible] = useState(false);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
     const target = document.getElementById(scrollTargetId);
@@ -30,12 +31,25 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
     return () => observer.disconnect();
   }, [scrollTargetId]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.visualViewport) return;
+
+    const initialHeight = window.visualViewport.height;
+    const handleResize = () => {
+      const currentHeight = window.visualViewport?.height ?? initialHeight;
+      setKeyboardOpen(currentHeight < initialHeight * 0.75);
+    };
+
+    window.visualViewport.addEventListener("resize", handleResize);
+    return () => window.visualViewport?.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleDemo = () => {
     trackCtaClick("sydra", tracking);
     document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  if (targetVisible) return null;
+  if (targetVisible || keyboardOpen) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 pb-safe-bottom lg:hidden">

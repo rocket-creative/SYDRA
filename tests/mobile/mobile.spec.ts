@@ -171,6 +171,16 @@ for (const route of ROUTES) {
       const pricingLink = drawerNav.getByRole("link", { name: "Pricing" });
       await expect(pricingLink).toBeVisible();
       await expect(pricingLink).toHaveCSS("min-height", "44px");
+
+      // Drawer must cover the viewport, not be trapped inside the sticky header
+      // (a leftover transform on header creates a fixed containing block).
+      const drawerBox = await drawerNav.boundingBox();
+      expect(drawerBox, "mobile drawer should have a bounding box").not.toBeNull();
+      expect(
+        drawerBox!.height,
+        "mobile drawer height should cover most of the viewport",
+      ).toBeGreaterThan((testInfo.project.use.viewport?.height ?? 900) * 0.9);
+      expect(drawerBox!.y, "mobile drawer should start near the top of the viewport").toBeLessThan(8);
     }
   });
 }

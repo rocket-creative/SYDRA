@@ -46,23 +46,27 @@ export function ProgrammaticStickyCta({ href }: ProgrammaticStickyCtaProps) {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 md:hidden">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 md:hidden"
+      style={{
+        paddingBottom: "env(safe-area-inset-bottom)",
+      }}
+    >
       <div
-        className="flex max-h-14 items-center bg-[var(--color-hero)] text-white"
+        className="flex h-14 items-center bg-[var(--color-hero)] text-white"
         style={{
-          paddingBottom: "max(0px, env(safe-area-inset-bottom))",
           borderRadius: "4px 4px 0 0",
         }}
       >
         <a
-          className="flex h-14 min-h-0 flex-1 items-center justify-center px-4 text-[13px] font-normal uppercase tracking-[0.08em] text-white"
+          className="flex h-full flex-1 items-center justify-center px-4 text-[13px] font-normal uppercase tracking-[0.08em] text-white"
           href={href}
         >
           Send us this denial
         </a>
         <button
           aria-label="Dismiss"
-          className="flex h-14 w-11 shrink-0 items-center justify-center text-white/80 hover:text-white"
+          className="flex h-full w-11 shrink-0 items-center justify-center text-white/80 hover:text-white"
           type="button"
           onClick={() => {
             try {

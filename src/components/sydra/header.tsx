@@ -67,7 +67,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           </a>
           {!isFunnel ? (
             <>
-              <Button className="px-4 sm:px-6" href="/demo" showArrow variant="solid">
+              <Button className="px-3 sm:px-4 md:px-6" href="/demo" showArrow variant="solid">
                 <span className="hidden sm:inline">Schedule a demo</span>
                 <span className="sm:hidden">Demo</span>
               </Button>

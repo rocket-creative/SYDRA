@@ -18,6 +18,7 @@ export function StickyConversionBar({
   primaryLabel = "Book demo",
 }: StickyConversionBarProps) {
   const [targetVisible, setTargetVisible] = useState(false);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
     const target = document.getElementById(scrollTargetId);
@@ -31,11 +32,24 @@ export function StickyConversionBar({
     return () => observer.disconnect();
   }, [scrollTargetId]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.visualViewport) return;
+
+    const initialHeight = window.visualViewport.height;
+    const handleResize = () => {
+      const currentHeight = window.visualViewport?.height ?? initialHeight;
+      setKeyboardOpen(currentHeight < initialHeight * 0.75);
+    };
+
+    window.visualViewport.addEventListener("resize", handleResize);
+    return () => window.visualViewport?.removeEventListener("resize", handleResize);
+  }, []);
+
   const handlePrimary = () => {
     document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  if (targetVisible) return null;
+  if (targetVisible || keyboardOpen) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 pb-safe-bottom lg:hidden">

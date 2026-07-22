@@ -28,7 +28,7 @@ function HeroContent({
       <p className="hero-sub prose-measure mt-5 type-body text-body">
         The No Surprises Act gets them paid through federal independent dispute resolution (IDR).
         Surgeon built NSA IDR software your billing team runs in five minutes per claim, turning
-        written off out-of-network claims into recovered revenue.
+        written off out of network claims into recovered revenue.
       </p>
       <p className="hero-bold prose-measure mt-3 text-[15px] font-medium leading-relaxed text-brand md:text-[17px]">
         Your team reviews. Your team submits. You keep the recovery.

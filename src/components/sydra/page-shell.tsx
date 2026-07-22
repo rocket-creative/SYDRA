@@ -32,6 +32,7 @@ export function SydraPageShell({
   banded = false,
 }: SydraPageShellProps) {
   const reserveMobileBar = hasMobileCtaBar || Boolean(stickyDemoHref);
+  const mobileCtaBreakpoint = stickyDemoHref && !hasMobileCtaBar ? "md" : "lg";
   const sticky = stickyDemoHref ? <ProgrammaticStickyCta href={stickyDemoHref} /> : null;
 
   if (banded) {
@@ -41,6 +42,7 @@ export function SydraPageShell({
         hasMobileCtaBar={reserveMobileBar}
         headerVariant={headerVariant}
         mainClassName={`landing-compact ${mainClassName ?? ""}`}
+        mobileCtaBreakpoint={mobileCtaBreakpoint}
       >
         {breadcrumb ? (
           <div className="bg-white">
@@ -56,7 +58,12 @@ export function SydraPageShell({
   }
 
   return (
-    <MagazineShell footerExtra={footerExtra} headerVariant={headerVariant} hasMobileCtaBar={reserveMobileBar}>
+    <MagazineShell
+      footerExtra={footerExtra}
+      hasMobileCtaBar={reserveMobileBar}
+      headerVariant={headerVariant}
+      mobileCtaBreakpoint={mobileCtaBreakpoint}
+    >
       <div className={mainClassName ?? "px-5 py-14 md:px-10 md:py-20"}>
         {breadcrumb ? (
           <div className="mx-auto mb-8 max-w-[1280px]">
