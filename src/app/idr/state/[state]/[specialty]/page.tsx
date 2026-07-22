@@ -125,6 +125,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
     stateName,
     stateCode: code,
   });
+  const demoHref = demoDeepLink({ stateCode: code });
 
   return (
     <>
@@ -139,7 +140,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
           faqPageJsonLd(faqs),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
         <Section tone="white">
           <EntityHero
             title={h1SpecialtyState(painLabel, stateName)}
@@ -165,7 +166,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
         </Section>
 
         <Section tone="neutral">
-          <DenialCta href={demoDeepLink({ stateCode: code })} />
+          <DenialCta href={demoHref} />
         </Section>
 
         <Section tone="white">

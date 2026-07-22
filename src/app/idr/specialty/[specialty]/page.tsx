@@ -84,6 +84,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
   }));
 
   const faqs = specialtyHubFaqs(meta.name, painLabel);
+  const demoHref = demoDeepLink({});
 
   return (
     <>
@@ -104,7 +105,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
           faqPageJsonLd(faqs),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
         <Section tone="white">
           <EntityHero
             title={h1Specialty(painLabel)}
@@ -129,7 +130,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoDeepLink({})} />
+          <DenialCta href={demoHref} />
         </Section>
 
         <Section tone="neutral">

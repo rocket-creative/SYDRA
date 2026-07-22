@@ -135,6 +135,7 @@ export default async function CptStatePayerPage({ params }: PageProps) {
     },
     { name: `${proc} denied in any state`, href: idrCodePath(code) },
   ];
+  const demoHref = demoDeepLink({ code, stateCode, payerSlug: payer });
 
   return (
     <>
@@ -149,7 +150,7 @@ export default async function CptStatePayerPage({ params }: PageProps) {
           }),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
         <Section tone="white">
           <EntityHero
             eyebrow={`${payerName} · ${stateName}`}
@@ -180,7 +181,7 @@ export default async function CptStatePayerPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoDeepLink({ code, stateCode, payerSlug: payer })} />
+          <DenialCta href={demoHref} />
         </Section>
 
         <Section tone="neutral">

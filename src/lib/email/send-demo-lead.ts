@@ -1,6 +1,11 @@
 import { Resend } from "resend";
 
 import {
+  getFounderFromEmail,
+  getLeadFromEmail,
+  getLeadInboxRecipients,
+} from "@/lib/email/inbox-recipients";
+import {
   BEST_TIME_LABELS,
   DISPUTES_LABELS,
   IDR_APPROACH_LABELS,
@@ -10,23 +15,9 @@ import {
   TIER_LABELS,
   type DemoRequest,
 } from "@/lib/schemas/demo-request";
-import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
 import type { LeadScoreResult } from "@/lib/leads/score-demo-lead";
 
 export type LeadRequestType = "demo" | "security";
-
-const DEFAULT_INBOX = SALES_EMAIL_FALLBACK;
-const DEFAULT_FROM = "notifications@sydrahealth.com";
-
-function getInboxEmail(): string {
-  const raw = process.env.LEADS_INBOX_EMAIL?.trim();
-  return raw && raw.length > 0 ? raw : DEFAULT_INBOX;
-}
-
-function getFromEmail(): string {
-  const raw = process.env.LEADS_FROM_EMAIL?.trim();
-  return raw && raw.length > 0 ? raw : DEFAULT_FROM;
-}
 
 function escapeHtml(value: string): string {
   return value
@@ -38,7 +29,7 @@ function escapeHtml(value: string): string {
 
 function formatOptional(value: string | undefined): string {
   const trimmed = value?.trim();
-  return trimmed && trimmed.length > 0 ? trimmed : "—";
+  return trimmed && trimmed.length > 0 ? trimmed : "n/a";
 }
 
 function requestLabel(requestType: LeadRequestType): string {
@@ -68,7 +59,7 @@ function buildPlainBody(
     `Current IDR approach: ${IDR_APPROACH_LABELS[data.idrApproach]}`,
     `Role: ${ROLE_LABELS[data.role]}`,
     `Timeline: ${TIMELINE_LABELS[data.timeline]}`,
-    `Tier interest: ${data.tierInterest ? TIER_LABELS[data.tierInterest] : "—"}`,
+    `Tier interest: ${data.tierInterest ? TIER_LABELS[data.tierInterest] : "n/a"}`,
     "",
     "Notes",
     `Message: ${formatOptional(data.message)}`,
@@ -78,8 +69,12 @@ function buildPlainBody(
     ...score.breakdown.map((line) => `  ${line}`),
     "",
     "Attribution",
+    `Route state: ${formatOptional(data.routeState)}`,
+    `Route code: ${formatOptional(data.routeCode)}`,
     `UTM source: ${formatOptional(data.utmSource)}`,
+    `UTM medium: ${formatOptional(data.utmMedium)}`,
     `UTM campaign: ${formatOptional(data.utmCampaign)}`,
+    `UTM content: ${formatOptional(data.utmContent)}`,
     "",
     `Submitted: ${new Date().toISOString()}`,
   ];
@@ -101,28 +96,48 @@ function buildHtmlBody(
         ? "#D97706"
         : "#64748B";
 
-  const typePrefix =
-    requestType === "security" ? "SECURITY" : score.priority;
+  const typePrefix = requestType === "security" ? "SECURITY" : score.priority;
 
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
-<p style="margin:0 0 16px"><strong style="color:${priorityColor}">[SYDRA ${typePrefix}]</strong> ${escapeHtml(requestLabel(requestType))} — ${escapeHtml(score.subjectSummary)}</p>
-<table style="border-collapse:collapse;width:100%">${row("Name", data.name)}${row("Email", data.email)}${row("Phone", formatOptional(data.phone))}${row("Best time to reach", BEST_TIME_LABELS[data.bestTimeToReach])}${row("Practice", data.practiceName)}${row("Specialty", SPECIALTY_LABELS[data.specialty])}${row("State", data.state)}${row("Disputes / month", DISPUTES_LABELS[data.disputesPerMonth])}${row("IDR approach", IDR_APPROACH_LABELS[data.idrApproach])}${row("Role", ROLE_LABELS[data.role])}${row("Timeline", TIMELINE_LABELS[data.timeline])}${row("Tier interest", data.tierInterest ? TIER_LABELS[data.tierInterest] : "—")}${row("Message", formatOptional(data.message))}${row("EOB file", formatOptional(data.eobFileName))}${row("UTM source", formatOptional(data.utmSource))}${row("UTM campaign", formatOptional(data.utmCampaign))}</table>
+<p style="margin:0 0 16px"><strong style="color:${priorityColor}">[SYDRA ${typePrefix}]</strong> ${escapeHtml(requestLabel(requestType))} · ${escapeHtml(score.subjectSummary)}</p>
+<table style="border-collapse:collapse;width:100%">${row("Name", data.name)}${row("Email", data.email)}${row("Phone", formatOptional(data.phone))}${row("Best time to reach", BEST_TIME_LABELS[data.bestTimeToReach])}${row("Practice", data.practiceName)}${row("Specialty", SPECIALTY_LABELS[data.specialty])}${row("State", data.state)}${row("Disputes / month", DISPUTES_LABELS[data.disputesPerMonth])}${row("IDR approach", IDR_APPROACH_LABELS[data.idrApproach])}${row("Role", ROLE_LABELS[data.role])}${row("Timeline", TIMELINE_LABELS[data.timeline])}${row("Tier interest", data.tierInterest ? TIER_LABELS[data.tierInterest] : "n/a")}${row("Message", formatOptional(data.message))}${row("EOB file", formatOptional(data.eobFileName))}${row("Route state", formatOptional(data.routeState))}${row("Route code", formatOptional(data.routeCode))}${row("UTM source", formatOptional(data.utmSource))}${row("UTM medium", formatOptional(data.utmMedium))}${row("UTM campaign", formatOptional(data.utmCampaign))}${row("UTM content", formatOptional(data.utmContent))}</table>
 <p style="margin:16px 0 8px;font-size:13px;color:#64748b"><strong>Score:</strong> ${score.score} points</p>
 <ul style="margin:0 0 16px;padding-left:20px;font-size:13px;color:#64748b">${score.breakdown.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
 }
 
-function buildConfirmationPlain(name: string, requestType: LeadRequestType): string {
+function firstNameFrom(fullName: string): string {
+  const part = fullName.trim().split(/\s+/)[0];
+  return part && part.length > 0 ? part : "there";
+}
+
+function buildFounderAutoReplyPlain(name: string): string {
+  const first = firstNameFrom(name);
+  return [
+    `Hi ${first},`,
+    "",
+    "Thanks for booking a demo. I built Sydra because I file these claims myself and I got tired of watching surgical practices write off money the No Surprises Act says they can recover.",
+    "",
+    "One thing to have ready for the call: a single denied or underpaid out of network EOB. We will run it live. If it qualifies, you will see the dollar figure on that claim before the call ends. If it does not, I will tell you straight and you have lost five minutes.",
+    "",
+    "The demo is free. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
+    "",
+    "Talk soon,",
+    "Dr. John Abrahams, MD",
+    "Board certified neurosurgeon",
+    "Founder, Kronos Health",
+    "",
+    "Kronos Health, 244 Westchester Ave, Ste 209, West Harrison, NY 10604",
+  ].join("\n");
+}
+
+function buildSecurityConfirmPlain(name: string): string {
   const greeting = name.trim() ? `Hi ${name.trim()},` : "Hi,";
-  const topic =
-    requestType === "security"
-      ? "security summary and demo request"
-      : "Sydra demo request";
   return [
     greeting,
     "",
-    `Thank you for contacting Kronos Health about Sydra. We received your ${topic}.`,
+    "Thank you for contacting Kronos Health about Sydra. We received your security summary and demo request.",
     "",
     "A member of our sales team will reply within one business day at the email address you provided.",
     "",
@@ -131,23 +146,29 @@ function buildConfirmationPlain(name: string, requestType: LeadRequestType): str
   ].join("\n");
 }
 
-function buildConfirmationHtml(name: string, requestType: LeadRequestType): string {
-  const greeting = escapeHtml(name.trim() ? `Hi ${name.trim()},` : "Hi,");
-  const topic =
-    requestType === "security"
-      ? "security summary and demo request"
-      : "Sydra demo request";
-  return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.6;color:#1A2B48;max-width:480px">
-<p>${greeting}</p>
-<p>Thank you for contacting Kronos Health about Sydra. We received your ${escapeHtml(topic)}.</p>
-<p>A member of our sales team will reply within one business day at the email address you provided.</p>
-<p style="margin-top:24px;font-size:13px;color:#64748b">Kronos Health<br>Sydra · NSA IDR software</p>
-</body></html>`;
-}
-
 export type SendDemoLeadResult =
   | { ok: true; id: string | undefined }
   | { ok: false; error: string };
+
+export function demoLeadFallbackFields(
+  data: DemoRequest,
+  requestType: LeadRequestType,
+): Record<string, string | number | boolean | null | undefined> {
+  return {
+    requestType,
+    name: data.name,
+    email: data.email,
+    practiceName: data.practiceName,
+    state: data.state,
+    specialty: data.specialty,
+    routeState: data.routeState,
+    routeCode: data.routeCode,
+    utmSource: data.utmSource,
+    utmMedium: data.utmMedium,
+    utmCampaign: data.utmCampaign,
+    utmContent: data.utmContent,
+  };
+}
 
 export async function sendDemoLeadEmail(
   data: DemoRequest,
@@ -161,11 +182,11 @@ export async function sendDemoLeadEmail(
 
   const resend = new Resend(apiKey);
   const subjectPrefix = requestType === "security" ? "SYDRA SECURITY" : `SYDRA ${score.priority}`;
-  const subject = `[${subjectPrefix}] ${requestLabel(requestType)} — ${score.subjectSummary}`;
+  const subject = `[${subjectPrefix}] ${requestLabel(requestType)} · ${score.subjectSummary}`;
 
   const { data: result, error } = await resend.emails.send({
-    from: getFromEmail(),
-    to: [getInboxEmail()],
+    from: getLeadFromEmail(),
+    to: getLeadInboxRecipients(),
     replyTo: data.email,
     subject,
     text: buildPlainBody(data, score, requestType),
@@ -176,21 +197,26 @@ export async function sendDemoLeadEmail(
     return { ok: false, error: error.message };
   }
 
-  const confirmSubject =
-    requestType === "security"
-      ? "We received your Sydra security request"
-      : "We received your Sydra demo request";
-
-  const { error: confirmError } = await resend.emails.send({
-    from: getFromEmail(),
-    to: [data.email],
-    subject: confirmSubject,
-    text: buildConfirmationPlain(data.name, requestType),
-    html: buildConfirmationHtml(data.name, requestType),
-  });
-
-  if (confirmError) {
-    console.error("Submitter confirmation email failed:", confirmError.message);
+  if (requestType === "demo") {
+    const { error: confirmError } = await resend.emails.send({
+      from: getFounderFromEmail(),
+      to: [data.email],
+      subject: "Your Sydra demo, and the one thing to have ready",
+      text: buildFounderAutoReplyPlain(data.name),
+    });
+    if (confirmError) {
+      console.error("Submitter confirmation email failed:", confirmError.message);
+    }
+  } else {
+    const { error: confirmError } = await resend.emails.send({
+      from: getLeadFromEmail(),
+      to: [data.email],
+      subject: "We received your Sydra security request",
+      text: buildSecurityConfirmPlain(data.name),
+    });
+    if (confirmError) {
+      console.error("Submitter confirmation email failed:", confirmError.message);
+    }
   }
 
   return { ok: true, id: result?.id };

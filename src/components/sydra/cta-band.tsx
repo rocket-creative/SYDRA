@@ -9,8 +9,7 @@ export function SydraCtaBand() {
           Ready to see Sydra on a real denied claim?
         </h2>
         <p className="prose-measure mt-6 type-body text-white/85">
-          Schedule a 15 minute walkthrough. No commitment. We show you what Sydra generates from
-          a recent case.
+          Schedule a free five minute demo. No commitment. We show you what Sydra generates from a real claim in your specialty.
         </p>
         <div className="mt-10">
           <Button href="/demo" showArrow variant="solidOnDark">

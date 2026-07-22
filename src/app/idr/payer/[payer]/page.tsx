@@ -78,6 +78,7 @@ export default async function PayerHubPage({ params }: PageProps) {
       href: idrCodeStatePayerPath(c.code, s.code, payer),
     })),
   );
+  const demoHref = demoDeepLink({ payerSlug: payer });
 
   return (
     <>
@@ -96,7 +97,7 @@ export default async function PayerHubPage({ params }: PageProps) {
           }),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
         <Section tone="white">
           <EntityHero
             eyebrow={`${payerName} · Federal IDR`}
@@ -144,7 +145,7 @@ export default async function PayerHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoDeepLink({ payerSlug: payer })} />
+          <DenialCta href={demoHref} />
         </Section>
 
         <Section tone="neutral">

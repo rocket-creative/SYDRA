@@ -23,12 +23,12 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Disallow API and query-string facets; clean paths are canonical.
-        disallow: ["/api/", "/*?*"],
+        disallow: ["/api/", "/admin/", "/*?*"],
       },
       ...AI_CRAWLERS.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/api/"],
+        disallow: ["/api/", "/admin/"],
       })),
     ],
     sitemap: `${base}/sitemap.xml`,

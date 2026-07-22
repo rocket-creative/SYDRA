@@ -121,7 +121,11 @@ export const demoRequestSchema = z.object({
   message: z.union([z.string().trim().max(5000), z.literal("")]).optional(),
   eobFileName: z.union([z.string().trim().max(500), z.literal("")]).optional(),
   utmSource: z.union([z.string().trim().max(200), z.literal("")]).optional(),
+  utmMedium: z.union([z.string().trim().max(200), z.literal("")]).optional(),
   utmCampaign: z.union([z.string().trim().max(200), z.literal("")]).optional(),
+  utmContent: z.union([z.string().trim().max(200), z.literal("")]).optional(),
+  routeState: z.union([z.string().trim().max(10), z.literal("")]).optional(),
+  routeCode: z.union([z.string().trim().max(20), z.literal("")]).optional(),
   website: z.union([z.string().trim().max(200), z.literal("")]).optional(),
 });
 

@@ -1,8 +1,9 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import { CtaLink } from "@/components/ui/cta-link";
+import { writeCalculatorEstimate } from "@/lib/landing/calculator-estimate";
 
 const WIN_RATE = 0.88;
 const AWARD_MULTIPLIER = 4.5;
@@ -59,6 +60,21 @@ export function RecoveryCalculator({
     };
   }, [claimsPerMonth, avgDisputedAmount]);
 
+  const touchedRef = useRef(false);
+
+  useEffect(() => {
+    if (!touchedRef.current) return;
+    writeCalculatorEstimate({
+      claimsPerMonth,
+      avgDisputedAmount,
+      annualRecovery: estimate.annualRecovery,
+    });
+  }, [claimsPerMonth, avgDisputedAmount, estimate.annualRecovery]);
+
+  const markTouched = () => {
+    touchedRef.current = true;
+  };
+
   const labelClass = onDark ? "text-white/70" : "text-body";
   const valueClass = onDark ? "text-white" : "text-brand";
   const mutedClass = onDark ? "text-white/55" : "text-body/70";
@@ -86,7 +102,10 @@ export function RecoveryCalculator({
             id={claimsId}
             max={CLAIMS_MAX}
             min={CLAIMS_MIN}
-            onChange={(e) => setClaimsPerMonth(Number(e.target.value))}
+            onChange={(e) => {
+              markTouched();
+              setClaimsPerMonth(Number(e.target.value));
+            }}
             type="range"
             value={claimsPerMonth}
           />
@@ -110,7 +129,10 @@ export function RecoveryCalculator({
             id={amountId}
             max={AMOUNT_MAX}
             min={AMOUNT_MIN}
-            onChange={(e) => setAvgDisputedAmount(Number(e.target.value))}
+            onChange={(e) => {
+              markTouched();
+              setAvgDisputedAmount(Number(e.target.value));
+            }}
             step={AMOUNT_STEP}
             type="range"
             value={avgDisputedAmount}

@@ -87,6 +87,7 @@ export default async function CptHubPage({ params }: PageProps) {
       name: `${meta.shortLabel} denials`,
       href: idrCodePath(meta.code),
     }));
+  const demoHref = demoDeepLink({ code });
 
   return (
     <>
@@ -105,7 +106,7 @@ export default async function CptHubPage({ params }: PageProps) {
           }),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
         <Section tone="white">
           <EntityHero
             eyebrow="Federal IDR · Code overview"
@@ -132,7 +133,7 @@ export default async function CptHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="neutral">
-          <DenialCta href={demoDeepLink({ code })} />
+          <DenialCta href={demoHref} />
         </Section>
 
         <Section tone="white">

@@ -29,9 +29,11 @@ export async function sendCrmWebhook(lead: PostcardLead): Promise<CrmWebhookResu
     monthly_oon_volume: DISPUTES_LABELS[lead.disputesPerMonth],
     product_interest: LANDING_PRODUCT_LABELS[lead.productInterest],
     tracking: {
-      state: lead.state_tracking ?? "",
+      state: lead.route_state || lead.state_tracking || "",
+      route_code: lead.route_code ?? "",
       utm_source: lead.utm_source ?? "",
       utm_medium: lead.utm_medium ?? "",
+      utm_campaign: lead.utm_campaign ?? "",
       utm_content: lead.utm_content ?? "",
       landed_at: lead.landed_at ?? "",
     },

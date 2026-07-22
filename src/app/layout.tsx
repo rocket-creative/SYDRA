@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import { GoogleAdsTag } from "@/components/analytics/google-ads";
+import { UtmFirstTouch } from "@/components/analytics/utm-first-touch";
 import { WebVitalsReporter } from "@/components/analytics/web-vitals-reporter";
 import { HOME_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
         <PageTransition>{children}</PageTransition>
+        <UtmFirstTouch />
         <WebVitalsReporter />
         <GoogleAdsTag />
       </body>

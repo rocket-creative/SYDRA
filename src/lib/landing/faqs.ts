@@ -10,6 +10,10 @@ export function buildFaqs(stateDisplay: string | null) {
 
   return [
     {
+      q: "What does the demo cost and what am I committing to?",
+      a: "Nothing and nothing. The demo is free, there is no contract, no setup fee, and nothing installs in your EMR. We walk one real claim from your specialty and tell you whether IDR fits your practice. If it does not, we say so on the call.",
+    },
+    {
       q: "What is federal IDR under the No Surprises Act?",
       a: "Federal independent dispute resolution is the arbitration process for qualifying out of network claims under the No Surprises Act. When open negotiation does not resolve payment, either party can initiate IDR. The IDRE selects one final offer based on the evidence each side submits.",
     },

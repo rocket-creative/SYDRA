@@ -1,9 +1,17 @@
 import { NextResponse } from "next/server";
 
 import { sendCrmWebhook } from "@/lib/crm/webhook";
-import { sendPostcardLeadEmail } from "@/lib/email/send-postcard-lead";
+import {
+  postcardLeadSubject,
+  postcardLeadToFallbackFields,
+  sendPostcardLeadEmail,
+} from "@/lib/email/send-postcard-lead";
 import { checkRateLimit } from "@/lib/landing/rate-limit";
-import { postcardLeadSchema } from "@/lib/schemas/postcard-lead";
+import { logLeadFallback } from "@/lib/leads/fallback-log";
+import {
+  normalizePostcardLead,
+  postcardLeadRequestSchema,
+} from "@/lib/schemas/postcard-lead";
 
 function clientIp(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -32,7 +40,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const parsed = postcardLeadSchema.safeParse(body);
+  const parsed = postcardLeadRequestSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
       { error: "Validation failed", details: parsed.error.flatten() },
@@ -40,25 +48,39 @@ export async function POST(request: Request) {
     );
   }
 
-  const lead = parsed.data;
+  const lead = normalizePostcardLead(parsed.data);
 
   if (isHoneypotFilled(lead.website)) {
     return NextResponse.json({ ok: true });
   }
 
+  const subject = postcardLeadSubject(lead);
+  const submittedAt = new Date().toISOString();
+
+  await logLeadFallback({
+    kind: lead.leadKind === "partial" ? "partial" : "full",
+    source: "postcard",
+    subject,
+    fields: postcardLeadToFallbackFields(lead),
+    submittedAt,
+  });
+
   const emailResult = await sendPostcardLeadEmail(lead);
   if (!emailResult.ok) {
-    console.error("Postcard lead email failed:", emailResult.error);
-    return NextResponse.json(
-      { error: "Unable to submit request. Please try again or contact us by email." },
-      { status: 502 },
-    );
+    console.error("Postcard lead email failed:", emailResult.error, {
+      subject,
+      payload: postcardLeadToFallbackFields(lead),
+    });
+    // Lead already logged; do not fail the visitor.
+    return NextResponse.json({ ok: true, emailDelivered: false });
   }
 
-  const crmResult = await sendCrmWebhook(lead);
-  if (!crmResult.ok) {
-    console.error("CRM webhook failed:", crmResult.error);
+  if (lead.leadKind === "full") {
+    const crmResult = await sendCrmWebhook(lead);
+    if (!crmResult.ok) {
+      console.error("CRM webhook failed:", crmResult.error);
+    }
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, emailDelivered: true });
 }

@@ -126,6 +126,7 @@ export default async function CptStatePage({ params }: PageProps) {
         ]
       : []),
   ];
+  const demoHref = demoDeepLink({ code, stateCode });
 
   return (
     <>
@@ -140,7 +141,7 @@ export default async function CptStatePage({ params }: PageProps) {
           }),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
         <Section tone="white">
           <EntityHero
             eyebrow={`Federal IDR · ${stateName}`}
@@ -171,7 +172,7 @@ export default async function CptStatePage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoDeepLink({ code, stateCode })} />
+          <DenialCta href={demoHref} />
         </Section>
 
         <Section tone="neutral">

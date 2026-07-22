@@ -9,6 +9,7 @@ import {
   parseCampaignCookie,
   serializeCampaignCookie,
 } from "@/lib/landing/tracking";
+import { persistUtmFirstTouch } from "@/lib/landing/utm-session";
 
 type TrackingProviderProps = {
   tracking: CampaignTracking;
@@ -36,11 +37,19 @@ export function TrackingProvider({ tracking, path }: TrackingProviderProps) {
 
   useEffect(() => {
     const existing = readCookie();
+    const sessionUtm = persistUtmFirstTouch({
+      utm_source: tracking.utm_source,
+      utm_medium: tracking.utm_medium,
+      utm_campaign: tracking.utm_campaign,
+      utm_content: tracking.utm_content,
+    });
     const merged: CampaignTracking = {
       state: tracking.state || existing?.state || "",
-      utm_source: tracking.utm_source || existing?.utm_source || "",
-      utm_medium: tracking.utm_medium || existing?.utm_medium || "",
-      utm_content: tracking.utm_content || existing?.utm_content || "",
+      utm_source: tracking.utm_source || existing?.utm_source || sessionUtm.utm_source,
+      utm_medium: tracking.utm_medium || existing?.utm_medium || sessionUtm.utm_medium,
+      utm_campaign:
+        tracking.utm_campaign || existing?.utm_campaign || sessionUtm.utm_campaign,
+      utm_content: tracking.utm_content || existing?.utm_content || sessionUtm.utm_content,
       landed_at: existing?.landed_at || tracking.landed_at,
     };
 

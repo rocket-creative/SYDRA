@@ -34,7 +34,7 @@ export default function PricingPage() {
               typical 20% attorney contingency fee. You keep more of every recovery.
             </p>
             <p className="mt-4 type-body text-body">
-              Schedule a 15 minute demo and we quote on the call. No commitment to proceed.
+              Schedule a five minute demo and we quote on the call. No commitment to proceed.
             </p>
           </header>
         </Section>
@@ -83,7 +83,7 @@ export default function PricingPage() {
           </h2>
           <div className="mt-6 space-y-4 type-body text-body">
             <p>
-              15 minutes on a real denied claim from your specialty. We walk through Sydra live:
+              Five minutes on a real denied claim from your specialty. We walk through Sydra live:
               EOB upload, eligibility check, draft generation, DOCX export. You see the output
               before we discuss any numbers.
             </p>

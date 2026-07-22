@@ -5,6 +5,7 @@ export type CampaignTracking = {
   state: string;
   utm_source: string;
   utm_medium: string;
+  utm_campaign: string;
   utm_content: string;
   landed_at: string;
 };
@@ -12,6 +13,7 @@ export type CampaignTracking = {
 export type UtmParams = {
   utm_source: string;
   utm_medium: string;
+  utm_campaign: string;
   utm_content: string;
 };
 
@@ -29,9 +31,10 @@ export function parseUtmFromSearchParams(
 
   const utm_source = get("utm_source") || get("src") || "";
   const utm_medium = get("utm_medium") || "";
+  const utm_campaign = get("utm_campaign") || "";
   const utm_content = get("utm_content") || "";
 
-  return { utm_source, utm_medium, utm_content };
+  return { utm_source, utm_medium, utm_campaign, utm_content };
 }
 
 export function buildCampaignTracking(
@@ -43,6 +46,7 @@ export function buildCampaignTracking(
     state: stateCode,
     utm_source: utm.utm_source,
     utm_medium: utm.utm_medium,
+    utm_campaign: utm.utm_campaign,
     utm_content: utm.utm_content,
     landed_at: landedAt,
   };
@@ -67,6 +71,7 @@ export function parseCampaignCookie(raw: string | undefined): CampaignTracking |
       state: typeof parsed.state === "string" ? parsed.state : "",
       utm_source: typeof parsed.utm_source === "string" ? parsed.utm_source : "",
       utm_medium: typeof parsed.utm_medium === "string" ? parsed.utm_medium : "",
+      utm_campaign: typeof parsed.utm_campaign === "string" ? parsed.utm_campaign : "",
       utm_content: typeof parsed.utm_content === "string" ? parsed.utm_content : "",
       landed_at:
         typeof parsed.landed_at === "string" ? parsed.landed_at : new Date().toISOString(),
@@ -75,4 +80,3 @@ export function parseCampaignCookie(raw: string | undefined): CampaignTracking |
     return null;
   }
 }
-

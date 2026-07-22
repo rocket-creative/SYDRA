@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 
-import { sendDemoLeadEmail, type LeadRequestType } from "@/lib/email/send-demo-lead";
+import {
+  demoLeadFallbackFields,
+  sendDemoLeadEmail,
+  type LeadRequestType,
+} from "@/lib/email/send-demo-lead";
+import { logLeadFallback } from "@/lib/leads/fallback-log";
 import { scoreDemoLead } from "@/lib/leads/score-demo-lead";
 import {
   demoRequestSchema,
@@ -64,19 +69,37 @@ export async function POST(request: Request) {
       : "demo";
   const requestType: LeadRequestType = rawType === "security" ? "security" : "demo";
 
+  const subjectPrefix = requestType === "security" ? "SYDRA SECURITY" : `SYDRA ${score.priority}`;
+  const subject = `[${subjectPrefix}] Demo lead`;
+
+  await logLeadFallback({
+    kind: "full",
+    source: "demo",
+    subject,
+    fields: demoLeadFallbackFields(lead, requestType),
+    submittedAt: new Date().toISOString(),
+  });
+
   const sendResult = await sendDemoLeadEmail(lead, score, requestType);
 
   if (!sendResult.ok) {
-    console.error("Demo lead email failed:", sendResult.error);
-    return NextResponse.json(
-      { error: "Unable to submit request. Please try again or contact us by email." },
-      { status: 502 },
-    );
+    console.error("Demo lead email failed:", sendResult.error, {
+      subject,
+      payload: demoLeadFallbackFields(lead, requestType),
+    });
+    // Lead already logged; do not fail the visitor.
+    return NextResponse.json({
+      ok: true,
+      redirect: "/demo/thank-you",
+      priority: score.priority,
+      emailDelivered: false,
+    });
   }
 
   return NextResponse.json({
     ok: true,
     redirect: "/demo/thank-you",
     priority: score.priority,
+    emailDelivered: true,
   });
 }

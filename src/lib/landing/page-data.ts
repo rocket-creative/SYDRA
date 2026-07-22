@@ -32,6 +32,7 @@ export async function getLandingPageData(
     {
       utm_source: utm.utm_source || existing?.utm_source || "",
       utm_medium: utm.utm_medium || existing?.utm_medium || "",
+      utm_campaign: utm.utm_campaign || existing?.utm_campaign || "",
       utm_content: utm.utm_content || existing?.utm_content || "",
     },
     existing?.landed_at,

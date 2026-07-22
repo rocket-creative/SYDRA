@@ -12,4 +12,4 @@ export const DISCLAIMER = `No outcome is guaranteed. Results vary by claim, paye
 
 export const WAIT_HOOK = `Most practices never file, and the window does not wait. After open negotiation ends you have four business days to start a dispute. Miss it and that money is gone for good. This is the part that costs surgical practices the most, doing nothing.`;
 
-export const CTA = `Send us this denial. We will tell you fast whether it qualifies and, if it does, we build the submission.`;
+export const CTA = `Send us this denial. We will tell you on the call whether it qualifies, free, and show you the dollar figure if it does. If it does not qualify you will know in five minutes and owe nothing.`;

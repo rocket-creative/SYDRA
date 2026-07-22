@@ -20,7 +20,7 @@ export function EntityHero({
   ctaLabel,
 }: EntityHeroProps) {
   return (
-    <header className="prose-measure">
+    <header className="prose-measure" data-entity-hero>
       {eyebrow ? (
         <p className="type-caption mb-4 uppercase tracking-[0.12em] text-body/70">
           {eyebrow}

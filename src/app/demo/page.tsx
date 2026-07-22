@@ -53,6 +53,10 @@ const callSteps = [
 
 const preBookingFaq = [
   {
+    q: "What does the demo cost and what am I committing to?",
+    a: "Nothing and nothing. The demo is free, there is no contract, no setup fee, and nothing installs in your EMR. We walk one real claim from your specialty and tell you whether IDR fits your practice. If it does not, we say so on the call.",
+  },
+  {
     q: "Do I have to buy anything to get the demo?",
     a: "No. Free with no commitment.",
   },
@@ -89,7 +93,7 @@ export default function DemoPage() {
             <h1 className={textStyles.pageTitle} id="heading-demo">
               See Sydra prepare a real NSA IDR submission.
               <span className={textStyles.pageSubtitle}>
-                15 minutes. Your specialty. Your actual CPT codes if you send one.
+                Five minutes. Your specialty. Your actual CPT codes if you send one.
               </span>
             </h1>
           </header>
@@ -155,7 +159,7 @@ export default function DemoPage() {
 
             <div className="order-1 lg:order-2 lg:col-span-6" id="demo-form">
               <h2 className={textStyles.subsectionTitle}>
-                Schedule your 15 minute demo.
+                Schedule your free five minute demo.
               </h2>
               <p className={`${textStyles.body} mt-2`}>
                 Send us an EOB before the call and we&apos;ll run the demo on your actual claim.

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { ProgrammaticStickyCta } from "@/components/idr/programmatic-sticky-cta";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { BreadcrumbNav } from "@/components/sydra/breadcrumb-nav";
 
@@ -11,6 +12,8 @@ type SydraPageShellProps = {
   mainClassName?: string;
   /** Reserve bottom space on mobile for a sticky conversion bar. */
   hasMobileCtaBar?: boolean;
+  /** Programmatic pages: sticky "Send us this denial" bar under 768px. */
+  stickyDemoHref?: string;
   /**
    * Render children as full-bleed alternating Section bands instead of a single
    * padded white article column. Children should be <Section> elements.
@@ -25,13 +28,17 @@ export function SydraPageShell({
   footerExtra,
   mainClassName,
   hasMobileCtaBar = false,
+  stickyDemoHref,
   banded = false,
 }: SydraPageShellProps) {
+  const reserveMobileBar = hasMobileCtaBar || Boolean(stickyDemoHref);
+  const sticky = stickyDemoHref ? <ProgrammaticStickyCta href={stickyDemoHref} /> : null;
+
   if (banded) {
     return (
       <MagazineShell
         footerExtra={footerExtra}
-        hasMobileCtaBar={hasMobileCtaBar}
+        hasMobileCtaBar={reserveMobileBar}
         headerVariant={headerVariant}
         mainClassName={`landing-compact ${mainClassName ?? ""}`}
       >
@@ -43,12 +50,13 @@ export function SydraPageShell({
           </div>
         ) : null}
         {children}
+        {sticky}
       </MagazineShell>
     );
   }
 
   return (
-    <MagazineShell footerExtra={footerExtra} headerVariant={headerVariant}>
+    <MagazineShell footerExtra={footerExtra} headerVariant={headerVariant} hasMobileCtaBar={reserveMobileBar}>
       <div className={mainClassName ?? "px-5 py-14 md:px-10 md:py-20"}>
         {breadcrumb ? (
           <div className="mx-auto mb-8 max-w-[1280px]">
@@ -57,6 +65,7 @@ export function SydraPageShell({
         ) : null}
         <div className="mx-auto max-w-[1280px]">{children}</div>
       </div>
+      {sticky}
     </MagazineShell>
   );
 }

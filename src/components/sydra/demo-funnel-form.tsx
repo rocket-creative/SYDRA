@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
 import { markLeadConversionPending } from "@/lib/analytics/google-ads";
@@ -14,6 +14,7 @@ import {
 import { US_STATES } from "@/lib/constants/us-states";
 import { isValidTierId } from "@/lib/content/tiers";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
+import { mergeUtmForSubmit, persistUtmFirstTouch } from "@/lib/landing/utm-session";
 import {
   DISPUTES_PER_MONTH_OPTIONS,
   DISPUTES_LABELS,
@@ -45,6 +46,9 @@ const initialStepOne: StepOneData = {
   practiceName: "",
 };
 
+const RISK_STACK =
+  "Free demo. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.";
+
 type DemoFunnelFormProps = {
   intent?: "demo" | "security";
 };
@@ -53,13 +57,15 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   const searchParams = useSearchParams();
   const requestType = intent === "security" ? "security" : "demo";
   const submitLabel =
-    intent === "security" ? "Request security summary" : "Schedule my demo";
+    intent === "security" ? "Request security summary" : "Request demo";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneData>(initialStepOne);
   const [state, setState] = useState<FormState>({ status: "idle" });
 
-  const utmSource = searchParams.get("utm_source") ?? "";
-  const utmCampaign = searchParams.get("utm_campaign") ?? "";
+  const utmSourceParam = searchParams.get("utm_source") ?? "";
+  const utmMediumParam = searchParams.get("utm_medium") ?? "";
+  const utmCampaignParam = searchParams.get("utm_campaign") ?? "";
+  const utmContentParam = searchParams.get("utm_content") ?? "";
   const tierParam = searchParams.get("tier");
   const preselectedTier = isValidTierId(tierParam) ? tierParam : "";
 
@@ -78,6 +84,15 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
     : entityPayer
       ? `Interested in disputing ${entityPayer} denials.`
       : "";
+
+  useEffect(() => {
+    persistUtmFirstTouch({
+      utm_source: utmSourceParam,
+      utm_medium: utmMediumParam,
+      utm_campaign: utmCampaignParam,
+      utm_content: utmContentParam,
+    });
+  }, [utmSourceParam, utmMediumParam, utmCampaignParam, utmContentParam]);
 
   const handleStepOneSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -104,6 +119,12 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         eobFile instanceof File && eobFile.size > 0 ? eobFile.name : "";
 
       const tierInterest = formData.get("tierInterest");
+      const utm = mergeUtmForSubmit({
+        utm_source: utmSourceParam,
+        utm_medium: utmMediumParam,
+        utm_campaign: utmCampaignParam,
+        utm_content: utmContentParam,
+      });
 
       const payload = {
         ...stepOne,
@@ -114,8 +135,12 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         tierInterest: tierInterest || undefined,
         message: formData.get("message") ?? "",
         eobFileName,
-        utmSource,
-        utmCampaign,
+        utmSource: utm.utm_source,
+        utmMedium: utm.utm_medium,
+        utmCampaign: utm.utm_campaign,
+        utmContent: utm.utm_content,
+        routeState: entityState,
+        routeCode: entityCode,
         website: formData.get("website") ?? "",
         request_type: requestType,
       };
@@ -152,7 +177,16 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         });
       }
     },
-    [requestType, stepOne, utmCampaign, utmSource],
+    [
+      entityCode,
+      entityState,
+      requestType,
+      stepOne,
+      utmCampaignParam,
+      utmContentParam,
+      utmMediumParam,
+      utmSourceParam,
+    ],
   );
 
   return (
@@ -166,7 +200,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         />
       </div>
       <p className="mt-3 type-caption text-body" aria-live="polite">
-        Step {step} of 2 · {step === 1 ? "Your details" : "Your practice"}
+        Step {step} of 2
       </p>
 
       {step === 1 ? (
@@ -208,6 +242,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               type="text"
             />
           </FormField>
+          <p className="text-xs leading-relaxed text-body/80">{RISK_STACK}</p>
           <Button className="w-full sm:w-auto" showArrow type="submit">
             Continue
           </Button>
@@ -259,6 +294,9 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               </optgroup>
             </select>
           </FormField>
+
+          <input name="routeState" type="hidden" value={entityState} />
+          <input name="routeCode" type="hidden" value={entityCode} />
 
           <FormField id="disputesPerMonth" label="Monthly OON claim estimate" required>
             <select
@@ -343,6 +381,8 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
               </p>
             </div>
           ) : null}
+
+          <p className="text-xs leading-relaxed text-body/80">{RISK_STACK}</p>
 
           <div className="flex flex-col gap-4 sm:flex-row-reverse">
             <Button
