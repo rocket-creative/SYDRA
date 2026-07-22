@@ -1,23 +1,10 @@
 import { Resend } from "resend";
 
-import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
+import { getLeadFromEmail, getLeadInboxRecipients } from "@/lib/email/inbox-recipients";
 import {
   CONTACT_INTENT_LABELS,
   type ContactRequest,
 } from "@/lib/schemas/contact-request";
-
-const DEFAULT_INBOX = SALES_EMAIL_FALLBACK;
-const DEFAULT_FROM = "notifications@sydrahealth.com";
-
-function getInboxEmail(): string {
-  const raw = process.env.LEADS_INBOX_EMAIL?.trim();
-  return raw && raw.length > 0 ? raw : DEFAULT_INBOX;
-}
-
-function getFromEmail(): string {
-  const raw = process.env.LEADS_FROM_EMAIL?.trim();
-  return raw && raw.length > 0 ? raw : DEFAULT_FROM;
-}
 
 export type SendContactResult =
   | { ok: true; id: string | undefined }
@@ -31,7 +18,8 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
 
   const resend = new Resend(apiKey);
   const intentLabel = CONTACT_INTENT_LABELS[data.intent];
-  const message = data.message?.trim() || "—";
+  const message = data.message?.trim() || "(none)";
+  const recipients = getLeadInboxRecipients();
 
   const text = [
     "Contact form submission",
@@ -47,10 +35,10 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
   ].join("\n");
 
   const { data: result, error } = await resend.emails.send({
-    from: getFromEmail(),
-    to: [getInboxEmail()],
+    from: getLeadFromEmail(),
+    to: recipients,
     replyTo: data.email,
-    subject: `[SYDRA CONTACT] ${intentLabel} — ${data.practiceName}`,
+    subject: `[SYDRA CONTACT] ${intentLabel} · ${data.practiceName}`,
     text,
   });
 
@@ -58,18 +46,22 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
     return { ok: false, error: error.message };
   }
 
-  await resend.emails.send({
-    from: getFromEmail(),
+  const { error: confirmError } = await resend.emails.send({
+    from: getLeadFromEmail(),
     to: [data.email],
-    subject: "We received your message — Sydra",
+    subject: "We received your message, Sydra",
     text: [
       data.name.trim() ? `Hi ${data.name.trim()},` : "Hi,",
       "",
       "Thank you for contacting Kronos Health about Sydra. We received your message and will reply within one business day.",
       "",
       "Kronos Health",
+      "244 Westchester Ave, Ste 209, West Harrison, NY 10604",
     ].join("\n"),
   });
+  if (confirmError) {
+    console.error("Contact auto reply failed:", confirmError.message);
+  }
 
   return { ok: true, id: result?.id };
 }

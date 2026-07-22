@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 
 import { sendContactEmail } from "@/lib/email/send-contact-email";
-import { contactRequestSchema } from "@/lib/schemas/contact-request";
+import { logLeadFallback } from "@/lib/leads/fallback-log";
+import { CONTACT_INTENT_LABELS, contactRequestSchema } from "@/lib/schemas/contact-request";
 
 function isHoneypotFilled(website: string | undefined): boolean {
   const trimmed = website?.trim();
@@ -28,14 +29,36 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const sendResult = await sendContactEmail(parsed.data);
+  const data = parsed.data;
+  const subject = `[SYDRA CONTACT] ${CONTACT_INTENT_LABELS[data.intent]} · ${data.practiceName}`;
+  const submittedAt = new Date().toISOString();
+
+  await logLeadFallback({
+    kind: "full",
+    source: "contact",
+    subject,
+    fields: {
+      name: data.name,
+      email: data.email,
+      practiceName: data.practiceName,
+      intent: data.intent,
+      message: data.message ?? "",
+    },
+    submittedAt,
+  });
+
+  const sendResult = await sendContactEmail(data);
   if (!sendResult.ok) {
-    console.error("Contact email failed:", sendResult.error);
-    return NextResponse.json(
-      { error: "Unable to submit request. Please try again or contact us by email." },
-      { status: 502 },
-    );
+    console.error("Contact email failed:", sendResult.error, {
+      email: data.email,
+      practiceName: data.practiceName,
+      intent: data.intent,
+      name: data.name,
+      message: data.message ?? "",
+    });
+    // Lead already logged; do not fail the visitor.
+    return NextResponse.json({ ok: true, emailDelivered: false });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, emailDelivered: true });
 }

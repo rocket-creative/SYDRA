@@ -4,7 +4,7 @@
 create table landing_leads (
   id uuid primary key default gen_random_uuid(),
   kind text not null check (kind in ('partial', 'full')),
-  source text not null check (source in ('postcard', 'demo')),
+  source text not null check (source in ('postcard', 'demo', 'contact')),
   subject text not null,
   email text,
   state text,
