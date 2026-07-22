@@ -17,8 +17,8 @@ export default function DemoThankYouPage() {
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
         <h1 className="type-h2 mt-4 text-brand">Request received</h1>
         <p className="mt-6 type-body text-body">
-          Our team reviews every request. If your practice is a fit, we&apos;ll follow up within
-          one business day at the time you selected to schedule your denied claim walkthrough.
+          Check your email for a note from Dr. Abrahams. Our team reviews every request and will
+          follow up within one business day to schedule your free five minute demo.
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <Button href="/" showArrow>

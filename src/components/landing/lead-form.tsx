@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/form-field";
 import { Section } from "@/components/ui/section";
 import { US_STATES } from "@/lib/constants/us-states";
-import { sydraDemoCalendlyUrl } from "@/lib/landing/calendly";
 import {
   CALCULATOR_UPDATE_EVENT,
   formatAnnualEstimate,
@@ -308,18 +307,9 @@ export function LeadForm({
           Request received
         </h2>
         <p className={`mt-4 type-body text-body ${isCard ? "" : "prose-measure"}`}>
-          A member of our team will follow up within one business day. Pick a time now if you want to
-          lock in your five minute Sydra demo.
+          Check your email for a note from Dr. Abrahams. A member of our team will follow up within
+          one business day to schedule your free five minute demo.
         </p>
-        <div
-          className={`mt-6 aspect-[4/3] w-full overflow-hidden border border-rule bg-neutral-section ${isCard ? "" : "max-w-3xl"}`}
-        >
-          <iframe
-            className="h-full min-h-[420px] w-full"
-            src={sydraDemoCalendlyUrl()}
-            title="Schedule a Sydra demo"
-          />
-        </div>
       </>,
       { labelledBy: successHeadingId },
     );
