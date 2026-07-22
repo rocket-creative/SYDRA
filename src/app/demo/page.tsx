@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
+import { DemoPageLeadForm } from "@/components/landing/demo-page-lead-form";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
-import { DemoFunnelForm } from "@/components/sydra/demo-funnel-form";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
@@ -157,18 +157,10 @@ export default function DemoPage() {
               <CtaTrustSignals className="mt-8" />
             </div>
 
-            <div className="order-1 lg:order-2 lg:col-span-6" id="demo-form">
-              <h2 className={textStyles.subsectionTitle}>
-                Schedule your free five minute demo.
-              </h2>
-              <p className={`${textStyles.body} mt-2`}>
-                Send us an EOB before the call and we&apos;ll run the demo on your actual claim.
-              </p>
-              <div className="mt-6">
-                <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
-                  <DemoFunnelForm />
-                </Suspense>
-              </div>
+            <div className="order-1 lg:order-2 lg:col-span-6">
+              <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+                <DemoPageLeadForm />
+              </Suspense>
               <p className="prose-measure mt-4">
                 <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
                   Not ready for software? Get a free IDR review

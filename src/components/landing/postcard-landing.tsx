@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Cursor } from "@/components/motion/cursor";
 import { SectionReveal } from "@/components/motion/reveal";
 import { AudiencePaths } from "@/components/landing/audience-paths";
@@ -10,7 +12,6 @@ import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { LeadForm } from "@/components/landing/lead-form";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
-import { ProofBar } from "@/components/landing/proof-bar";
 import { RecoverySection } from "@/components/landing/recovery-section";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
 import { TwoPaths } from "@/components/landing/two-paths";
@@ -79,46 +80,68 @@ export function PostcardLanding({
       <Cursor />
       <TrackingProvider path={path} tracking={tracking} />
       <div className="flex flex-col">
+        {/* 1. Hero with proof stack */}
         <div className="order-1">
           <Hero stateDisplay={stateDisplay} tracking={tracking} />
         </div>
-        <SectionReveal className="order-2 lg:order-3 lg:hidden">
-          <div className="mx-auto w-full max-w-[1280px] px-5 md:px-10">
-            <LeadForm defaultState={stateCode} tracking={tracking} variant="card" />
+        {/* 2. Demo form */}
+        <SectionReveal className="order-2">
+          <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
+            <Suspense fallback={<div className="h-80 animate-pulse rounded-[2px] bg-surface-muted" />}>
+              <LeadForm
+                anchorId="lead-form"
+                defaultState={stateCode}
+                tracking={tracking}
+                variant="card"
+              />
+            </Suspense>
           </div>
         </SectionReveal>
-        <SectionReveal className="order-3 lg:order-2">
-          <ProofBar />
-        </SectionReveal>
-        <SectionReveal className="order-4 lg:order-3">
-          <HowItWorks />
-        </SectionReveal>
-        <SectionReveal className="order-5 lg:order-4">
-          <FederalIdrExplainer />
-        </SectionReveal>
-        <SectionReveal className="order-6 lg:order-5">
-          <BuiltOnClaude />
-        </SectionReveal>
-        <SectionReveal className="order-7 lg:order-6">
+        {/* 3. Recovery calculator */}
+        <SectionReveal className="order-3">
           <RecoverySection tracking={tracking} />
         </SectionReveal>
-        <SectionReveal className="order-8 lg:order-7">
+        {/* 4. Three ways in */}
+        <SectionReveal className="order-4">
           <AudiencePaths />
         </SectionReveal>
-        <SectionReveal className="order-9 lg:order-8">
+        {/* 5. How Sydra works */}
+        <SectionReveal className="order-5">
+          <HowItWorks />
+        </SectionReveal>
+        {/* 6. Built by a surgeon who files these claims */}
+        <SectionReveal className="order-6">
           <FounderNote />
         </SectionReveal>
-        <SectionReveal className="order-10 lg:order-9">
+        {/* 7. Built on Claude */}
+        <SectionReveal className="order-7">
+          <BuiltOnClaude />
+        </SectionReveal>
+        {/* 8. What is Federal IDR */}
+        <SectionReveal className="order-8">
+          <FederalIdrExplainer />
+        </SectionReveal>
+        {/* 9. Two paths */}
+        <SectionReveal className="order-9">
           <TwoPaths tracking={tracking} />
         </SectionReveal>
-        <SectionReveal className="order-11 lg:order-10">
+        {/* 10. FAQ */}
+        <SectionReveal className="order-10">
           <Faq stateDisplay={stateDisplay} />
         </SectionReveal>
-        <SectionReveal className="order-12 lg:order-11">
+        {/* 11. Closing CTA and form */}
+        <SectionReveal className="order-11">
           <ClosingCta tracking={tracking} />
         </SectionReveal>
-        <SectionReveal className="hidden lg:order-12 lg:block">
-          <LeadForm defaultState={stateCode} tracking={tracking} variant="section" />
+        <SectionReveal className="order-12">
+          <Suspense fallback={<div className="h-80 animate-pulse bg-surface-muted" />}>
+            <LeadForm
+              anchorId="lead-form-closing"
+              defaultState={stateCode}
+              tracking={tracking}
+              variant="section"
+            />
+          </Suspense>
         </SectionReveal>
       </div>
       <MobileCtaBar tracking={tracking} />

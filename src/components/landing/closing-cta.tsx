@@ -13,7 +13,9 @@ type ClosingCtaProps = {
 export function ClosingCta({ tracking }: ClosingCtaProps) {
   const handleClick = () => {
     trackCtaClick("sydra", tracking);
-    document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document
+      .getElementById("lead-form-closing")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -22,11 +24,12 @@ export function ClosingCta({ tracking }: ClosingCtaProps) {
         Ready to stop writing off out of network claims?
       </h2>
       <p className="prose-measure mt-6 type-body text-body">
-        Book a five minute demo and we will walk a real claim from your specialty on the call.
+        See if your claims qualify. Free five minute demo. No commitment. We show you what Sydra
+        generates from a real claim in your specialty.
       </p>
       <div className="mt-10">
         <Button onClick={handleClick} showArrow>
-          Book a five minute demo
+          See if your claims qualify
         </Button>
       </div>
       <CtaTrustSignals className="prose-measure mt-6" />

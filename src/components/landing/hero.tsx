@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { HeroCtas } from "@/components/landing/hero-ctas";
+import { HeroProofStack } from "@/components/landing/hero-proof-stack";
 import { SplitHeadline } from "@/components/motion/split-headline";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
@@ -26,14 +27,12 @@ function HeroContent({
         <SplitHeadline text="Stop writing off out of network claims." />
       </h1>
       <p className="hero-sub prose-measure mt-5 type-body text-body">
-        The No Surprises Act gets them paid through federal independent dispute resolution (IDR).
-        Surgeon built NSA IDR software your billing team runs in five minutes per claim, turning
-        written off out of network claims into recovered revenue.
-      </p>
-      <p className="hero-bold prose-measure mt-3 text-[15px] font-medium leading-relaxed text-brand md:text-[17px]">
-        Your team reviews. Your team submits. You keep the recovery.
+        Your billing team recovers underpaid out of network claims in five minutes per claim, and
+        you keep every dollar. No attorney, no 20% cut. Built by a surgeon who files these claims
+        himself.
       </p>
       <HeroCtas tracking={tracking} />
+      <HeroProofStack className="mt-10 lg:hidden" />
     </div>
   );
 }
@@ -51,7 +50,7 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
       {/* Mobile: short image band stacked above white copy block */}
       <div className="relative h-[clamp(8rem,24dvh,12rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
         <Image
-          alt="Surgical practice billing team preparing out-of-network claims for federal IDR"
+          alt="Surgical practice billing team preparing out of network claims for federal IDR"
           className="object-cover object-[center_20%] md:object-right"
           fill
           priority
@@ -63,7 +62,14 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
       {/* Desktop: lower-third frosted band over photo. Mobile: solid white block. */}
       <div className="relative z-10 w-full bg-white md:mt-auto md:bg-white/50 md:backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none">
         <div className="mx-auto w-full max-w-[1280px] px-5 pb-8 pt-6 md:px-10 md:pb-16 md:pt-8">
-          <HeroContent eyebrow={eyebrow} tracking={tracking} />
+          <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-7">
+              <HeroContent eyebrow={eyebrow} tracking={tracking} />
+            </div>
+            <div className="hidden lg:col-span-5 lg:block">
+              <HeroProofStack />
+            </div>
+          </div>
         </div>
       </div>
     </section>

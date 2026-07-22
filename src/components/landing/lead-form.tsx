@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import type { ReactNode } from "react";
@@ -21,8 +22,12 @@ import {
   readCalculatorEstimate,
   type CalculatorEstimate,
 } from "@/lib/landing/calculator-estimate";
+import {
+  mergeRouteForSubmit,
+  persistRouteFirstTouch,
+} from "@/lib/landing/route-session";
 import type { CampaignTracking } from "@/lib/landing/tracking";
-import { mergeUtmForSubmit } from "@/lib/landing/utm-session";
+import { mergeUtmForSubmit, persistUtmFirstTouch } from "@/lib/landing/utm-session";
 import {
   DISPUTES_PER_MONTH_OPTIONS,
   DISPUTES_LABELS,
@@ -40,6 +45,8 @@ type LeadFormProps = {
   tracking: CampaignTracking;
   /** "section" renders a full page section. "card" renders a compact white card for the hero. */
   variant?: "section" | "card";
+  /** DOM id for scroll targets. Defaults to lead-form. */
+  anchorId?: string;
 };
 
 type FormStatus =
@@ -66,17 +73,71 @@ function RiskStack() {
   return <p className="text-xs leading-relaxed text-body/80">{RISK_STACK}</p>;
 }
 
-export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFormProps) {
+function resolvePrefillState(
+  urlState: string,
+  defaultState: string,
+  trackingState: string,
+): string {
+  const candidates = [urlState, defaultState, trackingState];
+  for (const raw of candidates) {
+    const code = raw.trim().toUpperCase();
+    if (US_STATES.some((s) => s.code === code)) return code;
+  }
+  return "";
+}
+
+export function LeadForm({
+  defaultState,
+  tracking,
+  variant = "section",
+  anchorId = "lead-form",
+}: LeadFormProps) {
+  const searchParams = useSearchParams();
+  const urlState = (searchParams.get("state") ?? "").trim().toUpperCase();
+  const urlCode = (searchParams.get("code") ?? "").trim();
+  const prefillState = resolvePrefillState(urlState, defaultState, tracking.state);
+
   const isCard = variant === "card";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneValues>({
-    state: defaultState || "",
+    state: prefillState,
     disputesPerMonth: "",
     email: "",
   });
   const [partialSent, setPartialSent] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({ status: "idle" });
   const [estimate, setEstimate] = useState<CalculatorEstimate | null>(null);
+  const [routeCtx, setRouteCtx] = useState(() =>
+    mergeRouteForSubmit(tracking.state),
+  );
+
+  useEffect(() => {
+    const persisted = persistRouteFirstTouch({ state: urlState, code: urlCode });
+    setRouteCtx({
+      state: persisted.state || mergeRouteForSubmit(tracking.state).state,
+      code: persisted.code,
+    });
+    persistUtmFirstTouch({
+      utm_source: searchParams.get("utm_source") ?? tracking.utm_source,
+      utm_medium: searchParams.get("utm_medium") ?? tracking.utm_medium,
+      utm_campaign: searchParams.get("utm_campaign") ?? tracking.utm_campaign,
+      utm_content: searchParams.get("utm_content") ?? tracking.utm_content,
+    });
+  }, [
+    searchParams,
+    tracking.state,
+    tracking.utm_campaign,
+    tracking.utm_content,
+    tracking.utm_medium,
+    tracking.utm_source,
+    urlCode,
+    urlState,
+  ]);
+
+  useEffect(() => {
+    if (!prefillState) return;
+    setStepOne((prev) => (prev.state ? prev : { ...prev, state: prefillState }));
+  }, [prefillState]);
 
   useEffect(() => {
     const sync = () => setEstimate(readCalculatorEstimate());
@@ -97,14 +158,19 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
       return (
         <div
           className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
-          id="lead-form"
+          id={anchorId}
         >
           {inner}
         </div>
       );
     }
     return (
-      <Section ariaLabelledby={labelledBy} id="lead-form" sidebarLabel={sidebarLabel} tone="neutral">
+      <Section
+        ariaLabelledby={labelledBy}
+        id={anchorId}
+        sidebarLabel={sidebarLabel}
+        tone="neutral"
+      >
         {inner}
       </Section>
     );
@@ -114,14 +180,21 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
   const formClass = isCard
     ? "relative mt-6 space-y-6"
     : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-6 md:p-10";
+  const headingId = `heading-${anchorId}`;
+  const successHeadingId = `heading-${anchorId}-success`;
+  const fieldId = (name: string) => `${anchorId}-${name}`;
 
   const attributionFields = useCallback(() => {
     const utm = mergeUtmForSubmit(tracking);
+    const route = {
+      state: routeCtx.state || mergeRouteForSubmit(tracking.state).state,
+      code: routeCtx.code || mergeRouteForSubmit(tracking.state).code,
+    };
     const calc = readCalculatorEstimate();
     return {
       state_tracking: tracking.state,
-      route_state: tracking.state,
-      route_code: "",
+      route_state: route.state,
+      route_code: route.code,
       utm_source: utm.utm_source,
       utm_medium: utm.utm_medium,
       utm_campaign: utm.utm_campaign,
@@ -131,7 +204,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
       calculator_avg_disputed_amount: calc?.avgDisputedAmount ?? null,
       calculator_annual_estimate: calc?.annualRecovery ?? null,
     };
-  }, [tracking]);
+  }, [routeCtx.code, routeCtx.state, tracking]);
 
   const handleStepOne = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -231,7 +304,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
   if (formStatus.status === "success") {
     return wrap(
       <>
-        <h2 className={headingClass} id="heading-lead-success">
+        <h2 className={headingClass} id={successHeadingId}>
           Request received
         </h2>
         <p className={`mt-4 type-body text-body ${isCard ? "" : "prose-measure"}`}>
@@ -248,7 +321,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           />
         </div>
       </>,
-      { labelledBy: "heading-lead-success" },
+      { labelledBy: successHeadingId },
     );
   }
 
@@ -263,7 +336,7 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           claims. Let us check it against a real denial.
         </p>
       ) : null}
-      <h2 className={headingClass} id="heading-lead-form">
+      <h2 className={headingClass} id={headingId}>
         Book your free five minute Sydra demo
       </h2>
       <p
@@ -280,13 +353,16 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
 
       {step === 1 ? (
         <form className={formClass} onSubmit={handleStepOne}>
-          <FormField id="state" label="State" required>
+          <input name="route_state" type="hidden" value={routeCtx.state} />
+          <input name="route_code" type="hidden" value={routeCtx.code} />
+
+          <FormField id={fieldId("state")} label="State" required>
             <select
               required
               aria-required="true"
               className={editorialSelectClass}
-              defaultValue={stepOne.state || defaultState || ""}
-              id="state"
+              defaultValue={stepOne.state || prefillState || ""}
+              id={fieldId("state")}
               name="state"
             >
               <option disabled value="">
@@ -313,13 +389,13 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
             </select>
           </FormField>
 
-          <FormField id="disputesPerMonth" label="Monthly out of network claim volume" required>
+          <FormField id={fieldId("disputesPerMonth")} label="Monthly out of network claim volume" required>
             <select
               required
               aria-required="true"
               className={editorialSelectClass}
               defaultValue={stepOne.disputesPerMonth}
-              id="disputesPerMonth"
+              id={fieldId("disputesPerMonth")}
               name="disputesPerMonth"
             >
               <option disabled value="">
@@ -333,14 +409,14 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
             </select>
           </FormField>
 
-          <FormField id="email" label="Email" required>
+          <FormField id={fieldId("email")} label="Email" required>
             <input
               required
               aria-required="true"
               autoComplete="email"
               className={editorialInputClass}
               defaultValue={stepOne.email}
-              id="email"
+              id={fieldId("email")}
               inputMode="email"
               name="email"
               type="email"
@@ -348,8 +424,14 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           </FormField>
 
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
-            <label htmlFor="website">Website</label>
-            <input autoComplete="off" id="website" name="website" tabIndex={-1} type="text" />
+            <label htmlFor={fieldId("website")}>Website</label>
+            <input
+              autoComplete="off"
+              id={fieldId("website")}
+              name="website"
+              tabIndex={-1}
+              type="text"
+            />
           </div>
 
           {formStatus.status === "error" ? (
@@ -382,37 +464,37 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
               stepOne.disputesPerMonth}
           </p>
 
-          <FormField id="practiceName" label="Practice name" required>
+          <FormField id={fieldId("practiceName")} label="Practice name" required>
             <input
               required
               aria-required="true"
               autoComplete="organization"
               className={editorialInputClass}
-              id="practiceName"
+              id={fieldId("practiceName")}
               name="practiceName"
               type="text"
             />
           </FormField>
 
-          <FormField id="name" label="Your name" required>
+          <FormField id={fieldId("name")} label="Your name" required>
             <input
               required
               aria-required="true"
               autoComplete="name"
               className={editorialInputClass}
-              id="name"
+              id={fieldId("name")}
               name="name"
               type="text"
             />
           </FormField>
 
-          <FormField id="role" label="Role" required>
+          <FormField id={fieldId("role")} label="Role" required>
             <select
               required
               aria-required="true"
               className={editorialSelectClass}
               defaultValue=""
-              id="role"
+              id={fieldId("role")}
               name="role"
             >
               <option disabled value="">
@@ -426,13 +508,13 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
             </select>
           </FormField>
 
-          <FormField id="phone" label="Phone" required>
+          <FormField id={fieldId("phone")} label="Phone" required>
             <input
               required
               aria-required="true"
               autoComplete="tel"
               className={editorialInputClass}
-              id="phone"
+              id={fieldId("phone")}
               inputMode="tel"
               name="phone"
               type="tel"
@@ -467,10 +549,10 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
           </fieldset>
 
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
-            <label htmlFor="website-step2">Website</label>
+            <label htmlFor={fieldId("website-step2")}>Website</label>
             <input
               autoComplete="off"
-              id="website-step2"
+              id={fieldId("website-step2")}
               name="website"
               tabIndex={-1}
               type="text"
@@ -515,6 +597,6 @@ export function LeadForm({ defaultState, tracking, variant = "section" }: LeadFo
         </form>
       )}
     </>,
-    { labelledBy: "heading-lead-form", sidebarLabel: "Get started" },
+    { labelledBy: headingId, sidebarLabel: "Get started" },
   );
 }
