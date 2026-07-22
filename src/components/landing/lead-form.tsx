@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
-import { reportLeadFormConversion } from "@/lib/analytics/google-ads";
+import { markLeadConversionPending } from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -51,8 +51,9 @@ type LeadFormProps = {
 type FormStatus =
   | { status: "idle" }
   | { status: "submitting" }
-  | { status: "success" }
   | { status: "error"; message: string };
+
+const THANK_YOU_PATH = "/demo/thank-you";
 
 type Step = 1 | 2;
 
@@ -105,6 +106,7 @@ export function LeadForm({
   });
   const [partialSent, setPartialSent] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({ status: "idle" });
+  const [phone, setPhone] = useState("");
   const [estimate, setEstimate] = useState<CalculatorEstimate | null>(null);
   const [routeCtx, setRouteCtx] = useState(() =>
     mergeRouteForSubmit(tracking.state),
@@ -180,7 +182,6 @@ export function LeadForm({
     ? "relative mt-6 space-y-6"
     : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-6 md:p-10";
   const headingId = `heading-${anchorId}`;
-  const successHeadingId = `heading-${anchorId}-success`;
   const fieldId = (name: string) => `${anchorId}-${name}`;
 
   const attributionFields = useCallback(() => {
@@ -238,6 +239,7 @@ export function LeadForm({
           return;
         }
         setPartialSent(true);
+        setPhone("");
         setStep(2);
         setFormStatus({ status: "idle" });
       } catch {
@@ -257,13 +259,22 @@ export function LeadForm({
 
       const formData = new FormData(event.currentTarget);
       const productInterest = formData.get("productInterest");
+      const phoneValue = phone.trim();
+      if (!phoneValue || phoneValue.includes("@")) {
+        setFormStatus({
+          status: "error",
+          message: "Enter a phone number so we can reach you about the demo.",
+        });
+        return;
+      }
+
       const payload = {
         leadKind: "full" as const,
         practiceName: formData.get("practiceName"),
         name: formData.get("name"),
         role: formData.get("role"),
         email: stepOne.email,
-        phone: formData.get("phone"),
+        phone: phoneValue,
         state: stepOne.state,
         disputesPerMonth: stepOne.disputesPerMonth,
         productInterest,
@@ -288,8 +299,9 @@ export function LeadForm({
         }
 
         trackLeadGA4(typeof productInterest === "string" ? productInterest : undefined);
-        reportLeadFormConversion();
-        setFormStatus({ status: "success" });
+        // Conversion fires once on the thank you page after redirect (not here).
+        markLeadConversionPending();
+        window.location.assign(THANK_YOU_PATH);
       } catch {
         setFormStatus({
           status: "error",
@@ -297,23 +309,8 @@ export function LeadForm({
         });
       }
     },
-    [attributionFields, partialSent, stepOne],
+    [attributionFields, partialSent, phone, stepOne],
   );
-
-  if (formStatus.status === "success") {
-    return wrap(
-      <>
-        <h2 className={headingClass} id={successHeadingId}>
-          Request received
-        </h2>
-        <p className={`mt-4 type-body text-body ${isCard ? "" : "prose-measure"}`}>
-          Check your email for a note from Dr. Abrahams. A member of our team will follow up within
-          one business day to schedule your free five minute demo.
-        </p>
-      </>,
-      { labelledBy: successHeadingId },
-    );
-  }
 
   return wrap(
     <>
@@ -447,12 +444,24 @@ export function LeadForm({
           </p>
         </form>
       ) : (
-        <form className={formClass} onSubmit={handleStepTwo}>
+        <form className={formClass} autoComplete="on" onSubmit={handleStepTwo}>
           <p className="border-l-2 border-rule py-1 pl-4 text-sm text-body">
             {stepOne.email} · {stepOne.state} ·{" "}
             {DISPUTES_LABELS[stepOne.disputesPerMonth as keyof typeof DISPUTES_LABELS] ??
               stepOne.disputesPerMonth}
           </p>
+
+          {/* Keep email in the DOM so browsers do not dump Step 1 email into Phone. */}
+          <input
+            aria-hidden
+            autoComplete="email"
+            className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+            name="email"
+            readOnly
+            tabIndex={-1}
+            type="email"
+            value={stepOne.email}
+          />
 
           <FormField id={fieldId("practiceName")} label="Practice name" required>
             <input
@@ -508,6 +517,8 @@ export function LeadForm({
               inputMode="tel"
               name="phone"
               type="tel"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
             />
           </FormField>
 

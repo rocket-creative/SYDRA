@@ -78,6 +78,12 @@ const nextConfig: NextConfig = {
         destination: "/how-it-works",
         permanent: true,
       },
+      {
+        // Broken post-submit target seen in live tests; real page lives under /demo.
+        source: "/thank-you",
+        destination: "/demo/thank-you",
+        permanent: false,
+      },
     ];
   },
   async headers() {
