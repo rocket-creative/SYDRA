@@ -80,7 +80,7 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
           onClick={handleDemo}
           type="button"
         >
-          See if you qualify
+          Book a free demo
           <Arrow className="shrink-0" />
         </button>
       </div>

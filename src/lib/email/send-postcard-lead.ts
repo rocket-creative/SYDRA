@@ -1,5 +1,10 @@
 import { Resend } from "resend";
 
+import { getSalesEmail } from "@/lib/contact";
+import {
+  buildFounderAutoReplyPlain,
+  leadHasPhone,
+} from "@/lib/email/founder-auto-reply";
 import { getFounderFromEmail, getLeadFromEmail, getLeadInboxRecipients } from "@/lib/email/inbox-recipients";
 import { DISPUTES_LABELS } from "@/lib/schemas/demo-request";
 import {
@@ -45,14 +50,21 @@ function calculatorBlock(data: PostcardLeadRequest): string[] {
   ];
 }
 
+function formatVolume(
+  value: PostcardPartialLead["disputesPerMonth"] | PostcardLead["disputesPerMonth"] | undefined,
+): string {
+  if (!value) return "n/a";
+  return DISPUTES_LABELS[value] ?? String(value);
+}
+
 function buildPartialPlainBody(data: PostcardPartialLead): string {
   return [
     "Type: Postcard landing partial lead",
     "",
     "Qualifiers",
     `Email: ${data.email}`,
-    `State: ${data.state}`,
-    `Monthly OON volume: ${DISPUTES_LABELS[data.disputesPerMonth]}`,
+    `State: ${formatOptional(data.state)}`,
+    `Monthly OON volume: ${formatVolume(data.disputesPerMonth)}`,
     "",
     "Attribution",
     `Route state: ${routeState(data)}`,
@@ -105,7 +117,7 @@ function buildPartialHtmlBody(data: PostcardPartialLead): string {
 
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong>[SYDRA POSTCARD]</strong> Partial lead</p>
-<table style="border-collapse:collapse;width:100%">${row("Email", data.email)}${row("State", data.state)}${row("Monthly OON volume", DISPUTES_LABELS[data.disputesPerMonth])}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Email", data.email)}${row("State", formatOptional(data.state))}${row("Monthly OON volume", formatVolume(data.disputesPerMonth))}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
 }
@@ -124,31 +136,6 @@ ${upgrade}
 <table style="border-collapse:collapse;width:100%">${row("Practice", data.practiceName)}${row("Name", data.name)}${row("Role", LANDING_ROLE_LABELS[data.role])}${row("Email", data.email)}${row("Phone", data.phone)}${row("State", data.state)}${row("Monthly OON volume", DISPUTES_LABELS[data.disputesPerMonth])}${row("Product interest", LANDING_PRODUCT_LABELS[data.productInterest])}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
-}
-
-function firstNameFrom(fullName: string): string {
-  const part = fullName.trim().split(/\s+/)[0];
-  return part && part.length > 0 ? part : "there";
-}
-
-function buildAutoReplyPlain(name: string): string {
-  const first = firstNameFrom(name);
-  return [
-    `Hi ${first},`,
-    "",
-    "Thanks for booking a demo. I built Sydra because I file these claims myself and I got tired of watching surgical practices write off money the No Surprises Act says they can recover.",
-    "",
-    "One thing to have ready for the call: a single denied or underpaid out of network EOB. We will run it live. If it qualifies, you will see the dollar figure on that claim before the call ends. If it does not, I will tell you straight and you have lost five minutes.",
-    "",
-    "The demo is free. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
-    "",
-    "Talk soon,",
-    "Dr. John Abrahams, MD",
-    "Board certified neurosurgeon",
-    "Founder, Kronos Health",
-    "",
-    "Kronos Health, 244 Westchester Ave, Ste 209, West Harrison, NY 10604",
-  ].join("\n");
 }
 
 export type SendPostcardLeadResult =
@@ -197,8 +184,11 @@ export async function sendPostcardLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getFounderFromEmail(),
       to: [data.email],
+      replyTo: getSalesEmail(),
       subject: "Your Sydra demo, and the one thing to have ready",
-      text: buildAutoReplyPlain(data.name),
+      text: buildFounderAutoReplyPlain(data.name, {
+        hasPhone: leadHasPhone(data.phone),
+      }),
     });
     if (confirmError) {
       console.error("Postcard auto reply failed:", confirmError.message);
@@ -214,8 +204,8 @@ export function postcardLeadToFallbackFields(
   if (data.leadKind === "partial") {
     return {
       email: data.email,
-      state: data.state,
-      disputesPerMonth: data.disputesPerMonth,
+      state: data.state || null,
+      disputesPerMonth: data.disputesPerMonth || null,
       route_state: routeState(data),
       route_code: data.route_code,
       utm_source: data.utm_source,

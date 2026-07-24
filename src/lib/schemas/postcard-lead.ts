@@ -41,8 +41,11 @@ const optionalTracking = {
 export const postcardPartialLeadSchema = z.object({
   leadKind: z.literal("partial"),
   email: z.string().trim().email().max(254),
-  state: z.string().trim().length(2).toUpperCase(),
-  disputesPerMonth: z.enum(DISPUTES_PER_MONTH_OPTIONS),
+  /** Optional: collected on step 2 in the current funnel; kept for older clients. */
+  state: z
+    .union([z.string().trim().length(2).toUpperCase(), z.literal("")])
+    .optional(),
+  disputesPerMonth: z.enum(DISPUTES_PER_MONTH_OPTIONS).optional(),
   ...optionalTracking,
 });
 

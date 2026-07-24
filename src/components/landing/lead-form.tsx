@@ -58,8 +58,6 @@ const THANK_YOU_PATH = "/demo/thank-you";
 type Step = 1 | 2;
 
 type StepOneValues = {
-  state: string;
-  disputesPerMonth: string;
   email: string;
 };
 
@@ -68,6 +66,9 @@ const CAN_SPAM_ADDRESS =
 
 const RISK_STACK =
   "Free demo. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.";
+
+const EMAIL_DELIVERY_ERROR =
+  "We could not reach our team inbox. Email sales@sydrahealth.com and we will follow up right away.";
 
 function RiskStack() {
   return <p className="text-xs leading-relaxed text-body/80">{RISK_STACK}</p>;
@@ -86,6 +87,21 @@ function resolvePrefillState(
   return "";
 }
 
+async function readLeadResponse(res: Response): Promise<{
+  ok: boolean;
+  emailDelivered?: boolean;
+}> {
+  try {
+    const data = (await res.json()) as { ok?: boolean; emailDelivered?: boolean };
+    return {
+      ok: res.ok && data.ok !== false,
+      emailDelivered: data.emailDelivered,
+    };
+  } catch {
+    return { ok: res.ok };
+  }
+}
+
 export function LeadForm({
   defaultState,
   tracking,
@@ -99,11 +115,7 @@ export function LeadForm({
 
   const isCard = variant === "card";
   const [step, setStep] = useState<Step>(1);
-  const [stepOne, setStepOne] = useState<StepOneValues>({
-    state: prefillState,
-    disputesPerMonth: "",
-    email: "",
-  });
+  const [stepOne, setStepOne] = useState<StepOneValues>({ email: "" });
   const [partialSent, setPartialSent] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({ status: "idle" });
   const [phone, setPhone] = useState("");
@@ -134,11 +146,6 @@ export function LeadForm({
     urlCode,
     urlState,
   ]);
-
-  useEffect(() => {
-    if (!prefillState) return;
-    setStepOne((prev) => (prev.state ? prev : { ...prev, state: prefillState }));
-  }, [prefillState]);
 
   useEffect(() => {
     const sync = () => setEstimate(readCalculatorEstimate());
@@ -211,8 +218,6 @@ export function LeadForm({
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const values: StepOneValues = {
-        state: String(formData.get("state") ?? "").trim(),
-        disputesPerMonth: String(formData.get("disputesPerMonth") ?? "").trim(),
         email: String(formData.get("email") ?? "").trim(),
       };
       setStepOne(values);
@@ -220,7 +225,7 @@ export function LeadForm({
 
       const payload = {
         leadKind: "partial" as const,
-        ...values,
+        email: values.email,
         website: formData.get("website") ?? "",
         ...attributionFields(),
       };
@@ -231,11 +236,17 @@ export function LeadForm({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!res.ok) {
+        const result = await readLeadResponse(res);
+        if (!result.ok) {
           setFormStatus({
             status: "error",
             message: "Something went wrong. Please try again or email sales@sydrahealth.com.",
           });
+          return;
+        }
+        if (result.emailDelivered === false) {
+          console.error("[lead-form] Partial lead emailDelivered:false", values.email);
+          setFormStatus({ status: "error", message: EMAIL_DELIVERY_ERROR });
           return;
         }
         setPartialSent(true);
@@ -275,8 +286,8 @@ export function LeadForm({
         role: formData.get("role"),
         email: stepOne.email,
         phone: phoneValue,
-        state: stepOne.state,
-        disputesPerMonth: stepOne.disputesPerMonth,
+        state: formData.get("state"),
+        disputesPerMonth: formData.get("disputesPerMonth"),
         productInterest,
         partialUpgraded: partialSent,
         website: formData.get("website") ?? "",
@@ -289,12 +300,18 @@ export function LeadForm({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
+        const result = await readLeadResponse(res);
 
-        if (!res.ok) {
+        if (!result.ok) {
           setFormStatus({
             status: "error",
             message: "Something went wrong. Please try again or email sales@sydrahealth.com.",
           });
+          return;
+        }
+        if (result.emailDelivered === false) {
+          console.error("[lead-form] Full lead emailDelivered:false", stepOne.email);
+          setFormStatus({ status: "error", message: EMAIL_DELIVERY_ERROR });
           return;
         }
 
@@ -309,7 +326,7 @@ export function LeadForm({
         });
       }
     },
-    [attributionFields, partialSent, phone, stepOne],
+    [attributionFields, partialSent, phone, stepOne.email],
   );
 
   return wrap(
@@ -335,68 +352,20 @@ export function LeadForm({
       </p>
 
       <p className="mt-4 type-caption text-body" aria-live="polite">
-        Step {step} of 2
+        {step === 1 ? "Start with your work email" : "Almost done"}
       </p>
 
       {step === 1 ? (
-        <form className={formClass} onSubmit={handleStepOne}>
+        <form
+          action="/api/postcard-lead"
+          className={formClass}
+          method="post"
+          onSubmit={handleStepOne}
+        >
           <input name="route_state" type="hidden" value={routeCtx.state} />
           <input name="route_code" type="hidden" value={routeCtx.code} />
 
-          <FormField id={fieldId("state")} label="State" required>
-            <select
-              required
-              aria-required="true"
-              className={editorialSelectClass}
-              defaultValue={stepOne.state || prefillState || ""}
-              id={fieldId("state")}
-              name="state"
-            >
-              <option disabled value="">
-                Select state
-              </option>
-              <optgroup label="Launch states">
-                {US_STATES.filter((s) =>
-                  (SUPPORTED_STATES as readonly string[]).includes(s.code),
-                ).map((s) => (
-                  <option key={s.code} value={s.code}>
-                    {s.name} ({s.code})
-                  </option>
-                ))}
-              </optgroup>
-              <optgroup label="All states">
-                {US_STATES.filter(
-                  (s) => !(SUPPORTED_STATES as readonly string[]).includes(s.code),
-                ).map((s) => (
-                  <option key={s.code} value={s.code}>
-                    {s.name} ({s.code})
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-          </FormField>
-
-          <FormField id={fieldId("disputesPerMonth")} label="Monthly out of network claim volume" required>
-            <select
-              required
-              aria-required="true"
-              className={editorialSelectClass}
-              defaultValue={stepOne.disputesPerMonth}
-              id={fieldId("disputesPerMonth")}
-              name="disputesPerMonth"
-            >
-              <option disabled value="">
-                Select volume
-              </option>
-              {DISPUTES_PER_MONTH_OPTIONS.map((value) => (
-                <option key={value} value={value}>
-                  {DISPUTES_LABELS[value]}
-                </option>
-              ))}
-            </select>
-          </FormField>
-
-          <FormField id={fieldId("email")} label="Email" required>
+          <FormField id={fieldId("email")} label="Work email" required>
             <input
               required
               aria-required="true"
@@ -435,7 +404,9 @@ export function LeadForm({
             showArrow
             type="submit"
           >
-            {formStatus.status === "submitting" ? "Submitting…" : "See if your claims qualify"}
+            {formStatus.status === "submitting"
+              ? "Submitting…"
+              : "Book your free five minute demo"}
           </Button>
 
           <p className="text-xs leading-relaxed text-body/70">
@@ -444,12 +415,14 @@ export function LeadForm({
           </p>
         </form>
       ) : (
-        <form className={formClass} autoComplete="on" onSubmit={handleStepTwo}>
-          <p className="border-l-2 border-rule py-1 pl-4 text-sm text-body">
-            {stepOne.email} · {stepOne.state} ·{" "}
-            {DISPUTES_LABELS[stepOne.disputesPerMonth as keyof typeof DISPUTES_LABELS] ??
-              stepOne.disputesPerMonth}
-          </p>
+        <form
+          action="/api/postcard-lead"
+          autoComplete="on"
+          className={formClass}
+          method="post"
+          onSubmit={handleStepTwo}
+        >
+          <p className="border-l-2 border-rule py-1 pl-4 text-sm text-body">{stepOne.email}</p>
 
           {/* Keep email in the DOM so browsers do not dump Step 1 email into Phone. */}
           <input
@@ -520,6 +493,63 @@ export function LeadForm({
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
             />
+          </FormField>
+
+          <FormField id={fieldId("state")} label="State" required>
+            <select
+              required
+              aria-required="true"
+              className={editorialSelectClass}
+              defaultValue={prefillState || ""}
+              id={fieldId("state")}
+              name="state"
+            >
+              <option disabled value="">
+                Select state
+              </option>
+              <optgroup label="Launch states">
+                {US_STATES.filter((s) =>
+                  (SUPPORTED_STATES as readonly string[]).includes(s.code),
+                ).map((s) => (
+                  <option key={s.code} value={s.code}>
+                    {s.name} ({s.code})
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="All states">
+                {US_STATES.filter(
+                  (s) => !(SUPPORTED_STATES as readonly string[]).includes(s.code),
+                ).map((s) => (
+                  <option key={s.code} value={s.code}>
+                    {s.name} ({s.code})
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          </FormField>
+
+          <FormField
+            id={fieldId("disputesPerMonth")}
+            label="Monthly out of network claim volume"
+            required
+          >
+            <select
+              required
+              aria-required="true"
+              className={editorialSelectClass}
+              defaultValue=""
+              id={fieldId("disputesPerMonth")}
+              name="disputesPerMonth"
+            >
+              <option disabled value="">
+                Select volume
+              </option>
+              {DISPUTES_PER_MONTH_OPTIONS.map((value) => (
+                <option key={value} value={value}>
+                  {DISPUTES_LABELS[value]}
+                </option>
+              ))}
+            </select>
           </FormField>
 
           <fieldset>

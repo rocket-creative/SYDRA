@@ -1,5 +1,10 @@
 import { Resend } from "resend";
 
+import { getSalesEmail } from "@/lib/contact";
+import {
+  buildFounderAutoReplyPlain,
+  leadHasPhone,
+} from "@/lib/email/founder-auto-reply";
 import {
   getFounderFromEmail,
   getLeadFromEmail,
@@ -107,31 +112,6 @@ function buildHtmlBody(
 </body></html>`;
 }
 
-function firstNameFrom(fullName: string): string {
-  const part = fullName.trim().split(/\s+/)[0];
-  return part && part.length > 0 ? part : "there";
-}
-
-function buildFounderAutoReplyPlain(name: string): string {
-  const first = firstNameFrom(name);
-  return [
-    `Hi ${first},`,
-    "",
-    "Thanks for booking a demo. I built Sydra because I file these claims myself and I got tired of watching surgical practices write off money the No Surprises Act says they can recover.",
-    "",
-    "One thing to have ready for the call: a single denied or underpaid out of network EOB. We will run it live. If it qualifies, you will see the dollar figure on that claim before the call ends. If it does not, I will tell you straight and you have lost five minutes.",
-    "",
-    "The demo is free. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
-    "",
-    "Talk soon,",
-    "Dr. John Abrahams, MD",
-    "Board certified neurosurgeon",
-    "Founder, Kronos Health",
-    "",
-    "Kronos Health, 244 Westchester Ave, Ste 209, West Harrison, NY 10604",
-  ].join("\n");
-}
-
 function buildSecurityConfirmPlain(name: string): string {
   const greeting = name.trim() ? `Hi ${name.trim()},` : "Hi,";
   return [
@@ -158,6 +138,7 @@ export function demoLeadFallbackFields(
     requestType,
     name: data.name,
     email: data.email,
+    phone: data.phone,
     practiceName: data.practiceName,
     state: data.state,
     specialty: data.specialty,
@@ -201,8 +182,11 @@ export async function sendDemoLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getFounderFromEmail(),
       to: [data.email],
+      replyTo: getSalesEmail(),
       subject: "Your Sydra demo, and the one thing to have ready",
-      text: buildFounderAutoReplyPlain(data.name),
+      text: buildFounderAutoReplyPlain(data.name, {
+        hasPhone: leadHasPhone(data.phone),
+      }),
     });
     if (confirmError) {
       console.error("Submitter confirmation email failed:", confirmError.message);
@@ -211,6 +195,7 @@ export async function sendDemoLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getLeadFromEmail(),
       to: [data.email],
+      replyTo: getSalesEmail(),
       subject: "We received your Sydra security request",
       text: buildSecurityConfirmPlain(data.name),
     });

@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 
+import { getSalesEmail } from "@/lib/contact";
 import { getLeadFromEmail, getLeadInboxRecipients } from "@/lib/email/inbox-recipients";
 import {
   CONTACT_INTENT_LABELS,
@@ -49,6 +50,7 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
   const { error: confirmError } = await resend.emails.send({
     from: getLeadFromEmail(),
     to: [data.email],
+    replyTo: getSalesEmail(),
     subject: "We received your message, Sydra",
     text: [
       data.name.trim() ? `Hi ${data.name.trim()},` : "Hi,",

@@ -71,15 +71,29 @@ export async function POST(request: Request) {
       subject,
       payload: postcardLeadToFallbackFields(lead),
     });
-    // Lead already logged; do not fail the visitor.
+    // Lead already logged via fallback. Client surfaces emailDelivered:false
+    // so the visitor is not silently advanced on a broken mailbox path.
     return NextResponse.json({ ok: true, emailDelivered: false });
   }
 
   if (lead.leadKind === "full") {
     const crmResult = await sendCrmWebhook(lead);
     if (!crmResult.ok) {
-      console.error("CRM webhook failed:", crmResult.error);
+      console.error("CRM webhook failed:", crmResult.error, {
+        subject,
+        email: lead.email,
+      });
+      return NextResponse.json({
+        ok: true,
+        emailDelivered: true,
+        crmDelivered: false,
+      });
     }
+    return NextResponse.json({
+      ok: true,
+      emailDelivered: true,
+      crmDelivered: true,
+    });
   }
 
   return NextResponse.json({ ok: true, emailDelivered: true });

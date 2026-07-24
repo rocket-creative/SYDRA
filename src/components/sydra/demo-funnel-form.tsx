@@ -60,6 +60,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
     intent === "security" ? "Request security summary" : "Request demo";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneData>(initialStepOne);
+  const [phone, setPhone] = useState("");
   const [state, setState] = useState<FormState>({ status: "idle" });
 
   const utmSourceParam = searchParams.get("utm_source") ?? "";
@@ -103,6 +104,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         email: String(formData.get("email") ?? "").trim(),
         practiceName: String(formData.get("practiceName") ?? "").trim(),
       });
+      setPhone("");
       setStep(2);
       setState({ status: "idle" });
     },
@@ -126,8 +128,11 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         utm_content: utmContentParam,
       });
 
+      const phoneValue = phone.trim().includes("@") ? "" : phone.trim();
+
       const payload = {
         ...stepOne,
+        phone: phoneValue,
         specialty: formData.get("specialty"),
         state: formData.get("state"),
         disputesPerMonth: formData.get("disputesPerMonth"),
@@ -180,6 +185,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
     [
       entityCode,
       entityState,
+      phone,
       requestType,
       stepOne,
       utmCampaignParam,
@@ -253,6 +259,18 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
             {stepOne.name} · {stepOne.practiceName}
           </p>
 
+          {/* Keep email in the DOM so browsers do not dump Step 1 email into Phone. */}
+          <input
+            aria-hidden
+            autoComplete="email"
+            className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+            name="emailConfirm"
+            readOnly
+            tabIndex={-1}
+            type="email"
+            value={stepOne.email}
+          />
+
           <FormField id="specialty" label="Specialty" required>
             <select required aria-required="true" className={editorialSelectClass} id="specialty" name="specialty">
               <option value="">Select specialty</option>
@@ -297,6 +315,23 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
 
           <input name="routeState" type="hidden" value={entityState} />
           <input name="routeCode" type="hidden" value={entityCode} />
+
+          <FormField
+            id="phone"
+            label="Phone"
+            hint="Optional. We call from (914) 705 6830 to set up the demo."
+          >
+            <input
+              autoComplete="tel"
+              className={editorialInputClass}
+              id="phone"
+              inputMode="tel"
+              name="phone"
+              type="tel"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+            />
+          </FormField>
 
           <FormField id="disputesPerMonth" label="Monthly OON claim estimate" required>
             <select
