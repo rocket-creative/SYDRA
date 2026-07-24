@@ -184,7 +184,9 @@ export function LeadForm({
     );
   };
 
-  const headingClass = isCard ? "text-xl font-medium text-brand" : "type-h2 prose-measure text-brand";
+  const headingClass = isCard
+    ? "text-[1.625rem] font-semibold leading-tight tracking-[-0.02em] text-brand md:text-[1.875rem] lg:text-[2.125rem]"
+    : "type-h2 prose-measure font-semibold text-brand";
   const formClass = isCard
     ? "relative mt-6 space-y-6"
     : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-6 md:p-10";
