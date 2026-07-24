@@ -2,9 +2,11 @@ import { Suspense } from "react";
 
 import { Cursor } from "@/components/motion/cursor";
 import { SplitHeadline } from "@/components/motion/split-headline";
+import { HeroProofStack } from "@/components/landing/hero-proof-stack";
 import { LeadForm } from "@/components/landing/lead-form";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
+import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import type { CampaignTracking } from "@/lib/landing/tracking";
@@ -72,6 +74,7 @@ export function AdLanding({ tracking, stateCode, path = "/recover" }: AdLandingP
             Built by Dr. John M. Abrahams, MD, a board certified neurosurgeon. No attorney cut. You
             keep the recovery.
           </p>
+          <HeroProofStack className="mt-8 max-w-3xl border-t border-rule pt-8" />
         </div>
       </section>
 
@@ -84,6 +87,7 @@ export function AdLanding({ tracking, stateCode, path = "/recover" }: AdLandingP
             variant="card"
           />
         </Suspense>
+        <CtaTrustSignals className="mt-8 max-w-3xl" />
       </div>
 
       <MobileCtaBar tracking={tracking} />
