@@ -173,7 +173,10 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
 
         // Flag the submit so the thank-you page fires the Ads conversion once
         // after it fully loads (more reliable than firing pre-navigation).
-        markLeadConversionPending();
+        markLeadConversionPending({
+          email: String(formData.get("email") ?? "").trim() || undefined,
+          landingPage: "demo",
+        });
         window.location.assign(redirectUrl);
       } catch {
         setState({

@@ -16,17 +16,19 @@ export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID?.trim() || DEFAULT_GA4_ID;
  * Report a demo / lead form submission to GA4 as a `generate_lead` event. Mark
  * this event as a key event in the GA4 UI to count conversions. The `interest`
  * value (the "what are you interested in" selection) is attached so you can
- * segment leads by product intent. No-ops when GA4 is not configured or gtag
- * is unavailable.
+ * segment leads by product intent. `landingPage` tags recover vs demo vs home.
+ * No-ops when GA4 is not configured or gtag is unavailable.
  */
-export function trackLeadGA4(interest?: string): void {
+export function trackLeadGA4(interest?: string, landingPage?: string): void {
   if (!GA4_ID || typeof window === "undefined") {
     return;
   }
   if (typeof window.gtag !== "function") {
     return;
   }
-  const params = interest ? { interest } : {};
+  const params: Record<string, string> = {};
+  if (interest) params.interest = interest;
+  if (landingPage) params.landing_page = landingPage;
   if (process.env.NODE_ENV !== "production") {
     console.log("[analytics] GA4 generate_lead", params);
   }

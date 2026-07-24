@@ -91,6 +91,7 @@ export function PostcardLanding({
               <LeadForm
                 anchorId="lead-form"
                 defaultState={stateCode}
+                landingPage="home"
                 tracking={tracking}
                 variant="card"
               />
@@ -138,6 +139,7 @@ export function PostcardLanding({
             <LeadForm
               anchorId="lead-form-closing"
               defaultState={stateCode}
+              landingPage="home"
               tracking={tracking}
               variant="section"
             />

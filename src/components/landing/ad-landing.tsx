@@ -99,6 +99,8 @@ export function AdLanding({ tracking, stateCode, path = "/recover" }: AdLandingP
           <LeadForm
             anchorId="lead-form"
             defaultState={stateCode}
+            landingPage="recover"
+            thankYouPath="/recover/thank-you"
             tracking={tracking}
             variant="card"
           />

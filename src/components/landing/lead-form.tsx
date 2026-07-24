@@ -46,6 +46,10 @@ type LeadFormProps = {
   variant?: "section" | "card";
   /** DOM id for scroll targets. Defaults to lead-form. */
   anchorId?: string;
+  /** Thank-you redirect after a full lead. Defaults to /demo/thank-you. */
+  thankYouPath?: string;
+  /** Attribution tag for GA4 generate_lead (recover | demo | home). */
+  landingPage?: string;
 };
 
 type FormStatus =
@@ -53,7 +57,7 @@ type FormStatus =
   | { status: "submitting" }
   | { status: "error"; message: string };
 
-const THANK_YOU_PATH = "/demo/thank-you";
+const DEFAULT_THANK_YOU_PATH = "/demo/thank-you";
 
 type Step = 1 | 2;
 
@@ -107,6 +111,8 @@ export function LeadForm({
   tracking,
   variant = "section",
   anchorId = "lead-form",
+  thankYouPath = DEFAULT_THANK_YOU_PATH,
+  landingPage,
 }: LeadFormProps) {
   const searchParams = useSearchParams();
   const urlState = (searchParams.get("state") ?? "").trim().toUpperCase();
@@ -317,10 +323,16 @@ export function LeadForm({
           return;
         }
 
-        trackLeadGA4(typeof productInterest === "string" ? productInterest : undefined);
+        trackLeadGA4(
+          typeof productInterest === "string" ? productInterest : undefined,
+          landingPage,
+        );
         // Conversion fires once on the thank you page after redirect (not here).
-        markLeadConversionPending();
-        window.location.assign(THANK_YOU_PATH);
+        markLeadConversionPending({
+          email: stepOne.email,
+          landingPage,
+        });
+        window.location.assign(thankYouPath);
       } catch {
         setFormStatus({
           status: "error",
@@ -328,7 +340,7 @@ export function LeadForm({
         });
       }
     },
-    [attributionFields, partialSent, phone, stepOne.email],
+    [attributionFields, landingPage, partialSent, phone, stepOne.email, thankYouPath],
   );
 
   return wrap(
