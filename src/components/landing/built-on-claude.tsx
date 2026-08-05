@@ -14,7 +14,7 @@ const layers = [
   {
     label: "Human escalation",
     title: "Your team approves every filing.",
-    body: "Your billing team reviews every draft and submits. Nothing files itself. On Sydra plus Kronos Support, a specialist escalates disputed cases.",
+    body: "Your billing team reviews every draft and submits. Nothing files itself. On Sydra plus Support, a specialist escalates disputed cases.",
   },
 ] as const;
 

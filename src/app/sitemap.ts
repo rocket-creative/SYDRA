@@ -83,6 +83,7 @@ function coreEntries(): Entry[] {
   const marketingPages: Entry[] = [
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/demo", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/case-review", priority: 0.9, changeFrequency: "monthly" },
     { path: "/pricing", priority: 0.9, changeFrequency: "monthly" },
     { path: "/how-it-works", priority: 0.8, changeFrequency: "monthly" },
     { path: "/what-is-idr", priority: 0.8, changeFrequency: "monthly" },

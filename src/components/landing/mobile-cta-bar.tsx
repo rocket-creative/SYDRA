@@ -55,7 +55,7 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
     <div className="fixed inset-x-0 bottom-0 z-40 pb-safe-bottom lg:hidden">
       <div className="flex border-t border-rule bg-white">
         <a
-          aria-label="Call Kronos Health"
+          aria-label="Call Sydra"
           className="flex min-h-[56px] flex-1 select-none items-center justify-center gap-2 border-r border-rule text-[13px] uppercase tracking-[0.08em] text-brand"
           href={PHONE_TEL}
         >

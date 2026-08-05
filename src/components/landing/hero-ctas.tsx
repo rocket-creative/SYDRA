@@ -22,10 +22,10 @@ export function HeroCtas({ tracking }: HeroCtasProps) {
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleKronosClick = () => {
-    trackCtaClick("kronos", tracking);
+  const handleFullServiceClick = () => {
+    trackCtaClick("case_review", tracking);
     document
-      .getElementById("kronos-path")
+      .getElementById("full-service-path")
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -37,9 +37,9 @@ export function HeroCtas({ tracking }: HeroCtasProps) {
       <button
         className="cta-link hidden min-h-[44px] select-none items-center gap-2 text-left text-[13px] font-normal uppercase tracking-[0.08em] text-body transition-colors hover:text-[var(--color-hero)] sm:inline-flex"
         type="button"
-        onClick={handleKronosClick}
+        onClick={handleFullServiceClick}
       >
-        <span>Prefer it handled for you? Talk to Kronos Revenue</span>
+        <span>Prefer it handled for you? Get a free claim review</span>
         <Arrow className="shrink-0" />
       </button>
     </div>

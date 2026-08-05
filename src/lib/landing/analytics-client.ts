@@ -2,7 +2,7 @@
 
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
-type AnalyticsProduct = "sydra" | "kronos";
+type AnalyticsProduct = "sydra" | "case_review";
 
 export type WebVitalName = "LCP" | "INP" | "CLS" | "FCP" | "TTFB";
 type WebVitalRating = "good" | "needs-improvement" | "poor";

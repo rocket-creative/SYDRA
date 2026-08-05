@@ -68,7 +68,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
     paragraphs: [
       "Within your practice: Role based access control. You define which staff members can view, draft, approve, or export. Permissions are granted explicitly, not inherited by default.",
       "Between practices: Strict tenant isolation enforced at multiple layers: application logic, API authorization, database row level security, and audit logging.",
-      "Within Kronos Health: Software engineering team access is governed by internal HIPAA training. Kronos Revenue RCM team access to PHI only for practices using Sydra + Kronos Support. Leadership access for quality review and escalated cases. No PHI accessible to sales or marketing without an operational need.",
+      "Within Sydra: Software engineering team access is governed by internal HIPAA training. Sydra Full Service RCM team access to PHI only for practices using Sydra + Support. Leadership access for quality review and escalated cases. No PHI accessible to sales or marketing without an operational need.",
     ],
   },
   {

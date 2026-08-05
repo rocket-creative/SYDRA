@@ -6,7 +6,10 @@ import { useCallback, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
-import { markLeadConversionPending } from "@/lib/analytics/google-ads";
+import {
+  markLeadConversionPending,
+  type AdsConversionAction,
+} from "@/lib/analytics/google-ads";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -39,6 +42,8 @@ import {
   LANDING_ROLE_OPTIONS,
 } from "@/lib/schemas/postcard-lead";
 
+type LeadFormIntent = "demo" | "case-review";
+
 type LeadFormProps = {
   defaultState: string;
   tracking: CampaignTracking;
@@ -48,8 +53,13 @@ type LeadFormProps = {
   anchorId?: string;
   /** Thank-you redirect after a full lead. Defaults to /demo/thank-you. */
   thankYouPath?: string;
-  /** Attribution tag for GA4 generate_lead (recover | demo | home). */
+  /** Attribution tag for GA4 generate_lead (recover | demo | home | case-review). */
   landingPage?: string;
+  /**
+   * Demo booking vs claim-review copy and Ads conversion. Case-review fires
+   * IDR Claim Review Submitted; demo fires Free Demo Booked.
+   */
+  intent?: LeadFormIntent;
 };
 
 type FormStatus =
@@ -66,16 +76,53 @@ type StepOneValues = {
 };
 
 const CAN_SPAM_ADDRESS =
-  "Kronos Health, 244 Westchester Ave, Ste 209, West Harrison, NY 10604";
-
-const RISK_STACK =
-  "Free demo. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.";
+  "Sydra, 244 Westchester Ave, Ste 209, West Harrison, NY 10604";
 
 const EMAIL_DELIVERY_ERROR =
   "We could not reach our team inbox. Email sales@sydrahealth.com and we will follow up right away.";
 
-function RiskStack() {
-  return <p className="text-xs leading-relaxed text-body/80">{RISK_STACK}</p>;
+const COPY_BY_INTENT: Record<
+  LeadFormIntent,
+  {
+    headline: string;
+    body: string;
+    riskStack: string;
+    stepOneCta: string;
+    stepTwoCta: string;
+    phoneError: string;
+    conversionAction: AdsConversionAction;
+    defaultProductInterest: (typeof LANDING_PRODUCT_OPTIONS)[number] | null;
+    showProductInterest: boolean;
+  }
+> = {
+  demo: {
+    headline: "Book your free five minute Sydra demo",
+    body: "Bring one denied EOB. We will tell you on the call whether it qualifies and show you the dollar figure on that claim. If it does not qualify, you have lost five minutes and nothing else.",
+    riskStack:
+      "Free demo. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
+    stepOneCta: "Book your free five minute demo",
+    stepTwoCta: "Request demo",
+    phoneError: "Enter a phone number so we can reach you about the demo.",
+    conversionAction: "free_demo",
+    defaultProductInterest: null,
+    showProductInterest: true,
+  },
+  "case-review": {
+    headline: "Get your free claim review",
+    body: "Tell us about your practice and monthly out of network volume. Our team reviews your situation and follows up within one business day with a clear recommendation.",
+    riskStack:
+      "Free claim review. No contract, no setup fee, and we never take a percentage of your recovery.",
+    stepOneCta: "Start free claim review",
+    stepTwoCta: "Submit claim review request",
+    phoneError: "Enter a phone number so we can reach you about your claim review.",
+    conversionAction: "idr_claim_review",
+    defaultProductInterest: "done_for_you",
+    showProductInterest: false,
+  },
+};
+
+function RiskStack({ text }: { text: string }) {
+  return <p className="text-xs leading-relaxed text-body/80">{text}</p>;
 }
 
 function resolvePrefillState(
@@ -113,7 +160,9 @@ export function LeadForm({
   anchorId = "lead-form",
   thankYouPath = DEFAULT_THANK_YOU_PATH,
   landingPage,
+  intent = "demo",
 }: LeadFormProps) {
+  const copy = COPY_BY_INTENT[intent];
   const searchParams = useSearchParams();
   const urlState = (searchParams.get("state") ?? "").trim().toUpperCase();
   const urlCode = (searchParams.get("code") ?? "").trim();
@@ -277,12 +326,13 @@ export function LeadForm({
       setFormStatus({ status: "submitting" });
 
       const formData = new FormData(event.currentTarget);
-      const productInterest = formData.get("productInterest");
+      const productInterest =
+        formData.get("productInterest") || copy.defaultProductInterest;
       const phoneValue = phone.trim();
       if (!phoneValue || phoneValue.includes("@")) {
         setFormStatus({
           status: "error",
-          message: "Enter a phone number so we can reach you about the demo.",
+          message: copy.phoneError,
         });
         return;
       }
@@ -331,6 +381,7 @@ export function LeadForm({
         markLeadConversionPending({
           email: stepOne.email,
           landingPage,
+          action: copy.conversionAction,
         });
         window.location.assign(thankYouPath);
       } catch {
@@ -340,7 +391,17 @@ export function LeadForm({
         });
       }
     },
-    [attributionFields, landingPage, partialSent, phone, stepOne.email, thankYouPath],
+    [
+      attributionFields,
+      copy.conversionAction,
+      copy.defaultProductInterest,
+      copy.phoneError,
+      landingPage,
+      partialSent,
+      phone,
+      stepOne.email,
+      thankYouPath,
+    ],
   );
 
   return wrap(
@@ -355,14 +416,12 @@ export function LeadForm({
         </p>
       ) : null}
       <h2 className={headingClass} id={headingId}>
-        Book your free five minute Sydra demo
+        {copy.headline}
       </h2>
       <p
         className={`mt-3 type-body text-body ${isCard ? "text-[15px] leading-relaxed" : "prose-measure mt-4"}`}
       >
-        Bring one denied EOB. We will tell you on the call whether it qualifies and show you the
-        dollar figure on that claim. If it does not qualify, you have lost five minutes and nothing
-        else.
+        {copy.body}
       </p>
 
       <p className="mt-4 type-caption text-body" aria-live="polite">
@@ -410,7 +469,7 @@ export function LeadForm({
             </p>
           ) : null}
 
-          <RiskStack />
+          <RiskStack text={copy.riskStack} />
 
           <Button
             className="w-full sm:w-auto"
@@ -418,14 +477,11 @@ export function LeadForm({
             showArrow
             type="submit"
           >
-            {formStatus.status === "submitting"
-              ? "Submitting…"
-              : "Book your free five minute demo"}
+            {formStatus.status === "submitting" ? "Submitting…" : copy.stepOneCta}
           </Button>
 
           <p className="text-xs leading-relaxed text-body/70">
-            You agree to be contacted by Kronos Health about Sydra. We do not sell your information.{" "}
-            {CAN_SPAM_ADDRESS}
+            You agree to be contacted by Sydra. We do not sell your information. {CAN_SPAM_ADDRESS}
           </p>
         </form>
       ) : (
@@ -566,32 +622,36 @@ export function LeadForm({
             </select>
           </FormField>
 
-          <fieldset>
-            <legend className="text-sm font-medium text-brand">
-              What are you interested in?
-              <span className="text-[var(--color-accent)]">
-                <span aria-hidden> *</span>
-                <span className="sr-only"> required</span>
-              </span>
-            </legend>
-            <div className="mt-4 space-y-3">
-              {LANDING_PRODUCT_OPTIONS.map((value) => (
-                <label
-                  key={value}
-                  className="flex min-h-[44px] cursor-pointer select-none items-center gap-3 text-base text-body"
-                >
-                  <input
-                    className="h-4 w-4 accent-[var(--color-accent)]"
-                    name="productInterest"
-                    required
-                    type="radio"
-                    value={value}
-                  />
-                  <span>{LANDING_PRODUCT_LABELS[value]}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+          {copy.showProductInterest ? (
+            <fieldset>
+              <legend className="text-sm font-medium text-brand">
+                What are you interested in?
+                <span className="text-[var(--color-accent)]">
+                  <span aria-hidden> *</span>
+                  <span className="sr-only"> required</span>
+                </span>
+              </legend>
+              <div className="mt-4 space-y-3">
+                {LANDING_PRODUCT_OPTIONS.map((value) => (
+                  <label
+                    key={value}
+                    className="flex min-h-[44px] cursor-pointer select-none items-center gap-3 text-base text-body"
+                  >
+                    <input
+                      className="h-4 w-4 accent-[var(--color-accent)]"
+                      name="productInterest"
+                      required
+                      type="radio"
+                      value={value}
+                    />
+                    <span>{LANDING_PRODUCT_LABELS[value]}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          ) : copy.defaultProductInterest ? (
+            <input name="productInterest" type="hidden" value={copy.defaultProductInterest} />
+          ) : null}
 
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
             <label htmlFor={fieldId("website-step2")}>Website</label>
@@ -610,7 +670,7 @@ export function LeadForm({
             </p>
           ) : null}
 
-          <RiskStack />
+          <RiskStack text={copy.riskStack} />
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
@@ -619,7 +679,7 @@ export function LeadForm({
               showArrow
               type="submit"
             >
-              {formStatus.status === "submitting" ? "Submitting…" : "Request demo"}
+              {formStatus.status === "submitting" ? "Submitting…" : copy.stepTwoCta}
             </Button>
             <Button
               className="w-full sm:w-auto"
@@ -636,8 +696,7 @@ export function LeadForm({
           </div>
 
           <p className="text-xs leading-relaxed text-body/70">
-            You agree to be contacted by Kronos Health about Sydra. We do not sell your information.{" "}
-            {CAN_SPAM_ADDRESS}
+            You agree to be contacted by Sydra. We do not sell your information. {CAN_SPAM_ADDRESS}
           </p>
         </form>
       )}

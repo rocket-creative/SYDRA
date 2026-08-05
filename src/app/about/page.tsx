@@ -8,8 +8,9 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
-import { kronosTeamUrl } from "@/lib/kronos-revenue";
+import { caseReviewUrl } from "@/lib/case-review";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { siteUrl } from "@/lib/site";
 import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.about;
@@ -19,17 +20,17 @@ const team = [
     name: "Dr. John M. Abrahams, MD",
     role: "Founder, Board Certified Neurosurgeon",
     credentials:
-      "Fellow, American Association of Neurological Surgeons (FAANS) · Past President, Brain and Spine Surgeons of New York · Founder, Kronos Health",
-    bio: "Dr. John M. Abrahams, MD is a practicing neurosurgeon in New York. He built the original NSA IDR submission process for his own neurosurgical practice after the No Surprises Act took effect in 2022. The process produced consistently better outcomes than the contingency attorney model the practice had used previously. His role in Sydra: the clinical coding framework, the determination library curation criteria, and the clinical necessity narrative structure are all built from his experience as a practicing surgeon. He reviews all medical content published by Kronos Health.",
+      "Fellow, American Association of Neurological Surgeons (FAANS) · Past President, Brain and Spine Surgeons of New York · Founder, Sydra",
+    bio: "Dr. John M. Abrahams, MD is a practicing neurosurgeon in New York. He built the original NSA IDR submission process for his own neurosurgical practice after the No Surprises Act took effect in 2022. The process produced consistently better outcomes than the contingency attorney model the practice had used previously. His role in Sydra: the clinical coding framework, the determination library curation criteria, and the clinical necessity narrative structure are all built from his experience as a practicing surgeon. He reviews all medical content published by Sydra.",
     isPhysician: true,
     medicalSpecialty: "Neurosurgery",
-    url: "https://www.kronosrevenue.health/team#person-john-abrahams",
+    url: `${siteUrl()}/about`,
   },
   {
     name: "Heisha Rivera",
-    role: "Director of Revenue Cycle Operations · Kronos Health",
+    role: "Director of Revenue Cycle Operations · Sydra",
     credentials: "",
-    bio: "Heisha leads the RCM operation at Kronos Revenue and the Sydra + Kronos Support team. She manages the specialists who handle Tier 2 Sydra escalations, monthly account reviews, and the Kronos Full Service client relationships.",
+    bio: "Heisha leads the RCM operation at Sydra Full Service and the Sydra + Support team. She manages the specialists who handle Tier 2 Sydra escalations, monthly account reviews, and the Sydra Full Service client relationships.",
   },
   {
     name: "Chelsea",
@@ -54,9 +55,9 @@ export default function AboutPage() {
           </h1>
           <div className={`${textStyles.bodyStack} mt-6`}>
             <p>
-              Sydra is the software arm of Kronos Health. Kronos Health is a working revenue cycle
-              management operation founded by Dr. John M. Abrahams, MD, a board certified practicing
-              neurosurgeon in New York.
+              Sydra is NSA IDR software built from a working revenue cycle management operation
+              founded by Dr. John M. Abrahams, MD, a board certified practicing neurosurgeon in New
+              York.
             </p>
             <p>
               The software wasn&apos;t built first. The billing operation was built first. Dr.
@@ -77,7 +78,7 @@ export default function AboutPage() {
         </header>
 
           <EditorialImage
-            alt="Kronos Health colleagues reviewing a document together in the office"
+            alt="Sydra colleagues reviewing a document together in the office"
             aspect="16/9"
             className="mt-10"
             eager
@@ -126,14 +127,9 @@ export default function AboutPage() {
               <Link className={textStyles.textLink} href="/how-it-works">
                 How Sydra works
               </Link>
-              <a
-                className={textStyles.textLink}
-                href={kronosTeamUrl()}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Full team story at Kronos Revenue
-              </a>
+              <Link className={textStyles.textLink} href={caseReviewUrl()}>
+                Prefer full service? Get a free claim review
+              </Link>
             </p>
           </section>
         </Section>

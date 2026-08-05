@@ -13,7 +13,7 @@ import {
   salesMailtoHref,
   supportMailtoHref,
 } from "@/lib/contact";
-import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
+import { caseReviewUrl } from "@/lib/case-review";
 import {
   localBusinessJsonLd,
   organizationContactPoint,
@@ -115,7 +115,7 @@ export default function ContactPage() {
                 </h2>
                 <p className={`${textStyles.body} mt-2`}>
                   Email {supportEmail} for platform questions. Hours: 9 to 5 ET, Monday through
-                  Friday. Sydra + Kronos Support customers: your Kronos specialist is your first
+                  Friday. Sydra + Support customers: your Sydra specialist is your first
                   call on claim level questions.
                 </p>
               </section>
@@ -125,20 +125,15 @@ export default function ContactPage() {
                   Want every claim handled without running software
                 </h2>
                 <p className={`${textStyles.body} mt-2`}>
-                  That&apos;s Kronos Revenue Full Service on our sister site.{" "}
-                  <a
-                    className={textStyles.textLink}
-                    href={kronosCaseReviewUrl()}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Get a free IDR review
+                  That&apos;s Sydra Full Service.{" "}
+                  <a className={textStyles.textLink} href={caseReviewUrl()}>
+                    Get a free claim review
                   </a>
                   . Phone:{" "}
                   <a className={textStyles.textLink} href="tel:+19147056830">
                     (914) 705 6830
                   </a>{" "}
-                  · intake@kronosrevenue.com
+                  · sales@sydrahealth.com
                 </p>
               </section>
             </div>
@@ -162,16 +157,16 @@ export default function ContactPage() {
                     {supportEmail}
                   </a>
                 </li>
-                <li>Kronos Revenue full service IDR: intake@kronosrevenue.com</li>
+                <li>Sydra Full Service IDR: sales@sydrahealth.com</li>
                 <li>
-                  Phone (Kronos Revenue):{" "}
+                  Phone:{" "}
                   <a className={textStyles.textLink} href="tel:+19147056830">
                     (914) 705 6830
                   </a>
                 </li>
                 <li>Hours: 9 to 5 ET, Monday through Friday</li>
                 <li>
-                  Mailing: Kronos Health · 244 Westchester Ave, Suite 209 · West Harrison, NY 10604
+                  Mailing: Sydra · 244 Westchester Ave, Suite 209 · West Harrison, NY 10604
                 </li>
               </ul>
               <p className="mt-6">

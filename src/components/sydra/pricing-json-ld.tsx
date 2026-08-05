@@ -31,7 +31,7 @@ export function PricingPageJsonLd() {
           serviceJsonLd({
             name: "Sydra NSA IDR Software Pricing",
             description:
-              "Self Serve, Kronos Support, and Full Service tiers for surgical billing teams filing federal IDR and NSA disputes.",
+              "Self Serve, Support, and Full Service tiers for surgical billing teams filing federal IDR and NSA disputes.",
             serviceType: "Healthcare billing software",
           }),
           faqPageJsonLd(PRICING_FAQ),

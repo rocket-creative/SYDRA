@@ -26,7 +26,7 @@ type AdLandingProps = {
 
 /**
  * Single-purpose paid-traffic landing: one promise, one form, one CTA.
- * No Sydra vs Kronos fork, calculator, or audience path grid.
+ * No Sydra vs full-service fork, calculator, or audience path grid.
  */
 export function AdLanding({ tracking, stateCode, path = "/recover" }: AdLandingProps) {
   const jsonLd = [

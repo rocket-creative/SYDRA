@@ -12,13 +12,13 @@ export const metadata = buildPageMetadata({
 });
 
 /**
- * Paid /recover conversion landing. Fires Google Ads "Submit lead form"
+ * Paid /recover conversion landing. Fires Google Ads "Free Demo Booked"
  * exactly once when LeadForm set the session hand-off flag.
  */
 export default function RecoverThankYouPage() {
   return (
     <MagazineShell headerVariant="funnel" mainClassName="px-5 py-16 md:px-10 md:py-24">
-      <LeadConversionOnMount />
+      <LeadConversionOnMount action="free_demo" />
       <div className="mx-auto max-w-xl">
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
         <h1 className="type-h2 mt-4 text-brand">Request received</h1>

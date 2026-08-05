@@ -23,7 +23,7 @@ export function SydraFooter() {
           src="/sydra-logo-nav.svg"
           width={220}
         />
-        <p className="type-caption mt-8 text-body">Kronos Health · Sydra</p>
+        <p className="type-caption mt-8 text-body">Sydra · Sydra</p>
         <address className="mt-6 max-w-2xl not-italic text-[15px] leading-relaxed text-body">
           {ADDRESS}
           <br />
@@ -66,7 +66,7 @@ export function SydraFooter() {
           </Link>
         </div>
         <p className="mt-6 text-xs text-body">
-          © {new Date().getFullYear()} Kronos Health. All rights reserved.
+          © {new Date().getFullYear()} Sydra. All rights reserved.
         </p>
       </div>
     </footer>

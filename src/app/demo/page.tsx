@@ -11,7 +11,7 @@ import { PRODUCT_SCREENS } from "@/components/sydra/product-screens";
 import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { getSalesEmail } from "@/lib/contact";
-import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
+import { caseReviewUrl } from "@/lib/case-review";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -105,7 +105,7 @@ export default function DemoPage() {
                   What happens on the call
                 </h2>
                 <p className={`${textStyles.body} mt-3`}>
-                  This isn&apos;t a slide deck. On a live call, a Kronos specialist enters a real
+                  This isn&apos;t a slide deck. On a live call, a Sydra specialist enters a real
                   denied claim from your specialty and Sydra builds the complete IDR submission
                   packet in real time while you watch, start to finish.
                 </p>
@@ -162,8 +162,8 @@ export default function DemoPage() {
                 <DemoPageLeadForm />
               </Suspense>
               <p className="prose-measure mt-4">
-                <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
-                  Not ready for software? Get a free IDR review
+                <CtaLink href={caseReviewUrl()}>
+                  Not ready for software? Get a free claim review
                 </CtaLink>
               </p>
             </div>

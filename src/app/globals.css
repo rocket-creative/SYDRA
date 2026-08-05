@@ -16,8 +16,8 @@
   --color-accent: #0028b8;
   --color-inverse: #ffffff;
   --color-rule: #d4d0c8;
-  --color-kronos-green: #00843d;
-  --color-kronos-green-dark: #00542a;
+  --color-full-service: #00843d;
+  --color-full-service-dark: #00542a;
   --gradient-hero: linear-gradient(
     165deg,
     var(--color-hero-deep) 0%,
@@ -65,8 +65,8 @@
   --color-accent: var(--color-accent);
   --color-inverse: var(--color-inverse);
   --color-rule: var(--color-rule);
-  --color-kronos-green: var(--color-kronos-green);
-  --color-kronos-green-dark: var(--color-kronos-green-dark);
+  --color-full-service: var(--color-full-service);
+  --color-full-service-dark: var(--color-full-service-dark);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

@@ -1,13 +1,13 @@
 /**
  * One-off check: submitting the demo form redirects to /demo/thank-you and the
- * Google Ads "Submit lead form" conversion fires there (once), driven by the
+ * Google Ads "Free Demo Booked" conversion fires there (once), driven by the
  * sessionStorage hand-off. Usage:
  *   node scripts/test-google-ads-conversion.mjs [baseUrl]
  */
 import { chromium } from "@playwright/test";
 
 const baseUrl = process.argv[2] ?? "https://www.sydrahealth.com";
-const expectedSendTo = "AW-18244375722/MhI6CKKQz8scEKqpzPtD";
+const expectedSendTo = "AW-18244375722/hu-3CMbXtdocEKqpzPtD";
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();

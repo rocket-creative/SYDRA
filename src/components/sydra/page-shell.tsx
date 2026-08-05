@@ -90,6 +90,10 @@ export const BREADCRUMBS = {
     { name: "Home", path: "" },
     { name: "Schedule a demo", path: "/demo" },
   ],
+  caseReview: [
+    { name: "Home", path: "" },
+    { name: "Claim review", path: "/case-review" },
+  ],
   howItWorks: [
     { name: "Home", path: "" },
     { name: "How it works", path: "/how-it-works" },

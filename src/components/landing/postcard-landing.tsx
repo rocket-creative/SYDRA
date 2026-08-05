@@ -22,7 +22,6 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import {
   breadcrumbJsonLd,
   faqPageJsonLd,
-  kronosHealthOrganizationJsonLd,
   personJsonLd,
   serviceJsonLd,
   softwareApplicationJsonLd,
@@ -47,7 +46,6 @@ export function PostcardLanding({
   const faqs = buildFaqs(stateDisplay);
   const jsonLd = [
     breadcrumbJsonLd([{ name: "Home", path: "" }]),
-    kronosHealthOrganizationJsonLd(),
     sydraOrganizationJsonLd(),
     softwareApplicationJsonLd(),
     sydraWebsiteJsonLd(),
@@ -65,9 +63,9 @@ export function PostcardLanding({
     }),
     personJsonLd({
       name: "Dr. John M. Abrahams, MD",
-      jobTitle: "Founder, Kronos Health",
+      jobTitle: "Founder, Sydra",
       description:
-        "Board certified neurosurgeon and founder of Kronos Health, which builds Sydra and Kronos Revenue.",
+        "Board certified neurosurgeon and founder of Sydra.",
       isPhysician: true,
       medicalSpecialty: "Neurosurgery",
     }),

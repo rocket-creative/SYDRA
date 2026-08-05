@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const analyticsSchema = z.object({
   event: z.enum(["page_view", "cta_click", "web_vital"]),
-  product: z.enum(["sydra", "kronos"]).optional(),
+  product: z.enum(["sydra", "case_review"]).optional(),
   state: z.string().max(10).optional(),
   utm_source: z.string().max(200).optional(),
   utm_medium: z.string().max(200).optional(),

@@ -1,9 +1,9 @@
 import { StaggerChild, StaggerParent } from "@/components/motion/reveal";
 
 import {
-  KRONOS_FULL_SERVICE_CTA,
-  kronosCaseReviewUrl,
-} from "@/lib/kronos-revenue";
+  CASE_REVIEW_CTA,
+  caseReviewUrl,
+} from "@/lib/case-review";
 
 const savings = [
   {
@@ -70,13 +70,11 @@ export function SydraCostSavings() {
           Don&apos;t want to run software at all?{" "}
           <a
             className="font-medium text-slate-200 underline decoration-slate-500 underline-offset-2 hover:text-white"
-            href={kronosCaseReviewUrl()}
-            rel="noopener noreferrer"
-            target="_blank"
+            href={caseReviewUrl()}
           >
-            {KRONOS_FULL_SERVICE_CTA}
+            {CASE_REVIEW_CTA}
           </a>{" "}
-          for Kronos Full-Service. Zero ops, headcount eliminated, and priced so you keep more of each win than typical attorney contingency.
+          for Sydra Full Service. Zero ops, headcount eliminated, and priced so you keep more of each win than typical attorney contingency.
         </p>
       </div>
     </section>

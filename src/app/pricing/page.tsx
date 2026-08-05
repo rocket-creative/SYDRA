@@ -9,7 +9,7 @@ import { SourcesReferences } from "@/components/sydra/sources-references";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
-import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
+import { caseReviewUrl } from "@/lib/case-review";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -94,7 +94,7 @@ export default function PricingPage() {
             </p>
             <p>
               If your practice volume is low enough that the platform economics don&apos;t work, we
-              tell you and direct you to Kronos Revenue Full Service as a better fit.
+              tell you and direct you to Sydra Full Service as a better fit.
             </p>
           </div>
         </section>
@@ -110,8 +110,8 @@ export default function PricingPage() {
               Schedule my demo
             </Button>
             <p className="mt-6">
-              <CtaLink href={kronosCaseReviewUrl()} rel="noopener noreferrer" target="_blank">
-                Not ready to run software? Get a free IDR review at Kronos Revenue
+              <CtaLink href={caseReviewUrl()}>
+                Not ready to run software? Get a free claim review
               </CtaLink>
             </p>
             <CtaTrustSignals className="mt-6" />

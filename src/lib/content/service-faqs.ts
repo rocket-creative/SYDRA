@@ -21,7 +21,7 @@ export const HOW_IT_WORKS_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "What happens after my team submits through Sydra?",
-    a: "Export to the IDRE portal and monitor status in the Sydra dashboard. Tier 2 adds Kronos escalation on disputed cases.",
+    a: "Export to the IDRE portal and monitor status in the Sydra dashboard. Tier 2 adds Sydra specialist escalation on disputed cases.",
   },
   {
     q: "Can Sydra handle eligibility and prior auth too?",
@@ -63,7 +63,7 @@ export const SECURITY_FAQ: ServiceFaqItem[] = [
 export const PRICING_FAQ: ServiceFaqItem[] = [
   {
     q: "Are there setup fees?",
-    a: "No setup fees on Self Serve or Sydra + Kronos Support.",
+    a: "No setup fees on Self Serve or Sydra + Support.",
   },
   {
     q: "Is there a minimum contract term?",
@@ -71,7 +71,7 @@ export const PRICING_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "Can we switch tiers?",
-    a: "Yes. Many practices start Self Serve and add Kronos Support or move to Full Service. Tier switches don't require a new onboarding process.",
+    a: "Yes. Many practices start Self Serve and add Support or move to Full Service. Tier switches don't require a new onboarding process.",
   },
   {
     q: "How does Sydra pricing compare to an attorney at 20%?",

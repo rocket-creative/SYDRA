@@ -1,5 +1,4 @@
 import { getContactEmail, getContactPhoneDisplay } from "@/lib/contact";
-import { KRONOS_HEALTH_ID, KRONOS_HEALTH_URL } from "@/lib/kronos-revenue";
 import { siteUrl } from "@/lib/site";
 
 export const SYDRA_ORG_ID = () => `${siteUrl()}/#organization`;
@@ -7,14 +6,13 @@ export const SYDRA_WEBSITE_ID = () => `${siteUrl()}/#website`;
 export const SYDRA_SOFTWARE_ID = () => `${siteUrl()}/#software`;
 export const SYDRA_LOGO_URL = () => `${siteUrl()}/sydra-logo-nav.svg`;
 
-/** Comma separated social profile URLs from NEXT_PUBLIC_ORG_SAME_AS when confirmed. */
+const DEFAULT_SAME_AS = ["https://www.linkedin.com/company/sydra-health/"] as const;
+
+/** Comma separated social profile URLs from NEXT_PUBLIC_ORG_SAME_AS when set. */
 export function organizationSameAs(): string[] {
   const raw = process.env.NEXT_PUBLIC_ORG_SAME_AS?.trim();
   if (!raw) {
-    return [
-      "https://www.linkedin.com/company/kronos-health",
-      "https://www.kronosrevenue.health",
-    ];
+    return [...DEFAULT_SAME_AS];
   }
   return raw
     .split(",")
@@ -199,9 +197,9 @@ export function softwareApplicationJsonLd() {
       "ModMed EMR integration Stedi clearinghouse",
     ],
     creator: {
-      "@type": "MedicalOrganization",
-      "@id": `${KRONOS_HEALTH_ID}`,
-      name: "Kronos Health",
+      "@type": "Organization",
+      "@id": SYDRA_ORG_ID(),
+      name: "Sydra",
     },
   };
 }
@@ -224,7 +222,7 @@ export function personJsonLd(person: PersonInput) {
     name: person.name,
     jobTitle: person.jobTitle,
     description: person.description,
-    worksFor: { "@id": KRONOS_HEALTH_ID },
+    worksFor: { "@id": SYDRA_ORG_ID() },
     ...(person.url ? { url: person.url } : {}),
     ...(person.sameAs?.length ? { sameAs: person.sameAs } : {}),
     ...(person.image ? { image: person.image } : {}),
@@ -238,14 +236,14 @@ export const SYDRA_LOCALBUSINESS_ID = () => `${siteUrl()}/#localbusiness`;
 
 /**
  * Contact-page LocalBusiness node. All fields mirror the NAP that already
- * renders on /contact and in the footer, linked to the parent organization.
+ * renders on /contact and in the footer, linked to the organization.
  */
 export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "@id": SYDRA_LOCALBUSINESS_ID(),
-    name: "Kronos Health",
+    name: "Sydra",
     url: siteUrl(),
     telephone: "+19147056830",
     address: {
@@ -262,7 +260,7 @@ export function localBusinessJsonLd() {
       opens: "09:00",
       closes: "17:00",
     },
-    parentOrganization: { "@id": KRONOS_HEALTH_ID },
+    parentOrganization: { "@id": SYDRA_ORG_ID() },
   };
 }
 
@@ -284,7 +282,7 @@ export function sydraOrganizationJsonLd() {
     "@type": "Organization",
     "@id": SYDRA_ORG_ID(),
     name: "Sydra",
-    legalName: "Kronos Health",
+    legalName: "Sydra",
     url: siteUrl(),
     logo: SYDRA_LOGO_URL(),
     description:
@@ -299,7 +297,6 @@ export function sydraOrganizationJsonLd() {
       postalCode: "10604",
       addressCountry: "US",
     },
-    parentOrganization: { "@id": KRONOS_HEALTH_ID },
     ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 }
@@ -315,25 +312,11 @@ export function sydraWebsiteJsonLd() {
   };
 }
 
-export function kronosHealthOrganizationJsonLd() {
-  const sameAs = organizationSameAs();
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": KRONOS_HEALTH_ID,
-    name: "Kronos Health",
-    url: KRONOS_HEALTH_URL,
-    logo: SYDRA_LOGO_URL(),
-    subOrganization: [{ "@id": SYDRA_ORG_ID() }],
-    ...(sameAs.length > 0 ? { sameAs } : {}),
-  };
-}
-
 /** Part 1C — homepage FAQ schema subset */
 export const HOMEPAGE_FAQ_SCHEMA = [
   {
     q: "What's Sydra and who is it for?",
-    a: "Sydra is AI software for federal IDR and NSA dispute resolution, built for surgical billing teams at orthopedic, neurosurgery, spine, and plastic surgery practices. Your billing team operates the software in house, reducing IDR claim preparation from 30 minutes to under 5 minutes per claim. Sydra is built by Kronos Health and runs on AWS Bedrock with HIPAA controls and BAA available.",
+    a: "Sydra is AI software for federal IDR and NSA dispute resolution, built for surgical billing teams at orthopedic, neurosurgery, spine, and plastic surgery practices. Your billing team operates the software in house, reducing IDR claim preparation from 30 minutes to under 5 minutes per claim. Sydra runs on AWS Bedrock with HIPAA controls and BAA available.",
   },
   {
     q: "How does Sydra reduce IDR prep time?",
@@ -348,7 +331,7 @@ export const HOMEPAGE_FAQ_SCHEMA = [
     a: "Yes. Sydra runs on AWS healthcare workloads with HIPAA eligible Claude Sonnet 4 on AWS Bedrock. A Business Associate Agreement is available for covered entities. Documents are encrypted in transit and at rest. Strict per practice tenant isolation is enforced at every database table. PHI never leaves the AWS HIPAA eligible service boundary during AI generation.",
   },
   {
-    q: "What's the difference between Sydra Self Serve, Sydra plus Kronos Support, and Kronos Full Service?",
-    a: "Sydra Self Serve is software your billing team operates independently. Sydra plus Kronos Support adds live specialist support, monthly account reviews, and escalation on edge cases. Kronos Full Service, available at kronosrevenue.health, is fully outsourced: the Kronos Revenue team handles every claim end to end. The right fit depends on who operates the workflow, not claim volume alone.",
+    q: "What's the difference between Sydra Self Serve, Sydra plus Support, and Sydra Full Service?",
+    a: "Sydra Self Serve is software your billing team operates independently. Sydra plus Support adds live specialist support, monthly account reviews, and escalation on edge cases. Sydra Full Service is fully outsourced: our team handles every claim end to end. Start with a free claim review at /case-review. The right fit depends on who operates the workflow, not claim volume alone.",
   },
 ];

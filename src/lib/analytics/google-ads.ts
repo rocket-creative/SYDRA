@@ -3,18 +3,36 @@
  *
  * The global site tag is loaded once in the root layout. Conversion events are
  * fired from the client after a successful lead form submit redirects to a
- * thank-you page (e.g. /demo/thank-you or /recover/thank-you).
+ * thank-you page (e.g. /demo/thank-you or /case-review/thank-you).
  */
 
-/** Google Ads account / conversion ID (Submit lead form action). */
+/** Google Ads account / conversion ID. */
 export const GOOGLE_ADS_ID = "AW-18244375722";
 
 /**
- * Full `send_to` for the "Submit lead form" conversion action in Google Ads.
- * Pulled from the Ads event snippet (AW ID + conversion label).
+ * Full `send_to` for the "Free Demo Booked" primary conversion action.
+ * Fires after successful demo / homepage / recover lead submits.
  */
-export const GOOGLE_ADS_CONVERSION_SEND_TO =
-  "AW-18244375722/MhI6CKKQz8scEKqpzPtD";
+export const GOOGLE_ADS_FREE_DEMO_SEND_TO =
+  "AW-18244375722/hu-3CMbXtdocEKqpzPtD";
+
+/**
+ * Full `send_to` for the "IDR Claim Review Submitted" primary conversion action.
+ * Fires after successful /case-review submits.
+ */
+export const GOOGLE_ADS_IDR_CLAIM_REVIEW_SEND_TO =
+  "AW-18244375722/s5ZYCOuEq9ocEKqpzPtD";
+
+/** @deprecated Use GOOGLE_ADS_FREE_DEMO_SEND_TO */
+export const GOOGLE_ADS_CONVERSION_SEND_TO = GOOGLE_ADS_FREE_DEMO_SEND_TO;
+
+export type AdsConversionAction = "free_demo" | "idr_claim_review";
+
+export function sendToForAction(action: AdsConversionAction): string {
+  return action === "idr_claim_review"
+    ? GOOGLE_ADS_IDR_CLAIM_REVIEW_SEND_TO
+    : GOOGLE_ADS_FREE_DEMO_SEND_TO;
+}
 
 /**
  * sessionStorage key holding a one-time payload set by a lead form on a
@@ -28,16 +46,19 @@ export type PendingLeadConversion = {
   token: string;
   /** Dedupes Ads conversions if the same submit is retried. */
   transactionId: string;
+  /** Which primary Ads conversion to fire on the thank-you page. */
+  action: AdsConversionAction;
   /** Optional email for enhanced conversions (cleared after fire). */
   email?: string;
-  /** Landing surface that generated the lead, e.g. recover | demo | home. */
+  /** Landing surface that generated the lead, e.g. recover | demo | home | case-review. */
   landingPage?: string;
 };
 
-type ReportLeadFormConversionOptions = {
+type ReportConversionOptions = {
   url?: string;
   transactionId?: string;
   email?: string;
+  action?: AdsConversionAction;
 };
 
 type GtagCommand = "js" | "config" | "event" | "set";
@@ -60,7 +81,7 @@ function newToken(): string {
 }
 
 /**
- * Fire the Google Ads "Submit lead form" conversion. Matches the Ads snippet:
+ * Fire a Google Ads conversion. Matches the Ads snippet:
  * `gtag('event', 'conversion', { send_to, value, currency, event_callback })`.
  *
  * Pass `url` when the form should redirect after the hit (legacy). Prefer the
@@ -69,19 +90,21 @@ function newToken(): string {
  * Returns false (Ads snippet convention). Includes a 2s navigation fallback when
  * `url` is set so a blocked gtag still reaches the thank you page.
  */
-export function reportLeadFormConversion(
-  urlOrOptions?: string | ReportLeadFormConversionOptions,
+export function reportAdsConversion(
+  urlOrOptions?: string | ReportConversionOptions,
 ): boolean {
   if (typeof window === "undefined") {
     return false;
   }
 
-  const options: ReportLeadFormConversionOptions =
+  const options: ReportConversionOptions =
     typeof urlOrOptions === "string" || urlOrOptions === undefined
       ? { url: urlOrOptions }
       : urlOrOptions;
 
   const { url, transactionId, email } = options;
+  const action: AdsConversionAction = options.action ?? "free_demo";
+  const sendTo = sendToForAction(action);
 
   let settled = false;
   const callback = () => {
@@ -104,7 +127,7 @@ export function reportLeadFormConversion(
   }
 
   const eventParams: Record<string, unknown> = {
-    send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
+    send_to: sendTo,
     value: 1.0,
     currency: "USD",
     event_callback: callback,
@@ -115,7 +138,8 @@ export function reportLeadFormConversion(
 
   if (process.env.NODE_ENV !== "production") {
     console.log("[analytics] Google Ads conversion", {
-      send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
+      action,
+      send_to: sendTo,
       url,
       transactionId,
       hasEmail: Boolean(email),
@@ -131,6 +155,16 @@ export function reportLeadFormConversion(
   return false;
 }
 
+/** Fire Free Demo Booked. Prefer `reportAdsConversion` with an explicit action. */
+export function reportLeadFormConversion(
+  urlOrOptions?: string | ReportConversionOptions,
+): boolean {
+  if (typeof urlOrOptions === "string" || urlOrOptions === undefined) {
+    return reportAdsConversion({ url: urlOrOptions, action: "free_demo" });
+  }
+  return reportAdsConversion({ ...urlOrOptions, action: urlOrOptions.action ?? "free_demo" });
+}
+
 /**
  * Set the one-time payload that tells the thank-you page a real lead submit
  * just happened, so it (and only it) fires the Ads conversion after navigation.
@@ -139,6 +173,7 @@ export function reportLeadFormConversion(
 export function markLeadConversionPending(input?: {
   email?: string;
   landingPage?: string;
+  action?: AdsConversionAction;
 }): void {
   if (typeof window === "undefined") {
     return;
@@ -148,6 +183,7 @@ export function markLeadConversionPending(input?: {
     const payload: PendingLeadConversion = {
       token,
       transactionId: token,
+      action: input?.action ?? "free_demo",
       email: input?.email?.trim() || undefined,
       landingPage: input?.landingPage?.trim() || undefined,
     };
@@ -177,14 +213,17 @@ export function consumeLeadConversionPending(): PendingLeadConversion | null {
     window.sessionStorage.removeItem(LEAD_CONVERSION_FLAG_KEY);
 
     try {
-      const parsed = JSON.parse(raw) as PendingLeadConversion;
+      const parsed = JSON.parse(raw) as Partial<PendingLeadConversion>;
       if (parsed && typeof parsed.token === "string" && parsed.token.length > 0) {
+        const action: AdsConversionAction =
+          parsed.action === "idr_claim_review" ? "idr_claim_review" : "free_demo";
         return {
           token: parsed.token,
           transactionId:
             typeof parsed.transactionId === "string" && parsed.transactionId.length > 0
               ? parsed.transactionId
               : parsed.token,
+          action,
           email: typeof parsed.email === "string" ? parsed.email : undefined,
           landingPage:
             typeof parsed.landingPage === "string" ? parsed.landingPage : undefined,
@@ -193,7 +232,7 @@ export function consumeLeadConversionPending(): PendingLeadConversion | null {
     } catch {
       // Legacy: plain string token
       if (raw.length > 0) {
-        return { token: raw, transactionId: raw };
+        return { token: raw, transactionId: raw, action: "free_demo" };
       }
     }
     return null;
@@ -202,7 +241,7 @@ export function consumeLeadConversionPending(): PendingLeadConversion | null {
   }
 }
 
-/** @deprecated Use reportLeadFormConversion */
+/** @deprecated Use reportAdsConversion */
 export function trackDemoConversion(): void {
-  reportLeadFormConversion();
+  reportAdsConversion({ action: "free_demo" });
 }

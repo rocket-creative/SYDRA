@@ -11,7 +11,7 @@ const props = [
   },
   {
     title: "Yours",
-    body: "Your team owns the workflow. Keep recoveries in house instead of giving 20% to a law firm, or add Kronos Support on tricky cases.",
+    body: "Your team owns the workflow. Keep recoveries in house instead of giving 20% to a law firm, or add Support on tricky cases.",
   },
 ] as const;
 

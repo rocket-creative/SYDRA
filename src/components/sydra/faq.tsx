@@ -2,9 +2,9 @@ import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { HOMEPAGE_FAQ_SCHEMA } from "@/lib/seo/json-ld";
 import {
-  KRONOS_FULL_SERVICE_CTA,
-  kronosCaseReviewUrl,
-} from "@/lib/kronos-revenue";
+  CASE_REVIEW_CTA,
+  caseReviewUrl,
+} from "@/lib/case-review";
 
 const faqs = HOMEPAGE_FAQ_SCHEMA.map((item) => ({
   q: item.q,
@@ -39,11 +39,9 @@ export function SydraFaq() {
                   <CtaLink href="/demo">Schedule a demo</CtaLink>
                   <a
                     className="cta-link group inline-flex min-h-11 items-center gap-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-hero)] hover:text-[var(--color-accent)]"
-                    href={kronosCaseReviewUrl()}
-                    rel="noopener noreferrer"
-                    target="_blank"
+                    href={caseReviewUrl()}
                   >
-                    {KRONOS_FULL_SERVICE_CTA}
+                    {CASE_REVIEW_CTA}
                   </a>
                 </p>
               ) : null}

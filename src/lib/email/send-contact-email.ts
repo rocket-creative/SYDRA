@@ -55,9 +55,9 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
     text: [
       data.name.trim() ? `Hi ${data.name.trim()},` : "Hi,",
       "",
-      "Thank you for contacting Kronos Health about Sydra. We received your message and will reply within one business day.",
+      "Thank you for contacting Sydra about Sydra. We received your message and will reply within one business day.",
       "",
-      "Kronos Health",
+      "Sydra",
       "244 Westchester Ave, Ste 209, West Harrison, NY 10604",
     ].join("\n"),
   });

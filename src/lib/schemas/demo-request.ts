@@ -90,7 +90,7 @@ export const TIMELINE_LABELS: Record<(typeof TIMELINE_OPTIONS)[number], string> 
 
 export const TIER_LABELS: Record<(typeof TIER_INTEREST_OPTIONS)[number], string> = {
   basic: "Self Serve",
-  plus: "Kronos Support",
+  plus: "Support",
   pro: "Full Service",
   not_sure: "Not sure",
 };

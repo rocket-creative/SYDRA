@@ -14,9 +14,9 @@ import {
   type TierDefinition,
 } from "@/lib/content/tiers";
 import {
-  KRONOS_FULL_SERVICE_CTA,
-  kronosCaseReviewUrl,
-} from "@/lib/kronos-revenue";
+  CASE_REVIEW_CTA,
+  caseReviewUrl,
+} from "@/lib/case-review";
 import { textStyles } from "@/lib/typography";
 
 type PricingTiersProps = {
@@ -88,14 +88,8 @@ function TierBlock({
       <div className="mt-8">
         {variant === "full" ? (
           isExternal ? (
-            <Button
-              href={kronosCaseReviewUrl()}
-              rel="noopener noreferrer"
-              showArrow
-              target="_blank"
-              variant="ghost"
-            >
-              {KRONOS_FULL_SERVICE_CTA}
+            <Button href={caseReviewUrl()} showArrow variant="ghost">
+              {CASE_REVIEW_CTA}
             </Button>
           ) : (
             <Button
@@ -108,10 +102,9 @@ function TierBlock({
           )
         ) : (
           <CtaLink
-            href={isExternal ? kronosCaseReviewUrl() : `/pricing#${tier.id}`}
-            {...(isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {})}
+            href={isExternal ? caseReviewUrl() : `/pricing#${tier.id}`}
           >
-            {isExternal ? KRONOS_FULL_SERVICE_CTA : "Learn more"}
+            {isExternal ? CASE_REVIEW_CTA : "Learn more"}
           </CtaLink>
         )}
       </div>

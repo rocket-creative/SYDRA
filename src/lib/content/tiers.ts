@@ -9,22 +9,23 @@ export type TierDefinition = {
   compactInclusions: string[];
   notIncluded?: string;
   recommended?: boolean;
-  /** Tier lives on Kronos Revenue; card links out instead of demo. */
+  /** Full Service starts with an in-site claim review, not a software demo. */
   externalOnly?: boolean;
 };
 
 export const PRICING_QUALITATIVE_LINE =
   "Pricing is shared on your demo call after we learn your specialty, state, and volume. No published list prices.";
 
-export const PRICING_SECTION_HEADLINE = "Three ways to handle NSA IDR. Same specialty depth. Different operator.";
+export const PRICING_SECTION_HEADLINE =
+  "Three ways to handle NSA IDR. Same specialty depth. Different operator.";
 
 export const TIER_ROUTING_HEADLINE =
   "The right fit depends on who operates the workflow, not claim volume alone.";
 
 export const TIER_ROUTING_LINES = [
   "Comfortable running software → Sydra Self Serve (any volume)",
-  "Software plus a backstop → Sydra + Kronos Support",
-  "Zero ops / fully outsourced → Kronos Full Service (any volume)",
+  "Software plus a backstop → Sydra + Support",
+  "Zero ops / fully outsourced → Sydra Full Service (any volume)",
 ] as const;
 
 export const PRICING_SECTION_SUBHEAD =
@@ -35,7 +36,7 @@ export function tierRoutingFaqAnswer(): string {
 }
 
 export const DEMO_TRUST_BLOCK =
-  "A five minute call with a Kronos specialist. We walk through Sydra live on a real claim, ask about your specialty and OON volume, and recommend the tier that fits. You leave with a quote, a sandbox account if you want one, and zero pressure.";
+  "A five minute call with a Sydra specialist. We walk through Sydra live on a real claim, ask about your specialty and OON volume, and recommend the tier that fits. You leave with a quote, a sandbox account if you want one, and zero pressure.";
 
 export const TIERS: TierDefinition[] = [
   {
@@ -58,8 +59,8 @@ export const TIERS: TierDefinition[] = [
   },
   {
     id: "plus",
-    name: "Sydra + Kronos Support",
-    tagline: "The software, with a Kronos specialist on call.",
+    name: "Sydra + Support",
+    tagline: "The software, with a Sydra specialist on call.",
     bestFor: "Software you operate, plus a backstop on tricky cases.",
     recommended: true,
     inclusions: [
@@ -78,19 +79,19 @@ export const TIERS: TierDefinition[] = [
   },
   {
     id: "pro",
-    name: "Kronos Full Service",
+    name: "Sydra Full Service",
     tagline: "Every claim handled end to end.",
     bestFor: "You want every claim handled without operating software.",
     externalOnly: true,
     inclusions: [
-      "Lives on the Kronos Revenue site",
-      "Kronos team operates every claim",
+      "Start with a free claim review on this site",
+      "Sydra team operates every claim",
       "Specialty trained, custom coded submissions",
       "Dedicated specialist and quarterly recovery review",
       "Materially less than typical 20% attorney contingency",
     ],
     compactInclusions: [
-      "Fully outsourced on Kronos Revenue",
+      "Fully outsourced claim handling",
       "Dedicated specialist on every file",
       "Alternative to IDR attorneys",
     ],
@@ -110,8 +111,8 @@ export const TIER_COMPARISON: ComparisonRow[] = [
   {
     feature: "Who runs claims",
     basic: "Your team",
-    plus: "Your team + Kronos on call",
-    pro: "Kronos team",
+    plus: "Your team + Sydra on call",
+    pro: "Sydra team",
   },
   {
     feature: "Software platform access",
@@ -134,7 +135,7 @@ export const TIER_COMPARISON: ComparisonRow[] = [
   {
     feature: "Specialty depth",
     basic: "Ortho, neuro, spine, plastics, anesthesia, gen surg",
-    plus: "Same + Kronos specialist",
+    plus: "Same + Sydra specialist",
     pro: "Same + specialist on every file",
   },
   {
@@ -147,7 +148,7 @@ export const TIER_COMPARISON: ComparisonRow[] = [
     feature: "How to start",
     basic: "Schedule a demo",
     plus: "Schedule a demo",
-    pro: "Get a free NSA IDR review",
+    pro: "Get a free claim review",
   },
 ];
 
@@ -160,7 +161,7 @@ export function getTierById(id: TierId): TierDefinition {
 }
 
 export function pricingFaqAnswer(): string {
-  return `${PRICING_SECTION_HEADLINE}. Self Serve is software your team runs in house. Sydra + Kronos Support adds live specialists and monthly reviews. Kronos Full Service is fully outsourced on our sister site. ${PRICING_QUALITATIVE_LINE}`;
+  return `${PRICING_SECTION_HEADLINE}. Self Serve is software your team runs in house. Sydra + Support adds live specialists and monthly reviews. Sydra Full Service is fully outsourced. Start with a free claim review. ${PRICING_QUALITATIVE_LINE}`;
 }
 
 export function isValidTierId(value: string | null): value is TierId {

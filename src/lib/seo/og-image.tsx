@@ -77,6 +77,6 @@ export const OG_TAGLINES = {
   pricing: "Sydra pricing — NSA IDR software plans for surgical billing teams.",
   howItWorks: "How Sydra prepares an NSA IDR submission step by step.",
   demo: "Schedule a Sydra demo, five minutes on a real denied claim.",
-  about: "About Sydra — built by Kronos Health and Dr. John M. Abrahams, MD.",
+  about: "About Sydra — built by Sydra and Dr. John M. Abrahams, MD.",
   security: "Sydra security — HIPAA controls, AWS Bedrock, BAA available.",
 } as const;

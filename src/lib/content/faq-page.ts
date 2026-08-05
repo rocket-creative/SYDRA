@@ -1,4 +1,4 @@
-import { kronosCaseReviewUrl } from "@/lib/kronos-revenue";
+import { caseReviewUrl } from "@/lib/case-review";
 import { siteUrl } from "@/lib/site";
 
 export type FaqItem = {
@@ -29,7 +29,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "What happens if an IDR dispute loses?",
-    a: "A determination against the provider's offer means the insurer's offer was selected. Both parties pay the IDRE administrative fee (currently $50 per dispute). Sydra tracks adverse determinations in your dashboard. After the 90 calendar day cooling off period, the same code and payer combination is eligible for re filing. If you have Sydra + Kronos Support, your Kronos specialist reviews adverse determinations with you at the monthly account review. CMS data shows 88% of properly filed disputes result in provider wins.",
+    a: "A determination against the provider's offer means the insurer's offer was selected. Both parties pay the IDRE administrative fee (currently $50 per dispute). Sydra tracks adverse determinations in your dashboard. After the 90 calendar day cooling off period, the same code and payer combination is eligible for re filing. If you have Sydra + Support, your Sydra specialist reviews adverse determinations with you at the monthly account review. CMS data shows 88% of properly filed disputes result in provider wins.",
   },
   {
     q: "How long does it take to get set up on Sydra?",
@@ -37,7 +37,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "What if my practice doesn't want to run software at all?",
-    a: "Kronos Full Service on our sister site handles every IDR claim end to end. Your practice forwards EOBs. The Kronos Revenue team handles eligibility, documentation, submission, and tracking. Zero software for your billing team to operate. Get a free IDR review at " + kronosCaseReviewUrl() + ".",
+    a: "Sydra Full Service handles every IDR claim end to end. Your practice forwards EOBs. The Sydra team handles eligibility, documentation, submission, and tracking. Zero software for your billing team to operate. Get a free IDR review at " + caseReviewUrl() + ".",
   },
 ];
 

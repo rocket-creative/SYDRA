@@ -44,8 +44,8 @@ export function buildFounderAutoReplyPlain(
     "Talk soon,",
     "Dr. John Abrahams, MD",
     "Board certified neurosurgeon",
-    "Founder, Kronos Health",
+    "Founder, Sydra",
     "",
-    "Kronos Health, 244 Westchester Ave, Ste 209, West Harrison, NY 10604",
+    "Sydra, 244 Westchester Ave, Ste 209, West Harrison, NY 10604",
   ].join("\n");
 }

@@ -79,9 +79,9 @@ export const HOME_METADATA = buildPageMetadata({
 
 export const PAGE_METADATA = {
   about: buildPageMetadata({
-    title: "About Sydra — Built by Kronos Health | Dr. John M. Abrahams, MD | Sydra",
+    title: "About Sydra | Dr. John M. Abrahams, MD | Sydra",
     description:
-      "Sydra is built by Kronos Health, founded by Dr. John M. Abrahams, a practicing board certified neurosurgeon. The software was built from a working RCM operation, not a technology startup.",
+      "Sydra is founded by Dr. John M. Abrahams, a practicing board certified neurosurgeon. The software was built from a working RCM operation, not a technology startup.",
     path: "/about",
     ogImagePath: "/about",
   }),
@@ -162,15 +162,15 @@ export const PAGE_METADATA = {
     ogImageAlt: "Contact Sydra for sales, demos, and customer support.",
   }),
   privacy: buildPageMetadata({
-    title: "Sydra Privacy Policy | Kronos Health Website Data",
+    title: "Sydra Privacy Policy | Website Data Practices",
     description:
-      "How Kronos Health and Sydra collect, use, and protect information submitted through demo requests, contact forms, and email links on this marketing website.",
+      "How Sydra collects, uses, and protects information submitted through demo requests, claim reviews, contact forms, and email links on this marketing website.",
     path: "/privacy",
   }),
   terms: buildPageMetadata({
-    title: "Sydra Terms of Use | Kronos Health Website Agreement",
+    title: "Sydra Terms of Use | Website Agreement",
     description:
-      "Terms governing use of the Sydra marketing website operated by Kronos Health. Software use is governed by separate customer agreements and business associate agreements.",
+      "Terms governing use of the Sydra marketing website. Software use is governed by separate customer agreements and business associate agreements.",
     path: "/terms",
   }),
   thankYou: buildPageMetadata({
@@ -178,6 +178,19 @@ export const PAGE_METADATA = {
     description:
       "Your Sydra demo request was received. Our team will review and follow up within one business day at the time you selected.",
     path: "/demo/thank-you",
+    robots: { index: false, follow: false },
+  }),
+  caseReview: buildPageMetadata({
+    title: "Free NSA IDR Claim Review | Sydra",
+    description:
+      "Request a free claim review. Share your practice details and out of network volume. Sydra follows up within one business day with a clear recommendation.",
+    path: "/case-review",
+  }),
+  caseReviewThankYou: buildPageMetadata({
+    title: "Claim Review Request Received | Sydra",
+    description:
+      "Your Sydra claim review request was received. Our team will follow up within one business day.",
+    path: "/case-review/thank-you",
     robots: { index: false, follow: false },
   }),
 } as const;

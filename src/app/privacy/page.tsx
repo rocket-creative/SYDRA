@@ -47,7 +47,7 @@ export default function PrivacyPage() {
               Privacy policy
             </h1>
             <p className={textStyles.pageLead}>
-              Kronos Health operates the Sydra marketing site. This policy describes how we handle
+              Sydra operates the Sydra marketing site. This policy describes how we handle
               information submitted through demo requests, contact forms, and email links on this
               site.
             </p>

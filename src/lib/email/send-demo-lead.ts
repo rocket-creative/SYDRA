@@ -117,11 +117,11 @@ function buildSecurityConfirmPlain(name: string): string {
   return [
     greeting,
     "",
-    "Thank you for contacting Kronos Health about Sydra. We received your security summary and demo request.",
+    "Thank you for contacting Sydra about Sydra. We received your security summary and demo request.",
     "",
     "A member of our sales team will reply within one business day at the email address you provided.",
     "",
-    "Kronos Health",
+    "Sydra",
     "Sydra · NSA IDR software",
   ].join("\n");
 }

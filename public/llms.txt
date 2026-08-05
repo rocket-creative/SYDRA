@@ -1,6 +1,6 @@
 # Sydra
 
-> Sydra is software for federal Independent Dispute Resolution (IDR) under the No Surprises Act, built for out of network surgical billing teams. It prepares a complete federal IDR submission in about five minutes per claim, files one claim per CPT (never batched), and cites prior determinations so each award is decided on its own merits. Built by Kronos Health, run on AWS Bedrock with HIPAA controls and a BAA available.
+> Sydra is software for federal Independent Dispute Resolution (IDR) under the No Surprises Act, built for out of network surgical billing teams. It prepares a complete federal IDR submission in about five minutes per claim, files one claim per CPT (never batched), and cites prior determinations so each award is decided on its own merits. Built by Sydra, run on AWS Bedrock with HIPAA controls and a BAA available.
 
 AI crawlers are welcome to read, index, and cite this site. The benchmark and guide surface is built to be the cited source for questions like "out of network reimbursement for a CPT in a given state" and "how to file federal IDR." Every dollar figure is bound to sourced, dated public data, and pages without confirmed data are intentionally left out of the index.
 

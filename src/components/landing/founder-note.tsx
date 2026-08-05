@@ -7,8 +7,7 @@ export function FounderNote() {
         Built by a surgeon who files these claims
       </h2>
       <p className="prose-measure mt-6 type-body text-body">
-        Sydra and Kronos Revenue are built by{" "}
-        <strong className="font-medium text-brand">Kronos Health</strong>, founded by{" "}
+        Sydra is built by{" "}
         <strong className="font-medium text-brand">Dr. John M. Abrahams, MD</strong>, a board
         certified neurosurgeon. Specialty depth for orthopedics, neurosurgery, spine, and plastics.
         One claim per CPT, every time.
