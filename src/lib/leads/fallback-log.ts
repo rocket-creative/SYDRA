@@ -8,7 +8,7 @@ import { getSupabaseService } from "@/lib/leads/supabase-admin";
 
 export type LeadFallbackPayload = {
   kind: "partial" | "full";
-  source: "postcard" | "demo" | "contact";
+  source: "postcard" | "demo" | "contact" | "privacy_request";
   subject: string;
   fields: Record<string, string | number | boolean | null | undefined>;
   submittedAt: string;
@@ -32,6 +32,9 @@ async function writeSupabase(payload: LeadFallbackPayload): Promise<FallbackLogR
     return { ok: false, error: "Supabase service role not configured" };
   }
 
+  const marketingConsent = payload.fields.marketingConsent === true;
+  const consentTextVersion = fieldString(payload.fields, "consentTextVersion");
+
   const { error } = await supabase.from("landing_leads").insert({
     kind: payload.kind,
     source: payload.source,
@@ -39,6 +42,8 @@ async function writeSupabase(payload: LeadFallbackPayload): Promise<FallbackLogR
     email: fieldString(payload.fields, "email"),
     state: fieldString(payload.fields, "state") || fieldString(payload.fields, "route_state"),
     fields: payload.fields,
+    marketing_consent: marketingConsent,
+    consent_text_version: consentTextVersion,
     submitted_at: payload.submittedAt,
   });
 

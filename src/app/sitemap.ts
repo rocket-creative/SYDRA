@@ -95,6 +95,7 @@ function coreEntries(): Entry[] {
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.75, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/do-not-sell", priority: 0.3, changeFrequency: "yearly" },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
     { path: "/idr", priority: 0.86, changeFrequency: "weekly" },
     { path: "/idr/guide", priority: 0.78, changeFrequency: "weekly" },

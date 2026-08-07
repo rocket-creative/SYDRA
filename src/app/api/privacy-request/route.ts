@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 
-import { sendContactEmail } from "@/lib/email/send-contact-email";
+import { sendPrivacyRequestEmail } from "@/lib/email/send-privacy-request";
 import { logLeadFallback } from "@/lib/leads/fallback-log";
-import { CONTACT_INTENT_LABELS, contactRequestSchema } from "@/lib/schemas/contact-request";
+import {
+  PRIVACY_REQUEST_LABELS,
+  privacyRequestSchema,
+} from "@/lib/schemas/privacy-request";
 
 function isHoneypotFilled(website: string | undefined): boolean {
   const trimmed = website?.trim();
@@ -17,7 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const parsed = contactRequestSchema.safeParse(body);
+  const parsed = privacyRequestSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
       { error: "Validation failed", details: parsed.error.flatten() },
@@ -30,36 +33,30 @@ export async function POST(request: Request) {
   }
 
   const data = parsed.data;
-  const subject = `[SYDRA CONTACT] ${CONTACT_INTENT_LABELS[data.intent]} · ${data.practiceName}`;
+  const subject = `[SYDRA PRIVACY] ${PRIVACY_REQUEST_LABELS[data.requestType]} · ${data.email}`;
   const submittedAt = new Date().toISOString();
 
   await logLeadFallback({
     kind: "full",
-    source: "contact",
+    source: "privacy_request",
     subject,
     fields: {
-      name: data.name,
       email: data.email,
-      phone: data.phone,
-      practiceName: data.practiceName,
-      intent: data.intent,
+      name: data.name ?? "",
+      requestType: data.requestType,
       message: data.message ?? "",
-      marketingConsent: data.marketingConsent,
-      consentTextVersion: data.consentTextVersion,
+      marketingConsent: false,
+      consentTextVersion: "",
     },
     submittedAt,
   });
 
-  const sendResult = await sendContactEmail(data);
+  const sendResult = await sendPrivacyRequestEmail(data);
   if (!sendResult.ok) {
-    console.error("Contact email failed:", sendResult.error, {
+    console.error("Privacy request email failed:", sendResult.error, {
       email: data.email,
-      practiceName: data.practiceName,
-      intent: data.intent,
-      name: data.name,
-      message: data.message ?? "",
+      requestType: data.requestType,
     });
-    // Lead already logged; do not fail the visitor.
     return NextResponse.json({ ok: true, emailDelivered: false });
   }
 

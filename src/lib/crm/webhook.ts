@@ -28,6 +28,8 @@ export async function sendCrmWebhook(lead: PostcardLead): Promise<CrmWebhookResu
     state: lead.state,
     monthly_oon_volume: DISPUTES_LABELS[lead.disputesPerMonth],
     product_interest: LANDING_PRODUCT_LABELS[lead.productInterest],
+    marketing_consent: lead.marketingConsent === true,
+    consent_text_version: lead.consentTextVersion ?? "",
     tracking: {
       state: lead.route_state || lead.state_tracking || "",
       route_code: lead.route_code ?? "",

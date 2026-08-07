@@ -130,6 +130,10 @@ export const BREADCRUMBS = {
     { name: "Home", path: "" },
     { name: "Privacy", path: "/privacy" },
   ],
+  doNotSell: [
+    { name: "Home", path: "" },
+    { name: "Do not sell or share", path: "/do-not-sell" },
+  ],
   terms: [
     { name: "Home", path: "" },
     { name: "Terms", path: "/terms" },

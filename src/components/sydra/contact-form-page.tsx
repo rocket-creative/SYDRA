@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 
+import { MarketingConsentFields } from "@/components/forms/marketing-consent";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
   editorialSelectClass,
   FormField,
 } from "@/components/ui/form-field";
+import { CONSENT_TEXT_VERSION, parseMarketingConsent } from "@/lib/consent/marketing";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
 import {
   CONTACT_INTENT_OPTIONS,
@@ -16,6 +18,7 @@ import {
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("Something went wrong.");
   const [email, setEmail] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -23,13 +26,23 @@ export function ContactForm() {
     setStatus("submitting");
     const formData = new FormData(event.currentTarget);
 
+    const phone = String(formData.get("phone") ?? "").trim();
+    if (!phone || phone.includes("@")) {
+      setErrorMessage("Enter a phone number so we can reach you.");
+      setStatus("error");
+      return;
+    }
+
     const payload = {
       name: formData.get("name"),
       email: formData.get("email"),
+      phone,
       practiceName: formData.get("practiceName"),
       intent: formData.get("intent"),
       message: formData.get("message") ?? "",
       website: formData.get("website") ?? "",
+      marketingConsent: parseMarketingConsent(formData.get("marketingConsent")),
+      consentTextVersion: CONSENT_TEXT_VERSION,
     };
 
     try {
@@ -39,6 +52,7 @@ export function ContactForm() {
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
+        setErrorMessage("Something went wrong. Please try again or email us.");
         setStatus("error");
         return;
       }
@@ -46,6 +60,7 @@ export function ContactForm() {
       setStatus("success");
       event.currentTarget.reset();
     } catch {
+      setErrorMessage("Network error. Check your connection and try again.");
       setStatus("error");
     }
   }
@@ -59,7 +74,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="space-y-8" onSubmit={handleSubmit}>
+    <form className="relative space-y-8" onSubmit={handleSubmit}>
       <FormField id="contact-name" label="Full name" required>
         <input
           required
@@ -81,6 +96,18 @@ export function ContactForm() {
           inputMode="email"
           name="email"
           type="email"
+        />
+      </FormField>
+      <FormField id="contact-phone" label="Phone" required>
+        <input
+          required
+          aria-required="true"
+          autoComplete="tel"
+          className={editorialInputClass}
+          id="contact-phone"
+          inputMode="tel"
+          name="phone"
+          type="tel"
         />
       </FormField>
       <FormField id="contact-practice" label="Practice name" required>
@@ -124,12 +151,13 @@ export function ContactForm() {
       </div>
       {status === "error" ? (
         <p className="text-sm text-red-700" role="alert">
-          Something went wrong. Email{" "}
+          {errorMessage}{" "}
           <a className="underline" href={salesMailtoHref()}>
             {getSalesEmail()}
           </a>
         </p>
       ) : null}
+      <MarketingConsentFields idPrefix="contact" />
       <Button
         className="w-full sm:w-auto"
         disabled={status === "submitting"}

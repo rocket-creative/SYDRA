@@ -164,8 +164,14 @@ export const PAGE_METADATA = {
   privacy: buildPageMetadata({
     title: "Sydra Privacy Policy | Website Data Practices",
     description:
-      "How Sydra collects, uses, and protects information submitted through demo requests, claim reviews, contact forms, and email links on this marketing website.",
+      "How Sydra collects, uses, and shares information from demo requests, claim reviews, and contact forms, including marketing emails and Google Customer Match advertising.",
     path: "/privacy",
+  }),
+  doNotSell: buildPageMetadata({
+    title: "Do Not Sell or Share My Personal Information | Sydra",
+    description:
+      "Opt out of sale or sharing of your personal information for advertising, unsubscribe from Sydra marketing emails, or request deletion of marketing site data.",
+    path: "/do-not-sell",
   }),
   terms: buildPageMetadata({
     title: "Sydra Terms of Use | Website Agreement",

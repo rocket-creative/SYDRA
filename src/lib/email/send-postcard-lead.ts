@@ -57,6 +57,15 @@ function formatVolume(
   return DISPUTES_LABELS[value] ?? String(value);
 }
 
+function consentLines(data: PostcardLeadRequest): string[] {
+  return [
+    "",
+    "Consent",
+    `Marketing + Customer Match: ${data.marketingConsent ? "yes" : "no"}`,
+    `Consent text version: ${formatOptional(data.consentTextVersion)}`,
+  ];
+}
+
 function buildPartialPlainBody(data: PostcardPartialLead): string {
   return [
     "Type: Postcard landing partial lead",
@@ -65,6 +74,7 @@ function buildPartialPlainBody(data: PostcardPartialLead): string {
     `Email: ${data.email}`,
     `State: ${formatOptional(data.state)}`,
     `Monthly OON volume: ${formatVolume(data.disputesPerMonth)}`,
+    ...consentLines(data),
     "",
     "Attribution",
     `Route state: ${routeState(data)}`,
@@ -94,6 +104,7 @@ function buildFullPlainBody(data: PostcardLead): string {
     `State: ${data.state}`,
     `Monthly OON volume: ${DISPUTES_LABELS[data.disputesPerMonth]}`,
     `Product interest: ${LANDING_PRODUCT_LABELS[data.productInterest]}`,
+    ...consentLines(data),
     "",
     "Attribution",
     `Route state: ${routeState(data)}`,
@@ -117,7 +128,7 @@ function buildPartialHtmlBody(data: PostcardPartialLead): string {
 
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong>[SYDRA POSTCARD]</strong> Partial lead</p>
-<table style="border-collapse:collapse;width:100%">${row("Email", data.email)}${row("State", formatOptional(data.state))}${row("Monthly OON volume", formatVolume(data.disputesPerMonth))}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Email", data.email)}${row("State", formatOptional(data.state))}${row("Monthly OON volume", formatVolume(data.disputesPerMonth))}${row("Marketing + Customer Match", data.marketingConsent ? "yes" : "no")}${row("Consent text version", formatOptional(data.consentTextVersion))}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
 }
@@ -133,7 +144,7 @@ function buildFullHtmlBody(data: PostcardLead): string {
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong>[SYDRA POSTCARD]</strong> New landing page lead · ${escapeHtml(data.practiceName)}</p>
 ${upgrade}
-<table style="border-collapse:collapse;width:100%">${row("Practice", data.practiceName)}${row("Name", data.name)}${row("Role", LANDING_ROLE_LABELS[data.role])}${row("Email", data.email)}${row("Phone", data.phone)}${row("State", data.state)}${row("Monthly OON volume", DISPUTES_LABELS[data.disputesPerMonth])}${row("Product interest", LANDING_PRODUCT_LABELS[data.productInterest])}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Practice", data.practiceName)}${row("Name", data.name)}${row("Role", LANDING_ROLE_LABELS[data.role])}${row("Email", data.email)}${row("Phone", data.phone)}${row("State", data.state)}${row("Monthly OON volume", DISPUTES_LABELS[data.disputesPerMonth])}${row("Product interest", LANDING_PRODUCT_LABELS[data.productInterest])}${row("Marketing + Customer Match", data.marketingConsent ? "yes" : "no")}${row("Consent text version", formatOptional(data.consentTextVersion))}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
 }
@@ -206,6 +217,8 @@ export function postcardLeadToFallbackFields(
       email: data.email,
       state: data.state || null,
       disputesPerMonth: data.disputesPerMonth || null,
+      marketingConsent: data.marketingConsent,
+      consentTextVersion: data.consentTextVersion,
       route_state: routeState(data),
       route_code: data.route_code,
       utm_source: data.utm_source,
@@ -227,6 +240,8 @@ export function postcardLeadToFallbackFields(
     disputesPerMonth: data.disputesPerMonth,
     productInterest: data.productInterest,
     partialUpgraded: data.partialUpgraded,
+    marketingConsent: data.marketingConsent,
+    consentTextVersion: data.consentTextVersion,
     route_state: routeState(data),
     route_code: data.route_code,
     utm_source: data.utm_source,

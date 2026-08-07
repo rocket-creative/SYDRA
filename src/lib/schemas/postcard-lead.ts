@@ -1,6 +1,20 @@
 import { z } from "zod";
 
+import { CONSENT_TEXT_VERSION, parseMarketingConsent } from "@/lib/consent/marketing";
 import { DISPUTES_PER_MONTH_OPTIONS } from "@/lib/schemas/demo-request";
+
+const marketingConsentField = {
+  marketingConsent: z.preprocess(
+    (value) => (value === undefined || value === null ? false : parseMarketingConsent(value)),
+    z.boolean(),
+  ),
+  consentTextVersion: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .transform((value) => (value && value.length > 0 ? value : CONSENT_TEXT_VERSION)),
+};
 
 export const LANDING_ROLE_OPTIONS = ["admin", "billing", "owner", "physician"] as const;
 
@@ -46,6 +60,7 @@ export const postcardPartialLeadSchema = z.object({
     .union([z.string().trim().length(2).toUpperCase(), z.literal("")])
     .optional(),
   disputesPerMonth: z.enum(DISPUTES_PER_MONTH_OPTIONS).optional(),
+  ...marketingConsentField,
   ...optionalTracking,
 });
 
@@ -60,6 +75,7 @@ export const postcardFullLeadSchema = z.object({
   disputesPerMonth: z.enum(DISPUTES_PER_MONTH_OPTIONS),
   productInterest: z.enum(LANDING_PRODUCT_OPTIONS),
   partialUpgraded: z.boolean().optional(),
+  ...marketingConsentField,
   ...optionalTracking,
 });
 

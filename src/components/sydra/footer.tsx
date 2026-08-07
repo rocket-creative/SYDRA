@@ -60,6 +60,12 @@ export function SydraFooter() {
           </Link>
           <Link
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/do-not-sell"
+          >
+            Do Not Sell or Share
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
             href="/terms"
           >
             Terms

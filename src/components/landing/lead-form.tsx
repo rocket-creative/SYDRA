@@ -10,6 +10,7 @@ import {
   markLeadConversionPending,
   type AdsConversionAction,
 } from "@/lib/analytics/google-ads";
+import { MarketingConsentFields } from "@/components/forms/marketing-consent";
 import { Button } from "@/components/ui/button";
 import {
   editorialInputClass,
@@ -17,6 +18,7 @@ import {
   FormField,
 } from "@/components/ui/form-field";
 import { Section } from "@/components/ui/section";
+import { CONSENT_TEXT_VERSION } from "@/lib/consent/marketing";
 import { US_STATES } from "@/lib/constants/us-states";
 import {
   CALCULATOR_UPDATE_EVENT,
@@ -74,9 +76,6 @@ type Step = 1 | 2;
 type StepOneValues = {
   email: string;
 };
-
-const CAN_SPAM_ADDRESS =
-  "Sydra, 244 Westchester Ave, Ste 209, West Harrison, NY 10604";
 
 const EMAIL_DELIVERY_ERROR =
   "We could not reach our team inbox. Email sales@sydrahealth.com and we will follow up right away.";
@@ -174,6 +173,7 @@ export function LeadForm({
   const [partialSent, setPartialSent] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({ status: "idle" });
   const [phone, setPhone] = useState("");
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [estimate, setEstimate] = useState<CalculatorEstimate | null>(null);
   const [routeCtx, setRouteCtx] = useState(() =>
     mergeRouteForSubmit(tracking.state),
@@ -284,6 +284,8 @@ export function LeadForm({
         leadKind: "partial" as const,
         email: values.email,
         website: formData.get("website") ?? "",
+        marketingConsent,
+        consentTextVersion: CONSENT_TEXT_VERSION,
         ...attributionFields(),
       };
 
@@ -317,7 +319,7 @@ export function LeadForm({
         });
       }
     },
-    [attributionFields],
+    [attributionFields, marketingConsent],
   );
 
   const handleStepTwo = useCallback(
@@ -349,6 +351,8 @@ export function LeadForm({
         productInterest,
         partialUpgraded: partialSent,
         website: formData.get("website") ?? "",
+        marketingConsent,
+        consentTextVersion: CONSENT_TEXT_VERSION,
         ...attributionFields(),
       };
 
@@ -397,6 +401,7 @@ export function LeadForm({
       copy.defaultProductInterest,
       copy.phoneError,
       landingPage,
+      marketingConsent,
       partialSent,
       phone,
       stepOne.email,
@@ -471,6 +476,12 @@ export function LeadForm({
 
           <RiskStack text={copy.riskStack} />
 
+          <MarketingConsentFields
+            checked={marketingConsent}
+            idPrefix={`${anchorId}-step1`}
+            onCheckedChange={setMarketingConsent}
+          />
+
           <Button
             className="w-full sm:w-auto"
             disabled={formStatus.status === "submitting"}
@@ -479,10 +490,6 @@ export function LeadForm({
           >
             {formStatus.status === "submitting" ? "Submitting…" : copy.stepOneCta}
           </Button>
-
-          <p className="text-xs leading-relaxed text-body/70">
-            You agree to be contacted by Sydra. We do not sell your information. {CAN_SPAM_ADDRESS}
-          </p>
         </form>
       ) : (
         <form
@@ -672,6 +679,12 @@ export function LeadForm({
 
           <RiskStack text={copy.riskStack} />
 
+          <MarketingConsentFields
+            checked={marketingConsent}
+            idPrefix={`${anchorId}-step2`}
+            onCheckedChange={setMarketingConsent}
+          />
+
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
               className="w-full sm:w-auto"
@@ -694,10 +707,6 @@ export function LeadForm({
               Back
             </Button>
           </div>
-
-          <p className="text-xs leading-relaxed text-body/70">
-            You agree to be contacted by Sydra. We do not sell your information. {CAN_SPAM_ADDRESS}
-          </p>
         </form>
       )}
     </>,

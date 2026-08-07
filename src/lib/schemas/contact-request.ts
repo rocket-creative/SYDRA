@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { CONSENT_TEXT_VERSION, parseMarketingConsent } from "@/lib/consent/marketing";
+
 export const CONTACT_INTENT_OPTIONS = [
   "schedule_demo",
   "pricing_question",
@@ -19,10 +21,21 @@ export const CONTACT_INTENT_LABELS: Record<(typeof CONTACT_INTENT_OPTIONS)[numbe
 export const contactRequestSchema = z.object({
   name: z.string().trim().min(1).max(200),
   email: z.string().trim().email().max(254),
+  phone: z.string().trim().min(7).max(50),
   practiceName: z.string().trim().min(1).max(200),
   intent: z.enum(CONTACT_INTENT_OPTIONS),
   message: z.union([z.string().trim().max(5000), z.literal("")]).optional(),
   website: z.union([z.string().trim().max(200), z.literal("")]).optional(),
+  marketingConsent: z.preprocess(
+    (value) => (value === undefined || value === null ? false : parseMarketingConsent(value)),
+    z.boolean(),
+  ),
+  consentTextVersion: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .transform((value) => (value && value.length > 0 ? value : CONSENT_TEXT_VERSION)),
 });
 
 export type ContactRequest = z.infer<typeof contactRequestSchema>;
