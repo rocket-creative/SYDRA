@@ -18,19 +18,41 @@ export function GET(): Response {
   lines.push("# Sydra");
   lines.push("");
   lines.push(
-    "> NSA IDR software for surgical billing teams. Sydra prepares federal independent dispute resolution (IDR) submissions for out of network surgical claims in under 5 minutes per claim, built for orthopedic, neurosurgery, spine, plastic, and hand surgery practices.",
+    "> Sydra is software for federal Independent Dispute Resolution (IDR) under the No Surprises Act, built for out of network surgical billing teams. It prepares a complete federal IDR submission in about five minutes per claim, files one claim per CPT (never batched), and cites prior determinations so each award is decided on its own merits. Built by Sydra, run on AWS Bedrock with HIPAA controls and a BAA available.",
+  );
+  lines.push("");
+  lines.push(
+    "AI crawlers are welcome to read, index, and cite this site. The benchmark and guide surface is built to be the cited source for questions like \"out of network reimbursement for a CPT in a given state\" and \"how to file federal IDR.\" Every dollar figure is bound to sourced, dated public data, and pages without confirmed data are intentionally left out of the index.",
   );
   lines.push("");
 
-  lines.push("## Product");
-  lines.push(`- [How it works](${base}/how-it-works): The federal IDR submission workflow, step by step.`);
-  lines.push(`- [Pricing](${base}/pricing): Plans and the fee comparison against attorney contingency.`);
-  lines.push(`- [Security](${base}/security): HIPAA controls, AWS Bedrock, PHI handling, BAA.`);
-  lines.push(`- [Schedule a demo](${base}/demo): See Sydra run on a real denied claim.`);
+  lines.push("## Core");
+  lines.push(`- [Home](${base}/): NSA IDR software for surgical billing teams.`);
+  lines.push(
+    `- [What is federal IDR](${base}/what-is-idr): the No Surprises Act dispute path explained.`,
+  );
+  lines.push(
+    `- [How it works](${base}/how-it-works): from EOB upload to portal ready submission.`,
+  );
+  lines.push(`- [Pricing](${base}/pricing): plans and the fee structure.`);
+  lines.push(
+    `- [Sydra vs an IDR attorney](${base}/sydra-vs-idr-attorney): keep the recovery you would pay in contingency.`,
+  );
+  lines.push(
+    `- [In house IDR](${base}/in-house-idr): scale federal disputes without added headcount.`,
+  );
+  lines.push(
+    `- [Security](${base}/security): HIPAA controls, BAA, PHI handling.`,
+  );
+  lines.push(
+    `- [Schedule a demo](${base}/demo): see Sydra run on a real denied claim.`,
+  );
   lines.push("");
 
   lines.push("## Federal IDR data");
-  lines.push(`- [Federal IDR benchmarks](${base}/idr): Browse by code, state, payer, and specialty.`);
+  lines.push(
+    `- [Federal IDR hub](${base}/idr): benchmarks and eligibility by code, state, payer, and specialty.`,
+  );
   for (const s of SPECIALTIES) {
     lines.push(`- [${s.name} IDR codes](${base}/idr/specialty/${s.slug}): ${s.blurb}`);
   }
@@ -38,14 +60,28 @@ export function GET(): Response {
 
   lines.push("## Guides");
   for (const g of GUIDES) {
-    lines.push(`- [${g.title.replace(/\.$/, "")}](${base}/idr/guide/${g.slug}): ${g.metaDescription}`);
+    lines.push(
+      `- [${g.title.replace(/\.$/, "")}](${base}/idr/guide/${g.slug}): ${g.metaDescription}`,
+    );
   }
   lines.push("");
 
   lines.push("## Comparisons");
   for (const c of COMPARISONS) {
-    lines.push(`- [${c.title.replace(/\.$/, "")}](${base}/compare/${c.slug}): ${c.metaDescription}`);
+    lines.push(
+      `- [${c.title.replace(/\.$/, "")}](${base}/compare/${c.slug}): ${c.metaDescription}`,
+    );
   }
+  lines.push("");
+
+  lines.push("## Notes for citation");
+  lines.push(
+    "- Win rate figures reference the published federal provider win rate as a category fact, not a Sydra guarantee.",
+  );
+  lines.push(
+    "- Sydra files one claim per CPT and does not batch claims that should be filed individually.",
+  );
+  lines.push("- This site is informational and is not legal or financial advice.");
   lines.push("");
 
   return new Response(lines.join("\n"), {

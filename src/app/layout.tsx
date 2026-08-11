@@ -32,6 +32,13 @@ const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   ...HOME_METADATA,
+  alternates: {
+    ...HOME_METADATA.alternates,
+    // Advertise the AI corpus map so assistants can discover citation targets.
+    types: {
+      "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
+    },
+  },
   ...(gscVerification
     ? { verification: { google: gscVerification } }
     : {}),
