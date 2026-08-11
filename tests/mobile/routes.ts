@@ -9,6 +9,7 @@ import {
   stateSlug,
 } from "@/lib/idr/taxonomy";
 import { RESOURCE_SLUGS } from "@/lib/content/resources/articles";
+import { RESOURCE_UPDATE_SLUGS } from "@/lib/content/resources/updates";
 
 export type MobileRoute = {
   /** A stable, filesystem-safe name used for screenshots and test titles. */
@@ -32,6 +33,9 @@ const sampleSpecialty = SPECIALTIES[0]!.slug;
 const sampleGuide = GUIDE_SLUGS[0];
 const sampleComparison = COMPARISON_SLUGS[0];
 const sampleResource = RESOURCE_SLUGS[0];
+const sampleUpdate =
+  RESOURCE_UPDATE_SLUGS.find((slug) => slug === "cms-2026-idr-final-rule") ??
+  RESOURCE_UPDATE_SLUGS[0]!;
 
 /** Static routes (every non-parameterized page in src/app). */
 const STATIC_ROUTES: MobileRoute[] = [
@@ -45,6 +49,11 @@ const STATIC_ROUTES: MobileRoute[] = [
   { name: "in-house-idr", path: "/in-house-idr" },
   { name: "security", path: "/security" },
   { name: "resources", path: "/resources" },
+  { name: "resources-updates", path: "/resources/updates" },
+  { name: "glossary", path: "/glossary" },
+  { name: "idr-filing-deadline", path: "/idr-filing-deadline" },
+  { name: "idr-for-billing-companies", path: "/idr-for-billing-companies" },
+  { name: "idr-recovery-calculator", path: "/idr-recovery-calculator" },
   { name: "faq", path: "/faq" },
   { name: "about", path: "/about" },
   { name: "contact", path: "/contact" },
@@ -70,6 +79,7 @@ const DYNAMIC_ROUTES: MobileRoute[] = [
   { name: "idr-guide-slug", path: `/idr/guide/${sampleGuide}` },
   { name: "compare-slug", path: `/compare/${sampleComparison}` },
   { name: "resources-slug", path: `/resources/${sampleResource}` },
+  { name: "resources-updates-slug", path: `/resources/updates/${sampleUpdate}` },
   { name: "postcard-state", path: `/r/${sampleStateCode.toLowerCase()}` },
 ];
 

@@ -41,5 +41,67 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
 ];
 
+export const FAQ_BILLING_SECTION_TITLE =
+  "Billing companies and multi provider organizations";
+
+export const FAQ_BILLING_COMPANY_ITEMS: FaqItem[] = [
+  {
+    q: "Does the platform identify potentially eligible out of network claims automatically?",
+    a: "Yes, per claim. Sydra runs an eligibility check on each uploaded EOB before your team invests time in a packet, checking the claim against NSA eligibility and open negotiation requirements.",
+  },
+  {
+    q: "How does Sydra determine whether a claim belongs in Federal IDR versus a state specific dispute process?",
+    a: "Two questions decide it. First, whether the health plan is self funded or fully insured, since self funded ERISA plans always route to federal IDR regardless of state. Second, if the plan is fully insured, whether that state has its own specified state law covering the service in question. Where one applies, state law controls instead of federal IDR.",
+  },
+  {
+    q: "What functionality is currently available for New Jersey, New York, and New Hampshire disputes?",
+    a: "New York, New Jersey, and New Hampshire all have dedicated jurisdiction guides and state pages covering their process specifics, including New York's three year lookback allowing providers to challenge commercial payments going back three years. Operationally, Sydra is currently live or rolling out in Texas, California, New York, New Jersey, Florida, and Arizona for 2026. New Hampshire is not currently on that operational list.",
+  },
+  {
+    q: "Does the system manage open negotiation and IDR filing deadlines?",
+    a: "Yes. Deadlines and eligibility windows run on deterministic software rather than a model, so the 30 business day open negotiation period and the 4 business day IDR initiation window are tracked without relying on AI judgment. Batching is available, and your team chooses whether to batch per submission rather than it being automatic.",
+  },
+  {
+    q: "What payer level, CPT level, provider level, and geographic level analytics are available?",
+    a: "Sydra publishes aggregate published federal benchmarks, sourced from CMS public use files and Georgetown CHIR, broken out by specialty and award multiple.",
+  },
+  {
+    q: "How is Sydra adapting its platform to the new CMS IDR Gateway and the Federal IDR operational changes being implemented in 2026?",
+    a: "The May 28, 2026 CMS final rule cut the federal IDR administrative fee from $115 to $15 per party per dispute and formally sanctioned batching, both of which Sydra's platform already reflects. CMS is also rolling out a new centralized IDR Gateway in phases through late 2026, replacing the old single use web forms.",
+  },
+  {
+    q: "What does Sydra cost?",
+    a: "Pricing is quoted per practice based on specialty and monthly out of network volume, confirmed on a demo call.",
+  },
+  {
+    q: "Is there a minimum volume commitment?",
+    a: "No minimum volume commitment and no minimum contract term are required on the standard tiers, month to month is available.",
+  },
+  {
+    q: "What is the implementation timeline?",
+    a: "Most practices are operational within one week of signing the BAA.",
+  },
+  {
+    q: "What are the API and integration capabilities?",
+    a: "Sydra lists AWS, Stedi, and ModMed as subprocessors and integrates with ModMed during onboarding.",
+  },
+  {
+    q: "Is Sydra HIPAA compliant, and is a BAA available?",
+    a: "Sydra handles PHI under HIPAA controls, running on Claude via Amazon Bedrock, a HIPAA eligible AWS service, operating within AWS's HIPAA BAA scope for that workload. Claude is contractually barred from training on your PHI, and no PHI reaches Anthropic's systems. A standard BAA is available for covered entities and business associates, covering permitted uses and disclosures, 60 day breach notification, audit rights, and data return or destruction on termination.",
+  },
+  {
+    q: "What is Sydra's SOC 2 status?",
+    a: "Sydra's controls are SOC 2 aligned, covering security, availability, and confidentiality. The full report is available under NDA to qualified prospects, requested through sales@sydrahealth.com.",
+  },
+  {
+    q: "What security controls are in place?",
+    a: "AES 256 encryption at rest through Amazon S3 and KMS, TLS 1.2 or higher in transit, strict per practice tenant isolation enforced at the application, API, database, and audit logging layers, and role based access control within each practice. Full audit logging captures user, timestamp, action, and IP address, available to the account administrator on request.",
+  },
+  {
+    q: "What are the contract terms?",
+    a: "No setup fees on Self Serve or Support tiers, no minimum contract term, month to month available.",
+  },
+];
+
 /** @deprecated Categories removed in spec Part 6 */
 export const FAQ_CATEGORIES = ["All"] as const;

@@ -50,14 +50,14 @@ function TwoWindowsVisual() {
       aria-label="Federal IDR filing windows: 30 business days open negotiation, then 4 business days to initiate"
       className="mt-10 border-t border-rule pt-10"
     >
-      <div className="grid gap-10 md:grid-cols-[1fr_auto_1fr] md:items-start md:gap-6">
+      <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-start md:gap-6">
         <div>
           <p className="type-caption text-body/70">Window {openNegotiation.step}</p>
           <p className="mt-3 type-h2 text-brand">{openNegotiation.duration}</p>
           <p className="mt-2 text-lg font-medium text-brand">{openNegotiation.title}</p>
           <p className={`${textStyles.body} mt-3 max-w-md`}>{openNegotiation.detail}</p>
         </div>
-        <div aria-hidden className="hidden items-center pt-10 md:flex">
+        <div aria-hidden className="flex items-center md:justify-center md:pt-10">
           <span className="type-caption text-body/50">then</span>
         </div>
         <div>
@@ -95,7 +95,7 @@ export default function IdrFilingDeadlinePage() {
             <p className={textStyles.pageLead}>{IDR_FILING_DEADLINE_HERO.lead}</p>
             <div className="mt-8">
               <Button href="/demo" showArrow>
-                Check my filing window on a free demo
+                Check my filing window
               </Button>
               <CtaTrustSignals className="mt-4" />
             </div>

@@ -633,6 +633,69 @@ export const GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "federal-vs-state-jurisdiction",
+    title: "Federal vs state IDR jurisdiction: the two questions that decide",
+    listLabel: "federal vs state IDR jurisdiction",
+    crossLink: {
+      href: "/idr/guide/self-funded-vs-fully-insured",
+      anchor: "self funded versus fully insured",
+      intro: "For the plan type primer that feeds this decision tree, start with",
+    },
+    metaTitle: "Federal vs State IDR Jurisdiction | Sydra",
+    metaDescription:
+      "How plan funding and specified state law decide whether an out of network dispute files in federal IDR or a state process, with NY, NJ, NH, and other examples.",
+    lead: "Every out of network dispute answers two questions before you know where it gets filed: whether the health plan is self funded or fully insured, and whether the state has a specified state law that covers the service. Get either answer wrong and you can burn the filing window in the wrong forum.",
+    sections: [
+      {
+        heading: "The two questions that decide jurisdiction.",
+        paragraphs: [
+          "Every out of network dispute answers two questions before you know where it gets filed.",
+          "Question one: is the health plan self funded or fully insured? Self funded ERISA plans are regulated federally regardless of what state the patient is in. About 65 percent of covered workers are in self funded plans, so the majority of employer coverage routes to federal IDR no matter which state you are filing from. Fully insured plans, the kind sold and regulated at the state level, are the ones where state law gets a chance to apply instead.",
+          "Question two: does the state have a specified state law? If the plan is fully insured, the next question is whether that state has what CMS calls a specified state law, a state law with its own method for determining the out of network payment amount. Where one exists and applies to the service in question, state law controls instead of federal IDR. Where it does not, or does not cover that particular service, federal IDR is the default. Commonwealth Fund research puts the count at roughly 22 states with some form of specified state law on the books, generally using a standard payment rule, a state run dispute process, or a hybrid of both.",
+          "This is why the same billing company managing claims across five states can be running five different processes depending on plan funding and state law, even when the underlying dispute looks identical on paper.",
+        ],
+      },
+      {
+        heading: "States with their own process worth knowing in detail.",
+        paragraphs: [
+          "New York has run its own IDR process since 2015, predating the federal law. It applies to patients in fully insured, state regulated plans. One detail that matters operationally: New York allows providers to challenge commercial payments going back three years, which means claims a billing company wrote off as dead can sometimes be revived well outside the federal filing window.",
+          "New Jersey runs a baseball style binding arbitration process under its Out of Network Consumer Protection, Transparency, Cost Containment, and Accountability Act. The timeline runs on its own clock, separate from the federal 30 business day open negotiation period: carriers have 20 days to pay or dispute a bill, and the provider then has 30 days to negotiate before either side can invoke arbitration. Unlike federal IDR, which is barred from considering provider billed charges, New Jersey's process can still weigh them as a factor.",
+          "New Hampshire is one of the earlier states, alongside New York, New Jersey, and Illinois, to build its own arbitration process rather than defaulting to the federal one. If you're filing in New Hampshire, do not assume the federal timeline and evidence standards apply without checking eligibility first, since a fully insured plan in this state is more likely to route to the state process than the federal one.",
+        ],
+      },
+      {
+        heading: "Texas, California, Ohio, Virginia, and Georgia, as examples of how it gets complicated.",
+        paragraphs: [
+          "These states illustrate why jurisdiction is not always a clean state by state answer. Texas requires binding arbitration for out of network professional and lab charges but not for facility charges, so the same patient encounter can split across two processes depending on which bill you're disputing. California's state law continues to apply to individual out of network providers at in network facilities, but its common law approach to reasonable charge for emergency services was found by CMS not to qualify as a specified state law, so federal IDR applies there instead. Ohio and Virginia both have specified state laws covering emergency and certain non emergency services at in network facilities, with federal IDR filling the gaps state law doesn't reach. Georgia has a state law, but CMS's own enforcement letter notes federal IDR still applies wherever that state law doesn't.",
+        ],
+      },
+      {
+        heading: "For every other state.",
+        paragraphs: [
+          "CMS publishes state specific enforcement letters and a determination chart that lays out, state by state, whether a specified state law or All Payer Model Agreement applies. That is the authoritative source for any state not covered in detail above.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Does the same insurer always use the same process in every state?",
+        a: "No. The same national insurer can be subject to federal IDR for a self funded employer plan in one state and a state arbitration process for a fully insured plan in another, depending entirely on how that specific plan is funded and what state law applies where the service was rendered.",
+      },
+      {
+        q: "If a state has its own process, does that mean federal IDR never applies there?",
+        a: "No. State law generally applies only to fully insured plans and only to the specific services the state law covers. Self funded plans in that same state still route to federal IDR, and any service the state law doesn't reach falls back to the federal process by default.",
+      },
+      {
+        q: "How do we confirm jurisdiction for a claim before filing?",
+        a: "Confirm the plan's funding status first, self funded plans go federal regardless of state. If the plan is fully insured, check whether the state has a specified state law covering that type of service. CMS's published state determination letters are the authoritative source when a state isn't covered in detail on this page.",
+      },
+      {
+        q: "How is the CMS IDR Gateway changing the federal process in 2026?",
+        a: "The May 28, 2026 CMS final rule cut the federal IDR administrative fee from $115 to $15 per party per dispute and formally sanctioned batching. CMS is also rolling out a new centralized IDR Gateway in phases through late 2026, replacing the old single use web forms.",
+      },
+    ],
+  },
 ];
 
 const GUIDE_INDEX = new Map(GUIDES.map((g) => [g.slug, g]));

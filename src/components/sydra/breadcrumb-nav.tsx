@@ -22,7 +22,10 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
                 </span>
               ) : null}
               {isLast ? (
-                <span aria-current="page" className="font-medium text-brand">
+                <span
+                  aria-current="page"
+                  className="line-clamp-2 min-w-0 font-medium text-brand"
+                >
                   {item.name}
                 </span>
               ) : (

@@ -26,7 +26,7 @@ const hrs = (n: number) => `${Math.round(n)} hrs`;
 export function LaborCalculator({
   variant = "light",
   ctaHref = "/demo",
-  ctaLabel = "Schedule a demo for your numbers",
+  ctaLabel = "Schedule a demo",
   onCtaClick,
 }: LaborCalculatorProps) {
   const [claimsPerMonth, setClaimsPerMonth] = useState(20);
@@ -63,7 +63,7 @@ export function LaborCalculator({
     <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
       <div className="space-y-10">
         <div>
-          <div className="flex items-baseline justify-between gap-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <label className={`type-caption ${labelClass}`} htmlFor={claimsId}>
               IDR eligible claims per month
             </label>
@@ -87,7 +87,7 @@ export function LaborCalculator({
         </div>
 
         <div>
-          <div className="flex items-baseline justify-between gap-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <label className={`type-caption ${labelClass}`} htmlFor={minutesId}>
               Minutes to build one submission by hand
             </label>
@@ -111,7 +111,7 @@ export function LaborCalculator({
         </div>
 
         <div>
-          <div className="flex items-baseline justify-between gap-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <label className={`type-caption ${labelClass}`} htmlFor={rateId}>
               Loaded hourly cost of billing staff
             </label>

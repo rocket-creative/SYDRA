@@ -5,6 +5,7 @@ import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
+import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
@@ -12,12 +13,19 @@ import {
   DEMO_CTA_LEAD,
   DOCX_SECTION,
   HOW_IT_WORKS_HERO,
+  HOW_IT_WORKS_HOW_TO_STEPS,
   ONE_PER_CPT_SECTION,
   SUBMISSION_FOOTNOTE,
   SUBMISSION_REQUIREMENTS,
   SYDRA_ELEMENTS,
 } from "@/lib/content/how-it-works-page";
-import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
+import { HOW_IT_WORKS_FAQ } from "@/lib/content/service-faqs";
+import {
+  faqPageJsonLd,
+  howToJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -32,6 +40,7 @@ function pageTitle(): string {
 }
 
 function HowItWorksJsonLd() {
+  const description = PAGE_METADATA.howItWorks.description ?? "";
   return (
     <>
       <BreadcrumbJsonLd items={[...BREADCRUMBS.howItWorks]} />
@@ -40,7 +49,7 @@ function HowItWorksJsonLd() {
           ...medicallyReviewedWebPageJsonLd({
             path: "/how-it-works",
             name: pageTitle(),
-            description: PAGE_METADATA.howItWorks.description ?? "",
+            description,
           }),
           serviceJsonLd({
             name: "Sydra NSA IDR Workflow",
@@ -48,6 +57,13 @@ function HowItWorksJsonLd() {
               "Upload an EOB, draft a specialty coded IDR in under 5 minutes, and submit with your billing team in control.",
             serviceType: "Healthcare billing software",
           }),
+          howToJsonLd({
+            path: "/how-it-works",
+            name: pageTitle(),
+            description,
+            steps: HOW_IT_WORKS_HOW_TO_STEPS,
+          }),
+          faqPageJsonLd(HOW_IT_WORKS_FAQ),
         ]}
       />
     </>
@@ -126,6 +142,14 @@ export default function HowItWorksPage() {
         </Section>
 
         <Section tone="white">
+          <ServiceFaqSection
+            heading="How it works FAQ"
+            id="heading-how-it-works-faq"
+            items={HOW_IT_WORKS_FAQ}
+          />
+        </Section>
+
+        <Section tone="neutral">
           <div className="prose-measure">
             <p className={`${textStyles.body} mb-6`}>{DEMO_CTA_LEAD}</p>
             <Button href="/demo" showArrow>

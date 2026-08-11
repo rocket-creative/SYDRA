@@ -3,10 +3,12 @@ import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
+import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import { RESOURCE_UPDATES } from "@/lib/content/resources/updates";
 import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
@@ -65,6 +67,12 @@ export default function ResourcesUpdatesPage() {
               the full guide or hub page that owns the lasting explanation. No new statistics beyond
               what already appears on Sydra.
             </p>
+            <div className="mt-8">
+              <Button href="/demo" showArrow>
+                Schedule a demo
+              </Button>
+              <CtaTrustSignals className="mt-4" />
+            </div>
           </header>
         </Section>
 

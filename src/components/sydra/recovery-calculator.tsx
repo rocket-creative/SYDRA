@@ -34,7 +34,7 @@ function clampInitial(value: number, min: number, max: number, step: number): nu
 export function RecoveryCalculator({
   variant = "light",
   ctaHref = "/demo",
-  ctaLabel = "Schedule a demo for your numbers",
+  ctaLabel = "Schedule a demo",
   onCtaClick,
   defaultClaimsPerMonth = 20,
   defaultAvgDisputedAmount = 15000,
@@ -89,7 +89,7 @@ export function RecoveryCalculator({
       {/* Controls */}
       <div className="space-y-10">
         <div>
-          <div className="flex items-baseline justify-between gap-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <label className={`type-caption ${labelClass}`} htmlFor={claimsId}>
               IDR eligible claims per month
             </label>
@@ -116,7 +116,7 @@ export function RecoveryCalculator({
         </div>
 
         <div>
-          <div className="flex items-baseline justify-between gap-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <label className={`type-caption ${labelClass}`} htmlFor={amountId}>
               Average disputed amount per claim
             </label>

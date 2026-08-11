@@ -1,62 +1,56 @@
-import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
-
 export type ServiceFaqItem = { q: string; a: string };
 
 export const HOW_IT_WORKS_FAQ: ServiceFaqItem[] = [
   {
-    q: "How long does it take to draft an IDR with Sydra?",
-    a: "Most billing teams produce a specialty coded IDR draft in under 5 minutes per claim. Your operator reviews and approves before anything is submitted.",
+    q: "How does Sydra work?",
+    a: "Sydra reviews the underpaid or denied claim, checks it against the qualifying payment amount and the payer's own reimbursement history, and tells you within minutes whether the claim is a strong candidate for independent dispute resolution. If it is, Sydra prepares the offer, the supporting documentation, and the certified IDR entity submission. You review it, you approve it, Sydra files it.",
   },
   {
-    q: "Does Sydra integrate with our EMR?",
-    a: "ModMed is supported today with more EMRs on the roadmap. If your team copies EOB data out of your system today, Sydra works with that workflow now.",
+    q: "Why does filing matter so much to the outcome?",
+    a: 'Georgetown University\'s Center on Health Insurance Reforms found that 88 percent of properly filed federal IDR disputes get paid, the highest provider win rate recorded since the process launched (CHIR, March 2026). The disputes that fail tend to fail on eligibility or documentation grounds, not on the merits of the underlying claim. Sydra exists to make sure your filing lands in the 88 percent instead of the group that gets thrown out on a technicality.',
   },
   {
-    q: "Who submits the IDR to the IDRE portal?",
-    a: "Your billing team does. Sydra generates the draft and documentation. Your operator edits, approves, and owns the submission before it leaves your practice.",
+    q: "How long does the IDR process take from start to finish?",
+    a: "Filing itself takes a few minutes once Sydra has flagged the claim. The federal timeline from initiation to a certified IDR entity decision typically runs thirty business days, though delays at the certified entity level are common industry wide. Sydra tracks every open case against that clock and flags anything falling behind schedule.",
   },
   {
-    q: "Does Sydra batch CPT codes on one submission?",
-    a: "Sydra defaults to one claim per CPT, because filing individually generally protects win rate. If one code in a batch does not win, the whole batch can lose together. Batching is CMS sanctioned as of the 2026 rule and available if your team wants it for a specific submission. You decide, per submission.",
+    q: "Do I need to do anything manually?",
+    a: "You approve the offer amount before anything is filed. Everything else, the eligibility check, the documentation packet, the submission to the certified IDR entity, the status tracking, runs through Sydra without you touching a spreadsheet or a payer portal.",
   },
   {
-    q: "What happens after my team submits through Sydra?",
-    a: "Export to the IDRE portal and monitor status in the Sydra dashboard. Tier 2 adds Sydra specialist escalation on disputed cases.",
-  },
-  {
-    q: "Can Sydra handle eligibility and prior auth too?",
-    a: "Yes. Sydra also includes eligibility verification, prior authorization drafting, CPT review from op notes, and compliance checks in the same platform.",
+    q: "Can Sydra handle claims across multiple payers and multiple states?",
+    a: "Yes. The qualifying payment amount and the applicable certified IDR entity both depend on payer and state, and Sydra applies the correct rules automatically instead of requiring your billing team to look each one up.",
   },
 ];
 
 export const SECURITY_FAQ: ServiceFaqItem[] = [
   {
-    q: "Is Sydra built for HIPAA?",
-    a: "Sydra is built to support HIPAA safeguards for PHI your billing team processes. Business Associate Agreements are available on request for covered entities and their billing teams.",
+    q: "Is patient data encrypted?",
+    a: "Yes. Documents are stored in Amazon S3 with AES 256 server side encryption, with keys managed through AWS Key Management Service. All data between your browser and Sydra's servers is transmitted over TLS 1.2 or higher.",
   },
   {
-    q: "Where is Sydra data hosted?",
-    a: "Production workloads run on AWS with region appropriate data residency for U.S. healthcare workloads.",
+    q: "Is Sydra HIPAA compliant?",
+    a: "Sydra handles PHI under HIPAA controls, running on Claude via Amazon Bedrock, a HIPAA eligible AWS service, and operating within AWS's HIPAA Business Associate Agreement for that workload. Claude is contractually barred from training on your PHI, no PHI is transmitted to Anthropic's systems, and no data is used to train the Claude model or any other model. A standard BAA is available for all covered entities and business associates using Sydra to process PHI.",
   },
   {
-    q: "Who are your subprocessors?",
-    a: "Primary infrastructure is AWS. Integration partners such as clearinghouse and EMR connectors are reviewed under our vendor program. Request the security one pager for the current subprocessor list.",
+    q: "Who has access to my billing data?",
+    a: "Within your practice, access is role based. You define which staff can view, draft, approve, or export, and permissions are granted explicitly rather than inherited by default. Between practices, strict tenant isolation is enforced at the application logic, API authorization, database row level security, and audit logging layers. Internally at Sydra, software engineering team access is governed by internal HIPAA training, the Full Service RCM team only has access for practices using Sydra plus Support, leadership has access for quality review and escalated cases, and no PHI is accessible to sales or marketing without an operational need.",
   },
   {
-    q: "How long are audit logs retained?",
-    a: "Audit log retention follows your agreement and our infrastructure policy. Ask sales for current retention windows during procurement.",
+    q: "Where is data hosted?",
+    a: "Sydra production workloads run on AWS infrastructure in US regions.",
   },
   {
-    q: "Does Sydra support MFA?",
-    a: "The production application supports modern session controls. MFA options for your practice are confirmed during onboarding and documented in the security summary.",
+    q: "What happens if there's a security incident involving my data?",
+    a: "Sydra maintains documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI, notification follows the timeline specified in your BAA, which is 60 days per HIPAA. Sydra has not had a reportable incident involving customer PHI to date.",
   },
   {
-    q: "Is Sydra SOC 2 aligned?",
-    a: "Sydra's controls are SOC 2 aligned. The report is available under NDA to qualified prospects during evaluation.",
+    q: "Does Sydra share data with payers or third parties beyond what's required to file a dispute?",
+    a: "Subprocessors with access to data in scope are AWS, Stedi, ModMed, and others listed in the subprocessor list available on request. Data submitted in an IDR filing goes to the certified IDR entity and the payer as required by the federal process, consistent with what the dispute itself requires.",
   },
   {
-    q: "Can we get a security summary for our compliance team?",
-    a: `Yes. Use the form on this page or email ${SALES_EMAIL_FALLBACK}. We send the one pager and schedule a walkthrough if you need one.`,
+    q: "Can I get an audit trail of who accessed my data?",
+    a: "Yes. Every log entry captures user name, email, user ID, UTC timestamp, action performed, record affected, IP address, and session identifier. Logs are available to your account administrator on request.",
   },
 ];
 

@@ -37,10 +37,17 @@ export function CmsRuleBatchingVideo({ className = "" }: CmsRuleBatchingVideoPro
         </div>
       ) : null}
 
-      <div className="mt-6">
-        <h3 className="text-sm font-semibold text-brand">Transcript</h3>
+      <details className="group mt-6">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center text-sm font-semibold text-brand marker:content-none [&::-webkit-details-marker]:hidden">
+          <span className="inline-flex items-center gap-2">
+            Transcript
+            <span aria-hidden className="text-body/50 transition group-open:rotate-180">
+              ▾
+            </span>
+          </span>
+        </summary>
         <p className={`${textStyles.body} mt-3`}>{CMS_RULE_BATCHING_VIDEO.transcript}</p>
-      </div>
+      </details>
     </aside>
   );
 }

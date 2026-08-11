@@ -104,3 +104,26 @@ export const ONE_PER_CPT_SECTION: HowItWorksSection = {
     "Batching is CMS sanctioned as of the May 28, 2026 final rule and available when your team wants it for a specific submission, for example lower value codes or claims from the same encounter with strongly overlapping evidence. You decide per submission. See the batching guide for the full tradeoff.",
   ],
 };
+
+export const HOW_IT_WORKS_HOW_TO_STEPS: { name: string; text: string }[] = [
+  {
+    name: "Flag the claim",
+    text: "Sydra checks each underpaid or denied claim against the qualifying payment amount and payer history to identify strong IDR candidates",
+  },
+  {
+    name: "Review the offer",
+    text: "Sydra calculates a recommended offer amount and assembles the supporting documentation",
+  },
+  {
+    name: "Approve and file",
+    text: "You approve the offer, and Sydra submits it to the correct certified IDR entity for that payer and state",
+  },
+  {
+    name: "Track the case",
+    text: "Sydra monitors the thirty business day federal timeline and flags any case falling behind",
+  },
+  {
+    name: "Receive the decision",
+    text: "The certified IDR entity issues a binding decision, and Sydra applies the result to your claim record",
+  },
+];

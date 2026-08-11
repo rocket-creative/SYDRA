@@ -114,42 +114,75 @@ function TierBlock({
 
 function ComparisonTable() {
   return (
-    <div className="mt-16 overflow-x-auto border-t border-rule pt-12">
+    <div className="mt-16 border-t border-rule pt-12">
       <h3 className={textStyles.subsectionTitle}>Compare plans</h3>
-      <table className="mt-8 w-full min-w-[640px] border-collapse text-left text-sm">
-        <thead>
-          <tr className="border-b border-rule">
-            <th className="pb-4 pr-4 font-normal text-brand" scope="col">
-              Feature
-            </th>
-            <th className="pb-4 px-4 text-left font-normal text-brand" scope="col">
-              Self Serve
-            </th>
-            <th className="pb-4 px-4 text-left font-normal text-[var(--color-accent)]" scope="col">
-              + Support
-            </th>
-            <th className="pb-4 pl-4 text-left font-normal text-brand" scope="col">
-              Full Service
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {TIER_COMPARISON.map((row) => (
-            <tr key={row.feature} className="border-b border-rule">
-              <td className="py-4 pr-4 text-[15px] text-body">{row.feature}</td>
-              <td className="py-4 px-4">
-                <ComparisonCellDisplay value={row.basic} />
-              </td>
-              <td className="py-4 px-4">
-                <ComparisonCellDisplay value={row.plus} />
-              </td>
-              <td className="py-4 pl-4">
-                <ComparisonCellDisplay value={row.pro} />
-              </td>
+
+      {/* Mobile: stacked rows so a four column table never forces overflow at 360. */}
+      <div className="mt-8 space-y-4 md:hidden">
+        {TIER_COMPARISON.map((row) => (
+          <div className="border border-rule p-5" key={row.feature}>
+            <p className="type-caption uppercase tracking-[0.08em] text-body/70">{row.feature}</p>
+            <dl className="mt-3 space-y-3">
+              <div>
+                <dt className="text-sm font-medium text-brand">Self Serve</dt>
+                <dd className="mt-1 break-words text-sm text-body">
+                  <ComparisonCellDisplay value={row.basic} />
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-[var(--color-accent)]">+ Support</dt>
+                <dd className="mt-1 break-words text-sm text-body">
+                  <ComparisonCellDisplay value={row.plus} />
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-brand">Full Service</dt>
+                <dd className="mt-1 break-words text-sm text-body">
+                  <ComparisonCellDisplay value={row.pro} />
+                </dd>
+              </div>
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: full comparison table. */}
+      <div className="mt-8 hidden overflow-x-auto md:block">
+        <table className="w-full border-collapse text-left text-sm">
+          <thead>
+            <tr className="border-b border-rule">
+              <th className="pb-4 pr-4 font-normal text-brand" scope="col">
+                Feature
+              </th>
+              <th className="pb-4 px-4 text-left font-normal text-brand" scope="col">
+                Self Serve
+              </th>
+              <th className="pb-4 px-4 text-left font-normal text-[var(--color-accent)]" scope="col">
+                + Support
+              </th>
+              <th className="pb-4 pl-4 text-left font-normal text-brand" scope="col">
+                Full Service
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {TIER_COMPARISON.map((row) => (
+              <tr key={row.feature} className="border-b border-rule">
+                <td className="py-4 pr-4 text-[15px] text-body">{row.feature}</td>
+                <td className="py-4 px-4">
+                  <ComparisonCellDisplay value={row.basic} />
+                </td>
+                <td className="py-4 px-4">
+                  <ComparisonCellDisplay value={row.plus} />
+                </td>
+                <td className="py-4 pl-4">
+                  <ComparisonCellDisplay value={row.pro} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

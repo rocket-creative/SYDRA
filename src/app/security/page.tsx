@@ -5,6 +5,7 @@ import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
+import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { salesMailtoHref } from "@/lib/contact";
@@ -14,7 +15,8 @@ import {
   SECURITY_SECTIONS,
   SOC2_SECTION,
 } from "@/lib/content/security-page";
-import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
+import { SECURITY_FAQ } from "@/lib/content/service-faqs";
+import { faqPageJsonLd, medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -44,6 +46,7 @@ function SecurityPageJsonLd() {
             description: PAGE_METADATA.security.description ?? "",
             serviceType: "Healthcare data security",
           }),
+          faqPageJsonLd(SECURITY_FAQ),
         ]}
       />
     </>
@@ -110,6 +113,14 @@ export default function SecurityPage() {
         </Section>
 
         <Section tone="neutral">
+          <ServiceFaqSection
+            heading="Security FAQ"
+            id="heading-security-faq"
+            items={SECURITY_FAQ}
+          />
+        </Section>
+
+        <Section tone="white">
           <div className="prose-measure flex flex-col gap-4 sm:flex-row">
             <Button href="/demo" showArrow>
               {SECURITY_CTA.demoLabel}

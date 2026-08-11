@@ -76,7 +76,7 @@ export default function InHouseIdrPage() {
             get back, not a Sydra performance claim.
           </p>
           <div className="mt-10 border-t border-rule pt-10">
-            <LaborCalculator ctaHref="/demo" ctaLabel="Schedule a demo for your numbers" />
+            <LaborCalculator ctaHref="/demo" ctaLabel="Schedule a demo" />
             <p className={`${textStyles.bodyMeasure} mt-6`}>
               Prefer recovery math instead of labor time?{" "}
               <Link className={textStyles.textLink} href="/idr-recovery-calculator">

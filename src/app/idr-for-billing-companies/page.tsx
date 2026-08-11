@@ -74,6 +74,7 @@ export default function IdrForBillingCompaniesPage() {
               <Button href={IDR_FOR_BILLING_HERO.ctaHref} showArrow>
                 {IDR_FOR_BILLING_HERO.ctaLabel}
               </Button>
+              <CtaTrustSignals className="mt-4" />
             </div>
           </header>
           <HeroProofStack className="mt-12" items={[...IDR_FOR_BILLING_STATS]} />
@@ -99,7 +100,7 @@ export default function IdrForBillingCompaniesPage() {
             CMS win rates and Georgetown CHIR award benchmarks, not a Sydra performance claim.
           </p>
           <div className="mt-10 border-t border-rule pt-10">
-            <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo for your numbers" />
+            <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo" />
             <p className={`${textStyles.bodyMeasure} mt-6`}>
               <Link className={textStyles.textLink} href="/idr-recovery-calculator">
                 Open the full calculator

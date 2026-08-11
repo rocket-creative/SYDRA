@@ -319,6 +319,44 @@ export function specialtyHubFaqs(name: string, painLabel: string): EntityFaqItem
   ];
 }
 
+/** Templated FAQs for /idr/cpt/[code] hubs. */
+export function cptHubFaqs(input: {
+  code: string;
+  description: string;
+}): EntityFaqItem[] {
+  const { code, description } = input;
+  return [
+    {
+      q: `What is IDR for ${code}?`,
+      a: `Independent dispute resolution is the federal process used to resolve a payment disagreement between a provider and a payer when a claim for ${description} is underpaid. Either side can initiate it once the required open negotiation period has passed without resolution.`,
+    },
+    {
+      q: "How is the qualifying payment amount calculated for this code?",
+      a: `The qualifying payment amount is generally based on the payer's median in network rate for the same or similar service in the same geographic area, adjusted annually. Sydra pulls the correct qualifying payment amount for ${code} automatically rather than requiring manual lookup.`,
+    },
+    {
+      q: "What determines whether a claim wins in IDR?",
+      a: "Certified IDR entities weigh the offer against the qualifying payment amount, the complexity of the service, the provider's training and experience, and market share considerations, among other factors defined in the federal rule. There is no guaranteed outcome, but a well documented offer with strong supporting evidence performs meaningfully better than a bare number.",
+    },
+  ];
+}
+
+/** General FAQs for the /idr hub (no CPT interpolation). */
+export const IDR_HUB_FAQS: EntityFaqItem[] = [
+  {
+    q: "What is IDR for a CPT code?",
+    a: "Independent dispute resolution is the federal process used to resolve a payment disagreement between a provider and a payer when a claim for a procedure is underpaid. Either side can initiate it once the required open negotiation period has passed without resolution.",
+  },
+  {
+    q: "How is the qualifying payment amount calculated for a code?",
+    a: "The qualifying payment amount is generally based on the payer's median in network rate for the same or similar service in the same geographic area, adjusted annually. Sydra pulls the correct qualifying payment amount for each CPT automatically rather than requiring manual lookup.",
+  },
+  {
+    q: "What determines whether a claim wins in IDR?",
+    a: "Certified IDR entities weigh the offer against the qualifying payment amount, the complexity of the service, the provider's training and experience, and market share considerations, among other factors defined in the federal rule. There is no guaranteed outcome, but a well documented offer with strong supporting evidence performs meaningfully better than a bare number.",
+  },
+];
+
 // --- Convenience re exports for pages --------------------------------------
 
 export { composeDenialReasons, demoDeepLink };

@@ -29,7 +29,7 @@ export function ClosingCta({ tracking }: ClosingCtaProps) {
       </p>
       <div className="mt-10">
         <Button onClick={handleClick} showArrow>
-          Book your free five minute demo
+          Book a free demo
         </Button>
       </div>
       <CtaTrustSignals className="prose-measure mt-6" />

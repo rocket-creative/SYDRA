@@ -5,9 +5,15 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
-import { FAQ_PAGE_ITEMS } from "@/lib/content/faq-page";
+import {
+  FAQ_BILLING_COMPANY_ITEMS,
+  FAQ_BILLING_SECTION_TITLE,
+  FAQ_PAGE_ITEMS,
+  type FaqItem,
+} from "@/lib/content/faq-page";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.faq;
 
@@ -19,8 +25,41 @@ function pageTitle(): string {
   return "Sydra FAQ";
 }
 
+function FaqAccordion({ items }: { items: FaqItem[] }) {
+  return (
+    <div className="max-w-2xl divide-y divide-[var(--color-rule)] border-y border-rule">
+      {items.map((item) => (
+        <details key={item.q} className="group py-0">
+          <summary className="cursor-pointer list-none py-6 text-left text-base font-normal text-brand md:text-[17px] [&::-webkit-details-marker]:hidden">
+            <span className="flex items-start justify-between gap-6">
+              {item.q}
+              <span
+                aria-hidden
+                className="type-caption shrink-0 text-body transition-transform duration-300 group-open:rotate-45"
+              >
+                +
+              </span>
+            </span>
+          </summary>
+          <div className="border-t border-rule pb-6 pt-2 text-[15px] leading-relaxed text-body">
+            <p>{item.a}</p>
+            {item.q.includes("cost") ? (
+              <p className="mt-4">
+                <CtaLink href="/demo">Schedule a demo for pricing</CtaLink>
+              </p>
+            ) : null}
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
 function FaqPageJsonLd() {
-  const questions = FAQ_PAGE_ITEMS.map(({ q, a }) => ({ q, a: String(a) }));
+  const questions = [...FAQ_PAGE_ITEMS, ...FAQ_BILLING_COMPANY_ITEMS].map(({ q, a }) => ({
+    q,
+    a: String(a),
+  }));
   return (
     <>
       <BreadcrumbJsonLd items={[...BREADCRUMBS.faq]} />
@@ -53,30 +92,15 @@ export default function FaqPage() {
         </Section>
 
         <Section sidebarLabel="FAQ" tone="neutral">
-          <div className="max-w-2xl divide-y divide-[var(--color-rule)] border-y border-rule">
-            {FAQ_PAGE_ITEMS.map((item) => (
-              <details key={item.q} className="group py-0">
-                <summary className="cursor-pointer list-none py-6 text-left text-base font-normal text-brand md:text-[17px] [&::-webkit-details-marker]:hidden">
-                  <span className="flex items-start justify-between gap-6">
-                    {item.q}
-                    <span
-                      aria-hidden
-                      className="type-caption shrink-0 text-body transition-transform duration-300 group-open:rotate-45"
-                    >
-                      +
-                    </span>
-                  </span>
-                </summary>
-                <div className="border-t border-rule pb-6 pt-2 text-[15px] leading-relaxed text-body">
-                  <p>{item.a}</p>
-                  {item.q.includes("cost") ? (
-                    <p className="mt-4">
-                      <CtaLink href="/demo">Schedule a demo for pricing</CtaLink>
-                    </p>
-                  ) : null}
-                </div>
-              </details>
-            ))}
+          <FaqAccordion items={FAQ_PAGE_ITEMS} />
+        </Section>
+
+        <Section sidebarLabel="Billing" tone="white">
+          <h2 className={textStyles.sectionTitle} id="heading-billing-faq">
+            {FAQ_BILLING_SECTION_TITLE}
+          </h2>
+          <div className="mt-8">
+            <FaqAccordion items={FAQ_BILLING_COMPANY_ITEMS} />
           </div>
         </Section>
 

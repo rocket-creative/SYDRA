@@ -6,6 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { CmsRuleBatchingVideo } from "@/components/sydra/cms-rule-batching-video";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
+import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell, updateBreadcrumb } from "@/components/sydra/page-shell";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
@@ -172,6 +173,7 @@ export default async function ResourceUpdatePage({ params }: PageProps) {
               <Button href="/demo" showArrow>
                 Schedule a demo
               </Button>
+              <CtaTrustSignals className="mt-4" />
             </div>
           </header>
         </Section>

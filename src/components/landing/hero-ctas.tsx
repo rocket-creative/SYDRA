@@ -32,7 +32,7 @@ export function HeroCtas({ tracking }: HeroCtasProps) {
   return (
     <div className="hero-cta mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
       <Button showArrow type="button" variant="solid" onClick={handleDemoClick}>
-        Book your free five minute demo
+        Book a free demo
       </Button>
       <button
         className="cta-link hidden min-h-[44px] select-none items-center gap-2 text-left text-[13px] font-normal uppercase tracking-[0.08em] text-body transition-colors hover:text-[var(--color-hero)] sm:inline-flex"

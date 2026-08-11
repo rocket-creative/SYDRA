@@ -31,7 +31,7 @@ export function SourcesReferences({ className = "" }: SourcesReferencesProps) {
               ) : null}
               {ref.url ? (
                 <a
-                  className={`${textStyles.textLink} mt-0.5 block text-sm`}
+                  className={`${textStyles.textLink} mt-0.5 block break-all text-sm`}
                   href={ref.url}
                   rel="noopener noreferrer"
                   target="_blank"

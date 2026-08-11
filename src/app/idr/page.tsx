@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
@@ -14,11 +15,12 @@ import { Section } from "@/components/ui/section";
 import { US_STATES } from "@/lib/constants/us-states";
 import { DISCLAIMER } from "@/lib/idr/copy";
 import { GUIDES } from "@/lib/idr/guides";
+import { IDR_HUB_FAQS } from "@/lib/idr/pain-content";
 import { PROOF_POINTS } from "@/lib/idr/proof-points";
 import { idrSpecialtyPath, idrStatePath } from "@/lib/idr/seo";
 import { SPECIALTIES } from "@/lib/idr/taxonomy";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -63,12 +65,15 @@ export default function IdrIndexPage() {
     <>
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
-        data={medicallyReviewedWebPageJsonLd({
-          path: "/idr",
-          name: "Federal IDR benchmarks",
-          description:
-            "Payment benchmarks, eligibility, and dispute outcomes for surgical out of network claims under the No Surprises Act.",
-        })}
+        data={[
+          ...medicallyReviewedWebPageJsonLd({
+            path: "/idr",
+            name: "Federal IDR benchmarks",
+            description:
+              "Payment benchmarks, eligibility, and dispute outcomes for surgical out of network claims under the No Surprises Act.",
+          }),
+          faqPageJsonLd(IDR_HUB_FAQS),
+        ]}
       />
       <SydraPageShell banded breadcrumb={crumbs}>
         <Section tone="white">
@@ -213,7 +218,14 @@ export default function IdrIndexPage() {
           <div className="mt-6">
             <EntityLinks links={guideLinks} title="How-to guides" />
           </div>
-          <RegulatoryAsOf className="mt-10" />
+        </Section>
+
+        <Section tone="white">
+          <EntityFaq items={IDR_HUB_FAQS} />
+        </Section>
+
+        <Section tone="neutral">
+          <RegulatoryAsOf />
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>

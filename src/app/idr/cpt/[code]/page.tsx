@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
 import {
@@ -14,10 +15,12 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
+import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { isIndexable } from "@/lib/idr/indexable";
 import {
   composeDenialReasons,
+  cptHubFaqs,
   cptHubMeta,
   h1Cpt,
   painCodeLine,
@@ -31,7 +34,11 @@ import {
 } from "@/lib/idr/seo";
 import { getCodeMeta, getSpecialtyMeta } from "@/lib/idr/taxonomy";
 import { US_STATES } from "@/lib/constants/us-states";
-import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -66,9 +73,12 @@ export default async function CptHubPage({ params }: PageProps) {
   if (!codeMeta) notFound();
 
   const proc = codeMeta.shortLabel;
+  const cptDescription =
+    (codeMeta.shortDescription ?? codeMeta.shortLabel).trim() || proc;
   const specialtySlug = codeMeta.specialty;
   const specialtyMeta = getSpecialtyMeta(specialtySlug);
   const denial = composeDenialReasons({ code, stateName: "any state" });
+  const faqs = cptHubFaqs({ code, description: cptDescription });
 
   const crumbs = [
     { name: "Home", path: "" },
@@ -105,6 +115,7 @@ export default async function CptHubPage({ params }: PageProps) {
             description: `Software that prepares the federal IDR submission for ${proc} disputes.`,
             serviceType: "Healthcare revenue cycle software",
           }),
+          faqPageJsonLd(faqs),
         ]}
       />
       <SydraPageShell banded breadcrumb={crumbs} stickyDemoHref={demoHref}>
@@ -138,6 +149,10 @@ export default async function CptHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
+          <EntityFaq items={faqs} />
+        </Section>
+
+        <Section tone="neutral">
           <EntityLinks
             inline
             links={stateLinks}
@@ -162,6 +177,7 @@ export default async function CptHubPage({ params }: PageProps) {
             </div>
           ) : null}
           <MedicalReviewBlock />
+          <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>
     </>

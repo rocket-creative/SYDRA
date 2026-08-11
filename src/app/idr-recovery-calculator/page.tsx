@@ -65,6 +65,12 @@ export default function IdrRecoveryCalculatorPage() {
               {IDR_RECOVERY_CALCULATOR_HERO.title}
             </h1>
             <p className={textStyles.pageLead}>{IDR_RECOVERY_CALCULATOR_HERO.lead}</p>
+            <div className="mt-8">
+              <Button href="/demo" showArrow>
+                Schedule a demo
+              </Button>
+              <CtaTrustSignals className="mt-4" />
+            </div>
           </header>
         </Section>
 
@@ -72,7 +78,7 @@ export default function IdrRecoveryCalculatorPage() {
           <h2 className="sr-only" id="heading-calculator-tool">
             Recovery estimate tool
           </h2>
-          <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo for your numbers" />
+          <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo" />
         </Section>
 
         <Section tone="white">

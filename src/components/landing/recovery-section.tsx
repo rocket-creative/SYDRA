@@ -22,7 +22,7 @@ export function RecoverySection({ tracking }: RecoverySectionProps) {
       <div className="mt-12 border-t border-rule pt-10">
         <RecoveryCalculator
           ctaHref="#lead-form"
-          ctaLabel="Book your five minute demo"
+          ctaLabel="Book a free demo"
           onCtaClick={() => trackCtaClick("sydra", tracking)}
           variant="light"
         />

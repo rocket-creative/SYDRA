@@ -30,7 +30,7 @@ export function MarketingConsentFields({
         htmlFor={checkboxId}
       >
         <input
-          className="mt-0.5 h-4 w-4 shrink-0 border border-rule accent-[var(--color-hero)]"
+          className="mt-0.5 h-4 w-4 shrink-0 border border-rule text-base accent-[var(--color-hero)]"
           id={checkboxId}
           name="marketingConsent"
           type="checkbox"

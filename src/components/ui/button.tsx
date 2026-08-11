@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Arrow } from "@/components/ui/arrow";
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-[2px] px-6 text-[13px] font-normal uppercase tracking-[0.08em] transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]";
+  "inline-flex max-w-full min-h-11 items-center justify-center gap-2 rounded-[2px] px-6 text-[13px] font-normal uppercase tracking-[0.08em] whitespace-normal text-center text-balance transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]";
 
 const variants = {
   solid:
@@ -44,7 +44,7 @@ export function Button({
 
   const content = (
     <>
-      <span>{children}</span>
+      <span className="min-w-0">{children}</span>
       {showArrow ? <Arrow className="shrink-0" /> : null}
     </>
   );
