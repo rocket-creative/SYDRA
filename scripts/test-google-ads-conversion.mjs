@@ -1,13 +1,13 @@
 /**
  * One-off check: submitting the demo form redirects to /demo/thank-you and the
- * Google Ads "Free Demo Booked" conversion fires there (once), driven by the
+ * Google Ads "Submit lead form" conversion fires there (once), driven by the
  * sessionStorage hand-off. Usage:
  *   node scripts/test-google-ads-conversion.mjs [baseUrl]
  */
 import { chromium } from "@playwright/test";
 
 const baseUrl = process.argv[2] ?? "https://www.sydrahealth.com";
-const expectedSendTo = "AW-18244375722/hu-3CMbXtdocEKqpzPtD";
+const expectedSendTo = "AW-18244375722/MhI6CKKQz8scEKqpzPtD";
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
@@ -39,29 +39,33 @@ await page.addInitScript(() => {
   window.gtag = gtag;
 });
 
-await page.route("**/api/demo", async (route) => {
+await page.route("**/api/postcard-lead", async (route) => {
   await route.fulfill({
     status: 200,
     contentType: "application/json",
-    body: JSON.stringify({ ok: true, redirect: "/demo/thank-you" }),
+    body: JSON.stringify({ ok: true }),
   });
 });
 
 await page.goto(`${baseUrl}/demo`, { waitUntil: "networkidle" });
 
-await page.locator("#name").fill("Conversion Test");
-await page.locator("#email").fill("conversion-test@example.com");
-await page.locator("#practiceName").fill("Test Practice");
-await page.getByRole("button", { name: "Continue" }).click();
+// Step 1: email only (anchorId on /demo is demo-form).
+await page.locator("#demo-form-email").fill("conversion-test@example.com");
+await page.getByRole("button", { name: "Book your free five minute demo" }).click();
 
-await page.locator("#specialty").selectOption("neurosurgery");
-await page.locator("#state").selectOption("NY");
-await page.locator("#disputesPerMonth").selectOption("5_to_15");
-await page.locator("#idrApproach").selectOption("in_house_manual");
-await page.getByRole("button", { name: "Schedule my demo" }).click();
+// Step 2: full lead.
+await page.locator("#demo-form-practiceName").waitFor({ state: "visible", timeout: 10000 });
+await page.locator("#demo-form-practiceName").fill("Test Practice");
+await page.locator("#demo-form-name").fill("Conversion Test");
+await page.locator("#demo-form-role").selectOption("billing");
+await page.locator("#demo-form-phone").fill("5551234567");
+await page.locator("#demo-form-state").selectOption("NY");
+await page.locator("#demo-form-disputesPerMonth").selectOption("5_to_15");
+await page.locator('input[name="productInterest"][value="sydra_software"]').check();
+await page.getByRole("button", { name: "Request demo" }).click();
 
-// The conversion now fires on the thank-you page (after navigation), not in
-// the submit handler. Wait for that navigation, then let the mount effect run.
+// The conversion fires on the thank-you page (after navigation), not in the
+// submit handler. Wait for that navigation, then let the mount effect run.
 let landedOnThankYou = true;
 try {
   await page.waitForURL("**/demo/thank-you", { timeout: 10000 });

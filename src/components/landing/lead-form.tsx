@@ -58,8 +58,8 @@ type LeadFormProps = {
   /** Attribution tag for GA4 generate_lead (recover | demo | home | case-review). */
   landingPage?: string;
   /**
-   * Demo booking vs claim-review copy and Ads conversion. Case-review fires
-   * IDR Claim Review Submitted; demo fires Free Demo Booked.
+   * Demo booking vs claim-review copy. Both intents fire Google Ads
+   * Primary "Submit lead form" (`MhI6CKKQz8scEKqpzPtD`) on thank-you.
    */
   intent?: LeadFormIntent;
 };
@@ -114,7 +114,8 @@ const COPY_BY_INTENT: Record<
     stepOneCta: "Start free claim review",
     stepTwoCta: "Submit claim review request",
     phoneError: "Enter a phone number so we can reach you about your claim review.",
-    conversionAction: "idr_claim_review",
+    // Same Primary "Submit lead form" action as demo/recover (MhI6…).
+    conversionAction: "free_demo",
     defaultProductInterest: "done_for_you",
     showProductInterest: false,
   },

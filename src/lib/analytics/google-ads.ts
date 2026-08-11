@@ -3,35 +3,43 @@
  *
  * The global site tag is loaded once in the root layout. Conversion events are
  * fired from the client after a successful lead form submit redirects to a
- * thank-you page (e.g. /demo/thank-you or /case-review/thank-you).
+ * thank-you page (e.g. /demo/thank-you, /recover/thank-you, or
+ * /case-review/thank-you).
  */
 
 /** Google Ads account / conversion ID. */
 export const GOOGLE_ADS_ID = "AW-18244375722";
 
 /**
- * Full `send_to` for the "Free Demo Booked" primary conversion action.
- * Fires after successful demo / homepage / recover lead submits.
+ * Full `send_to` for the Primary "Submit lead form" conversion action
+ * (Google Ads Goals → Conversions → Tag setup event snippet).
+ * Fires after successful demo / homepage / recover / case-review lead submits.
  */
-export const GOOGLE_ADS_FREE_DEMO_SEND_TO =
-  "AW-18244375722/hu-3CMbXtdocEKqpzPtD";
+export const GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO =
+  "AW-18244375722/MhI6CKKQz8scEKqpzPtD";
+
+/** @deprecated Use GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO */
+export const GOOGLE_ADS_FREE_DEMO_SEND_TO = GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO;
 
 /**
- * Full `send_to` for the "IDR Claim Review Submitted" primary conversion action.
- * Fires after successful /case-review submits.
+ * @deprecated Secondary "IDR Claim Review Submitted" is Inactive in Ads and
+ * must not be fired. Kept only as a historical reference for the old label
+ * `s5ZYCOuEq9ocEKqpzPtD`. All lead forms use Submit lead form instead.
  */
 export const GOOGLE_ADS_IDR_CLAIM_REVIEW_SEND_TO =
-  "AW-18244375722/s5ZYCOuEq9ocEKqpzPtD";
+  GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO;
 
-/** @deprecated Use GOOGLE_ADS_FREE_DEMO_SEND_TO */
-export const GOOGLE_ADS_CONVERSION_SEND_TO = GOOGLE_ADS_FREE_DEMO_SEND_TO;
+/** @deprecated Use GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO */
+export const GOOGLE_ADS_CONVERSION_SEND_TO = GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO;
 
+/**
+ * Internal thank-you action key. Both values resolve to Submit lead form;
+ * `idr_claim_review` remains only so legacy sessionStorage payloads still fire.
+ */
 export type AdsConversionAction = "free_demo" | "idr_claim_review";
 
-export function sendToForAction(action: AdsConversionAction): string {
-  return action === "idr_claim_review"
-    ? GOOGLE_ADS_IDR_CLAIM_REVIEW_SEND_TO
-    : GOOGLE_ADS_FREE_DEMO_SEND_TO;
+export function sendToForAction(_action: AdsConversionAction): string {
+  return GOOGLE_ADS_SUBMIT_LEAD_FORM_SEND_TO;
 }
 
 /**
@@ -46,7 +54,7 @@ export type PendingLeadConversion = {
   token: string;
   /** Dedupes Ads conversions if the same submit is retried. */
   transactionId: string;
-  /** Which primary Ads conversion to fire on the thank-you page. */
+  /** Which thank-you page expected this hand-off (both map to Submit lead form). */
   action: AdsConversionAction;
   /** Optional email for enhanced conversions (cleared after fire). */
   email?: string;
@@ -155,7 +163,7 @@ export function reportAdsConversion(
   return false;
 }
 
-/** Fire Free Demo Booked. Prefer `reportAdsConversion` with an explicit action. */
+/** Fire Submit lead form. Prefer `reportAdsConversion` with an explicit action. */
 export function reportLeadFormConversion(
   urlOrOptions?: string | ReportConversionOptions,
 ): boolean {

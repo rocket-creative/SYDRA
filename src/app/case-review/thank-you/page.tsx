@@ -15,7 +15,7 @@ export default function CaseReviewThankYouPage() {
       headerVariant="funnel"
       mainClassName="px-5 py-16 md:px-10 md:py-24"
     >
-      <LeadConversionOnMount action="idr_claim_review" />
+      <LeadConversionOnMount action="free_demo" />
       <div className="mx-auto max-w-xl">
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
         <h1 className="type-h2 mt-4 text-brand">Claim review request received</h1>

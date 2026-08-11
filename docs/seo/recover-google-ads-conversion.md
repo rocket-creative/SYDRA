@@ -110,9 +110,14 @@ Auto-tagging (`gclid`) must stay **On** (Account settings → Auto-tagging).
 - Do not install another Google tag / GTM container for this conversion.
 - Do not add a “Thank you page” URL conversion on `/recover/thank-you` while
   the event snippet is already Primary (double counting).
+- Prefer making **Free Demo Booked** and **Demo Thank You Page Visit** Secondary
+  (or removing them) so Maximize Conversions learns from Submit lead form only.
 - Do not mark step-1 email capture as the conversion. Only full submit →
   thank-you counts.
 - Do not put `{creative}` or other unknown ValueTrack tokens in the Final URL.
+- Confirm campaigns optimize to the goal that includes Submit lead form as
+  Primary (the “goal has no primary conversion actions” card may be a custom
+  goal, not the account-default goal).
 
 ## Done when
 

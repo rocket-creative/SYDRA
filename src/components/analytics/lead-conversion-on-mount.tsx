@@ -17,10 +17,10 @@ type LeadConversionOnMountProps = {
 };
 
 /**
- * Fires the matching Google Ads conversion exactly once after a real lead
- * submit redirects here. Only fires when a lead form set the one-time
- * sessionStorage payload (consumed on read), so refreshes, back-button
- * navigation, and direct/organic visits never fire it. Renders nothing.
+ * Fires Google Ads "Submit lead form" exactly once after a real lead submit
+ * redirects here. Only fires when a lead form set the one-time sessionStorage
+ * payload (consumed on read), so refreshes, back-button navigation, and
+ * direct/organic visits never fire it. Renders nothing.
  */
 export function LeadConversionOnMount({
   action = "free_demo",

@@ -12,7 +12,7 @@ export const metadata = buildPageMetadata({
 });
 
 /**
- * Paid /recover conversion landing. Fires Google Ads "Free Demo Booked"
+ * Paid /recover conversion landing. Fires Google Ads "Submit lead form"
  * exactly once when LeadForm set the session hand-off flag.
  */
 export default function RecoverThankYouPage() {
