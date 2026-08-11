@@ -5,10 +5,17 @@ import { textStyles } from "@/lib/typography";
 
 const LINKS = [
   { href: "/idr", label: "Federal IDR benchmarks" },
+  { href: "/idr-filing-deadline", label: "IDR filing deadline" },
+  { href: "/idr-for-billing-companies", label: "IDR for billing companies" },
+  { href: "/in-house-idr", label: "In house IDR" },
+  { href: "/sydra-vs-idr-attorney", label: "Sydra vs an IDR attorney" },
   { href: "/how-it-works", label: "How Sydra works" },
   { href: "/pricing", label: "Compare pricing" },
+  { href: "/idr-recovery-calculator", label: "IDR recovery calculator" },
   { href: "/security", label: "Security and HIPAA" },
   { href: "/resources", label: "IDR resources" },
+  { href: "/resources/updates", label: "Resource updates" },
+  { href: "/glossary", label: "IDR glossary" },
   { href: "/faq", label: "Full FAQ" },
 ] as const;
 

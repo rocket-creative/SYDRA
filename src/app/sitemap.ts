@@ -8,6 +8,7 @@ import { GUIDE_SLUGS } from "@/lib/idr/guides";
 import { CURRENT_WAVE, isIndexable } from "@/lib/idr/indexable";
 import { plainLineLength } from "@/lib/idr/pain-content";
 import { RESOURCE_SLUGS } from "@/lib/content/resources/articles";
+import { RESOURCE_UPDATE_SLUGS } from "@/lib/content/resources/updates";
 import {
   idrCodePath,
   idrCodeStatePath,
@@ -89,8 +90,13 @@ function coreEntries(): Entry[] {
     { path: "/what-is-idr", priority: 0.8, changeFrequency: "monthly" },
     { path: "/sydra-vs-idr-attorney", priority: 0.8, changeFrequency: "monthly" },
     { path: "/in-house-idr", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/idr-for-billing-companies", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/idr-filing-deadline", priority: 0.8, changeFrequency: "monthly" },
     { path: "/security", priority: 0.75, changeFrequency: "monthly" },
     { path: "/resources", priority: 0.7, changeFrequency: "weekly" },
+    { path: "/resources/updates", priority: 0.65, changeFrequency: "monthly" },
+    { path: "/glossary", priority: 0.65, changeFrequency: "monthly" },
+    { path: "/idr-recovery-calculator", priority: 0.75, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.75, changeFrequency: "monthly" },
@@ -107,13 +113,19 @@ function coreEntries(): Entry[] {
     changeFrequency: "monthly",
   }));
 
+  const updatePages: Entry[] = RESOURCE_UPDATE_SLUGS.map((slug) => ({
+    path: `/resources/updates/${slug}`,
+    priority: 0.55,
+    changeFrequency: "monthly",
+  }));
+
   const comparisonPages: Entry[] = COMPARISON_SLUGS.map((slug) => ({
     path: `/compare/${slug}`,
     priority: 0.7,
     changeFrequency: "monthly",
   }));
 
-  return [...marketingPages, ...articlePages, ...comparisonPages];
+  return [...marketingPages, ...articlePages, ...updatePages, ...comparisonPages];
 }
 
 function specialtyEntries(): Entry[] {

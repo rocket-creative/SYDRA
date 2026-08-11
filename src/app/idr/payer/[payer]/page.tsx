@@ -9,6 +9,7 @@ import {
   WaitHookBlock,
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
@@ -24,7 +25,7 @@ import {
   LAUNCH_STATES,
   getPayerMeta,
 } from "@/lib/idr/taxonomy";
-import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
 
 export const dynamicParams = true;
@@ -85,7 +86,7 @@ export default async function PayerHubPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path,
             name: `${payerName} out of network surgical denials`,
             description: `Why ${payerName} underpays out of network surgical claims and how federal IDR recovers the gap.`,
@@ -154,6 +155,7 @@ export default async function PayerHubPage({ params }: PageProps) {
             links={exampleLinks}
             title={`${payerName} denials by procedure and state`}
           />
+          <MedicalReviewBlock />
         </Section>
 
         <SydraCtaBand />

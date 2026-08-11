@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "check:copy": "node scripts/check-copy-hyphens.mjs",
+    "check:sources": "node scripts/check-sources-stale.mjs",
+    "check:batching": "node scripts/check-batching-language.mjs",
     "seed": "tsx supabase/seed.ts",
     "test:mobile": "playwright test",
     "test:mobile:ui": "playwright test --ui",

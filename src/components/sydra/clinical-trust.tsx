@@ -45,11 +45,18 @@ export function ClinicalReferences({ id = "heading-references" }: ClinicalRefere
   );
 }
 
+/** Shared default for visible clinical review date across educational pages. */
+export const DEFAULT_MEDICAL_REVIEW_DATE = "May 27, 2026";
+
 type MedicalReviewBlockProps = {
   id?: string;
+  lastReviewed?: string;
 };
 
-export function MedicalReviewBlock({ id = "heading-medical-review" }: MedicalReviewBlockProps) {
+export function MedicalReviewBlock({
+  id = "heading-medical-review",
+  lastReviewed = DEFAULT_MEDICAL_REVIEW_DATE,
+}: MedicalReviewBlockProps) {
   return (
     <aside
       aria-labelledby={id}
@@ -67,7 +74,7 @@ export function MedicalReviewBlock({ id = "heading-medical-review" }: MedicalRev
           >
             Dr. John Abrahams, MD, FAANS
           </Link>
-          . Last reviewed: May 27, 2026.
+          . Last reviewed: {lastReviewed}.
         </ReviewHighlight>
       </p>
     </aside>

@@ -1,49 +1,5 @@
+import { SITE_SOURCES } from "@/lib/content/sources";
 import { textStyles } from "@/lib/typography";
-
-const REFERENCES = [
-  {
-    title: "CMS Federal IDR Q1/Q2 2025 Public Use File",
-    detail: "Released January 21, 2026",
-    url: "https://www.cms.gov/nosurprises/policies-and-resources/reports",
-  },
-  {
-    title: "Georgetown University CHIR · Health Affairs webinar",
-    detail:
-      "March 2026 — 3.4 million disputes through June 2025; 88% win rate; median award ~4.5x in network rate",
-  },
-  {
-    title: "Zelis — NSA IDR Eligibility Challenges",
-    detail: "March 2026 — 44% of 2024 IDR cases challenged as ineligible by non initiating party",
-  },
-  {
-    title: "ACEP analysis of CMS data",
-    detail: "~10% of eligible claims estimated to reach IDR arbitration",
-  },
-  {
-    title: "Brookings Institution NSA Arbitration Databook",
-    detail: "April 2026",
-    url: "https://www.brookings.edu/articles/no-surprises-act-arbitration-databook",
-  },
-  {
-    title: "ACR — Providers Prevail in Vast Majority of IDR Claims",
-    detail: "January 2026 — 88% of disputes found in provider's favor; 87% of awards exceeded QPA",
-  },
-  {
-    title: "No Surprises Act: Public Law 116-260, Division BB, Title I",
-  },
-  {
-    title: "Federal IDR regulations: 45 CFR Part 149",
-    url: "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-F/part-149",
-  },
-  {
-    title: "CMS No Surprises Act overview",
-    url: "https://www.cms.gov/nosurprises",
-  },
-  {
-    title: "HHS HIPAA for professionals",
-    url: "https://www.hhs.gov/hipaa/for-professionals",
-  },
-] as const;
 
 type SourcesReferencesProps = {
   className?: string;
@@ -65,15 +21,15 @@ export function SourcesReferences({ className = "" }: SourcesReferencesProps) {
           </span>
         </summary>
         <ol className={`${textStyles.listNone} mt-4 text-sm`} id="heading-sources">
-          {REFERENCES.map((ref, index) => (
-            <li key={ref.title}>
+          {SITE_SOURCES.map((ref, index) => (
+            <li key={ref.id}>
               <span className="font-medium text-brand">
-                {index + 1}. {ref.title}
+                {index + 1}. {ref.label}
               </span>
-              {"detail" in ref && ref.detail ? (
+              {ref.detail ? (
                 <span className={`${textStyles.meta} mt-0.5 block`}>{ref.detail}</span>
               ) : null}
-              {"url" in ref && ref.url ? (
+              {ref.url ? (
                 <a
                   className={`${textStyles.textLink} mt-0.5 block text-sm`}
                   href={ref.url}

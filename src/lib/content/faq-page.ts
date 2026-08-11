@@ -13,7 +13,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "Does Sydra batch CPT codes?",
-    a: "No. Sydra files one claim per eligible CPT code. If your EOB contains three CPT codes, Sydra generates three separate submission packets. Each with a procedure specific payment offer, CPT specific market rate justification, clinical narrative specific to that procedure, and the provider credentials relevant to that code. The one CPT per claim structure isn't configurable. Federal IDR is final offer arbitration. A batched offer covering three CPT codes can't be matched cleanly to any single prior determination. CMS data shows providers win 88% of IDR disputes industry wide (H1 2025). The practices reaching that win rate are filing correctly. Batched filings underperform it.",
+    a: "Sydra defaults to one claim per eligible CPT code. If your EOB contains three CPT codes, Sydra prepares three separate submission packets by default, each with a procedure specific payment offer, CPT specific market rate justification, clinical narrative, and credentials for that code. Batching is CMS sanctioned as of the May 28, 2026 final rule and available if your team wants it for a specific submission. You decide per submission. Federal IDR is final offer arbitration, so a batched offer covering several CPT codes can win or lose together. CMS data shows providers win 88% of IDR disputes industry wide (H1 2025). Filing individually is the setting that generally protects that win rate.",
   },
   {
     q: "What CPT codes does Sydra's determination library cover?",

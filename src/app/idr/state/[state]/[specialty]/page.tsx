@@ -12,6 +12,7 @@ import {
   WaitHookBlock,
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
@@ -38,7 +39,7 @@ import {
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
 import type { SpecialtySlug } from "@/lib/idr/types";
-import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -132,7 +133,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path,
             name: h1SpecialtyState(painLabel, stateName),
             description: `Federal IDR for ${painLabel} in ${stateName}.`,
@@ -182,6 +183,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
 
         <Section tone="neutral">
           <EntityFaq items={faqs} />
+          <MedicalReviewBlock />
         </Section>
       </SydraPageShell>
     </>

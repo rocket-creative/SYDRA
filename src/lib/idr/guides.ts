@@ -154,13 +154,18 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Should claims be batched?",
-        a: "Federal rules allow batching similar claims into one dispute, but for high multiple surgical claims it can drag a strong award toward the weakest claim in the batch. Sydra files one claim per CPT so each award is decided on its own merits.",
+        a: "Federal rules allow batching similar claims into one dispute as of the May 2026 CMS rule, but for high multiple surgical claims one arbiter offer can make the whole batch win or lose together. Sydra defaults to one claim per CPT so each award is decided on its own merits, and your team can choose to batch per submission when the tradeoff fits.",
       },
     ],
   },
   {
     slug: "idr-deadlines-explained",
     title: "IDR deadlines and the four business day window",
+    crossLink: {
+      href: "/idr-filing-deadline",
+      anchor: "federal IDR filing deadline",
+      intro: "To check whether a claim is still inside the window, start with",
+    },
     metaTitle: "IDR deadlines and the four business day window | Sydra",
     metaDescription:
       "The open negotiation period and the four business day window that decide whether an out of network claim can still be recovered, and how to track both.",
@@ -294,6 +299,11 @@ export const GUIDES: Guide[] = [
   {
     slug: "may-2026-idr-rule-change",
     title: "What changed in the May 2026 IDR operations rule",
+    crossLink: {
+      href: "/resources/updates/may-2026-idr-operations-rule",
+      anchor: "May 2026 IDR operations rule update",
+      intro: "For a short dated changelog of the same rule, see the",
+    },
     metaTitle: "What changed in the May 2026 IDR operations rule | Sydra",
     metaDescription:
       "The 2026 federal IDR operations rule explained, and what it means for how surgical practices file, register, and track disputes under tighter standards.",
@@ -471,6 +481,11 @@ export const GUIDES: Guide[] = [
   {
     slug: "open-negotiation-explained",
     title: "The 30 business day open negotiation period explained",
+    crossLink: {
+      href: "/idr-filing-deadline",
+      anchor: "federal IDR filing deadline",
+      intro: "When open negotiation closes, the initiation clock starts. See",
+    },
     metaTitle: "The 30 business day open negotiation period explained | Sydra",
     metaDescription:
       "What the open negotiation period is, how to document it correctly, and why it is a required gate before any out of network IDR filing can begin.",
@@ -514,46 +529,63 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "idr-batching-claims",
-    title: "Why Sydra files one claim per CPT instead of batching",
-    metaTitle: "Batching IDR Claims vs One Claim per CPT | Sydra",
+    title: "Batching vs filing individually: the actual tradeoff, and who decides",
+    listLabel: "batching vs filing individually",
+    crossLink: {
+      href: "/resources/updates/cms-2026-idr-final-rule",
+      anchor: "CMS May 2026 final rule update",
+      intro: "For the dated fee cut and batching announcement, read the",
+    },
+    metaTitle: "Batching vs Filing Individually in Federal IDR | Sydra",
     metaDescription:
-      "Batching saves a small administrative fee but can drag a high multiple surgical award down to the weakest claim in the batch. Why Sydra files one claim per CPT to protect each award.",
-    lead: "Batching combines similar out of network claims into a single IDR dispute to spread the administrative fee across many claims. For low value, near identical claims that can make sense. For surgical claims it usually does not, because baseball style arbitration picks one number for the whole batch, so a strong, high multiple claim gets dragged toward the weakest claim it is grouped with. Sydra files one claim per CPT so every award is decided on its own merits.",
+      "CMS now allows batching claims into one IDR submission to cut fees and speed resolution. Here is the real tradeoff on win rate, and why Sydra defaults to per submission filing with the client deciding.",
+    lead: "CMS finalized new federal IDR rules on May 28, 2026. The administrative filing fee dropped from $115 to $15, batching multiple claims into one submission is now permitted, and a new IDR Gateway platform is rolling out in phases. Batching is a real, sanctioned option. It also carries correlated risk. Sydra defaults to one claim per CPT because that setting protects win rate for most cases, and your billing team decides per submission whether to batch.",
     sections: [
       {
-        heading: "What batching actually does.",
+        heading: "What the May 2026 rule changed.",
         paragraphs: [
-          "Federal rules let you combine similar claims involving the same provider and plan into one dispute, within defined criteria for service type and time period. The administrative fee attaches to the dispute, not to each claim inside it, so a batch carries that fee once rather than many times. The appeal is simple: lower per claim cost.",
+          "On May 28, 2026, CMS finalized a rule overhauling federal IDR, jointly with the Departments of Labor, Treasury, and the Office of Personnel Management. The standard administrative filing fee fell from $115 to $15 per dispute. CMS also finalized permission to batch multiple related claims into a single IDR submission, aimed at lowering costs and speeding resolution. A centralized IDR Gateway platform is rolling out in phases so providers can initiate disputes, track status, and manage filings in one place.",
+          "Source: CMS final rule announcement, May 28, 2026. See the dated update post for the full changelog and press release link.",
         ],
       },
       {
-        heading: "Why it hurts surgical awards.",
+        heading: "The correlated risk tradeoff.",
         paragraphs: [
-          "IDR is baseball style arbitration. The arbitrator picks one offer for the entire dispute, not a separate number for each claim inside it. When you batch a high multiple surgical CPT together with routine, lower multiple claims, you force one number to cover all of them. The strong claim no longer stands on its own strongest comparable determinations; it gets averaged against the weakest claim in the group.",
-          "For surgical practices that spread is the whole point. The administrative fee you save by batching is small. The award you compress by batching can be many multiples of the qualifying payment amount. Trading a large protected award for a small fee saving is a bad bargain.",
+          "When several claims are batched into one submission, the arbiter picks one offer for the whole batch. If that offer is not selected, every code in the batch loses together. Filed individually, each code stands on its own evidence.",
+          "This is Dr. Abrahams' experience from filing these claims directly, not a published CMS win rate statistic. Ten high value codes batched into one submission can win or lose as a block. The same ten codes filed individually might land eight or nine wins instead of an all or nothing outcome on the batch.",
         ],
       },
       {
-        heading: "The Sydra position: one claim per CPT.",
+        heading: "Sydra's default: one claim per CPT.",
         paragraphs: [
-          "Sydra files one claim per CPT. Each claim is submitted on its own, cited to the prior determinations that are closest to it, so each award is decided on its own merits. Nothing strong gets pulled down by something weak. This is the same position the product holds across the site, and it is why surgical awards run as high as they do when claims are filed individually.",
+          "Sydra still defaults to one claim per CPT. Each claim is cited to the prior determinations closest to it, so each award is decided on its own merits. That is the setting that protects win rate for most surgical submissions, and it remains the product default.",
         ],
       },
       {
-        heading: "When the fee is not the deciding factor.",
+        heading: "Batching is available when you choose it.",
         paragraphs: [
-          "The reason practices reach for batching is the per claim fee on routine underpayments. Sydra removes that pressure a different way: it prepares each submission in about five minutes, so filing every CPT on its own is fast enough that the fee stops being the thing that decides whether a claim is worth pursuing. You file the whole book, one claim per CPT, and protect every award.",
+          "Batching is available, CMS sanctioned, and can lower administrative fees and speed resolution when the correlated risk is acceptable. Examples include lower value codes, or codes from the same encounter with strongly overlapping evidence. Your billing team decides per submission. Sydra surfaces the tradeoff so the choice is informed, not forced.",
+        ],
+      },
+      {
+        heading: "The $15 fee changes the volume math either way.",
+        paragraphs: [
+          "Whether you file individually or batch, the $15 administrative fee (down from $115) makes more claims economically worth disputing than a year ago. Sydra prepares each submission in about five minutes, so filing the full book one claim per CPT stays practical at volume, and batching remains an available tool when your team wants it for a specific set of claims.",
         ],
       },
     ],
     faqs: [
       {
         q: "Should I batch my surgical IDR claims?",
-        a: "Generally no. Federal rules allow batching, but because the arbitrator picks one number for the whole dispute, batching a high multiple surgical claim with weaker claims drags the strong award down. Sydra files one claim per CPT so each award is decided on its own merits.",
+        a: "Usually keep high value surgical codes individual, because one arbiter offer covers the whole batch. Batching can make sense for lower value codes or same encounter claims with overlapping evidence. Sydra defaults to one claim per CPT and lets your team choose per submission.",
+      },
+      {
+        q: "Does Sydra refuse to batch?",
+        a: "No. Sydra defaults to one claim per CPT because that protects win rate for most cases. Batching is CMS sanctioned as of the May 28, 2026 rule and available when your team wants it for a specific submission.",
       },
       {
         q: "Does filing one claim per CPT cost more in administrative fees?",
-        a: "Slightly, because the fee attaches per dispute. But on surgical claims the protected award is many multiples of the qualifying payment amount, which dwarfs the small fee difference. Sydra also prepares each claim in about five minutes, so per claim filing stays practical at volume.",
+        a: "Each dispute carries its own administrative fee, now $15 under the 2026 rule. On surgical claims the protected award is often many multiples of the qualifying payment amount, which usually dwarfs the fee difference. Sydra prepares each claim in about five minutes, so per claim filing stays practical at volume.",
       },
     ],
   },
@@ -586,7 +618,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "How software removes the barriers.",
         paragraphs: [
-          "Software removes both barriers. Sydra assembles the federal packet, cites prior determinations on the code, files one claim per CPT to protect each award, and tracks every deadline. The practice files its full volume in minutes per claim and keeps the entire recovery. The hidden line item stops being a loss.",
+          "Software removes both barriers. Sydra assembles the federal packet, cites prior determinations on the code, defaults to one claim per CPT to protect each award, offers CMS sanctioned batching when your team chooses it, and tracks every deadline. The practice files its full volume in minutes per claim and keeps the entire recovery. The hidden line item stops being a loss.",
         ],
       },
     ],

@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { GUIDES } from "@/lib/idr/guides";
-import { itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -32,7 +33,7 @@ export default function GuideIndexPage() {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/idr/guide",
             name: "Federal IDR guides",
             description:
@@ -93,7 +94,8 @@ export default function GuideIndexPage() {
         <SydraCtaBand />
 
         <Section tone="white">
-          <SourcesReferences />
+          <MedicalReviewBlock />
+          <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>
     </>

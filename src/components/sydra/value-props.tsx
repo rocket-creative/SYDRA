@@ -7,7 +7,7 @@ const props = [
   },
   {
     title: "Smarter",
-    body: "Specialty trained. Files one claim per CPT. Never batches codes that should be filed individually.",
+    body: "Specialty trained. Files one claim per CPT by default. Batching is CMS sanctioned as of 2026, and your team decides per submission.",
   },
   {
     title: "Yours",

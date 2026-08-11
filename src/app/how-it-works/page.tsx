@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
+import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import {
@@ -15,7 +17,7 @@ import {
   SUBMISSION_REQUIREMENTS,
   SYDRA_ELEMENTS,
 } from "@/lib/content/how-it-works-page";
-import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -35,7 +37,7 @@ function HowItWorksJsonLd() {
       <BreadcrumbJsonLd items={[...BREADCRUMBS.howItWorks]} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/how-it-works",
             name: pageTitle(),
             description: PAGE_METADATA.howItWorks.description ?? "",
@@ -115,6 +117,9 @@ export default function HowItWorksPage() {
                     <p key={p.slice(0, 40)}>{p}</p>
                   ))}
                 </div>
+                {section.id === "heading-one-per-cpt" ? (
+                  <RegulatoryAsOf className="mt-6" />
+                ) : null}
               </section>
             ))}
           </div>
@@ -129,6 +134,7 @@ export default function HowItWorksPage() {
             <CtaTrustSignals className="mt-4" />
           </div>
           <ServiceCrossLinks current="/how-it-works" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>

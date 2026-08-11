@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { PricingTiers } from "@/components/sydra/pricing-tiers";
 import { PricingPageJsonLd } from "@/components/sydra/pricing-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
@@ -36,6 +39,13 @@ export default function PricingPage() {
             <p className="mt-4 type-body text-body">
               Schedule a five minute demo and we quote on the call. No commitment to proceed.
             </p>
+            <p className="mt-4 type-body text-body">
+              Running IDR for more than one practice? See{" "}
+              <Link className={textStyles.textLink} href="/idr-for-billing-companies">
+                Sydra for billing companies and RCM firms
+              </Link>
+              .
+            </p>
           </header>
         </Section>
 
@@ -51,7 +61,11 @@ export default function PricingPage() {
                 20% of every IDR recovery, indefinitely. On $300,000 in annual IDR recoveries:
                 $60,000 in attorney fees annually. Plus: disputes lost from batched CPT filings
                 never appear in the recovery total. A practice winning 60% of disputes at 20%
-                contingency recovers 60% x 80% = 48% of its IDR potential.
+                contingency recovers 60% x 80% = 48% of its IDR potential.{" "}
+                <Link className={textStyles.textLink} href="/idr-recovery-calculator">
+                  Open the full calculator
+                </Link>{" "}
+                to estimate attorney take at your volume.
               </p>
             </div>
             <div>
@@ -117,6 +131,7 @@ export default function PricingPage() {
             <CtaTrustSignals className="mt-6" />
           </div>
           <ServiceCrossLinks current="/pricing" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>

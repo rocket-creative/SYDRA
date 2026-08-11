@@ -11,6 +11,7 @@ import {
   WaitHookBlock,
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
@@ -30,7 +31,7 @@ import {
   getStateName,
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
-import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -90,7 +91,7 @@ export default async function StateHubPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path,
             name: h1State(stateName),
             description: `Federal IDR for out of network surgical claims in ${stateName}.`,
@@ -142,6 +143,7 @@ export default async function StateHubPage({ params }: PageProps) {
             heading={`Federal IDR in ${stateName}: common questions.`}
             items={faqs}
           />
+          <MedicalReviewBlock />
         </Section>
 
         <SydraCtaBand />

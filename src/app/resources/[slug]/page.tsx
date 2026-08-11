@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { articleBreadcrumb, SydraPageShell } from "@/components/sydra/page-shell";
@@ -15,7 +16,12 @@ import {
   RESOURCE_SLUGS,
   type ResourceArticle,
 } from "@/lib/content/resources/articles";
-import { articleJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  articleJsonLd,
+  drAbrahamsPersonJsonLd,
+  faqPageJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -92,12 +98,20 @@ export default async function ResourceArticlePage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
+          drAbrahamsPersonJsonLd(),
+          webPageJsonLd({
+            path: `/resources/${article.slug}`,
+            name: article.title.replace(/\.$/, ""),
+            description: article.metaDescription,
+            reviewedBy: true,
+          }),
           articleJsonLd({
             path: `/resources/${article.slug}`,
             headline: article.title.replace(/\.$/, ""),
             description: article.metaDescription,
             datePublished: article.datePublished,
             dateModified: article.dateModified,
+            reviewedBy: true,
           }),
           faqPageJsonLd(article.faqs),
         ]}
@@ -187,6 +201,7 @@ export default async function ResourceArticlePage({ params }: PageProps) {
         <Section tone="white">
           <RelatedGuides article={article} />
           <ServiceCrossLinks current="/resources" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>

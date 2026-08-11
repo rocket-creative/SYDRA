@@ -1,0 +1,87 @@
+[
+  {
+    "id": "cms-puf-2025-h1",
+    "label": "CMS Federal IDR Q1/Q2 2025 Public Use File",
+    "detail": "Released January 21, 2026",
+    "url": "https://www.cms.gov/nosurprises/policies-and-resources/reports",
+    "dateReleased": "2026-01-21",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "georgetown-chir-2026-03",
+    "label": "Georgetown University CHIR · Health Affairs webinar",
+    "detail": "March 2026. 3.4 million disputes through June 2025; 88% win rate; median award ~4.5x in network rate",
+    "dateReleased": "2026-03",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "zelis-eligibility-2026-03",
+    "label": "Zelis: NSA IDR Eligibility Challenges",
+    "detail": "March 2026. 44% of 2024 IDR cases challenged as ineligible by non initiating party",
+    "dateReleased": "2026-03",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "acep-cms-analysis",
+    "label": "ACEP analysis of CMS data",
+    "detail": "~10% of eligible claims estimated to reach IDR arbitration",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "brookings-nsa-databook-2026-04",
+    "label": "Brookings Institution NSA Arbitration Databook",
+    "detail": "April 2026",
+    "url": "https://www.brookings.edu/articles/no-surprises-act-arbitration-databook",
+    "dateReleased": "2026-04",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "acr-idr-claims-2026-01",
+    "label": "ACR: Providers Prevail in Vast Majority of IDR Claims",
+    "detail": "January 2026. 88% of disputes found in provider's favor; 87% of awards exceeded QPA",
+    "dateReleased": "2026-01",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "nsa-public-law-116-260",
+    "label": "No Surprises Act: Public Law 116-260, Division BB, Title I",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "federal-idr-45-cfr-149",
+    "label": "Federal IDR regulations: 45 CFR Part 149",
+    "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-F/part-149",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "cms-nsa-overview",
+    "label": "CMS No Surprises Act overview",
+    "url": "https://www.cms.gov/nosurprises",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "hhs-hipaa-professionals",
+    "label": "HHS HIPAA for professionals",
+    "url": "https://www.hhs.gov/hipaa/for-professionals",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "cms-final-rule-2026-05",
+    "label": "CMS Final Rule: No Surprises Act IDR overhaul (HHS, DOL, Treasury, OPM)",
+    "detail": "Administrative fee reduced from $115 to $15. Batching of multiple claims now permitted to lower costs and speed resolution. New IDR Gateway centralized platform rolling out in phases.",
+    "url": "https://www.cms.gov/newsroom/press-releases/federal-rule-takes-aim-saving-taxpayer-dollars-health-care-bureaucracy-reducing-dispute-fees",
+    "dateReleased": "2026-05-28",
+    "lastVerified": "2026-08-11",
+    "verificationStatus": "current"
+  }
+]

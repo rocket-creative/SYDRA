@@ -1,6 +1,6 @@
 import { CountUp } from "@/components/motion/count-up";
 
-type ProofItem = {
+export type ProofItem = {
   value: string;
   label: string;
   caption?: string;
@@ -26,14 +26,20 @@ const PROOF_ITEMS: readonly ProofItem[] = [
   },
 ] as const;
 
+type HeroProofStackProps = {
+  className?: string;
+  /** Override the default homepage three-stat row. */
+  items?: readonly ProofItem[];
+};
+
 /** Compact trust row under the hero CTA. Stacks on mobile, three columns from md up. */
-export function HeroProofStack({ className = "" }: { className?: string }) {
+export function HeroProofStack({ className = "", items = PROOF_ITEMS }: HeroProofStackProps) {
   return (
     <div
       aria-label="Recovery proof points"
       className={`grid gap-6 sm:grid-cols-3 sm:gap-5 ${className}`.trim()}
     >
-      {PROOF_ITEMS.map((item) => (
+      {items.map((item) => (
         <figure key={item.value} className="min-w-0">
           <p
             className="text-[1.75rem] font-light leading-none tracking-[-0.03em] text-brand tabular-nums md:text-[2rem]"

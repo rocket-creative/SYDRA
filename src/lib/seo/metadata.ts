@@ -23,6 +23,11 @@ type PageMetadataInput = {
   ogImagePath?: string;
   keywords?: string[];
   robots?: Metadata["robots"];
+  /** When set, Open Graph is emitted as type article with these timestamps. */
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+  };
 };
 
 export function buildPageMetadata({
@@ -34,32 +39,46 @@ export function buildPageMetadata({
   ogImagePath,
   keywords,
   robots = { index: true, follow: true },
+  article,
 }: PageMetadataInput): Metadata {
   const canonicalTarget = canonicalPath ?? path;
   const canonical = `${siteUrl()}${canonicalTarget === "" ? "/" : canonicalTarget}`;
   const ogImage = ogImagePath ? ogImageUrl(ogImagePath) : ogImageUrl();
+  const images = [
+    {
+      url: ogImage,
+      width: 1200,
+      height: 630,
+      alt: ogImageAlt,
+    },
+  ];
 
   return {
     title: { absolute: title },
     description,
     ...(keywords && keywords.length > 0 ? { keywords } : {}),
     alternates: { canonical },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      siteName: SITE_NAME,
-      locale: "en_US",
-      type: "website",
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: ogImageAlt,
+    openGraph: article
+      ? {
+          title,
+          description,
+          url: canonical,
+          siteName: SITE_NAME,
+          locale: "en_US",
+          type: "article",
+          publishedTime: article.publishedTime,
+          modifiedTime: article.modifiedTime ?? article.publishedTime,
+          images,
+        }
+      : {
+          title,
+          description,
+          url: canonical,
+          siteName: SITE_NAME,
+          locale: "en_US",
+          type: "website",
+          images,
         },
-      ],
-    },
     twitter: {
       card: "summary_large_image",
       title,
@@ -131,6 +150,24 @@ export const PAGE_METADATA = {
     ogImageAlt:
       "Running federal IDR in house at scale without adding billing headcount.",
   }),
+  idrForBillingCompanies: buildPageMetadata({
+    title: "NSA IDR Software for Billing Companies and RCM Firms | Sydra",
+    description:
+      "Running federal IDR for multiple client practices? See how Sydra's per practice tenant isolation, specialty coded submissions, and per submission filing defaults hold up at billing company volume.",
+    path: "/idr-for-billing-companies",
+    ogImagePath: "/idr-for-billing-companies",
+    ogImageAlt:
+      "Sydra NSA IDR software for medical billing companies and RCM firms managing multiple client practices.",
+  }),
+  idrFilingDeadline: buildPageMetadata({
+    title: "Federal IDR Filing Deadline | 4 Business Days to Initiate | Sydra",
+    description:
+      "Federal IDR runs on strict clocks. 30 business days for open negotiation, then 4 business days to file. Miss either window and the claim is closed for that cycle. See what still qualifies.",
+    path: "/idr-filing-deadline",
+    ogImagePath: "/idr-filing-deadline",
+    ogImageAlt:
+      "Federal IDR filing deadline: 30 business days, then 4 business days to initiate.",
+  }),
   security: buildPageMetadata({
     title: "Sydra Security — HIPAA Controls, BAA, AWS Bedrock, PHI Handling | Sydra",
     description:
@@ -153,6 +190,27 @@ export const PAGE_METADATA = {
     path: "/resources",
     ogImageAlt:
       "Federal IDR and No Surprises Act guides for surgical billing teams.",
+  }),
+  resourcesUpdates: buildPageMetadata({
+    title: "Federal IDR and NSA Updates | Sydra",
+    description:
+      "Dated updates on federal IDR and No Surprises Act developments. CMS data releases, rule changes, and court decisions that affect surgical practices filing disputes.",
+    path: "/resources/updates",
+    ogImageAlt: "Federal IDR resource updates for surgical billing teams.",
+  }),
+  glossary: buildPageMetadata({
+    title: "Federal IDR Glossary | No Surprises Act Terms Defined | Sydra",
+    description:
+      "Plain definitions of federal IDR and No Surprises Act terms for surgical billing teams, sourced to CMS rules, Public Use Files, and related guidance. Links to full guides.",
+    path: "/glossary",
+    ogImageAlt: "Federal IDR glossary for surgical billing teams.",
+  }),
+  idrRecoveryCalculator: buildPageMetadata({
+    title: "Free IDR Recovery Calculator | Sydra",
+    description:
+      "Free calculator. Estimate what properly filed federal IDR could recover for your practice, and what a 20 percent attorney would take from it. Uses published CMS win rates and Georgetown CHIR benchmarks.",
+    path: "/idr-recovery-calculator",
+    ogImageAlt: "IDR recovery calculator for out of network surgical claims.",
   }),
   contact: buildPageMetadata({
     title: "Contact Sydra — Sales, Demos, and Support | Sydra",

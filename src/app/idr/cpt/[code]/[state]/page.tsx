@@ -13,6 +13,7 @@ import {
   WaitHookBlock,
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
@@ -42,7 +43,11 @@ import {
   IDR_PAYERS,
   stateCodeFromSlug,
 } from "@/lib/idr/taxonomy";
-import { faqPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -133,6 +138,11 @@ export default async function CptStatePage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
+          ...medicallyReviewedWebPageJsonLd({
+            path: idrCodeStatePath(code, stateCode),
+            name: h1CptState(proc, stateName),
+            description: `Federal IDR for out of network ${proc} (CPT ${code}) denials in ${stateName}.`,
+          }),
           faqPageJsonLd(faqs),
           serviceJsonLd({
             name: "Sydra NSA IDR software",
@@ -189,6 +199,7 @@ export default async function CptStatePage({ params }: PageProps) {
             ) : null}
             <EntityLinks links={keepExploringLinks} title="Keep exploring" />
           </div>
+          <MedicalReviewBlock />
         </Section>
       </SydraPageShell>
     </>

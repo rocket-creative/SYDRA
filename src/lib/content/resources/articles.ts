@@ -202,9 +202,9 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
       id: "batching",
       heading: "Batching and the one claim per service question.",
       paragraphs: [
-        "The federal rules allow batching of certain similar items and services into one dispute, which can lower the per claim administrative cost. It is tempting to batch aggressively to save on fees.",
-        "The tradeoff is at the determination. A batched submission produces a composite offer that cannot map cleanly to any single prior determination, and it tends to perform worse at arbitration. Filing one claim per service keeps each offer tied to comparable prior determinations for that exact code, which is what the arbitrator is weighing.",
-        "Sydra files one claim per code for this reason. If a case involves several codes, each becomes its own submission, and each takes under five minutes to prepare.",
+        "As of the May 28, 2026 CMS final rule, federal rules allow batching of certain similar items and services into one dispute, which can lower the per claim administrative cost. It is tempting to batch aggressively to save on fees.",
+        "The tradeoff is at the determination. A batched submission produces one offer for the whole batch, so codes can win or lose together. Filing one claim per service keeps each offer tied to comparable prior determinations for that exact code.",
+        "Sydra defaults to one claim per code for this reason, and batching is available when your team chooses it for a specific submission. If a case involves several codes, each becomes its own submission by default, and each takes under five minutes to prepare.",
       ],
     },
   ],
@@ -227,7 +227,7 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
     },
     {
       q: "Should I batch IDR claims?",
-      a: "Batching can reduce per claim fees, but it usually weakens the determination because a composite offer cannot map cleanly to comparable prior determinations. Filing one claim per code keeps each offer tied to the right comparables and tends to perform better at arbitration.",
+      a: "Batching can reduce per claim fees and is CMS sanctioned as of May 2026, but high value codes can win or lose together on one arbiter offer. Filing one claim per code by default keeps each offer tied to the right comparables. Choose batching per submission when the correlated risk is acceptable.",
     },
   ],
   related: ["federal-idr-process", "idr-win-rates-and-awards", "idr-attorney-vs-software"],

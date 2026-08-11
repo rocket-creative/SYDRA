@@ -11,6 +11,7 @@ import {
   WaitHookBlock,
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
@@ -30,7 +31,7 @@ import {
 } from "@/lib/idr/seo";
 import { getCodeMeta, getSpecialtyMeta } from "@/lib/idr/taxonomy";
 import { US_STATES } from "@/lib/constants/us-states";
-import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -94,7 +95,7 @@ export default async function CptHubPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: idrCodePath(code),
             name: `${proc} (CPT ${code}) federal IDR`,
             description: `Out of network ${proc} (CPT ${code}) is routinely paid below billed charges or denied. Federal IDR recovers that gap, and Sydra prepares the submission.`,
@@ -160,6 +161,7 @@ export default async function CptHubPage({ params }: PageProps) {
               />
             </div>
           ) : null}
+          <MedicalReviewBlock />
         </Section>
       </SydraPageShell>
     </>

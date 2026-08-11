@@ -54,6 +54,18 @@ export function SydraFooter() {
           </Link>
           <Link
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/glossary"
+          >
+            Glossary
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/idr-recovery-calculator"
+          >
+            Recovery calculator
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
             href="/privacy"
           >
             Privacy

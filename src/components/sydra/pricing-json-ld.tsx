@@ -1,7 +1,11 @@
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
-import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
 function pageTitle(): string {
@@ -23,7 +27,7 @@ export function PricingPageJsonLd() {
       />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/pricing",
             name: pageTitle(),
             description: PAGE_METADATA.pricing.description ?? "",

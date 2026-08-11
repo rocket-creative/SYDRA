@@ -39,14 +39,43 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
   };
 }
 
+/** Stable Person @id for Dr. Abrahams; educational pages reference this via reviewedBy. */
+export const DR_ABRAHAMS_PERSON_ID = () => `${siteUrl()}/about#dr-abrahams`;
+
+/**
+ * Physician JSON-LD for Dr. John M. Abrahams.
+ * Credentials are limited to facts already stated on /about.
+ */
+export function drAbrahamsPersonJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    "@id": DR_ABRAHAMS_PERSON_ID(),
+    name: "Dr. John M. Abrahams, MD",
+    jobTitle: "Founder, Board Certified Neurosurgeon",
+    description:
+      "Dr. John M. Abrahams, MD is a practicing neurosurgeon in New York. Fellow, American Association of Neurological Surgeons (FAANS). Past President, Brain and Spine Surgeons of New York. Founder, Sydra. He reviews all medical content published by Sydra.",
+    medicalSpecialty: "Neurosurgery",
+    worksFor: { "@id": SYDRA_ORG_ID() },
+    memberOf: {
+      "@type": "MedicalOrganization",
+      name: "American Association of Neurological Surgeons",
+    },
+    url: `${siteUrl()}/about`,
+  };
+}
+
 export function webPageJsonLd({
   path,
   name,
   description,
+  reviewedBy,
 }: {
   path: string;
   name: string;
   description: string;
+  /** When true, sets reviewedBy to Dr. Abrahams Person @id. */
+  reviewedBy?: boolean;
 }) {
   const base = siteUrl();
   const url = `${base}${path}`;
@@ -59,7 +88,27 @@ export function webPageJsonLd({
     description,
     isPartOf: { "@id": SYDRA_WEBSITE_ID() },
     about: { "@id": SYDRA_ORG_ID() },
+    ...(reviewedBy ? { reviewedBy: { "@id": DR_ABRAHAMS_PERSON_ID() } } : {}),
   };
+}
+
+/**
+ * Person + WebPage with reviewedBy for educational surfaces.
+ * Spread into PageJsonLd data arrays alongside FAQ/Service/Article nodes.
+ */
+export function medicallyReviewedWebPageJsonLd({
+  path,
+  name,
+  description,
+}: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  return [
+    drAbrahamsPersonJsonLd(),
+    webPageJsonLd({ path, name, description, reviewedBy: true }),
+  ];
 }
 
 export function faqPageJsonLd(questions: { q: string; a: string }[]) {
@@ -80,18 +129,24 @@ export function articleJsonLd({
   description,
   datePublished,
   dateModified,
+  reviewedBy,
+  type = "Article",
 }: {
   path: string;
   headline: string;
   description: string;
   datePublished: string;
   dateModified?: string;
+  /** When true, sets reviewedBy to Dr. Abrahams Person @id. */
+  reviewedBy?: boolean;
+  /** Use NewsArticle for dated regulatory updates that read as news. */
+  type?: "Article" | "NewsArticle";
 }) {
   const base = siteUrl();
   const url = `${base}${path}`;
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": type,
     "@id": `${url}/#article`,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     headline,
@@ -103,7 +158,14 @@ export function articleJsonLd({
     author: { "@id": SYDRA_ORG_ID() },
     publisher: { "@id": SYDRA_ORG_ID() },
     image: SYDRA_LOGO_URL(),
+    ...(reviewedBy ? { reviewedBy: { "@id": DR_ABRAHAMS_PERSON_ID() } } : {}),
   };
+}
+
+export function newsArticleJsonLd(
+  input: Omit<Parameters<typeof articleJsonLd>[0], "type">,
+) {
+  return articleJsonLd({ ...input, type: "NewsArticle" });
 }
 
 export function howToJsonLd({
@@ -144,6 +206,33 @@ export function itemListJsonLd(items: { name: string; path: string }[]) {
       position: index + 1,
       name: item.name,
       url: `${base}${item.path}`,
+    })),
+  };
+}
+
+export function definedTermSetJsonLd({
+  path,
+  name,
+  terms,
+}: {
+  path: string;
+  name: string;
+  terms: { name: string; description: string; url?: string }[];
+}) {
+  const base = siteUrl();
+  const url = `${base}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": `${url}/#definedtermset`,
+    name,
+    url,
+    hasDefinedTerm: terms.map((term) => ({
+      "@type": "DefinedTerm",
+      name: term.name,
+      description: term.description,
+      inDefinedTermSet: `${url}/#definedtermset`,
+      ...(term.url ? { url: term.url } : {}),
     })),
   };
 }
@@ -201,6 +290,74 @@ export function softwareApplicationJsonLd() {
       "@id": SYDRA_ORG_ID(),
       name: "Sydra",
     },
+  };
+}
+
+/** Free tool schema for the standalone IDR recovery calculator page. */
+export function webApplicationJsonLd({
+  path,
+  name,
+  description,
+}: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  const url = `${siteUrl()}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": `${url}/#webapplication`,
+    name,
+    description,
+    url,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web browser",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    provider: { "@id": SYDRA_ORG_ID() },
+  };
+}
+
+/** VideoObject for explainer videos with inline transcript. */
+export function videoObjectJsonLd({
+  path,
+  name,
+  description,
+  uploadDate,
+  transcript,
+  contentUrl,
+  embedUrl,
+  durationSeconds,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  uploadDate: string;
+  transcript: string;
+  contentUrl?: string;
+  embedUrl?: string;
+  durationSeconds?: number;
+}) {
+  const pageUrl = `${siteUrl()}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "@id": `${pageUrl}/#video`,
+    name,
+    description,
+    uploadDate,
+    transcript,
+    ...(durationSeconds
+      ? { duration: `PT${Math.round(durationSeconds)}S` }
+      : {}),
+    ...(contentUrl ? { contentUrl } : {}),
+    ...(embedUrl ? { embedUrl } : {}),
+    reviewedBy: { "@id": DR_ABRAHAMS_PERSON_ID() },
+    publisher: { "@id": SYDRA_ORG_ID() },
   };
 }
 
@@ -324,7 +481,7 @@ export const HOMEPAGE_FAQ_SCHEMA = [
   },
   {
     q: "How does Sydra compare to using an IDR attorney?",
-    a: "Attorneys typically charge 20% of every IDR recovery as a contingency fee. Sydra is software your billing team operates, priced below typical attorney contingency fees with an exact quote on the demo call. You keep the recovery in house instead of losing 20% per award. Sydra also files one claim per CPT, which produces better IDR outcomes than the batching approach attorneys frequently use.",
+    a: "Attorneys typically charge 20% of every IDR recovery as a contingency fee. Sydra is software your billing team operates, priced below typical attorney contingency fees with an exact quote on the demo call. You keep the recovery in house instead of losing 20% per award. Sydra defaults to one claim per CPT to protect win rate, while batching remains available under the 2026 CMS rule when your team chooses it per submission.",
   },
   {
     q: "Is Sydra HIPAA compliant?",

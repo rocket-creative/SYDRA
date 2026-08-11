@@ -17,7 +17,7 @@ export const HOW_IT_WORKS_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "Does Sydra batch CPT codes on one submission?",
-    a: "No. Sydra files one claim per eligible CPT code. Batching codes that should be filed individually is a common manual error Sydra prevents.",
+    a: "Sydra defaults to one claim per CPT, because filing individually generally protects win rate. If one code in a batch does not win, the whole batch can lose together. Batching is CMS sanctioned as of the 2026 rule and available if your team wants it for a specific submission. You decide, per submission.",
   },
   {
     q: "What happens after my team submits through Sydra?",

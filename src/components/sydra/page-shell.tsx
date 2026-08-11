@@ -110,6 +110,14 @@ export const BREADCRUMBS = {
     { name: "Home", path: "" },
     { name: "In house IDR", path: "/in-house-idr" },
   ],
+  idrForBillingCompanies: [
+    { name: "Home", path: "" },
+    { name: "IDR for billing companies", path: "/idr-for-billing-companies" },
+  ],
+  idrFilingDeadline: [
+    { name: "Home", path: "" },
+    { name: "IDR filing deadline", path: "/idr-filing-deadline" },
+  ],
   security: [
     { name: "Home", path: "" },
     { name: "Security", path: "/security" },
@@ -121,6 +129,19 @@ export const BREADCRUMBS = {
   resources: [
     { name: "Home", path: "" },
     { name: "Resources", path: "/resources" },
+  ],
+  resourcesUpdates: [
+    { name: "Home", path: "" },
+    { name: "Resources", path: "/resources" },
+    { name: "Updates", path: "/resources/updates" },
+  ],
+  glossary: [
+    { name: "Home", path: "" },
+    { name: "Glossary", path: "/glossary" },
+  ],
+  idrRecoveryCalculator: [
+    { name: "Home", path: "" },
+    { name: "IDR recovery calculator", path: "/idr-recovery-calculator" },
   ],
   contact: [
     { name: "Home", path: "" },
@@ -146,5 +167,15 @@ export function articleBreadcrumb(name: string, slug: string): { name: string; p
     { name: "Home", path: "" },
     { name: "Resources", path: "/resources" },
     { name, path: `/resources/${slug}` },
+  ];
+}
+
+/** Home > Resources > Updates > <post> trail for a dated resource update. */
+export function updateBreadcrumb(name: string, slug: string): { name: string; path: string }[] {
+  return [
+    { name: "Home", path: "" },
+    { name: "Resources", path: "/resources" },
+    { name: "Updates", path: "/resources/updates" },
+    { name, path: `/resources/updates/${slug}` },
   ];
 }

@@ -4,9 +4,11 @@ import Link from "next/link";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { EntityLinks } from "@/components/idr/entity-links";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
+import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { US_STATES } from "@/lib/constants/us-states";
@@ -16,7 +18,7 @@ import { PROOF_POINTS } from "@/lib/idr/proof-points";
 import { idrSpecialtyPath, idrStatePath } from "@/lib/idr/seo";
 import { SPECIALTIES } from "@/lib/idr/taxonomy";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { webPageJsonLd } from "@/lib/seo/json-ld";
+import { medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -31,6 +33,11 @@ const crumbs = [
   { name: "Home", path: "" },
   { name: "Federal IDR", path: "/idr" },
 ];
+
+const QPA_PHRASE = "qualifying payment amount";
+const FIRST_QPA_PROOF_ID = PROOF_POINTS.find((p) =>
+  p.claim.toLowerCase().includes(QPA_PHRASE),
+)?.id;
 
 export default function IdrIndexPage() {
   const specialtyLinks = SPECIALTIES.map((s) => ({
@@ -56,14 +63,12 @@ export default function IdrIndexPage() {
     <>
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
-        data={[
-          webPageJsonLd({
-            path: "/idr",
-            name: "Federal IDR benchmarks",
-            description:
-              "Payment benchmarks, eligibility, and dispute outcomes for surgical out of network claims under the No Surprises Act.",
-          }),
-        ]}
+        data={medicallyReviewedWebPageJsonLd({
+          path: "/idr",
+          name: "Federal IDR benchmarks",
+          description:
+            "Payment benchmarks, eligibility, and dispute outcomes for surgical out of network claims under the No Surprises Act.",
+        })}
       />
       <SydraPageShell banded breadcrumb={crumbs}>
         <Section tone="white">
@@ -95,14 +100,31 @@ export default function IdrIndexPage() {
         </Section>
 
         <Section tone="neutral">
-          <EntityLinks links={specialtyLinks} title="Browse by specialty" />
+          <EntityLinks
+            links={[
+              {
+                name: "Billing companies and RCM firms",
+                href: "/idr-for-billing-companies",
+              },
+              { name: "In house IDR teams", href: "/in-house-idr" },
+              {
+                name: "Sydra vs an IDR attorney",
+                href: "/sydra-vs-idr-attorney",
+              },
+            ]}
+            title="Start by audience"
+          />
         </Section>
 
         <Section tone="white">
-          <EntityLinks inline links={stateLinks} title="Browse by state" />
+          <EntityLinks links={specialtyLinks} title="Browse by specialty" />
         </Section>
 
         <Section tone="neutral">
+          <EntityLinks inline links={stateLinks} title="Browse by state" />
+        </Section>
+
+        <Section tone="white">
           <h2 className={textStyles.sectionTitle}>The federal record.</h2>
           <p className={`${textStyles.body} mt-3 prose-measure`}>
             The published federal IDR record across all disputes. These are
@@ -110,20 +132,42 @@ export default function IdrIndexPage() {
             any one claim.
           </p>
           <dl className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {PROOF_POINTS.map((point) => (
-              <div key={point.id}>
-                <dt
-                  className="font-light leading-none tracking-[-0.03em] tabular-nums text-brand text-balance"
-                  style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
-                >
-                  {point.value}
-                </dt>
-                <dd className={`${textStyles.body} mt-3`}>{point.claim}</dd>
-                <dd className={`${textStyles.meta} mt-3`}>
-                  {point.source}. As of {point.asOf}.
-                </dd>
-              </div>
-            ))}
+            {PROOF_POINTS.map((point) => {
+              const qpaIndex =
+                point.id === FIRST_QPA_PROOF_ID
+                  ? point.claim.toLowerCase().indexOf(QPA_PHRASE)
+                  : -1;
+
+              return (
+                <div key={point.id}>
+                  <dt
+                    className="font-light leading-none tracking-[-0.03em] tabular-nums text-brand text-balance"
+                    style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
+                  >
+                    {point.value}
+                  </dt>
+                  <dd className={`${textStyles.body} mt-3`}>
+                    {qpaIndex >= 0 ? (
+                      <>
+                        {point.claim.slice(0, qpaIndex)}
+                        <Link
+                          className={textStyles.textLink}
+                          href="/glossary#qpa"
+                        >
+                          {point.claim.slice(qpaIndex, qpaIndex + QPA_PHRASE.length)}
+                        </Link>
+                        {point.claim.slice(qpaIndex + QPA_PHRASE.length)}
+                      </>
+                    ) : (
+                      point.claim
+                    )}
+                  </dd>
+                  <dd className={`${textStyles.meta} mt-3`}>
+                    {point.source}. As of {point.asOf}.
+                  </dd>
+                </div>
+              );
+            })}
           </dl>
           <p className={`${textStyles.body} mt-8 prose-measure`}>
             See the full{" "}
@@ -133,12 +177,35 @@ export default function IdrIndexPage() {
             >
               IDR win rate and award benchmark
             </Link>{" "}
-            for every figure, sourced and dated.
+            for every figure, sourced and dated.             For dated regulatory notes and
+            sourcing reminders, see the{" "}
+            <Link
+              className={textStyles.textLink}
+              href="/resources/updates/cms-2026-idr-final-rule"
+            >
+              CMS May 2026 final rule update
+            </Link>
+            {" "}
+            ($15 fee and batching), the{" "}
+            <Link
+              className={textStyles.textLink}
+              href="/resources/updates/cms-federal-idr-puf-benchmarks"
+            >
+              CMS Federal IDR PUF update
+            </Link>
+            , or the{" "}
+            <Link
+              className={textStyles.textLink}
+              href="/resources/updates/may-2026-idr-operations-rule"
+            >
+              May 2026 operations rule update
+            </Link>
+            .
           </p>
           <p className={`${textStyles.meta} mt-8 prose-measure`}>{DISCLAIMER}</p>
         </Section>
 
-        <Section tone="white">
+        <Section tone="neutral">
           <h2 className={textStyles.sectionTitle}>Guides.</h2>
           <p className={`${textStyles.body} mt-3 prose-measure`}>
             How the federal IDR process works for surgical practices.
@@ -146,6 +213,8 @@ export default function IdrIndexPage() {
           <div className="mt-6">
             <EntityLinks links={guideLinks} title="How-to guides" />
           </div>
+          <RegulatoryAsOf className="mt-10" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
 

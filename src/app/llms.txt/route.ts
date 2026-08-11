@@ -18,7 +18,7 @@ export function GET(): Response {
   lines.push("# Sydra");
   lines.push("");
   lines.push(
-    "> Sydra is software for federal Independent Dispute Resolution (IDR) under the No Surprises Act, built for out of network surgical billing teams. It prepares a complete federal IDR submission in about five minutes per claim, files one claim per CPT (never batched), and cites prior determinations so each award is decided on its own merits. Built by Sydra, run on AWS Bedrock with HIPAA controls and a BAA available.",
+    "> Sydra is software for federal Independent Dispute Resolution (IDR) under the No Surprises Act, built for out of network surgical billing teams. It prepares a complete federal IDR submission in about five minutes per claim, files one claim per CPT by default (batching is CMS sanctioned as of the May 2026 rule and available per submission), and cites prior determinations so each award is decided on its own merits. Built by Sydra, run on AWS Bedrock with HIPAA controls and a BAA available.",
   );
   lines.push("");
   lines.push(
@@ -40,6 +40,21 @@ export function GET(): Response {
   );
   lines.push(
     `- [In house IDR](${base}/in-house-idr): scale federal disputes without added headcount.`,
+  );
+  lines.push(
+    `- [IDR for billing companies](${base}/idr-for-billing-companies): federal IDR for RCM firms managing multiple client practices.`,
+  );
+  lines.push(
+    `- [IDR filing deadline](${base}/idr-filing-deadline): the 30 and 4 business day clocks that close a claim cycle.`,
+  );
+  lines.push(
+    `- [IDR recovery calculator](${base}/idr-recovery-calculator): estimate recovery and attorney fee math at your volume.`,
+  );
+  lines.push(
+    `- [IDR glossary](${base}/glossary): short definitions of QPA, IDRE, open negotiation, and related terms.`,
+  );
+  lines.push(
+    `- [Resource updates](${base}/resources/updates): dated notes on federal IDR process changes.`,
   );
   lines.push(
     `- [Security](${base}/security): HIPAA controls, BAA, PHI handling.`,
@@ -79,7 +94,7 @@ export function GET(): Response {
     "- Win rate figures reference the published federal provider win rate as a category fact, not a Sydra guarantee.",
   );
   lines.push(
-    "- Sydra files one claim per CPT and does not batch claims that should be filed individually.",
+    "- Sydra defaults to one claim per CPT to protect win rate. Batching is CMS sanctioned as of May 2026 and available when the client chooses it per submission.",
   );
   lines.push("- This site is informational and is not legal or financial advice.");
   lines.push("");

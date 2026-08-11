@@ -1,9 +1,12 @@
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS } from "@/components/sydra/page-shell";
-import { personJsonLd, SYDRA_ORG_ID, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  drAbrahamsPersonJsonLd,
+  personJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
-import { siteUrl } from "@/lib/site";
 
 type TeamMember = {
   name: string;
@@ -28,25 +31,6 @@ function pageTitle(): string {
 }
 
 export function AboutPageJsonLd({ team }: AboutPageJsonLdProps) {
-  const abrahams = team.find((m) => m.isPhysician);
-
-  const physicianSchema = abrahams
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Physician",
-        name: abrahams.name,
-        jobTitle: abrahams.role,
-        description: abrahams.bio,
-        medicalSpecialty: abrahams.medicalSpecialty ?? "Neurosurgery",
-        worksFor: { "@id": SYDRA_ORG_ID() },
-        memberOf: {
-          "@type": "MedicalOrganization",
-          name: "American Association of Neurological Surgeons",
-        },
-        url: abrahams.url ?? `${siteUrl()}/about`,
-      }
-    : null;
-
   return (
     <>
       <BreadcrumbJsonLd items={[...BREADCRUMBS.about]} />
@@ -57,7 +41,8 @@ export function AboutPageJsonLd({ team }: AboutPageJsonLdProps) {
             name: pageTitle(),
             description: PAGE_METADATA.about.description ?? "",
           }),
-          ...(physicianSchema ? [physicianSchema] : []),
+          // Canonical Physician node with stable @id for reviewedBy references sitewide.
+          drAbrahamsPersonJsonLd(),
           ...team
             .filter((m) => !m.isPhysician)
             .map((member) =>

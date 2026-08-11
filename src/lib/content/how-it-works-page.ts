@@ -38,8 +38,8 @@ export const SYDRA_ELEMENTS: HowItWorksSection[] = [
     id: "element-1",
     title: "Element 1 — Payment offer",
     paragraphs: [
-      "Claude, the AI built by Anthropic and run via Amazon Bedrock, identifies the correct CPT code from the EOB, and Sydra prepares the formal offer statement. One claim per CPT. If the EOB contains multiple CPT codes, Sydra generates a separate submission packet for each. Never batched. Your billing team reviews every decision before anything is filed.",
-      "The one CPT per claim structure isn't configurable. It's how federal IDR was designed, and it's what the data shows produces the best outcomes for providers.",
+      "Claude, the AI built by Anthropic and run via Amazon Bedrock, identifies the correct CPT code from the EOB, and Sydra prepares the formal offer statement. Draft generated as a specialty coded IDR submission, filed one claim per CPT by default. Batching is available under the 2026 CMS rule. Your team chooses per submission whether to file individually or batch, and sees the tradeoff before deciding. Your billing team reviews every decision before anything is filed.",
+      "The default stays one claim per CPT because that setting generally protects win rate. When several codes share one offer, the arbiter picks one number for the whole batch. Filed individually, each code is judged on its own evidence.",
     ],
   },
   {
@@ -96,11 +96,11 @@ export const DOCX_SECTION: HowItWorksSection = {
 
 export const ONE_PER_CPT_SECTION: HowItWorksSection = {
   id: "heading-one-per-cpt",
-  title: "The one per CPT rule and why it matters.",
+  title: "One claim per CPT by default, and why that still matters.",
   paragraphs: [
     "Federal IDR is final offer arbitration. The IDRE picks one offer. No splits. The IDRE picks the offer better supported by evidence.",
-    "When multiple CPT codes are batched into one submission, the composite offer can't map cleanly to any single prior determination. The submission performs worse.",
-    "Sydra files one claim per CPT. If your case involves CPT 22612, 22632, 22840, and 63030, that's four submissions. Each takes under 5 minutes in Sydra. Total: under 20 minutes for four procedure specific, prior determination cited IDR packets.",
-    "The alternative: one batched submission in 30 to 40 minutes that performs materially worse at arbitration. The math isn't complicated.",
+    "When multiple CPT codes are batched into one submission, the composite offer can live or die together on a single arbiter decision. That correlated risk is why Sydra defaults to one claim per CPT.",
+    "By default, if your case involves CPT 22612, 22632, 22840, and 63030, Sydra prepares four submissions. Each takes under 5 minutes. Total: under 20 minutes for four procedure specific, prior determination cited IDR packets.",
+    "Batching is CMS sanctioned as of the May 28, 2026 final rule and available when your team wants it for a specific submission, for example lower value codes or claims from the same encounter with strongly overlapping evidence. You decide per submission. See the batching guide for the full tradeoff.",
   ],
 };

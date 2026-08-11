@@ -2,12 +2,14 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
+import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import {
@@ -16,11 +18,29 @@ import {
   WHAT_IS_IDR_HERO,
   WHAT_IS_IDR_SECTIONS,
 } from "@/lib/content/what-is-idr-page";
-import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.whatIsIdr;
+
+function linkFirstPhrase(text: string, phrase: string, href: string) {
+  const index = text.indexOf(phrase);
+  if (index < 0) return text;
+  return (
+    <>
+      {text.slice(0, index)}
+      <Link className={textStyles.textLink} href={href}>
+        {phrase}
+      </Link>
+      {text.slice(index + phrase.length)}
+    </>
+  );
+}
 
 function WhatIsIdrJsonLd() {
   return (
@@ -28,7 +48,7 @@ function WhatIsIdrJsonLd() {
       <BreadcrumbJsonLd items={[...BREADCRUMBS.whatIsIdr]} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/what-is-idr",
             name: "What is federal IDR?",
             description: PAGE_METADATA.whatIsIdr.description ?? "",
@@ -70,7 +90,18 @@ export default function WhatIsIdrPage() {
                 </h2>
                 <div className={`${textStyles.bodyStack} mt-4`}>
                   {section.paragraphs.map((p) => (
-                    <p key={p.slice(0, 40)}>{p}</p>
+                    <p key={p.slice(0, 40)}>
+                      {section.id === "heading-idr" && p.includes("QPA")
+                        ? linkFirstPhrase(p, "QPA", "/glossary#qpa")
+                        : section.id === "heading-who" &&
+                            p.includes("open negotiation")
+                          ? linkFirstPhrase(
+                              p,
+                              "open negotiation",
+                              "/glossary#open-negotiation",
+                            )
+                          : p}
+                    </p>
                   ))}
                 </div>
                 {section.list ? (
@@ -79,6 +110,28 @@ export default function WhatIsIdrPage() {
                       <li key={item.slice(0, 40)}>{item}</li>
                     ))}
                   </ul>
+                ) : null}
+                {section.id === "heading-deadlines" ? (
+                  <p className={`${textStyles.body} mt-4`}>
+                    <Link className={textStyles.textLink} href="/idr-filing-deadline">
+                      See the full deadline breakdown
+                    </Link>
+                    .
+                  </p>
+                ) : null}
+                {section.id === "heading-2026" ? (
+                  <>
+                    <p className={`${textStyles.body} mt-4`}>
+                      <Link
+                        className={textStyles.textLink}
+                        href="/resources/updates/cms-2026-idr-final-rule"
+                      >
+                        Read the CMS May 2026 final rule update
+                      </Link>
+                      .
+                    </p>
+                    <RegulatoryAsOf className="mt-4" />
+                  </>
                 ) : null}
               </section>
             ))}
@@ -120,6 +173,7 @@ export default function WhatIsIdrPage() {
             items={WHAT_IS_IDR_FAQS}
           />
           <ServiceCrossLinks current="/what-is-idr" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
 

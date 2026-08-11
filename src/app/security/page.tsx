@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -13,7 +14,7 @@ import {
   SECURITY_SECTIONS,
   SOC2_SECTION,
 } from "@/lib/content/security-page";
-import { serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -33,7 +34,7 @@ function SecurityPageJsonLd() {
       <BreadcrumbJsonLd items={[...BREADCRUMBS.security]} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/security",
             name: pageTitle(),
             description: PAGE_METADATA.security.description ?? "",
@@ -119,6 +120,7 @@ export default function SecurityPage() {
           </div>
           <CtaTrustSignals className="prose-measure mt-6" />
           <ServiceCrossLinks current="/security" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>

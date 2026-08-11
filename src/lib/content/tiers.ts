@@ -139,10 +139,10 @@ export const TIER_COMPARISON: ComparisonRow[] = [
     pro: "Same + specialist on every file",
   },
   {
-    feature: "One claim per CPT (no batching)",
-    basic: true,
-    plus: true,
-    pro: true,
+    feature: "Per submission filing (client decides on batching)",
+    basic: "Yes, by default. Batching available on request",
+    plus: "Yes, by default. Batching available on request",
+    pro: "Yes, by default. Batching available on request",
   },
   {
     feature: "How to start",

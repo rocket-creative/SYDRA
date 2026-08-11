@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
@@ -17,7 +18,11 @@ import {
   SYDRA_VS_ATTORNEY_HERO,
   SYDRA_VS_ATTORNEY_SECTIONS,
 } from "@/lib/content/sydra-vs-attorney-page";
-import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -29,7 +34,7 @@ function SydraVsAttorneyJsonLd() {
       <BreadcrumbJsonLd items={[...BREADCRUMBS.sydraVsAttorney]} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/sydra-vs-idr-attorney",
             name: "Sydra vs an IDR attorney",
             description: PAGE_METADATA.sydraVsAttorney.description ?? "",
@@ -72,6 +77,11 @@ export default function SydraVsAttorneyPage() {
           </p>
           <div className="mt-10 border-t border-rule pt-10">
             <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo for your numbers" />
+            <p className={`${textStyles.bodyMeasure} mt-6`}>
+              <Link className={textStyles.textLink} href="/idr-recovery-calculator">
+                Open the full calculator
+              </Link>
+            </p>
           </div>
         </Section>
 
@@ -113,6 +123,7 @@ export default function SydraVsAttorneyPage() {
             items={SYDRA_VS_ATTORNEY_FAQS}
           />
           <ServiceCrossLinks current="/sydra-vs-idr-attorney" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
 

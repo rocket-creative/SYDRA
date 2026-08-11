@@ -79,4 +79,8 @@ export const OG_TAGLINES = {
   demo: "Schedule a Sydra demo, five minutes on a real denied claim.",
   about: "About Sydra — built by Sydra and Dr. John M. Abrahams, MD.",
   security: "Sydra security — HIPAA controls, AWS Bedrock, BAA available.",
+  idrFilingDeadline:
+    "Federal IDR filing deadline: 30 business days, then 4 business days to initiate.",
+  idrForBillingCompanies:
+    "Sydra NSA IDR software for medical billing companies and RCM firms managing multiple client practices.",
 } as const;

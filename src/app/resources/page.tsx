@@ -1,13 +1,14 @@
 import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { RESOURCE_ARTICLES } from "@/lib/content/resources/articles";
-import { itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -19,7 +20,7 @@ function ResourcesJsonLd() {
       <BreadcrumbJsonLd items={[...BREADCRUMBS.resources]} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/resources",
             name: "Resources — Federal IDR and No Surprises Act guides",
             description: PAGE_METADATA.resources.description ?? "",
@@ -81,27 +82,45 @@ export default function ResourcesPage() {
         </Section>
 
         <Section tone="white">
-          <div className="prose-measure">
-            <h2 className={textStyles.sectionTitle}>Federal IDR benchmarks and guides.</h2>
-            <p className={`${textStyles.body} mt-3`}>
-              Browse payment benchmarks, eligibility, and dispute outcomes by CPT
-              code, state, and payer on the{" "}
-              <Link className={textStyles.textLink} href="/idr">
-                Federal IDR hub
-              </Link>
-              , or read the full set of{" "}
-              <Link className={textStyles.textLink} href="/idr/guide">
-                step by step IDR guides
-              </Link>
-              .
-            </p>
+          <div className="prose-measure space-y-8">
+            <div>
+              <h2 className={textStyles.sectionTitle}>Resource updates.</h2>
+              <p className={`${textStyles.body} mt-3`}>
+                Short, dated notes on federal IDR process changes and sourcing reminders. Each update
+                links back to the evergreen guide or hub page.{" "}
+                <Link className={textStyles.textLink} href="/resources/updates">
+                  Browse updates
+                </Link>
+                .
+              </p>
+            </div>
+            <div>
+              <h2 className={textStyles.sectionTitle}>Federal IDR benchmarks and guides.</h2>
+              <p className={`${textStyles.body} mt-3`}>
+                Browse payment benchmarks, eligibility, and dispute outcomes by CPT code, state, and
+                payer on the{" "}
+                <Link className={textStyles.textLink} href="/idr">
+                  Federal IDR hub
+                </Link>
+                , read the full set of{" "}
+                <Link className={textStyles.textLink} href="/idr/guide">
+                  step by step IDR guides
+                </Link>
+                , or look up terms in the{" "}
+                <Link className={textStyles.textLink} href="/glossary">
+                  IDR glossary
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         </Section>
 
         <SydraCtaBand />
 
         <Section tone="white">
-          <SourcesReferences />
+          <MedicalReviewBlock />
+          <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>
     </>

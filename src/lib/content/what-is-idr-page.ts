@@ -31,7 +31,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     paragraphs: [
       "When the provider and the health plan cannot agree on a fair payment, either side can take the claim to independent dispute resolution, or IDR. IDR is a federal arbitration process run by certified neutral entities.",
       "Both sides submit a single proposed payment amount with supporting evidence. The arbiter picks one of the two offers. There is no splitting the difference. The offer best supported by the evidence wins, which is why how you build the submission matters.",
-      "The arbiter weighs the qualified payment amount, or QPA, which is the plan's median contracted rate for the service, against the provider's evidence on case complexity, surgeon training, and prior determinations for the same code and region.",
+      "The arbiter weighs the qualifying payment amount, or QPA, which is the plan's median contracted rate for the service, against the provider's evidence on case complexity, surgeon training, and prior determinations for the same code and region.",
     ],
   },
   {
@@ -59,7 +59,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     id: "heading-2026",
     title: "What changed in 2026.",
     paragraphs: [
-      "The process used to be too expensive for smaller practices. As of 2026 a federal rule cut the administrative filing fees, opening IDR to practices that could not justify the cost before. It is one of the most useful developments for providers, and almost no one is talking about it yet.",
+      "The process used to be too expensive for smaller practices. On May 28, 2026, CMS finalized a rule that cut the administrative filing fee from $115 to $15 and explicitly permitted batching multiple claims into one IDR submission. That fee cut opens IDR to practices that could not justify the cost before. Batching is now a real option with a real tradeoff on win rate. See the dated CMS final rule update for the full breakdown.",
     ],
   },
   {
@@ -86,7 +86,7 @@ export const WHAT_IS_IDR_FAQS: ContentFaq[] = [
   },
   {
     q: "How much does it cost to file in 2026?",
-    a: "A 2026 federal rule cut the administrative filing fees, which is what opened the process to smaller practices. The current per dispute administrative fee is confirmed when you initiate, and your documentation team can plan around it.",
+    a: "The May 28, 2026 CMS final rule set the standard administrative filing fee at $15, down from $115. Confirm the current per dispute administrative fee when you initiate, because CMS can update fee guidance, and plan around the IDRE fee separately.",
   },
 ];
 

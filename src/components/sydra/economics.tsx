@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Section } from "@/components/ui/section";
 import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
 
@@ -40,6 +42,14 @@ export function SydraEconomics() {
 
       <div className="prose-measure mt-14 border-t border-white/20 pt-10">
         <RecoveryCalculator variant="onDark" />
+        <p className="mt-6 text-[15px] leading-relaxed text-white/85">
+          <Link
+            className="font-medium text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+            href="/idr-recovery-calculator"
+          >
+            Open the full calculator
+          </Link>
+        </p>
       </div>
     </Section>
   );

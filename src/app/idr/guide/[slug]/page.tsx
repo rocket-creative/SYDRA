@@ -6,13 +6,27 @@ import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { LegalFooter } from "@/components/idr/legal-footer";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { CmsRuleBatchingVideo } from "@/components/sydra/cms-rule-batching-video";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
+import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import {
+  CMS_RULE_BATCHING_VIDEO,
+  getCmsRuleBatchingVideoUrl,
+} from "@/lib/content/videos/cms-rule-batching";
 import { getGuide } from "@/lib/idr/guides";
-import { articleJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/seo/json-ld";
+import {
+  articleJsonLd,
+  drAbrahamsPersonJsonLd,
+  faqPageJsonLd,
+  howToJsonLd,
+  videoObjectJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -60,18 +74,28 @@ export default async function GuidePage({ params }: PageProps) {
     { name: "Federal IDR", path: "/idr" },
     { name: guide.title.replace(/\.$/, ""), path },
   ];
+  const isBatchingGuide = slug === "idr-batching-claims";
+  const batchingVideoUrl = isBatchingGuide ? getCmsRuleBatchingVideoUrl() : undefined;
 
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
+          drAbrahamsPersonJsonLd(),
+          webPageJsonLd({
+            path,
+            name: guide.title.replace(/\.$/, ""),
+            description: guide.metaDescription,
+            reviewedBy: true,
+          }),
           articleJsonLd({
             path,
             headline: guide.title.replace(/\.$/, ""),
             description: guide.metaDescription,
             datePublished: "2026-06-01",
-            dateModified: "2026-07-18",
+            dateModified: isBatchingGuide ? "2026-08-11" : "2026-07-18",
+            reviewedBy: true,
           }),
           ...(guide.howToSteps
             ? [
@@ -80,6 +104,21 @@ export default async function GuidePage({ params }: PageProps) {
                   name: guide.title.replace(/\.$/, ""),
                   description: guide.metaDescription,
                   steps: guide.howToSteps,
+                }),
+              ]
+            : []),
+          ...(isBatchingGuide
+            ? [
+                videoObjectJsonLd({
+                  path,
+                  name: CMS_RULE_BATCHING_VIDEO.name,
+                  description: CMS_RULE_BATCHING_VIDEO.description,
+                  uploadDate: CMS_RULE_BATCHING_VIDEO.uploadDate,
+                  transcript: CMS_RULE_BATCHING_VIDEO.transcript,
+                  durationSeconds: CMS_RULE_BATCHING_VIDEO.durationSeconds,
+                  ...(batchingVideoUrl
+                    ? { embedUrl: batchingVideoUrl, contentUrl: batchingVideoUrl }
+                    : {}),
                 }),
               ]
             : []),
@@ -96,11 +135,30 @@ export default async function GuidePage({ params }: PageProps) {
             ctaHref="/demo"
             ctaLabel="Schedule a demo"
           />
+          {isBatchingGuide ? <RegulatoryAsOf className="mt-6" /> : null}
           {guide.crossLink ? (
             <p className={`${textStyles.meta} mt-6`}>
               {guide.crossLink.intro}{" "}
               <Link className={textStyles.textLink} href={guide.crossLink.href}>
                 {guide.crossLink.anchor}
+              </Link>
+              .
+            </p>
+          ) : null}
+          {slug === "qualifying-payment-amount-explained" ? (
+            <p className={`${textStyles.meta} mt-6`}>
+              For the short definition, see{" "}
+              <Link className={textStyles.textLink} href="/glossary#qpa">
+                QPA in the glossary
+              </Link>
+              .
+            </p>
+          ) : null}
+          {slug === "open-negotiation-explained" ? (
+            <p className={`${textStyles.meta} mt-6`}>
+              For the short definition, see{" "}
+              <Link className={textStyles.textLink} href="/glossary#open-negotiation">
+                open negotiation in the glossary
               </Link>
               .
             </p>
@@ -123,8 +181,10 @@ export default async function GuidePage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
+          {isBatchingGuide ? <CmsRuleBatchingVideo className="mb-14" /> : null}
           <EntityFaq items={guide.faqs} />
           <LegalFooter className="mt-10" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
 

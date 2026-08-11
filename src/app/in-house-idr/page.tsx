@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { LaborCalculator } from "@/components/sydra/labor-calculator";
@@ -17,7 +18,11 @@ import {
   IN_HOUSE_IDR_HERO,
   IN_HOUSE_IDR_SECTIONS,
 } from "@/lib/content/in-house-idr-page";
-import { faqPageJsonLd, serviceJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  medicallyReviewedWebPageJsonLd,
+  serviceJsonLd,
+} from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -29,7 +34,7 @@ function InHouseIdrJsonLd() {
       <BreadcrumbJsonLd items={[...BREADCRUMBS.inHouseIdr]} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path: "/in-house-idr",
             name: "In house IDR, without the headcount.",
             description: PAGE_METADATA.inHouseIdr.description ?? "",
@@ -72,6 +77,13 @@ export default function InHouseIdrPage() {
           </p>
           <div className="mt-10 border-t border-rule pt-10">
             <LaborCalculator ctaHref="/demo" ctaLabel="Schedule a demo for your numbers" />
+            <p className={`${textStyles.bodyMeasure} mt-6`}>
+              Prefer recovery math instead of labor time?{" "}
+              <Link className={textStyles.textLink} href="/idr-recovery-calculator">
+                Open the full calculator
+              </Link>
+              .
+            </p>
           </div>
         </Section>
 
@@ -113,6 +125,7 @@ export default function InHouseIdrPage() {
             items={IN_HOUSE_IDR_FAQS}
           />
           <ServiceCrossLinks current="/in-house-idr" />
+          <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
 

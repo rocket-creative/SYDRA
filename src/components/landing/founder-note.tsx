@@ -10,7 +10,8 @@ export function FounderNote() {
         Sydra is built by{" "}
         <strong className="font-medium text-brand">Dr. John M. Abrahams, MD</strong>, a board
         certified neurosurgeon. Specialty depth for orthopedics, neurosurgery, spine, and plastics.
-        One claim per CPT, every time.
+        Files one claim per CPT by default, because it protects your win rate. Batching is available
+        and CMS sanctioned as of the 2026 rule. You decide per submission.
       </p>
     </Section>
   );

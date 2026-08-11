@@ -10,6 +10,7 @@ import {
   WaitHookBlock,
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
@@ -33,7 +34,11 @@ import {
   getSpecialtyMeta,
 } from "@/lib/idr/taxonomy";
 import type { SpecialtySlug } from "@/lib/idr/types";
-import { faqPageJsonLd, itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import {
+  faqPageJsonLd,
+  itemListJsonLd,
+  medicallyReviewedWebPageJsonLd,
+} from "@/lib/seo/json-ld";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -91,7 +96,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={crumbs} />
       <PageJsonLd
         data={[
-          webPageJsonLd({
+          ...medicallyReviewedWebPageJsonLd({
             path,
             name: h1Specialty(painLabel),
             description: meta.blurb,
@@ -135,6 +140,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
 
         <Section tone="neutral">
           <EntityFaq items={faqs} />
+          <MedicalReviewBlock />
         </Section>
 
         <SydraCtaBand />
