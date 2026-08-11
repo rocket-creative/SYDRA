@@ -48,6 +48,24 @@ export function SydraFooter() {
           </Link>
           <Link
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/how-it-works"
+          >
+            How it works
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/faq"
+          >
+            FAQ
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/security"
+          >
+            Security
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
             href="/resources"
           >
             Resources

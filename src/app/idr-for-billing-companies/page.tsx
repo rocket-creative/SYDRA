@@ -151,10 +151,14 @@ export default function IdrForBillingCompaniesPage() {
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>
               Also see{" "}
+              <Link className={textStyles.textLink} href="/faq#heading-billing-faq">
+                billing company FAQs
+              </Link>
+              ,{" "}
               <Link className={textStyles.textLink} href="/in-house-idr">
                 running IDR in house
-              </Link>{" "}
-              and{" "}
+              </Link>
+              , and{" "}
               <Link className={textStyles.textLink} href="/sydra-vs-idr-attorney">
                 Sydra vs an IDR attorney
               </Link>
@@ -162,6 +166,7 @@ export default function IdrForBillingCompaniesPage() {
             </p>
           </div>
           <ServiceFaqSection
+            className="mt-16"
             heading="Questions billing companies ask first"
             id="heading-idr-for-billing-faq"
             items={IDR_FOR_BILLING_FAQS}

@@ -77,6 +77,10 @@ const DYNAMIC_ROUTES: MobileRoute[] = [
   { name: "idr-payer", path: `/idr/payer/${samplePayer}` },
   { name: "idr-specialty", path: `/idr/specialty/${sampleSpecialty}` },
   { name: "idr-guide-slug", path: `/idr/guide/${sampleGuide}` },
+  {
+    name: "idr-guide-federal-vs-state",
+    path: "/idr/guide/federal-vs-state-jurisdiction",
+  },
   { name: "compare-slug", path: `/compare/${sampleComparison}` },
   { name: "resources-slug", path: `/resources/${sampleResource}` },
   { name: "resources-updates-slug", path: `/resources/updates/${sampleUpdate}` },

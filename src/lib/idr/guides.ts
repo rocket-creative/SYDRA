@@ -255,6 +255,11 @@ export const GUIDES: Guide[] = [
   {
     slug: "self-funded-vs-fully-insured",
     title: "Self funded versus fully insured and why it decides your IDR path",
+    crossLink: {
+      href: "/idr/guide/federal-vs-state-jurisdiction",
+      anchor: "federal vs state IDR jurisdiction",
+      intro: "For how plan type and specified state law decide the filing forum, see",
+    },
     metaTitle: "Self funded versus fully insured: your IDR path | Sydra",
     metaDescription:
       "How to tell whether an out of network claim routes to federal IDR or a state process, and why plan type is the first thing your team should check.",

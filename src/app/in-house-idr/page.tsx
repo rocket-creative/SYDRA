@@ -120,6 +120,7 @@ export default function InHouseIdrPage() {
             </p>
           </div>
           <ServiceFaqSection
+            className="mt-16"
             heading="Questions about running it in house"
             id="heading-in-house-idr-faq"
             items={IN_HOUSE_IDR_FAQS}

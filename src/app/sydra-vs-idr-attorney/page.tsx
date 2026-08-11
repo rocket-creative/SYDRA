@@ -118,6 +118,7 @@ export default function SydraVsAttorneyPage() {
             </p>
           </div>
           <ServiceFaqSection
+            className="mt-16"
             heading="Questions about cost and control"
             id="heading-sydra-vs-attorney-faq"
             items={SYDRA_VS_ATTORNEY_FAQS}

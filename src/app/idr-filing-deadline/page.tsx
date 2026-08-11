@@ -156,6 +156,7 @@ export default function IdrFilingDeadlinePage() {
             <CtaTrustSignals className="mt-4" />
           </div>
           <ServiceFaqSection
+            className="mt-16"
             heading="Questions about the filing deadline"
             id="heading-idr-filing-deadline-faq"
             items={IDR_FILING_DEADLINE_FAQS}

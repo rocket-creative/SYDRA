@@ -60,6 +60,9 @@ export function GET(): Response {
     `- [Security](${base}/security): HIPAA controls, BAA, PHI handling.`,
   );
   lines.push(
+    `- [FAQ](${base}/faq): common questions for practices and billing companies.`,
+  );
+  lines.push(
     `- [Schedule a demo](${base}/demo): see Sydra run on a real denied claim.`,
   );
   lines.push("");

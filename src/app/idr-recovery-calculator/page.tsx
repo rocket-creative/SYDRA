@@ -139,6 +139,7 @@ export default function IdrRecoveryCalculatorPage() {
             </p>
           </div>
           <ServiceFaqSection
+            className="mt-16"
             heading="Questions about this estimate"
             id="heading-calculator-faq"
             items={IDR_RECOVERY_CALCULATOR_FAQS}

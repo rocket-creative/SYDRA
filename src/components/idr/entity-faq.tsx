@@ -22,7 +22,7 @@ export function EntityFaq({ heading = "Common questions.", items }: EntityFaqPro
           <details className="group py-0" key={item.q}>
             <summary className="cursor-pointer list-none py-6 text-left text-base font-normal text-brand md:text-[17px] [&::-webkit-details-marker]:hidden">
               <span className="flex items-start justify-between gap-6">
-                {item.q}
+                <span className="min-w-0">{item.q}</span>
                 <span
                   aria-hidden
                   className="type-caption shrink-0 text-body transition-transform duration-300 group-open:rotate-45"

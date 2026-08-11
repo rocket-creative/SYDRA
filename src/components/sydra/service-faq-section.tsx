@@ -7,6 +7,8 @@ type ServiceFaqSectionProps = {
   heading?: string;
   items: { q: string; a: string }[];
   highlightForReview?: boolean;
+  /** Extra classes when stacked after sibling content in the same Section. */
+  className?: string;
 };
 
 export function ServiceFaqSection({
@@ -14,12 +16,13 @@ export function ServiceFaqSection({
   heading = "Common questions",
   items,
   highlightForReview = true,
+  className = "",
 }: ServiceFaqSectionProps) {
   const wrap = (content: ReactNode) =>
     highlightForReview ? <ReviewHighlight>{content}</ReviewHighlight> : content;
 
   return (
-    <section aria-labelledby={id} className="prose-measure mt-16">
+    <section aria-labelledby={id} className={`prose-measure ${className}`.trim()}>
       <h2 className="type-h2 text-brand" id={id}>
         {wrap(heading)}
       </h2>
@@ -28,7 +31,7 @@ export function ServiceFaqSection({
           <details key={item.q} className="group py-0">
             <summary className="cursor-pointer list-none py-6 text-left text-base font-normal text-brand md:text-[17px] [&::-webkit-details-marker]:hidden">
               <span className="flex items-start justify-between gap-6">
-                {wrap(item.q)}
+                <span className="min-w-0">{wrap(item.q)}</span>
                 <span
                   aria-hidden
                   className="type-caption shrink-0 text-body transition-transform duration-300 group-open:rotate-45"

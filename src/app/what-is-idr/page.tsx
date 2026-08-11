@@ -168,6 +168,7 @@ export default function WhatIsIdrPage() {
             </p>
           </div>
           <ServiceFaqSection
+            className="mt-16"
             heading="Questions providers ask first"
             id="heading-what-is-idr-faq"
             items={WHAT_IS_IDR_FAQS}
