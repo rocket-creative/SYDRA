@@ -59,6 +59,11 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
                 </CtaLink>
               </p>
             ) : null}
+            {item.a.includes("/roadmap") ? (
+              <p className="mt-4">
+                <CtaLink href="/roadmap">See product roadmap</CtaLink>
+              </p>
+            ) : null}
           </div>
         </details>
       ))}

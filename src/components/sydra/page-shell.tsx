@@ -126,6 +126,10 @@ export const BREADCRUMBS = {
     { name: "Home", path: "" },
     { name: "FAQ", path: "/faq" },
   ],
+  roadmap: [
+    { name: "Home", path: "" },
+    { name: "Roadmap", path: "/roadmap" },
+  ],
   resources: [
     { name: "Home", path: "" },
     { name: "Resources", path: "/resources" },

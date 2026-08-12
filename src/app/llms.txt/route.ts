@@ -63,6 +63,9 @@ export function GET(): Response {
     `- [FAQ](${base}/faq): common questions for practices and billing companies.`,
   );
   lines.push(
+    `- [Roadmap](${base}/roadmap): what Sydra ships today and what is in active development.`,
+  );
+  lines.push(
     `- [Schedule a demo](${base}/demo): see Sydra run on a real denied claim.`,
   );
   lines.push("");

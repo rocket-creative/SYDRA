@@ -55,6 +55,7 @@ const STATIC_ROUTES: MobileRoute[] = [
   { name: "idr-for-billing-companies", path: "/idr-for-billing-companies" },
   { name: "idr-recovery-calculator", path: "/idr-recovery-calculator" },
   { name: "faq", path: "/faq" },
+  { name: "roadmap", path: "/roadmap" },
   { name: "about", path: "/about" },
   { name: "contact", path: "/contact" },
   { name: "privacy", path: "/privacy" },

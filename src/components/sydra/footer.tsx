@@ -60,6 +60,12 @@ export function SydraFooter() {
           </Link>
           <Link
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/roadmap"
+          >
+            Roadmap
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
             href="/security"
           >
             Security

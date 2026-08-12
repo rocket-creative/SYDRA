@@ -17,6 +17,7 @@ const LINKS = [
   { href: "/resources/updates", label: "Resource updates" },
   { href: "/glossary", label: "IDR glossary" },
   { href: "/faq", label: "Full FAQ" },
+  { href: "/roadmap", label: "Product roadmap" },
 ] as const;
 
 type ServiceCrossLinksProps = {

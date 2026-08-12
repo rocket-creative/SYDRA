@@ -98,6 +98,7 @@ function coreEntries(): Entry[] {
     { path: "/glossary", priority: 0.65, changeFrequency: "monthly" },
     { path: "/idr-recovery-calculator", priority: 0.75, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/roadmap", priority: 0.65, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.75, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },

@@ -183,6 +183,13 @@ export const PAGE_METADATA = {
     ogImageAlt:
       "Answers to common questions about Sydra NSA IDR software for surgical billing teams.",
   }),
+  roadmap: buildPageMetadata({
+    title: "Sydra Product Roadmap | What's Live and In Development",
+    description:
+      "See what Sydra ships today for NSA IDR and what is in active development for billing companies: bulk import, eligibility scanning, and account structure.",
+    path: "/roadmap",
+    ogImageAlt: "Sydra product roadmap for NSA IDR software capabilities.",
+  }),
   resources: buildPageMetadata({
     title: "Resources — Federal IDR and No Surprises Act Guides | Sydra",
     description:

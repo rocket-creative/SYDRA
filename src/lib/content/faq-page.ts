@@ -46,28 +46,49 @@ export const FAQ_BILLING_SECTION_TITLE =
 
 export const FAQ_BILLING_COMPANY_ITEMS: FaqItem[] = [
   {
+    q: "Can Sydra support a medical billing company managing disputes for multiple independent surgeon clients, with separate TINs and NPIs?",
+    a:
+      "Yes, as long as those clients are all set up under the medical billing company's Sydra platform. A dedicated billing company account structure, sitting above individual provider profiles rather than requiring each client to be configured as its own separate provider profile, is in active development. See " +
+      siteUrl() +
+      "/roadmap for status.",
+  },
+  {
     q: "Does the platform identify potentially eligible out of network claims automatically?",
     a: "Yes, per claim. Sydra runs an eligibility check on each uploaded EOB before your team invests time in a packet, checking the claim against NSA eligibility and open negotiation requirements.",
   },
   {
     q: "How does Sydra determine whether a claim belongs in Federal IDR versus a state specific dispute process?",
-    a: "Two questions decide it. First, whether the health plan is self funded or fully insured, since self funded ERISA plans always route to federal IDR regardless of state. Second, if the plan is fully insured, whether that state has its own specified state law covering the service in question. Where one applies, state law controls instead of federal IDR.",
+    a:
+      "Two questions decide it. First, whether the health plan is self funded or fully insured, since self funded ERISA plans always route to federal IDR regardless of state. Second, if the plan is fully insured, whether that state has its own specified state law covering the service in question. Sydra determines this using the EOB remark codes on the claim. Reviewing insurance card details as an additional data point is planned, see " +
+      siteUrl() +
+      "/roadmap.",
   },
   {
     q: "What functionality is currently available for New Jersey, New York, and New Hampshire disputes?",
-    a: "New York, New Jersey, and New Hampshire all have dedicated jurisdiction guides and state pages covering their process specifics, including New York's three year lookback allowing providers to challenge commercial payments going back three years. Operationally, Sydra is currently live or rolling out in Texas, California, New York, New Jersey, Florida, and Arizona for 2026. New Hampshire is not currently on that operational list.",
+    a: "Sydra provides state regulation guidance for all three states today, including New York's three year lookback allowing providers to challenge commercial payments going back three years. Operational rollout is prioritized by client demand, New York and New Jersey are live first, with additional states added as client need grows. New Hampshire can be added quickly once there's a client need for it.",
   },
   {
-    q: "Does the system manage open negotiation and IDR filing deadlines?",
-    a: "Yes. Deadlines and eligibility windows run on deterministic software rather than a model, so the 30 business day open negotiation period and the 4 business day IDR initiation window are tracked without relying on AI judgment. Batching is available, and your team chooses whether to batch per submission rather than it being automatic.",
+    q: "Does the system manage open negotiation notices, business day deadlines, IDR initiation, batching, and evidence and offer deadlines?",
+    a:
+      "Yes. Deadlines and eligibility windows run on deterministic software rather than a model, so the open negotiation period and IDR initiation window are tracked without relying on AI judgment, and batching is available with your team choosing per submission. Automated payment follow up tracking is in active development, see " +
+      siteUrl() +
+      "/roadmap.",
   },
   {
-    q: "What payer level, CPT level, provider level, and geographic level analytics are available?",
-    a: "Sydra publishes aggregate published federal benchmarks, sourced from CMS public use files and Georgetown CHIR, broken out by specialty and award multiple.",
+    q: "Can we establish our own negotiation parameters, settlement thresholds, and IDR offer strategies?",
+    a: "Yes. You control your own offer strategy and settlement thresholds rather than being locked into a fixed methodology.",
+  },
+  {
+    q: "What payer level, CPT level, provider level, and geographic level analytics are available for prior negotiations and IDR outcomes?",
+    a: "Three layers. Published federal benchmarks sourced from CMS public use files, your own historical data from prior wins and losses as you add it, and broader market data sourced from Optum and FairHealth.",
+  },
+  {
+    q: "Can all of our claim, payer, settlement, and outcome data be exported, and who owns the underlying data?",
+    a: "Yes, all of it can be exported, and you own your data.",
   },
   {
     q: "How is Sydra adapting its platform to the new CMS IDR Gateway and the Federal IDR operational changes being implemented in 2026?",
-    a: "The May 28, 2026 CMS final rule cut the federal IDR administrative fee from $115 to $15 per party per dispute and formally sanctioned batching, both of which Sydra's platform already reflects. CMS is also rolling out a new centralized IDR Gateway in phases through late 2026, replacing the old single use web forms.",
+    a: "Several ways, all already built in rather than planned. Sydra generates submissions that are Gateway ready and mirrors the Gateway's own case model, so as CMS migrates from single use forms to the centralized portal, intake, documentation, and status tracking already line up with it, no spreadsheets and no re keying. Sydra maintains a payer registration lookup so every dispute identifies the correct plan the first time, removing a common cause of rejected or delayed filings under the new identification requirements. The new batching criteria, same encounter items, same service code across patients, and specialty CPT ranges, are encoded directly into the platform, which auto groups line items up to the 50 item cap to maximize what goes into each dispute and lower the effective per claim fee. With eligibility and information requests now running on 5 business day clocks and open negotiation responses due by day 15, missed deadlines mean lost disputes, so Sydra's tracking and alerts are built around these exact windows, and the required eligibility documentation is auto assembled to match the expanded notice requirements. Because unpaid fees now cause a party's offer to be disregarded entirely, Sydra tracks the $15 fee and offer deadlines per dispute, while batching keeps the total fee burden low relative to the recovery. Sydra also reads the CARC and RARC remittance codes payers are now required to use to flag NSA applicability, so the platform automatically surfaces underpaid out of network claims that are actually eligible, the top of the recovery funnel.",
   },
   {
     q: "What does Sydra cost?",
