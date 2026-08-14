@@ -42,7 +42,8 @@ ${GA4_ID ? `          gtag('config', '${GA4_ID}');\n` : ""}
               'send_to': '${GOOGLE_ADS_CONVERSION_SEND_TO}',
               'value': 1.0,
               'currency': 'USD',
-              'event_callback': callback
+              'event_callback': callback,
+              'event_timeout': 2000
             });
             return false;
           }

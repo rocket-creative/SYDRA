@@ -7,14 +7,18 @@ the primary conversion for the recover campaign.
 ## What the website already does (do not change Ads tags on the site)
 
 The site fires the existing **Submit lead form** conversion event after a
-**full** lead submit (step 2), not after email-only step 1.
+**full** lead submit (step 2), not after email-only step 1. The same event
+covers `/recover`, `/demo`, `/case-review`, and the homepage form.
 
 Flow:
 
 1. Visitor lands on `https://www.sydrahealth.com/recover?...`
+   (or `/demo`, `/case-review`)
 2. Completes the two-step form
-3. Redirects to `https://www.sydrahealth.com/recover/thank-you`
-4. Thank-you page fires once:
+3. Form page fires Submit lead form, then redirects to the matching thank-you
+   URL (`/recover/thank-you`, `/demo/thank-you`, or `/case-review/thank-you`)
+4. Thank-you page may fire once more with the same `transaction_id` (Ads
+   dedupes). Do **not** add a page-load conversion on any thank-you URL.
 
 ```text
 gtag('event', 'conversion', {
@@ -54,7 +58,7 @@ If the action is missing, create **Website** → **Event** conversion:
 - Event: use the existing tag / event that matches  
   `send_to = AW-18244375722/MhI6CKKQz8scEKqpzPtD`
 - Do **not** create a duplicate page-load conversion on `/recover/thank-you`
-  (that would double-count with the event snippet).
+  or `/case-review/thank-you` (that would double-count with the event snippet).
 
 ### B. Wire the recover campaign to that conversion
 
@@ -102,7 +106,8 @@ Auto-tagging (`gclid`) must stay **On** (Account settings → Auto-tagging).
    (can take a few minutes to hours).
 6. In browser DevTools → Network, confirm a request to Google that includes
    the conversion (`googleadservices`, `google.com/ccm/collect`, or similar)
-   after landing on thank-you. Refreshing thank-you must **not** fire again.
+   on full submit and/or thank-you. Refreshing thank-you must **not** add a
+   new unique `transaction_id`.
 7. Confirm sales inbox / lead email arrived (site-side proof the lead is real).
 
 ### F. What NOT to do
@@ -112,6 +117,8 @@ Auto-tagging (`gclid`) must stay **On** (Account settings → Auto-tagging).
   the event snippet is already Primary (double counting).
 - Prefer making **Free Demo Booked** and **Demo Thank You Page Visit** Secondary
   (or removing them) so Maximize Conversions learns from Submit lead form only.
+  **Demo Thank You Page Visit** only matches `/demo/thank-you` and will miss
+  `/case-review/thank-you` and `/recover/thank-you`.
 - Do not mark step-1 email capture as the conversion. Only full submit →
   thank-you counts.
 - Do not put `{creative}` or other unknown ValueTrack tokens in the Final URL.
@@ -125,4 +132,6 @@ Auto-tagging (`gclid`) must stay **On** (Account settings → Auto-tagging).
 - [ ] Recover campaign optimizes to that conversion
 - [ ] Final URLs use literal `utm_content` labels
 - [ ] One test full submit from `/recover` shows in Ads (and email arrives)
-- [ ] Refreshing `/recover/thank-you` does not add another conversion
+- [ ] One test full submit from `/case-review` shows in Ads as Submit lead form
+- [ ] Refreshing `/recover/thank-you` or `/case-review/thank-you` does not add
+      another conversion

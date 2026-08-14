@@ -8,6 +8,8 @@ import type { ReactNode } from "react";
 import { trackLeadGA4 } from "@/lib/analytics/ga4";
 import {
   markLeadConversionPending,
+  reportAdsConversion,
+  whenGtagReady,
   type AdsConversionAction,
 } from "@/lib/analytics/google-ads";
 import { MarketingConsentFields } from "@/components/forms/marketing-consent";
@@ -374,21 +376,24 @@ export function LeadForm({
         }
         if (result.emailDelivered === false) {
           console.error("[lead-form] Full lead emailDelivered:false", stepOne.email);
-          setFormStatus({ status: "error", message: EMAIL_DELIVERY_ERROR });
-          return;
         }
 
         trackLeadGA4(
           typeof productInterest === "string" ? productInterest : undefined,
           landingPage,
         );
-        // Conversion fires once on the thank you page after redirect (not here).
-        markLeadConversionPending({
+        const transactionId = markLeadConversionPending({
           email: stepOne.email,
           landingPage,
           action: copy.conversionAction,
         });
-        window.location.assign(thankYouPath);
+        await whenGtagReady();
+        reportAdsConversion({
+          url: thankYouPath,
+          transactionId: transactionId ?? undefined,
+          email: stepOne.email,
+          action: copy.conversionAction,
+        });
       } catch {
         setFormStatus({
           status: "error",

@@ -5,36 +5,48 @@ import { useEffect } from "react";
 import {
   consumeLeadConversionPending,
   reportAdsConversion,
+  whenGtagReady,
   type AdsConversionAction,
 } from "@/lib/analytics/google-ads";
 
 type LeadConversionOnMountProps = {
   /**
-   * Expected conversion for this thank-you page. Guards against firing the
-   * wrong label if a stale session flag somehow lands on the wrong page.
+   * Fallback action if a legacy payload omitted one. Both values resolve to
+   * Submit lead form; do not drop the hit on a mismatch.
    */
   action?: AdsConversionAction;
 };
 
 /**
- * Fires Google Ads "Submit lead form" exactly once after a real lead submit
- * redirects here. Only fires when a lead form set the one-time sessionStorage
- * payload (consumed on read), so refreshes, back-button navigation, and
- * direct/organic visits never fire it. Renders nothing.
+ * Backup Google Ads "Submit lead form" fire after a real lead submit redirects
+ * here. Waits for gtag before consuming the one-time sessionStorage payload so
+ * a late script load cannot drop the hit. Same transaction_id as the form-page
+ * fire so Ads dedupes. Refreshes, back-button, and direct visits never fire.
+ * Renders nothing.
  */
 export function LeadConversionOnMount({
   action = "free_demo",
 }: LeadConversionOnMountProps) {
   useEffect(() => {
-    const pending = consumeLeadConversionPending();
-    if (!pending) return;
-    if (pending.action !== action) return;
+    let cancelled = false;
 
-    reportAdsConversion({
-      action: pending.action,
-      transactionId: pending.transactionId,
-      email: pending.email,
-    });
+    void (async () => {
+      await whenGtagReady();
+      if (cancelled) return;
+
+      const pending = consumeLeadConversionPending();
+      if (!pending) return;
+
+      reportAdsConversion({
+        action: pending.action ?? action,
+        transactionId: pending.transactionId,
+        email: pending.email,
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [action]);
 
   return null;

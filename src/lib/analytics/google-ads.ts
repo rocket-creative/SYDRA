@@ -1,11 +1,14 @@
 /**
  * Google Ads (gtag.js) configuration and conversion tracking.
  *
- * The global site tag is loaded once in the root layout. Conversion events are
- * fired from the client after a successful lead form submit redirects to a
- * thank-you page (e.g. /demo/thank-you, /recover/thank-you, or
- * /case-review/thank-you).
+ * The global site tag is loaded once in the root layout. On a successful full
+ * lead submit the form fires Submit lead form (Google's event_callback snippet)
+ * then navigates to a thank-you page. The thank-you page is a backup fire with
+ * the same transaction_id so Ads dedupes. Paths: /demo/thank-you,
+ * /recover/thank-you, /case-review/thank-you.
  */
+
+const GTAG_READY_TIMEOUT_MS = 2000;
 
 /** Google Ads account / conversion ID. */
 export const GOOGLE_ADS_ID = "AW-18244375722";
@@ -44,9 +47,9 @@ export function sendToForAction(_action: AdsConversionAction): string {
 
 /**
  * sessionStorage key holding a one-time payload set by a lead form on a
- * successful (200) submit that redirects to a thank-you page. The thank-you
- * page consumes it to fire the conversion exactly once, so refreshes,
- * back-navigation, and direct/organic visits never fire it.
+ * successful (200) submit. The thank-you page consumes it for a backup fire
+ * with the same transaction_id. Refreshes, back-navigation, and direct visits
+ * never fire.
  */
 export const LEAD_CONVERSION_FLAG_KEY = "sydra_pending_lead_conversion";
 
@@ -89,11 +92,38 @@ function newToken(): string {
 }
 
 /**
+ * Resolve when `window.gtag` is a function, or after `timeoutMs`.
+ * The form page has usually already loaded the tag; thank-you is a fresh load.
+ */
+export function whenGtagReady(timeoutMs = GTAG_READY_TIMEOUT_MS): Promise<boolean> {
+  if (typeof window === "undefined") {
+    return Promise.resolve(false);
+  }
+  if (typeof window.gtag === "function") {
+    return Promise.resolve(true);
+  }
+  return new Promise((resolve) => {
+    const started = Date.now();
+    const id = window.setInterval(() => {
+      if (typeof window.gtag === "function") {
+        window.clearInterval(id);
+        resolve(true);
+        return;
+      }
+      if (Date.now() - started >= timeoutMs) {
+        window.clearInterval(id);
+        resolve(false);
+      }
+    }, 50);
+  });
+}
+
+/**
  * Fire a Google Ads conversion. Matches the Ads snippet:
- * `gtag('event', 'conversion', { send_to, value, currency, event_callback })`.
+ * `gtag('event', 'conversion', { send_to, value, currency, event_callback, event_timeout })`.
  *
- * Pass `url` when the form should redirect after the hit (legacy). Prefer the
- * thank-you mount path with `markLeadConversionPending` instead.
+ * Pass `url` so the form navigates after the hit (Google's event_callback
+ * pattern). Thank-you mount is a backup with the same transaction_id.
  *
  * Returns false (Ads snippet convention). Includes a 2s navigation fallback when
  * `url` is set so a blocked gtag still reaches the thank you page.
@@ -139,6 +169,7 @@ export function reportAdsConversion(
     value: 1.0,
     currency: "USD",
     event_callback: callback,
+    event_timeout: GTAG_READY_TIMEOUT_MS,
   };
   if (transactionId) {
     eventParams.transaction_id = transactionId;
@@ -157,7 +188,7 @@ export function reportAdsConversion(
   window.gtag("event", "conversion", eventParams);
 
   if (typeof url === "string" && url.length > 0) {
-    window.setTimeout(callback, 2000);
+    window.setTimeout(callback, GTAG_READY_TIMEOUT_MS);
   }
 
   return false;
@@ -175,19 +206,22 @@ export function reportLeadFormConversion(
 
 /**
  * Set the one-time payload that tells the thank-you page a real lead submit
- * just happened, so it (and only it) fires the Ads conversion after navigation.
- * Call this right before redirecting to the thank-you page.
+ * just happened, so it can fire a backup conversion after navigation.
+ * Call this right before `reportAdsConversion({ url })`.
+ *
+ * Returns the transaction_id even when sessionStorage is blocked, so the
+ * form-page fire can still dedupe.
  */
 export function markLeadConversionPending(input?: {
   email?: string;
   landingPage?: string;
   action?: AdsConversionAction;
-}): void {
+}): string | null {
   if (typeof window === "undefined") {
-    return;
+    return null;
   }
+  const token = newToken();
   try {
-    const token = newToken();
     const payload: PendingLeadConversion = {
       token,
       transactionId: token,
@@ -197,9 +231,10 @@ export function markLeadConversionPending(input?: {
     };
     window.sessionStorage.setItem(LEAD_CONVERSION_FLAG_KEY, JSON.stringify(payload));
   } catch {
-    // sessionStorage can throw (private mode / disabled). The 2s navigation
-    // fallback and gtag guards still keep the flow working without a flag.
+    // sessionStorage can throw (private mode / disabled). Form-page fire with
+    // event_callback still records the conversion without a thank-you flag.
   }
+  return token;
 }
 
 /**
