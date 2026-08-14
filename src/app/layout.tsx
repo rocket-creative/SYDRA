@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { GoogleAdsTag } from "@/components/analytics/google-ads";
@@ -56,6 +57,7 @@ export default function RootLayout({
         <UtmFirstTouch />
         <WebVitalsReporter />
         <GoogleAdsTag />
+        <Analytics />
       </body>
     </html>
   );

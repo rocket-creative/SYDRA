@@ -31,6 +31,7 @@ const securityHeaders = [
         "https://www.google.com",
         "https://pagead2.googlesyndication.com",
         "https://googleads.g.doubleclick.net",
+        "https://va.vercel-scripts.com",
       ].join(" "),
       "style-src 'self' 'unsafe-inline'",
       [
@@ -69,6 +70,8 @@ const securityHeaders = [
         "https://*.g.doubleclick.net",
         "https://ad.doubleclick.net",
         "https://stats.g.doubleclick.net",
+        "https://va.vercel-scripts.com",
+        "https://vitals.vercel-insights.com",
       ].join(" "),
       [
         "frame-src 'self'",
