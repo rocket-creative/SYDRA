@@ -9,7 +9,7 @@ import {
   editorialSelectClass,
   FormField,
 } from "@/components/ui/form-field";
-import { CONSENT_TEXT_VERSION, parseMarketingConsent } from "@/lib/consent/marketing";
+import { CONSENT_TEXT_VERSION } from "@/lib/consent/marketing";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
 import {
   CONTACT_INTENT_OPTIONS,
@@ -41,7 +41,7 @@ export function ContactForm() {
       intent: formData.get("intent"),
       message: formData.get("message") ?? "",
       website: formData.get("website") ?? "",
-      marketingConsent: parseMarketingConsent(formData.get("marketingConsent")),
+      marketingConsent: false,
       consentTextVersion: CONSENT_TEXT_VERSION,
     };
 
@@ -157,7 +157,7 @@ export function ContactForm() {
           </a>
         </p>
       ) : null}
-      <MarketingConsentFields idPrefix="contact" />
+      <MarketingConsentFields />
       <Button
         className="w-full sm:w-auto"
         disabled={status === "submitting"}

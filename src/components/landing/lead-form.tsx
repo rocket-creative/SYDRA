@@ -207,7 +207,6 @@ function LeadFormInner({
   const [partialSent, setPartialSent] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>({ status: "idle" });
   const [phone, setPhone] = useState("");
-  const [marketingConsent, setMarketingConsent] = useState(false);
   const [estimate, setEstimate] = useState<CalculatorEstimate | null>(null);
   const [routeCtx, setRouteCtx] = useState(() =>
     mergeRouteForSubmit(tracking.state),
@@ -317,7 +316,7 @@ function LeadFormInner({
         leadKind: "partial" as const,
         email: values.email,
         website: formData.get("website") ?? "",
-        marketingConsent,
+        marketingConsent: false,
         consentTextVersion: CONSENT_TEXT_VERSION,
         ...attributionFields(),
       };
@@ -352,7 +351,7 @@ function LeadFormInner({
         });
       }
     },
-    [attributionFields, marketingConsent],
+    [attributionFields],
   );
 
   const handleStepTwo = useCallback(
@@ -384,7 +383,7 @@ function LeadFormInner({
         productInterest,
         partialUpgraded: partialSent,
         website: formData.get("website") ?? "",
-        marketingConsent,
+        marketingConsent: false,
         consentTextVersion: CONSENT_TEXT_VERSION,
         ...attributionFields(),
       };
@@ -437,7 +436,6 @@ function LeadFormInner({
       copy.defaultProductInterest,
       copy.phoneError,
       landingPage,
-      marketingConsent,
       partialSent,
       phone,
       stepOne.email,
@@ -512,11 +510,7 @@ function LeadFormInner({
 
           <RiskStack text={copy.riskStack} />
 
-          <MarketingConsentFields
-            checked={marketingConsent}
-            idPrefix={`${anchorId}-step1`}
-            onCheckedChange={setMarketingConsent}
-          />
+          <MarketingConsentFields />
 
           <Button
             className="w-full sm:w-auto"
@@ -715,11 +709,7 @@ function LeadFormInner({
 
           <RiskStack text={copy.riskStack} />
 
-          <MarketingConsentFields
-            checked={marketingConsent}
-            idPrefix={`${anchorId}-step2`}
-            onCheckedChange={setMarketingConsent}
-          />
+          <MarketingConsentFields />
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
