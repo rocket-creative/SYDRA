@@ -84,7 +84,7 @@ export const IDR_FOR_BILLING_FAQS: ContentFaq[] = [
   },
   {
     q: "Do you still take a percentage of recovery at billing company volume?",
-    a: "No. Every Sydra tier is a platform fee structured below a typical 20 percent contingency, not a percentage of recovery, regardless of volume.",
+    a: "No. Sydra is priced on per claim and subscription models rather than a percentage of recovery, so your cost does not grow with the size of the recoveries you win for clients.",
   },
 ];
 
