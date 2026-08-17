@@ -8,7 +8,7 @@ import { getSupabaseService } from "@/lib/leads/supabase-admin";
 
 export type LeadFallbackPayload = {
   kind: "partial" | "full";
-  source: "postcard" | "demo" | "contact" | "privacy_request";
+  source: "postcard" | "demo" | "contact" | "privacy_request" | "claim_review";
   subject: string;
   fields: Record<string, string | number | boolean | null | undefined>;
   submittedAt: string;

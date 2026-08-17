@@ -5,7 +5,7 @@ import { getSupabaseService } from "@/lib/leads/supabase-admin";
 export type LandingLeadRow = {
   id: string;
   kind: "partial" | "full";
-  source: "postcard" | "demo" | "contact" | "privacy_request";
+  source: "postcard" | "demo" | "contact" | "privacy_request" | "claim_review";
   subject: string;
   email: string | null;
   state: string | null;
