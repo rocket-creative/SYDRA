@@ -135,7 +135,7 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoHref} />
+          <DenialCta />
         </Section>
 
         <Section tone="neutral">

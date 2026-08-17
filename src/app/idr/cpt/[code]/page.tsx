@@ -145,7 +145,7 @@ export default async function CptHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="neutral">
-          <DenialCta href={demoHref} />
+          <DenialCta />
         </Section>
 
         <Section tone="white">

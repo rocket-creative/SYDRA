@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import type { ComposedDenial } from "@/lib/idr/denial-engine";
 import { CTA, DISCLAIMER, PROMISE, WAIT_HOOK } from "@/lib/idr/copy";
-import type { StatePathway } from "@/lib/idr/state-pathways";
 import { statePathwaySentence } from "@/lib/idr/pain-content";
+import type { StatePathway } from "@/lib/idr/state-pathways";
 import { textStyles } from "@/lib/typography";
 
 /**
@@ -78,17 +78,7 @@ export function StatePathwayBlock({ pathway }: { pathway: StatePathway }) {
   );
 }
 
-/** 3.8 CTA. SAME wording, DIFFERENT deep link. */
-export function DenialCta({ href }: { href: string }) {
-  return (
-    <div className="prose-measure">
-      <h2 className={textStyles.sectionTitle}>Send us this denial.</h2>
-      <p className={`${textStyles.body} mt-4`}>{CTA}</p>
-      <div className="mt-8">
-        <Button href={href} showArrow>
-          Send us this denial
-        </Button>
-      </div>
-    </div>
-  );
+/** 3.8 CTA. Shared DualPageCta; destinations are /case-review and /demo. */
+export function DenialCta() {
+  return <DualPageCta className="prose-measure" lead={CTA} />;
 }

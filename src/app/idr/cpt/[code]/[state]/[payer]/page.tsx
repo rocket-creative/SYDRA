@@ -191,7 +191,7 @@ export default async function CptStatePayerPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoHref} />
+          <DenialCta />
         </Section>
 
         <Section tone="neutral">

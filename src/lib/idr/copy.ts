@@ -6,10 +6,10 @@
  * interpolate a code, state, payer, win rate, or dollar figure into any of them.
  */
 
-export const PROMISE = `When an out of network surgical claim is filed right, federal IDR routinely pays well above the insurer's first number, and most properly filed disputes go the provider's way. We build the submission, your billing team approves it, and you keep the recovery. We do this every day and we win most of the time. No one can promise a specific result on a specific claim, and we will not pretend otherwise.`;
+export const PROMISE = `Sydra was built to change the economics of that work. It identifies which of your claims qualify, assembles the submissions, and manages every date. Nothing changes in how you practice or how you bill.`;
 
 export const DISCLAIMER = `No outcome is guaranteed. Results vary by claim, payer, specialty, and documentation. Any general figures reflect the published federal record across all disputes, not a prediction about your claim. This is general information, not legal or financial advice.`;
 
-export const WAIT_HOOK = `Most practices never file, and the window does not wait. After open negotiation ends you have four business days to start a dispute. Miss it and that money is gone for good. This is the part that costs surgical practices the most, doing nothing.`;
+export const WAIT_HOOK = `There is a defined federal pathway between a payer's underpayment and a binding arbitrated amount: an open negotiation window, an eligibility determination, a batching decision, then arbitration. Each step has a hard deadline, and missing one forfeits the claim.`;
 
-export const CTA = `Send us this denial. We will tell you on the call whether it qualifies, free, and show you the dollar figure if it does. If it does not qualify you will know in 15 minutes and owe nothing.`;
+export const CTA = `Send us one denied out of network EOB. You'll get a written IDR eligibility check and a dollar estimate back within one business day. No call required.`;

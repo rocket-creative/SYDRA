@@ -146,7 +146,7 @@ export default async function PayerHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="white">
-          <DenialCta href={demoHref} />
+          <DenialCta />
         </Section>
 
         <Section tone="neutral">

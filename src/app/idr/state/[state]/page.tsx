@@ -135,7 +135,7 @@ export default async function StateHubPage({ params }: PageProps) {
         </Section>
 
         <Section tone="neutral">
-          <DenialCta href={demoHref} />
+          <DenialCta />
         </Section>
 
         <Section tone="white">
