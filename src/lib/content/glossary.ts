@@ -16,7 +16,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     slug: "administrative-fee",
     term: "Administrative fee",
     definition:
-      "A non refundable fee each party pays when initiating federal IDR. CMS sets the amount annually. It is separate from the IDRE fee, which the losing party generally bears after the determination.",
+      "A non refundable fee each party pays when initiating federal IDR, set annually by CMS. It is $15 per party, per dispute, cut from $115 by the final rule of May 28, 2026, effective June 11, 2026. It is separate from the IDRE fee, which the losing party generally bears after the determination.",
     relatedHref: "/resources/idr-eligibility-deadlines-fees",
     relatedLabel: "Eligibility, deadlines, and fees",
   },
@@ -48,7 +48,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     slug: "contingency-fee",
     term: "Contingency fee",
     definition:
-      "A fee model that typically keeps about 20 percent of every recovery. The cost rises with every successful dispute. Sydra is software your billing team operates, priced below a typical 20 percent contingency.",
+      "A fee model that typically keeps 10 to 20 percent of every recovery. The share does not shrink as your volume grows, so the cost rises with every successful dispute while the work per dispute does not. Sydra is priced on per claim and subscription models rather than a percentage of recovery.",
     relatedHref: "/sydra-vs-idr-attorney",
     relatedLabel: "Compare your IDR options",
   },

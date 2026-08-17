@@ -345,18 +345,16 @@ export function cptHubFaqs(input: {
 export const IDR_HUB_FAQS: EntityFaqItem[] = [
   {
     q: "What is IDR for a CPT code?",
-    a: "Independent dispute resolution is the federal process used to resolve a payment disagreement between a provider and a payer when a claim for a procedure is underpaid. Either side can initiate it once the required open negotiation period has passed without resolution.",
+    a: "Independent dispute resolution is the federal process for contesting an underpayment on a specific procedure. Either party can initiate it once the required open negotiation period has passed without resolution.",
   },
   {
     q: "How is the qualifying payment amount calculated for a code?",
-    a: "The qualifying payment amount is generally based on the payer's median in network rate for the same or similar service in the same geographic area, adjusted annually. Sydra pulls the correct qualifying payment amount for each CPT automatically rather than requiring manual lookup.",
+    a: "The qualifying payment amount is generally the payer's median in network rate for the same or similar service in the same geographic area, adjusted annually. It is the plan's anchor, not a cap. Sydra pulls the correct amount for each CPT rather than requiring a manual lookup.",
   },
   {
     q: "What determines whether a claim wins in IDR?",
-    a: "Certified IDR entities weigh the offer against the qualifying payment amount, the complexity of the service, the provider's training and experience, and market share considerations, among other factors defined in the federal rule. There is no guaranteed outcome, but a well documented offer with strong supporting evidence performs meaningfully better than a bare number.",
+    a: "Certified IDR entities weigh the offer against the qualifying payment amount, the complexity of the service, the provider's training and experience, and market share, among other factors defined in the federal rule. There is no guaranteed outcome. A documented offer with real comparables performs meaningfully better than a bare number.",
   },
 ];
-
-// --- Convenience re exports for pages --------------------------------------
 
 export { composeDenialReasons, demoDeepLink };

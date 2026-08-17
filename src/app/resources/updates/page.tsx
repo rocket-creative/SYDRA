@@ -63,9 +63,9 @@ export default function ResourcesUpdatesPage() {
               </span>
             </h1>
             <p className={textStyles.pageLead}>
-              Dated posts on federal IDR process changes and sourcing reminders. Each update links to
-              the full guide or hub page that owns the lasting explanation. No new statistics beyond
-              what already appears on Sydra.
+              Short notes on federal IDR process changes and sourcing. Each one links to the guide
+              that owns the lasting explanation. No statistic appears here that does not already
+              appear on Sydra with its source.
             </p>
             <div className="mt-8">
               <Button href="/demo" showArrow>

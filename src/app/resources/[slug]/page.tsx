@@ -124,7 +124,14 @@ export default async function ResourceArticlePage({ params }: PageProps) {
               {article.title}
               <span className={textStyles.pageSubtitle}>{article.subtitle}</span>
             </h1>
-            <p className={textStyles.pageLead}>{article.lead}</p>
+            {article.lead.split("\n\n").map((paragraph, index) => (
+              <p
+                className={index === 0 ? textStyles.pageLead : `${textStyles.body} mt-4`}
+                key={paragraph.slice(0, 48)}
+              >
+                {paragraph}
+              </p>
+            ))}
             <p className="type-caption mt-6 text-body">
               Published{" "}
               <time dateTime={article.datePublished}>

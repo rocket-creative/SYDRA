@@ -53,7 +53,7 @@ export default function GuideIndexPage() {
             <h1 className={textStyles.pageTitle} id="heading-idr-guides">
               Federal IDR guides.
               <span className={textStyles.pageSubtitle}>
-                How the process works for surgical billing teams.
+                How the process actually runs.
               </span>
             </h1>
             <p className={textStyles.pageLead}>
@@ -61,6 +61,11 @@ export default function GuideIndexPage() {
               arbitrated amount: an open negotiation window, an eligibility determination, a
               batching decision, then arbitration. Each step has a hard deadline, and missing one
               forfeits the claim.
+            </p>
+            <p className={`${textStyles.body} mt-4`}>
+              These guides cover each step: what qualifies a claim, which clocks are running, why
+              the qualifying payment amount comes in low, and why surgical awards land well above
+              it. Written for billing teams and practice administrators, not patients.
             </p>
           </header>
         </Section>

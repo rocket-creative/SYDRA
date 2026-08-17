@@ -47,14 +47,14 @@ export default function ResourcesPage() {
             <h1 className={textStyles.pageTitle} id="heading-resources">
               Federal IDR and No Surprises Act resources.
               <span className={textStyles.pageSubtitle}>
-                Practical guides for surgical billing teams.
+                Written for billing teams, not patients.
               </span>
             </h1>
             <p className={textStyles.pageLead}>
-              Clear, provider focused explanations of how federal independent dispute resolution
-              works, what qualifies a claim, what the process recovers, and how the No Surprises Act
-              changed out of network payment. Written for billing teams and practice administrators,
-              not patients.
+              IDR is a process problem, not a legal mystery. The rules are published. The deadlines
+              are fixed. The determinations are searchable. These pages cover how the process works,
+              what qualifies a claim, what the federal record shows about recovery, and how the No
+              Surprises Act changed out of network payment.
             </p>
           </header>
         </Section>

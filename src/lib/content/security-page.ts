@@ -89,7 +89,7 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
     id: "heading-incident",
     title: "Incident response.",
     paragraphs: [
-      "Documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI: We notify you per the timeline in your BAA. We haven't had a reportable incident involving customer PHI.",
+      "Documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI: We notify you per the timeline in your BAA.",
     ],
   },
   {

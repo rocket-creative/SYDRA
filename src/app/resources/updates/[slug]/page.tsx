@@ -153,7 +153,14 @@ export default async function ResourceUpdatePage({ params }: PageProps) {
               {update.title}
               <span className={textStyles.pageSubtitle}>{update.subtitle}</span>
             </h1>
-            <p className={textStyles.pageLead}>{update.lead}</p>
+            {update.lead.split("\n\n").map((paragraph, index) => (
+              <p
+                className={index === 0 ? textStyles.pageLead : `${textStyles.body} mt-4`}
+                key={paragraph.slice(0, 48)}
+              >
+                {paragraph}
+              </p>
+            ))}
             <p className="type-caption mt-6 text-body">
               Published{" "}
               <time dateTime={update.datePublished}>
@@ -210,7 +217,13 @@ export default async function ResourceUpdatePage({ params }: PageProps) {
             </Link>
           </p>
           <ServiceCrossLinks current="/resources/updates" />
-          <MedicalReviewBlock />
+          <MedicalReviewBlock
+            lastReviewed={
+              update.slug === "open-negotiation-and-idr-deadlines"
+                ? "July 8, 2026"
+                : undefined
+            }
+          />
           <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>

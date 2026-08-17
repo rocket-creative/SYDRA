@@ -6,7 +6,6 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
-import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { salesMailtoHref } from "@/lib/contact";
 import {
@@ -132,7 +131,6 @@ export default function SecurityPage() {
           <CtaTrustSignals className="prose-measure mt-6" />
           <ServiceCrossLinks current="/security" />
           <MedicalReviewBlock />
-          <SourcesReferences className="mt-12" />
         </Section>
       </SydraPageShell>
     </>

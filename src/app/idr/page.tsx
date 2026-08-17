@@ -79,9 +79,12 @@ export default function IdrIndexPage() {
         <Section tone="white">
           <EntityHero
             eyebrow="No Surprises Act"
-            title="Out of network surgical claims denied or underpaid?"
+            title="That payment is an opening offer."
             subtitle="Federal IDR, by code, state, payer, and specialty."
-            lead="Out of network surgical claims are routinely paid below the billed charge or denied outright. Most practices treat what arrives as the amount owed. Under the No Surprises Act it is not. It is an opening offer, and federal Independent Dispute Resolution exists specifically to contest it."
+            lead={[
+              "Out of network surgical claims are routinely paid below the billed charge or denied outright. Most practices treat what arrives as the amount owed. Under the No Surprises Act it is not. It is an opening offer, and federal Independent Dispute Resolution exists specifically to contest it.",
+              "Find your procedure, state, and payer below to see why these claims get paid short and what the federal record says about recovering the gap.",
+            ]}
           />
           <p className={`${textStyles.meta} mt-6`}>
             New to this? Start with{" "}
@@ -132,9 +135,8 @@ export default function IdrIndexPage() {
         <Section tone="white">
           <h2 className={textStyles.sectionTitle}>The federal record.</h2>
           <p className={`${textStyles.body} mt-3 prose-measure`}>
-            The published federal IDR record across all disputes. These are
-            aggregate federal figures, sourced and dated, not a prediction about
-            any one claim.
+            These are aggregate federal figures from CMS Public Use Files and independent analyses,
+            not Sydra outcomes, and they move as new files publish.
           </p>
           <dl className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {PROOF_POINTS.map((point) => {

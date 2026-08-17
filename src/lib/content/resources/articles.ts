@@ -43,7 +43,7 @@ const FEDERAL_IDR_PROCESS: ResourceArticle = {
   datePublished: "2026-06-10",
   excerpt:
     "The full federal IDR sequence for surgical billing teams, from the open negotiation notice to the arbitrator's final determination.",
-  lead: "Federal independent dispute resolution is the arbitration process the No Surprises Act created to settle out of network payment disputes between providers and health plans. This page walks through the entire sequence, from the open negotiation notice your billing team sends to the determination the arbitrator returns, so you know exactly what each step requires and when the clock starts.",
+  lead: "Federal IDR is final offer arbitration. Each side submits one number with evidence, and a certified entity picks one. There is no splitting the difference and no third figure.\n\nThat structure is why the sequence matters as much as the argument. This page walks the whole thing, from the open negotiation notice your billing team sends to the determination the entity returns, with the clock that governs each step.",
   sections: [
     {
       id: "what-is-idr",
@@ -52,6 +52,7 @@ const FEDERAL_IDR_PROCESS: ResourceArticle = {
         "Federal IDR is final offer arbitration. Each side submits a single payment amount for the disputed service, and a certified independent dispute resolution entity, the IDRE, picks one of the two offers. The arbitrator cannot split the difference or invent a third number. It selects the offer better supported by the evidence.",
         "That structure is sometimes called baseball style arbitration, because each side commits to one number and the arbitrator chooses between them. It rewards the party that submits a credible, well documented offer and penalizes a number that looks arbitrary.",
         "IDR applies to qualifying out of network claims governed by the No Surprises Act. It does not apply to Medicare, Medicaid, or claims a state arbitration law already covers. Confirming the claim qualifies is the first thing your team should settle before investing time in a submission.",
+        "Five steps. Six deadlines. Nothing here is difficult; all of it is unforgiving.",
       ],
     },
     {
@@ -106,8 +107,7 @@ const FEDERAL_IDR_PROCESS: ResourceArticle = {
       id: "where-sydra-fits",
       heading: "Where Sydra fits in the process.",
       paragraphs: [
-        "Sydra prepares the submission your team files. It identifies the correct code from the explanation of benefits, drafts the market rate justification from a library of prior determinations, builds the clinical narrative from the operative note, and assembles the credential block. Your billing team reviews, approves, and submits through the federal portal.",
-        "The process above does not change. The time it takes does. Building a complete submission from scratch runs 25 to 40 minutes per claim. With Sydra, the same packet comes together in under five minutes, and your team stays in control of every submission.",
+        "Sydra sits at step four. Steps one through three are administrative and your team runs them. Step four is where the dispute is actually won or lost, and where building by hand takes 25 to 40 minutes per claim against under 5 minutes with Sydra. Nothing files itself. Your billing team reviews every submission and files it through the portal.",
       ],
     },
   ],
@@ -143,7 +143,7 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
   dateModified: "2026-07-18",
   excerpt:
     "Eligibility rules, the business day deadline sequence, the fee structure, and the batching rules that decide whether a claim survives arbitration.",
-  lead: "More than four in ten federal IDR disputes are challenged as ineligible by the other party. Eligibility, timing, and fees decide whether a claim ever reaches a determination. This page covers which claims qualify, the deadlines that govern each step, what the process costs, and how batching works.",
+  lead: "More than four in ten federal IDR disputes are challenged as ineligible by the other side. Almost none of those challenges are about the medicine. They are about whether the claim qualified, whether a clock was met, and whether the paperwork proved it.\n\nThis page covers which claims are eligible, the deadline sequence in business days, what the process costs, and how batching changes the arithmetic.",
   sections: [
     {
       id: "eligibility",
@@ -196,8 +196,7 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
       id: "fees",
       heading: "What IDR costs: the fee structure.",
       paragraphs: [
-        "Two fees apply. Each party pays a non refundable administrative fee set by CMS each year. Each party also pays the IDRE's fee, which falls within a CMS approved range that varies for single and batched determinations.",
-        "The administrative fee is not returned regardless of outcome. The IDRE fee works differently: the prevailing party's IDRE fee is effectively returned, so the losing party bears the cost of the arbitrator. Because CMS updates these amounts, confirm the current figures in the CMS fee guidance before you file.",
+        "Two fees, and they are commonly confused. The administrative fee is paid by both parties and is non refundable: $15 per party, per dispute, cut from $115 by the CMS final rule of May 28, 2026, effective June 11, 2026. The certified IDRE fee is separate, falls within a CMS approved range, and is effectively borne by the losing party. Confirm both before filing, because CMS updates fee guidance.",
       ],
     },
     {
@@ -225,7 +224,7 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
     },
     {
       q: "How much does IDR cost?",
-      a: "Each party pays a non refundable administrative fee set annually by CMS, plus the IDRE's fee, which falls within a CMS approved range. The losing party effectively bears the IDRE fee. Because CMS updates these amounts, confirm the current figures in the CMS fee guidance before filing.",
+      a: "Two fees, and they are commonly confused. The administrative fee is paid by both parties and is non refundable: $15 per party, per dispute, cut from $115 by the CMS final rule of May 28, 2026, effective June 11, 2026. The certified IDRE fee is separate, falls within a CMS approved range, and is effectively borne by the losing party. Confirm both before filing, because CMS updates fee guidance.",
     },
     {
       q: "Should I batch IDR claims?",
@@ -237,15 +236,15 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
 
 const IDR_WIN_RATES_AND_AWARDS: ResourceArticle = {
   slug: "idr-win-rates-and-awards",
-  title: "IDR win rates and award amounts.",
-  subtitle: "What surgical practices actually recover.",
+  title: "What the federal record shows.",
+  subtitle: "Win rates, award multiples, and what happens after the determination.",
   metaTitle: "IDR Win Rates and Award Amounts for Providers | Sydra",
   metaDescription:
     "What federal IDR data shows about provider win rates, how award amounts compare to the qualifying payment amount, and what happens after a determination is issued.",
   datePublished: "2026-06-10",
   excerpt:
     "Provider win rates, how awards compare to the QPA, what happens after a determination, and your recourse when a plan does not pay.",
-  lead: "Providers win the large majority of federal IDR disputes, and winning awards routinely land well above the plan's qualifying payment amount. This page summarizes what the published data shows, how to think about recovery on your own claims, and what happens after the arbitrator decides.",
+  lead: "Providers win the large majority of federal IDR disputes, and winning awards routinely land well above the plan's qualifying payment amount. Both of those statements come from published federal data, not from Sydra.\n\nThis page summarizes what that record shows, how to think about it against your own claims, and what happens once an arbitrator decides.",
   sections: [
     {
       id: "win-rates",
@@ -413,7 +412,7 @@ const NO_SURPRISES_ACT_FOR_SURGEONS: ResourceArticle = {
   datePublished: "2026-06-10",
   excerpt:
     "A plain explanation of the No Surprises Act from the provider side: underpayment, the QPA, open negotiation, and how IDR works.",
-  lead: "The No Surprises Act reshaped how out of network claims are paid, and surgical specialties feel it most. This page explains the Act from the provider side: what it does, why out of network claims come back underpaid, what the qualifying payment amount is, and how independent dispute resolution gives practices a path to recover the difference.",
+  lead: "The No Surprises Act removed the patient from out of network billing disputes. The patient pays the in network cost share, and the provider and the plan settle the balance between themselves.\n\nMost practices operationalized the first half and never touched the second. This page covers the provider side: why out of network claims come back short, what the qualifying payment amount is and is not, and how IDR gives you a route to the difference.",
   sections: [
     {
       id: "what-it-does",
@@ -459,8 +458,7 @@ const NO_SURPRISES_ACT_FOR_SURGEONS: ResourceArticle = {
       id: "what-it-means",
       heading: "What it means for a surgical practice.",
       paragraphs: [
-        "The Act took balance billing off the table, but it gave providers a structured way to recover fair payment on out of network claims. Practices that use it well treat underpaid out of network explanations of benefits as recoverable revenue, not write offs.",
-        "The work is procedural and evidentiary, and it repeats claim after claim. The practices that capture the most are the ones that catch eligible claims early, file each code on its own merits, and move fast enough to keep up with their own volume.",
+        "Surgical specialties feel this most, because the gap between a plan's qualifying payment amount and the market rate for a complex procedure is widest exactly where the procedure is most complex. That is also where prior determinations are most favorable, and where a documented submission is most likely to be picked.",
       ],
     },
   ],
@@ -487,16 +485,16 @@ const NO_SURPRISES_ACT_FOR_SURGEONS: ResourceArticle = {
 
 const IDR_WIN_RATE_AWARD_BENCHMARK: ResourceArticle = {
   slug: "sydra-idr-win-rate-award-benchmark",
-  title: "Sydra IDR win rate and award benchmark.",
-  subtitle: "The federal IDR record for providers, in one place.",
-  metaTitle: "IDR Win Rate and Award Benchmark for Providers | Sydra",
+  title: "The federal IDR record, in one place.",
+  subtitle: "Published win rates and award multiples, with the source and reporting period on every figure.",
+  metaTitle: "Federal IDR Win Rates and Award Benchmarks | Sydra",
   metaDescription:
     "A citable benchmark of federal IDR outcomes: provider win rates, how awards compare to the QPA, surgical and neurology award multiples, dispute volume, and the sources behind each figure.",
   datePublished: "2026-07-18",
   dateModified: "2026-07-18",
   excerpt:
     "One standalone reference for federal IDR outcomes: win rates, award multiples over the QPA, and dispute volume, each figure sourced and dated.",
-  lead: "This benchmark aggregates the published federal IDR record into one citable page. Every figure below is drawn from CMS Public Use Files and independent analyses by Georgetown CHIR, the Congressional Research Service, and others, with the source and reporting period noted. These are aggregate federal figures, not a prediction about any one claim, and they move as new public use files publish.",
+  lead: "This benchmark aggregates the published federal IDR record into one citable page. Every figure below is drawn from CMS Public Use Files and independent analyses by Georgetown CHIR, the Congressional Research Service, and others, with the source and reporting period noted. These are aggregate federal figures, not a prediction about any one claim, and they move as new public use files publish.\n\nThese are aggregate federal figures from CMS Public Use Files and independent analyses. They are not Sydra outcomes. They describe the federal IDR record across all disputes and they update as new public use files publish.",
   sections: [
     {
       id: "win-rate",

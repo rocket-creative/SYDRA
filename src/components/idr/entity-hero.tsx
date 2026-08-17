@@ -4,7 +4,7 @@ import { textStyles } from "@/lib/typography";
 type EntityHeroProps = {
   title: string;
   subtitle?: string;
-  lead: string;
+  lead: string | readonly string[];
   eyebrow?: string;
   /** Optional top-of-page CTA rendered below the lead. */
   ctaHref?: string;
@@ -19,6 +19,8 @@ export function EntityHero({
   ctaHref,
   ctaLabel,
 }: EntityHeroProps) {
+  const leads = typeof lead === "string" ? [lead] : lead;
+
   return (
     <header className="prose-measure" data-entity-hero>
       {eyebrow ? (
@@ -30,7 +32,14 @@ export function EntityHero({
         {title}
         {subtitle ? <span className={textStyles.pageSubtitle}>{subtitle}</span> : null}
       </h1>
-      <p className={textStyles.pageLead}>{lead}</p>
+      {leads.map((paragraph, index) => (
+        <p
+          className={index === 0 ? textStyles.pageLead : `${textStyles.body} mt-4`}
+          key={paragraph.slice(0, 48)}
+        >
+          {paragraph}
+        </p>
+      ))}
       {ctaHref && ctaLabel ? (
         <div className="mt-8">
           <Button href={ctaHref} showArrow>

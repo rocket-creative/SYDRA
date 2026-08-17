@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { CASE_REVIEW_PATH, PRIMARY_CTA_LABEL } from "@/lib/case-review";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
@@ -101,8 +102,8 @@ export default function IdrFilingDeadlinePage() {
               </p>
             ))}
             <div className="mt-8">
-              <Button href="/demo" showArrow>
-                Check my filing window
+              <Button href={CASE_REVIEW_PATH} showArrow>
+                {PRIMARY_CTA_LABEL}
               </Button>
               <CtaTrustSignals className="mt-4" />
             </div>
@@ -157,8 +158,8 @@ export default function IdrFilingDeadlinePage() {
         <Section tone="neutral">
           <div className="prose-measure">
             <p className={`${textStyles.body} mb-6`}>{IDR_FILING_DEADLINE_CTA_LEAD}</p>
-            <Button href="/demo" showArrow>
-              Check my filing window
+            <Button href={CASE_REVIEW_PATH} showArrow>
+              {PRIMARY_CTA_LABEL}
             </Button>
             <CtaTrustSignals className="mt-4" />
           </div>

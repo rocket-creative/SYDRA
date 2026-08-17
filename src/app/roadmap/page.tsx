@@ -4,7 +4,6 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
-import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { ROADMAP_FAQ, ROADMAP_HERO, ROADMAP_ITEMS } from "@/lib/content/roadmap-page";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
@@ -48,6 +47,7 @@ export default function RoadmapPage() {
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-roadmap">
               {ROADMAP_HERO.title}
+              <span className={textStyles.pageSubtitle}>{ROADMAP_HERO.subtitle}</span>
             </h1>
             <p className={textStyles.pageLead}>{ROADMAP_HERO.intro}</p>
           </header>
@@ -80,7 +80,6 @@ export default function RoadmapPage() {
 
         <Section tone="white">
           <ServiceCrossLinks current="/roadmap" />
-          <SourcesReferences />
         </Section>
       </SydraPageShell>
     </>

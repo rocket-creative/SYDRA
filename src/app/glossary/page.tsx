@@ -59,8 +59,8 @@ export default function GlossaryPage() {
               </span>
             </h1>
             <p className={textStyles.pageLead}>
-              Plain language definitions for federal independent dispute resolution under the No
-              Surprises Act. Each entry links to the guide or resource that owns the full explainer.
+              Plain language definitions for the terms billing teams actually encounter. Each entry
+              links to the guide that owns the full explanation.
             </p>
             <div className="mt-8">
               <Button href="/demo" showArrow>

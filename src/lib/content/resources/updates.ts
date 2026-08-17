@@ -23,7 +23,7 @@ export type ResourceUpdate = {
 const CMS_2026_IDR_FINAL_RULE: ResourceUpdate = {
   slug: "cms-2026-idr-final-rule",
   title: "CMS cuts the IDR filing fee to $15 and now allows batching. Here's what changed.",
-  subtitle: "May 28, 2026 final rule: $15 fee, batching permitted, IDR Gateway rolling out.",
+  subtitle: "The final rule of May 28, 2026, effective June 11, 2026: $15 fee, batching permitted, IDR Gateway rolling out.",
   metaTitle: "CMS Cuts IDR Filing Fee to $15, Permits Batching | Sydra",
   metaDescription:
     "CMS finalized new IDR rules on May 28, 2026. The filing fee dropped from $115 to $15, batching is now permitted, and a new IDR Gateway platform is rolling out. Here's what changed and how Sydra handles it.",
@@ -44,9 +44,8 @@ const CMS_2026_IDR_FINAL_RULE: ResourceUpdate = {
       id: "what-this-means",
       heading: "What this means for your practice",
       paragraphs: [
-        "The lower fee makes filing economically worthwhile on more claims than it was a year ago. Batching is a real, sanctioned option now, but it comes with a real tradeoff worth understanding before you use it.",
-        "When several claims are batched into one submission, the arbiter picks one offer for the whole batch. If that offer is not selected, every code in the batch loses together. Filed individually, each code stands on its own evidence. Dr. Abrahams, who built Sydra's process from his own practice's IDR filings, has seen this play out directly: ten high value codes batched together can win or lose as a block, where the same ten codes filed individually might land eight or nine wins instead of an all or nothing outcome on the batch.",
-        "That is why Sydra's default stays one claim per CPT. It is the setting that protects win rate for most submissions. But batching is now available, CMS sanctioned, and can make sense for lower value codes or claims from the same encounter with strongly overlapping evidence, where the correlated risk is smaller. It is a per submission decision, and it is your call, not a fixed platform rule. See how Sydra handles batching decisions for the full breakdown.",
+        "The fee was never the reason large claims went unfiled. At $115 a side it was the reason small ones did. A $2,000 underpayment carried an administrative cost that made pursuing it marginal; at $15 it does not.",
+        "The practical effect is that the floor on what is worth disputing dropped, and most billing workflows have not been rebuilt around that.",
       ],
     },
     {
@@ -78,7 +77,7 @@ const MAY_2026_RULE_UPDATE: ResourceUpdate = {
   dateModified: "2026-08-11",
   excerpt:
     "The 2026 operations rule tightened how practices file and track federal IDR. Open negotiation moved into the portal, disputes carry registration numbers, and eligibility review happens earlier.",
-  lead: "A federal IDR operations rule finalized in 2026 changed how practices actually file, not the underlying award math. Open negotiation moved into the federal portal, disputes carry registration numbers, and a structured eligibility review happens earlier in the process. For the May 28, 2026 fee cut and batching permission, see the CMS final rule update linked below.",
+  lead: "The operations rule finalized on May 28, 2026 and effective June 11, 2026 changed how practices file, not what awards look like. Open negotiation moved into the federal portal, disputes now carry registration numbers, and a structured eligibility review happens earlier in the sequence.\n\nThe award math is unchanged. The filing mechanics are not.",
   sections: [
     {
       id: "what-changed",
@@ -143,6 +142,7 @@ const CMS_PUF_REMINDER: ResourceUpdate = {
       paragraphs: [
         "The Federal IDR hub and related resource pages surface payment benchmarks, eligibility context, and dispute outcomes by procedure, state, and payer. The recovery calculator and economics sections use the same published win rate and award multiple inputs so estimates stay tied to public data.",
         "None of those pages claim the aggregate federal win rate as a guarantee for your next dispute. They exist so your team can see the public record before deciding whether to file. Win rate reflects the pattern across many determinations and is not a promise on any single claim.",
+        "These files are also where the fee history comes from: the administrative fee was cut from $115 to $15 per party, per dispute, by the final rule of May 28, 2026, effective June 11, 2026.",
       ],
     },
     {
@@ -170,6 +170,7 @@ const OPEN_NEGOTIATION_DEADLINES: ResourceUpdate = {
   metaDescription:
     "Reminder that the 30 business day open negotiation period and the four business day IDR initiation window still decide whether an out of network claim can be recovered.",
   datePublished: "2026-07-08",
+  dateModified: "2026-07-08",
   excerpt:
     "Two clocks still govern federal IDR: 30 business days of open negotiation, then four business days to initiate. Miss the second window and the claim cannot be disputed.",
   lead: "Federal IDR still runs on two unforgiving clocks. First, a 30 business day open negotiation period must run before you can file. Second, once that period closes, you have only four business days to initiate IDR. This update does not change those rules. It points billing teams back to the evergreen deadline and process guides when volume makes the calendar the risk.",
@@ -178,8 +179,8 @@ const OPEN_NEGOTIATION_DEADLINES: ResourceUpdate = {
       id: "what-changed",
       heading: "What changed",
       paragraphs: [
-        "Open negotiation is a required 30 business day period to settle a payment dispute directly with the plan before IDR. It starts when either party sends the open negotiation notice within 30 business days of the initial payment or denial. Most disputes do not settle here, but the period cannot be skipped, and its closing date starts the four business day clock to initiate IDR.",
-        "Once open negotiation closes, you have four business days to initiate through the federal portal. Miss that window and the claim cannot be disputed for that cycle. The revenue on that claim is generally lost to the process. There is no general grace period built into the federal timing rules.",
+        "Open negotiation is a required 30 business day period to settle a payment dispute with the plan before IDR can begin. Under the 2026 operations rule it is initiated through the federal IDR portal rather than as a direct exchange with the payer, and the dispute carries a registration number from that point forward.",
+        "Most disputes do not settle in this window, but it cannot be skipped, and its closing date starts the four business day clock to initiate IDR. Miss that window and the claim cannot be disputed for that cycle. There is no general grace period in the federal timing rules.",
       ],
     },
     {

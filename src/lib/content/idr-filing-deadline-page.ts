@@ -40,16 +40,15 @@ export const IDR_FILING_DEADLINE_SECTIONS: ContentSection[] = [
     id: "heading-get-deadline-right",
     title: "Why the deadline is the part to get right first.",
     paragraphs: [
-      "Evidence can be refined. A narrative can be rewritten. A payment offer can be rechecked against prior determinations. The deadline cannot. Once the 4 business day window closes, no amount of documentation brings that claim back for the same cycle.",
-      "Sydra treats timing as deterministic software. The open negotiation close date and the initiation window are calculated and surfaced before a packet is built, so the clock is never a guess left to judgment.",
+      "Everything else in federal IDR is recoverable. A weak market rate justification can be strengthened next time. A missed deadline cannot be anything next time. The claim is simply gone, and it is gone for administrative reasons rather than because the plan was right about the money.",
+      "That is why deadline tracking is the first thing Sydra does with a claim, before anything is drafted against it.",
     ],
   },
   {
     id: "heading-2026-urgency",
     title: "What changed in 2026 that makes this more urgent.",
     paragraphs: [
-      "A 2026 federal rule cut the administrative filing fees, which opened IDR to practices that could not justify the cost before. More claims are now economically worth filing, which means more claims sitting in live windows at once.",
-      "Higher volume does not stretch the clocks. The same 30 business day and 4 business day rules still apply, so the operational risk of a missed initiation rises as more disputes enter the queue.",
+      "The CMS final rule of May 28, 2026, effective June 11, 2026, cut the administrative fee from $115 to $15 per party, per dispute. The clocks did not change. What changed is how many of your claims are now worth filing, which means more claims moving through the same two windows, and more opportunities to miss one.",
     ],
   },
   {

@@ -5,9 +5,10 @@ export type RoadmapItem = {
 };
 
 export const ROADMAP_HERO = {
-  title: "What's live today, and what we're actively building",
+  title: "What we're building now.",
+  subtitle: "So you know what to expect on a demo, and what isn't there yet.",
   intro:
-    "Sydra ships new capability regularly. Here's what's currently in active development, so you know what to expect on a demo and what's coming next.",
+    "Everything below is in development. It is listed here so that a demo does not surprise you in either direction. You will see what exists, and you will not be shown a slide about something that doesn't.",
 };
 
 export const ROADMAP_ITEMS: RoadmapItem[] = [
