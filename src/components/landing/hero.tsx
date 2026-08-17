@@ -3,6 +3,11 @@ import Image from "next/image";
 import { HeroCtas } from "@/components/landing/hero-ctas";
 import { HeroProofStack } from "@/components/landing/hero-proof-stack";
 import { SplitHeadline } from "@/components/motion/split-headline";
+import {
+  FOUNDER_ORIGIN_ATTRIBUTION,
+  FOUNDER_ORIGIN_LINE,
+  FOUNDER_ORIGIN_ROLE,
+} from "@/lib/content/founder-lines";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 type HeroProps = {
@@ -29,6 +34,16 @@ function HeroContent({
         minutes, and you keep 100% of the recovery — no 20% contingency cut.
       </p>
       <HeroCtas />
+      <figure className="hero-origin mt-6 prose-measure">
+        <blockquote className="type-body text-body">
+          {FOUNDER_ORIGIN_LINE}
+        </blockquote>
+        <figcaption className="mt-3 text-sm text-body">
+          <strong className="font-medium text-brand">{FOUNDER_ORIGIN_ATTRIBUTION}</strong>
+          {" — "}
+          {FOUNDER_ORIGIN_ROLE}
+        </figcaption>
+      </figure>
       <HeroProofStack className="mt-8 border-t border-rule pt-8" />
     </div>
   );

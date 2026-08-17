@@ -81,11 +81,14 @@ export function ClaimReviewForm({ source }: ClaimReviewFormProps) {
 
   if (succeeded) {
     return (
-      <div role="status">
+      <div className="space-y-4" role="status">
         <p className="type-body text-brand">
-          <strong>Got it.</strong> Check your inbox — we&apos;ll send your claim review within one
-          business day. If you want it run against a real claim, reply to that email with one denied
-          EOB attached.
+          <strong>Got it — check your inbox.</strong> We&apos;ve sent you a sample review so you can
+          see exactly what you&apos;ll get back.
+        </p>
+        <p className="type-body text-brand">
+          Someone from Sydra will follow up personally within one business day. If you&apos;d like a
+          review on your own claim before then, reply to that email with one denied EOB attached.
         </p>
       </div>
     );
@@ -157,7 +160,8 @@ export function ClaimReviewForm({ source }: ClaimReviewFormProps) {
         {submitting ? "Sending…" : "Send me my claim review"}
       </Button>
       <p className="text-[13px] leading-snug text-body/80">
-        Takes about a minute. HIPAA-compliant upload. We don&apos;t contact your payer.
+        Takes about a minute. No patient data needed — we&apos;ll show you exactly what to redact. We
+        don&apos;t contact your payer.
       </p>
     </form>
   );

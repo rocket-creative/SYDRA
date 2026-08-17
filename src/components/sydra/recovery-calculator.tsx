@@ -4,7 +4,6 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 
 import { ClaimReviewForm } from "@/components/landing/claim-review-form";
-import { CtaLink } from "@/components/ui/cta-link";
 import { writeCalculatorEstimate } from "@/lib/landing/calculator-estimate";
 
 const WIN_RATE = 0.88;
@@ -35,7 +34,6 @@ function clampInitial(value: number, min: number, max: number, step: number): nu
 
 export function RecoveryCalculator({
   variant = "light",
-  onCtaClick,
   defaultClaimsPerMonth = 20,
   defaultAvgDisputedAmount = 15000,
 }: RecoveryCalculatorProps) {
@@ -191,15 +189,6 @@ export function RecoveryCalculator({
             </p>
           </div>
           <ClaimReviewForm source="calculator" />
-          <p>
-            <CtaLink
-              className={onDark ? "!text-white hover:!text-white/80" : ""}
-              href="/demo"
-              onClick={onCtaClick}
-            >
-              Or book a 15-minute demo
-            </CtaLink>
-          </p>
         </div>
       </div>
     </div>

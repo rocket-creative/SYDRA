@@ -8,7 +8,6 @@ import { HeroProofStack } from "@/components/landing/hero-proof-stack";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
-import { CtaLink } from "@/components/ui/cta-link";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { Section } from "@/components/ui/section";
@@ -105,9 +104,6 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
           id="lead-form"
         >
           <ClaimReviewForm source="recover" />
-          <p className="mt-6">
-            <CtaLink href="/demo">Or book a 15-minute demo</CtaLink>
-          </p>
         </div>
         <CtaTrustSignals className="mt-8 max-w-3xl" />
       </div>

@@ -3,7 +3,7 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { CtaLink } from "@/components/ui/cta-link";
-import { CASE_REVIEW_PATH } from "@/lib/case-review";
+import { CASE_REVIEW_PATH, CASE_REVIEW_SAMPLE_PATH } from "@/lib/case-review";
 import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 
@@ -29,7 +29,7 @@ export default function CaseReviewPage() {
       <div className="mx-auto max-w-xl">
         <ClaimReviewForm source="case-review" />
         <p className="mt-6">
-          <CtaLink href="/demo">Or book a 15-minute demo</CtaLink>
+          <CtaLink href={CASE_REVIEW_SAMPLE_PATH}>See a sample review</CtaLink>
         </p>
       </div>
     </SydraPageShell>

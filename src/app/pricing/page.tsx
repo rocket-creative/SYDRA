@@ -14,6 +14,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
 import { caseReviewUrl } from "@/lib/case-review";
+import { FOUR_OBJECTION_LINE } from "@/lib/content/founder-lines";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -33,16 +34,14 @@ export default function PricingPage() {
                 Quoted to your volume. Not a percentage of every recovery.
               </span>
             </h1>
-            <p className="mt-4 type-caption text-body">
-              No setup fees · Month to month · Switch tiers anytime, no re-onboarding
-            </p>
+            <p className="mt-4 type-caption text-body">{FOUR_OBJECTION_LINE}</p>
             <p className="mt-6 type-body text-body">
               We don&apos;t publish a list price because the right number depends on your specialty,
               state, and monthly out of network claim volume. Every tier is structured below the
               typical 20% attorney contingency fee. You keep more of every recovery.
             </p>
             <p className="mt-4 type-body text-body">
-              Schedule a 15 minute demo and we quote on the call. No commitment to proceed.
+              Request a 15 minute demo and we quote on the call. No commitment to proceed.
             </p>
             <p className="mt-4 type-body text-body">
               Running IDR for more than one practice? See{" "}

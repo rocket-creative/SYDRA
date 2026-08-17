@@ -16,12 +16,17 @@ export function DemoPageLeadForm() {
   const stateCode = US_STATES.some((s) => s.code === stateRaw) ? stateRaw : "";
   const utm = parseUtmFromSearchParams(searchParams);
   const tracking = buildCampaignTracking(stateCode, utm);
+  const source = (searchParams.get("source") ?? "").trim();
+  const thankYouPath = /^[a-zA-Z0-9_-]+$/.test(source)
+    ? `/demo/thank-you?source=${encodeURIComponent(source)}`
+    : "/demo/thank-you";
 
   return (
     <LeadForm
       anchorId="demo-form"
       defaultState={stateCode}
       landingPage="demo"
+      thankYouPath={thankYouPath}
       tracking={tracking}
       variant="card"
     />

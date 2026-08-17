@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { track } from "@vercel/analytics";
+
 import { Arrow } from "@/components/ui/arrow";
+import { CASE_REVIEW_PATH, PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
 import { trackCtaClick } from "@/lib/landing/analytics-client";
-import { CASE_REVIEW_PATH } from "@/lib/case-review";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 const PHONE_TEL = "tel:+19147056830";
@@ -75,9 +77,12 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
         <Link
           className="cta-link flex min-h-[56px] flex-1 select-none items-center justify-center gap-2 bg-[var(--color-hero)] px-2 text-center text-[13px] uppercase tracking-[0.08em] text-white"
           href={CASE_REVIEW_PATH}
-          onClick={() => trackCtaClick("case_review", tracking)}
+          onClick={() => {
+            track("cta_primary_click", { placement: "mobile-bar" });
+            trackCtaClick("case_review", tracking);
+          }}
         >
-          See what one denied claim is worth
+          {PRIMARY_CTA_SHORT_LABEL}
           <Arrow className="shrink-0" />
         </Link>
       </div>

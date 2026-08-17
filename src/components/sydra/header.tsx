@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 import { MobileNavDrawer } from "@/components/sydra/mobile-nav-drawer";
 import { Button } from "@/components/ui/button";
+import { CASE_REVIEW_PATH, PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
 
 export const PRIMARY_NAV = [
   { href: "/pricing", label: "Pricing" },
@@ -67,9 +69,14 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           </a>
           {!isFunnel ? (
             <>
-              <Button className="px-3 sm:px-4 md:px-6" href="/demo" showArrow variant="solid">
-                <span className="hidden sm:inline">Schedule a demo</span>
-                <span className="sm:hidden">Demo</span>
+              <Button
+                className="px-3 sm:px-4 md:px-6"
+                href={CASE_REVIEW_PATH}
+                showArrow
+                variant="solid"
+                onClick={() => track("cta_primary_click", { placement: "header" })}
+              >
+                {PRIMARY_CTA_SHORT_LABEL}
               </Button>
               <MobileNavDrawer linkClass={linkClass} nav={PRIMARY_NAV} signInHref={SIGN_IN} />
             </>

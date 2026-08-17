@@ -12,6 +12,7 @@ import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { getSalesEmail } from "@/lib/contact";
 import { caseReviewUrl } from "@/lib/case-review";
+import { DEMO_RISK_REVERSAL } from "@/lib/content/founder-lines";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -138,7 +139,7 @@ export default function DemoPage() {
 
               <section aria-labelledby="heading-pre-faq" className="mt-10 prose-measure">
                 <h2 className={textStyles.subsectionTitle} id="heading-pre-faq">
-                  Before you book
+                  Before you request
                 </h2>
                 <div className="mt-4 divide-y divide-[var(--color-rule)] border-y border-rule">
                   {preBookingFaq.map((item) => (
@@ -158,6 +159,7 @@ export default function DemoPage() {
             </div>
 
             <div className="order-1 lg:order-2 lg:col-span-6">
+              <p className="prose-measure mb-6 type-body text-body">{DEMO_RISK_REVERSAL}</p>
               <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
                 <DemoPageLeadForm />
               </Suspense>
@@ -174,7 +176,7 @@ export default function DemoPage() {
           <SourcesReferences />
         </Section>
       </SydraPageShell>
-      <StickyConversionBar primaryLabel="Schedule demo" scrollTargetId="demo-form" />
+      <StickyConversionBar primaryLabel="Request demo" scrollTargetId="demo-form" />
     </>
   );
 }

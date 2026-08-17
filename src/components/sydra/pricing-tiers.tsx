@@ -97,7 +97,7 @@ function TierBlock({
               showArrow
               variant={isRecommended ? "solid" : "ghost"}
             >
-              Schedule a demo
+              Request a 15-minute demo
             </Button>
           )
         ) : (
@@ -230,7 +230,7 @@ export function PricingTiers({ variant, headingLevel }: PricingTiersProps) {
             <p className="mt-3 type-body text-body">{DEMO_TRUST_BLOCK}</p>
             <div className="mt-8">
               <Button href="/demo" showArrow>
-                Schedule a demo
+                Request a 15-minute demo
               </Button>
             </div>
           </div>

@@ -254,7 +254,7 @@ export const PAGE_METADATA = {
   caseReview: buildPageMetadata({
     title: "Free NSA IDR Claim Review | Sydra",
     description:
-      "Request a free claim review. Share your practice details and out of network volume. Sydra follows up within one business day with a clear recommendation.",
+      "See a sample claim review, then reply with one denied EOB. You get eligibility, a dollar estimate, and the filing deadline within one business day.",
     path: "/case-review",
   }),
   caseReviewThankYou: buildPageMetadata({

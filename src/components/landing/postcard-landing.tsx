@@ -92,7 +92,7 @@ export function PostcardLanding({
         </SectionReveal>
         {/* 3. Recovery calculator */}
         <SectionReveal className="order-3">
-          <RecoverySection tracking={tracking} />
+          <RecoverySection />
         </SectionReveal>
         {/* 4. How Sydra works */}
         <SectionReveal className="order-4">

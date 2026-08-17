@@ -2,14 +2,8 @@
 
 import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
 import { Section } from "@/components/ui/section";
-import { trackCtaClick } from "@/lib/landing/analytics-client";
-import type { CampaignTracking } from "@/lib/landing/tracking";
 
-type RecoverySectionProps = {
-  tracking: CampaignTracking;
-};
-
-export function RecoverySection({ tracking }: RecoverySectionProps) {
+export function RecoverySection() {
   return (
     <Section ariaLabelledby="heading-recovery" id="recovery" sidebarLabel="Your numbers" tone="white">
       <h2 className="type-h2 prose-measure text-brand" id="heading-recovery">
@@ -20,12 +14,7 @@ export function RecoverySection({ tracking }: RecoverySectionProps) {
         Georgetown CHIR award benchmarks, not a Sydra performance claim.
       </p>
       <div className="mt-12 border-t border-rule pt-10">
-        <RecoveryCalculator
-          ctaHref="#lead-form"
-          ctaLabel="Book a free demo"
-          onCtaClick={() => trackCtaClick("sydra", tracking)}
-          variant="light"
-        />
+        <RecoveryCalculator variant="light" />
       </div>
     </Section>
   );
