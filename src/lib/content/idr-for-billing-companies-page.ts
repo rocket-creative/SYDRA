@@ -3,7 +3,9 @@ import type { ContentFaq, ContentSection } from "@/lib/content/what-is-idr-page"
 export const IDR_FOR_BILLING_HERO = {
   eyebrow: "For billing companies and RCM firms",
   title: "Filing federal IDR across more than one client practice?",
-  lead: "Every claim you file for a client is out of network revenue that would otherwise be written off. Sydra prepares a specialty coded federal IDR submission in about five minutes, with tenant isolation built in at the data layer so each client's claims, documents, and history stay separate.",
+  lead: "IDR is one of the last major revenue functions still handled largely by hand: eligibility screening, batch construction, deadline tracking, and submission assembly, all done claim by claim. That labor intensity is why most RCM firms either decline the work or price it painfully. Sydra supplies the automation layer underneath it, so you can open or expand an IDR service line without adding headcount in proportion to volume.",
+  whiteLabelBold: "It can run white label under your own brand.",
+  whiteLabelRest: "Your clients see your service, not ours.",
   ctaLabel: "Request a 15-minute demo",
   ctaHref: "/demo",
 };
@@ -39,6 +41,7 @@ export const IDR_FOR_BILLING_SECTIONS: ContentSection[] = [
     id: "heading-tenant-isolation",
     title: "What stays separate, client by client.",
     paragraphs: [
+      "Sydra prepares a specialty coded federal IDR submission in about five minutes, with tenant isolation built in at the data layer so each client's claims, documents, and history stay separate.",
       "Sydra's tenant isolation is enforced at multiple layers, not just a permissions toggle: application logic, API authorization, database row level security, and audit logging all scope to the individual practice's tenant identifier. For a firm handling several clients' PHI under separate BAAs, that separation is the part that has to be structurally true, not just promised in a contract.",
     ],
     list: [

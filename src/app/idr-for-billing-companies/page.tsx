@@ -70,6 +70,10 @@ export default function IdrForBillingCompaniesPage() {
               {IDR_FOR_BILLING_HERO.title}
             </h1>
             <p className={textStyles.pageLead}>{IDR_FOR_BILLING_HERO.lead}</p>
+            <p className={`${textStyles.body} mt-4`}>
+              <strong>{IDR_FOR_BILLING_HERO.whiteLabelBold}</strong>{" "}
+              {IDR_FOR_BILLING_HERO.whiteLabelRest}
+            </p>
             <div className="mt-8">
               <Button href={IDR_FOR_BILLING_HERO.ctaHref} showArrow>
                 {IDR_FOR_BILLING_HERO.ctaLabel}
