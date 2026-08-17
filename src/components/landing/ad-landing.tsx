@@ -12,6 +12,7 @@ import { MagazineShell } from "@/components/ui/magazine-shell";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { Section } from "@/components/ui/section";
 import { CLAIM_REVIEW_OFFER } from "@/lib/case-review";
+import { FOUNDER_MARKETING_BYLINE } from "@/lib/content/founder-lines";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import {
   breadcrumbJsonLd,
@@ -85,7 +86,7 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
                 <ConversionCtaPair placement="recover-hero" />
               </div>
               <p className="mt-6 text-sm leading-relaxed text-body/80">
-                Built by Dr. John M. Abrahams, MD, a board certified neurosurgeon. No attorney cut.
+                Built by {FOUNDER_MARKETING_BYLINE}. No attorney cut.
                 You keep the recovery.
               </p>
               <HeroProofStack className="mt-8 border-t border-rule pt-8" />

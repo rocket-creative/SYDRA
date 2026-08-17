@@ -77,7 +77,7 @@ export const OG_TAGLINES = {
   pricing: "Sydra pricing — NSA IDR software plans for surgical billing teams.",
   howItWorks: "How Sydra prepares an NSA IDR submission step by step.",
   demo: "Request a 15-minute Sydra demo on a real denied claim.",
-  about: "About Sydra — built by Sydra and Dr. John M. Abrahams, MD.",
+  about: "About Sydra — built by Sydra and Dr. John Abrahams, MD.",
   security: "Sydra security — HIPAA controls, AWS Bedrock, BAA available.",
   idrFilingDeadline:
     "Federal IDR filing deadline: 30 business days, then 4 business days to initiate.",

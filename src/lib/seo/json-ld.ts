@@ -43,7 +43,7 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
 export const DR_ABRAHAMS_PERSON_ID = () => `${siteUrl()}/about#dr-abrahams`;
 
 /**
- * Physician JSON-LD for Dr. John M. Abrahams.
+ * Physician JSON-LD for Dr. John Abrahams.
  * Credentials are limited to facts already stated on /about.
  */
 export function drAbrahamsPersonJsonLd() {
@@ -51,10 +51,10 @@ export function drAbrahamsPersonJsonLd() {
     "@context": "https://schema.org",
     "@type": "Physician",
     "@id": DR_ABRAHAMS_PERSON_ID(),
-    name: "Dr. John M. Abrahams, MD",
+    name: "Dr. John Abrahams, MD",
     jobTitle: "Founder, Board Certified Neurosurgeon",
     description:
-      "Dr. John M. Abrahams, MD is a practicing neurosurgeon in New York. Fellow, American Association of Neurological Surgeons (FAANS). Past President, Brain and Spine Surgeons of New York. Founder, Sydra. He reviews all medical content published by Sydra.",
+      "Dr. John Abrahams, MD is a practicing neurosurgeon in New York. Fellow, American Association of Neurological Surgeons. Past President, Brain and Spine Surgeons of New York. Founder, Sydra. He reviews all medical content published by Sydra.",
     medicalSpecialty: "Neurosurgery",
     worksFor: { "@id": SYDRA_ORG_ID() },
     memberOf: {

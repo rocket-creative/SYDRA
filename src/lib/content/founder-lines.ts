@@ -6,6 +6,13 @@ export const FOUNDER_ORIGIN_LINE =
 export const FOUNDER_ORIGIN_ATTRIBUTION = "Dr. John Abrahams, MD";
 export const FOUNDER_ORIGIN_ROLE = "board certified neurosurgeon, founder";
 
+/** Marketing attribution: hero, origin line, page bylines, email signatures. */
+export const FOUNDER_MARKETING_BYLINE =
+  "Dr. John Abrahams, MD — board certified neurosurgeon, founder";
+
+/** Name only on the clinical-review byline. FAANS appears nowhere else. */
+export const FOUNDER_CLINICAL_NAME = "John Abrahams, MD, FAANS";
+
 export const FOUR_OBJECTION_LINE =
   "No contract. No setup fee. Nothing installs in your EMR. We never take a percentage of your recovery.";
 

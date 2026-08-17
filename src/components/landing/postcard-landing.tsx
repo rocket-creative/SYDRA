@@ -59,7 +59,7 @@ export function PostcardLanding({
       serviceType: "NSA IDR claim preparation",
     }),
     personJsonLd({
-      name: "Dr. John M. Abrahams, MD",
+      name: "Dr. John Abrahams, MD",
       jobTitle: "Founder, Sydra",
       description:
         "Board certified neurosurgeon and founder of Sydra.",

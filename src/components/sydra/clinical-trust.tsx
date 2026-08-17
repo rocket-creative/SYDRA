@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { ReviewHighlight } from "@/components/sydra/review-highlight";
+import { FOUNDER_CLINICAL_NAME } from "@/lib/content/founder-lines";
 
 type ClinicalReferencesProps = {
   id?: string;
@@ -72,7 +73,7 @@ export function MedicalReviewBlock({
             className="font-medium text-[#1A2B48] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             href="/about"
           >
-            Dr. John Abrahams, MD, FAANS
+            {FOUNDER_CLINICAL_NAME}
           </Link>
           . Last reviewed: {lastReviewed}.
         </ReviewHighlight>

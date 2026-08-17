@@ -12,6 +12,7 @@
  * Log specialty, state, payer, CPT, estimate, and later the award.
  */
 import { CASE_REVIEW_SAMPLE_PATH } from "@/lib/case-review";
+import { FOUNDER_MARKETING_BYLINE } from "@/lib/content/founder-lines";
 import { getContactPhoneDisplay } from "@/lib/contact";
 import {
   claimReviewDeliverySchedulingBlock,
@@ -20,7 +21,7 @@ import {
 import { siteUrl } from "@/lib/site";
 
 const DEFAULT_PHONE = "(914) 705 6830";
-const FOUNDER_NAME = "Dr. John Abrahams, MD";
+const FOUNDER_NAME = FOUNDER_MARKETING_BYLINE;
 
 export const CLAIM_REVIEW_AUTO_REPLY_SUBJECT =
   "Your Sydra claim review — a sample, and what to send";

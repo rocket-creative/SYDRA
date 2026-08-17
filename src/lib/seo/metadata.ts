@@ -98,9 +98,9 @@ export const HOME_METADATA = buildPageMetadata({
 
 export const PAGE_METADATA = {
   about: buildPageMetadata({
-    title: "About Sydra | Dr. John M. Abrahams, MD | Sydra",
+    title: "About Sydra | Dr. John Abrahams, MD | Sydra",
     description:
-      "Sydra is founded by Dr. John M. Abrahams, a practicing board certified neurosurgeon. The software was built from a working RCM operation, not a technology startup.",
+      "Sydra is founded by Dr. John Abrahams, a practicing board certified neurosurgeon. The software was built from a working RCM operation, not a technology startup.",
     path: "/about",
     ogImagePath: "/about",
   }),

@@ -7,7 +7,7 @@ export const CMS_RULE_BATCHING_VIDEO = {
   slug: "cms-rule-batching",
   name: "The IDR fee dropped to $15. Here's what it means for your claims.",
   description:
-    "CMS cut the federal IDR filing fee from $115 to $15 and now permits batching claims. Dr. John Abrahams explains the batching tradeoff and how Sydra handles it.",
+    "CMS cut the federal IDR filing fee from $115 to $15 and now permits batching claims. Dr. John Abrahams, MD explains the batching tradeoff and how Sydra handles it.",
   /** ISO date when the produced video is published. Update when media goes live. */
   uploadDate: "2026-08-11",
   durationSeconds: 80,

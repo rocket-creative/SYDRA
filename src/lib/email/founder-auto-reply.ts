@@ -1,4 +1,5 @@
 import { demoSchedulingBlock } from "@/lib/email/demo-windows";
+import { FOUNDER_MARKETING_BYLINE } from "@/lib/content/founder-lines";
 
 function firstNameFrom(fullName: string): string {
   const part = fullName.trim().split(/\s+/)[0];
@@ -34,9 +35,7 @@ export function buildFounderAutoReplyPlain(
     demoSchedulingBlock(),
     "",
     "Talk soon,",
-    "Dr. John Abrahams, MD",
-    "Board certified neurosurgeon",
-    "Founder, Sydra",
+    FOUNDER_MARKETING_BYLINE,
     "",
     "Sydra, 244 Westchester Ave, Ste 209, West Harrison, NY 10604",
   ].join("\n");

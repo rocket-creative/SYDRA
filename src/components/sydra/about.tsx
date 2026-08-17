@@ -3,6 +3,7 @@ import { CtaLink } from "@/components/ui/cta-link";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { FullServiceBanner } from "@/components/sydra/full-service-banner";
 import { CASE_REVIEW_CTA, caseReviewUrl } from "@/lib/case-review";
+import { FOUNDER_MARKETING_BYLINE } from "@/lib/content/founder-lines";
 
 export function SydraAbout() {
   return (
@@ -17,10 +18,10 @@ export function SydraAbout() {
             <div className="mt-8 max-w-2xl space-y-4 type-body text-body">
               <p>
                 Sydra was built by{" "}
-                <strong className="text-brand">Dr. John Abrahams</strong>, a practicing neurosurgeon
-                who saw billing teams spend 30 minutes per claim on IDR submissions that should take
-                under 5. The product comes from a working RCM operation that runs claims every day,
-                not a technology startup.
+                <strong className="text-brand">{FOUNDER_MARKETING_BYLINE}</strong>
+                . The product comes from a working RCM operation that runs claims every day, not a
+                technology startup. He saw billing teams spend 30 minutes per claim on IDR
+                submissions that should take under 5.
               </p>
               <p>
                 The revenue cycle team trained the system on real determinations. Chelsea leads
