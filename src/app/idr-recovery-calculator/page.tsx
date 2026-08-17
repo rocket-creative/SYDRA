@@ -120,7 +120,7 @@ export default function IdrRecoveryCalculatorPage() {
               {IDR_RECOVERY_CALCULATOR_CTA_LEAD}
             </h2>
             <p className={`${textStyles.body} mt-4 mb-6`}>
-              Free five minute demo. We look at your actual specialty, state, and payer mix.
+              Free 15 minute demo. We look at your actual specialty, state, and payer mix.
             </p>
             <Button href="/demo" showArrow>
               Schedule a demo

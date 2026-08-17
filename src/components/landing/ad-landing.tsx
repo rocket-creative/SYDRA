@@ -47,7 +47,7 @@ export function AdLanding({
       path: "/recover",
       name: "Recover underpaid out of network claims",
       description:
-        "Book a free five minute Sydra demo. See whether your denied out of network claims qualify for federal IDR recovery.",
+        "Book a free 15 minute Sydra demo. See whether your denied out of network claims qualify for federal IDR recovery.",
     }),
   ];
 
@@ -88,7 +88,7 @@ export function AdLanding({
                 <SplitHeadline text="Recover underpaid out of network claims." />
               </h1>
               <p className="mt-5 type-body text-body">
-                Book a free five minute demo. Bring one denied EOB and we will tell you if it
+                Book a free 15 minute demo. Bring one denied EOB and we will tell you if it
                 qualifies for federal IDR, and what that claim is worth.
               </p>
               <p className="mt-6 text-sm leading-relaxed text-body/80">

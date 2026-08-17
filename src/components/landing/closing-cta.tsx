@@ -24,7 +24,7 @@ export function ClosingCta({ tracking }: ClosingCtaProps) {
         Ready to stop writing off out of network claims?
       </h2>
       <p className="prose-measure mt-6 type-body text-body">
-        Free five minute demo. No commitment. We show you what Sydra generates from a real claim in
+        Free 15 minute demo. No commitment. We show you what Sydra generates from a real claim in
         your specialty.
       </p>
       <div className="mt-10">

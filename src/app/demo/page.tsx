@@ -93,7 +93,7 @@ export default function DemoPage() {
             <h1 className={textStyles.pageTitle} id="heading-demo">
               See Sydra prepare a real NSA IDR submission.
               <span className={textStyles.pageSubtitle}>
-                Five minutes. Your specialty. Your actual CPT codes if you send one.
+                15 minutes. Your specialty. Your actual CPT codes if you send one.
               </span>
             </h1>
           </header>
@@ -115,8 +115,8 @@ export default function DemoPage() {
                   ))}
                 </ol>
                 <p className={`${textStyles.body} mt-6`}>
-                  Total: under 5 minutes for the claim, 10 minutes for the walkthrough and
-                  questions. You watch the packet get built before any pricing comes up. You leave
+                  Under 5 minutes on your claim, 10 minutes on the walkthrough — 15 minutes
+                  total. You watch the packet get built before any pricing comes up. You leave
                   with the actual Sydra output, a pricing quote, and a sandbox account if you want
                   one. No pressure to sign anything on the call.
                 </p>

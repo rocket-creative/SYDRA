@@ -104,8 +104,8 @@ const COPY_BY_INTENT: Record<
   }
 > = {
   demo: {
-    headline: "Book your free five minute Sydra demo",
-    body: "Bring one denied EOB. We will tell you on the call whether it qualifies and show you the dollar figure on that claim. If it does not qualify, you have lost five minutes and nothing else.",
+    headline: "Book your free 15 minute Sydra demo",
+    body: "Bring one denied EOB. We will tell you on the call whether it qualifies and show you the dollar figure on that claim. If it does not qualify, you have lost 15 minutes and nothing else.",
     riskStack:
       "Free demo. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
     stepOneCta: "Book a free demo",

@@ -19,7 +19,7 @@ export function SydraContactForm() {
           Ready to see Sydra on a real claim?
         </h2>
         <p className="mt-6 type-body text-body">
-          Schedule a free five minute demo. We walk through Sydra live on a denied claim, recommend the
+          Schedule a free 15 minute demo. We walk through Sydra live on a denied claim, recommend the
           right tier, and quote on your volume. No pressure.
         </p>
         <div className="mt-10">

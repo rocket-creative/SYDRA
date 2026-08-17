@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Recover Out of Network Claims | Sydra",
   description:
-    "Book a free five minute Sydra demo. See if your denied out of network claims qualify for federal IDR recovery. Surgeon built. No attorney cut.",
+    "Book a free 15 minute Sydra demo. See if your denied out of network claims qualify for federal IDR recovery. Surgeon built. No attorney cut.",
   path: "/recover",
   // Paid landing: keep crawlable for ads preview, avoid competing with homepage SEO.
   robots: { index: false, follow: true },

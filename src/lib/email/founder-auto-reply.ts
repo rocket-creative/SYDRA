@@ -35,7 +35,7 @@ export function buildFounderAutoReplyPlain(
     "",
     "Thanks for booking a demo. I built Sydra because I file these claims myself and I got tired of watching surgical practices write off money the No Surprises Act says they can recover.",
     "",
-    "One thing to have ready for the call: a single denied or underpaid out of network EOB. We will run it live. If it qualifies, you will see the dollar figure on that claim before the call ends. If it does not, I will tell you straight and you have lost five minutes.",
+    "One thing to have ready for the call: a single denied or underpaid out of network EOB. We will run it live. If it qualifies, you will see the dollar figure on that claim before the call ends. If it does not, I will tell you straight and you have lost 15 minutes.",
     "",
     "The demo is free. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
     "",
