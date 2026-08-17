@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { PricingViewed } from "@/components/analytics/pricing-viewed";
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
@@ -22,6 +23,7 @@ export default function PricingPage() {
   return (
     <>
       <PricingPageJsonLd />
+      <PricingViewed />
       <SydraPageShell banded breadcrumb={[...BREADCRUMBS.pricing]}>
         <Section ariaLabelledby="heading-pricing" tone="white">
           <header className="max-w-2xl">

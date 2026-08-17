@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 
 import { ClaimReviewForm } from "@/components/landing/claim-review-form";
 import { CtaLink } from "@/components/ui/cta-link";
@@ -68,6 +69,10 @@ export function RecoveryCalculator({
       avgDisputedAmount,
       annualRecovery: estimate.annualRecovery,
     });
+    const timer = window.setTimeout(() => {
+      track("calculator_completed", { estimatedAnnual: estimate.annualRecovery });
+    }, 800);
+    return () => window.clearTimeout(timer);
   }, [claimsPerMonth, avgDisputedAmount, estimate.annualRecovery]);
 
   const markTouched = () => {

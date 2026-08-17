@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
+import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
 import { editorialInputClass, FormField } from "@/components/ui/form-field";
@@ -70,6 +71,7 @@ export function ClaimReviewForm({ source }: ClaimReviewFormProps) {
         return;
       }
       setSucceeded(true);
+      track("claim_review_submitted", { source: source ?? "" });
     } catch {
       setFormError("Something went wrong. Please try again or email support@sydrahealth.com.");
     } finally {

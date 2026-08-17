@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+
+import { DemoBookedOnMount } from "@/components/analytics/demo-booked-on-mount";
 import { LeadConversionOnMount } from "@/components/analytics/lead-conversion-on-mount";
 import { Button } from "@/components/ui/button";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -13,6 +16,9 @@ export default function DemoThankYouPage() {
       mainClassName="px-5 py-16 md:px-10 md:py-24"
     >
       <LeadConversionOnMount action="free_demo" />
+      <Suspense fallback={null}>
+        <DemoBookedOnMount />
+      </Suspense>
       <div className="mx-auto max-w-xl">
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
         <h1 className="type-h2 mt-4 text-brand">Request received</h1>
