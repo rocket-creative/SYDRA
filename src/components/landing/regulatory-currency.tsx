@@ -1,21 +1,16 @@
+import { HomepageBand } from "@/components/landing/homepage-band";
 import { CtaLink } from "@/components/ui/cta-link";
-import { Section } from "@/components/ui/section";
 
 const CMS_RULE_URL =
   "https://www.cms.gov/newsroom/fact-sheets/federal-independent-dispute-resolution-operations-final-rule";
 
 export function RegulatoryCurrency() {
   return (
-    <Section
-      ariaLabelledby="heading-regulatory-currency"
-      id="built-for-the-rules"
-      sidebarLabel="Current rules"
-      tone="neutral"
-    >
-      <h2 className="type-h2 prose-measure text-brand" id="heading-regulatory-currency">
+    <HomepageBand ariaLabelledby="heading-regulatory-currency" id="built-for-the-rules" tone="white">
+      <h2 className="home-h2 max-w-[720px] text-brand" id="heading-regulatory-currency">
         Built for the rules as they are now.
       </h2>
-      <div className="prose-measure mt-6 space-y-5 type-body text-body">
+      <div className="home-body mt-6 max-w-[720px] space-y-5 text-body">
         <p>The federal IDR process changed materially in June 2026. Most billing workflows still run the old one.</p>
         <p>
           <strong className="font-medium text-brand">
@@ -45,7 +40,7 @@ export function RegulatoryCurrency() {
       <p className="mt-8">
         <CtaLink href="/idr/guide">Read the full federal IDR guide</CtaLink>
       </p>
-      <p className="mt-6 text-[11px] leading-relaxed text-body/70">
+      <p className="home-caption mt-6 text-body">
         Source:{" "}
         <a
           className="underline decoration-rule underline-offset-2 transition-colors hover:text-[var(--color-hero)]"
@@ -57,6 +52,6 @@ export function RegulatoryCurrency() {
         </a>
         .
       </p>
-    </Section>
+    </HomepageBand>
   );
 }

@@ -1,3 +1,5 @@
+import { HomepageBand } from "@/components/landing/homepage-band";
+
 export type ProofItem = {
   value: string;
   label: string;
@@ -26,12 +28,33 @@ const PROOF_ITEMS: readonly ProofItem[] = [
 
 type HeroProofStackProps = {
   className?: string;
-  /** Override the default homepage proof row. */
   items?: readonly ProofItem[];
+  variant?: "compact" | "homepage";
 };
 
-/** Compact trust row under the hero CTA. Stacks on mobile, two columns from md, four from lg. */
-export function HeroProofStack({ className = "", items = PROOF_ITEMS }: HeroProofStackProps) {
+export function HeroProofStack({
+  className = "",
+  items = PROOF_ITEMS,
+  variant = "compact",
+}: HeroProofStackProps) {
+  if (variant === "homepage") {
+    return (
+      <div
+        aria-label="Recovery proof points"
+        className={`grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:grid-cols-4 ${className}`.trim()}
+      >
+        {items.map((item) => (
+          <figure key={item.value} className="min-w-0">
+            <p className="home-stat whitespace-nowrap text-brand tabular-nums">{item.value}</p>
+            <div className="mt-3 h-[2px] w-8 bg-[var(--color-rule)]" aria-hidden />
+            <figcaption className="home-caption mt-3 text-body">{item.label}</figcaption>
+            {item.caption ? <p className="home-caption mt-3 text-body">{item.caption}</p> : null}
+          </figure>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div
       aria-label="Recovery proof points"
@@ -53,5 +76,16 @@ export function HeroProofStack({ className = "", items = PROOF_ITEMS }: HeroProo
         </figure>
       ))}
     </div>
+  );
+}
+
+export function HomepageProofBand() {
+  return (
+    <HomepageBand ariaLabelledby="heading-proof-band" id="proof-band" tone="alt">
+      <h2 className="sr-only" id="heading-proof-band">
+        Recovery proof points
+      </h2>
+      <HeroProofStack variant="homepage" />
+    </HomepageBand>
   );
 }

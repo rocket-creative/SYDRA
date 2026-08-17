@@ -1,21 +1,21 @@
 "use client";
 
+import { HomepageBand } from "@/components/landing/homepage-band";
 import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
-import { Section } from "@/components/ui/section";
 
 export function RecoverySection() {
   return (
-    <Section ariaLabelledby="heading-recovery" id="recovery" sidebarLabel="Your numbers" tone="white">
-      <h2 className="type-h2 prose-measure text-brand" id="heading-recovery">
+    <HomepageBand ariaLabelledby="heading-recovery" id="recovery" tone="alt">
+      <h2 className="home-h2 max-w-[720px] text-brand" id="heading-recovery">
         See what properly filed IDR could recover
       </h2>
-      <p className="prose-measure mt-6 text-[15px] leading-relaxed text-body">
+      <p className="home-body mt-6 max-w-[720px] text-body">
         Drag the two sliders to match your practice. The estimate uses published CMS win rates and
         Georgetown CHIR award benchmarks, not a Sydra performance claim.
       </p>
-      <div className="mt-12 border-t border-rule pt-10">
+      <div className="mt-8 border-t border-rule pt-8">
         <RecoveryCalculator variant="light" />
       </div>
-    </Section>
+    </HomepageBand>
   );
 }

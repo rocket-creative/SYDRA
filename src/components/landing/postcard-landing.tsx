@@ -1,26 +1,22 @@
 import { Cursor } from "@/components/motion/cursor";
-import { SectionReveal } from "@/components/motion/reveal";
-import { BuiltOnClaude } from "@/components/landing/built-on-claude";
+import { HomepageReveal } from "@/components/motion/homepage-reveal";
+import { AudienceSegments } from "@/components/landing/audience-segments";
 import { ClaimReviewForm } from "@/components/landing/claim-review-form";
-import { ClosingCta } from "@/components/landing/closing-cta";
-import { Faq } from "@/components/landing/faq";
-import { FederalIdrExplainer } from "@/components/landing/federal-idr-explainer";
-import { FounderNote } from "@/components/landing/founder-note";
 import { Hero } from "@/components/landing/hero";
-import { HowItWorks } from "@/components/landing/how-it-works";
+import { HomepageProofBand } from "@/components/landing/hero-proof-stack";
+import {
+  ProcessProblemStatement,
+  UnderuseStatement,
+} from "@/components/landing/homepage-statements";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { RecoverySection } from "@/components/landing/recovery-section";
 import { RegulatoryCurrency } from "@/components/landing/regulatory-currency";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
-import { TwoPaths } from "@/components/landing/two-paths";
 import { MagazineShell } from "@/components/ui/magazine-shell";
-import { Section } from "@/components/ui/section";
 import type { CampaignTracking } from "@/lib/landing/tracking";
-import { buildFaqs } from "@/lib/landing/faqs";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import {
   breadcrumbJsonLd,
-  faqPageJsonLd,
   personJsonLd,
   serviceJsonLd,
   softwareApplicationJsonLd,
@@ -41,7 +37,6 @@ export function PostcardLanding({
   tracking,
   path,
 }: PostcardLandingProps) {
-  const faqs = buildFaqs(stateDisplay);
   const jsonLd = [
     breadcrumbJsonLd([{ name: "Home", path: "" }]),
     sydraOrganizationJsonLd(),
@@ -49,7 +44,7 @@ export function PostcardLanding({
     sydraWebsiteJsonLd(),
     webPageJsonLd({
       path: "",
-      name: "Stop writing off out of network claims",
+      name: "That payment is an opening offer.",
       description:
         "Surgeon built NSA IDR software your billing team runs in five minutes per claim. Prepare federal IDR submissions and keep the recovery.",
     }),
@@ -62,80 +57,56 @@ export function PostcardLanding({
     personJsonLd({
       name: "Dr. John Abrahams, MD",
       jobTitle: "Founder, Sydra",
-      description:
-        "Board certified neurosurgeon and founder of Sydra.",
+      description: "Board certified neurosurgeon and founder of Sydra.",
       isPhysician: true,
       medicalSpecialty: "Neurosurgery",
     }),
-    faqPageJsonLd(faqs.map(({ q, a }) => ({ q, a }))),
   ];
 
   return (
-    <MagazineShell hasMobileCtaBar headerBorderless mainClassName="landing-compact">
+    <MagazineShell hasMobileCtaBar headerBorderless>
       <PageJsonLd data={jsonLd} />
       <Cursor />
       <TrackingProvider path={path} tracking={tracking} />
       <div className="flex flex-col">
-        {/* 1. Hero with proof stack */}
         <div className="order-1">
           <Hero stateDisplay={stateDisplay} tracking={tracking} />
         </div>
-        {/* 2. Two delivery paths */}
-        <SectionReveal className="order-2">
-          <TwoPaths />
-        </SectionReveal>
-        {/* 3. Current federal IDR rules */}
-        <SectionReveal className="order-3">
+        <HomepageReveal className="order-2">
+          <HomepageProofBand />
+        </HomepageReveal>
+        <HomepageReveal className="order-3">
+          <UnderuseStatement />
+        </HomepageReveal>
+        <HomepageReveal className="order-4">
+          <AudienceSegments />
+        </HomepageReveal>
+        <HomepageReveal className="order-5">
           <RegulatoryCurrency />
-        </SectionReveal>
-        {/* 4. Claim review form */}
-        <SectionReveal className="order-4">
-          <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
-            <div
-              className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
-              id="lead-form"
-            >
-              <ClaimReviewForm source="homepage-band" />
-            </div>
-          </div>
-        </SectionReveal>
-        {/* 5. Recovery calculator */}
-        <SectionReveal className="order-5">
+        </HomepageReveal>
+        <HomepageReveal className="order-6">
           <RecoverySection />
-        </SectionReveal>
-        {/* 6. How Sydra works */}
-        <SectionReveal className="order-6">
-          <HowItWorks />
-        </SectionReveal>
-        {/* 7. Built by a surgeon who files these claims */}
-        <SectionReveal className="order-7">
-          <FounderNote />
-        </SectionReveal>
-        {/* 8. Built on Claude */}
-        <SectionReveal className="order-8">
-          <BuiltOnClaude />
-        </SectionReveal>
-        {/* 9. What is Federal IDR */}
-        <SectionReveal className="order-9">
-          <FederalIdrExplainer />
-        </SectionReveal>
-        {/* 10. FAQ */}
-        <SectionReveal className="order-10">
-          <Faq stateDisplay={stateDisplay} />
-        </SectionReveal>
-        {/* 11. Closing CTA and form */}
-        <SectionReveal className="order-11">
-          <ClosingCta />
-        </SectionReveal>
-        <SectionReveal className="order-12">
-          <Section id="lead-form-closing" sidebarLabel="Get started" tone="neutral">
-            <div className="max-w-2xl rounded-[2px] bg-white p-6 md:p-10">
-              <ClaimReviewForm source="homepage-closing" />
-            </div>
-          </Section>
-        </SectionReveal>
+        </HomepageReveal>
+        <HomepageReveal className="order-7">
+          <ProcessProblemStatement />
+        </HomepageReveal>
+        <HomepageReveal className="order-8">
+          <HomepageBandForm />
+        </HomepageReveal>
       </div>
       <MobileCtaBar tracking={tracking} />
     </MagazineShell>
+  );
+}
+
+function HomepageBandForm() {
+  return (
+    <section className="bg-neutral-section py-12 md:py-16 lg:py-24" id="lead-form-closing">
+      <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8">
+        <div className="max-w-2xl rounded-[2px] bg-white p-6 md:p-8" id="lead-form">
+          <ClaimReviewForm source="homepage-closing" />
+        </div>
+      </div>
+    </section>
   );
 }
