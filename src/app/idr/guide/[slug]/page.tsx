@@ -5,15 +5,16 @@ import { notFound } from "next/navigation";
 import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { LegalFooter } from "@/components/idr/legal-footer";
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { CmsRuleBatchingVideo } from "@/components/sydra/cms-rule-batching-video";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
-import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { CTA } from "@/lib/idr/copy";
 import {
   CMS_RULE_BATCHING_VIDEO,
   getCmsRuleBatchingVideoUrl,
@@ -131,10 +132,11 @@ export default async function GuidePage({ params }: PageProps) {
             eyebrow="Federal IDR · Guide"
             title={guide.title}
             subtitle="A guide for surgical billing teams."
-            lead={guide.lead}
-            ctaHref="/demo"
-            ctaLabel="Request a 15-minute demo"
+            lead={guide.lead.split("\n\n")}
           />
+          <div className="mt-8">
+            <ConversionCtaPair placement="idr-guide" showSupportingLine={false} />
+          </div>
           {isBatchingGuide ? <RegulatoryAsOf className="mt-6" /> : null}
           {guide.crossLink ? (
             <p className={`${textStyles.meta} mt-6`}>
@@ -188,7 +190,21 @@ export default async function GuidePage({ params }: PageProps) {
           <SourcesReferences className="mt-12" />
         </Section>
 
-        <SydraCtaBand />
+        <Section ariaLabelledby="heading-cta-band" tone="hero">
+          <div className="prose-measure">
+            <h2 className="type-h2 text-white" id="heading-cta-band">
+              Ready to see Sydra on a real denied claim?
+            </h2>
+            <p className="prose-measure mt-6 type-body text-white/85">{CTA}</p>
+            <div className="mt-10">
+              <ConversionCtaPair
+                onDark
+                placement="idr-guide"
+                showSupportingLine={false}
+              />
+            </div>
+          </div>
+        </Section>
       </SydraPageShell>
     </>
   );
