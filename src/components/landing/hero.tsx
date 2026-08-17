@@ -30,8 +30,9 @@ function HeroContent({
         <SplitHeadline text="Stop writing off out of network claims." />
       </h1>
       <p className="hero-sub mt-5 type-body text-body">
-        88% of properly filed federal IDR disputes get paid. Your billing team files one in five
-        minutes, and you keep 100% of the recovery — no 20% contingency cut.
+        88% of properly filed federal IDR disputes get paid. Sydra prepares each submission in about
+        five minutes — or our team files them for you, for a fraction of what recovery normally
+        costs.
       </p>
       <HeroCtas />
       <figure className="hero-origin mt-6 prose-measure">
