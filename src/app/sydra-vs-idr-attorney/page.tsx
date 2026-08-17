@@ -76,7 +76,7 @@ export default function SydraVsAttorneyPage() {
             Georgetown CHIR award benchmarks, not a Sydra performance claim.
           </p>
           <div className="mt-10 border-t border-rule pt-10">
-            <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo" />
+            <RecoveryCalculator ctaHref="/demo" ctaLabel="Request a 15-minute demo" />
             <p className={`${textStyles.bodyMeasure} mt-6`}>
               <Link className={textStyles.textLink} href="/idr-recovery-calculator">
                 Open the full calculator
@@ -106,7 +106,7 @@ export default function SydraVsAttorneyPage() {
           <div className="prose-measure">
             <p className={`${textStyles.body} mb-6`}>{SYDRA_VS_ATTORNEY_CTA_LEAD}</p>
             <Button href="/demo" showArrow>
-              Schedule a demo
+              Request a 15-minute demo
             </Button>
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>

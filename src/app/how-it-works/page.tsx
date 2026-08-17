@@ -153,7 +153,7 @@ export default function HowItWorksPage() {
           <div className="prose-measure">
             <p className={`${textStyles.body} mb-6`}>{DEMO_CTA_LEAD}</p>
             <Button href="/demo" showArrow>
-              Schedule a demo
+              Request a 15-minute demo
             </Button>
             <CtaTrustSignals className="mt-4" />
           </div>

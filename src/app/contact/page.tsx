@@ -78,7 +78,7 @@ export default function ContactPage() {
           <Section className="order-2 lg:order-3" sidebarLabel="Demo" tone="white">
             <section aria-labelledby="heading-contact-form" className="prose-measure" id="contact-form">
               <h2 className={textStyles.sectionTitle} id="heading-contact-form">
-                Schedule a demo or ask a question.
+                Request a 15-minute demo or ask a question.
               </h2>
               <div className="mt-6 border-t border-rule pt-8">
                 <ContactForm />
@@ -171,7 +171,7 @@ export default function ContactPage() {
               </ul>
               <p className="mt-6">
                 <Link className={textStyles.textLink} href="/demo">
-                  Or schedule a demo directly
+                  Or request a 15-minute demo directly
                 </Link>
               </p>
             </section>

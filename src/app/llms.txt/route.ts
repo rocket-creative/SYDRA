@@ -66,7 +66,7 @@ export function GET(): Response {
     `- [Roadmap](${base}/roadmap): what Sydra ships today and what is in active development.`,
   );
   lines.push(
-    `- [Schedule a demo](${base}/demo): see Sydra run on a real denied claim.`,
+    `- [Request a 15-minute demo](${base}/demo): see Sydra run on a real denied claim.`,
   );
   lines.push("");
 

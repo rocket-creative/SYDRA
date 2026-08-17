@@ -140,7 +140,7 @@ export default async function ResourceArticlePage({ params }: PageProps) {
             </p>
             <div className="mt-8">
               <Button href="/demo" showArrow>
-                Schedule a demo
+                Request a 15-minute demo
               </Button>
             </div>
           </header>

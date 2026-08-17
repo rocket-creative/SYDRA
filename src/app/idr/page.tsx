@@ -98,7 +98,7 @@ export default function IdrIndexPage() {
             </Link>
             , or{" "}
             <Link className={textStyles.textLink} href="/demo">
-              book a demo
+              request a 15-minute demo
             </Link>
             .
           </p>

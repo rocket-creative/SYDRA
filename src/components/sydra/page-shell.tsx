@@ -88,7 +88,7 @@ export const BREADCRUMBS = {
   ],
   demo: [
     { name: "Home", path: "" },
-    { name: "Schedule a demo", path: "/demo" },
+    { name: "Request a demo", path: "/demo" },
   ],
   caseReview: [
     { name: "Home", path: "" },

@@ -77,7 +77,7 @@ export default function IdrRecoveryCalculatorPage() {
           <h2 className="sr-only" id="heading-calculator-tool">
             Recovery estimate tool
           </h2>
-          <RecoveryCalculator ctaHref="/demo" ctaLabel="Schedule a demo" />
+          <RecoveryCalculator ctaHref="/demo" ctaLabel="Request a 15-minute demo" />
         </Section>
 
         <Section tone="white">
@@ -122,7 +122,7 @@ export default function IdrRecoveryCalculatorPage() {
               Free 15 minute demo. We look at your actual specialty, state, and payer mix.
             </p>
             <Button href="/demo" showArrow>
-              Schedule a demo
+              Request a 15-minute demo
             </Button>
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>

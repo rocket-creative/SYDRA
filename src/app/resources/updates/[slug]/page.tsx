@@ -171,7 +171,7 @@ export default async function ResourceUpdatePage({ params }: PageProps) {
             {isFinalRuleUpdate ? <RegulatoryAsOf className="mt-4" /> : null}
             <div className="mt-8">
               <Button href="/demo" showArrow>
-                Schedule a demo
+                Request a 15-minute demo
               </Button>
               <CtaTrustSignals className="mt-4" />
             </div>

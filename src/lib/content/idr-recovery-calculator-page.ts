@@ -20,7 +20,7 @@ export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
     title: "What this does not tell you",
     paragraphs: [
       "This estimate uses aggregate published win rate and award data. It does not account for your specific specialty's award multiples, which vary significantly. Surgical disputes have awarded roughly 970 percent to over 1,700 percent of the qualifying payment amount in recent reporting periods, while emergency disputes average closer to 257 percent, per the stats already published on the Federal IDR hub. It also does not account for your state's specific dynamics or your payer mix.",
-      "For a number specific to your practice, book a demo and we will walk through it with your actual claims.",
+      "For a number specific to your practice, request a 15-minute demo and we will walk through it with your actual claims.",
     ],
   },
 ];
@@ -36,7 +36,7 @@ export const IDR_RECOVERY_CALCULATOR_FAQS: ContentFaq[] = [
   },
   {
     q: "What should I do with the estimate?",
-    a: "Use it to compare keeping recovery in house against paying a contingency fee. Schedule a demo if you want to walk through a real denied claim from your specialty and see how Sydra prepares the submission.",
+    a: "Use it to compare keeping recovery in house against paying a contingency fee. Request a 15-minute demo if you want to walk through a real denied claim from your specialty and see how Sydra prepares the submission.",
   },
 ];
 

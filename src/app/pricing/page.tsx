@@ -125,7 +125,7 @@ export default function PricingPage() {
         <Section tone="neutral">
           <div className="max-w-xl">
             <Button href="/demo" showArrow>
-              Schedule my demo
+              Request a 15-minute demo
             </Button>
             <p className="mt-6">
               <CtaLink href={caseReviewUrl()}>

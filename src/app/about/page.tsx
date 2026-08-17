@@ -137,7 +137,7 @@ export default function AboutPage() {
         <Section tone="neutral">
           <div className="prose-measure">
             <Button href="/demo" showArrow>
-              Schedule a demo
+              Request a 15-minute demo
             </Button>
             <CtaTrustSignals className="mt-4" />
           </div>

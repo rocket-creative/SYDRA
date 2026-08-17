@@ -142,7 +142,7 @@ export default function WhatIsIdrPage() {
           <div className="prose-measure">
             <p className={`${textStyles.body} mb-6`}>{WHAT_IS_IDR_CTA_LEAD}</p>
             <Button href="/demo" showArrow>
-              Schedule a demo
+              Request a 15-minute demo
             </Button>
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>

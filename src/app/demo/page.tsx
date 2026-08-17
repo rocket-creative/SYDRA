@@ -24,7 +24,7 @@ function pageTitle(): string {
   if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
     return String(meta.title.absolute);
   }
-  return "Schedule a Sydra Demo";
+  return "Request a 15-minute Sydra Demo";
 }
 
 function DemoPageJsonLd() {

@@ -149,7 +149,7 @@ const CMS_PUF_REMINDER: ResourceUpdate = {
       id: "source",
       heading: "Source",
       paragraphs: [
-        "Browse the Federal IDR hub for code, state, and payer context, or open the IDR win rates and awards resource for the sourced figures in one place. If you want help filing eligible claims before their windows close, schedule a demo and bring a recent denial from your specialty.",
+        "Browse the Federal IDR hub for code, state, and payer context, or open the IDR win rates and awards resource for the sourced figures in one place. If you want help filing eligible claims before their windows close, request a 15-minute demo and bring a recent denial from your specialty.",
       ],
     },
   ],

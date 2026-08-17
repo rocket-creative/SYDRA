@@ -14,7 +14,7 @@ export function MobileCtaBar() {
           </Button>
         ) : null}
         <Button className="flex-[2]" href="/demo" showArrow>
-          Schedule a demo
+          Request a 15-minute demo
         </Button>
       </div>
     </div>

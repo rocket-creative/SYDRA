@@ -133,7 +133,7 @@ export default async function GuidePage({ params }: PageProps) {
             subtitle="A guide for surgical billing teams."
             lead={guide.lead}
             ctaHref="/demo"
-            ctaLabel="Schedule a demo"
+            ctaLabel="Request a 15-minute demo"
           />
           {isBatchingGuide ? <RegulatoryAsOf className="mt-6" /> : null}
           {guide.crossLink ? (

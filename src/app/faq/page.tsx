@@ -49,7 +49,7 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
             <p>{item.a}</p>
             {item.q.includes("cost") ? (
               <p className="mt-4">
-                <CtaLink href="/demo">Schedule a demo for pricing</CtaLink>
+                <CtaLink href="/demo">Request a 15-minute demo for pricing</CtaLink>
               </p>
             ) : null}
             {item.q === JURISDICTION_FAQ_Q ? (
