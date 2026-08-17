@@ -8,7 +8,8 @@ import {
 import {
   getFounderFromEmail,
   getLeadFromEmail,
-  getLeadInboxRecipients,
+  leadCopyBcc,
+  leadTeamNotifyAddresses,
 } from "@/lib/email/inbox-recipients";
 
 export type DeliverLeadInput = {
@@ -21,10 +22,6 @@ export type DeliverLeadResult =
   | { ok: true; channel: "resend" | "console" }
   | { ok: false; error: string };
 
-function notificationRecipients(): string[] {
-  return getLeadInboxRecipients();
-}
-
 /**
  * Claim-review lead delivery. Resend when RESEND_API_KEY is set; otherwise a
  * structured console.info. This function is the only place the submitter email
@@ -32,14 +29,15 @@ function notificationRecipients(): string[] {
  */
 export async function deliverLead(lead: DeliverLeadInput): Promise<DeliverLeadResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
-  const recipients = notificationRecipients();
+  const team = leadTeamNotifyAddresses();
   const source = lead.source?.trim() || "unspecified";
   const payload = {
     type: "claim_review",
     email: lead.email,
     practiceName: lead.practiceName,
     source,
-    to: recipients,
+    to: team.to,
+    bcc: team.bcc,
   };
 
   if (!apiKey) {
@@ -66,7 +64,7 @@ export async function deliverLead(lead: DeliverLeadInput): Promise<DeliverLeadRe
 
   const { error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    to: recipients,
+    ...team,
     replyTo: lead.email,
     subject: `[SYDRA CLAIM REVIEW] ${lead.practiceName}`,
     text,
@@ -82,6 +80,7 @@ export async function deliverLead(lead: DeliverLeadInput): Promise<DeliverLeadRe
   const { error: confirmError } = await resend.emails.send({
     from: getFounderFromEmail(),
     to: [lead.email],
+    ...leadCopyBcc(),
     replyTo: salesAddress,
     subject: CLAIM_REVIEW_AUTO_REPLY_SUBJECT,
     text: buildClaimReviewAutoReplyPlain(lead.practiceName),

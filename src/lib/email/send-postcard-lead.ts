@@ -5,7 +5,12 @@ import {
   buildFounderAutoReplyPlain,
   leadHasPhone,
 } from "@/lib/email/founder-auto-reply";
-import { getFounderFromEmail, getLeadFromEmail, getLeadInboxRecipients } from "@/lib/email/inbox-recipients";
+import {
+  getFounderFromEmail,
+  getLeadFromEmail,
+  leadCopyBcc,
+  leadTeamNotifyAddresses,
+} from "@/lib/email/inbox-recipients";
 import { DISPUTES_LABELS } from "@/lib/schemas/demo-request";
 import {
   LANDING_PRODUCT_LABELS,
@@ -180,7 +185,7 @@ export async function sendPostcardLeadEmail(
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    to: getLeadInboxRecipients(),
+    ...leadTeamNotifyAddresses(),
     replyTo: data.email,
     subject,
     text,
@@ -195,6 +200,7 @@ export async function sendPostcardLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getFounderFromEmail(),
       to: [data.email],
+      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: "Your Sydra demo, and the one thing to have ready",
       text: buildFounderAutoReplyPlain(data.name, {

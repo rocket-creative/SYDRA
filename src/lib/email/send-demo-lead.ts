@@ -8,7 +8,8 @@ import {
 import {
   getFounderFromEmail,
   getLeadFromEmail,
-  getLeadInboxRecipients,
+  leadCopyBcc,
+  leadTeamNotifyAddresses,
 } from "@/lib/email/inbox-recipients";
 import {
   BEST_TIME_LABELS,
@@ -167,7 +168,7 @@ export async function sendDemoLeadEmail(
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    to: getLeadInboxRecipients(),
+    ...leadTeamNotifyAddresses(),
     replyTo: data.email,
     subject,
     text: buildPlainBody(data, score, requestType),
@@ -182,6 +183,7 @@ export async function sendDemoLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getFounderFromEmail(),
       to: [data.email],
+      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: "Your Sydra demo, and the one thing to have ready",
       text: buildFounderAutoReplyPlain(data.name, {
@@ -195,6 +197,7 @@ export async function sendDemoLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getLeadFromEmail(),
       to: [data.email],
+      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: "We received your Sydra security request",
       text: buildSecurityConfirmPlain(data.name),

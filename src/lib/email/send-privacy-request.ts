@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 import { getSalesEmail } from "@/lib/contact";
-import { getLeadFromEmail, getLeadInboxRecipients } from "@/lib/email/inbox-recipients";
+import { getLeadFromEmail, leadCopyBcc, leadTeamNotifyAddresses } from "@/lib/email/inbox-recipients";
 import {
   PRIVACY_REQUEST_LABELS,
   type PrivacyRequest,
@@ -40,7 +40,7 @@ export async function sendPrivacyRequestEmail(
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    to: getLeadInboxRecipients(),
+    ...leadTeamNotifyAddresses(),
     replyTo: data.email,
     subject: `[SYDRA PRIVACY] ${typeLabel} · ${data.email}`,
     text,
@@ -53,6 +53,7 @@ export async function sendPrivacyRequestEmail(
   const { error: confirmError } = await resend.emails.send({
     from: getLeadFromEmail(),
     to: [data.email],
+    ...leadCopyBcc(),
     replyTo: getSalesEmail(),
     subject: "We received your privacy request, Sydra",
     text: [

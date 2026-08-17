@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 import { getSalesEmail } from "@/lib/contact";
-import { getLeadFromEmail, getLeadInboxRecipients } from "@/lib/email/inbox-recipients";
+import { getLeadFromEmail, leadCopyBcc, leadTeamNotifyAddresses } from "@/lib/email/inbox-recipients";
 import {
   CONTACT_INTENT_LABELS,
   type ContactRequest,
@@ -20,8 +20,6 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
   const resend = new Resend(apiKey);
   const intentLabel = CONTACT_INTENT_LABELS[data.intent];
   const message = data.message?.trim() || "(none)";
-  const recipients = getLeadInboxRecipients();
-
   const text = [
     "Contact form submission",
     "",
@@ -41,7 +39,7 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    to: recipients,
+    ...leadTeamNotifyAddresses(),
     replyTo: data.email,
     subject: `[SYDRA CONTACT] ${intentLabel} · ${data.practiceName}`,
     text,
@@ -54,6 +52,7 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
   const { error: confirmError } = await resend.emails.send({
     from: getLeadFromEmail(),
     to: [data.email],
+    ...leadCopyBcc(),
     replyTo: getSalesEmail(),
     subject: "We received your message, Sydra",
     text: [
