@@ -29,9 +29,9 @@ export function SydraEconomics() {
           <p className="type-caption text-white/60">Median award vs QPA</p>
           <p className="prose-measure mt-6 text-[15px] leading-relaxed text-white/85">
             If your practice files IDR at a typical 20% contingency: Sydra lets your
-            billing team run the workflow in house. Platform fee is structured below typical 20%
-            contingency. Exact quote on your demo call after we understand your specialty and
-            volume.
+            billing team run the workflow in house. Per claim and subscription models rather than a
+            percentage of recovery are structured below typical 20% contingency. Exact quote on
+            your demo call after we understand your specialty and volume.
           </p>
           <p className="prose-measure mt-4 text-[15px] leading-relaxed text-white/85">
             Providers win 88% of properly filed IDR disputes. CMS Q1/Q2 2025 Public Use File.
