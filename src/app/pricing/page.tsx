@@ -38,8 +38,9 @@ export default function PricingPage() {
             <p className="mt-4 type-caption text-body">{FOUR_OBJECTION_LINE}</p>
             <p className="mt-6 type-body text-body">
               We don&apos;t publish a list price because the right number depends on your specialty,
-              state, and monthly out of network claim volume. Every tier is structured below the
-              typical 20% contingency charged for out of network recovery. You keep more of every recovery.
+              state, and monthly out of network claim volume. Sydra is priced on per claim and
+              subscription models rather than a percentage of recovery, so the cost of the service
+              stops scaling against you at exactly the point your volume makes it most expensive.
             </p>
             <p className="mt-4 type-body text-body">
               Request a 15 minute demo and we quote on the call. No commitment to proceed.
