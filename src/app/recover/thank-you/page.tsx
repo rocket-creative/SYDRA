@@ -17,7 +17,7 @@ export const metadata = buildPageMetadata({
  */
 export default function RecoverThankYouPage() {
   return (
-    <MagazineShell headerVariant="funnel" mainClassName="px-5 py-16 md:px-10 md:py-24">
+    <MagazineShell headerVariant="funnel" mainClassName="px-4 py-16 md:px-10 md:py-24">
       <LeadConversionOnMount action="free_demo" />
       <div className="mx-auto max-w-xl">
         <p className="type-caption text-[var(--color-accent)]">Confirmed</p>

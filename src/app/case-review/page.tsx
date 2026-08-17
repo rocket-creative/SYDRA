@@ -37,7 +37,7 @@ export default async function CaseReviewPage({ searchParams }: PageProps) {
     <SydraPageShell
       breadcrumb={[...BREADCRUMBS.caseReview]}
       headerVariant="funnel"
-      mainClassName="px-5 py-12 md:px-10 md:py-16"
+      mainClassName="px-4 py-12 md:px-10 md:py-16"
     >
       <BreadcrumbJsonLd items={[...BREADCRUMBS.caseReview]} />
       <PageJsonLd

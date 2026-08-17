@@ -13,7 +13,7 @@ export default function DemoThankYouPage() {
     <SydraPageShell
       breadcrumb={[...BREADCRUMBS.demo, { name: "Thank you", path: "/demo/thank-you" }]}
       headerVariant="funnel"
-      mainClassName="px-5 py-16 md:px-10 md:py-24"
+      mainClassName="px-4 py-16 md:px-10 md:py-24"
     >
       <LeadConversionOnMount action="free_demo" />
       <Suspense fallback={null}>

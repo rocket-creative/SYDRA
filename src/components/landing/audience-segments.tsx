@@ -48,7 +48,7 @@ export function AudienceSegments() {
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
         {segments.map((segment) => (
           <article
-            className="flex h-full flex-col rounded border border-rule bg-white p-6 transition-colors md:p-8 lg:hover:border-body/40"
+            className="flex h-full min-w-0 flex-col rounded border border-rule bg-white p-5 transition-colors md:p-8 lg:hover:border-body/40"
             key={segment.heading}
           >
             <h3 className="home-card-heading text-brand">{segment.heading}</h3>

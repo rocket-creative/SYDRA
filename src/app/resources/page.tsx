@@ -64,7 +64,7 @@ export default function ResourcesPage() {
             {RESOURCE_ARTICLES.map((article) => (
               <li key={article.slug} className="bg-white">
                 <Link
-                  className="group flex h-full flex-col gap-3 p-7 transition-colors hover:bg-neutral-section focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] md:p-9"
+                  className="group flex h-full min-w-0 flex-col gap-3 p-5 transition-colors hover:bg-neutral-section focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] md:p-9"
                   href={`/resources/${article.slug}`}
                 >
                   <h2 className="text-lg font-medium text-brand transition-colors group-hover:text-[var(--color-hero)]">

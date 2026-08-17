@@ -27,7 +27,7 @@ export function EntityLinks({ title, links, inline = false }: EntityLinksProps) 
           {links.map((link) => (
             <li key={link.href}>
               <Link
-                className="inline-flex min-h-[44px] max-w-full items-center break-words border border-rule px-4 py-2 text-left text-[13px] uppercase tracking-[0.06em] text-brand transition-colors hover:border-body/40"
+                className="inline-flex min-h-12 w-full max-w-full items-center break-words border border-rule px-4 py-2 text-left text-[13px] uppercase tracking-[0.06em] text-brand transition-colors hover:border-body/40 sm:w-auto"
                 href={link.href}
               >
                 {link.name}
@@ -40,7 +40,7 @@ export function EntityLinks({ title, links, inline = false }: EntityLinksProps) 
           {links.map((link) => (
             <li key={link.href}>
               <Link
-                className={`${textStyles.textLink} inline-flex min-h-[44px] min-w-0 items-center break-words`}
+                className={`${textStyles.textLink} inline-flex min-h-12 min-w-0 items-center break-words`}
                 href={link.href}
               >
                 {link.name}

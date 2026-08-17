@@ -13,7 +13,7 @@ const footerLink =
 export function SydraFooter() {
   const email = getSalesEmail();
   return (
-    <footer className="border-t border-rule bg-white px-5 py-14 text-brand md:px-10">
+    <footer className="border-t border-rule bg-white px-4 py-14 text-brand md:px-10">
       <div className="mx-auto max-w-[1280px]">
         <Image
           alt="Sydra"
@@ -41,85 +41,85 @@ export function SydraFooter() {
         </p>
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-body">
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/what-is-idr"
           >
             What is federal IDR?
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/sydra-vs-idr-attorney"
           >
             Compare the fees →
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/what-is-idr"
           >
             Read the full Federal IDR guide
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/idr"
           >
             Federal IDR
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/how-it-works"
           >
             How it works
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/faq"
           >
             FAQ
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/roadmap"
           >
             Roadmap
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/security"
           >
             Security
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/resources"
           >
             Resources
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/glossary"
           >
             Glossary
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/idr-recovery-calculator"
           >
             Recovery calculator
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/privacy"
           >
             Privacy
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/do-not-sell"
           >
             Do Not Sell or Share
           </Link>
           <Link
-            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
             href="/terms"
           >
             Terms

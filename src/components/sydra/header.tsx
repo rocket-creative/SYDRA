@@ -35,18 +35,18 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
     <header
       className={`animate-nav-in sticky top-0 z-[100] pt-[max(0.5rem,env(safe-area-inset-top))] transition-[background-color,border-color] duration-300 ${shellClass}`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center gap-2 px-5 py-3 sm:gap-3 md:gap-6 md:px-10 md:py-4">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-2 px-4 py-3 sm:gap-3 md:gap-6 md:px-10 md:py-4">
         <Link
           aria-label="Sydra home"
-          className="flex min-h-11 min-w-0 shrink items-center gap-2 transition-opacity duration-300 hover:opacity-90 sm:gap-3"
+          className="flex min-h-12 min-w-0 shrink items-center gap-2 transition-opacity duration-300 hover:opacity-90 sm:gap-3"
           href="/"
         >
           <Image
             alt="Sydra - NSA IDR Software"
-            className="h-7 w-auto sm:h-9"
+            className="h-6 w-auto max-w-[7.5rem] sm:h-8 sm:max-w-none md:h-9"
             height={36}
             loading="eager"
-            sizes="(max-width: 1024px) 140px, 220px"
+            sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 220px"
             src="/sydra-logo-nav.svg"
             width={220}
           />
@@ -60,7 +60,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
 
         <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 md:gap-6">
           <a
-            className={`hidden min-h-[44px] select-none items-center type-caption transition-colors duration-300 lg:inline-flex ${linkClass}`}
+            className={`hidden min-h-12 select-none items-center type-caption transition-colors duration-300 lg:inline-flex ${linkClass}`}
             href={SIGN_IN}
             rel="noopener noreferrer"
             target="_blank"
@@ -70,7 +70,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           {!isFunnel ? (
             <>
               <Button
-                className="px-3 sm:px-4 md:px-6"
+                className="hidden sm:inline-flex sm:w-auto"
                 href={CASE_REVIEW_PATH}
                 showArrow
                 variant="solid"
@@ -87,12 +87,12 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       {!isFunnel ? (
         <nav
           aria-label="Primary"
-          className="mx-auto hidden max-w-[1280px] select-none gap-x-6 border-t border-rule px-5 py-1.5 md:px-10 lg:flex lg:py-3"
+          className="mx-auto hidden max-w-[1280px] select-none gap-x-6 border-t border-rule px-4 py-1.5 md:px-10 lg:flex lg:py-3"
         >
           {PRIMARY_NAV.map((item) => (
             <Link
               key={item.href}
-              className={`nav-link inline-flex items-center type-caption transition-colors duration-300 ${linkClass}`}
+              className={`nav-link inline-flex min-h-12 items-center type-caption transition-colors duration-300 ${linkClass}`}
               href={item.href}
             >
               {item.label}

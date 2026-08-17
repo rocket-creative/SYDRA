@@ -145,7 +145,11 @@ body {
 }
 
 p,
-li {
+li,
+h1,
+h2,
+h3,
+h4 {
   overflow-wrap: break-word;
 }
 
@@ -308,7 +312,7 @@ li {
   text-transform: uppercase;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .home-h1 {
     font-size: 44px;
   }

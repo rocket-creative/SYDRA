@@ -103,7 +103,7 @@ function HomepageBandForm() {
   return (
     <section className="bg-neutral-section py-12 md:py-16 lg:py-24" id="lead-form-closing">
       <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8">
-        <div className="max-w-2xl rounded-[2px] bg-white p-6 md:p-8" id="lead-form">
+        <div className="max-w-2xl rounded-[2px] bg-white p-5 md:p-8" id="lead-form">
           <ClaimReviewForm source="homepage-closing" />
         </div>
       </div>

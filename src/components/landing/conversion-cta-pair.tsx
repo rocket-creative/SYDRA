@@ -61,10 +61,10 @@ export function ConversionCtaPair({
         )}
       </div>
       {showSupportingLine ? (
-        <p className="prose-measure mt-4 text-[15px] leading-relaxed text-body">{SUPPORTING_LINE}</p>
+        <p className="prose-measure mt-4 text-base leading-relaxed text-body">{SUPPORTING_LINE}</p>
       ) : null}
       {placement === "homepage-hero" || placement === "homepage-closing" ? (
-        <p className="prose-measure mt-4 text-[15px] leading-relaxed text-body">{FOUR_OBJECTION_LINE}</p>
+        <p className="prose-measure mt-4 text-base leading-relaxed text-body">{FOUR_OBJECTION_LINE}</p>
       ) : null}
     </div>
   );

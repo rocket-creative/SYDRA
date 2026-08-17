@@ -3,6 +3,10 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { track } from "@vercel/analytics";
+
+import { Button } from "@/components/ui/button";
+import { CASE_REVIEW_PATH, PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
 
 type NavItem = { href: string; label: string };
 
@@ -86,7 +90,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
         aria-controls={panelId}
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
-        className="inline-flex min-h-[44px] min-w-[44px] select-none items-center justify-center text-brand lg:hidden"
+        className="inline-flex min-h-12 min-w-12 select-none items-center justify-center text-brand lg:hidden"
         onClick={() => setOpen((prev) => !prev)}
         type="button"
       >
@@ -133,7 +137,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
                   </span>
                   <button
                     aria-label="Close menu"
-                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-brand"
+                    className="inline-flex min-h-12 min-w-12 items-center justify-center text-brand"
                     onClick={close}
                     type="button"
                   >
@@ -154,7 +158,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
                   {signInHref ? (
                     <li className="border-b border-rule pb-2 mb-2">
                       <a
-                        className={`inline-flex min-h-[44px] w-full items-center text-sm transition-colors duration-300 ${linkClass}`}
+                        className={`inline-flex min-h-12 w-full items-center text-sm transition-colors duration-300 ${linkClass}`}
                         href={signInHref}
                         onClick={close}
                         rel="noopener noreferrer"
@@ -167,7 +171,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
                   {nav.map((item) => (
                     <li key={item.href}>
                       <Link
-                        className={`inline-flex min-h-[44px] w-full items-center text-sm transition-colors duration-300 ${linkClass}`}
+                        className={`inline-flex min-h-12 w-full items-center text-sm transition-colors duration-300 ${linkClass}`}
                         href={item.href}
                         onClick={close}
                       >
@@ -175,6 +179,18 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
                       </Link>
                     </li>
                   ))}
+                  <li className="mt-4 border-t border-rule pt-4">
+                    <Button
+                      href={CASE_REVIEW_PATH}
+                      showArrow
+                      onClick={() => {
+                        track("cta_primary_click", { placement: "mobile-nav" });
+                        close();
+                      }}
+                    >
+                      {PRIMARY_CTA_SHORT_LABEL}
+                    </Button>
+                  </li>
                 </ul>
               </nav>
             </>,

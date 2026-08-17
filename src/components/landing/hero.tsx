@@ -17,8 +17,8 @@ function HeroContent({
   return (
     <div className="w-full">
       <div aria-hidden className="mb-5 h-px w-16 bg-[var(--color-accent)]" />
-      <p className="home-eyebrow text-body">{eyebrow}</p>
-      <h1 className="home-h1 mt-4 text-brand" id="landing-hero-heading">
+      <p className="home-eyebrow break-words text-body">{eyebrow}</p>
+      <h1 className="home-h1 mt-4 min-w-0 text-balance text-brand" id="landing-hero-heading">
         That payment is an opening offer.
       </h1>
       <p className="home-lead mt-5 text-body">
@@ -47,7 +47,7 @@ export function Hero({ stateDisplay }: HeroProps) {
       aria-labelledby="landing-hero-heading"
       className="relative flex flex-col overflow-hidden bg-white text-brand md:min-h-[clamp(34rem,70dvh,52rem)] md:bg-transparent"
     >
-      <div className="relative h-[clamp(8rem,24dvh,12rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
+      <div className="relative h-[clamp(10rem,32dvh,16rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
         <Image
           alt="Surgical practice billing team preparing out of network claims for federal IDR"
           className="object-cover object-[center_20%] md:object-right"
@@ -59,8 +59,8 @@ export function Hero({ stateDisplay }: HeroProps) {
       </div>
 
       <div className="relative z-10 flex w-full flex-1 md:mt-auto md:items-end">
-        <div className="mx-auto flex w-full max-w-[1200px] px-4 pb-8 pt-6 md:px-6 md:pb-14 md:pt-10 lg:px-8">
-          <div className="hero-frost-panel w-full rounded-[2px] border border-rule/40 p-6 md:max-w-xl md:border-white/60 md:p-8 lg:max-w-2xl lg:p-10">
+        <div className="mx-auto flex w-full max-w-[1200px] px-4 pb-8 pt-5 md:px-6 md:pb-14 md:pt-10 lg:px-8">
+          <div className="hero-frost-panel w-full min-w-0 rounded-[2px] border border-rule/40 p-5 md:max-w-xl md:border-white/60 md:p-8 lg:max-w-2xl lg:p-10">
             <HeroContent eyebrow={eyebrow} />
           </div>
         </div>

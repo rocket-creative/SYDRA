@@ -72,7 +72,7 @@ export function LaborCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-12 w-full cursor-pointer ${sliderClass}`}
             id={claimsId}
             max={CLAIMS_MAX}
             min={CLAIMS_MIN}
@@ -96,7 +96,7 @@ export function LaborCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-12 w-full cursor-pointer ${sliderClass}`}
             id={minutesId}
             max={MINUTES_MAX}
             min={MINUTES_MIN}
@@ -120,7 +120,7 @@ export function LaborCalculator({
             </span>
           </div>
           <input
-            className={`mt-3 h-11 w-full cursor-pointer ${sliderClass}`}
+            className={`mt-3 h-12 w-full cursor-pointer ${sliderClass}`}
             id={rateId}
             max={RATE_MAX}
             min={RATE_MIN}

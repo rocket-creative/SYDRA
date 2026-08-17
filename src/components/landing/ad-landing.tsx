@@ -59,7 +59,7 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
         aria-labelledby="ad-landing-hero-heading"
         className="relative flex flex-col overflow-hidden border-b border-rule bg-white text-brand md:min-h-[clamp(34rem,70dvh,52rem)] md:bg-transparent"
       >
-        <div className="relative h-[clamp(8rem,24dvh,12rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
+        <div className="relative h-[clamp(10rem,32dvh,16rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
           <Image
             alt="Billing specialist reviewing claim paperwork at a laptop in a modern office"
             className="object-cover object-[center_30%] md:object-right"
@@ -72,7 +72,7 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
 
         <div className="relative z-10 flex w-full flex-1 md:mt-auto md:items-end">
           <div className="mx-auto flex w-full max-w-[1280px] px-5 pb-8 pt-6 md:px-10 md:pb-14 md:pt-10">
-            <div className="hero-frost-panel w-full rounded-[2px] border border-rule/40 p-6 md:max-w-xl md:border-white/60 md:p-8 lg:max-w-2xl lg:p-10">
+            <div className="hero-frost-panel w-full min-w-0 rounded-[2px] border border-rule/40 p-5 md:max-w-xl md:border-white/60 md:p-8 lg:max-w-2xl lg:p-10">
               <div aria-hidden className="rule-draw mb-5 h-px w-16 bg-[var(--color-accent)]" />
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-body/70">
                 Out of network claim recovery
@@ -94,7 +94,7 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
         </div>
       </section>
 
-      <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
+      <div className="mx-auto w-full max-w-[1280px] px-4 py-10 md:px-10 md:py-14">
         <div
           className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
           id="lead-form"
