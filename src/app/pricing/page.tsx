@@ -87,8 +87,8 @@ export default function PricingPage() {
             <div>
               <h3 className="font-medium text-brand">What Sydra changes</h3>
               <p className="mt-2">
-                Your billing team runs IDR in house. Platform fee quoted to your volume.
-                Structured below typical 20% contingency. You keep more per dollar won.
+                Your billing team runs IDR in house. Per claim or subscription, quoted to your volume.
+                Never a percentage of recovery. You keep more per dollar won.
               </p>
             </div>
           </div>
