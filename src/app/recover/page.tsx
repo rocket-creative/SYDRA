@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Recover Out of Network Claims | Sydra",
   description:
-    "Book a free 15 minute Sydra demo. See if your denied out of network claims qualify for federal IDR recovery. Surgeon built. No attorney cut.",
+    "Send us one denied out-of-network EOB. We'll tell you whether it qualifies for federal IDR and what it's worth — in writing, within one business day. No call, no software to install.",
   path: "/recover",
   // Paid landing: keep crawlable for ads preview, avoid competing with homepage SEO.
   robots: { index: false, follow: true },
@@ -17,22 +17,11 @@ type PageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-function firstQueryValue(value: string | string[] | undefined): string {
-  if (Array.isArray(value)) return value[0]?.trim() ?? "";
-  return value?.trim() ?? "";
-}
-
 export default async function RecoverAdLandingPage({ searchParams }: PageProps) {
   const query = await searchParams;
   const data = await getLandingPageData(undefined, query);
 
   return (
-    <AdLanding
-      path="/recover"
-      stateCode={data.stateCode}
-      tracking={data.tracking}
-      urlCode={firstQueryValue(query.code)}
-      urlState={firstQueryValue(query.state).toUpperCase()}
-    />
+    <AdLanding path="/recover" tracking={data.tracking} />
   );
 }

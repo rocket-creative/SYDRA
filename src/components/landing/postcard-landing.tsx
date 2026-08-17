@@ -125,7 +125,7 @@ export function PostcardLanding({
         </SectionReveal>
         {/* 11. Closing CTA and form */}
         <SectionReveal className="order-11">
-          <ClosingCta tracking={tracking} />
+          <ClosingCta />
         </SectionReveal>
         <SectionReveal className="order-12">
           <Section id="lead-form-closing" sidebarLabel="Get started" tone="neutral">

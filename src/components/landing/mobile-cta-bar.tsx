@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import { Arrow } from "@/components/ui/arrow";
 import { trackCtaClick } from "@/lib/landing/analytics-client";
+import { CASE_REVIEW_PATH } from "@/lib/case-review";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 const PHONE_TEL = "tel:+19147056830";
@@ -44,11 +46,6 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
     return () => window.visualViewport?.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleDemo = () => {
-    trackCtaClick("sydra", tracking);
-    document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   if (targetVisible || keyboardOpen) return null;
 
   return (
@@ -75,14 +72,14 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
           </svg>
           Call
         </a>
-        <button
-          className="cta-link flex min-h-[56px] flex-1 select-none items-center justify-center gap-2 bg-[var(--color-hero)] text-[13px] uppercase tracking-[0.08em] text-white"
-          onClick={handleDemo}
-          type="button"
+        <Link
+          className="cta-link flex min-h-[56px] flex-1 select-none items-center justify-center gap-2 bg-[var(--color-hero)] px-2 text-center text-[13px] uppercase tracking-[0.08em] text-white"
+          href={CASE_REVIEW_PATH}
+          onClick={() => trackCtaClick("case_review", tracking)}
         >
-          Book a free demo
+          See what one denied claim is worth
           <Arrow className="shrink-0" />
-        </button>
+        </Link>
       </div>
     </div>
   );

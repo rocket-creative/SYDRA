@@ -1,9 +1,8 @@
-import { Suspense } from "react";
-
-import { CaseReviewLeadForm } from "@/components/landing/case-review-lead-form";
+import { ClaimReviewForm } from "@/components/landing/claim-review-form";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
+import { CtaLink } from "@/components/ui/cta-link";
 import { CASE_REVIEW_PATH } from "@/lib/case-review";
 import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -28,9 +27,10 @@ export default function CaseReviewPage() {
         ]}
       />
       <div className="mx-auto max-w-xl">
-        <Suspense fallback={<div className="min-h-[320px] rounded-sm bg-white" />}>
-          <CaseReviewLeadForm />
-        </Suspense>
+        <ClaimReviewForm source="case-review" />
+        <p className="mt-6">
+          <CtaLink href="/demo">Or book a 15-minute demo</CtaLink>
+        </p>
       </div>
     </SydraPageShell>
   );

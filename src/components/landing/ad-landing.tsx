@@ -2,13 +2,16 @@ import Image from "next/image";
 
 import { Cursor } from "@/components/motion/cursor";
 import { SplitHeadline } from "@/components/motion/split-headline";
+import { ClaimReviewForm } from "@/components/landing/claim-review-form";
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { HeroProofStack } from "@/components/landing/hero-proof-stack";
-import { LeadForm } from "@/components/landing/lead-form";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
+import { CtaLink } from "@/components/ui/cta-link";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
+import { Section } from "@/components/ui/section";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import {
   breadcrumbJsonLd,
@@ -19,23 +22,14 @@ import {
 
 type AdLandingProps = {
   tracking: CampaignTracking;
-  stateCode: string;
   path?: string;
-  urlCode?: string;
-  urlState?: string;
 };
 
 /**
  * Single-purpose paid-traffic landing: one promise, one form, one CTA.
  * No Sydra vs full-service fork, calculator, or audience path grid.
  */
-export function AdLanding({
-  tracking,
-  stateCode,
-  path = "/recover",
-  urlCode = "",
-  urlState = "",
-}: AdLandingProps) {
+export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
   const jsonLd = [
     breadcrumbJsonLd([
       { name: "Home", path: "" },
@@ -47,7 +41,7 @@ export function AdLanding({
       path: "/recover",
       name: "Recover underpaid out of network claims",
       description:
-        "Book a free 15 minute Sydra demo. See whether your denied out of network claims qualify for federal IDR recovery.",
+        "Send us one denied out-of-network EOB. We'll tell you whether it qualifies for federal IDR and what it's worth — in writing, within one business day. No call, no software to install.",
     }),
   ];
 
@@ -88,9 +82,13 @@ export function AdLanding({
                 <SplitHeadline text="Recover underpaid out of network claims." />
               </h1>
               <p className="mt-5 type-body text-body">
-                Book a free 15 minute demo. Bring one denied EOB and we will tell you if it
-                qualifies for federal IDR, and what that claim is worth.
+                Send us one denied out-of-network EOB. We&apos;ll tell you whether it qualifies for
+                federal IDR and what it&apos;s worth — in writing, within one business day. No call,
+                no software to install.
               </p>
+              <div className="mt-6">
+                <ConversionCtaPair placement="recover-hero" />
+              </div>
               <p className="mt-6 text-sm leading-relaxed text-body/80">
                 Built by Dr. John M. Abrahams, MD, a board certified neurosurgeon. No attorney cut.
                 You keep the recovery.
@@ -102,19 +100,25 @@ export function AdLanding({
       </section>
 
       <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
-        <LeadForm
-          anchorId="lead-form"
-          defaultState={stateCode}
-          landingPage="recover"
-          readSearchParams={false}
-          thankYouPath="/recover/thank-you"
-          tracking={tracking}
-          urlCode={urlCode}
-          urlState={urlState}
-          variant="card"
-        />
+        <div
+          className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
+          id="lead-form"
+        >
+          <ClaimReviewForm source="recover" />
+          <p className="mt-6">
+            <CtaLink href="/demo">Or book a 15-minute demo</CtaLink>
+          </p>
+        </div>
         <CtaTrustSignals className="mt-8 max-w-3xl" />
       </div>
+
+      <Section id="recover-closing" tone="white">
+        <ConversionCtaPair
+          placement="recover-closing"
+          secondaryAs="link"
+          showSupportingLine={false}
+        />
+      </Section>
 
       <MobileCtaBar tracking={tracking} />
     </MagazineShell>

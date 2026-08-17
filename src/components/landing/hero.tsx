@@ -12,10 +12,8 @@ type HeroProps = {
 
 function HeroContent({
   eyebrow,
-  tracking,
 }: {
   eyebrow: string;
-  tracking: CampaignTracking;
 }) {
   return (
     <div className="w-full">
@@ -27,17 +25,16 @@ function HeroContent({
         <SplitHeadline text="Stop writing off out of network claims." />
       </h1>
       <p className="hero-sub mt-5 type-body text-body">
-        Your billing team recovers underpaid out of network claims in five minutes per claim, and
-        you keep every dollar. No attorney, no 20% cut. Built by a surgeon who files these claims
-        himself.
+        88% of properly filed federal IDR disputes get paid. Your billing team files one in five
+        minutes, and you keep 100% of the recovery — no 20% contingency cut.
       </p>
-      <HeroCtas tracking={tracking} />
+      <HeroCtas />
       <HeroProofStack className="mt-8 border-t border-rule pt-8" />
     </div>
   );
 }
 
-export function Hero({ stateDisplay, tracking }: HeroProps) {
+export function Hero({ stateDisplay }: HeroProps) {
   const eyebrow = stateDisplay
     ? `OUT OF NETWORK RECOVERY FOR SURGICAL PRACTICES · ${stateDisplay}`
     : "OUT OF NETWORK RECOVERY FOR SURGICAL PRACTICES";
@@ -63,7 +60,7 @@ export function Hero({ stateDisplay, tracking }: HeroProps) {
       <div className="relative z-10 flex w-full flex-1 md:mt-auto md:items-end">
         <div className="mx-auto flex w-full max-w-[1280px] px-5 pb-8 pt-6 md:px-10 md:pb-14 md:pt-10">
           <div className="hero-frost-panel w-full rounded-[2px] border border-rule/40 p-6 md:max-w-xl md:border-white/60 md:p-8 lg:max-w-2xl lg:p-10">
-            <HeroContent eyebrow={eyebrow} tracking={tracking} />
+            <HeroContent eyebrow={eyebrow} />
           </div>
         </div>
       </div>
