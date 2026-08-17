@@ -10,6 +10,7 @@ import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { RecoverySection } from "@/components/landing/recovery-section";
+import { RegulatoryCurrency } from "@/components/landing/regulatory-currency";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
 import { TwoPaths } from "@/components/landing/two-paths";
 import { MagazineShell } from "@/components/ui/magazine-shell";
@@ -83,8 +84,12 @@ export function PostcardLanding({
         <SectionReveal className="order-2">
           <TwoPaths />
         </SectionReveal>
-        {/* 3. Claim review form */}
+        {/* 3. Current federal IDR rules */}
         <SectionReveal className="order-3">
+          <RegulatoryCurrency />
+        </SectionReveal>
+        {/* 4. Claim review form */}
+        <SectionReveal className="order-4">
           <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
             <div
               className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
@@ -94,35 +99,35 @@ export function PostcardLanding({
             </div>
           </div>
         </SectionReveal>
-        {/* 4. Recovery calculator */}
-        <SectionReveal className="order-4">
+        {/* 5. Recovery calculator */}
+        <SectionReveal className="order-5">
           <RecoverySection />
         </SectionReveal>
-        {/* 5. How Sydra works */}
-        <SectionReveal className="order-5">
+        {/* 6. How Sydra works */}
+        <SectionReveal className="order-6">
           <HowItWorks />
         </SectionReveal>
-        {/* 6. Built by a surgeon who files these claims */}
-        <SectionReveal className="order-6">
+        {/* 7. Built by a surgeon who files these claims */}
+        <SectionReveal className="order-7">
           <FounderNote />
         </SectionReveal>
-        {/* 7. Built on Claude */}
-        <SectionReveal className="order-7">
+        {/* 8. Built on Claude */}
+        <SectionReveal className="order-8">
           <BuiltOnClaude />
         </SectionReveal>
-        {/* 8. What is Federal IDR */}
-        <SectionReveal className="order-8">
+        {/* 9. What is Federal IDR */}
+        <SectionReveal className="order-9">
           <FederalIdrExplainer />
         </SectionReveal>
-        {/* 9. FAQ */}
-        <SectionReveal className="order-9">
+        {/* 10. FAQ */}
+        <SectionReveal className="order-10">
           <Faq stateDisplay={stateDisplay} />
         </SectionReveal>
-        {/* 10. Closing CTA and form */}
-        <SectionReveal className="order-10">
+        {/* 11. Closing CTA and form */}
+        <SectionReveal className="order-11">
           <ClosingCta />
         </SectionReveal>
-        <SectionReveal className="order-11">
+        <SectionReveal className="order-12">
           <Section id="lead-form-closing" sidebarLabel="Get started" tone="neutral">
             <div className="max-w-2xl rounded-[2px] bg-white p-6 md:p-10">
               <ClaimReviewForm source="homepage-closing" />
