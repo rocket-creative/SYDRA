@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 
+import { ClaimReviewForm } from "@/components/landing/claim-review-form";
 import { CtaLink } from "@/components/ui/cta-link";
 import { writeCalculatorEstimate } from "@/lib/landing/calculator-estimate";
 
@@ -33,8 +34,6 @@ function clampInitial(value: number, min: number, max: number, step: number): nu
 
 export function RecoveryCalculator({
   variant = "light",
-  ctaHref = "/demo",
-  ctaLabel = "Schedule a demo",
   onCtaClick,
   defaultClaimsPerMonth = 20,
   defaultAvgDisputedAmount = 15000,
@@ -176,15 +175,27 @@ export function RecoveryCalculator({
           </div>
         </div>
 
-        <p className="mt-8">
-          <CtaLink
-            className={onDark ? "!text-white hover:!text-white/80" : ""}
-            href={ctaHref}
-            onClick={onCtaClick}
-          >
-            {ctaLabel}
-          </CtaLink>
-        </p>
+        <div className="mt-8 space-y-6">
+          <div>
+            <h3 className={`text-lg font-medium leading-snug ${valueClass}`}>
+              That&apos;s {usd(estimate.annualRecovery)} a year you&apos;re currently writing off.
+            </h3>
+            <p className={`mt-3 text-[15px] leading-relaxed ${mutedClass}`}>
+              Want that number verified against a real claim instead of an estimate? Send us one
+              denied EOB and we&apos;ll tell you exactly what it&apos;s worth.
+            </p>
+          </div>
+          <ClaimReviewForm source="calculator" />
+          <p>
+            <CtaLink
+              className={onDark ? "!text-white hover:!text-white/80" : ""}
+              href="/demo"
+              onClick={onCtaClick}
+            >
+              Or book a 15-minute demo
+            </CtaLink>
+          </p>
+        </div>
       </div>
     </div>
   );

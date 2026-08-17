@@ -1,21 +1,20 @@
-import { Suspense } from "react";
-
 import { Cursor } from "@/components/motion/cursor";
 import { SectionReveal } from "@/components/motion/reveal";
 import { AudiencePaths } from "@/components/landing/audience-paths";
 import { BuiltOnClaude } from "@/components/landing/built-on-claude";
+import { ClaimReviewForm } from "@/components/landing/claim-review-form";
 import { ClosingCta } from "@/components/landing/closing-cta";
 import { Faq } from "@/components/landing/faq";
 import { FederalIdrExplainer } from "@/components/landing/federal-idr-explainer";
 import { FounderNote } from "@/components/landing/founder-note";
 import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/how-it-works";
-import { LeadForm } from "@/components/landing/lead-form";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { RecoverySection } from "@/components/landing/recovery-section";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
 import { TwoPaths } from "@/components/landing/two-paths";
 import { MagazineShell } from "@/components/ui/magazine-shell";
+import { Section } from "@/components/ui/section";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import { buildFaqs } from "@/lib/landing/faqs";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
@@ -39,7 +38,6 @@ type PostcardLandingProps = {
 
 export function PostcardLanding({
   stateDisplay,
-  stateCode,
   tracking,
   path,
 }: PostcardLandingProps) {
@@ -82,18 +80,15 @@ export function PostcardLanding({
         <div className="order-1">
           <Hero stateDisplay={stateDisplay} tracking={tracking} />
         </div>
-        {/* 2. Demo form */}
+        {/* 2. Claim review form */}
         <SectionReveal className="order-2">
           <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
-            <Suspense fallback={<div className="h-80 animate-pulse rounded-[2px] bg-surface-muted" />}>
-              <LeadForm
-                anchorId="lead-form"
-                defaultState={stateCode}
-                landingPage="home"
-                tracking={tracking}
-                variant="card"
-              />
-            </Suspense>
+            <div
+              className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
+              id="lead-form"
+            >
+              <ClaimReviewForm source="homepage-band" />
+            </div>
           </div>
         </SectionReveal>
         {/* 3. Recovery calculator */}
@@ -133,15 +128,11 @@ export function PostcardLanding({
           <ClosingCta tracking={tracking} />
         </SectionReveal>
         <SectionReveal className="order-12">
-          <Suspense fallback={<div className="h-80 animate-pulse bg-surface-muted" />}>
-            <LeadForm
-              anchorId="lead-form-closing"
-              defaultState={stateCode}
-              landingPage="home"
-              tracking={tracking}
-              variant="section"
-            />
-          </Suspense>
+          <Section id="lead-form-closing" sidebarLabel="Get started" tone="neutral">
+            <div className="max-w-2xl rounded-[2px] bg-white p-6 md:p-10">
+              <ClaimReviewForm source="homepage-closing" />
+            </div>
+          </Section>
         </SectionReveal>
       </div>
       <MobileCtaBar tracking={tracking} />
