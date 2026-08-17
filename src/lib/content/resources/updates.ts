@@ -134,7 +134,7 @@ const CMS_PUF_REMINDER: ResourceUpdate = {
       heading: "What changed",
       paragraphs: [
         "CMS publishes Federal IDR Public Use Files that summarize resolved disputes under the No Surprises Act. Independent analyses of those files report patterns such as providers prevailing in about 88 percent of resolved federal IDR disputes through the first half of 2025, and about 85 percent of 2024 determinations decided for the provider.",
-        "Surgical disputes show the largest multiples in that public record, with prevailing offers running from about 970 percent to more than 1,700 percent of the qualifying payment amount across recent reporting periods, while surgery and neurology remain a small share of total cases. Those figures update as new public use files publish. When citing a number from this site, name the underlying CMS or Georgetown source and its reporting period rather than treating Sydra as the primary data publisher.",
+        "Surgical disputes show the largest multiples in that public record, while surgery and neurology remain a small share of total cases. Those figures update as new public use files publish. When citing a number from this site, name the underlying CMS or Georgetown source and its reporting period rather than treating Sydra as the primary data publisher.",
       ],
     },
     {

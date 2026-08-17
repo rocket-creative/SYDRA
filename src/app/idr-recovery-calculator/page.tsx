@@ -54,7 +54,7 @@ function CalculatorJsonLd() {
 }
 
 export default function IdrRecoveryCalculatorPage() {
-  const [howCalculated, whatItDoesNotTell] = IDR_RECOVERY_CALCULATOR_SECTIONS;
+  const [howCalculated, conservativeEstimate] = IDR_RECOVERY_CALCULATOR_SECTIONS;
 
   return (
     <>
@@ -93,21 +93,14 @@ export default function IdrRecoveryCalculatorPage() {
               </div>
             </section>
 
-            <section aria-labelledby={whatItDoesNotTell.id}>
-              <h2 className={textStyles.sectionTitle} id={whatItDoesNotTell.id}>
-                {whatItDoesNotTell.title}
+            <section aria-labelledby={conservativeEstimate.id}>
+              <h2 className={textStyles.sectionTitle} id={conservativeEstimate.id}>
+                {conservativeEstimate.title}
               </h2>
               <div className={`${textStyles.bodyStack} mt-4`}>
-                {whatItDoesNotTell.paragraphs.map((p) => (
+                {conservativeEstimate.paragraphs.map((p) => (
                   <p key={p.slice(0, 40)}>{p}</p>
                 ))}
-                <p>
-                  See specialty and payer context on the{" "}
-                  <Link className={textStyles.textLink} href="/idr">
-                    Federal IDR hub
-                  </Link>
-                  .
-                </p>
               </div>
             </section>
           </div>

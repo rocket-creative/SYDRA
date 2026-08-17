@@ -2,7 +2,7 @@ import type { ContentFaq, ContentSection } from "@/lib/content/what-is-idr-page"
 
 export const IDR_RECOVERY_CALCULATOR_HERO = {
   title: "How much could properly filed federal IDR recover for your practice?",
-  lead: "Enter monthly out of network claim volume and average disputed amount. Uses the published CMS win rate on the amount already in dispute. Award multiples versus QPA are not applied. Not a Sydra performance claim.",
+  lead: "Enter monthly out of network claim volume and average disputed amount. Uses the published CMS win rate on the amount already in dispute. Award multiples versus QPA are not applied — this estimate is deliberately conservative. Not a Sydra performance claim.",
 };
 
 export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
@@ -16,11 +16,13 @@ export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
     ],
   },
   {
-    id: "heading-what-it-does-not-tell",
-    title: "What this does not tell you",
+    id: "heading-deliberately-conservative",
+    title: "This estimate is deliberately conservative",
     paragraphs: [
-      "This estimate uses aggregate published win rate and award data. It does not account for your specific specialty's award multiples, which vary significantly. Surgical disputes have awarded roughly 970 percent to over 1,700 percent of the qualifying payment amount in recent reporting periods, while emergency disputes average closer to 257 percent, per the stats already published on the Federal IDR hub. It also does not account for your state's specific dynamics or your payer mix.",
-      "For a number specific to your practice, request a 15-minute demo and we will walk through it with your actual claims.",
+      "We apply the published 88% provider win rate to the amount already in dispute, and we stop there. We do not apply award multiples, and recovery is capped so it can never exceed what you are disputing.",
+      "Real determinations run higher. CMS reports that the prevailing offer exceeded the qualifying payment amount in approximately 87% of payment determinations in the second half of 2025. We leave that out of the estimate on purpose — a number you can defend to your CFO is worth more than a bigger one you cannot.",
+      "What this does not account for: your specialty's award patterns, your state's dynamics, or your payer mix. For a number specific to your practice, request a 15-minute demo and we will walk through it with your actual claims.",
+      "Source: CMS, Federal IDR Supplemental Background, July–December 2025.",
     ],
   },
 ];

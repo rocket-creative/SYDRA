@@ -356,7 +356,7 @@ export const GUIDES: Guide[] = [
     metaTitle: "Why surgical IDR awards run so far above the QPA | Sydra",
     metaDescription:
       "The specialty data behind surgical IDR, why surgery and neurology win the largest multiples over the QPA, and why the lane stays uncrowded for now.",
-    lead: "Surgical disputes win the largest multiples in the entire federal IDR dataset, with prevailing offers running from roughly 970 percent to over 1,700 percent of the qualifying payment amount across recent periods. Surgery and neurology together are only about 9 percent of cases, yet they recover the most per claim, while emergency and radiology crowd the low multiple lane.",
+    lead: "Surgical disputes win the largest multiples in the entire federal IDR dataset. Surgery and neurology together are only about 9 percent of cases, yet they recover the most per claim, while emergency and radiology crowd the low multiple lane.",
     sections: [
       {
         heading: "What total volume hides.",
@@ -367,7 +367,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Surgery wins the biggest awards.",
         paragraphs: [
-          "Surgery is the opposite. Surgery and neurology together are a small slice of cases, around 9 percent, but they win the biggest awards in the dataset. Surgical prevailing offers have run from about 970 percent to more than 1,700 percent of the QPA across recent reporting periods. Neurology disputes have topped 1,200 percent.",
+          "Surgery is the opposite. Surgery and neurology together are a small slice of cases, around 9 percent, but they win the biggest awards in the dataset. Neurology disputes have topped 1,200 percent.",
         ],
       },
       {

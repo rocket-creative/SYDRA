@@ -518,10 +518,10 @@ const IDR_WIN_RATE_AWARD_BENCHMARK: ResourceArticle = {
         "The averages hide the real story, which is how far surgical awards run above the QPA compared with the high volume specialties. Surgery and neurology recover the widest multiples in the dataset.",
       ],
       list: [
-        "Surgical disputes have awarded roughly 970 percent to over 1,700 percent of the QPA across recent reporting periods. Source: CMS PUF, CRS R48738, and Georgetown CHIR. As of 2024 to 2025.",
+        "Surgical disputes win the largest award multiples versus the QPA across recent reporting periods. Source: CMS PUF, CRS R48738, and Georgetown CHIR. As of 2024 to 2025.",
         "Neurology and neuromuscular disputes have awarded over 1,200 percent of the QPA. Source: CMS PUF and Georgetown CHIR. As of 2024.",
         "Radiology disputes award around 559 to 594 percent of the QPA. Source: Georgetown CHIR and CMS PUF. As of 2024 to 2025.",
-        "Emergency disputes award far smaller multiples, around 257 percent of the QPA. Source: Georgetown CHIR and CMS PUF. As of H1 2024.",
+        "Emergency disputes award far smaller multiples than surgery, which is why aggregators crowd that lane and surgery stays open. Source: Georgetown CHIR and CMS PUF. As of H1 2024.",
       ],
     },
     {
@@ -563,7 +563,7 @@ const IDR_WIN_RATE_AWARD_BENCHMARK: ResourceArticle = {
     },
     {
       q: "How much higher than the QPA are IDR awards?",
-      a: "The prevailing offer beat the qualifying payment amount in roughly 87 to 88 percent of determinations. Surgical disputes have awarded about 970 percent to over 1,700 percent of the QPA, and neurology disputes over 1,200 percent, far above emergency disputes at around 257 percent.",
+      a: "The prevailing offer beat the qualifying payment amount in roughly 87 to 88 percent of determinations. Surgical disputes win the largest multiples versus the QPA, and neurology disputes over 1,200 percent, far above emergency disputes.",
     },
     {
       q: "How many IDR disputes have been filed?",

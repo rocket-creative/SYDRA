@@ -42,7 +42,7 @@ Subject: IDR award data for [spine / orthopedic / neuro / plastics] practices
 
 Hi [First name],
 
-Quick one for the [association] newsletter. We maintain a sourced benchmark of federal IDR outcomes, and the specialty split is striking: surgical disputes have awarded roughly 970 percent to over 1,700 percent of the plan's qualifying payment amount, far above high volume specialties, yet surgery and neurology are only about 9 percent of cases.
+Quick one for the [association] newsletter. We maintain a sourced benchmark of federal IDR outcomes, and the specialty split is striking: surgical disputes win the largest award multiples versus the plan's qualifying payment amount, far above high volume specialties, yet surgery and neurology are only about 9 percent of cases.
 
 The full benchmark, with sources and dates, is here: [benchmark URL]
 

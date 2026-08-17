@@ -21,9 +21,7 @@ export type ProofPointId =
   | "win-rate"
   | "win-rate-2024"
   | "above-qpa"
-  | "surgery-multiple"
   | "neuro-multiple"
-  | "emergency-multiple"
   | "radiology-multiple"
   | "total-volume"
   | "specialty-share"
@@ -58,27 +56,11 @@ export const PROOF_POINTS: ProofPoint[] = [
     verifyBeforePublish: true,
   },
   {
-    id: "surgery-multiple",
-    value: "up to 1,700%+",
-    claim: "Surgical disputes have awarded roughly 970 percent to over 1,700 percent of the qualifying payment amount across recent reporting periods.",
-    source: "CMS Federal IDR Public Use Files; CRS R48738; Georgetown CHIR",
-    asOf: "2024 to 2025",
-    verifyBeforePublish: true,
-  },
-  {
     id: "neuro-multiple",
     value: "1,200%+",
     claim: "Neurology and neuromuscular disputes have awarded over 1,200 percent of the qualifying payment amount.",
     source: "CMS Federal IDR Public Use Files; Georgetown CHIR",
     asOf: "2024",
-    verifyBeforePublish: true,
-  },
-  {
-    id: "emergency-multiple",
-    value: "~257%",
-    claim: "Emergency disputes award far smaller multiples, around 257 percent of the qualifying payment amount, which is why the aggregators crowd that lane and surgery stays open.",
-    source: "Georgetown CHIR; CMS PUF",
-    asOf: "H1 2024",
     verifyBeforePublish: true,
   },
   {
