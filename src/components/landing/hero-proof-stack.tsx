@@ -15,23 +15,27 @@ const PROOF_ITEMS: readonly ProofItem[] = [
     label: "to prepare a complete submission packet",
   },
   {
-    value: "No 20% cut",
-    label: "You keep the recovery.",
+    value: "Or we file it",
+    label: "Our team handles every dispute end to end",
+  },
+  {
+    value: "June 2026",
+    label: "Built for the current federal IDR rules",
   },
 ] as const;
 
 type HeroProofStackProps = {
   className?: string;
-  /** Override the default homepage three-stat row. */
+  /** Override the default homepage proof row. */
   items?: readonly ProofItem[];
 };
 
-/** Compact trust row under the hero CTA. Stacks on mobile, three columns from md up. */
+/** Compact trust row under the hero CTA. Stacks on mobile, two columns from md, four from lg. */
 export function HeroProofStack({ className = "", items = PROOF_ITEMS }: HeroProofStackProps) {
   return (
     <div
       aria-label="Recovery proof points"
-      className={`grid gap-6 sm:grid-cols-3 sm:gap-5 ${className}`.trim()}
+      className={`grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-5 lg:grid-cols-4 ${className}`.trim()}
     >
       {items.map((item) => (
         <figure key={item.value} className="min-w-0">
