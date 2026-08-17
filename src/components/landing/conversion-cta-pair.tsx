@@ -5,9 +5,9 @@ import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
 import {
-  CASE_REVIEW_PATH,
   PRIMARY_CTA_LABEL,
   PRIMARY_CTA_SHORT_LABEL,
+  caseReviewUrl,
 } from "@/lib/case-review";
 import { FOUR_OBJECTION_LINE } from "@/lib/content/founder-lines";
 
@@ -15,7 +15,9 @@ export type CtaPlacement =
   | "homepage-hero"
   | "homepage-closing"
   | "recover-hero"
-  | "recover-closing";
+  | "recover-closing"
+  | "calculator-hero"
+  | "pricing-body";
 
 const SUPPORTING_LINE =
   "Send us one denied out-of-network EOB. You'll get a written IDR eligibility check and a dollar estimate back within one business day. No call required.";
@@ -41,7 +43,7 @@ export function ConversionCtaPair({
   return (
     <div>
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-        <Button href={CASE_REVIEW_PATH} showArrow variant="solid" onClick={handlePrimary}>
+        <Button href={caseReviewUrl(placement)} showArrow variant="solid" onClick={handlePrimary}>
           <span className="sm:hidden">{shortLabel}</span>
           <span className="hidden sm:inline">{PRIMARY_CTA_LABEL}</span>
         </Button>

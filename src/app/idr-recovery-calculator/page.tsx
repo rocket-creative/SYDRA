@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
@@ -66,9 +67,7 @@ export default function IdrRecoveryCalculatorPage() {
             </h1>
             <p className={textStyles.pageLead}>{IDR_RECOVERY_CALCULATOR_HERO.lead}</p>
             <div className="mt-8">
-              <Button href="/demo" showArrow>
-                Schedule a demo
-              </Button>
+              <ConversionCtaPair placement="calculator-hero" showSupportingLine={false} />
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>

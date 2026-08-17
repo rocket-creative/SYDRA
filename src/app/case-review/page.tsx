@@ -19,7 +19,20 @@ import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.caseReview;
 
-export default function CaseReviewPage() {
+type PageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function resolveClaimReviewSource(raw: string | string[] | undefined): string {
+  const value = Array.isArray(raw) ? raw[0] : raw;
+  const trimmed = value?.trim() ?? "";
+  if (trimmed.length > 0 && trimmed.length <= 80) return trimmed;
+  return "case-review";
+}
+
+export default async function CaseReviewPage({ searchParams }: PageProps) {
+  const query = await searchParams;
+  const source = resolveClaimReviewSource(query.source);
   return (
     <SydraPageShell
       breadcrumb={[...BREADCRUMBS.caseReview]}
@@ -53,7 +66,7 @@ export default function CaseReviewPage() {
           <CtaLink href={CASE_REVIEW_SAMPLE_PATH}>See a sample review</CtaLink>
         </p>
         <div className="mt-8">
-          <ClaimReviewForm source="case-review" />
+          <ClaimReviewForm source={source} />
         </div>
       </div>
     </SydraPageShell>

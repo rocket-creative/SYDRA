@@ -18,8 +18,9 @@ export const CLAIM_REVIEW_OFFER =
 export const PRIMARY_CTA_LABEL = "See what one denied claim is worth";
 export const PRIMARY_CTA_SHORT_LABEL = "What's your claim worth?";
 
-export function caseReviewUrl(): string {
-  return CASE_REVIEW_PATH;
+export function caseReviewUrl(source?: string): string {
+  if (!source) return CASE_REVIEW_PATH;
+  return `${CASE_REVIEW_PATH}?source=${encodeURIComponent(source)}`;
 }
 
 export function caseReviewLinkLabel(): string {
