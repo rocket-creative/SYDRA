@@ -57,7 +57,7 @@ export default function GuideIndexPage() {
               </span>
             </h1>
             <p className={textStyles.pageLead}>
-              There is a defined federal pathway between a payer's underpayment and a binding
+              There is a defined federal pathway between a payer&apos;s underpayment and a binding
               arbitrated amount: an open negotiation window, an eligibility determination, a
               batching decision, then arbitration. Each step has a hard deadline, and missing one
               forfeits the claim.

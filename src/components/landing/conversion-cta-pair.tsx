@@ -14,6 +14,7 @@ import { FOUR_OBJECTION_LINE } from "@/lib/content/founder-lines";
 export type CtaPlacement =
   | "homepage-hero"
   | "homepage-closing"
+  | "homepage-segments"
   | "homepage-two-paths"
   | "recover-hero"
   | "recover-closing"
