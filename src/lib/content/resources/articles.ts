@@ -327,7 +327,7 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
   datePublished: "2026-06-10",
   excerpt:
     "Whether an attorney is required, who can run IDR, and how a typical contingency compares to software your team operates in house.",
-  lead: "Many practices assume federal IDR requires a lawyer. It does not. The No Surprises Act lets a provider or its authorised representative run the entire process. What follows is who can file, when legal help genuinely earns its cost, and how a contingency compares to operating software in house.",
+  lead: "Many practices assume federal IDR requires a lawyer. It does not. The No Surprises Act lets a provider or its authorized representative run the entire process. What follows is who can file, when legal help genuinely earns its cost, and how a contingency compares to operating software in house.",
   dualCtas: true,
   sections: [
     {
@@ -389,7 +389,7 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
     },
     {
       q: "Can I file IDR without a lawyer?",
-      a: "Yes. A provider can file directly, and so can an authorised representative — an in house billing team or a billing company acting on the practice's behalf.",
+      a: "Yes. A provider can file directly, and so can an authorized representative — an in house billing team or a billing company acting on the practice's behalf.",
     },
     {
       q: "How do typical contingency fees compare to software?",
@@ -397,7 +397,7 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
     },
     {
       q: "Can a billing company file IDR on my behalf?",
-      a: "Yes, as your authorised representative. Many do, and Sydra can run white label under their brand.",
+      a: "Yes, as your authorized representative. Many do, and Sydra can run white label under their brand.",
     },
   ],
   related: ["federal-idr-process", "idr-win-rates-and-awards", "idr-eligibility-deadlines-fees"],

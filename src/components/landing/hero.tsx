@@ -3,11 +3,7 @@ import Image from "next/image";
 import { HeroCtas } from "@/components/landing/hero-ctas";
 import { HeroProofStack } from "@/components/landing/hero-proof-stack";
 import { SplitHeadline } from "@/components/motion/split-headline";
-import {
-  FOUNDER_ORIGIN_ATTRIBUTION,
-  FOUNDER_ORIGIN_LINE,
-  FOUNDER_ORIGIN_ROLE,
-} from "@/lib/content/founder-lines";
+import { FOUNDER_ORIGIN_LINE } from "@/lib/content/founder-lines";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 type HeroProps = {
@@ -40,9 +36,7 @@ function HeroContent({
           {FOUNDER_ORIGIN_LINE}
         </blockquote>
         <figcaption className="mt-3 text-sm text-body">
-          <strong className="font-medium text-brand">{FOUNDER_ORIGIN_ATTRIBUTION}</strong>
-          {" — "}
-          {FOUNDER_ORIGIN_ROLE}
+          Dr. John Abrahams, MD, board certified neurosurgeon and founder
         </figcaption>
       </figure>
       <HeroProofStack className="mt-8 border-t border-rule pt-8" />

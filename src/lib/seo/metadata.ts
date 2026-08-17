@@ -220,7 +220,7 @@ export const PAGE_METADATA = {
     ogImageAlt: "IDR recovery calculator for out of network surgical claims.",
   }),
   contact: buildPageMetadata({
-    title: "Contact Sydra — Sales, Demos, and Support | Sydra",
+    title: "Contact Sydra: Sales, Demos, and Support | Sydra",
     description:
       "Request a 15-minute demo, ask a pricing question, or reach customer support. Email sales@sydrahealth.com. Responses within one business day.",
     path: "/contact",

@@ -25,7 +25,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     title: "First, the No Surprises Act.",
     paragraphs: [
       "The No Surprises Act took effect in 2022. It removed the patient from the middle of out of network billing disputes: the patient pays only the in network cost share, and the provider and the plan resolve the balance between themselves.",
-      "That second half is the part most practices never operationalised. The law did not simply cap what you can bill. It created a mechanism for recovering what the plan should have paid, and left it to providers to use.",
+      "That second half is the part most practices never operationalized. The law did not simply cap what you can bill. It created a mechanism for recovering what the plan should have paid, and left it to providers to use.",
     ],
   },
   {
@@ -40,8 +40,8 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     id: "heading-who",
     title: "Who can use it.",
     paragraphs: [
-      "Out of network claims that fall under the No Surprises Act qualify — emergency services, and non emergency services delivered by out of network providers at in network facilities where no valid notice and consent was obtained.",
-      "You do not need a lawyer. The statute does not require one. A provider can file directly, and so can an authorised representative — an in house billing team or a billing company acting on the practice's behalf.",
+      "Out of network claims that fall under the No Surprises Act qualify: emergency services, and non emergency services delivered by out of network providers at in network facilities where no valid notice and consent was obtained.",
+      "You do not need a lawyer. The statute does not require one. A provider can file directly, and so can an authorized representative, whether that is an in house billing team or a billing company acting on the practice's behalf.",
     ],
   },
   {
@@ -65,7 +65,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     title: "How often properly filed disputes win.",
     paragraphs: [
       "88 percent of properly filed federal IDR disputes result in a provider win, according to Georgetown University CHIR, March 2026. Across 3.4 million disputes through June 2025, 87 percent of awards exceeded the qualifying payment amount, and the median award ran roughly 4.5 times the in network rate.",
-      "Two numbers explain why the opportunity persists. Roughly 10 percent of eligible claims are estimated to reach arbitration at all. And 44 percent of 2024 IDR cases were challenged as ineligible — usually on administrative grounds that correct preparation prevents.",
+      "Two numbers explain why the opportunity persists. Roughly 10 percent of eligible claims are estimated to reach arbitration at all. And 44 percent of 2024 IDR cases were challenged as ineligible, usually on administrative grounds that correct preparation prevents.",
     ],
   },
 ];

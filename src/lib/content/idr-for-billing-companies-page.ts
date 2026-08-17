@@ -4,7 +4,7 @@ export const IDR_FOR_BILLING_HERO = {
   eyebrow: "For billing companies and RCM firms",
   title: "Filing federal IDR across more than one client practice?",
   lead: "Every claim you file for a client is out of network revenue that would otherwise be written off. Sydra prepares a specialty coded federal IDR submission in about five minutes, with tenant isolation built in at the data layer so each client's claims, documents, and history stay separate.",
-  ctaLabel: "Book a free demo",
+  ctaLabel: "Request a 15-minute demo",
   ctaHref: "/demo",
 };
 
@@ -94,5 +94,5 @@ export const IDR_FOR_BILLING_CTA_LEAD =
 export const IDR_FOR_BILLING_CTA_BAND = {
   title: "Ready to see Sydra on a real denied claim from one of your client practices?",
   lead: "Free 15 minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.",
-  ctaLabel: "Book a free demo",
+  ctaLabel: "Request a 15-minute demo",
 };

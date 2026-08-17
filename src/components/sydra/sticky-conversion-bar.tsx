@@ -15,7 +15,7 @@ type StickyConversionBarProps = {
 /** Sticky bottom CTA for high intent pages (demo, contact). Hides when target is in view. */
 export function StickyConversionBar({
   scrollTargetId,
-  primaryLabel = "Book demo",
+  primaryLabel = "Request a 15-minute demo",
 }: StickyConversionBarProps) {
   const [targetVisible, setTargetVisible] = useState(false);
   const [keyboardOpen, setKeyboardOpen] = useState(false);

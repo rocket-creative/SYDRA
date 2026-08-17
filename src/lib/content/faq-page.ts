@@ -28,7 +28,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "What happens if an IDR dispute loses?",
-    a: "The plan's offer is selected and the losing party pays the certified IDRE fee, currently $50. The same item cannot be re filed against the same party for a 90 calendar day cooling period. For properly filed disputes the base rate is 88 percent in the provider's favour, which is why preparation is the whole game.",
+    a: "The plan's offer is selected and the losing party pays the certified IDRE fee, currently $50. The same item cannot be re filed against the same party for a 90 calendar day cooling period. For properly filed disputes the base rate is 88 percent in the provider's favor, which is why preparation is the whole game.",
   },
   {
     q: "How long does it take to get set up on Sydra?",
