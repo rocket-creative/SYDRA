@@ -160,7 +160,7 @@ export default function IdrForBillingCompaniesPage() {
               </Link>
               , and{" "}
               <Link className={textStyles.textLink} href="/sydra-vs-idr-attorney">
-                Sydra vs an IDR attorney
+                Compare your IDR options
               </Link>
               .
             </p>

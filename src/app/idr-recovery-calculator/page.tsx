@@ -121,7 +121,7 @@ export default function IdrRecoveryCalculatorPage() {
             <p className={`${textStyles.body} mt-8`}>
               Related:{" "}
               <Link className={textStyles.textLink} href="/sydra-vs-idr-attorney">
-                Sydra vs an IDR attorney
+                Compare your IDR options
               </Link>
               ,{" "}
               <Link className={textStyles.textLink} href="/resources/idr-win-rates-and-awards">

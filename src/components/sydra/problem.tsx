@@ -19,7 +19,7 @@ export function SydraProblem() {
               The No Surprises Act gave providers the right to dispute underpayments through
               Independent Dispute Resolution, the highest value recovery step in
               the workflow. Most practices never file because each submission eats 30
-              minutes of biller time, or they hand the file to an attorney and
+              minutes of biller time, or they hand the file off and
               lose 20% of every win. Sydra cuts prep to under 5 and keeps the
               recovery with your team.
             </p>

@@ -444,8 +444,8 @@ export const GUIDES: Guide[] = [
     title: "Do you need an attorney to file IDR",
     metaTitle: "Do you need an attorney to file IDR? | Sydra",
     metaDescription:
-      "Whether the federal IDR process requires a lawyer, what a contingency attorney really costs you, and the rare cases when hiring one is actually worth it.",
-    lead: "No, you do not need an attorney to file federal IDR. The process is administrative, not litigation, and your billing team can prepare and submit packets directly. A contingency attorney typically takes 20 to 30 percent of every recovery for work that takes about five minutes per claim on software. Lawyers earn their keep on rare, novel, or contested cases, not routine surgical disputes.",
+      "Whether the federal IDR process requires a lawyer, what a typical contingency really costs you, and the rare cases when hiring counsel is actually worth it.",
+    lead: "No, you do not need an attorney to file federal IDR. The process is administrative, not litigation, and your billing team can prepare and submit packets directly. A typical contingency takes 20 to 30 percent of every recovery for work that takes about five minutes per claim on software. Counsel earns their keep on rare, novel, or contested cases, not routine surgical disputes.",
     sections: [
       {
         heading: "The short answer is no.",
@@ -456,7 +456,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Why practices hand it off.",
         paragraphs: [
-          "So why do so many practices hand it to a contingency attorney? Usually because filing by hand is tedious and the deadlines are easy to miss, so outsourcing feels safer. The cost of that comfort is steep. A contingency attorney commonly takes 20 to 30 percent of every recovery. On a practice's full surgical volume, that is a large and permanent tax on money you earned.",
+          "So why do so many practices hand it to a typical contingency arrangement? Usually because filing by hand is tedious and the deadlines are easy to miss, so outsourcing feels safer. The cost of that comfort is steep. A typical contingency commonly takes 20 to 30 percent of every recovery. On a practice's full surgical volume, that is a large and permanent tax on money you earned.",
         ],
       },
       {
@@ -468,7 +468,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Why software wins the rest.",
         paragraphs: [
-          "For everything else, which is most of the volume, software wins. Sydra lets your team prepare and submit a packet in about five minutes, track the deadlines automatically, and keep the full recovery. The attorney's 20 percent stays in your practice.",
+          "For everything else, which is most of the volume, software wins. Sydra lets your team prepare and submit a packet in about five minutes, track the deadlines automatically, and keep the full recovery. The typical 20 percent stays in your practice.",
         ],
       },
     ],
@@ -479,7 +479,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "When does hiring an attorney make sense?",
-        a: "For a small number of unusual or contested cases. For routine surgical underpayments, an attorney's cut is pure margin you could have kept.",
+        a: "For a small number of unusual or contested cases. For routine surgical underpayments, a typical 20 percent contingency is pure margin you could have kept.",
       },
     ],
   },

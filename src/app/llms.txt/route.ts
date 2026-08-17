@@ -36,7 +36,7 @@ export function GET(): Response {
   );
   lines.push(`- [Pricing](${base}/pricing): plans and the fee structure.`);
   lines.push(
-    `- [Sydra vs an IDR attorney](${base}/sydra-vs-idr-attorney): keep the recovery you would pay in contingency.`,
+    `- [Compare your IDR options](${base}/sydra-vs-idr-attorney): three ways to file, including when a contingency firm is the right answer.`,
   );
   lines.push(
     `- [In house IDR](${base}/in-house-idr): scale federal disputes without added headcount.`,
@@ -48,7 +48,7 @@ export function GET(): Response {
     `- [IDR filing deadline](${base}/idr-filing-deadline): the 30 and 4 business day clocks that close a claim cycle.`,
   );
   lines.push(
-    `- [IDR recovery calculator](${base}/idr-recovery-calculator): estimate recovery and attorney fee math at your volume.`,
+    `- [IDR recovery calculator](${base}/idr-recovery-calculator): estimate recovery and typical contingency cost at your volume.`,
   );
   lines.push(
     `- [IDR glossary](${base}/glossary): short definitions of QPA, IDRE, open negotiation, and related terms.`,

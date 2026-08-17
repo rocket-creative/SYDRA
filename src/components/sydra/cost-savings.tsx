@@ -18,17 +18,17 @@ const savings = [
   },
   {
     value: "No 20% cut",
-    label: "Vs. attorney contingency",
-    detail: "Run IDR in house with Sydra instead of giving a law firm a share of every recovery.",
+    label: "Vs. typical contingency",
+    detail: "Run IDR in house with Sydra instead of giving a typical 20% contingency a share of every recovery.",
   },
   {
     value: "You keep it",
     label: "Recovery stays with the practice",
-    detail: "Software pricing on your demo call, structured below typical attorney contingency fees.",
+    detail: "Software pricing on your demo call, structured below a typical 20% contingency.",
   },
 ] as const;
 
-/** Labor time savings first; attorney contingency comparison also on the table for Sydra. */
+/** Labor time savings first; typical contingency comparison also on the table for Sydra. */
 export function SydraCostSavings() {
   return (
     <section
@@ -48,8 +48,8 @@ export function SydraCostSavings() {
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-300 md:text-[17px]">
             Sydra wins on two economics: your team stops spending 30 minutes per
-            claim on manual IDR prep, and you stop routing recoveries through a 20%
-            attorney when your billing team can run the software themselves.
+            claim on manual IDR prep, and you stop routing recoveries through a typical 20%
+            contingency when your billing team can run the software themselves.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export function SydraCostSavings() {
           >
             {CASE_REVIEW_CTA}
           </a>{" "}
-          for Sydra Full Service. Zero ops, headcount eliminated, and priced so you keep more of each win than typical attorney contingency.
+          for Sydra Full Service. Zero ops, headcount eliminated, and priced so you keep more of each win than a typical 20% contingency.
         </p>
       </div>
     </section>

@@ -39,7 +39,7 @@ export default function PricingPage() {
             <p className="mt-6 type-body text-body">
               We don&apos;t publish a list price because the right number depends on your specialty,
               state, and monthly out of network claim volume. Every tier is structured below the
-              typical 20% attorney contingency fee. You keep more of every recovery.
+              typical 20% contingency charged for out of network recovery. You keep more of every recovery.
             </p>
             <p className="mt-4 type-body text-body">
               Request a 15 minute demo and we quote on the call. No commitment to proceed.
@@ -64,22 +64,22 @@ export default function PricingPage() {
           </h2>
           <div className="mt-6 space-y-6 type-body text-body">
             <div>
-              <h3 className="font-medium text-brand">If you use a contingency attorney</h3>
+              <h3 className="font-medium text-brand">If you pay a typical 20% contingency</h3>
               <p className="mt-2">
                 20% of every IDR recovery, indefinitely. On $300,000 in annual IDR recoveries:
-                $60,000 in attorney fees annually. Plus: disputes lost from batched CPT filings
+                $60,000 in contingency fees annually. Plus: disputes lost from batched CPT filings
                 never appear in the recovery total. A practice winning 60% of disputes at 20%
                 contingency recovers 60% x 80% = 48% of its IDR potential.{" "}
                 <Link className={textStyles.textLink} href="/idr-recovery-calculator">
                   Open the full calculator
                 </Link>{" "}
-                to estimate attorney take at your volume.
+                to estimate contingency cost at your volume.
               </p>
             </div>
             <div>
               <h3 className="font-medium text-brand">If you&apos;re not filing IDR</h3>
               <p className="mt-2">
-                Zero attorney fees. Zero IDR recovery. The gap between the insurer&apos;s initial
+                Zero contingency fees. Zero IDR recovery. The gap between the insurer&apos;s initial
                 payment and what IDR would award stays with the insurer.
               </p>
             </div>

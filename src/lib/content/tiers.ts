@@ -88,12 +88,12 @@ export const TIERS: TierDefinition[] = [
       "Sydra team operates every claim",
       "Specialty trained, custom coded submissions",
       "Dedicated specialist and quarterly recovery review",
-      "Materially less than typical 20% attorney contingency",
+      "Materially less than a typical 20% contingency",
     ],
     compactInclusions: [
       "Fully outsourced claim handling",
       "Dedicated specialist on every file",
-      "Alternative to IDR attorneys",
+      "A flat fee alternative to a typical 20% contingency",
     ],
   },
 ];

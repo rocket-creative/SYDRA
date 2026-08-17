@@ -107,7 +107,7 @@ export const PAGE_METADATA = {
   pricing: buildPageMetadata({
     title: "NSA IDR Software Pricing for Surgical Billing Teams | Sydra",
     description:
-      "Sydra pricing is quoted on your demo call based on specialty and monthly OON volume. Structured below typical 20% attorney contingency. Three tiers: Self Serve, Support, Full Service.",
+      "Sydra pricing is quoted on your demo call based on specialty and monthly OON volume. Structured below typical 20% contingency. Three tiers: Self Serve, Support, Full Service.",
     path: "/pricing",
     ogImagePath: "/pricing",
     ogImageAlt: "Sydra pricing — NSA IDR software plans for surgical billing teams.",
@@ -215,7 +215,7 @@ export const PAGE_METADATA = {
   idrRecoveryCalculator: buildPageMetadata({
     title: "Free IDR Recovery Calculator | Sydra",
     description:
-      "Free calculator. Estimate what properly filed federal IDR could recover for your practice, and what a 20 percent attorney would take from it. Uses published CMS win rates and Georgetown CHIR benchmarks.",
+      "Free calculator. Estimate what properly filed federal IDR could recover for your practice, and what a typical 20 percent contingency would take from it. Uses published CMS win rates and Georgetown CHIR benchmarks.",
     path: "/idr-recovery-calculator",
     ogImageAlt: "IDR recovery calculator for out of network surgical claims.",
   }),

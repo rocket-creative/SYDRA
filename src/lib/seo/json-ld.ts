@@ -273,7 +273,7 @@ export function softwareApplicationJsonLd() {
       availability: "https://schema.org/InStock",
       priceCurrency: "USD",
       description:
-        "Pricing shared on demo call. Structured below typical 20% attorney contingency fee.",
+        "Pricing shared on demo call. Structured below typical 20% contingency fee.",
     },
     featureList: [
       "AI drafted federal IDR submissions using Claude Sonnet 4 on AWS Bedrock",
@@ -480,8 +480,8 @@ export const HOMEPAGE_FAQ_SCHEMA = [
     a: "Sydra uses Claude Sonnet 4 on AWS Bedrock to generate a complete federal IDR submission packet from an uploaded EOB. The system drafts the executive summary, market rate justification citing prior IDR determinations, and clinical necessity narrative from your operative note. Your billing team reviews, approves, and exports a submission ready DOCX file with a guided checklist for the federal IDRE portal.",
   },
   {
-    q: "How does Sydra compare to using an IDR attorney?",
-    a: "Attorneys typically charge 20% of every IDR recovery as a contingency fee. Sydra is software your billing team operates, priced below typical attorney contingency fees with an exact quote on the demo call. You keep the recovery in house instead of losing 20% per award. Sydra defaults to one claim per CPT to protect win rate, while batching remains available under the 2026 CMS rule when your team chooses it per submission.",
+    q: "How does Sydra compare to a typical contingency?",
+    a: "A typical contingency takes 20% of every IDR recovery. Sydra is software your billing team operates, priced below that rate with an exact quote on the demo call. You keep the recovery instead of losing 20% per award. Sydra defaults to one claim per CPT to protect win rate, while batching remains available under the 2026 CMS rule when your team chooses it per submission.",
   },
   {
     q: "Is Sydra HIPAA compliant?",

@@ -82,7 +82,7 @@ export const WHAT_IS_IDR_FAQS: ContentFaq[] = [
   },
   {
     q: "Do I need a lawyer to file IDR?",
-    a: "No. Some practices use IDR attorneys who typically keep about 20 percent of every recovery. Others run the process on software their billing team operates and keep the full award. See the fee comparison on the Sydra versus an IDR attorney page.",
+    a: "No. The No Surprises Act does not require a lawyer. A trained billing team can complete every step. Some practices pay a typical 20 percent contingency; others run the process on software and keep the full award. See the fee comparison on Compare your IDR options.",
   },
   {
     q: "How much does it cost to file in 2026?",

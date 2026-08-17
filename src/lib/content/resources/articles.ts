@@ -319,13 +319,13 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
   slug: "idr-attorney-vs-software",
   title: "Do you need an IDR attorney?",
   subtitle: "Software, billing teams, and the economics of filing.",
-  metaTitle: "IDR Attorney vs Software: Do You Need a Lawyer to File? | Sydra",
+  metaTitle: "Do You Need a Lawyer to File Federal IDR? | Sydra",
   metaDescription:
-    "Whether you need an attorney to file federal IDR, who can run the process, and how attorney contingency fees compare to software your billing team operates in house.",
+    "Whether you need an attorney to file federal IDR, who can run the process, and how a typical contingency compares to software your billing team operates in house.",
   datePublished: "2026-06-10",
   excerpt:
-    "Whether an attorney is required, who can run IDR, and how contingency fees compare to software your team operates in house.",
-  lead: "Many practices assume federal IDR requires a lawyer. It does not. The No Surprises Act lets a provider or its billing team run the entire process. This page covers who can file, when legal help is worth it, and how the economics of an attorney's contingency fee compare to operating software in house.",
+    "Whether an attorney is required, who can run IDR, and how a typical contingency compares to software your team operates in house.",
+  lead: "Many practices assume federal IDR requires a lawyer. It does not. The No Surprises Act lets a provider or its billing team run the entire process. This page covers who can file, when legal help is worth it, and how the economics of a typical contingency compare to operating software in house.",
   sections: [
     {
       id: "do-you-need-a-lawyer",
@@ -347,7 +347,7 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
       id: "economics",
       heading: "The economics: contingency fee vs software.",
       paragraphs: [
-        "IDR attorneys typically charge a contingency fee, often in the range of 10 to 20 percent of every recovery. On a steady stream of out of network claims, that compounds: 20 percent of every award, on every claim, indefinitely.",
+        "A typical contingency often keeps 10 to 20 percent of every recovery. On a steady stream of out of network claims, that compounds: 20 percent of every award, on every claim, indefinitely.",
         "Software your team operates changes the structure. Instead of a percentage of each recovery, you pay for the tool that prepares the submission, and you keep the award in house. Across a year of claims, the difference between a recurring percentage of recovery and a fixed software cost is usually the largest line in the comparison.",
         "The honest caveat is staffing. Software assumes you have a billing team to operate it. If you do not, a full service option that handles claims end to end may fit better, even at a higher effective cost, because it removes the labor entirely.",
       ],
@@ -383,8 +383,8 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
       a: "Yes. You can initiate and pursue federal IDR yourself or through your billing team. The steps are sending the open negotiation notice, initiating through the federal portal, selecting the IDRE, and submitting your offer and evidence. Software that prepares the submission lets a team do this in minutes per claim.",
     },
     {
-      q: "How do IDR attorney fees compare to software?",
-      a: "IDR attorneys typically charge a contingency fee, often 10 to 20 percent of each recovery, on every claim. Software your team operates replaces that recurring percentage with a fixed cost and keeps the award in house. Across a year of claims, that difference is usually the largest factor in the comparison.",
+      q: "How do typical contingency fees compare to software?",
+      a: "A typical contingency often keeps 10 to 20 percent of each recovery, on every claim. Software your team operates replaces that recurring percentage with a fixed cost and keeps the award in house. Across a year of claims, that difference is usually the largest factor in the comparison.",
     },
     {
       q: "Can a billing company file IDR on my behalf?",

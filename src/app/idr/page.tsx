@@ -113,7 +113,7 @@ export default function IdrIndexPage() {
               },
               { name: "In house IDR teams", href: "/in-house-idr" },
               {
-                name: "Sydra vs an IDR attorney",
+                name: "Compare your IDR options",
                 href: "/sydra-vs-idr-attorney",
               },
             ]}

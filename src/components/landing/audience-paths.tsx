@@ -11,11 +11,11 @@ const paths = [
     cta: "Learn the basics",
   },
   {
-    label: "A lawyer takes a cut",
-    title: "Already paying an attorney?",
-    body: "IDR attorneys typically keep 20 percent of every recovery. See the fee math against running it on software you own.",
+    label: "A typical contingency takes a cut",
+    title: "Already paying a contingency?",
+    body: "A typical contingency keeps 20 percent of every recovery. See the fee math against running it on software you own.",
     href: "/sydra-vs-idr-attorney",
-    cta: "Compare the fees",
+    cta: "Compare your IDR options",
   },
   {
     label: "We do it in house",

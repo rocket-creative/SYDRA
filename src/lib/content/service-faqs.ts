@@ -68,7 +68,7 @@ export const PRICING_FAQ: ServiceFaqItem[] = [
     a: "Yes. Many practices start Self Serve and add Support or move to Full Service. Tier switches don't require a new onboarding process.",
   },
   {
-    q: "How does Sydra pricing compare to an attorney at 20%?",
-    a: "For a practice with 20 claims per month, $15,000 average disputed amount, 88% win rate: Attorney at 20%: $633,600 in annual fees on recoveries. Sydra platform fee: quoted to your volume, structured below that figure. The exact comparison is part of what we show you on the demo call.",
+    q: "How does Sydra pricing compare to a typical 20% contingency?",
+    a: "For a practice with 20 claims per month, $15,000 average disputed amount, 88% win rate: a typical 20% contingency: $633,600 in annual fees on recoveries. Sydra platform fee: quoted to your volume, structured below that figure. The exact comparison is part of what we show you on the demo call.",
   },
 ];

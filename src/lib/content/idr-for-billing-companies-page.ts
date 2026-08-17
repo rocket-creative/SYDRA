@@ -59,7 +59,7 @@ export const IDR_FOR_BILLING_SECTIONS: ContentSection[] = [
     id: "heading-pricing-volume",
     title: "Pricing that scales with volume, not a per seat model.",
     paragraphs: [
-      "Sydra doesn't publish list pricing because the right structure depends on specialty mix, state mix, and monthly out of network volume, all of which look different for a billing company aggregating several clients than for a single practice. Every tier is structured below a typical 20 percent attorney contingency fee.",
+      "Sydra doesn't publish list pricing because the right structure depends on specialty mix, state mix, and monthly out of network volume, all of which look different for a billing company aggregating several clients than for a single practice. Every tier is structured below a typical 20 percent contingency.",
       "On the demo call, bring your actual client volume and specialty mix and get a real number instead of a generic estimate that doesn't reflect how your book is built.",
     ],
   },
@@ -84,7 +84,7 @@ export const IDR_FOR_BILLING_FAQS: ContentFaq[] = [
   },
   {
     q: "Do you still take a percentage of recovery at billing company volume?",
-    a: "No. Every Sydra tier is a platform fee structured below a typical 20 percent attorney contingency, not a percentage of recovery, regardless of volume.",
+    a: "No. Every Sydra tier is a platform fee structured below a typical 20 percent contingency, not a percentage of recovery, regardless of volume.",
   },
 ];
 

@@ -104,7 +104,7 @@ export const BREADCRUMBS = {
   ],
   sydraVsAttorney: [
     { name: "Home", path: "" },
-    { name: "Sydra vs an IDR attorney", path: "/sydra-vs-idr-attorney" },
+    { name: "Compare your IDR options", path: "/sydra-vs-idr-attorney" },
   ],
   inHouseIdr: [
     { name: "Home", path: "" },

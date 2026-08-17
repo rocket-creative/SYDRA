@@ -48,9 +48,9 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     slug: "contingency-fee",
     term: "Contingency fee",
     definition:
-      "A fee model where an IDR attorney typically keeps about 20 percent of every recovery. The cost rises with every successful dispute. Sydra is software your billing team operates, priced below typical attorney contingency fees.",
+      "A fee model that typically keeps about 20 percent of every recovery. The cost rises with every successful dispute. Sydra is software your billing team operates, priced below a typical 20 percent contingency.",
     relatedHref: "/sydra-vs-idr-attorney",
-    relatedLabel: "Sydra vs an IDR attorney",
+    relatedLabel: "Compare your IDR options",
   },
   {
     slug: "cooling-off-period",

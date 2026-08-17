@@ -21,7 +21,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "What does Sydra cost?",
-    a: "Pricing is shared on your demo call after we understand your specialty, state, and monthly OON claim volume. What we can tell you: Sydra's platform fee is structured below typical 20% attorney contingency fees for most practices at most claim volumes. Exact quote on your demo call. No obligation.",
+    a: "Pricing is shared on your demo call after we understand your specialty, state, and monthly OON claim volume. What we can tell you: Sydra's platform fee is structured below a typical 20% contingency for most practices at most claim volumes. Exact quote on your demo call. No obligation.",
   },
   {
     q: "How does Sydra handle HIPAA and patient data security?",

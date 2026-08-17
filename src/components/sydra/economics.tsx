@@ -28,7 +28,7 @@ export function SydraEconomics() {
           <div className="rule-measure my-4 border-t border-white/20" aria-hidden />
           <p className="type-caption text-white/60">Median award vs QPA</p>
           <p className="prose-measure mt-6 text-[15px] leading-relaxed text-white/85">
-            If your practice files IDR through an attorney at 20% contingency: Sydra lets your
+            If your practice files IDR at a typical 20% contingency: Sydra lets your
             billing team run the workflow in house. Platform fee is structured below typical 20%
             contingency. Exact quote on your demo call after we understand your specialty and
             volume.

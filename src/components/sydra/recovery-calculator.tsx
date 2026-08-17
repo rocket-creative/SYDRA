@@ -162,7 +162,7 @@ export function RecoveryCalculator({
             </p>
           </div>
           <div className="min-w-0">
-            <p className={`type-caption ${labelClass}`}>A 20% attorney would take</p>
+            <p className={`type-caption ${labelClass}`}>Typical contingency cost</p>
             <p className={`mt-2 break-words text-lg font-light tabular-nums sm:text-xl ${valueClass}`}>
               {usd(estimate.attorneyFees)}
               <span className={`text-sm ${mutedClass}`}>/yr</span>

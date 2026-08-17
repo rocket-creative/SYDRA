@@ -8,7 +8,7 @@ const LINKS = [
   { href: "/idr-filing-deadline", label: "IDR filing deadline" },
   { href: "/idr-for-billing-companies", label: "IDR for billing companies" },
   { href: "/in-house-idr", label: "In house IDR" },
-  { href: "/sydra-vs-idr-attorney", label: "Sydra vs an IDR attorney" },
+  { href: "/sydra-vs-idr-attorney", label: "Compare your IDR options" },
   { href: "/how-it-works", label: "How Sydra works" },
   { href: "/pricing", label: "Compare pricing" },
   { href: "/idr-recovery-calculator", label: "IDR recovery calculator" },

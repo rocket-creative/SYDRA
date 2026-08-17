@@ -216,7 +216,7 @@ export function buildClaimReviewWriteupPlain(input: {
     "",
     claimReviewWriteupSchedulingBlock(),
     "",
-    "Or we file it for you. We prepare and submit, you keep the recovery. Materially less than a typical 20% attorney contingency. Reply to this email.",
+    "Or we file it for you. We prepare and submit, you keep the recovery. Materially less than a typical 20% contingency. Reply to this email.",
     "",
     "No pressure either way. If this claim isn't worth pursuing, this document says so.",
     "",
