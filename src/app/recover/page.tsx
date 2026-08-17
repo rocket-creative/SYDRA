@@ -17,11 +17,22 @@ type PageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
+function firstQueryValue(value: string | string[] | undefined): string {
+  if (Array.isArray(value)) return value[0]?.trim() ?? "";
+  return value?.trim() ?? "";
+}
+
 export default async function RecoverAdLandingPage({ searchParams }: PageProps) {
   const query = await searchParams;
   const data = await getLandingPageData(undefined, query);
 
   return (
-    <AdLanding path="/recover" stateCode={data.stateCode} tracking={data.tracking} />
+    <AdLanding
+      path="/recover"
+      stateCode={data.stateCode}
+      tracking={data.tracking}
+      urlCode={firstQueryValue(query.code)}
+      urlState={firstQueryValue(query.state).toUpperCase()}
+    />
   );
 }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Suspense } from "react";
 
 import { Cursor } from "@/components/motion/cursor";
 import { SplitHeadline } from "@/components/motion/split-headline";
@@ -22,13 +21,21 @@ type AdLandingProps = {
   tracking: CampaignTracking;
   stateCode: string;
   path?: string;
+  urlCode?: string;
+  urlState?: string;
 };
 
 /**
  * Single-purpose paid-traffic landing: one promise, one form, one CTA.
  * No Sydra vs full-service fork, calculator, or audience path grid.
  */
-export function AdLanding({ tracking, stateCode, path = "/recover" }: AdLandingProps) {
+export function AdLanding({
+  tracking,
+  stateCode,
+  path = "/recover",
+  urlCode = "",
+  urlState = "",
+}: AdLandingProps) {
   const jsonLd = [
     breadcrumbJsonLd([
       { name: "Home", path: "" },
@@ -95,16 +102,17 @@ export function AdLanding({ tracking, stateCode, path = "/recover" }: AdLandingP
       </section>
 
       <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
-        <Suspense fallback={<div className="h-64 animate-pulse rounded-[2px] bg-surface-muted" />}>
-          <LeadForm
-            anchorId="lead-form"
-            defaultState={stateCode}
-            landingPage="recover"
-            thankYouPath="/recover/thank-you"
-            tracking={tracking}
-            variant="card"
-          />
-        </Suspense>
+        <LeadForm
+          anchorId="lead-form"
+          defaultState={stateCode}
+          landingPage="recover"
+          readSearchParams={false}
+          thankYouPath="/recover/thank-you"
+          tracking={tracking}
+          urlCode={urlCode}
+          urlState={urlState}
+          variant="card"
+        />
         <CtaTrustSignals className="mt-8 max-w-3xl" />
       </div>
 

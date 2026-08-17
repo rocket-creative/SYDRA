@@ -64,6 +64,13 @@ type LeadFormProps = {
    * Primary "Submit lead form" (`MhI6CKKQz8scEKqpzPtD`) on thank-you.
    */
   intent?: LeadFormIntent;
+  /**
+   * When false, do not call useSearchParams (avoids streaming the form after
+   * the footer). Pass urlState/urlCode from the server instead.
+   */
+  readSearchParams?: boolean;
+  urlState?: string;
+  urlCode?: string;
 };
 
 type FormStatus =
@@ -155,7 +162,31 @@ async function readLeadResponse(res: Response): Promise<{
   }
 }
 
-export function LeadForm({
+export function LeadForm(props: LeadFormProps) {
+  if (props.readSearchParams === false) {
+    return (
+      <LeadFormInner
+        {...props}
+        urlCode={props.urlCode ?? ""}
+        urlState={props.urlState ?? ""}
+      />
+    );
+  }
+  return <LeadFormFromSearchParams {...props} />;
+}
+
+function LeadFormFromSearchParams(props: LeadFormProps) {
+  const searchParams = useSearchParams();
+  return (
+    <LeadFormInner
+      {...props}
+      urlCode={(searchParams.get("code") ?? "").trim()}
+      urlState={(searchParams.get("state") ?? "").trim().toUpperCase()}
+    />
+  );
+}
+
+function LeadFormInner({
   defaultState,
   tracking,
   variant = "section",
@@ -163,11 +194,10 @@ export function LeadForm({
   thankYouPath = DEFAULT_THANK_YOU_PATH,
   landingPage,
   intent = "demo",
+  urlState = "",
+  urlCode = "",
 }: LeadFormProps) {
   const copy = COPY_BY_INTENT[intent];
-  const searchParams = useSearchParams();
-  const urlState = (searchParams.get("state") ?? "").trim().toUpperCase();
-  const urlCode = (searchParams.get("code") ?? "").trim();
   const prefillState = resolvePrefillState(urlState, defaultState, tracking.state);
 
   const isCard = variant === "card";
@@ -189,13 +219,12 @@ export function LeadForm({
       code: persisted.code,
     });
     persistUtmFirstTouch({
-      utm_source: searchParams.get("utm_source") ?? tracking.utm_source,
-      utm_medium: searchParams.get("utm_medium") ?? tracking.utm_medium,
-      utm_campaign: searchParams.get("utm_campaign") ?? tracking.utm_campaign,
-      utm_content: searchParams.get("utm_content") ?? tracking.utm_content,
+      utm_source: tracking.utm_source,
+      utm_medium: tracking.utm_medium,
+      utm_campaign: tracking.utm_campaign,
+      utm_content: tracking.utm_content,
     });
   }, [
-    searchParams,
     tracking.state,
     tracking.utm_campaign,
     tracking.utm_content,
