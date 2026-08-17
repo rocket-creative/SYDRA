@@ -11,6 +11,7 @@ import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { Section } from "@/components/ui/section";
+import { CLAIM_REVIEW_OFFER } from "@/lib/case-review";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import {
   breadcrumbJsonLd,
@@ -39,8 +40,7 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
     webPageJsonLd({
       path: "/recover",
       name: "Recover underpaid out of network claims",
-      description:
-        "Send us one denied out-of-network EOB. We'll tell you whether it qualifies for federal IDR and what it's worth — in writing, within one business day. No call, no software to install.",
+      description: CLAIM_REVIEW_OFFER,
     }),
   ];
 
@@ -80,11 +80,7 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
               <h1 className="type-display mt-4 text-brand" id="ad-landing-hero-heading">
                 <SplitHeadline text="Recover underpaid out of network claims." />
               </h1>
-              <p className="mt-5 type-body text-body">
-                Send us one denied out-of-network EOB. We&apos;ll tell you whether it qualifies for
-                federal IDR and what it&apos;s worth — in writing, within one business day. No call,
-                no software to install.
-              </p>
+              <p className="mt-5 type-body text-body">{CLAIM_REVIEW_OFFER}</p>
               <div className="mt-6">
                 <ConversionCtaPair placement="recover-hero" />
               </div>

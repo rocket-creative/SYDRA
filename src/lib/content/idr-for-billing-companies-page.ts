@@ -11,8 +11,6 @@ export const IDR_FOR_BILLING_HERO = {
 export const IDR_FOR_BILLING_STATS = [
   {
     value: "88%",
-    countTo: 88,
-    suffix: "%",
     label: "of properly filed federal IDR disputes get paid",
     caption: "Source: Georgetown University CHIR, March 2026",
   },

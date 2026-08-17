@@ -5,9 +5,7 @@ import { track } from "@vercel/analytics";
 
 import { ClaimReviewForm } from "@/components/landing/claim-review-form";
 import { writeCalculatorEstimate } from "@/lib/landing/calculator-estimate";
-
-const WIN_RATE = 0.88;
-const AWARD_MULTIPLIER = 4.5;
+import { estimateRecovery } from "@/lib/landing/recovery-estimate";
 
 const CLAIMS_MIN = 1;
 const CLAIMS_MAX = 100;
@@ -47,16 +45,10 @@ export function RecoveryCalculator({
   const claimsId = useId();
   const amountId = useId();
 
-  const estimate = useMemo(() => {
-    const monthlyRecovery = claimsPerMonth * avgDisputedAmount * WIN_RATE * AWARD_MULTIPLIER;
-    const annualRecovery = monthlyRecovery * 12;
-    const attorneyFees = annualRecovery * 0.2;
-    return {
-      monthlyRecovery: Math.round(monthlyRecovery),
-      annualRecovery: Math.round(annualRecovery),
-      attorneyFees: Math.round(attorneyFees),
-    };
-  }, [claimsPerMonth, avgDisputedAmount]);
+  const estimate = useMemo(
+    () => estimateRecovery(claimsPerMonth, avgDisputedAmount),
+    [claimsPerMonth, avgDisputedAmount],
+  );
 
   const touchedRef = useRef(false);
 
@@ -146,8 +138,9 @@ export function RecoveryCalculator({
         </div>
 
         <p className={`text-xs leading-relaxed ${mutedClass}`}>
-          Uses CMS published win rates (88%) and Georgetown CHIR median award benchmarks. Not a
-          Sydra performance claim.
+          Uses the CMS published 88% win rate on the amount already in dispute. Award multiples
+          versus QPA are not applied here. Recovery is capped at the disputed amount. Not a Sydra
+          performance claim.
         </p>
       </div>
 
@@ -181,7 +174,7 @@ export function RecoveryCalculator({
         <div className="mt-8 space-y-6">
           <div>
             <h3 className={`text-lg font-medium leading-snug ${valueClass}`}>
-              That&apos;s {usd(estimate.annualRecovery)} a year you&apos;re currently writing off.
+              {`That's ${usd(estimate.annualRecovery)} a year you're currently writing off.`}
             </h3>
             <p className={`mt-3 text-[15px] leading-relaxed ${mutedClass}`}>
               Want that number verified against a real claim instead of an estimate? Send us one

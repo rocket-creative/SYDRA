@@ -10,6 +10,10 @@ export const CLAIM_REVIEW_BOOKING_PATH = "/demo?source=claim-review";
 
 export const CASE_REVIEW_CTA = "Get a free claim review";
 
+/** Shared offer line on /recover and /case-review. */
+export const CLAIM_REVIEW_OFFER =
+  "Send us one denied out-of-network EOB. We'll tell you whether it qualifies for federal IDR and what it's worth — in writing, within one business day. No call, no software to install.";
+
 /** Primary conversion CTA. Full label on desktop; shortLabel in header and on mobile. */
 export const PRIMARY_CTA_LABEL = "See what one denied claim is worth";
 export const PRIMARY_CTA_SHORT_LABEL = "What's your claim worth?";

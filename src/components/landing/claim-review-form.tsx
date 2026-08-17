@@ -84,8 +84,7 @@ export function ClaimReviewForm({ source }: ClaimReviewFormProps) {
     return (
       <div className="space-y-4" role="status">
         <p className="type-body text-brand">
-          <strong>Got it — check your inbox.</strong> We&apos;ve sent you a sample review so you can
-          see exactly what you&apos;ll get back.
+          {`Got it — check your inbox. We've sent you a sample review so you can see exactly what you'll get back.`}
         </p>
         <p className="type-body text-brand">
           Someone from Sydra will follow up personally within one business day. If you&apos;d like a

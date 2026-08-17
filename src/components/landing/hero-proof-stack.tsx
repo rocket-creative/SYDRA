@@ -1,18 +1,12 @@
-import { CountUp } from "@/components/motion/count-up";
-
 export type ProofItem = {
   value: string;
   label: string;
   caption?: string;
-  countTo?: number;
-  suffix?: string;
 };
 
 const PROOF_ITEMS: readonly ProofItem[] = [
   {
     value: "88%",
-    countTo: 88,
-    suffix: "%",
     label: "of properly filed federal IDR disputes get paid",
     caption: "Source: Georgetown University CHIR, March 2026",
   },
@@ -45,11 +39,7 @@ export function HeroProofStack({ className = "", items = PROOF_ITEMS }: HeroProo
             className="text-[1.75rem] font-light leading-none tracking-[-0.03em] text-brand tabular-nums md:text-[2rem]"
             style={{ fontVariantNumeric: "tabular-nums" }}
           >
-            {item.countTo != null ? (
-              <CountUp end={item.countTo} suffix={item.suffix} />
-            ) : (
-              item.value
-            )}
+            {item.value}
           </p>
           <div className="my-2.5 h-px w-8 bg-[var(--color-rule)]" aria-hidden />
           <figcaption className="text-sm leading-snug text-body">{item.label}</figcaption>

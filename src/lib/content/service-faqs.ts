@@ -69,6 +69,6 @@ export const PRICING_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "How does Sydra pricing compare to an attorney at 20%?",
-    a: "For a practice with 20 claims per month, $15,000 average disputed amount, 88% win rate: Attorney at 20%: $31,680 in annual fees on recoveries. Sydra platform fee: quoted to your volume, structured below that figure. The exact comparison is part of what we show you on the demo call.",
+    a: "For a practice with 20 claims per month, $15,000 average disputed amount, 88% win rate: Attorney at 20%: $633,600 in annual fees on recoveries. Sydra platform fee: quoted to your volume, structured below that figure. The exact comparison is part of what we show you on the demo call.",
   },
 ];

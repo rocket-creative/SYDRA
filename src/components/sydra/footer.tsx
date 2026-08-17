@@ -23,7 +23,7 @@ export function SydraFooter() {
           src="/sydra-logo-nav.svg"
           width={220}
         />
-        <p className="type-caption mt-8 text-body">Sydra · Sydra</p>
+        <p className="type-caption mt-8 text-body">Sydra</p>
         <address className="mt-6 max-w-2xl not-italic text-[15px] leading-relaxed text-body">
           {ADDRESS}
           <br />
