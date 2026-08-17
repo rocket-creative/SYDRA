@@ -57,12 +57,10 @@ export default function GuideIndexPage() {
               </span>
             </h1>
             <p className={textStyles.pageLead}>
-              Provider focused explanations of how federal independent dispute
-              resolution works under the No Surprises Act: what qualifies a
-              claim, the deadlines that decide the outcome, why the qualifying
-              payment amount runs low, and why surgical awards run well above it.
-              Written for billing teams and practice administrators, not
-              patients.
+              There is a defined federal pathway between a payer's underpayment and a binding
+              arbitrated amount: an open negotiation window, an eligibility determination, a
+              batching decision, then arbitration. Each step has a hard deadline, and missing one
+              forfeits the claim.
             </p>
           </header>
         </Section>

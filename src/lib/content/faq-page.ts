@@ -1,4 +1,3 @@
-import { caseReviewUrl } from "@/lib/case-review";
 import { siteUrl } from "@/lib/site";
 
 export type FaqItem = {
@@ -9,35 +8,35 @@ export type FaqItem = {
 export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
     q: "How long does it actually take to prepare an IDR submission in Sydra?",
-    a: "Under 5 minutes for a standard single CPT claim where the operative note is already uploaded and the provider profile is built. The time breaks down: 30 to 60 seconds to upload the EOB and run the eligibility check. 60 to 90 seconds to review the automatically generated draft. 30 seconds to approve and export the DOCX. After the first five to ten submissions, experienced billers report the process taking closer to 3 minutes per claim. The 30 minute comparison is based on the manual process: pulling the EOB, looking up QPA, drafting a market rate argument from scratch, writing a clinical narrative, gathering credentials, and formatting for the portal. Sydra automates the documentation step. The review is still human. The drafting isn't.",
+    a: "Under 5 minutes for a standard single CPT claim, against roughly 30 minutes by hand. Upload and eligibility check runs 30 to 60 seconds, review 60 to 90 seconds, approve and export about 30 seconds. Past the first five to ten submissions most teams settle around three minutes.",
   },
   {
     q: "Does Sydra batch CPT codes?",
-    a: "Sydra defaults to one claim per eligible CPT code. If your EOB contains three CPT codes, Sydra prepares three separate submission packets by default, each with a procedure specific payment offer, CPT specific market rate justification, clinical narrative, and credentials for that code. Batching is CMS sanctioned as of the May 28, 2026 final rule and available if your team wants it for a specific submission. You decide per submission. Federal IDR is final offer arbitration, so a batched offer covering several CPT codes can win or lose together. CMS data shows providers win 88% of IDR disputes industry wide (H1 2025). Filing individually is the setting that generally protects that win rate.",
+    a: "It defaults to one claim per CPT code, because federal IDR is final offer arbitration and a submission covering one procedure is easier to support than one covering four. Batching is CMS sanctioned as of the final rule of May 28, 2026, effective June 11, 2026, at up to 50 qualified items per dispute, and is available per submission when your team wants it.",
   },
   {
     q: "What CPT codes does Sydra's determination library cover?",
-    a: "Sydra has ingested 213+ IDR determinations. The library is weighted toward surgical specialties: Spine: 22612, 22630, 22633, 22840, 22842, 63030, 63047, 63055, and related add ons. Orthopedic: 27447, 27130, 29881, 29882, 23412, 29806, 29827, 27570, and related codes. Neurosurgery: 61510, 61512, 61520, 63047, 63055, and selected cranial procedure codes. Plastics and hand: 25447, 26356, 26115, 19364, and selected reconstructive codes. For codes not in the library at a state specific level: Sydra uses national comparison data and flags lower library confidence on the market rate section. Complete current coverage available to review on your demo call.",
+    a: "213+ ingested IDR determinations, weighted toward surgical specialties — spine, orthopedic, neurosurgery, and plastics and hand. Comparables are filtered to your CPT code and your state.",
   },
   {
     q: "What does Sydra cost?",
-    a: "Pricing is shared on your demo call after we understand your specialty, state, and monthly OON claim volume. What we can tell you: Sydra's platform fee is structured below a typical 20% contingency for most practices at most claim volumes. Exact quote on your demo call. No obligation.",
+    a: "Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive. The right number depends on specialty, state, and monthly out of network volume, so it is quoted on a 15 minute call.",
   },
   {
     q: "How does Sydra handle HIPAA and patient data security?",
-    a: "IDR submissions contain PHI. Sydra handles PHI under these controls: AI processing runs on Claude Sonnet 4 on AWS Bedrock. PHI stays inside the AWS HIPAA eligible service boundary during generation. No data is sent to Anthropic's infrastructure. Storage: Amazon S3, AES 256 encryption at rest. TLS 1.2 or higher for all data in transit. Strict per practice tenant isolation at the database row level. BAA: Standard BAA available for covered entities. Email sales@sydrahealth.com. SOC 2: SOC 2 aligned controls. Report available under NDA on request. See the full security page at " + siteUrl() + "/security.",
+    a: "PHI is processed on Claude Sonnet 4 via AWS Bedrock, encrypted at rest with AES-256 in S3 and in transit with TLS 1.2 or above, with per practice isolation at the data layer. SOC 2 aligned. A BAA is available on request.",
   },
   {
     q: "What happens if an IDR dispute loses?",
-    a: "A determination against the provider's offer means the insurer's offer was selected. Both parties pay the IDRE administrative fee (currently $50 per dispute). Sydra tracks adverse determinations in your dashboard. After the 90 calendar day cooling off period, the same code and payer combination is eligible for re filing. If you have Sydra + Support, your Sydra specialist reviews adverse determinations with you at the monthly account review. CMS data shows 88% of properly filed disputes result in provider wins.",
+    a: "The plan's offer is selected and the losing party pays the certified IDRE fee, currently $50. The same item cannot be re filed against the same party for a 90 calendar day cooling period. For properly filed disputes the base rate is 88 percent in the provider's favour, which is why preparation is the whole game.",
   },
   {
     q: "How long does it take to get set up on Sydra?",
-    a: "Most practices are operational within one week of signing the BAA. Day 1 to 2: We provision your practice tenant and send login credentials. Day 2 to 3: Your billing lead uploads the first provider CV and we build the provider profile. Day 3 to 4: ModMed integration configured if applicable. Day 4 to 5: First claim run in the platform with your billing lead watching. Day 5 to 7: Second and third claims run independently.",
+    a: "Most practices are live within one week. Days 1 to 2, tenant provisioning. Days 2 to 3, CV upload and provider profile. Days 3 to 4, integration. Days 4 to 5, first claim run with us. Days 5 to 7, independent runs.",
   },
   {
     q: "What if my practice doesn't want to run software at all?",
-    a: "Sydra Full Service handles every IDR claim end to end. Your practice forwards EOBs. The Sydra team handles eligibility, documentation, submission, and tracking. Zero software for your billing team to operate. Get a free IDR review at " + caseReviewUrl() + ".",
+    a: "Then we run it. Sydra Full Service handles federal IDR end to end. You forward the EOBs and nothing else changes in how you practice or how you bill.",
   },
 ];
 

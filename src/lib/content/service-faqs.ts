@@ -3,23 +3,23 @@ export type ServiceFaqItem = { q: string; a: string };
 export const HOW_IT_WORKS_FAQ: ServiceFaqItem[] = [
   {
     q: "How does Sydra work?",
-    a: "Sydra reviews the underpaid or denied claim, checks it against the qualifying payment amount and the payer's own reimbursement history, and tells you within minutes whether the claim is a strong candidate for independent dispute resolution. If it is, Sydra prepares the offer, the supporting documentation, and the certified IDR entity submission. You review it, you approve it, Sydra files it.",
+    a: "You upload an EOB and the supporting documents. Sydra runs the eligibility check, identifies the eligible CPT, pulls comparable prior determinations, drafts the clinical narrative from the operative note, assembles the six required elements, and exports a submission ready packet. Your team reviews and files.",
   },
   {
     q: "Why does filing matter so much to the outcome?",
-    a: 'Georgetown University\'s Center on Health Insurance Reforms found that 88 percent of properly filed federal IDR disputes get paid, the highest provider win rate recorded since the process launched (CHIR, March 2026). The disputes that fail tend to fail on eligibility or documentation grounds, not on the merits of the underlying claim. Sydra exists to make sure your filing lands in the 88 percent instead of the group that gets thrown out on a technicality.',
+    a: "Because the entity picks one offer and does not split. The dispute is decided on which side documented its number better. Preparation is not administrative overhead in this process; it is the argument.",
   },
   {
     q: "How long does the IDR process take from start to finish?",
-    a: "Filing itself takes a few minutes once Sydra has flagged the claim. The federal timeline from initiation to a certified IDR entity decision typically runs thirty business days, though delays at the certified entity level are common industry wide. Sydra tracks every open case against that clock and flags anything falling behind schedule.",
+    a: "The open negotiation period runs 30 business days, and IDR must be initiated within 4 business days after it closes. Determination timelines after that vary with entity workload.",
   },
   {
     q: "Do I need to do anything manually?",
-    a: "You approve the offer amount before anything is filed. Everything else, the eligibility check, the documentation packet, the submission to the certified IDR entity, the status tracking, runs through Sydra without you touching a spreadsheet or a payer portal.",
+    a: "Yes, deliberately. Nothing files itself. Sydra prepares the submission; your billing team reviews every decision and submits through the IDRE portal.",
   },
   {
     q: "Can Sydra handle claims across multiple payers and multiple states?",
-    a: "Yes. The qualifying payment amount and the applicable certified IDR entity both depend on payer and state, and Sydra applies the correct rules automatically instead of requiring your billing team to look each one up.",
+    a: "Yes. Determination comparables are filtered by CPT code and state, so a submission is built against the market the dispute actually sits in.",
   },
 ];
 

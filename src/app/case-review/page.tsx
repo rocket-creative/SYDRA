@@ -51,7 +51,7 @@ export default async function CaseReviewPage({ searchParams }: PageProps) {
       />
       <div className="mx-auto max-w-xl">
         <header>
-          <h1 className={textStyles.pageTitle}>Get your free claim review.</h1>
+          <h1 className={textStyles.pageTitle}>See what one denied claim is worth.</h1>
           <p className={textStyles.pageLead}>{CLAIM_REVIEW_OFFER}</p>
         </header>
         <figure className="mt-8">

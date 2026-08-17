@@ -28,8 +28,8 @@ export function RegulatoryCurrency() {
           <strong className="font-medium text-brand">
             Open negotiation must now be initiated through the federal IDR portal
           </strong>
-          , not directly with the payer. The window remains 30 business days, and it is unforgiving
-          — there is no cure for missing it.
+          , not directly with the payer. The window remains 30 business days, and it is unforgiving.
+          There is no cure for missing it.
         </p>
         <p>
           <strong className="font-medium text-brand">

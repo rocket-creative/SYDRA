@@ -16,7 +16,7 @@ export type SecuritySection = {
 export const SECURITY_HERO = {
   title: "How Sydra handles protected health information.",
   intro:
-    "An NSA IDR submission contains your patient's name, date of service, diagnosis, procedure codes, operative note excerpts, and disputed claim amounts. Every document uploaded to Sydra is protected health information under HIPAA. This page describes how we handle PHI specifically.",
+    "Every document uploaded to Sydra is protected health information under HIPAA. An operative note, an EOB, an insurance card: all of it. This page documents how it is handled, who can reach it, and what you can request in writing.",
 };
 
 export const SECURITY_TRUST_CARDS: SecurityTrustCard[] = [
@@ -35,8 +35,7 @@ export const SOC2_SECTION: SecuritySection = {
   id: "heading-soc2",
   title: "SOC 2 alignment.",
   paragraphs: [
-    "Sydra's controls are SOC 2 aligned, covering security, availability, and confidentiality for the systems that process customer data.",
-    "A SOC 2 report is available under NDA to qualified prospects during evaluation. Email sales@sydrahealth.com with your compliance contact copied and we'll send it the same business day.",
+    "Sydra is built to SOC 2 criteria for security, availability and confidentiality. We are aligned to those criteria and are not yet certified against them. The report is available under NDA, and we would rather say that plainly than let the badge imply otherwise.",
   ],
 };
 

@@ -11,6 +11,7 @@ export type Comparison = {
   metaTitle: string;
   metaDescription: string;
   lead: string;
+  belowTable?: string;
   rows: { label: string; sydra: string; other: string }[];
   faqs: EntityFaqItem[];
 };
@@ -23,11 +24,12 @@ export const COMPARISONS: Comparison[] = [
   {
     slug: "sydra-vs-in-house-manual",
     alternative: "manual in house filing",
-    title: "Sydra vs filing IDR by hand.",
-    metaTitle: "Sydra vs Manual In House IDR | 30 Minutes to Under 5 | Sydra",
+    title: "Sydra against filing by hand.",
+    metaTitle: "Sydra vs Filing Federal IDR by Hand | Sydra",
     metaDescription:
       "Filing federal IDR by hand takes 25 to 40 minutes per claim. Compare manual in house filing against Sydra, which prepares the submission in under 5 minutes.",
-    lead: "Filing federal IDR by hand takes 25 to 40 minutes per claim, so most teams file far fewer claims than they should. Sydra prepares the submission in under 5 minutes. Here is the comparison.",
+    lead: "Filing federal IDR by hand takes 25 to 40 minutes per claim, so most teams file far fewer claims than they are entitled to. Sydra prepares the submission in under 5 minutes. The comparison is below, and the only row that changes anything is the last one.",
+    belowTable: "Throughput is the row that matters. The other four are how it happens.",
     rows: [
       { label: "Time per claim", sydra: "Under 5 minutes", other: "25 to 40 minutes" },
       { label: "Market rate justification", sydra: "Prior determinations cited automatically", other: "Researched by hand" },
@@ -38,7 +40,7 @@ export const COMPARISONS: Comparison[] = [
     faqs: [
       {
         q: "How much time does Sydra actually save?",
-        a: "Sydra reduces preparation from 25 to 40 minutes per claim to under 5, which returns hours of billing team time each month and lets practices file the claims they were skipping.",
+        a: "Preparation drops from 25 to 40 minutes per claim to under 5. That returns hours to the billing team each month, and it lets a practice file the claims it was skipping — which is where the recovery actually sits.",
       },
     ],
   },

@@ -11,9 +11,12 @@ export type ContentFaq = {
 };
 
 export const WHAT_IS_IDR_HERO = {
-  title: "What is federal IDR?",
-  subtitle: "The No Surprises Act dispute path, explained for providers.",
-  lead: "If a health plan paid you less than your out of network claim was worth, federal law gives you a way to dispute it. Most practices have never heard of it. Here is what it is, who qualifies, and how the process works.",
+  title: "That payment is an opening offer.",
+  subtitle: "Federal IDR, explained for providers.",
+  paragraphs: [
+    "When a health plan pays an out of network claim, most practices treat the amount that arrives as the amount owed. Under the No Surprises Act, it isn't. That payment is an opening offer, and federal Independent Dispute Resolution exists specifically to contest it.",
+    "Most practices have never used it. This page covers what it is, who qualifies, what the deadlines are, and what changed in 2026.",
+  ],
 };
 
 export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
@@ -21,52 +24,48 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     id: "heading-nsa",
     title: "First, the No Surprises Act.",
     paragraphs: [
-      "The No Surprises Act, or NSA, is a federal law that took effect in 2022. It protects patients from surprise bills for out of network care they could not reasonably avoid, such as emergency treatment or care from an out of network surgeon at an in network facility.",
-      "Under the NSA the patient pays only their in network cost share. The health plan and the provider settle the rest between themselves. That is where most disputes begin, because the plan's first payment is often far below the value of the work.",
+      "The No Surprises Act took effect in 2022. It removed the patient from the middle of out of network billing disputes: the patient pays only the in network cost share, and the provider and the plan resolve the balance between themselves.",
+      "That second half is the part most practices never operationalised. The law did not simply cap what you can bill. It created a mechanism for recovering what the plan should have paid, and left it to providers to use.",
     ],
   },
   {
     id: "heading-idr",
     title: "Then, independent dispute resolution.",
     paragraphs: [
-      "When the provider and the health plan cannot agree on a fair payment, either side can take the claim to independent dispute resolution, or IDR. IDR is a federal arbitration process run by certified neutral entities.",
-      "Both sides submit a single proposed payment amount with supporting evidence. The arbiter picks one of the two offers. There is no splitting the difference. The offer best supported by the evidence wins, which is why how you build the submission matters.",
-      "The arbiter weighs the qualifying payment amount, or QPA, which is the plan's median contracted rate for the service, against the provider's evidence on case complexity, surgeon training, and prior determinations for the same code and region.",
+      "Federal IDR is final offer arbitration. You submit an offer, the plan submits an offer, and a certified independent dispute resolution entity picks one. There is no splitting the difference. The entity picks the offer better supported by evidence.",
+      "That structure is why preparation determines outcome. The dispute is not argued; it is documented.",
     ],
   },
   {
     id: "heading-who",
     title: "Who can use it.",
     paragraphs: [
-      "Federal IDR covers out of network claims protected by the No Surprises Act once open negotiation has failed. It is most relevant to surgical specialties with high value procedures.",
-    ],
-    list: [
-      "Out of network emergency services.",
-      "Out of network care delivered at an in network facility, including most surgical specialties.",
-      "Air ambulance services.",
-      "Claims where the plan's payment is lower than the value supported by your documentation.",
+      "Out of network claims that fall under the No Surprises Act qualify — emergency services, and non emergency services delivered by out of network providers at in network facilities where no valid notice and consent was obtained.",
+      "You do not need a lawyer. The statute does not require one. A provider can file directly, and so can an authorised representative — an in house billing team or a billing company acting on the practice's behalf.",
     ],
   },
   {
     id: "heading-deadlines",
     title: "The deadlines that matter.",
     paragraphs: [
-      "IDR runs on strict clocks. You must complete a 30 business day open negotiation period first. After that closes, you have 4 business days to initiate IDR for the claim. Miss a window and the claim is closed for that cycle.",
-      "Because the deadlines are unforgiving, the part that should never depend on judgment, the timing, is the part to get right first.",
+      "There is a defined federal pathway between a payer's underpayment and a binding arbitrated amount: an open negotiation window, an eligibility determination, a batching decision, then arbitration. Each step has a hard deadline, and missing one forfeits the claim.",
+      "The open negotiation period runs 30 business days. Once it closes, you have 4 business days to initiate IDR. There is no cure for missing either one. That is the entire reason this work goes undone. Not that it is legally difficult, but that it is deadline driven, document heavy, and unforgiving of administrative error.",
     ],
   },
   {
     id: "heading-2026",
     title: "What changed in 2026.",
     paragraphs: [
-      "The process used to be too expensive for smaller practices. On May 28, 2026, CMS finalized a rule that cut the administrative filing fee from $115 to $15 and explicitly permitted batching multiple claims into one IDR submission. That fee cut opens IDR to practices that could not justify the cost before. Batching is now a real option with a real tradeoff on win rate. See the dated CMS final rule update for the full breakdown.",
+      "The CMS final rule of May 28, 2026, effective June 11, 2026, cut the administrative fee from $115 to $15 per party, per dispute. It also moved open negotiation into the federal IDR portal rather than leaving it as a direct exchange with the payer, and set batching at up to 50 qualified items per dispute.",
+      "The practical effect is on which claims are worth filing. At $115 a side, small dollar disputes were not worth the administrative cost. At $15 they are. Confirm the current per dispute administrative fee when you initiate, because CMS can update fee guidance, and plan around the certified IDRE fee separately.",
     ],
   },
   {
     id: "heading-win",
     title: "How often properly filed disputes win.",
     paragraphs: [
-      "CMS data shows 88 percent of properly filed federal IDR disputes result in a provider win. Source: Georgetown University CHIR, March 2026. This is a published benchmark, not a Sydra performance claim.",
+      "88 percent of properly filed federal IDR disputes result in a provider win, according to Georgetown University CHIR, March 2026. Across 3.4 million disputes through June 2025, 87 percent of awards exceeded the qualifying payment amount, and the median award ran roughly 4.5 times the in network rate.",
+      "Two numbers explain why the opportunity persists. Roughly 10 percent of eligible claims are estimated to reach arbitration at all. And 44 percent of 2024 IDR cases were challenged as ineligible — usually on administrative grounds that correct preparation prevents.",
     ],
   },
 ];
@@ -78,17 +77,17 @@ export const WHAT_IS_IDR_FAQS: ContentFaq[] = [
   },
   {
     q: "What is the No Surprises Act?",
-    a: "A federal law in effect since 2022 that shields patients from surprise out of network bills. The patient pays only the in network cost share, and the provider and plan resolve the balance, through IDR when they cannot agree.",
+    a: "A federal law in effect since 2022 that removes the patient from out of network billing disputes. The patient pays the in network cost share, and the provider and plan resolve the balance — through IDR when they cannot agree.",
   },
   {
     q: "Do I need a lawyer to file IDR?",
-    a: "No. The No Surprises Act does not require a lawyer. A trained billing team can complete every step. Some practices pay a typical 20 percent contingency; others run the process on software and keep the full award. See the fee comparison on Compare your IDR options.",
+    a: "No. The No Surprises Act does not require one. A trained billing team can complete every step. Some practices hand the work to a contingency firm that takes 20 percent or more of whatever comes back. Others run the process on software and keep the award.",
   },
   {
     q: "How much does it cost to file in 2026?",
-    a: "The May 28, 2026 CMS final rule set the standard administrative filing fee at $15, down from $115. Confirm the current per dispute administrative fee when you initiate, because CMS can update fee guidance, and plan around the IDRE fee separately.",
+    a: "The CMS final rule of May 28, 2026, effective June 11, 2026, set the administrative fee at $15 per party, per dispute, down from $115. The certified IDRE fee is separate and is paid by the losing party. Confirm both when you initiate, because CMS can update fee guidance.",
   },
 ];
 
 export const WHAT_IS_IDR_CTA_LEAD =
-  "Once you know the process exists, the question is who runs it. See Sydra prepare a real federal IDR submission in about five minutes.";
+  "Send us one denied out of network EOB. You'll get a written IDR eligibility check and a dollar estimate back within one business day. No call required.";

@@ -6,16 +6,19 @@ export type HowItWorksSection = {
 };
 
 export const HOW_IT_WORKS_HERO = {
-  title: "How Sydra prepares a federal IDR submission.",
+  title: "What a federal IDR submission requires, and what Sydra does with each part.",
   subtitle: "Step by step, element by element.",
-  lead: "This page describes what Sydra does from the moment you upload an EOB to the moment your billing team exports a submission ready packet for the IDRE portal. The federal IDR submission requirements are specific. This page covers them specifically.",
+  paragraphs: [
+    "Federal IDR is final offer arbitration. The entity picks one offer — yours or the plan's — based on which is better supported. Six elements decide that, and every one of them has to be built.",
+    "Building them by hand takes 25 to 40 minutes per claim. That number, not the law, is what limits how many disputes a practice files. This page describes what each element requires and what Sydra does with it.",
+  ],
 };
 
 export const SUBMISSION_REQUIREMENTS: HowItWorksSection = {
   id: "heading-requirements",
   title: "What a complete federal IDR submission requires.",
   paragraphs: [
-    "A single federal IDR submission requires:",
+    "Six elements. A submission missing any one of them is weaker on the axis the entity actually scores.",
   ],
   list: [
     "The provider's payment offer: a specific dollar amount per CPT code. Not a range. One number with the basis for that number documented.",
@@ -27,9 +30,6 @@ export const SUBMISSION_REQUIREMENTS: HowItWorksSection = {
   ],
 };
 
-export const DEMO_CTA_LEAD =
-  "On a demo call, you watch this entire sequence run live on a real denied claim from your specialty: EOB upload to finished IDR submission packet, start to finish, in under 5 minutes.";
-
 export const SUBMISSION_FOOTNOTE =
   "Building all six from scratch on a single claim: 25 to 40 minutes. Sydra handles elements 1 through 4. Your team provides the EOB and operative note. Your team reviews and submits.";
 
@@ -38,59 +38,51 @@ export const SYDRA_ELEMENTS: HowItWorksSection[] = [
     id: "element-1",
     title: "Element 1 — Payment offer",
     paragraphs: [
-      "Claude, the AI built by Anthropic and run via Amazon Bedrock, identifies the correct CPT code from the EOB, and Sydra prepares the formal offer statement. Draft generated as a specialty coded IDR submission, filed one claim per CPT by default. Batching is available under the 2026 CMS rule. Your team chooses per submission whether to file individually or batch, and sees the tradeoff before deciding. Your billing team reviews every decision before anything is filed.",
-      "The default stays one claim per CPT because that setting generally protects win rate. When several codes share one offer, the arbiter picks one number for the whole batch. Filed individually, each code is judged on its own evidence.",
+      "The offer must be a specific dollar figure per CPT code, not a range. Claude, the AI built by Anthropic and run via Amazon Bedrock, identifies the correct CPT code from the EOB, and Sydra prepares the formal offer statement against it.",
     ],
   },
   {
     id: "element-2",
     title: "Element 2 — Market rate justification",
     paragraphs: [
-      "Sydra pulls prior IDR determinations from its library of 213+ ingested cases, filtered to your specific CPT code and your state. The market rate section cites those determinations directly with case identifiers and determination amounts.",
+      "This is the element that most often decides the outcome, and the one that takes longest by hand. Sydra pulls prior IDR determinations from a library of 213+ ingested cases, filtered to your CPT code and your state, and cites them in the submission.",
     ],
   },
   {
     id: "element-3",
     title: "Element 3 — Clinical necessity narrative",
     paragraphs: [
-      "Upload the operative note as a PDF. Claude via Amazon Bedrock reads the document directly through its multimodal layer. No OCR. No copy paste. The PDF is processed directly.",
-      "Sydra extracts: the procedure performed, surgical approach, clinical indication, surgeon's documentation of complexity, intraoperative findings relevant to clinical justification, and technique specific details that distinguish this case from a templated submission.",
-      "The narrative draft is built from those extracted elements, not from a template. Your billing team reviews. If something in the operative note strengthens the clinical argument, Sydra surfaces it. If the biller sees something that needs adjustment, they edit it. The draft is a starting point. The human is still the reviewer.",
+      "Upload the operative note as a PDF. Claude via Amazon Bedrock reads the document directly through its multimodal layer, with no OCR and no copy and paste, and drafts the clinical narrative from what the note actually says.",
     ],
   },
   {
     id: "element-4",
     title: "Element 4 — Provider credentials",
     paragraphs: [
-      "Sydra maintains a provider profile built from the surgeon's CV. Upload the CV once as a DOCX. Sydra extracts: board certifications, fellowship training, procedure volume by CPT category, publications, and practice affiliations.",
-      "Each submission automatically includes the credential block relevant to the CPT being filed. A craniotomy submission includes the surgeon's neurosurgical training and cranial procedure volume. A total knee submission includes orthopedic training and arthroplasty volume.",
+      "Training, board certifications, and procedure volume for the CPT in dispute. Sydra maintains a provider profile built from the surgeon's CV. Upload it once as a DOCX and it populates every subsequent submission.",
     ],
   },
   {
     id: "element-5",
     title: "Element 5 — Open negotiation documentation",
     paragraphs: [
-      "If you have sent an Open Negotiation Notice, upload it. Sydra attaches it with the required proof of delivery fields populated. If you haven't yet sent it, Sydra flags this before generating the submission. IDR can't be initiated without completing the open negotiation step.",
+      "Proof that the 30 business day period elapsed. If you have sent an Open Negotiation Notice, upload it, and Sydra attaches it with the required proof of delivery fields populated.",
     ],
   },
   {
     id: "element-6",
     title: "Element 6 — Eligibility verification",
     paragraphs: [
-      "At EOB upload, Sydra runs a real time eligibility check through the Stedi clearinghouse (270/271 transaction) if the practice is connected to ModMed. For manual uploads, Sydra reviews the claim data against federal eligibility criteria and flags any concerns.",
-      "Any eligibility flag is surfaced before the draft is generated. You resolve the flag or you don't file the claim. The system prevents ineligible submissions from being prepared.",
+      "44 percent of 2024 IDR cases were challenged as ineligible. At EOB upload, Sydra runs a real time eligibility check through the Stedi clearinghouse using a 270/271 transaction, so a claim that will not survive challenge is flagged before anyone drafts against it.",
     ],
   },
 ];
 
 export const DOCX_SECTION: HowItWorksSection = {
   id: "heading-docx",
-  title: "The DOCX export and submission checklist.",
+  title: "The export and the submission checklist.",
   paragraphs: [
-    "When your billing team approves the draft, one click export generates a submission ready DOCX.",
-    "The DOCX contains: the formal payment offer letter, market rate justification with prior determination citations, clinical necessity narrative, provider credential block, and an appendix with all supporting documents.",
-    "The guided checklist walks your biller through the IDRE portal step by step: what goes where, what attachments are required, what the confirmation looks like.",
-    "Nothing is submitted automatically. Your billing team controls the submission.",
+    "Sydra produces a DOCX and PDF packet and a guided checklist for the IDRE portal. Nothing files itself. Your billing team reviews every decision and submits.",
   ],
 };
 
@@ -98,10 +90,8 @@ export const ONE_PER_CPT_SECTION: HowItWorksSection = {
   id: "heading-one-per-cpt",
   title: "One claim per CPT by default, and why that still matters.",
   paragraphs: [
-    "Federal IDR is final offer arbitration. The IDRE picks one offer. No splits. The IDRE picks the offer better supported by evidence.",
-    "When multiple CPT codes are batched into one submission, the composite offer can live or die together on a single arbiter decision. That correlated risk is why Sydra defaults to one claim per CPT.",
-    "By default, if your case involves CPT 22612, 22632, 22840, and 63030, Sydra prepares four submissions. Each takes under 5 minutes. Total: under 20 minutes for four procedure specific, prior determination cited IDR packets.",
-    "Batching is CMS sanctioned as of the May 28, 2026 final rule and available when your team wants it for a specific submission, for example lower value codes or claims from the same encounter with strongly overlapping evidence. You decide per submission. See the batching guide for the full tradeoff.",
+    "Federal IDR is final offer arbitration. The entity picks one offer. There are no splits: it picks the offer better supported by evidence, and a submission covering one procedure is easier to support than one covering four.",
+    "Sydra defaults to one claim per CPT code because that setting generally protects win rate. Batching is CMS sanctioned as of the final rule of May 28, 2026, effective June 11, 2026, at up to 50 qualified items per dispute, and is available when your team wants it.",
   ],
 };
 

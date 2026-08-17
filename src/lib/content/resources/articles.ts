@@ -29,6 +29,8 @@ export type ResourceArticle = {
   faqs: ArticleFaq[];
   /** Slugs of related articles for the keep reading block. */
   related: string[];
+  /** When true, this article uses the Group A primary/secondary CTA pair instead of a demo-only button. */
+  dualCtas?: boolean;
 };
 
 const FEDERAL_IDR_PROCESS: ResourceArticle = {
@@ -289,8 +291,8 @@ const IDR_WIN_RATES_AND_AWARDS: ResourceArticle = {
       id: "unclaimed-revenue",
       heading: "The unclaimed revenue most practices leave behind.",
       paragraphs: [
-        "Only a small share of eligible claims ever reach arbitration. Estimates of CMS data suggest roughly 10 percent of eligible claims are taken to IDR. The rest are written off, often because preparing a submission by hand is slow and the volume looks unmanageable.",
-        "Given the win rate and the typical gap above the QPA, the claims that never get filed represent real, recoverable revenue. The constraint is rarely whether the claims would win. It is whether a team has a fast enough way to file them.",
+        "Roughly 10 percent of eligible claims reach arbitration at all. Set that against an 88 percent provider win rate and the gap is not a dispute problem. It is a filing problem. The claims are winnable and they are not being filed, because filing takes longer than the claim appears to be worth.",
+        "That calculation changed on June 11, 2026, when the administrative fee dropped from $115 to $15.",
       ],
     },
   ],
@@ -317,15 +319,16 @@ const IDR_WIN_RATES_AND_AWARDS: ResourceArticle = {
 
 const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
   slug: "idr-attorney-vs-software",
-  title: "Do you need an IDR attorney?",
-  subtitle: "Software, billing teams, and the economics of filing.",
+  title: "Do you need an attorney to file federal IDR?",
+  subtitle: "Who can file, when legal help is worth paying for, and how the economics compare.",
   metaTitle: "Do You Need a Lawyer to File Federal IDR? | Sydra",
   metaDescription:
     "Whether you need an attorney to file federal IDR, who can run the process, and how a typical contingency compares to software your billing team operates in house.",
   datePublished: "2026-06-10",
   excerpt:
     "Whether an attorney is required, who can run IDR, and how a typical contingency compares to software your team operates in house.",
-  lead: "Many practices assume federal IDR requires a lawyer. It does not. The No Surprises Act lets a provider or its billing team run the entire process. This page covers who can file, when legal help is worth it, and how the economics of a typical contingency compare to operating software in house.",
+  lead: "Many practices assume federal IDR requires a lawyer. It does not. The No Surprises Act lets a provider or its authorised representative run the entire process. What follows is who can file, when legal help genuinely earns its cost, and how a contingency compares to operating software in house.",
+  dualCtas: true,
   sections: [
     {
       id: "do-you-need-a-lawyer",
@@ -347,9 +350,9 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
       id: "economics",
       heading: "The economics: contingency fee vs software.",
       paragraphs: [
-        "A typical contingency often keeps 10 to 20 percent of every recovery. On a steady stream of out of network claims, that compounds: 20 percent of every award, on every claim, indefinitely.",
-        "Software your team operates changes the structure. Instead of a percentage of each recovery, you pay for the tool that prepares the submission, and you keep the award in house. Across a year of claims, the difference between a recurring percentage of recovery and a fixed software cost is usually the largest line in the comparison.",
-        "The honest caveat is staffing. Software assumes you have a billing team to operate it. If you do not, a full service option that handles claims end to end may fit better, even at a higher effective cost, because it removes the labor entirely.",
+        "A contingency typically keeps 10 to 20 percent of every recovery. On a single claim that is a reasonable price for someone else carrying the risk and the work.",
+        "On a steady stream of out of network claims it compounds: 20 percent of every award, on every claim, indefinitely. The work per claim does not grow with the size of the award, but the fee does.",
+        "Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive. That is the whole of the economic argument. It is about the pricing model, not about the firms that use it.",
       ],
     },
     {
@@ -368,27 +371,33 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
       id: "what-good-looks-like",
       heading: "What good IDR support looks like.",
       paragraphs: [
-        "Whichever model you choose, the markers of a good process are the same: claims are caught at the explanation of benefits stage, eligibility is confirmed before drafting, each code is filed as its own submission, market rate arguments cite comparable prior determinations, and determinations are tracked through to payment.",
-        "An attorney, a billing company, or your own team can all do this well. The deciding factors are speed, cost structure, and who keeps the recovery.",
+        "An attorney, a billing company, or your own team can all do this well. What separates good from bad is whether the six required elements get built properly and whether the deadlines get met. Both are process questions.",
+      ],
+    },
+    {
+      id: "contingency-firm",
+      heading: "If you run a contingency firm",
+      paragraphs: [
+        "Same engine, aimed at a different number: recoveries per FTE. Automating the mechanical steps makes smaller dollar claims economical to pursue that currently are not worth a reviewer's time, and it lets your experienced people spend their hours on the disputes where judgment actually changes the outcome.",
       ],
     },
   ],
   faqs: [
     {
       q: "Do I need an attorney for the No Surprises Act IDR process?",
-      a: "No. The No Surprises Act does not require an attorney to file federal IDR. A provider or its authorized representative, including an in house billing team or a billing company, can complete the entire process. Attorneys can help with novel legal questions or enforcement, but routine IDR is procedural work a trained team can handle.",
+      a: "No. The statute does not require one to initiate or pursue federal IDR.",
     },
     {
       q: "Can I file IDR without a lawyer?",
-      a: "Yes. You can initiate and pursue federal IDR yourself or through your billing team. The steps are sending the open negotiation notice, initiating through the federal portal, selecting the IDRE, and submitting your offer and evidence. Software that prepares the submission lets a team do this in minutes per claim.",
+      a: "Yes. A provider can file directly, and so can an authorised representative — an in house billing team or a billing company acting on the practice's behalf.",
     },
     {
       q: "How do typical contingency fees compare to software?",
-      a: "A typical contingency often keeps 10 to 20 percent of each recovery, on every claim. Software your team operates replaces that recurring percentage with a fixed cost and keeps the award in house. Across a year of claims, that difference is usually the largest factor in the comparison.",
+      a: "A contingency typically keeps 10 to 20 percent of every recovery, and that share grows with your volume. Sydra is priced on per claim and subscription models rather than a percentage of recovery.",
     },
     {
       q: "Can a billing company file IDR on my behalf?",
-      a: "Yes. A billing company acting as your authorized representative can complete every step of federal IDR. The provider authorizes the representative, and the representative sends the notice, initiates the dispute, selects the IDRE, and files the submission.",
+      a: "Yes, as your authorised representative. Many do, and Sydra can run white label under their brand.",
     },
   ],
   related: ["federal-idr-process", "idr-win-rates-and-awards", "idr-eligibility-deadlines-fees"],

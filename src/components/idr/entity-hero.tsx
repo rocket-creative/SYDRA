@@ -3,7 +3,7 @@ import { textStyles } from "@/lib/typography";
 
 type EntityHeroProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   lead: string;
   eyebrow?: string;
   /** Optional top-of-page CTA rendered below the lead. */
@@ -28,7 +28,7 @@ export function EntityHero({
       ) : null}
       <h1 className={textStyles.pageTitle}>
         {title}
-        <span className={textStyles.pageSubtitle}>{subtitle}</span>
+        {subtitle ? <span className={textStyles.pageSubtitle}>{subtitle}</span> : null}
       </h1>
       <p className={textStyles.pageLead}>{lead}</p>
       {ctaHref && ctaLabel ? (

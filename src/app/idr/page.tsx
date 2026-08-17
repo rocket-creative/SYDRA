@@ -81,7 +81,7 @@ export default function IdrIndexPage() {
             eyebrow="No Surprises Act"
             title="Out of network surgical claims denied or underpaid?"
             subtitle="Federal IDR, by code, state, payer, and specialty."
-            lead="Out of network surgical claims are routinely paid below the billed charge or denied outright. Find your procedure, state, and payer to see why these claims get denied and how federal IDR recovers the gap. We build the submission and you keep the recovery."
+            lead="Out of network surgical claims are routinely paid below the billed charge or denied outright. Most practices treat what arrives as the amount owed. Under the No Surprises Act it is not. It is an opening offer, and federal Independent Dispute Resolution exists specifically to contest it."
           />
           <p className={`${textStyles.meta} mt-6`}>
             New to this? Start with{" "}

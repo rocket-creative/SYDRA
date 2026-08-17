@@ -77,6 +77,24 @@ export default function AboutPage() {
           </div>
         </header>
 
+        <section className="prose-measure mt-14" aria-labelledby="heading-why-this-origin">
+          <h2 className={textStyles.sectionTitle} id="heading-why-this-origin">
+            Why this origin.
+          </h2>
+          <div className={`${textStyles.bodyStack} mt-4`}>
+            <p>
+              Most software in this category is built by people who read the regulation. This was
+              built by someone who missed deadlines, argued market rate, and watched a contingency
+              take 20 percent of recoveries he had already done the clinical work for.
+            </p>
+            <p>
+              That is why Sydra defaults to one claim per CPT, why the eligibility check runs before
+              drafting, and why nothing files without a human approving it. Those are not product
+              decisions made in a planning session. They are scar tissue.
+            </p>
+          </div>
+        </section>
+
           <EditorialImage
             alt="Sydra colleagues reviewing a document together in the office"
             aspect="16/9"

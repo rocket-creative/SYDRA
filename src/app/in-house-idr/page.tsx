@@ -1,10 +1,9 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
-import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { LaborCalculator } from "@/components/sydra/labor-calculator";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -13,7 +12,6 @@ import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import {
-  IN_HOUSE_IDR_CTA_LEAD,
   IN_HOUSE_IDR_FAQS,
   IN_HOUSE_IDR_HERO,
   IN_HOUSE_IDR_SECTIONS,
@@ -76,7 +74,7 @@ export default function InHouseIdrPage() {
             get back, not a Sydra performance claim.
           </p>
           <div className="mt-10 border-t border-rule pt-10">
-            <LaborCalculator ctaHref="/demo" ctaLabel="Request a 15-minute demo" />
+            <LaborCalculator ctaHref="/case-review" ctaLabel="See what one denied claim is worth" />
             <p className={`${textStyles.bodyMeasure} mt-6`}>
               Prefer recovery math instead of labor time?{" "}
               <Link className={textStyles.textLink} href="/idr-recovery-calculator">
@@ -106,10 +104,7 @@ export default function InHouseIdrPage() {
 
         <Section tone="neutral">
           <div className="prose-measure">
-            <p className={`${textStyles.body} mb-6`}>{IN_HOUSE_IDR_CTA_LEAD}</p>
-            <Button href="/demo" showArrow>
-              Request a 15-minute demo
-            </Button>
+            <DualPageCta />
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>
               See the full workflow:{" "}
@@ -129,8 +124,6 @@ export default function InHouseIdrPage() {
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
-
-        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

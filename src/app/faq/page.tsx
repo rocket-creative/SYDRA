@@ -1,6 +1,6 @@
 import { CtaLink } from "@/components/ui/cta-link";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
-import { SydraCtaBand } from "@/components/sydra/cta-band";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
@@ -49,7 +49,7 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
             <p>{item.a}</p>
             {item.q.includes("cost") ? (
               <p className="mt-4">
-                <CtaLink href="/demo">Request a 15-minute demo for pricing</CtaLink>
+                <CtaLink href="/demo">Request a 15-minute demo</CtaLink>
               </p>
             ) : null}
             {item.q === JURISDICTION_FAQ_Q ? (
@@ -120,7 +120,11 @@ export default function FaqPage() {
           </div>
         </Section>
 
-        <SydraCtaBand />
+        <Section tone="neutral">
+          <div className="prose-measure">
+            <DualPageCta />
+          </div>
+        </Section>
 
         <Section tone="white">
           <ServiceCrossLinks current="/faq" />

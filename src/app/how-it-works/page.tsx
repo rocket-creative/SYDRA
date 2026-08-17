@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
@@ -10,7 +10,6 @@ import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import {
-  DEMO_CTA_LEAD,
   DOCX_SECTION,
   HOW_IT_WORKS_HERO,
   HOW_IT_WORKS_HOW_TO_STEPS,
@@ -81,7 +80,11 @@ export default function HowItWorksPage() {
               {HOW_IT_WORKS_HERO.title}
               <span className={textStyles.pageSubtitle}>{HOW_IT_WORKS_HERO.subtitle}</span>
             </h1>
-            <p className={textStyles.pageLead}>{HOW_IT_WORKS_HERO.lead}</p>
+            {HOW_IT_WORKS_HERO.paragraphs.map((p, index) => (
+              <p className={index === 0 ? textStyles.pageLead : `${textStyles.body} mt-4`} key={p.slice(0, 40)}>
+                {p}
+              </p>
+            ))}
           </header>
         </Section>
 
@@ -90,6 +93,11 @@ export default function HowItWorksPage() {
             <h2 className={textStyles.sectionTitle} id={SUBMISSION_REQUIREMENTS.id}>
               {SUBMISSION_REQUIREMENTS.title}
             </h2>
+            {SUBMISSION_REQUIREMENTS.paragraphs.map((p) => (
+              <p className={`${textStyles.bodyMeasure} mt-4`} key={p.slice(0, 40)}>
+                {p}
+              </p>
+            ))}
             {SUBMISSION_REQUIREMENTS.list ? (
               <ol className={textStyles.list}>
                 {SUBMISSION_REQUIREMENTS.list.map((item) => (
@@ -151,10 +159,7 @@ export default function HowItWorksPage() {
 
         <Section tone="neutral">
           <div className="prose-measure">
-            <p className={`${textStyles.body} mb-6`}>{DEMO_CTA_LEAD}</p>
-            <Button href="/demo" showArrow>
-              Request a 15-minute demo
-            </Button>
+            <DualPageCta />
             <CtaTrustSignals className="mt-4" />
           </div>
           <ServiceCrossLinks current="/how-it-works" />

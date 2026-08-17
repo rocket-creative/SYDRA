@@ -120,16 +120,16 @@ export const PAGE_METADATA = {
     ogImagePath: "/demo",
   }),
   howItWorks: buildPageMetadata({
-    title: "How to File an NSA IDR Submission, Step by Step | Sydra",
+    title: "How Sydra Prepares a Federal IDR Submission | Sydra",
     description:
       "From EOB upload to IDRE portal submission. Eligibility check, AI draft generation, clinical narrative from op note, prior determination citations, DOCX export. Under 5 minutes.",
     path: "/how-it-works",
     ogImagePath: "/how-it-works",
   }),
   whatIsIdr: buildPageMetadata({
-    title: "What Is IDR? No Surprises Act Dispute Resolution | Sydra",
+    title: "What Is Federal IDR? The No Surprises Act Dispute Path | Sydra",
     description:
-      "IDR means Independent Dispute Resolution under the No Surprises Act. See who qualifies, deadlines and fees, and how surgical billing teams recover underpaid out of network claims.",
+      "A health plan's payment on an out of network claim is an opening offer. Federal IDR is the process for contesting it. Who qualifies, what the deadlines are, and what changed in 2026.",
     path: "/what-is-idr",
     ogImageAlt:
       "What IDR means under the No Surprises Act, explained for surgical billing teams.",
@@ -143,7 +143,7 @@ export const PAGE_METADATA = {
       "Federal IDR options compared: contingency firm, in house with Sydra, or Sydra files for you.",
   }),
   inHouseIdr: buildPageMetadata({
-    title: "In House IDR | Scale Federal Disputes Without Headcount | Sydra",
+    title: "In House IDR Without Added Headcount | Sydra",
     description:
       "Filing federal IDR by hand takes 25 to 40 minutes per claim. See what that labor costs at your volume and how Sydra adds capacity without adding staff.",
     path: "/in-house-idr",
@@ -254,7 +254,7 @@ export const PAGE_METADATA = {
   caseReview: buildPageMetadata({
     title: "Free NSA IDR Claim Review | Sydra",
     description:
-      "See a sample claim review, then reply with one denied EOB. You get eligibility, a dollar estimate, and the filing deadline within one business day.",
+      "Send us one denied out of network EOB. We'll tell you whether it qualifies for federal IDR and what it's worth, in writing, within one business day. No call required.",
     path: "/case-review",
   }),
   caseReviewThankYou: buildPageMetadata({

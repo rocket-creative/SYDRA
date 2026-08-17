@@ -92,7 +92,14 @@ export default function IdrFilingDeadlinePage() {
                 {IDR_FILING_DEADLINE_HERO.subtitle}
               </span>
             </h1>
-            <p className={textStyles.pageLead}>{IDR_FILING_DEADLINE_HERO.lead}</p>
+            {IDR_FILING_DEADLINE_HERO.paragraphs.map((p, index) => (
+              <p
+                className={index === 0 ? textStyles.pageLead : `${textStyles.body} mt-4`}
+                key={p.slice(0, 40)}
+              >
+                {p}
+              </p>
+            ))}
             <div className="mt-8">
               <Button href="/demo" showArrow>
                 Check my filing window

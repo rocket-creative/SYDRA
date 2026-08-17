@@ -40,8 +40,10 @@ export function ClaimReviewSampleDocument() {
 
   return (
     <article className="prose-measure">
-      <p className="type-caption text-[var(--color-accent)]">{sample.kicker}</p>
-      <h1 className={`${textStyles.pageTitle} mt-3`} id="heading-sample-review">
+      {sample.kicker ? (
+        <p className="type-caption text-[var(--color-accent)]">{sample.kicker}</p>
+      ) : null}
+      <h1 className={`${textStyles.pageTitle} ${sample.kicker ? "mt-3" : ""}`} id="heading-sample-review">
         {sample.title}
       </h1>
       <p className="mt-4 text-sm text-body">{sample.preparedLine}</p>
@@ -117,8 +119,10 @@ export function ClaimReviewSampleDocument() {
         <h2 className={textStyles.subsectionTitle} id="heading-sample-next">
           What happens next
         </h2>
-        <p className="mt-4 type-body text-body">{sample.nextSelf}</p>
-        <p className="mt-4 type-body text-body">{sample.nextFull}</p>
+        <h3 className={`${textStyles.subsectionTitle} mt-4`}>{sample.nextSelfHeading}</h3>
+        <p className="mt-3 type-body text-body">{sample.nextSelf}</p>
+        <h3 className={`${textStyles.subsectionTitle} mt-8`}>{sample.nextFullHeading}</h3>
+        <p className="mt-3 type-body text-body">{sample.nextFull}</p>
       </section>
 
       <p className="mt-12 text-sm leading-relaxed text-body/80">{sample.footer}</p>

@@ -1,6 +1,6 @@
 export const SYDRA_VS_ATTORNEY_HERO = {
   title: "Federal IDR: your options compared.",
-  lead: "There are three realistic ways a practice gets out of network claims through federal IDR: hand them to a contingency firm, file them in house, or use a service that files on your behalf. Each one is the right answer for somebody. Here is how they actually differ.",
+  lead: "You don't need convincing that IDR recovers money. You've seen it. The question is how much of that recovery you keep, and whether the share you give up should keep growing as your volume does. Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive.",
 };
 
 export const OPTIONS_COMPARISON_COLUMNS = [

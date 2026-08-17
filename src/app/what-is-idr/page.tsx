@@ -1,10 +1,9 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
-import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
@@ -77,7 +76,11 @@ export default function WhatIsIdrPage() {
               {WHAT_IS_IDR_HERO.title}
               <span className={textStyles.pageSubtitle}>{WHAT_IS_IDR_HERO.subtitle}</span>
             </h1>
-            <p className={textStyles.pageLead}>{WHAT_IS_IDR_HERO.lead}</p>
+            {WHAT_IS_IDR_HERO.paragraphs.map((p, index) => (
+              <p className={index === 0 ? textStyles.pageLead : `${textStyles.body} mt-4`} key={p.slice(0, 40)}>
+                {p}
+              </p>
+            ))}
           </header>
         </Section>
 
@@ -126,7 +129,7 @@ export default function WhatIsIdrPage() {
                         className={textStyles.textLink}
                         href="/resources/updates/cms-2026-idr-final-rule"
                       >
-                        Read the CMS May 2026 final rule update
+                        Read the CMS 2026 final rule update
                       </Link>
                       .
                     </p>
@@ -140,10 +143,7 @@ export default function WhatIsIdrPage() {
 
         <Section tone="white">
           <div className="prose-measure">
-            <p className={`${textStyles.body} mb-6`}>{WHAT_IS_IDR_CTA_LEAD}</p>
-            <Button href="/demo" showArrow>
-              Request a 15-minute demo
-            </Button>
+            <DualPageCta lead={WHAT_IS_IDR_CTA_LEAD} />
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>
               Go deeper:{" "}
@@ -177,8 +177,6 @@ export default function WhatIsIdrPage() {
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
-
-        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

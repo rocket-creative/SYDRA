@@ -4,7 +4,10 @@ export const IDR_FILING_DEADLINE_HERO = {
   eyebrow: "THE CLOCK IS ALREADY RUNNING",
   title: "You have 4 business days to file.",
   subtitle: "Not 4 weeks.",
-  lead: "Federal IDR runs on strict, unforgiving clocks. Once your 30 business day open negotiation period closes, you have exactly 4 business days to initiate a dispute. Miss that window and the claim is closed for that cycle, permanently, no extension. This is the part of the process that should never depend on judgment, because the deadline does not move for anyone.",
+  paragraphs: [
+    "Federal IDR runs on two clocks and neither one moves. The open negotiation period runs 30 business days. Once it closes, you have exactly 4 business days to initiate. Miss that window and the claim is closed for that cycle. Permanently. No extension, no appeal path.",
+    "This is the part of the process that should never depend on anyone's judgment, because the deadline does not depend on anyone's judgment either.",
+  ],
 };
 
 export const IDR_FILING_DEADLINE_WINDOWS = [

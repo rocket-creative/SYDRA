@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
-import { SydraCtaBand } from "@/components/sydra/cta-band";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
@@ -12,6 +12,7 @@ import { Section } from "@/components/ui/section";
 import { getComparison } from "@/lib/idr/comparisons";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { textStyles } from "@/lib/typography";
 
 export const dynamicParams = true;
 export const revalidate = 86400;
@@ -63,11 +64,11 @@ export default async function ComparePage({ params }: PageProps) {
           <EntityHero
             eyebrow="Compare"
             title={comparison.title}
-            subtitle={`Sydra against ${comparison.alternative}.`}
             lead={comparison.lead}
-            ctaHref="/demo"
-            ctaLabel="Request a 15-minute demo"
           />
+          <div className="prose-measure mt-8">
+            <DualPageCta />
+          </div>
         </Section>
 
         <Section tone="neutral">
@@ -125,14 +126,15 @@ export default async function ComparePage({ params }: PageProps) {
               </tbody>
             </table>
           </div>
+          {comparison.belowTable ? (
+            <p className={`${textStyles.bodyMeasure} mt-8`}>{comparison.belowTable}</p>
+          ) : null}
         </Section>
 
         <Section tone="white">
           <EntityFaq items={comparison.faqs} />
           <SourcesReferences className="mt-12" />
         </Section>
-
-        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

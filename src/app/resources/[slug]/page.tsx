@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
+import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { articleBreadcrumb, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
@@ -138,11 +139,17 @@ export default async function ResourceArticlePage({ params }: PageProps) {
                 </>
               ) : null}
             </p>
-            <div className="mt-8">
-              <Button href="/demo" showArrow>
-                Request a 15-minute demo
-              </Button>
-            </div>
+            {article.dualCtas ? (
+              <div className="mt-8">
+                <DualPageCta />
+              </div>
+            ) : (
+              <div className="mt-8">
+                <Button href="/demo" showArrow>
+                  Request a 15-minute demo
+                </Button>
+              </div>
+            )}
           </header>
         </Section>
 
@@ -196,7 +203,7 @@ export default async function ResourceArticlePage({ params }: PageProps) {
           </div>
         </Section>
 
-        <SydraCtaBand />
+        {article.dualCtas ? null : <SydraCtaBand />}
 
         <Section tone="white">
           <RelatedGuides article={article} />

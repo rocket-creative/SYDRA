@@ -2,8 +2,8 @@
 
 export const CLAIM_REVIEW_SAMPLE = {
   title: "Claim Review — Sample",
-  kicker: "Sample document",
-  preparedLine: "Prepared for illustration · Figures are representative, not a specific practice",
+  kicker: "",
+  preparedLine: "Sample document · Prepared for illustration · Figures are representative, not a specific practice",
   verdict: "Eligible for federal IDR.",
   verdictDetail:
     "Non-emergency service by an out-of-network surgeon at an in-network facility, with no valid notice-and-consent on file. This is squarely within the No Surprises Act, and it's underpaid.",
@@ -55,9 +55,11 @@ export const CLAIM_REVIEW_SAMPLE = {
     "This claim could be batched with other 64721 disputes against the same payer, spreading the fee",
   ],
   costsNote: "Against a claim worth $2,400–$3,500, the arithmetic is not close.",
+  nextSelfHeading: "See it run on your own claim.",
   nextSelf:
-    "Run it yourself with Sydra — about five minutes per claim, your team reviews and owns every submission.",
-  nextFull: "Or we run it — we prepare and file, you keep the recovery.",
+    "Fifteen minutes on Zoom, using your claim and your CPT codes. You will see the real output and get a price. Nothing to sign on the call.",
+  nextFullHeading: "Or we file it for you.",
+  nextFull: "We prepare and submit, you keep the recovery.",
   footer:
     "Sample document. Figures are representative of a typical hand surgery claim and are not drawn from a specific practice. Not a guarantee of recovery, and not legal advice.",
 } as const;
