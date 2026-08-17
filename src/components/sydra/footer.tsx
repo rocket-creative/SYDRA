@@ -42,6 +42,24 @@ export function SydraFooter() {
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-body">
           <Link
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/what-is-idr"
+          >
+            What is federal IDR?
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/sydra-vs-idr-attorney"
+          >
+            Compare the fees →
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
+            href="/what-is-idr"
+          >
+            Read the full Federal IDR guide
+          </Link>
+          <Link
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--color-hero)]"
             href="/idr"
           >
             Federal IDR

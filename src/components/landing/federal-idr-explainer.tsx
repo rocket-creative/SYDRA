@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { Arrow } from "@/components/ui/arrow";
 import { Section } from "@/components/ui/section";
 
 const paragraphs = [
@@ -82,17 +81,7 @@ export function FederalIdrExplainer() {
         ))}
       </div>
 
-      <p className="mt-8">
-        <Link
-          className="inline-flex min-h-[44px] items-center gap-2 type-caption text-brand transition-colors hover:text-[var(--color-hero)]"
-          href="/what-is-idr"
-        >
-          <span>Read the full Federal IDR guide</span>
-          <Arrow className="shrink-0" />
-        </Link>
-      </p>
-
-      <nav aria-label="Explore federal IDR" className="mt-6">
+      <nav aria-label="Explore federal IDR" className="mt-8">
         <ul className="flex flex-wrap gap-x-5 gap-y-2 type-caption text-body">
           {[
             { href: "/idr", label: "Federal IDR by state and specialty" },
@@ -100,7 +89,6 @@ export function FederalIdrExplainer() {
             { href: "/how-it-works", label: "How it works" },
             { href: "/resources/idr-eligibility-deadlines-fees", label: "Eligibility, deadlines, and fees" },
             { href: "/pricing", label: "Pricing" },
-            { href: "/demo", label: "Book a demo" },
           ].map((item) => (
             <li key={item.href}>
               <Link

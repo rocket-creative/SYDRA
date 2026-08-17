@@ -1,6 +1,5 @@
 import { Cursor } from "@/components/motion/cursor";
 import { SectionReveal } from "@/components/motion/reveal";
-import { AudiencePaths } from "@/components/landing/audience-paths";
 import { BuiltOnClaude } from "@/components/landing/built-on-claude";
 import { ClaimReviewForm } from "@/components/landing/claim-review-form";
 import { ClosingCta } from "@/components/landing/closing-cta";
@@ -95,12 +94,8 @@ export function PostcardLanding({
         <SectionReveal className="order-3">
           <RecoverySection tracking={tracking} />
         </SectionReveal>
-        {/* 4. Three ways in */}
+        {/* 4. How Sydra works */}
         <SectionReveal className="order-4">
-          <AudiencePaths />
-        </SectionReveal>
-        {/* 5. How Sydra works */}
-        <SectionReveal className="order-5">
           <HowItWorks />
         </SectionReveal>
         {/* 6. Built by a surgeon who files these claims */}
@@ -117,7 +112,7 @@ export function PostcardLanding({
         </SectionReveal>
         {/* 9. Two paths */}
         <SectionReveal className="order-9">
-          <TwoPaths tracking={tracking} />
+          <TwoPaths />
         </SectionReveal>
         {/* 10. FAQ */}
         <SectionReveal className="order-10">

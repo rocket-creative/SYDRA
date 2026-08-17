@@ -1,26 +1,8 @@
-"use client";
-
 import type { CSSProperties } from "react";
 
-import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
-import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
-import { trackCtaClick } from "@/lib/landing/analytics-client";
-import { CASE_REVIEW_PATH } from "@/lib/case-review";
-import type { CampaignTracking } from "@/lib/landing/tracking";
 
-type TwoPathsProps = {
-  tracking: CampaignTracking;
-};
-
-export function TwoPaths({ tracking }: TwoPathsProps) {
-  const scrollToForm = () => {
-    trackCtaClick("sydra", tracking);
-    document
-      .getElementById("lead-form")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
+export function TwoPaths() {
   return (
     <Section
       ariaLabelledby="heading-two-paths"
@@ -46,11 +28,6 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
             </a>
             .
           </p>
-          <div className="mt-8">
-            <Button className="w-full" showArrow type="button" onClick={scrollToForm}>
-              Book a demo
-            </Button>
-          </div>
         </article>
 
         <article
@@ -65,24 +42,6 @@ export function TwoPaths({ tracking }: TwoPathsProps) {
           <p className="mt-4 type-body text-body">
             Our boutique team files every claim for you, specialty coded, for a flat fee, never 20%.
           </p>
-          <div className="mt-8 flex flex-col gap-3">
-            <Button
-              className="w-full !border-[var(--color-full-service-dark)] !bg-[var(--color-full-service-dark)] hover:!bg-[#003d1f]"
-              href={CASE_REVIEW_PATH}
-              showArrow
-              onClick={() => trackCtaClick("case_review", tracking)}
-            >
-              Free claim review
-            </Button>
-            <p className="text-sm text-body">
-              <a
-                className="text-link inline-flex min-h-[44px] items-center font-medium text-[var(--color-full-service-dark)] underline decoration-rule underline-offset-4"
-                href={salesMailtoHref()}
-              >
-                {getSalesEmail()}
-              </a>
-            </p>
-          </div>
         </article>
       </div>
     </Section>

@@ -31,6 +31,9 @@ export default function PricingPage() {
                 Quoted to your volume. Not a percentage of every recovery.
               </span>
             </h1>
+            <p className="mt-4 type-caption text-body">
+              No setup fees · Month to month · Switch tiers anytime, no re-onboarding
+            </p>
             <p className="mt-6 type-body text-body">
               We don&apos;t publish a list price because the right number depends on your specialty,
               state, and monthly out of network claim volume. Every tier is structured below the
