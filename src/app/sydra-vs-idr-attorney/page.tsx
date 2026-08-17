@@ -1,28 +1,20 @@
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
-import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
-import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
-import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { CtaLink } from "@/components/ui/cta-link";
 import { Section } from "@/components/ui/section";
 import {
-  SYDRA_VS_ATTORNEY_CTA_LEAD,
-  SYDRA_VS_ATTORNEY_FAQS,
+  OPTIONS_COMPARED_SECTIONS,
+  OPTIONS_COMPARISON_COLUMNS,
+  OPTIONS_COMPARISON_ROWS,
   SYDRA_VS_ATTORNEY_HERO,
-  SYDRA_VS_ATTORNEY_SECTIONS,
 } from "@/lib/content/sydra-vs-attorney-page";
-import {
-  faqPageJsonLd,
-  medicallyReviewedWebPageJsonLd,
-  serviceJsonLd,
-} from "@/lib/seo/json-ld";
+import { medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -36,19 +28,69 @@ function SydraVsAttorneyJsonLd() {
         data={[
           ...medicallyReviewedWebPageJsonLd({
             path: "/sydra-vs-idr-attorney",
-            name: "Sydra vs an IDR attorney",
+            name: "Federal IDR: Your Options Compared",
             description: PAGE_METADATA.sydraVsAttorney.description ?? "",
           }),
-          serviceJsonLd({
-            name: "Sydra IDR software versus IDR attorney comparison",
-            description:
-              "A comparison of running federal IDR on Sydra software versus paying an IDR attorney a contingency fee on out of network surgical claims.",
-            serviceType: "Healthcare billing software",
-          }),
-          faqPageJsonLd(SYDRA_VS_ATTORNEY_FAQS),
         ]}
       />
     </>
+  );
+}
+
+function OptionsComparisonTable() {
+  return (
+    <div className="mt-10">
+      <div className="space-y-4 md:hidden">
+        {OPTIONS_COMPARISON_ROWS.map((row) => (
+          <div className="border border-rule p-5" key={row.feature}>
+            <p className="type-caption uppercase tracking-[0.08em] text-body/70">{row.feature}</p>
+            <dl className="mt-3 space-y-3">
+              {OPTIONS_COMPARISON_COLUMNS.map((column, index) => (
+                <div key={column}>
+                  <dt className="text-sm font-medium text-brand">{column}</dt>
+                  <dd className="mt-1 break-words text-sm text-body">{row.values[index]}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden overflow-x-auto md:block">
+        <table className="w-full border-collapse text-left text-sm">
+          <thead>
+            <tr className="border-b border-rule">
+              <th className="pb-4 pr-4 font-normal text-brand" scope="col">
+                <span className="sr-only">Comparison</span>
+              </th>
+              {OPTIONS_COMPARISON_COLUMNS.map((column) => (
+                <th
+                  className="px-4 pb-4 text-left font-normal text-brand last:pl-4 last:pr-0"
+                  key={column}
+                  scope="col"
+                >
+                  {column}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {OPTIONS_COMPARISON_ROWS.map((row) => (
+              <tr className="border-b border-rule" key={row.feature}>
+                <th className="py-4 pr-4 text-left text-[15px] font-medium text-body" scope="row">
+                  {row.feature}
+                </th>
+                {row.values.map((value, index) => (
+                  <td className="px-4 py-4 last:pl-4 last:pr-0" key={`${row.feature}-${index}`}>
+                    <span className="text-sm text-body">{value}</span>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
@@ -61,33 +103,15 @@ export default function SydraVsAttorneyPage() {
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-sydra-vs-attorney">
               {SYDRA_VS_ATTORNEY_HERO.title}
-              <span className={textStyles.pageSubtitle}>{SYDRA_VS_ATTORNEY_HERO.subtitle}</span>
             </h1>
             <p className={textStyles.pageLead}>{SYDRA_VS_ATTORNEY_HERO.lead}</p>
           </header>
+          <OptionsComparisonTable />
         </Section>
 
-        <Section ariaLabelledby="heading-fee-math" sidebarLabel="The fee math" tone="neutral">
-          <h2 className={textStyles.sectionTitle} id="heading-fee-math">
-            What a 20 percent attorney would take.
-          </h2>
-          <p className={`${textStyles.bodyMeasure} mt-4`}>
-            Drag the sliders to match your practice. The estimate uses published CMS win rates and
-            Georgetown CHIR award benchmarks, not a Sydra performance claim.
-          </p>
-          <div className="mt-10 border-t border-rule pt-10">
-            <RecoveryCalculator ctaHref="/demo" ctaLabel="Request a 15-minute demo" />
-            <p className={`${textStyles.bodyMeasure} mt-6`}>
-              <Link className={textStyles.textLink} href="/idr-recovery-calculator">
-                Open the full calculator
-              </Link>
-            </p>
-          </div>
-        </Section>
-
-        <Section tone="white">
+        <Section tone="neutral">
           <div className="space-y-14">
-            {SYDRA_VS_ATTORNEY_SECTIONS.map((section) => (
+            {OPTIONS_COMPARED_SECTIONS.map((section) => (
               <section key={section.id} aria-labelledby={section.id}>
                 <h2 className={textStyles.sectionTitle} id={section.id}>
                   {section.title}
@@ -97,32 +121,20 @@ export default function SydraVsAttorneyPage() {
                     <p key={p.slice(0, 40)}>{p}</p>
                   ))}
                 </div>
+                {"ctaHref" in section && section.ctaHref ? (
+                  <p className="mt-6">
+                    <CtaLink href={section.ctaHref}>{section.ctaLabel}</CtaLink>
+                  </p>
+                ) : null}
               </section>
             ))}
           </div>
         </Section>
 
-        <Section tone="neutral">
+        <Section tone="white">
           <div className="prose-measure">
-            <p className={`${textStyles.body} mb-6`}>{SYDRA_VS_ATTORNEY_CTA_LEAD}</p>
-            <Button href="/demo" showArrow>
-              Request a 15-minute demo
-            </Button>
-            <CtaTrustSignals className="mt-4" />
-            <p className={`${textStyles.body} mt-8`}>
-              Related reading:{" "}
-              <Link className={textStyles.textLink} href="/resources/idr-attorney-vs-software">
-                IDR attorney vs software, in depth
-              </Link>
-              .
-            </p>
+            <ConversionCtaPair placement="options-compared" />
           </div>
-          <ServiceFaqSection
-            className="mt-16"
-            heading="Questions about cost and control"
-            id="heading-sydra-vs-attorney-faq"
-            items={SYDRA_VS_ATTORNEY_FAQS}
-          />
           <ServiceCrossLinks current="/sydra-vs-idr-attorney" />
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />

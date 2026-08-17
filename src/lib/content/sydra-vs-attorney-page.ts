@@ -1,50 +1,66 @@
-import type { ContentFaq, ContentSection } from "@/lib/content/what-is-idr-page";
-
 export const SYDRA_VS_ATTORNEY_HERO = {
-  title: "Sydra vs an IDR attorney",
-  subtitle: "Same federal process. You keep the 20 percent.",
-  lead: "An IDR attorney files the same federal disputes your billing team can. The difference is the bill. Most contingency arrangements keep about 20 percent of every recovery, for as long as you use them. Here is the comparison, with the fee math you can run yourself.",
+  title: "Federal IDR: your options compared.",
+  lead: "There are three realistic ways a practice gets out of network claims through federal IDR: hand them to a contingency firm, file them in house, or use a service that files on your behalf. Each one is the right answer for somebody. Here is how they actually differ.",
 };
 
-export const SYDRA_VS_ATTORNEY_SECTIONS: ContentSection[] = [
+export const OPTIONS_COMPARISON_COLUMNS = [
+  "Contingency firm",
+  "In house with Sydra",
+  "Sydra files for you",
+] as const;
+
+export type OptionsComparisonRow = {
+  feature: string;
+  values: [string, string, string];
+};
+
+export const OPTIONS_COMPARISON_ROWS: OptionsComparisonRow[] = [
   {
-    id: "heading-fee",
-    title: "What the 20 percent actually costs.",
-    paragraphs: [
-      "A contingency fee feels painless because it comes out of money you were not collecting before. But it scales with your success and it never ends. The better your win rate, the more the percentage takes, every month, on every recovery.",
-      "Software you operate is a flat platform fee. As your volume grows, your cost per dispute falls instead of rising. The slider below uses the same published benchmarks as our recovery estimate, so you can see the annual difference for your own numbers.",
+    feature: "Cost",
+    values: [
+      "Typically 20% of every recovery",
+      "Flat subscription, quoted to volume",
+      "Flat fee, quoted to volume",
     ],
   },
   {
-    id: "heading-control",
-    title: "Who controls the work.",
-    paragraphs: [
-      "With an attorney, you hand over the file and wait. You see the outcome, not the reasoning. With Sydra, your billing team prepares the submission, reviews every decision, and files it. The work stays in your office and the relationship with the payer stays yours.",
+    feature: "Your time per claim",
+    values: ["Minimal", "About five minutes", "Minimal"],
+  },
+  {
+    feature: "Who owns the submission",
+    values: ["The firm", "Your billing team", "Sydra, with your approval"],
+  },
+  {
+    feature: "Scales with volume",
+    values: [
+      "Cost scales with every dollar recovered",
+      "Cost stays flat as volume grows",
+      "Cost stays flat as volume grows",
     ],
   },
   {
-    id: "heading-when-attorney",
-    title: "When an attorney still makes sense.",
-    paragraphs: [
-      "We will not pretend a lawyer is never the right call. If a dispute escalates into litigation, or you have a one off claim and no interest in building a repeatable process, counsel can be the better fit. For practices with steady out of network volume that want to keep the recovery, software your team runs is usually the lower cost path.",
-    ],
+    feature: "Handles related litigation",
+    values: ["Yes", "No", "No"],
   },
 ];
 
-export const SYDRA_VS_ATTORNEY_FAQS: ContentFaq[] = [
+export const OPTIONS_COMPARED_SECTIONS = [
   {
-    q: "How much do IDR attorneys charge?",
-    a: "Most work on contingency and keep roughly 20 percent of every recovery. Some add hourly or filing fees on top. The exact terms vary, but the contingency model means your cost rises with every successful dispute.",
+    id: "heading-when-contingency-firm",
+    title: "When a contingency firm is the right answer",
+    paragraphs: [
+      "A firm is genuinely the better choice in three situations. If the dispute has escalated beyond IDR into litigation, you need counsel and software will not help. If you are fighting a broader contract or network fight with a payer, IDR is one front in a larger matter and it should be run by lawyers. And if you have no billing staff at all and want zero involvement, a firm that takes a percentage carries all of the risk — that is what the percentage buys.",
+      "Where the percentage stops making sense is volume. A contingency rate that is reasonable on four claims a year is expensive on four hundred, because the cost grows with every dollar you recover while the work per claim does not.",
+    ],
   },
   {
-    q: "Is software cheaper than an attorney?",
-    a: "For most practices at most claim volumes, yes. Sydra's platform fee is structured below a typical 20 percent contingency. The exact comparison for your specialty and volume is part of what we show on the demo call.",
+    id: "heading-if-you-are-a-firm",
+    title: "If you are a firm filing on behalf of clients",
+    paragraphs: [
+      "Sydra is used by contingency firms, not only by practices. The constraint on an IDR practice is hours per case, which is why small disputes get declined. Sydra prepares a complete submission in about five minutes, which changes which cases are worth taking. Your fee structure does not change — your capacity does.",
+    ],
+    ctaHref: "/idr-for-billing-companies",
+    ctaLabel: "See pricing for firms and billing companies",
   },
-  {
-    q: "Do I lose protection by not using a lawyer?",
-    a: "No. IDR is an administrative arbitration process, not litigation. The arbiter weighs the evidence in the submission. A well built submission is what wins, which is what the software is for. If a case ever escalates beyond IDR, that is when counsel is worth it.",
-  },
-];
-
-export const SYDRA_VS_ATTORNEY_CTA_LEAD =
-  "Bring a recent denied claim. We will show you what Sydra prepares and what you would keep at your volume.";
+] as const;

@@ -135,12 +135,12 @@ export const PAGE_METADATA = {
       "What IDR means under the No Surprises Act, explained for surgical billing teams.",
   }),
   sydraVsAttorney: buildPageMetadata({
-    title: "Sydra vs an IDR Attorney | Keep the 20% You Would Pay | Sydra",
+    title: "Federal IDR: Your Options Compared | Sydra",
     description:
-      "IDR attorneys keep about 20 percent of every recovery. Compare the fee math against Sydra software your billing team runs in house, and see exactly what you keep.",
+      "Three ways to file federal IDR: a contingency firm, in house with Sydra, or Sydra files for you. See how they differ on cost, time, and who owns the submission.",
     path: "/sydra-vs-idr-attorney",
     ogImageAlt:
-      "Sydra software compared with an IDR attorney on the 20 percent contingency fee.",
+      "Federal IDR options compared: contingency firm, in house with Sydra, or Sydra files for you.",
   }),
   inHouseIdr: buildPageMetadata({
     title: "In House IDR | Scale Federal Disputes Without Headcount | Sydra",
