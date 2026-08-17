@@ -8,7 +8,7 @@ export function ClosingCta() {
   return (
     <Section ariaLabelledby="heading-closing" id="closing-cta" sidebarLabel="Next step" tone="white">
       <h2 className="type-h2 prose-measure text-brand" id="heading-closing">
-        Ready to stop writing off out of network claims?
+        Ready to see Sydra on a real denied claim?
       </h2>
       <div className="mt-10">
         <ConversionCtaPair placement="homepage-closing" />

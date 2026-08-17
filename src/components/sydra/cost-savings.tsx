@@ -17,7 +17,7 @@ const savings = [
     detail: "At 10 files a month, that's 4+ hours of labor cost recovered.",
   },
   {
-    value: "No 20% cut",
+    value: "Never a percentage of recovery",
     label: "Vs. typical contingency",
     detail: "Run IDR in house with Sydra instead of giving a typical 20% contingency a share of every recovery.",
   },

@@ -19,8 +19,8 @@ export const OPTIONS_COMPARISON_ROWS: OptionsComparisonRow[] = [
     feature: "Cost",
     values: [
       "Typically 20% of every recovery",
-      "Flat subscription, quoted to volume",
-      "Flat fee, quoted to volume",
+      "Per claim or subscription, quoted to volume",
+      "Per claim or subscription, quoted to volume",
     ],
   },
   {

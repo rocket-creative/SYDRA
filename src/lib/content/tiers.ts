@@ -93,7 +93,7 @@ export const TIERS: TierDefinition[] = [
     compactInclusions: [
       "Fully outsourced claim handling",
       "Dedicated specialist on every file",
-      "A flat fee alternative to a typical 20% contingency",
+      "Per claim and subscription models rather than a percentage of recovery",
     ],
   },
 ];

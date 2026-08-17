@@ -57,10 +57,10 @@ export const PROOF_POINTS: ProofPoint[] = [
   },
   {
     id: "neuro-multiple",
-    value: "1,200%+",
-    claim: "Neurology and neuromuscular disputes have awarded over 1,200 percent of the qualifying payment amount.",
-    source: "CMS Federal IDR Public Use Files; Georgetown CHIR",
-    asOf: "2024",
+    value: "87%",
+    claim: "CMS reports that the prevailing offer exceeded the qualifying payment amount in approximately 87 percent of payment determinations in the second half of 2025.",
+    source: "CMS, Federal IDR Supplemental Background, July to December 2025",
+    asOf: "H2 2025",
     verifyBeforePublish: true,
   },
   {

@@ -526,7 +526,7 @@ const IDR_WIN_RATE_AWARD_BENCHMARK: ResourceArticle = {
       ],
       list: [
         "Surgical disputes win the largest award multiples versus the QPA across recent reporting periods. Source: CMS PUF, CRS R48738, and Georgetown CHIR. As of 2024 to 2025.",
-        "Neurology and neuromuscular disputes have awarded over 1,200 percent of the QPA. Source: CMS PUF and Georgetown CHIR. As of 2024.",
+        "CMS reports that the prevailing offer exceeded the qualifying payment amount in approximately 87 percent of payment determinations in the second half of 2025. Source: CMS, Federal IDR Supplemental Background, July to December 2025.",
         "Radiology disputes award around 559 to 594 percent of the QPA. Source: Georgetown CHIR and CMS PUF. As of 2024 to 2025.",
         "Emergency disputes award far smaller multiples than surgery, which is why aggregators crowd that lane and surgery stays open. Source: Georgetown CHIR and CMS PUF. As of H1 2024.",
       ],
@@ -570,7 +570,7 @@ const IDR_WIN_RATE_AWARD_BENCHMARK: ResourceArticle = {
     },
     {
       q: "How much higher than the QPA are IDR awards?",
-      a: "The prevailing offer beat the qualifying payment amount in roughly 87 to 88 percent of determinations. Surgical disputes win the largest multiples versus the QPA, and neurology disputes over 1,200 percent, far above emergency disputes.",
+      a: "The prevailing offer beat the qualifying payment amount in roughly 87 to 88 percent of determinations. Surgical disputes win the largest multiples versus the QPA, far above emergency disputes.",
     },
     {
       q: "How many IDR disputes have been filed?",
