@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { PricingViewed } from "@/components/analytics/pricing-viewed";
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
@@ -43,6 +44,9 @@ export default function PricingPage() {
             <p className="mt-4 type-body text-body">
               Request a 15 minute demo and we quote on the call. No commitment to proceed.
             </p>
+            <div className="mt-6">
+              <ConversionCtaPair placement="pricing-body" secondaryAs="link" />
+            </div>
             <p className="mt-4 type-body text-body">
               Running IDR for more than one practice? See{" "}
               <Link className={textStyles.textLink} href="/idr-for-billing-companies">
