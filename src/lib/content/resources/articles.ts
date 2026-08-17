@@ -196,7 +196,7 @@ const IDR_ELIGIBILITY_DEADLINES_FEES: ResourceArticle = {
       id: "fees",
       heading: "What IDR costs: the fee structure.",
       paragraphs: [
-        "Two fees, and they are commonly confused. The administrative fee is paid by both parties and is non refundable: $15 per party, per dispute, cut from $115 by the CMS final rule of May 28, 2026, effective June 11, 2026. The certified IDRE fee is separate, falls within a CMS approved range, and is effectively borne by the losing party. Confirm both before filing, because CMS updates fee guidance.",
+        "Two fees, and they are commonly confused. The **administrative fee** is paid by both parties and is non refundable: $15 per party, per dispute, cut from $115 by the CMS final rule of May 28, 2026, effective June 11, 2026. The **certified IDRE fee** is separate, falls within a CMS approved range, and is effectively borne by the losing party. Confirm both before filing, because CMS updates fee guidance.",
       ],
     },
     {

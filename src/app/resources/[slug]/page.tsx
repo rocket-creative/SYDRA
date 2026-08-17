@@ -43,6 +43,21 @@ function formatArticleDate(iso: string): string {
   }).format(new Date(`${iso}T00:00:00Z`));
 }
 
+function CopyWithEmphasis({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return (
+    <>
+      {parts.map((part, index) =>
+        part.startsWith("**") && part.endsWith("**") ? (
+          <strong key={index}>{part.slice(2, -2)}</strong>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
@@ -169,7 +184,9 @@ export default async function ResourceArticlePage({ params }: PageProps) {
                 </h2>
                 <div className={`${textStyles.bodyStack} mt-4`}>
                   {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                    <p key={paragraph.slice(0, 48)}>
+                      <CopyWithEmphasis text={paragraph} />
+                    </p>
                   ))}
                 </div>
                 {section.list ? (

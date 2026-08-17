@@ -42,7 +42,7 @@ export const SECURITY_FAQ: ServiceFaqItem[] = [
   },
   {
     q: "What happens if there's a security incident involving my data?",
-    a: "Sydra maintains documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI, notification follows the timeline specified in your BAA, which is 60 days per HIPAA. Sydra has not had a reportable incident involving customer PHI to date.",
+    a: "Sydra maintains documented incident response procedures covering detection, escalation, containment, recovery, and customer notification. If an incident involves your PHI, notification follows the timeline specified in your BAA, which is 60 days per HIPAA.",
   },
   {
     q: "Does Sydra share data with payers or third parties beyond what's required to file a dispute?",

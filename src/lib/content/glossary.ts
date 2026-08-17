@@ -48,7 +48,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     slug: "contingency-fee",
     term: "Contingency fee",
     definition:
-      "A fee model that typically keeps 10 to 20 percent of every recovery. The share does not shrink as your volume grows, so the cost rises with every successful dispute while the work per dispute does not. Sydra is priced on per claim and subscription models rather than a percentage of recovery.",
+      "A fee model that typically keeps 20 percent or more of every recovery. The share does not shrink as your volume grows, so the cost rises with every successful dispute while the work per dispute does not. Sydra is priced on per claim and subscription models rather than a percentage of recovery.",
     relatedHref: "/sydra-vs-idr-attorney",
     relatedLabel: "Compare your IDR options",
   },
