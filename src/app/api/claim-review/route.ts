@@ -59,7 +59,6 @@ export async function POST(request: Request) {
     submittedAt,
   });
 
-  // TODO(george): confirm lead destination for deliverLead() — currently LEAD_NOTIFICATION_EMAIL / LEADS_INBOX_EMAIL / sales@sydrahealth.com
   const delivered = await deliverLead({
     email: lead.email,
     practiceName: lead.practiceName,

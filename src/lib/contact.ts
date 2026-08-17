@@ -1,27 +1,19 @@
+/** The only Sydra mailbox. All forms, From, To, Reply-To, and public copy use this. */
 export const SALES_EMAIL_FALLBACK = "sales@sydrahealth.com";
-
-const DEFAULT_SALES_EMAIL = SALES_EMAIL_FALLBACK;
-const DEFAULT_SUPPORT_EMAIL = "sales@sydrahealth.com";
 
 const MAILTO_SUBJECT = "FROM SYDRA";
 
-function readEnvEmail(key: string, fallback: string): string {
-  const raw = process.env[key];
-  const trimmed = raw?.trim();
-  return trimmed && trimmed.length > 0 ? trimmed : fallback;
-}
-
-/** Primary public contact and form routing (sales inbox). */
+/** Primary public contact and form routing. Always sales@. */
 export function getContactEmail(): string {
-  return readEnvEmail("NEXT_PUBLIC_CONTACT_EMAIL", DEFAULT_SALES_EMAIL);
+  return SALES_EMAIL_FALLBACK;
 }
 
 export function getSalesEmail(): string {
-  return readEnvEmail("NEXT_PUBLIC_SALES_EMAIL", DEFAULT_SALES_EMAIL);
+  return SALES_EMAIL_FALLBACK;
 }
 
 export function getSupportEmail(): string {
-  return readEnvEmail("NEXT_PUBLIC_SUPPORT_EMAIL", DEFAULT_SUPPORT_EMAIL);
+  return SALES_EMAIL_FALLBACK;
 }
 
 /** Optional display phone, e.g. (555) 123 4567 */

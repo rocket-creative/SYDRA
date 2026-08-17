@@ -444,7 +444,7 @@ export function sydraOrganizationJsonLd() {
     logo: SYDRA_LOGO_URL(),
     description:
       "AI software for federal IDR and NSA disputes. Built by surgeons for surgical billing teams.",
-    email: "sales@sydrahealth.com",
+    email: getContactEmail(),
     telephone: "+19147056830",
     address: {
       "@type": "PostalAddress",

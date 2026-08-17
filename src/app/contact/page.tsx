@@ -133,7 +133,7 @@ export default function ContactPage() {
                   <a className={textStyles.textLink} href="tel:+19147056830">
                     (914) 705 6830
                   </a>{" "}
-                  · sales@sydrahealth.com
+                  · {salesEmail}
                 </p>
               </section>
             </div>
@@ -157,7 +157,7 @@ export default function ContactPage() {
                     {supportEmail}
                   </a>
                 </li>
-                <li>Sydra Full Service IDR: sales@sydrahealth.com</li>
+                <li>Sydra Full Service IDR: {salesEmail}</li>
                 <li>
                   Phone:{" "}
                   <a className={textStyles.textLink} href="tel:+19147056830">

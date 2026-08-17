@@ -5,6 +5,7 @@ import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
 import { editorialInputClass, FormField } from "@/components/ui/form-field";
+import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
 
 type ClaimReviewFormProps = {
   source?: string;
@@ -66,14 +67,14 @@ export function ClaimReviewForm({ source }: ClaimReviewFormProps) {
       if (!res.ok || data.ok === false) {
         setFormError(
           data.error ||
-            "Something went wrong. Please try again or email support@sydrahealth.com.",
+            `Something went wrong. Please try again or email ${SALES_EMAIL_FALLBACK}.`,
         );
         return;
       }
       setSucceeded(true);
       track("claim_review_submitted", { source: source ?? "" });
     } catch {
-      setFormError("Something went wrong. Please try again or email support@sydrahealth.com.");
+      setFormError(`Something went wrong. Please try again or email ${SALES_EMAIL_FALLBACK}.`);
     } finally {
       setSubmitting(false);
     }

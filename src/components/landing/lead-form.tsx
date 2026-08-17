@@ -20,6 +20,7 @@ import {
   FormField,
 } from "@/components/ui/form-field";
 import { Section } from "@/components/ui/section";
+import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
 import { CONSENT_TEXT_VERSION } from "@/lib/consent/marketing";
 import { US_STATES } from "@/lib/constants/us-states";
 import {
@@ -87,7 +88,7 @@ type StepOneValues = {
 };
 
 const EMAIL_DELIVERY_ERROR =
-  "We could not reach our team inbox. Email sales@sydrahealth.com and we will follow up right away.";
+  `We could not reach our team inbox. Email ${SALES_EMAIL_FALLBACK} and we will follow up right away.`;
 
 const COPY_BY_INTENT: Record<
   LeadFormIntent,
@@ -331,7 +332,7 @@ function LeadFormInner({
         if (!result.ok) {
           setFormStatus({
             status: "error",
-            message: "Something went wrong. Please try again or email sales@sydrahealth.com.",
+            message: `Something went wrong. Please try again or email ${SALES_EMAIL_FALLBACK}.`,
           });
           return;
         }
@@ -399,7 +400,7 @@ function LeadFormInner({
         if (!result.ok) {
           setFormStatus({
             status: "error",
-            message: "Something went wrong. Please try again or email sales@sydrahealth.com.",
+            message: `Something went wrong. Please try again or email ${SALES_EMAIL_FALLBACK}.`,
           });
           return;
         }

@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-import { getSalesEmail, SALES_EMAIL_FALLBACK } from "@/lib/contact";
+import { getSalesEmail } from "@/lib/contact";
 import {
   buildClaimReviewAutoReplyPlain,
   CLAIM_REVIEW_AUTO_REPLY_SUBJECT,
@@ -22,16 +22,7 @@ export type DeliverLeadResult =
   | { ok: false; error: string };
 
 function notificationRecipients(): string[] {
-  const raw = process.env.LEAD_NOTIFICATION_EMAIL?.trim();
-  if (raw) {
-    const list = raw
-      .split(",")
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0);
-    if (list.length > 0) return [...new Set(list)];
-  }
-  const inbox = getLeadInboxRecipients();
-  return inbox.length > 0 ? inbox : [SALES_EMAIL_FALLBACK];
+  return getLeadInboxRecipients();
 }
 
 /**
