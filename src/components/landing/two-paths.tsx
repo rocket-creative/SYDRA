@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { Section } from "@/components/ui/section";
 
 export function TwoPaths() {
@@ -10,39 +11,45 @@ export function TwoPaths() {
       sidebarLabel="Two paths"
       tone="white"
     >
-      <h2 className="type-h2 prose-measure text-brand" id="heading-two-paths">
-        Same specialty depth. Different operator.
+      <h2 className="sr-only" id="heading-two-paths">
+        Two ways to file federal IDR
       </h2>
-      <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <article className="editorial-card bg-white p-6 sm:p-8">
-          <p className="type-caption text-body/70">Run it in house</p>
-          <h3 className="mt-3 text-xl font-medium text-brand">Sydra software</h3>
-          <p className="mt-4 type-body text-body">
-            Software your billing team operates. Best when you want to keep the workflow and the
-            margin.{" "}
-            <a
-              className="font-medium text-[var(--color-accent)] underline decoration-rule underline-offset-4 transition-colors hover:text-[var(--color-hero)]"
-              href="/pricing"
-            >
-              See Sydra pricing
-            </a>
-            .
-          </p>
-        </article>
-
+      <div className="grid gap-6 lg:grid-cols-2">
         <article
           className="editorial-card bg-white p-6 sm:p-8"
           id="full-service-path"
           style={{ "--card-accent": "var(--color-full-service)" } as CSSProperties}
         >
-          <p className="type-caption text-[var(--color-full-service-dark)]">Done for you</p>
-          <h3 className="mt-3 text-xl font-medium text-[var(--color-full-service-dark)]">
-            Sydra Full Service
+          <h3 className="text-xl font-medium text-[var(--color-full-service-dark)]">
+            We file for you.
           </h3>
           <p className="mt-4 type-body text-body">
-            Our boutique team files every claim for you, specialty coded, for a flat fee, never 20%.
+            Send us the claims. Our team prepares, files, and tracks every federal IDR dispute end
+            to end. You review nothing unless you want to, and you keep the recovery.
+          </p>
+          <p className="mt-4 type-body text-body">
+            Best for practices without a dedicated billing team, or any practice that would rather
+            this simply be handled.
           </p>
         </article>
+
+        <article className="editorial-card bg-white p-6 sm:p-8">
+          <h3 className="text-xl font-medium text-brand">Or your team files with Sydra.</h3>
+          <p className="mt-4 type-body text-body">
+            Your billing staff runs Sydra directly. About five minutes per claim, and your team
+            edits, approves and owns every submission before it leaves the practice.
+          </p>
+          <p className="mt-4 type-body text-body">
+            Best for practices with an in-house biller, billing companies, and firms filing on
+            behalf of clients.
+          </p>
+        </article>
+      </div>
+      <div className="mt-10">
+        <p className="type-body text-brand">Either way, the first step is the same.</p>
+        <div className="mt-6">
+          <ConversionCtaPair placement="homepage-two-paths" showSupportingLine={false} />
+        </div>
       </div>
     </Section>
   );

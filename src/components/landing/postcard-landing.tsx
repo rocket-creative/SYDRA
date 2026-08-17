@@ -79,8 +79,12 @@ export function PostcardLanding({
         <div className="order-1">
           <Hero stateDisplay={stateDisplay} tracking={tracking} />
         </div>
-        {/* 2. Claim review form */}
+        {/* 2. Two delivery paths */}
         <SectionReveal className="order-2">
+          <TwoPaths />
+        </SectionReveal>
+        {/* 3. Claim review form */}
+        <SectionReveal className="order-3">
           <div className="mx-auto w-full max-w-[1280px] px-5 py-10 md:px-10 md:py-14">
             <div
               className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
@@ -90,12 +94,12 @@ export function PostcardLanding({
             </div>
           </div>
         </SectionReveal>
-        {/* 3. Recovery calculator */}
-        <SectionReveal className="order-3">
+        {/* 4. Recovery calculator */}
+        <SectionReveal className="order-4">
           <RecoverySection />
         </SectionReveal>
-        {/* 4. How Sydra works */}
-        <SectionReveal className="order-4">
+        {/* 5. How Sydra works */}
+        <SectionReveal className="order-5">
           <HowItWorks />
         </SectionReveal>
         {/* 6. Built by a surgeon who files these claims */}
@@ -110,19 +114,15 @@ export function PostcardLanding({
         <SectionReveal className="order-8">
           <FederalIdrExplainer />
         </SectionReveal>
-        {/* 9. Two paths */}
+        {/* 9. FAQ */}
         <SectionReveal className="order-9">
-          <TwoPaths />
-        </SectionReveal>
-        {/* 10. FAQ */}
-        <SectionReveal className="order-10">
           <Faq stateDisplay={stateDisplay} />
         </SectionReveal>
-        {/* 11. Closing CTA and form */}
-        <SectionReveal className="order-11">
+        {/* 10. Closing CTA and form */}
+        <SectionReveal className="order-10">
           <ClosingCta />
         </SectionReveal>
-        <SectionReveal className="order-12">
+        <SectionReveal className="order-11">
           <Section id="lead-form-closing" sidebarLabel="Get started" tone="neutral">
             <div className="max-w-2xl rounded-[2px] bg-white p-6 md:p-10">
               <ClaimReviewForm source="homepage-closing" />

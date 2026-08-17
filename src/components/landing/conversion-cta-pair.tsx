@@ -14,10 +14,12 @@ import { FOUR_OBJECTION_LINE } from "@/lib/content/founder-lines";
 export type CtaPlacement =
   | "homepage-hero"
   | "homepage-closing"
+  | "homepage-two-paths"
   | "recover-hero"
   | "recover-closing"
   | "calculator-hero"
-  | "pricing-body";
+  | "pricing-body"
+  | "options-compared";
 
 const SUPPORTING_LINE =
   "Send us one denied out-of-network EOB. You'll get a written IDR eligibility check and a dollar estimate back within one business day. No call required.";
@@ -47,7 +49,9 @@ export function ConversionCtaPair({
           <span className="sm:hidden">{shortLabel}</span>
           <span className="hidden sm:inline">{PRIMARY_CTA_LABEL}</span>
         </Button>
-        {secondaryAs === "button" ? (
+        {placement === "homepage-two-paths" ? (
+          <CtaLink href="/pricing">See pricing</CtaLink>
+        ) : placement === "options-compared" ? null : secondaryAs === "button" ? (
           <Button href="/demo" variant="ghost">
             Request a 15-minute demo
           </Button>
