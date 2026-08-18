@@ -8,7 +8,7 @@ type LegalFooterProps = {
  */
 export function LegalFooter({ className = "" }: LegalFooterProps) {
   return (
-    <p className={`type-caption text-body/70 ${className}`}>
+    <p className={`type-note text-body/70 ${className}`}>
       This page is general information about the No Surprises Act dispute process,
       not legal advice. Eligibility depends on the specific plan, claim, and
       current federal and state rules. Confirm details for your claim before

@@ -63,7 +63,7 @@ function TierBlock({
       ) : null}
 
       <h3 className="text-xl font-normal text-brand">{tier.name}</h3>
-      <p className="mt-2 type-caption text-[var(--color-accent)]">{tier.tagline}</p>
+      <p className="mt-2 type-note text-[var(--color-accent)]">{tier.tagline}</p>
       <p className="mt-4 type-body text-body">{tier.bestFor}</p>
 
       <ul className="mt-6 flex-1 space-y-3">

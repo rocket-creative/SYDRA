@@ -134,7 +134,7 @@ export function LaborCalculator({
           </div>
         </div>
 
-        <p className={`text-xs leading-relaxed ${mutedClass}`}>
+        <p className={`text-sm leading-relaxed ${mutedClass}`}>
           Manual build time of 25 to 40 minutes per submission is the Sydra documented range. Sydra
           prepares a standard single CPT claim in about five minutes. Your hourly rate and volume
           are your own inputs.

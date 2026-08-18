@@ -71,7 +71,7 @@ export function HeroProofStack({
           <div className="my-2.5 h-px w-8 bg-[var(--color-rule)]" aria-hidden />
           <figcaption className="text-sm leading-snug text-body">{item.label}</figcaption>
           {item.caption ? (
-            <p className="mt-1.5 text-[11px] leading-relaxed text-body/70">{item.caption}</p>
+            <p className="mt-1.5 text-xs leading-relaxed text-body/70">{item.caption}</p>
           ) : null}
         </figure>
       ))}

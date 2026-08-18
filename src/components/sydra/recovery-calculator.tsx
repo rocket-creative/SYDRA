@@ -137,7 +137,7 @@ export function RecoveryCalculator({
           </div>
         </div>
 
-        <p className={`text-xs leading-relaxed ${mutedClass}`}>
+        <p className={`text-sm leading-relaxed ${mutedClass}`}>
           Uses the CMS published 88% win rate on the amount already in dispute. Award multiples
           versus QPA are not applied here. Recovery is capped at the disputed amount. Not a Sydra
           performance claim.

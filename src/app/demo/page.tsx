@@ -123,7 +123,8 @@ export default function DemoPage() {
                 </p>
               </section>
 
-              <section aria-labelledby="heading-preview" className="mt-10 prose-measure">
+              {/* Decorative UI mocks render 8-10px labels; illegible on a phone, so md and up only. */}
+              <section aria-labelledby="heading-preview" className="mt-10 hidden prose-measure md:block">
                 <h2 className={textStyles.subsectionTitle} id="heading-preview">
                   Product preview
                 </h2>

@@ -35,7 +35,7 @@ export default function PricingPage() {
                 Quoted to your volume. Not a percentage of every recovery.
               </span>
             </h1>
-            <p className="mt-4 type-caption text-body">{FOUR_OBJECTION_LINE}</p>
+            <p className="mt-4 type-note text-body">{FOUR_OBJECTION_LINE}</p>
             <p className="mt-6 type-body text-body">
               We don&apos;t publish a list price because the right number depends on your specialty,
               state, and monthly out of network claim volume. Sydra is priced on per claim and
