@@ -9,7 +9,7 @@ import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
  */
 export function HeroCtas() {
   return (
-    <div className="mt-6 sm:mt-8">
+    <div className="mt-5 sm:mt-8">
       <ConversionCtaPair placement="homepage-hero" />
     </div>
   );

@@ -68,30 +68,35 @@ export function PostcardLanding({
       <PageJsonLd data={jsonLd} />
       <Cursor />
       <TrackingProvider path={path} tracking={tracking} />
+      {/*
+       * Phones read the form straight after the hero, so the conversion ask
+       * lands within the first two screens instead of ~7,000px down. From md up
+       * the eight-section editorial order applies and the form closes the page.
+       */}
       <div className="flex flex-col">
         <div className="order-1">
           <Hero stateDisplay={stateDisplay} tracking={tracking} />
         </div>
-        <HomepageReveal className="order-2">
+        <HomepageReveal className="order-2 md:order-8">
+          <HomepageBandForm />
+        </HomepageReveal>
+        <HomepageReveal className="order-3 md:order-2">
           <HomepageProofBand />
         </HomepageReveal>
-        <HomepageReveal className="order-3">
+        <HomepageReveal className="order-4 md:order-3">
           <UnderuseStatement />
         </HomepageReveal>
-        <HomepageReveal className="order-4">
+        <HomepageReveal className="order-5 md:order-4">
           <AudienceSegments />
         </HomepageReveal>
-        <HomepageReveal className="order-5">
+        <HomepageReveal className="order-6 md:order-5">
           <RegulatoryCurrency />
         </HomepageReveal>
-        <HomepageReveal className="order-6">
+        <HomepageReveal className="order-7 md:order-6">
           <RecoverySection />
         </HomepageReveal>
-        <HomepageReveal className="order-7">
+        <HomepageReveal className="order-8 md:order-7">
           <ProcessProblemStatement />
-        </HomepageReveal>
-        <HomepageReveal className="order-8">
-          <HomepageBandForm />
         </HomepageReveal>
       </div>
       <MobileCtaBar tracking={tracking} />

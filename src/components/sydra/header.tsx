@@ -38,7 +38,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       <div className="mx-auto flex max-w-[1280px] items-center gap-2 px-4 py-3 sm:gap-3 md:gap-6 md:px-10 md:py-4">
         <Link
           aria-label="Sydra home"
-          className="flex min-h-12 min-w-0 shrink items-center gap-2 transition-opacity duration-300 hover:opacity-90 sm:gap-3"
+          className="flex min-h-12 min-w-0 shrink-0 items-center gap-2 transition-opacity duration-300 hover:opacity-90 lg:shrink lg:gap-3"
           href="/"
         >
           <Image
@@ -52,7 +52,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           />
           <span
             aria-hidden
-            className="hidden type-caption tracking-[0.16em] text-body/50 sm:block"
+            className="hidden truncate type-caption tracking-[0.16em] text-body/50 lg:block"
           >
             NSA&nbsp;·&nbsp;IDR&nbsp;·&nbsp;SIMPLIFIED
           </span>
@@ -69,15 +69,23 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
           </a>
           {!isFunnel ? (
             <>
-              <Button
-                className="hidden sm:inline-flex sm:w-auto"
-                href={CASE_REVIEW_PATH}
-                showArrow
-                variant="solid"
-                onClick={() => track("cta_primary_click", { placement: "header" })}
-              >
-                {PRIMARY_CTA_SHORT_LABEL}
-              </Button>
+              {/*
+               * Wrapper, not `hidden` on the Button itself: the Button base class
+               * sets `inline-flex`, which resolves after `hidden` in the compiled
+               * stylesheet and would keep the CTA visible on phones, where it
+               * squeezes the logo to zero width. Phones get the CTA from the nav
+               * drawer and the sticky bottom bar instead.
+               */}
+              <div className="hidden sm:block">
+                <Button
+                  href={CASE_REVIEW_PATH}
+                  showArrow
+                  variant="solid"
+                  onClick={() => track("cta_primary_click", { placement: "header" })}
+                >
+                  {PRIMARY_CTA_SHORT_LABEL}
+                </Button>
+              </div>
               <MobileNavDrawer linkClass={linkClass} nav={PRIMARY_NAV} signInHref={SIGN_IN} />
             </>
           ) : null}
