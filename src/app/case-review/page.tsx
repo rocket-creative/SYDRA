@@ -1,4 +1,6 @@
-import { ClaimReviewForm } from "@/components/landing/claim-review-form";
+import { Suspense } from "react";
+
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -19,20 +21,7 @@ import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.caseReview;
 
-type PageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-};
-
-function resolveClaimReviewSource(raw: string | string[] | undefined): string {
-  const value = Array.isArray(raw) ? raw[0] : raw;
-  const trimmed = value?.trim() ?? "";
-  if (trimmed.length > 0 && trimmed.length <= 80) return trimmed;
-  return "case-review";
-}
-
-export default async function CaseReviewPage({ searchParams }: PageProps) {
-  const query = await searchParams;
-  const source = resolveClaimReviewSource(query.source);
+export default function CaseReviewPage() {
   return (
     <SydraPageShell
       breadcrumb={[...BREADCRUMBS.caseReview]}
@@ -66,7 +55,9 @@ export default async function CaseReviewPage({ searchParams }: PageProps) {
           <CtaLink href={CASE_REVIEW_SAMPLE_PATH}>See a sample review</CtaLink>
         </p>
         <div className="mt-8">
-          <ClaimReviewForm source={source} />
+          <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+            <SharedLeadForm anchorId="case-review-form" landingPage="case-review" />
+          </Suspense>
         </div>
       </div>
     </SydraPageShell>

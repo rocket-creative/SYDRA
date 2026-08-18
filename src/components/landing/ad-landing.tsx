@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { Suspense } from "react";
 
 import { Cursor } from "@/components/motion/cursor";
 import { SplitHeadline } from "@/components/motion/split-headline";
-import { ClaimReviewForm } from "@/components/landing/claim-review-form";
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { HeroProofStack } from "@/components/landing/hero-proof-stack";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
@@ -95,12 +96,10 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
       </section>
 
       <div className="mx-auto w-full max-w-[1280px] px-4 py-10 md:px-10 md:py-14">
-        <div
-          className="rounded-[2px] border border-rule bg-white p-6 text-left md:p-8"
-          id="lead-form"
-        >
-          <ClaimReviewForm source="recover" />
-        </div>
+        {/* Ads conversions for this route fire on /recover/thank-you. */}
+        <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+          <SharedLeadForm landingPage="recover" thankYouPath="/recover/thank-you" />
+        </Suspense>
         <CtaTrustSignals className="mt-8 max-w-3xl" />
       </div>
 

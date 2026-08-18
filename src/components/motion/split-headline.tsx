@@ -19,8 +19,15 @@ export function SplitHeadline({
 }: SplitHeadlineProps) {
   const words = text.split(" ");
 
+  /*
+   * The animated words are aria-hidden, so the readable copy is a visually
+   * hidden sibling. aria-label on the wrapper does not work here: it is a span
+   * with no role, where the attribute is prohibited and ignored, which left the
+   * headline with no accessible text at all.
+   */
   return (
-    <span className={className} aria-label={text}>
+    <span className={className}>
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden" aria-hidden="true">
           <span

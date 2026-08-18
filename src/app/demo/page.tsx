@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { DemoPageLeadForm } from "@/components/landing/demo-page-lead-form";
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
@@ -162,7 +162,7 @@ export default function DemoPage() {
             <div className="order-1 lg:order-2 lg:col-span-6">
               <p className="prose-measure mb-6 type-body text-body">{DEMO_RISK_REVERSAL}</p>
               <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
-                <DemoPageLeadForm />
+                <SharedLeadForm anchorId="demo-form" intent="demo" landingPage="demo" />
               </Suspense>
               <p className="prose-measure mt-4">
                 <CtaLink href={caseReviewUrl()}>

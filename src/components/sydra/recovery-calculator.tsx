@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useId, useMemo, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 
-import { ClaimReviewForm } from "@/components/landing/claim-review-form";
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { writeCalculatorEstimate } from "@/lib/landing/calculator-estimate";
 import { estimateRecovery } from "@/lib/landing/recovery-estimate";
 
@@ -181,7 +181,14 @@ export function RecoveryCalculator({
               denied EOB and we&apos;ll tell you exactly what it&apos;s worth.
             </p>
           </div>
-          <ClaimReviewForm source="calculator" />
+          {/*
+            LeadForm reads the estimate written above out of session storage and
+            opens with it, so the number the visitor just produced carries into
+            the submission.
+          */}
+          <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+            <SharedLeadForm anchorId="calculator-lead-form" landingPage="calculator" />
+          </Suspense>
         </div>
       </div>
     </div>

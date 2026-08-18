@@ -1,7 +1,9 @@
+import { Suspense } from "react";
+
 import { Cursor } from "@/components/motion/cursor";
 import { HomepageReveal } from "@/components/motion/homepage-reveal";
 import { AudienceSegments } from "@/components/landing/audience-segments";
-import { ClaimReviewForm } from "@/components/landing/claim-review-form";
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { Hero } from "@/components/landing/hero";
 import { HomepageProofBand } from "@/components/landing/hero-proof-stack";
 import {
@@ -108,8 +110,10 @@ function HomepageBandForm() {
   return (
     <section className="bg-neutral-section py-12 md:py-16 lg:py-24" id="lead-form-closing">
       <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8">
-        <div className="max-w-2xl rounded-[2px] bg-white p-5 md:p-8" id="lead-form">
-          <ClaimReviewForm source="homepage-closing" />
+        <div className="max-w-2xl">
+          <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+            <SharedLeadForm landingPage="postcard" />
+          </Suspense>
         </div>
       </div>
     </section>

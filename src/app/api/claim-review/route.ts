@@ -1,5 +1,14 @@
 import { NextResponse } from "next/server";
 
+/**
+ * Legacy endpoint. Every form on the site now posts to /api/postcard-lead via
+ * SharedLeadForm; nothing in this codebase calls this route. It stays because a
+ * browser holding a cached copy of the old two-field form would otherwise lose
+ * the lead on submit. Delivery is identical either way: Supabase first, then
+ * sales@ with the ops address on BCC. Safe to delete once the CDN cache window
+ * for the pages that carried the old form has passed.
+ */
+
 import { deliverLead } from "@/lib/email/deliver-lead";
 import { checkRateLimit } from "@/lib/landing/rate-limit";
 import { logLeadFallback } from "@/lib/leads/fallback-log";
