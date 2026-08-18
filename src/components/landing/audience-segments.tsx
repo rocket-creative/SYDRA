@@ -11,8 +11,15 @@ const segments = [
   {
     heading: "If you have never filed an IDR claim",
     body: "There is a defined federal pathway between a payer's underpayment and a binding arbitrated amount: an open negotiation window, an eligibility determination, a batching decision, then arbitration. Each step has a hard deadline, and missing one forfeits the claim. Sydra identifies which of your claims qualify, assembles the submissions, and manages every date. Nothing changes in how you practice or how you bill. The work happens downstream of what your office already does.",
-    href: "/how-it-works",
-    link: "See how Sydra works",
+    /*
+     * Not /how-it-works. This segment promises that Sydra finds the claims and
+     * holds the deadlines, and /how-it-works opens with the reader drafting a
+     * submission in five minutes, which is the opposite offer. /case-review
+     * delivers what the paragraph above just said: send one EOB, get back what
+     * qualifies. Matches PATH_DETAIL_LINKS["path-never-filed"] on the homepage.
+     */
+    href: "/case-review",
+    link: "Start with one denied claim",
   },
   {
     heading: "If you already use a contingency firm charging 20% or more",
