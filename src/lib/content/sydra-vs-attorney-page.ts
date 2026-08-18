@@ -3,6 +3,11 @@ export const SYDRA_VS_ATTORNEY_HERO = {
   lead: "You don't need convincing that IDR recovers money. You've seen it. The question is how much of that recovery you keep, and whether the share you give up should keep growing as your volume does. Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive.",
 };
 
+/**
+ * Three filing arrangements compared on cost. These are not the four audience
+ * paths on the homepage, which describe who you are rather than how the filing
+ * gets done. Both Sydra columns are available to any of those four audiences.
+ */
 export const OPTIONS_COMPARISON_COLUMNS = [
   "Contingency firm",
   "In house with Sydra",

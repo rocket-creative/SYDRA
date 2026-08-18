@@ -9,6 +9,22 @@
     "verificationStatus": "current"
   },
   {
+    "id": "cms-puf-2025-q4",
+    "label": "CMS Federal IDR Q4 2025 Public Use File",
+    "detail": "Quarter 4, 2025. Source for the per CPT area average initial payment and median figures in the Practice A table on the homepage. Geography and median denominator are pending confirmation from ops; see the TODO above PRACTICE_A in src/lib/content/homepage.ts.",
+    "url": "https://www.cms.gov/nosurprises/policies-and-resources/reports",
+    "dateReleased": "2025-Q4",
+    "lastVerified": "2026-08-18",
+    "verificationStatus": "current"
+  },
+  {
+    "id": "sydra-client-records",
+    "label": "Sydra client records, presented with client permission",
+    "detail": "Provenance for the Sydra performance figures in SYDRA_PERFORMANCE (src/lib/idr/proof-points.ts): 92% across 113 decided cases, 82.9% across 76 decided cases under the client's prior contingency firm, and the CPT 19318 award of $50,742.00 against a $2,500 QPA. Decided cases only; excludes withdrawn, ineligible, and pending disputes. Not federal data and not a category benchmark.",
+    "lastVerified": "2026-08-18",
+    "verificationStatus": "current"
+  },
+  {
     "id": "georgetown-chir-2026-03",
     "label": "Georgetown University CHIR · Health Affairs webinar",
     "detail": "March 2026. 3.4 million disputes through June 2025; 88% win rate; median award ~4.5x in network rate",

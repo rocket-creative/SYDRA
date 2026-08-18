@@ -63,21 +63,27 @@ export function Hero() {
 }
 
 /**
- * Three cells, equal width, 1px rules between them. Stays 3-across on phones by
- * scaling the type down instead of stacking.
+ * Four cells, equal width, 1px rules between them from md up.
+ *
+ * Phones get 2x2 rather than 4-across: four cells at 390px would leave ~85px
+ * each, below the 12px type floor the repo's mobile harness enforces. The
+ * dividers only apply on the single-row layouts, because divide-x on a wrapped
+ * grid draws a rule down the left of the second row's first cell.
  */
 export function ProofStrip() {
   return (
-    <section className={`bg-neutral-section py-5 lg:py-2.5 ${BAND}`} id="proof">
-      <dl className={`${INNER} grid grid-cols-3 divide-x divide-[var(--color-rule)]`}>
+    <section className={`bg-neutral-section py-5 lg:py-1.5 ${BAND}`} id="proof">
+      <dl
+        className={`${INNER} grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-4 md:gap-0 md:divide-x md:divide-[var(--color-rule)]`}
+      >
         {PROOF_CELLS.map((cell) => (
-          <div className="min-w-0 px-3 first:pl-0 last:pr-0 md:px-6" key={cell.value}>
+          <div className="min-w-0 md:px-4 md:first:pl-0 md:last:pr-0" key={cell.value}>
             <dt className="text-[20px] font-medium leading-tight text-brand tabular-nums md:text-[24px]">
               {cell.value}
             </dt>
             {/*
-             * Three across at 390px leaves ~110px a cell, so 12px is the practical
-             * floor and it is also where the repo's mobile harness and the spec stop.
+             * Two across at 390px leaves ~175px a cell, but 12px stays the floor:
+             * it is where the repo's mobile harness and the spec both stop.
              */}
             <dd className="mt-1.5 text-[12px] leading-snug text-body md:text-[13px] lg:mt-1">
               {cell.label}

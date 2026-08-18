@@ -23,7 +23,6 @@ import {
   serviceJsonLd,
   softwareApplicationJsonLd,
   sydraOrganizationJsonLd,
-  sydraWebsiteJsonLd,
   webPageJsonLd,
 } from "@/lib/seo/json-ld";
 
@@ -39,16 +38,27 @@ export function PostcardLanding({
   tracking,
   path,
 }: PostcardLandingProps) {
+  /*
+   * This page describes itself, not the homepage. It previously passed path ""
+   * and the homepage's name to webPageJsonLd, so /r and /r/[state] emitted
+   * structured data claiming to be the site root while serving different
+   * content. sydraWebsiteJsonLd is also gone: the WebSite node belongs on the
+   * canonical homepage, not on a noindexed campaign lander.
+   */
   const jsonLd = [
-    breadcrumbJsonLd([{ name: "Home", path: "" }]),
+    breadcrumbJsonLd([
+      { name: "Home", path: "" },
+      { name: stateDisplay ? `Federal IDR in ${stateDisplay}` : "Federal IDR recovery", path },
+    ]),
     sydraOrganizationJsonLd(),
     softwareApplicationJsonLd(),
-    sydraWebsiteJsonLd(),
     webPageJsonLd({
-      path: "",
-      name: "That payment is an opening offer.",
+      path,
+      name: stateDisplay
+        ? `Out of network recovery for surgical practices in ${stateDisplay}`
+        : "Out of network recovery for surgical practices",
       description:
-        "Surgeon built NSA IDR software your billing team runs in five minutes per claim. Prepare federal IDR submissions and keep the recovery.",
+        "Surgeon built NSA IDR software your billing team runs in five minutes per claim, or Sydra files every dispute for you. Prepare federal IDR submissions and keep the recovery.",
     }),
     serviceJsonLd({
       name: "Sydra NSA IDR submission software",

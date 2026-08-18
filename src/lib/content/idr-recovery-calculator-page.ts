@@ -10,7 +10,8 @@ export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
     id: "heading-how-calculated",
     title: "How this number is calculated",
     paragraphs: [
-      "Estimated annual recovery = monthly eligible claims × average disputed amount × 12 × 88 percent, capped so recovery never exceeds the amount in dispute. The three to five times award multiple applies to QPA, not to the disputed amount.",
+      "Estimated annual recovery = monthly eligible claims × average disputed amount × 12 × 88 percent, capped so recovery never exceeds the amount in dispute. Award multiples are measured against QPA rather than against the amount you are disputing, so this calculator applies none of them.",
+      "Published medians cluster around three to five times QPA. That is a median, not a ceiling: individual determinations land both below and well above it, and a single award can run many times higher. Nothing in that range is applied to the figure below.",
       "The contingency comparison = that same recovery figure × 0.20, the typical contingency rate charged for out of network recovery.",
       "88% of properly filed federal IDR disputes get paid. Source: Georgetown University CHIR, March 2026.",
     ],
@@ -34,7 +35,7 @@ export const IDR_RECOVERY_CALCULATOR_FAQS: ContentFaq[] = [
   },
   {
     q: "Are these Sydra win rates?",
-    a: "No. The inputs mirror the same published CMS and Georgetown CHIR figures used elsewhere on this site. Sydra does not claim those outcomes as its own performance.",
+    a: "No. The inputs mirror the same published CMS and Georgetown CHIR figures used elsewhere on this site, and describe the federal record across every filer rather than Sydra's own results. Sydra client outcomes are published separately on the homepage, where each figure is labelled as a client result and carries the denominator behind it.",
   },
   {
     q: "What should I do with the estimate?",

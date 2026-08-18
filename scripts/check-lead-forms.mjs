@@ -37,13 +37,21 @@ const EXPECTED_STEP_ONE = ["email"];
 const EXPECTED_STEP_TWO = ["practiceName", "name", "role", "phone", "state", "disputesPerMonth"];
 
 /**
- * Path sections must reach the page written for that audience. /demo is absent on
- * purpose: the demo CTA is withheld until a booking provider is live, so the
- * homepage offers a phone call, the calculator, and the embedded form instead.
+ * Path sections must reach the page written for that audience. Mirrors
+ * PATH_DETAIL_LINKS in src/lib/content/homepage.ts; update both together.
+ *
+ * /demo is absent on purpose: the demo CTA is withheld until a booking provider
+ * is live, so the homepage offers a phone call, the calculator, and the embedded
+ * form instead.
+ *
+ * /case-review replaced /how-it-works here when the never-filed path was
+ * re-pointed. That section promises Sydra identifies the claims and manages the
+ * deadlines, which /how-it-works contradicts by opening with the reader drafting
+ * a submission. /how-it-works stays reachable from the sitewide header nav.
  */
 const REQUIRED_LINKS = [
   "/idr-recovery-calculator",
-  "/how-it-works",
+  "/case-review",
   "/sydra-vs-idr-attorney",
   "/idr-for-billing-companies",
   "/in-house-idr",

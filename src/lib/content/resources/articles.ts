@@ -349,7 +349,7 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
       id: "economics",
       heading: "The economics: contingency fee vs software.",
       paragraphs: [
-        "A contingency typically keeps 10 to 20 percent of every recovery. On a single claim that is a reasonable price for someone else carrying the risk and the work.",
+        "A contingency typically keeps 20 percent or more of every recovery. On a single claim that is a reasonable price for someone else carrying the risk and the work.",
         "On a steady stream of out of network claims it compounds: 20 percent of every award, on every claim, indefinitely. The work per claim does not grow with the size of the award, but the fee does.",
         "Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive. That is the whole of the economic argument. It is about the pricing model, not about the firms that use it.",
       ],

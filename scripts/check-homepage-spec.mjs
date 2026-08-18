@@ -102,7 +102,14 @@ function expectedStrings() {
   for (const row of PRACTICE_B.rows) strings.push(row.metric, row.sydra, row.prior);
 
   strings.push(RESULTS_DISCLAIMER);
-  strings.push(CTA_BLOCK.heading, CTA_BLOCK.body, CTA_BLOCK.calculator, CTA_BLOCK.question);
+  /* CTA_BLOCK.call renders with the phone number appended, so it is a substring. */
+  strings.push(
+    CTA_BLOCK.heading,
+    CTA_BLOCK.body,
+    CTA_BLOCK.call,
+    CTA_BLOCK.calculator,
+    CTA_BLOCK.question,
+  );
 
   return [...new Set(strings)];
 }

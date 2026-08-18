@@ -92,10 +92,10 @@ export const IDR_FOR_BILLING_FAQS: ContentFaq[] = [
 ];
 
 export const IDR_FOR_BILLING_CTA_LEAD =
-  "Free 15 minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.";
+  "Free 15-minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.";
 
 export const IDR_FOR_BILLING_CTA_BAND = {
   title: "Ready to see Sydra on a real denied claim from one of your client practices?",
-  lead: "Free 15 minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.",
+  lead: "Free 15-minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.",
   ctaLabel: "Request a 15-minute demo",
 };

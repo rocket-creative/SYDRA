@@ -36,7 +36,7 @@ export function tierRoutingFaqAnswer(): string {
 }
 
 export const DEMO_TRUST_BLOCK =
-  "A 15 minute call with a Sydra specialist. We walk through Sydra live on a real claim, ask about your specialty and OON volume, and recommend the tier that fits. You leave with a quote, a sandbox account if you want one, and zero pressure.";
+  "A 15-minute call with a Sydra specialist. We walk through Sydra live on a real claim, ask about your specialty and OON volume, and recommend the tier that fits. You leave with a quote, a sandbox account if you want one, and zero pressure.";
 
 export const TIERS: TierDefinition[] = [
   {

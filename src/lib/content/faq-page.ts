@@ -8,7 +8,7 @@ export type FaqItem = {
 export const FAQ_PAGE_ITEMS: FaqItem[] = [
   {
     q: "How long does it actually take to prepare an IDR submission in Sydra?",
-    a: "Under 5 minutes for a standard single CPT claim, against roughly 30 minutes by hand. Upload and eligibility check runs 30 to 60 seconds, review 60 to 90 seconds, approve and export about 30 seconds. Past the first five to ten submissions most teams settle around three minutes.",
+    a: "About five minutes for a standard single CPT claim, against 25 to 40 minutes by hand. Upload and eligibility check runs 30 to 60 seconds, review 60 to 90 seconds, approve and export about 30 seconds. Teams past their first five to ten submissions often come in under that, because the review step is where the time goes and it gets faster with familiarity.",
   },
   {
     q: "Does Sydra batch CPT codes?",
@@ -20,7 +20,7 @@ export const FAQ_PAGE_ITEMS: FaqItem[] = [
   },
   {
     q: "What does Sydra cost?",
-    a: "Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive. The right number depends on specialty, state, and monthly out of network volume, so it is quoted on a 15 minute call.",
+    a: "Sydra is priced on per claim and subscription models rather than a percentage of recovery, so the cost of the service stops scaling against you at exactly the point your volume makes it most expensive. The right number depends on specialty, state, and monthly out of network volume, so it is quoted on a 15-minute call.",
   },
   {
     q: "How does Sydra handle HIPAA and patient data security?",

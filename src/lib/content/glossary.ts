@@ -40,7 +40,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     slug: "cms-federal-idr-puf",
     term: "CMS Federal IDR Public Use File (PUF)",
     definition:
-      "CMS published files that summarize resolved federal IDR disputes under the No Surprises Act. Sydra site benchmarks for win rates and award multiples are sourced from these Public Use Files and related analyses, not from Sydra performance claims.",
+      "CMS published files that summarize resolved federal IDR disputes under the No Surprises Act. The benchmark win rates and award multiples on this site are sourced from these Public Use Files and related analyses, and describe the federal record across all filers. Sydra's own client outcomes are published separately and labelled as Sydra figures, so the two are never read as the same number.",
     relatedHref: "/resources/updates/cms-federal-idr-puf-benchmarks",
     relatedLabel: "CMS Federal IDR PUF update",
   },

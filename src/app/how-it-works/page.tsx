@@ -2,6 +2,7 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { DualPageCta } from "@/components/sydra/dual-page-cta";
+import { FullServiceBanner } from "@/components/sydra/full-service-banner";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
@@ -170,6 +171,13 @@ export default function HowItWorksPage() {
             items={HOW_IT_WORKS_FAQ}
           />
         </Section>
+
+        {/*
+          This page describes the reader operating the software. The homepage
+          also offers to do the filing, so the done-for-you option has to be
+          reachable from here rather than only from /about.
+        */}
+        <FullServiceBanner variant="subtle" />
 
         <Section tone="neutral">
           <div className="prose-measure">

@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { HeroCtas } from "@/components/landing/hero-ctas";
 import { FOUNDER_ORIGIN_LINE } from "@/lib/content/founder-lines";
+import { HERO } from "@/lib/content/homepage";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 type HeroProps = {
@@ -18,14 +19,15 @@ function HeroContent({
     <div className="w-full">
       <div aria-hidden className="mb-5 h-px w-16 bg-[var(--color-accent)]" />
       <p className="home-eyebrow break-words text-body">{eyebrow}</p>
+      {/*
+       * Taken from HERO rather than restated. This page carried a longer second
+       * wording of the same approved line, so the site said the one thing it
+       * most wants to say in two different ways.
+       */}
       <h1 className="home-h1 mt-4 min-w-0 text-balance text-brand" id="landing-hero-heading">
-        That payment is an opening offer.
+        {HERO.h1}
       </h1>
-      <p className="home-lead mt-4 text-body md:mt-5">
-        When a health plan pays an out of network claim, most practices treat the amount that arrives
-        as the amount owed. Under the No Surprises Act, it isn&apos;t. Federal Independent Dispute
-        Resolution exists specifically to contest it.
-      </p>
+      <p className="home-lead mt-4 text-body md:mt-5">{HERO.subhead}</p>
       <HeroCtas />
       <figure className="mt-5 max-w-[720px] md:mt-6">
         <blockquote className="home-body text-body">{FOUNDER_ORIGIN_LINE}</blockquote>

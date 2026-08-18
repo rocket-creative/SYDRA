@@ -119,14 +119,14 @@ const MAY_2026_RULE_UPDATE: ResourceUpdate = {
 const CMS_PUF_REMINDER: ResourceUpdate = {
   slug: "cms-federal-idr-puf-benchmarks",
   title: "CMS Federal IDR Public Use Files remain the source for site benchmarks.",
-  subtitle: "A reminder on where Sydra's published IDR figures come from.",
+  subtitle: "Where the published federal record ends and Sydra's own client figures begin.",
   metaTitle: "CMS Federal IDR PUF Benchmarks Reminder | Sydra",
   metaDescription:
-    "Reminder that Sydra's federal IDR win rates and award multiples are sourced from CMS Federal IDR Public Use Files and independent analyses, not Sydra performance claims.",
+    "The federal IDR win rates and award multiples used as benchmarks on Sydra pages come from CMS Public Use Files, and are distinct from Sydra's client outcomes.",
   datePublished: "2026-06-18",
   excerpt:
-    "Site benchmarks for provider win rates and award multiples come from CMS Federal IDR Public Use Files and related analyses. They are not Sydra outcome claims.",
-  lead: "When you see win rates, award multiples, or dispute volume figures on Sydra pages, they come from CMS Federal IDR Public Use Files and independent analyses such as Georgetown CHIR. They describe the federal record across disputes, not Sydra performance on any single claim. This short update restates that sourcing so billing teams know where to look next.",
+    "Benchmark figures for provider win rates and award multiples come from CMS Federal IDR Public Use Files. Sydra's own client outcomes are published separately and labelled as such.",
+  lead: "Sydra publishes two different kinds of number, and reading one as the other will mislead you in both directions.\n\nBenchmark figures, such as the roughly 88 percent provider win rate and the median award multiple, come from CMS Federal IDR Public Use Files and independent analyses such as Georgetown CHIR. They describe the federal record across every filer in the dataset. They are not claims about Sydra.\n\nSydra client outcomes, such as the 92 percent win rate across 113 decided cases shown on the homepage, come from Sydra's own records and are published with client permission. Each carries the denominator and exclusions that make it defensible. This update explains which is which.",
   sections: [
     {
       id: "what-changed",
@@ -142,6 +142,7 @@ const CMS_PUF_REMINDER: ResourceUpdate = {
       paragraphs: [
         "The Federal IDR hub and related resource pages surface payment benchmarks, eligibility context, and dispute outcomes by procedure, state, and payer. The recovery calculator and economics sections use the same published win rate and award multiple inputs so estimates stay tied to public data.",
         "None of those pages claim the aggregate federal win rate as a guarantee for your next dispute. They exist so your team can see the public record before deciding whether to file. Win rate reflects the pattern across many determinations and is not a promise on any single claim.",
+        "Where a page shows a Sydra client figure instead, it says so and states the denominator alongside it. A client win rate covers decided cases only for that client over the period measured, and excludes withdrawn, ineligible, and pending disputes. A single award, such as the breast reduction claim awarded 20.30 times its qualifying payment amount, is one outcome and is not typical, average, or expected.",
         "These files are also where the fee history comes from: the administrative fee was cut from $115 to $15 per party, per dispute, by the final rule of May 28, 2026, effective June 11, 2026.",
       ],
     },

@@ -10,6 +10,16 @@ const TH = "px-3 py-2.5 text-left align-bottom text-[13px] font-medium text-bran
 const TD = "px-3 py-3 text-left align-top text-[14px] text-body first:pl-0";
 
 /**
+ * NOT SPEC COPY. The proof strip above the fold shows the published 88% federal
+ * win rate; the table below shows a Sydra client at 92%. Two different numbers
+ * for what a skimming reader will take to be the same thing, so this names the
+ * difference before the table does. It also carries the source for the 88%,
+ * which the approved PROOF_CELLS copy omits.
+ */
+const FEDERAL_VS_CLIENT_BRIDGE =
+  "The 88% figure above is the federal record across every filer in the CMS dataset (Georgetown University CHIR, March 2026). The rate below is one Sydra client's own outcome across its decided cases. They measure different things and neither predicts the other.";
+
+/**
  * Case study data. Every figure is transcribed from the source and must not be
  * rounded, reformatted, or recalculated, and the disclaimer has to stay on this
  * page with the tables.
@@ -84,6 +94,7 @@ export function Results() {
           <h3 className="page-subsection-title" id="practice-b-heading">
             {PRACTICE_B.heading}
           </h3>
+          <p className="mt-2 max-w-[80ch] type-note text-body">{FEDERAL_VS_CLIENT_BRIDGE}</p>
           <TableScroller labelledBy="practice-b-heading">
             <table className="w-full min-w-[32rem] border-collapse bg-white">
               <caption className="sr-only">{PRACTICE_B.caption}</caption>

@@ -43,7 +43,7 @@ export default function PricingPage() {
               stops scaling against you at exactly the point your volume makes it most expensive.
             </p>
             <p className="mt-4 type-body text-body">
-              Request a 15 minute demo and we quote on the call. No commitment to proceed.
+              Request a 15-minute demo and we quote on the call. No commitment to proceed.
             </p>
             <div className="mt-6">
               <ConversionCtaPair placement="pricing-body" secondaryAs="link" />

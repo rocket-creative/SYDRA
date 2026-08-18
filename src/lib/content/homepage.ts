@@ -12,6 +12,13 @@
  * deliberately not recast. check:copy is not wired into `npm run build` and
  * already failed before this change (see docs/sydra-em-dash-sweep.md). Ops must
  * decide whether the guardrail or the approved copy gives way.
+ *
+ * HOUSE STYLE(unresolved): the spec hyphenates compound modifiers this site
+ * leaves open. "out-of-network", "per-claim" and "white-label" appear below,
+ * against "out of network", "per claim" and "white label" everywhere else.
+ * check:copy permits both, so nothing fails, but the homepage reads as though a
+ * different hand wrote it. Not recast here because the strings are approved.
+ * Ops decides: either the spec relaxes or the rest of the site closes up.
  */
 
 export const HERO = {
@@ -77,9 +84,23 @@ export const PATH_GROUPS: readonly [PathGroup, PathGroup] = [
   },
 ] as const;
 
+/**
+ * The fourth cell is an approved addition to spec 4, not spec copy. Without it
+ * the homepage sells software only: "5 min to prepare a submission" reads as
+ * work the visitor does. But the first path above promises that Sydra
+ * identifies the claims, assembles the submissions, and manages the deadlines,
+ * and /recover, /r and /idr-for-billing-companies all already carry this cell
+ * (see src/components/landing/hero-proof-stack.tsx). Dropping it here was the
+ * only place on the site where full service went unmentioned, so a visitor who
+ * cannot operate software concluded Sydra was not for them.
+ *
+ * Wording is taken verbatim from the existing proof stack so the two surfaces
+ * cannot drift.
+ */
 export const PROOF_CELLS = [
   { value: "88%", label: "of properly filed federal IDR disputes get paid" },
   { value: "5 min", label: "to prepare a complete submission packet" },
+  { value: "Or we file it", label: "our team handles every dispute end to end" },
   { value: "June 2026", label: "built for the current federal IDR rules" },
 ] as const;
 
@@ -124,13 +145,19 @@ export const PATH_DETAILS: readonly PathDetail[] = [
  * block. Labels below are editable; every string above this point is not.
  *
  * Destinations are matched to the audience each section addresses:
- *   never-filed        -> how a submission gets built, start to finish
- *   contingency-client -> the three filing options compared on cost
+ *   never-filed        -> the claim review, where Sydra identifies what qualifies
+ *   contingency-client -> the three filing arrangements compared on cost
  *   rcm                -> multi tenant behaviour at billing company volume
  *   contingency-firm   -> the labor calculator, which is the per FTE argument
+ *
+ * never-filed previously pointed at /how-it-works. That page opens with the
+ * reader drafting a submission in five minutes, which contradicts the promise
+ * this section just made, that Sydra identifies the claims and manages the
+ * deadlines. /case-review is the surface that actually delivers that promise:
+ * send one EOB, get back what qualifies and what it is worth.
  */
 export const PATH_DETAIL_LINKS: Record<string, { href: string; label: string }> = {
-  "path-never-filed": { href: "/how-it-works", label: "See how a submission gets built" },
+  "path-never-filed": { href: "/case-review", label: "Start with one denied claim" },
   "path-contingency-client": {
     href: "/sydra-vs-idr-attorney",
     label: "Compare your filing options",
@@ -157,9 +184,20 @@ export const RESULTS_INTRO = {
 export const NO_CASE_EXAMPLE = "—";
 
 /**
- * TODO(ops): spec 12.1 — "Area Avg Initial Payment" and "Median" need a stated
- * geography and a stated denominator before this goes public. Median of what:
- * initial payments, or awards? Do not publish without an answer.
+ * TODO(ops): spec 12.1. Two questions block this table, and neither can be
+ * answered by inspecting the numbers:
+ *
+ *   1. Geography. "Area Avg Initial Payment" averages over some region. Which?
+ *      RESULTS_DISCLAIMER currently says "the applicable geographic region",
+ *      which is true but tells a reader nothing. Name the region.
+ *   2. Denominator. "Median" is a median of what: initial payments, or awards?
+ *      A median award of $747.71 against a $3,116.33 average initial payment
+ *      (CPT 19364) only makes sense under one of those readings, and a reader
+ *      who picks the wrong one draws the opposite conclusion.
+ *
+ * Do not publish without answers. The vintage is registered as cms-puf-2025-q4
+ * in src/lib/content/sources.json; add the geography and denominator there and
+ * to the column labels at the same time.
  */
 export const PRACTICE_A = {
   caption: "Practice A, plastic and reconstructive surgery: area payment benchmarks by CPT code",
@@ -259,8 +297,15 @@ export const CTA_BLOCK = {
  * purpose: on a page it is a button that goes nowhere. Do not re-add it.
  */
 
-/** Header CTA per spec 3.1. Shortens to "Demo" on phones and stays visible. */
-export const HEADER_CTA = {
-  label: "Request a 15-min demo",
-  shortLabel: "Demo",
-} as const;
+/*
+ * Spec 3.1 asked for a header CTA labelled "Request a 15-min demo". It is not
+ * defined here, and the shared header in src/components/sydra/header.tsx keeps
+ * pointing at /case-review, for the same reason CTA_BLOCK withholds its demo
+ * button: there is no booking provider yet, so a demo ask the site cannot
+ * fulfil is worse than a claim review it can. The header is also shared by
+ * every route, so changing it would swap the primary CTA on roughly forty
+ * pages, not just this one.
+ *
+ * TODO(scheduler): revisit alongside the CTA_BLOCK note above once Calendly or
+ * equivalent is live. Both should change together or not at all.
+ */

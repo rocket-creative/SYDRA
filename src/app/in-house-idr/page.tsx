@@ -4,6 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { DualPageCta } from "@/components/sydra/dual-page-cta";
+import { FullServiceBanner } from "@/components/sydra/full-service-banner";
 import { LaborCalculator } from "@/components/sydra/labor-calculator";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -115,6 +116,12 @@ export default function InHouseIdrPage() {
             ))}
           </div>
         </Section>
+
+        {/*
+          The whole page argues for keeping the work in house, so the reader who
+          concludes they would rather not needs the alternative named here.
+        */}
+        <FullServiceBanner variant="subtle" />
 
         <Section tone="neutral">
           <div className="prose-measure">

@@ -10,7 +10,7 @@ type SydraCtaBandProps = {
 
 export function SydraCtaBand({
   title = "Ready to see Sydra on a real denied claim?",
-  lead = "Request a free 15 minute demo. No commitment. We show you what Sydra generates from a real claim in your specialty.",
+  lead = "Request a free 15-minute demo. No commitment. We show you what Sydra generates from a real claim in your specialty.",
   ctaLabel = "Request a 15-minute demo",
   ctaHref = "/demo",
 }: SydraCtaBandProps = {}) {

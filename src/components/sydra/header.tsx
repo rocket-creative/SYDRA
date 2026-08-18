@@ -9,21 +9,21 @@ import { Button } from "@/components/ui/button";
 import { CASE_REVIEW_PATH, PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
 
 /*
- * CONFLICT(homepage spec 3.1): the spec calls for four nav links, "How it works",
- * "Pricing", "Calculator" and "About", a persistent CTA labelled "Request a
- * 15-min demo" that shortens to "Demo" on phones and never hides behind the
- * hamburger, and a lockup tagline. This header is shared by every route, so
- * applying that would rename links, drop "Federal IDR guide", "Resources" and
- * "Contact" from sitewide internal linking, and change the primary CTA
- * destination away from /case-review on ~40 pages. Left unchanged pending a
- * human decision. Three specifics:
+ * CONFLICT(homepage spec 3.1), resolved in favour of this header. The spec calls
+ * for four nav links, "How it works", "Pricing", "Calculator" and "About", plus a
+ * persistent CTA labelled "Request a 15-min demo" that shortens to "Demo" on
+ * phones. This header is shared by every route, so applying that would rename
+ * links, drop "Federal IDR guide", "Resources" and "Contact" from sitewide
+ * internal linking, and swap the primary CTA on ~40 pages.
  *
- *   1. Link set and labels below vs. the spec's four.
- *   2. CTA label is PRIMARY_CTA_SHORT_LABEL to /case-review, not the demo ask.
- *   3. The CTA is hidden below sm, so at 390px no CTA is visible in the header.
- *      The spec requires it to stay visible and shorten to "Demo".
+ * The CTA stays PRIMARY_CTA_SHORT_LABEL to /case-review because there is no
+ * booking provider yet. The homepage CTA block withheld its own demo button for
+ * that reason, and a header promising a demo the site cannot book would
+ * reintroduce exactly the problem that decision avoided. See the notes above
+ * CTA_BLOCK in src/lib/content/homepage.ts; the two move together.
  *
- * The spec's own rule 7 says to flag a codebase conflict rather than resolve it.
+ * Still open: the CTA is hidden below sm, so at 390px no CTA is visible in the
+ * header. Phones reach it through the nav drawer and the sticky bottom bar.
  */
 export const PRIMARY_NAV = [
   { href: "/pricing", label: "Pricing" },

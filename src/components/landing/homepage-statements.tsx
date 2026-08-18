@@ -1,5 +1,6 @@
 import { HomepageBand } from "@/components/landing/homepage-band";
 import { CtaLink } from "@/components/ui/cta-link";
+import { THESIS } from "@/lib/content/homepage";
 
 export function UnderuseStatement() {
   return (
@@ -32,14 +33,11 @@ export function ProcessProblemStatement() {
       tone="white"
     >
       <div className="max-w-[720px]">
+        {/* THESIS, not a second wording of it. See the note in landing/hero.tsx. */}
         <h2 className="home-h2 text-brand" id="heading-process-problem">
-          IDR is a process problem, not a legal mystery.
+          {THESIS.heading}
         </h2>
-        <p className="home-lead mt-6 text-body">
-          The rules are published. The deadlines are fixed. The determinations are searchable. Work
-          with that structure is work that can be automated, and most of the industry simply
-          hasn&apos;t gotten around to it yet.
-        </p>
+        <p className="home-lead mt-6 text-body">{THESIS.body}</p>
         <p className="home-lead mt-6 text-body">
           We would welcome a short call to walk through where your out of network volume sits and
           what a realistic pathway looks like. Fifteen minutes is usually enough to tell whether this

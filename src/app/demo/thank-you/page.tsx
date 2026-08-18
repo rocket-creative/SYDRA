@@ -24,7 +24,7 @@ export default function DemoThankYouPage() {
         <h1 className="type-h2 mt-4 text-brand">Request received</h1>
         <p className="mt-6 type-body text-body">
           Check your email for a note from Dr. Abrahams. Our team reviews every request and will
-          follow up within one business day to request your free 15 minute demo.
+          follow up within one business day to request your free 15-minute demo.
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <Button href="/" showArrow>

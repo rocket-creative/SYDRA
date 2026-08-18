@@ -20,8 +20,8 @@ export function SydraAbout() {
                 Sydra was built by{" "}
                 <strong className="text-brand">{FOUNDER_MARKETING_BYLINE}</strong>
                 . The product comes from a working RCM operation that runs claims every day, not a
-                technology startup. He saw billing teams spend 30 minutes per claim on IDR
-                submissions that should take under 5.
+                technology startup. He saw billing teams spend 25 to 40 minutes per claim on IDR
+                submissions that should take about five.
               </p>
               <p>
                 The revenue cycle team trained the system on real determinations. Chelsea leads

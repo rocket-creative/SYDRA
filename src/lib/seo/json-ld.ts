@@ -281,7 +281,7 @@ export function softwareApplicationJsonLd() {
       "Real time eligibility verification 270/271",
       "Prior authorization drafting",
       "CPT code assessment from operative notes",
-      "213+ ingested IDR determinations with 90%+ provider win rate in reference library",
+      "Reference library of 213+ ingested federal IDR determinations, cited per submission",
       "HIPAA controls AWS BAA SOC 2 aligned",
       "ModMed EMR integration Stedi clearinghouse",
     ],
@@ -473,7 +473,7 @@ export function sydraWebsiteJsonLd() {
 export const HOMEPAGE_FAQ_SCHEMA = [
   {
     q: "What's Sydra and who is it for?",
-    a: "Sydra is AI software for federal IDR and NSA dispute resolution, built for surgical billing teams at orthopedic, neurosurgery, spine, and plastic surgery practices. Your billing team operates the software in house, reducing IDR claim preparation from 30 minutes to under 5 minutes per claim. Sydra runs on AWS Bedrock with HIPAA controls and BAA available.",
+    a: "Sydra is AI software for federal IDR and NSA dispute resolution, built for surgical billing teams at orthopedic, neurosurgery, spine, and plastic surgery practices. Your billing team operates the software in house, reducing IDR claim preparation from 25 to 40 minutes to about five minutes per claim, or Sydra prepares and files every dispute for you. Sydra runs on AWS Bedrock with HIPAA controls and BAA available.",
   },
   {
     q: "How does Sydra reduce IDR prep time?",

@@ -65,6 +65,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
     title: "How often properly filed disputes win.",
     paragraphs: [
       "88 percent of properly filed federal IDR disputes result in a provider win, according to Georgetown University CHIR, March 2026. Across 3.4 million disputes through June 2025, 87 percent of awards exceeded the qualifying payment amount, and the median award ran roughly 4.5 times the in network rate.",
+      "Those last two figures use different baselines, and mixing them will mislead you. How often providers beat the plan is measured against the qualifying payment amount. How large the awards run is measured against the in network rate. A multiple quoted against one baseline cannot be compared with a multiple quoted against the other, so check which one any figure names before you plan around it.",
       "Two numbers explain why the opportunity persists. Roughly 10 percent of eligible claims are estimated to reach arbitration at all. And 44 percent of 2024 IDR cases were challenged as ineligible, usually on administrative grounds that correct preparation prevents.",
     ],
   },
