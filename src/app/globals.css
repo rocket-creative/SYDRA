@@ -342,10 +342,30 @@ h4 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+/* Emphasis step for the hero kicker. Pairs with .home-eyebrow, never replaces it. */
+.home-eyebrow-strong {
+  font-size: 13px;
+  font-weight: 700;
+}
+/*
+ * Hero H1 only, heavier and larger than .type-h1. Weight carries most of the
+ * emphasis because the vertical budget is nearly spent: #thesis must stay above
+ * 660px at 1440x760 and sits at ~650px, so the desktop step is capped at 50px
+ * and the line height tightened to 1.1 to pay for it.
+ */
+.home-hero-h1 {
+  font-size: clamp(2rem, 3.6vw, 3.125rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
 
 @media (min-width: 768px) {
   .home-h1 {
     font-size: 44px;
+  }
+  .home-eyebrow-strong {
+    font-size: 14px;
   }
   .home-h2 {
     font-size: 30px;

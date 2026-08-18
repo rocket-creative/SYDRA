@@ -1,10 +1,13 @@
+import Image from "next/image";
+
 import { HERO, PROOF_CELLS, THESIS } from "@/lib/content/homepage";
 
 /**
  * The hero, proof strip and thesis line share one vertical budget with the path
  * cards. Padding is tighter than the sitewide --space-section rhythm and the
- * headings use the compact end of the existing type scale (type-h1, type-h2)
- * rather than the larger home-h1 / home-h2 steps.
+ * thesis heading uses the compact type-h2 step rather than the larger home-h2.
+ * The hero H1 gets its own home-hero-h1 step, sized to the headroom the fold
+ * budget leaves once the cards, proof strip and thesis are placed.
  *
  * Base classes are the phone layout, sized for legibility: 14px body copy, 16px
  * card padding, 12px floor on the proof strip. The lg: overrides then compress
@@ -17,16 +20,43 @@ const INNER = "mx-auto w-full max-w-[1200px]";
 /**
  * Kept deliberately short on phones. The four path cards below it are the page's
  * primary navigation, so the hero should not eat half the first screen.
+ *
+ * From md the hero is an 8/4 split, copy left and photo right. The photo is
+ * absolutely positioned inside its column, so it contributes no intrinsic height
+ * and the grid row is sized by the copy: the band stays 179px and the desktop
+ * fold budget is unchanged. The 8 columns are also what keeps the H1 on one
+ * line, which needs 752px at its 50px cap against 789px of column.
  */
 export function Hero() {
   return (
     <section className={`bg-white pt-5 pb-4 lg:pt-3 ${BAND}`} id="hero">
-      <div className={`${INNER} text-left md:text-center`}>
-        <p className="home-eyebrow text-[var(--color-accent)]">{HERO.kicker}</p>
-        <h1 className="type-h1 mt-2 text-brand">{HERO.h1}</h1>
-        <p className="home-lead mt-3 max-w-[54ch] text-balance text-body md:mx-auto lg:mt-2">
-          {HERO.subhead}
-        </p>
+      <div className={`${INNER} text-left`}>
+        <div className="md:grid md:grid-cols-12 md:gap-x-8">
+          <div className="md:col-span-8">
+            <p className="home-eyebrow home-eyebrow-strong text-[var(--color-accent)]">
+              {HERO.kicker}
+            </p>
+            <h1 className="home-hero-h1 mt-2 text-brand">{HERO.h1}</h1>
+            <p className="home-lead mt-3 max-w-[54ch] text-balance text-body lg:mt-2">
+              {HERO.subhead}
+            </p>
+          </div>
+          {/*
+           * Phones get a fixed shallow band under the copy rather than the
+           * stretched column, so the headline still opens the page and the cards
+           * stay as close to the first screen as the copy allows.
+           */}
+          <div className="hero-image-in relative mt-5 h-[clamp(7rem,20dvh,9rem)] overflow-hidden rounded-[2px] bg-surface-muted md:col-span-4 md:mt-0 md:h-auto">
+            <Image
+              alt="Billing specialist reviewing out of network claim data on dual monitors"
+              className="object-cover object-[72%_48%]"
+              fill
+              priority
+              sizes="(min-width: 768px) 30vw, 100vw"
+              src="/images/editorial/postcard-hero-billing.png"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
