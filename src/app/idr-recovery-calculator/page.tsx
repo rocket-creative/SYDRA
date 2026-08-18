@@ -12,6 +12,7 @@ import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import {
   IDR_RECOVERY_CALCULATOR_CTA_LEAD,
@@ -71,6 +72,14 @@ export default function IdrRecoveryCalculatorPage() {
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>
+          <EditorialImage
+            alt="Two billing specialists reviewing recovery figures on screen"
+            aspect="16/9"
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            src="/images/editorial/billing-team-screen-review.png"
+          />
         </Section>
 
         <Section ariaLabelledby="heading-calculator-tool" sidebarLabel="Estimate" tone="neutral">

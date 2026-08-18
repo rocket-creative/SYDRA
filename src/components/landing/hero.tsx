@@ -49,12 +49,12 @@ export function Hero({ stateDisplay }: HeroProps) {
     >
       <div className="relative h-[clamp(7.5rem,22dvh,10rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
         <Image
-          alt="Surgical practice billing team preparing out of network claims for federal IDR"
-          className="object-cover object-[center_20%] md:object-right"
+          alt="Surgeon at an office window overlooking the hospital campus"
+          className="object-cover object-[center_25%] md:object-right"
           fill
           priority
           sizes="100vw"
-          src="/images/editorial/postcard-hero-billing.png"
+          src="/images/editorial/senior-surgeon-window.png"
         />
       </div>
 

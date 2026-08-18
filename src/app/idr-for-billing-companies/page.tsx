@@ -12,6 +12,7 @@ import { RecoveryCalculator } from "@/components/sydra/recovery-calculator";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import {
   IDR_FOR_BILLING_CTA_BAND,
@@ -81,6 +82,14 @@ export default function IdrForBillingCompaniesPage() {
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>
+          <EditorialImage
+            alt="Revenue cycle team tracking claim dashboards in an open office"
+            aspect="16/9"
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            src="/images/editorial/rcm-office-dashboards.png"
+          />
           <HeroProofStack className="mt-12" items={[...IDR_FOR_BILLING_STATS]} />
         </Section>
 

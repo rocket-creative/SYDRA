@@ -10,6 +10,7 @@ import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import {
@@ -87,6 +88,14 @@ export default function WhatIsIdrPage() {
               </p>
             ))}
           </header>
+          <EditorialImage
+            alt="Clinician carrying claim paperwork through a hospital corridor"
+            aspect="16/9"
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            src="/images/editorial/hospital-corridor-claims.png"
+          />
         </Section>
 
         <Section tone="neutral">

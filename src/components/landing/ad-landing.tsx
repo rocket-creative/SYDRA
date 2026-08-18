@@ -62,12 +62,12 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
       >
         <div className="relative h-[clamp(10rem,32dvh,16rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
           <Image
-            alt="Billing specialist reviewing claim paperwork at a laptop in a modern office"
+            alt="A practice reviewing out of network claim options with advisors"
             className="object-cover object-[center_30%] md:object-right"
             fill
             priority
             sizes="100vw"
-            src="/images/editorial/recover-hero-billing.png"
+            src="/images/editorial/boardroom-advisors-review.png"
           />
         </div>
 

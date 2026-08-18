@@ -7,6 +7,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { CtaLink } from "@/components/ui/cta-link";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import {
@@ -111,6 +112,14 @@ export default function SydraVsAttorneyPage() {
             </h1>
             <p className={textStyles.pageLead}>{SYDRA_VS_ATTORNEY_HERO.lead}</p>
           </header>
+          <EditorialImage
+            alt="An attorney reviewing an out of network claim file page by page"
+            aspect="16/9"
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            src="/images/editorial/executive-document-review.png"
+          />
           <OptionsComparisonTable />
         </Section>
 

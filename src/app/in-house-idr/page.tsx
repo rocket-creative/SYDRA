@@ -10,6 +10,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import {
@@ -68,6 +69,14 @@ export default function InHouseIdrPage() {
             </h1>
             <p className={textStyles.pageLead}>{IN_HOUSE_IDR_HERO.lead}</p>
           </header>
+          <EditorialImage
+            alt="Billing specialist reviewing an out of network claim at a standing desk"
+            aspect="16/9"
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            src="/images/editorial/biller-standing-desk.png"
+          />
         </Section>
 
         <Section ariaLabelledby="heading-labor-math" sidebarLabel="Your team's time" tone="neutral">

@@ -6,6 +6,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { StickyConversionBar } from "@/components/sydra/sticky-conversion-bar";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import {
   getSalesEmail,
@@ -73,6 +74,14 @@ export default function ContactPage() {
                 Different questions go to different places. Use the guide below.
               </p>
             </header>
+            <EditorialImage
+              alt="A practice manager and a surgeon shaking hands in a hospital lobby"
+              aspect="16/9"
+              className="mt-10"
+              eager
+              sizes="(max-width: 1024px) 100vw, 1200px"
+              src="/images/editorial/attorney-surgeon-handshake.png"
+            />
           </Section>
 
           <Section className="order-2 lg:order-3" sidebarLabel="Demo" tone="white">
