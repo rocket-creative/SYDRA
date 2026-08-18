@@ -11,6 +11,7 @@ import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import {
   IN_HOUSE_IDR_FAQS,
   IN_HOUSE_IDR_HERO,
@@ -54,7 +55,11 @@ export default function InHouseIdrPage() {
   return (
     <>
       <InHouseIdrJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.inHouseIdr]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.inHouseIdr]}
+        stickyCtaHref={caseReviewUrl("in-house-idr-sticky")}
+      >
         <Section ariaLabelledby="heading-in-house-idr" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-in-house-idr">

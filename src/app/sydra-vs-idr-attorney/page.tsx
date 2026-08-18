@@ -8,6 +8,7 @@ import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { CtaLink } from "@/components/ui/cta-link";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import {
   OPTIONS_COMPARED_SECTIONS,
   OPTIONS_COMPARISON_COLUMNS,
@@ -98,7 +99,11 @@ export default function SydraVsAttorneyPage() {
   return (
     <>
       <SydraVsAttorneyJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.sydraVsAttorney]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.sydraVsAttorney]}
+        stickyCtaHref={caseReviewUrl("options-compared-sticky")}
+      >
         <Section ariaLabelledby="heading-sydra-vs-attorney" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-sydra-vs-attorney">

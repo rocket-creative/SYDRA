@@ -43,7 +43,11 @@ export default function AboutPage() {
   return (
     <>
       <AboutPageJsonLd team={team} />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.about]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.about]}
+        stickyCtaHref={caseReviewUrl("about-sticky")}
+      >
         <Section ariaLabelledby="heading-about" tone="white">
         <header className="prose-measure">
           <h1 className={textStyles.pageTitle} id="heading-about">

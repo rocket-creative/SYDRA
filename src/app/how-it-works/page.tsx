@@ -9,6 +9,7 @@ import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import {
   DOCX_SECTION,
   HOW_IT_WORKS_HERO,
@@ -73,7 +74,11 @@ export default function HowItWorksPage() {
   return (
     <>
       <HowItWorksJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.howItWorks]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.howItWorks]}
+        stickyCtaHref={caseReviewUrl("how-it-works-sticky")}
+      >
         <Section ariaLabelledby="heading-how-it-works" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-how-it-works">

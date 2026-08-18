@@ -7,6 +7,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import { RESOURCE_ARTICLES } from "@/lib/content/resources/articles";
 import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -41,7 +42,11 @@ export default function ResourcesPage() {
   return (
     <>
       <ResourcesJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.resources]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.resources]}
+        stickyCtaHref={caseReviewUrl("resources-sticky")}
+      >
         <Section ariaLabelledby="heading-resources" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-resources">

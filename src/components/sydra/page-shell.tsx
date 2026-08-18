@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 
-import { ProgrammaticStickyCta } from "@/components/idr/programmatic-sticky-cta";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { BreadcrumbNav } from "@/components/sydra/breadcrumb-nav";
+import { StickyPageCta } from "@/components/sydra/sticky-page-cta";
+import { PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
 
 type SydraPageShellProps = {
   children: ReactNode;
@@ -14,6 +15,11 @@ type SydraPageShellProps = {
   hasMobileCtaBar?: boolean;
   /** Programmatic pages: sticky "Send us this denial" bar under 768px. */
   stickyDemoHref?: string;
+  /**
+   * Long content pages: sticky claim review bar under 1024px, so phones reach
+   * the ask without scrolling to the closing section.
+   */
+  stickyCtaHref?: string;
   /**
    * Render children as full-bleed alternating Section bands instead of a single
    * padded white article column. Children should be <Section> elements.
@@ -29,11 +35,23 @@ export function SydraPageShell({
   mainClassName,
   hasMobileCtaBar = false,
   stickyDemoHref,
+  stickyCtaHref,
   banded = false,
 }: SydraPageShellProps) {
-  const reserveMobileBar = hasMobileCtaBar || Boolean(stickyDemoHref);
-  const mobileCtaBreakpoint = stickyDemoHref && !hasMobileCtaBar ? "md" : "lg";
-  const sticky = stickyDemoHref ? <ProgrammaticStickyCta href={stickyDemoHref} /> : null;
+  const reserveMobileBar =
+    hasMobileCtaBar || Boolean(stickyDemoHref) || Boolean(stickyCtaHref);
+  const mobileCtaBreakpoint =
+    stickyDemoHref && !hasMobileCtaBar && !stickyCtaHref ? "md" : "lg";
+  const sticky = stickyDemoHref ? (
+    <StickyPageCta
+      hideAt="md"
+      href={stickyDemoHref}
+      label="Send us this denial"
+      placement="programmatic-sticky"
+    />
+  ) : stickyCtaHref ? (
+    <StickyPageCta href={stickyCtaHref} label={PRIMARY_CTA_SHORT_LABEL} />
+  ) : null;
 
   if (banded) {
     return (

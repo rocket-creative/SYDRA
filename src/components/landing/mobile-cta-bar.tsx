@@ -51,7 +51,7 @@ export function MobileCtaBar({ tracking, scrollTargetId = "lead-form" }: MobileC
   if (targetVisible || keyboardOpen) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 pb-safe-bottom lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 pb-safe-bottom lg:hidden" data-sticky-cta>
       <div className="flex border-t border-rule bg-white">
         <a
           aria-label="Call Sydra"

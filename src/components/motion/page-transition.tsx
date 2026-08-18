@@ -22,7 +22,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
     <div
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(6px)",
+        // Must settle on "none": any transform here would make this div the
+        // containing block for fixed descendants, unpinning the sticky CTA bars.
+        transform: visible ? "none" : "translateY(6px)",
         transition:
           "opacity 400ms cubic-bezier(0.16,1,0.3,1), transform 400ms cubic-bezier(0.16,1,0.3,1)",
       }}

@@ -8,6 +8,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import { GUIDES } from "@/lib/idr/guides";
 import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -47,7 +48,11 @@ export default function GuideIndexPage() {
           ),
         ]}
       />
-      <SydraPageShell banded breadcrumb={crumbs}>
+      <SydraPageShell
+        banded
+        breadcrumb={crumbs}
+        stickyCtaHref={caseReviewUrl("idr-guide-sticky")}
+      >
         <Section ariaLabelledby="heading-idr-guides" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-idr-guides">

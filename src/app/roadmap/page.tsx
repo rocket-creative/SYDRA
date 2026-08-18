@@ -5,6 +5,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import { ROADMAP_FAQ, ROADMAP_HERO, ROADMAP_ITEMS } from "@/lib/content/roadmap-page";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -42,7 +43,11 @@ export default function RoadmapPage() {
   return (
     <>
       <RoadmapPageJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.roadmap]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.roadmap]}
+        stickyCtaHref={caseReviewUrl("roadmap-sticky")}
+      >
         <Section ariaLabelledby="heading-roadmap" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-roadmap">

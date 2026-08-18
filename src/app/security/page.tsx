@@ -7,6 +7,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import { salesMailtoHref } from "@/lib/contact";
 import {
   SECURITY_CTA,
@@ -56,7 +57,11 @@ export default function SecurityPage() {
   return (
     <>
       <SecurityPageJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.security]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.security]}
+        stickyCtaHref={caseReviewUrl("security-sticky")}
+      >
         <Section ariaLabelledby="heading-security" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-security">

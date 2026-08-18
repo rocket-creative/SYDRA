@@ -11,6 +11,7 @@ import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
+import { caseReviewUrl } from "@/lib/case-review";
 import {
   WHAT_IS_IDR_CTA_LEAD,
   WHAT_IS_IDR_FAQS,
@@ -69,7 +70,11 @@ export default function WhatIsIdrPage() {
   return (
     <>
       <WhatIsIdrJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.whatIsIdr]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.whatIsIdr]}
+        stickyCtaHref={caseReviewUrl("what-is-idr-sticky")}
+      >
         <Section ariaLabelledby="heading-what-is-idr" tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-what-is-idr">
