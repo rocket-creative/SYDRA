@@ -147,6 +147,40 @@ for (const route of ROUTES) {
       `Sub-44px tap targets on ${route.path} at ${width}px: ${JSON.stringify(smallTargets, null, 2)}`,
     ).toEqual([]);
 
+    // 4) Header integrity. The logo must keep its full width and never sit
+    //    under another header control. Regression guard for the header CTA,
+    //    whose component base class sets `inline-flex` and once beat a
+    //    `hidden` utility, squeezing the logo link to zero width on phones.
+    const headerLayout = await page.evaluate(() => {
+      const header = document.querySelector("header");
+      if (!header) return null;
+      const box = (el: Element | null) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        if (r.width === 0 && r.height === 0) return null;
+        return { left: Math.round(r.left), right: Math.round(r.right), width: Math.round(r.width) };
+      };
+      const logoLink = header.querySelector('a[aria-label="Sydra home"]');
+      return {
+        logoLink: box(logoLink),
+        logoImg: box(logoLink?.querySelector("img") ?? null),
+        cta: box(header.querySelector('a[href*="case-review"]')),
+      };
+    });
+
+    expect(headerLayout?.logoImg, `Header logo should render on ${route.path}`).toBeTruthy();
+    expect(
+      headerLayout!.logoImg!.right,
+      `Header logo overflows its link box on ${route.path} at ${width}px: ${JSON.stringify(headerLayout)}`,
+    ).toBeLessThanOrEqual(headerLayout!.logoLink!.right + 1);
+
+    if (headerLayout?.cta) {
+      expect(
+        headerLayout.cta.left,
+        `Header CTA overlaps the logo on ${route.path} at ${width}px: ${JSON.stringify(headerLayout)}`,
+      ).toBeGreaterThanOrEqual(headerLayout.logoImg!.right);
+    }
+
     if (route.path === "/") {
       const leadFormPlacement = await page.evaluate(() => {
         const form = document.getElementById("lead-form");
@@ -170,7 +204,14 @@ for (const route of ROUTES) {
       await expect(drawerNav).toBeVisible();
       const pricingLink = drawerNav.getByRole("link", { name: "Pricing" });
       await expect(pricingLink).toBeVisible();
-      await expect(pricingLink).toHaveCSS("min-height", "44px");
+      // WCAG 2.5.8 floor, not an exact value: drawer links carry min-h-12 (48px).
+      const pricingMinHeight = await pricingLink.evaluate((el) =>
+        parseFloat(getComputedStyle(el).minHeight),
+      );
+      expect(
+        pricingMinHeight,
+        "drawer links should reserve at least a 44px tap target",
+      ).toBeGreaterThanOrEqual(MIN_TAP);
 
       // Drawer must cover the viewport, not be trapped inside the sticky header
       // (a leftover transform on header creates a fixed containing block).

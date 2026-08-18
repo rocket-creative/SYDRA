@@ -40,6 +40,11 @@ const sampleUpdate =
 /** Static routes (every non-parameterized page in src/app). */
 const STATIC_ROUTES: MobileRoute[] = [
   { name: "home", path: "/" },
+  { name: "case-review", path: "/case-review" },
+  { name: "case-review-sample", path: "/case-review/sample" },
+  { name: "case-review-thank-you", path: "/case-review/thank-you" },
+  { name: "recover", path: "/recover" },
+  { name: "recover-thank-you", path: "/recover/thank-you" },
   { name: "demo", path: "/demo" },
   { name: "demo-thank-you", path: "/demo/thank-you" },
   { name: "pricing", path: "/pricing" },
@@ -59,6 +64,7 @@ const STATIC_ROUTES: MobileRoute[] = [
   { name: "about", path: "/about" },
   { name: "contact", path: "/contact" },
   { name: "privacy", path: "/privacy" },
+  { name: "do-not-sell", path: "/do-not-sell" },
   { name: "terms", path: "/terms" },
   { name: "idr", path: "/idr" },
   { name: "idr-guide", path: "/idr/guide" },
