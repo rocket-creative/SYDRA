@@ -71,6 +71,21 @@ export function Homepage({ tracking, path }: HomepageProps) {
       <ProofStrip />
       <Thesis />
 
+      {/*
+        Mid-page lead capture, horizontal band. It sits after the thesis line
+        rather than directly under the proof strip because the enforced fold
+        budget (spec 3) requires #thesis to end above 660px at 1440x760, and it
+        already ends at 654px. The card at the foot of the page keeps its own
+        anchor, so both mount the same form with separate field ids.
+      */}
+      <Suspense fallback={<div className="h-[420px] animate-pulse bg-neutral-section" />}>
+        <SharedLeadForm
+          anchorId="claim-review-form"
+          landingPage="home-band"
+          variant="band"
+        />
+      </Suspense>
+
       <PathDetails />
       <Results />
 

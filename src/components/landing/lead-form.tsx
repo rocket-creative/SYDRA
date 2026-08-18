@@ -52,8 +52,12 @@ type LeadFormIntent = "demo" | "case-review";
 type LeadFormProps = {
   defaultState: string;
   tracking: CampaignTracking;
-  /** "section" renders a full page section. "card" renders a compact white card for the hero. */
-  variant?: "section" | "card";
+  /**
+   * "section" renders a full page section. "card" renders a compact white card
+   * for the hero. "band" renders a full width horizontal strip: copy on the
+   * left, fields on the right, step 1 as a single email row.
+   */
+  variant?: "section" | "card" | "band";
   /** DOM id for scroll targets. Defaults to lead-form. */
   anchorId?: string;
   /** Thank-you redirect after a full lead. Defaults to /demo/thank-you. */
@@ -202,6 +206,7 @@ function LeadFormInner({
   const prefillState = resolvePrefillState(urlState, defaultState, tracking.state);
 
   const isCard = variant === "card";
+  const isBand = variant === "band";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneValues>({ email: "" });
   const [partialSent, setPartialSent] = useState(false);
@@ -273,10 +278,20 @@ function LeadFormInner({
 
   const headingClass = isCard
     ? "text-[1.625rem] font-semibold leading-tight tracking-[-0.02em] text-brand md:text-[1.875rem] lg:text-[2.125rem]"
-    : "type-h2 prose-measure font-semibold text-brand";
+    : isBand
+      ? "type-h2 font-semibold text-brand"
+      : "type-h2 prose-measure font-semibold text-brand";
   const formClass = isCard
     ? "relative mt-6 space-y-6"
-    : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-6 md:p-10";
+    : isBand
+      ? "relative mt-4 space-y-5"
+      : "relative mt-10 max-w-2xl space-y-8 rounded-[2px] bg-white p-6 md:p-10";
+  /** Step 2 asks for six fields. The band pairs them into columns instead of one tall stack. */
+  const fieldStackClass = isBand
+    ? "grid gap-x-6 gap-y-5 sm:grid-cols-2"
+    : isCard
+      ? "space-y-6"
+      : "space-y-8";
   const headingId = `heading-${anchorId}`;
   const fieldId = (name: string) => `${anchorId}-${name}`;
 
@@ -443,11 +458,11 @@ function LeadFormInner({
     ],
   );
 
-  return wrap(
+  const intro = (
     <>
       {estimate ? (
         <p
-          className={`mb-3 text-sm leading-relaxed text-brand ${isCard ? "" : "prose-measure"}`}
+          className={`mb-3 text-sm leading-relaxed text-brand ${isCard || isBand ? "" : "prose-measure"}`}
           data-calculator-handoff
         >
           Your estimate: {formatAnnualEstimate(estimate.annualRecovery)} per year in recoverable
@@ -458,16 +473,32 @@ function LeadFormInner({
         {copy.headline}
       </h2>
       <p
-        className={`mt-3 type-body text-body ${isCard ? "text-[15px] leading-relaxed" : "prose-measure mt-4"}`}
+        className={`mt-3 type-body text-body ${isCard || isBand ? "text-[15px] leading-relaxed" : "prose-measure mt-4"}`}
       >
         {copy.body}
       </p>
+    </>
+  );
 
-      <p className="mt-4 type-caption text-body" aria-live="polite">
-        {step === 1 ? "Start with your work email" : "Almost done"}
-      </p>
+  const stepLabel = (
+    <p className="mt-4 type-caption text-body" aria-live="polite">
+      {step === 1 ? "Start with your work email" : "Almost done"}
+    </p>
+  );
 
-      {step === 1 ? (
+  const stepOneSubmit = (
+    <Button
+      className="w-full sm:w-auto"
+      disabled={formStatus.status === "submitting"}
+      showArrow
+      type="submit"
+    >
+      {formStatus.status === "submitting" ? "Submitting…" : copy.stepOneCta}
+    </Button>
+  );
+
+  const formElement =
+    step === 1 ? (
         <form
           action="/api/postcard-lead"
           className={formClass}
@@ -477,19 +508,28 @@ function LeadFormInner({
           <input name="route_state" type="hidden" value={routeCtx.state} />
           <input name="route_code" type="hidden" value={routeCtx.code} />
 
-          <FormField id={fieldId("email")} label="Work email" required>
-            <input
-              required
-              aria-required="true"
-              autoComplete="email"
-              className={editorialInputClass}
-              defaultValue={stepOne.email}
+          {/* The band puts the field and its button on one row, so the strip stays shallow. */}
+          <div className={isBand ? "flex flex-col gap-4 sm:flex-row sm:items-end" : ""}>
+            <FormField
+              className={isBand ? "min-w-0 flex-1" : ""}
               id={fieldId("email")}
-              inputMode="email"
-              name="email"
-              type="email"
-            />
-          </FormField>
+              label="Work email"
+              required
+            >
+              <input
+                required
+                aria-required="true"
+                autoComplete="email"
+                className={editorialInputClass}
+                defaultValue={stepOne.email}
+                id={fieldId("email")}
+                inputMode="email"
+                name="email"
+                type="email"
+              />
+            </FormField>
+            {isBand ? <div className="shrink-0">{stepOneSubmit}</div> : null}
+          </div>
 
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
             <label htmlFor={fieldId("website")}>Website</label>
@@ -512,14 +552,7 @@ function LeadFormInner({
 
           <MarketingConsentFields />
 
-          <Button
-            className="w-full sm:w-auto"
-            disabled={formStatus.status === "submitting"}
-            showArrow
-            type="submit"
-          >
-            {formStatus.status === "submitting" ? "Submitting…" : copy.stepOneCta}
-          </Button>
+          {isBand ? null : stepOneSubmit}
         </form>
       ) : (
         <form
@@ -543,121 +576,123 @@ function LeadFormInner({
             value={stepOne.email}
           />
 
-          <FormField id={fieldId("practiceName")} label="Practice name" required>
-            <input
-              required
-              aria-required="true"
-              autoComplete="organization"
-              className={editorialInputClass}
-              id={fieldId("practiceName")}
-              name="practiceName"
-              type="text"
-            />
-          </FormField>
+          <div className={fieldStackClass}>
+            <FormField id={fieldId("practiceName")} label="Practice name" required>
+              <input
+                required
+                aria-required="true"
+                autoComplete="organization"
+                className={editorialInputClass}
+                id={fieldId("practiceName")}
+                name="practiceName"
+                type="text"
+              />
+            </FormField>
 
-          <FormField id={fieldId("name")} label="Your name" required>
-            <input
-              required
-              aria-required="true"
-              autoComplete="name"
-              className={editorialInputClass}
-              id={fieldId("name")}
-              name="name"
-              type="text"
-            />
-          </FormField>
+            <FormField id={fieldId("name")} label="Your name" required>
+              <input
+                required
+                aria-required="true"
+                autoComplete="name"
+                className={editorialInputClass}
+                id={fieldId("name")}
+                name="name"
+                type="text"
+              />
+            </FormField>
 
-          <FormField id={fieldId("role")} label="Role" required>
-            <select
-              required
-              aria-required="true"
-              className={editorialSelectClass}
-              defaultValue=""
-              id={fieldId("role")}
-              name="role"
-            >
-              <option disabled value="">
-                Select role
-              </option>
-              {LANDING_ROLE_OPTIONS.map((value) => (
-                <option key={value} value={value}>
-                  {LANDING_ROLE_LABELS[value]}
+            <FormField id={fieldId("role")} label="Role" required>
+              <select
+                required
+                aria-required="true"
+                className={editorialSelectClass}
+                defaultValue=""
+                id={fieldId("role")}
+                name="role"
+              >
+                <option disabled value="">
+                  Select role
                 </option>
-              ))}
-            </select>
-          </FormField>
-
-          <FormField id={fieldId("phone")} label="Phone" required>
-            <input
-              required
-              aria-required="true"
-              autoComplete="tel"
-              className={editorialInputClass}
-              id={fieldId("phone")}
-              inputMode="tel"
-              name="phone"
-              type="tel"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-            />
-          </FormField>
-
-          <FormField id={fieldId("state")} label="State" required>
-            <select
-              required
-              aria-required="true"
-              className={editorialSelectClass}
-              defaultValue={prefillState || ""}
-              id={fieldId("state")}
-              name="state"
-            >
-              <option disabled value="">
-                Select state
-              </option>
-              <optgroup label="Launch states">
-                {US_STATES.filter((s) =>
-                  (SUPPORTED_STATES as readonly string[]).includes(s.code),
-                ).map((s) => (
-                  <option key={s.code} value={s.code}>
-                    {s.name} ({s.code})
+                {LANDING_ROLE_OPTIONS.map((value) => (
+                  <option key={value} value={value}>
+                    {LANDING_ROLE_LABELS[value]}
                   </option>
                 ))}
-              </optgroup>
-              <optgroup label="All states">
-                {US_STATES.filter(
-                  (s) => !(SUPPORTED_STATES as readonly string[]).includes(s.code),
-                ).map((s) => (
-                  <option key={s.code} value={s.code}>
-                    {s.name} ({s.code})
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-          </FormField>
+              </select>
+            </FormField>
 
-          <FormField
-            id={fieldId("disputesPerMonth")}
-            label="Monthly out of network claim volume"
-            required
-          >
-            <select
-              required
-              aria-required="true"
-              className={editorialSelectClass}
-              defaultValue=""
+            <FormField id={fieldId("phone")} label="Phone" required>
+              <input
+                required
+                aria-required="true"
+                autoComplete="tel"
+                className={editorialInputClass}
+                id={fieldId("phone")}
+                inputMode="tel"
+                name="phone"
+                type="tel"
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+              />
+            </FormField>
+
+            <FormField id={fieldId("state")} label="State" required>
+              <select
+                required
+                aria-required="true"
+                className={editorialSelectClass}
+                defaultValue={prefillState || ""}
+                id={fieldId("state")}
+                name="state"
+              >
+                <option disabled value="">
+                  Select state
+                </option>
+                <optgroup label="Launch states">
+                  {US_STATES.filter((s) =>
+                    (SUPPORTED_STATES as readonly string[]).includes(s.code),
+                  ).map((s) => (
+                    <option key={s.code} value={s.code}>
+                      {s.name} ({s.code})
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="All states">
+                  {US_STATES.filter(
+                    (s) => !(SUPPORTED_STATES as readonly string[]).includes(s.code),
+                  ).map((s) => (
+                    <option key={s.code} value={s.code}>
+                      {s.name} ({s.code})
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+            </FormField>
+
+            <FormField
               id={fieldId("disputesPerMonth")}
-              name="disputesPerMonth"
+              label="Monthly out of network claim volume"
+              required
             >
-              <option disabled value="">
-                Select volume
-              </option>
-              {DISPUTES_PER_MONTH_OPTIONS.map((value) => (
-                <option key={value} value={value}>
-                  {DISPUTES_LABELS[value]}
+              <select
+                required
+                aria-required="true"
+                className={editorialSelectClass}
+                defaultValue=""
+                id={fieldId("disputesPerMonth")}
+                name="disputesPerMonth"
+              >
+                <option disabled value="">
+                  Select volume
                 </option>
-              ))}
-            </select>
-          </FormField>
+                {DISPUTES_PER_MONTH_OPTIONS.map((value) => (
+                  <option key={value} value={value}>
+                    {DISPUTES_LABELS[value]}
+                  </option>
+                ))}
+              </select>
+            </FormField>
+          </div>
 
           {copy.showProductInterest ? (
             <fieldset>
@@ -734,7 +769,31 @@ function LeadFormInner({
             </Button>
           </div>
         </form>
-      )}
+      );
+
+  if (isBand) {
+    return (
+      <section
+        aria-labelledby={headingId}
+        className="border-y border-rule bg-neutral-section px-4 py-10 md:px-6 md:py-12 lg:px-8"
+        id={anchorId}
+      >
+        <div className="mx-auto grid w-full max-w-[1200px] gap-8 lg:grid-cols-12 lg:items-start lg:gap-x-12">
+          <div className="lg:col-span-5">{intro}</div>
+          <div className="lg:col-span-7">
+            {stepLabel}
+            {formElement}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return wrap(
+    <>
+      {intro}
+      {stepLabel}
+      {formElement}
     </>,
     { labelledBy: headingId, sidebarLabel: "Get started" },
   );

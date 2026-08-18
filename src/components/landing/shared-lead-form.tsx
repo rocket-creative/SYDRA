@@ -33,7 +33,7 @@ type SharedLeadFormProps = {
   intent?: LeadFormIntent;
   /** Overrides the per-intent default. */
   thankYouPath?: string;
-  variant?: "section" | "card";
+  variant?: "section" | "card" | "band";
 };
 
 export function SharedLeadForm({
