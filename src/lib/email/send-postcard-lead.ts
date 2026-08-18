@@ -11,6 +11,11 @@ import {
   leadCopyBcc,
   leadTeamNotifyAddresses,
 } from "@/lib/email/inbox-recipients";
+import {
+  LEAD_THANK_YOU_SUBJECT,
+  buildLeadThankYouHtml,
+  buildLeadThankYouPlain,
+} from "@/lib/email/lead-thank-you";
 import { DISPUTES_LABELS } from "@/lib/schemas/demo-request";
 import {
   LANDING_PRODUCT_LABELS,
@@ -194,6 +199,21 @@ export async function sendPostcardLeadEmail(
 
   if (error) {
     return { ok: false, error: error.message };
+  }
+
+  if (isPartial) {
+    const { error: thankYouError } = await resend.emails.send({
+      from: getLeadFromEmail(),
+      to: [data.email],
+      ...leadCopyBcc(),
+      replyTo: getSalesEmail(),
+      subject: LEAD_THANK_YOU_SUBJECT,
+      text: buildLeadThankYouPlain(),
+      html: buildLeadThankYouHtml(),
+    });
+    if (thankYouError) {
+      console.error("Postcard thank you email failed:", thankYouError.message);
+    }
   }
 
   if (!isPartial) {
