@@ -1,11 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
+import {
+  getSalesEmail,
+  salesMailtoHref,
+  SALES_PHONE_DISPLAY,
+  SALES_PHONE_TEL,
+} from "@/lib/contact";
 
 const ADDRESS = "244 Westchester Ave, Ste 209, West Harrison, NY 10604";
-const PHONE_DISPLAY = "(914) 705 6830";
-const PHONE_TEL = "tel:+19147056830";
+const PHONE_DISPLAY = SALES_PHONE_DISPLAY;
+const PHONE_TEL = SALES_PHONE_TEL;
 
 const footerLink =
   "underline decoration-rule underline-offset-4 transition-colors hover:text-[var(--color-hero)]";

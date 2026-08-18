@@ -36,9 +36,12 @@ const FORM_ROUTES = [
 const EXPECTED_STEP_ONE = ["email"];
 const EXPECTED_STEP_TWO = ["practiceName", "name", "role", "phone", "state", "disputesPerMonth"];
 
-/** Path sections must reach the page written for that audience. */
+/**
+ * Path sections must reach the page written for that audience. /demo is absent on
+ * purpose: the demo CTA is withheld until a booking provider is live, so the
+ * homepage offers a phone call, the calculator, and the embedded form instead.
+ */
 const REQUIRED_LINKS = [
-  "/demo",
   "/idr-recovery-calculator",
   "/how-it-works",
   "/sydra-vs-idr-attorney",
@@ -157,8 +160,18 @@ async function main() {
     'homepage keeps the "Ask a question" mailto',
   );
   record(
+    links.filter((h) => h === "tel:+19147056830").length >= 5,
+    "every CTA block offers the published number as a tel: link",
+    `tel links found: ${links.filter((h) => h?.startsWith("tel:")).length}`,
+  );
+  const bodyText = await page.evaluate(() => document.querySelector("main").innerText);
+  record(
+    bodyText.includes("(914) 705 6830"),
+    "the number renders as readable text, not just an href",
+  );
+  record(
     !links.some((h) => h?.startsWith("mailto:") && h.includes("Demo%20request")),
-    "homepage demo CTA points at a form, not a mailto",
+    "no mailto stands in for a demo booking",
   );
 
   // 5. No broken internal links.

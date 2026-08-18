@@ -102,7 +102,7 @@ function expectedStrings() {
   for (const row of PRACTICE_B.rows) strings.push(row.metric, row.sydra, row.prior);
 
   strings.push(RESULTS_DISCLAIMER);
-  strings.push(CTA_BLOCK.heading, CTA_BLOCK.body, CTA_BLOCK.demo, CTA_BLOCK.calculator, CTA_BLOCK.question);
+  strings.push(CTA_BLOCK.heading, CTA_BLOCK.body, CTA_BLOCK.calculator, CTA_BLOCK.question);
 
   return [...new Set(strings)];
 }
@@ -238,11 +238,15 @@ async function main() {
   const cardStops = expectedHrefs.map((href) => `card:${href}`);
   const missingStops = cardStops.filter((stop) => !reached.has(stop));
   /*
-   * Match the three approved labels rather than counting stops: #cta also holds
-   * the shared lead form, whose fields and submit button are tab stops too.
+   * Match the button labels rather than counting stops: #cta also holds the
+   * shared lead form, whose fields and submit button are tab stops too. The call
+   * button renders its label with the phone number appended, so match on prefix.
    */
-  const ctaLabels = [CTA_BLOCK.demo, CTA_BLOCK.calculator, CTA_BLOCK.question];
-  const missingCtas = ctaLabels.filter((label) => !reached.has(`cta:${label}`));
+  const ctaLabels = [CTA_BLOCK.call, CTA_BLOCK.calculator, CTA_BLOCK.question];
+  const reachedCtas = [...reached].filter((stop) => stop.startsWith("cta:"));
+  const missingCtas = ctaLabels.filter(
+    (label) => !reachedCtas.some((stop) => stop.slice(4).startsWith(label)),
+  );
   record(
     missingStops.length === 0 && missingCtas.length === 0,
     "keyboard tabbing reaches all four path cards and the three CTA buttons",

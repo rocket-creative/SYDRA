@@ -4,19 +4,15 @@ import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
 import { CTA_BLOCK } from "@/lib/content/homepage";
-import { getSalesEmail } from "@/lib/contact";
+import { getSalesEmail, SALES_PHONE_DISPLAY, SALES_PHONE_TEL } from "@/lib/contact";
 
 /**
- * Spec 9 asks for a scheduler modal with a mailto fallback until Ops provisions
- * a provider. Superseded by a direct instruction to send every CTA to a page
- * that holds the real form, so this points at /demo, which mounts SharedLeadForm
- * and delivers to sales@, the ops BCC, and the Supabase row. A mailto drops the
- * lead if the visitor has no mail client configured; the form cannot.
- *
- * TODO(scheduler): when a booking provider exists, swap this for a modal trigger
- * and keep the approved label and the analytics call below unchanged.
+ * TODO(scheduler): the demo button is deliberately absent until Calendly or an
+ * equivalent is provisioned. See the note above CTA_BLOCK for how to restore it.
+ * "Set up a call" is the primary action in the meantime, because a phone number
+ * is something a visitor can act on without a booking widget.
  */
-const DEMO_HREF = "/demo";
+const CALL_HREF = SALES_PHONE_TEL;
 
 /**
  * CONFLICT(spec 8, button 2): the spec says this anchors to "the existing
@@ -50,12 +46,12 @@ export function CtaBlock({ headingLevel, headingId, placement, bordered = true }
       <p className="home-body mt-2 max-w-[54ch] text-body">{CTA_BLOCK.body}</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <Button
-          href={DEMO_HREF}
+          href={CALL_HREF}
           showArrow
           variant="solid"
-          onClick={() => track("cta_click", { label: "cta_request_demo", placement })}
+          onClick={() => track("cta_click", { label: "cta_set_up_call", placement })}
         >
-          {CTA_BLOCK.demo}
+          {`${CTA_BLOCK.call}: ${SALES_PHONE_DISPLAY}`}
         </Button>
         <Button
           href={CALCULATOR_HREF}

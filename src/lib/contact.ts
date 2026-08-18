@@ -1,6 +1,13 @@
 /** The only Sydra mailbox. All forms, From, To, Reply-To, and public copy use this. */
 export const SALES_EMAIL_FALLBACK = "sales@sydrahealth.com";
 
+/**
+ * The published Sydra number. Display form carries no hyphens, per brand style.
+ * Single source of truth for the footer, /contact, and the homepage call CTA.
+ */
+export const SALES_PHONE_DISPLAY = "(914) 705 6830";
+export const SALES_PHONE_TEL = "tel:+19147056830";
+
 const MAILTO_SUBJECT = "FROM SYDRA";
 
 /** Primary public contact and form routing. Always sales@. */

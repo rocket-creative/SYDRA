@@ -72,8 +72,13 @@ for (const route of ROUTES) {
         const header = el.closest("header");
         return Boolean(header && !header.closest("main"));
       };
+      /*
+       * tel: counts. On a phone a tap-to-call link is the most direct conversion
+       * on the page, and it is the homepage's primary CTA while demo booking
+       * waits on a scheduler.
+       */
       const candidates = document.querySelectorAll<HTMLElement>(
-        "main a[href*='case-review'], main a[href^='/demo'], main form input, main form select",
+        "main a[href*='case-review'], main a[href^='/demo'], main a[href^='tel:'], main form input, main form select",
       );
       for (const el of candidates) {
         if (siteHeader(el)) continue;

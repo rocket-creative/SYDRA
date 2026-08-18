@@ -235,10 +235,21 @@ export const PRACTICE_B = {
 export const RESULTS_DISCLAIMER =
   "Disclaimer: The figures above reflect actual outcomes for specific Sydra clients and are presented with client permission. Practice names and identifying details have been removed. Payment averages and medians are derived from the 2025 federal Independent Dispute Resolution Public Use File (PUF), Quarter 4, and reflect reported activity for the referenced procedure codes in the applicable geographic region; they are not Sydra performance figures. Individual case examples are single outcomes and are not typical, average, or expected results. Win rates reflect decided cases only for the referenced client over the period measured and do not include withdrawn, ineligible, or pending disputes. Past results do not guarantee or predict future outcomes. Eligibility for federal IDR, applicable deadlines, and award amounts depend on the specific facts of each claim, the applicable plan, and current federal regulations, which are subject to change. Nothing on this page is legal, financial, billing, or coding advice. Sydra is not a law firm and does not provide legal representation.";
 
+/**
+ * Spec 8 opens with "Request a 15-min demo" wired to a scheduler modal. That
+ * button is withheld until a booking provider is live: offering a demo the site
+ * cannot actually book is the problem the spec was trying to avoid. "Set up a
+ * call" with the published number takes its place, so the primary action is one
+ * a visitor can complete right now.
+ *
+ * TODO(scheduler): once Calendly or equivalent is provisioned, restore the demo
+ * button as the primary action with the approved label "Request a 15-min demo",
+ * and keep the call, calculator, and email options below it.
+ */
 export const CTA_BLOCK = {
   heading: "Worth a 15-minute call?",
   body: "We'd welcome a short call to see if this is worth pursuing.",
-  demo: "Request a 15-min demo",
+  call: "Set up a call",
   calculator: "What's your claim worth?",
   question: "Ask a question",
 } as const;
