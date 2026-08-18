@@ -182,6 +182,20 @@ for (const route of ROUTES) {
     }
 
     if (route.path === "/") {
+      /*
+       * CONFLICT(homepage spec 2): #lead-form exists again, so the `found`
+       * assertion passes, but the placement assertion below does not. This one
+       * encodes the previous homepage, where the form sat second in the mobile
+       * order. Spec 2 fixes the section order as hero, paths, proof, thesis,
+       * four path detail sections, the case study tables, then #cta, which puts
+       * the form around 5800px on a 390px phone against a 1350px budget.
+       *
+       * Honouring it means either hoisting a form above the path sections, which
+       * contradicts spec 2, or retiring this assertion in favour of the looser
+       * conversion-within-two-screens rule in mobile-first.spec.ts, which the
+       * homepage now passes via the /demo CTA in the first path section. That is
+       * a conversion decision, not a test fix, so it is left failing.
+       */
       const leadFormPlacement = await page.evaluate(() => {
         const form = document.getElementById("lead-form");
         const viewportHeight = window.innerHeight;

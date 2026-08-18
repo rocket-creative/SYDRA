@@ -6,7 +6,7 @@ import { SydraHeader } from "@/components/sydra/header";
 
 type MagazineShellProps = {
   children: ReactNode;
-  headerVariant?: "default" | "funnel";
+  headerVariant?: "default" | "funnel" | "compact";
   headerBorderless?: boolean;
   footerExtra?: ReactNode;
   showSiteFooter?: boolean;
