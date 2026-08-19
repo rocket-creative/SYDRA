@@ -20,6 +20,22 @@ export const LANDING_ROLE_OPTIONS = ["admin", "billing", "owner", "physician"] a
 
 export const LANDING_PRODUCT_OPTIONS = ["sydra_software", "done_for_you", "not_sure"] as const;
 
+/**
+ * The four audience paths, in the order they appear in AudienceSegments.
+ * productInterest asks what a lead wants to buy; this asks where they sit,
+ * which is what decides how the first call is run. "other" exists because a
+ * practice already filing in house on its own fits none of the four, and
+ * forcing that reader into the nearest box is worse than knowing they are
+ * elsewhere.
+ */
+export const LANDING_SEGMENT_OPTIONS = [
+  "never_filed",
+  "uses_contingency_firm",
+  "rcm_company",
+  "contingency_firm",
+  "other",
+] as const;
+
 export const LANDING_ROLE_LABELS: Record<(typeof LANDING_ROLE_OPTIONS)[number], string> = {
   admin: "Practice admin",
   billing: "Billing lead",
@@ -31,6 +47,14 @@ export const LANDING_PRODUCT_LABELS: Record<(typeof LANDING_PRODUCT_OPTIONS)[num
   sydra_software: "Sydra software",
   done_for_you: "Done for you",
   not_sure: "Not sure",
+};
+
+export const LANDING_SEGMENT_LABELS: Record<(typeof LANDING_SEGMENT_OPTIONS)[number], string> = {
+  never_filed: "We have never filed an IDR claim",
+  uses_contingency_firm: "We use a contingency firm today",
+  rcm_company: "We run an RCM or billing company",
+  contingency_firm: "We run a contingency firm",
+  other: "Something else",
 };
 
 const optionalTracking = {
@@ -74,6 +98,7 @@ export const postcardFullLeadSchema = z.object({
   state: z.string().trim().length(2).toUpperCase(),
   disputesPerMonth: z.enum(DISPUTES_PER_MONTH_OPTIONS),
   productInterest: z.enum(LANDING_PRODUCT_OPTIONS),
+  segment: z.enum(LANDING_SEGMENT_OPTIONS),
   partialUpgraded: z.boolean().optional(),
   ...marketingConsentField,
   ...optionalTracking,

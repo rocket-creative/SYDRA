@@ -178,6 +178,7 @@ export default function IdrForContingencyFirmsPage() {
             <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
               <SharedLeadForm
                 anchorId="contingency-lead-form"
+                defaultSegment="contingency_firm"
                 intent="demo"
                 landingPage="idr-for-contingency-firms"
               />

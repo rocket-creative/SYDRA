@@ -166,6 +166,7 @@ export default function SydraVsAttorneyPage() {
             <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
               <SharedLeadForm
                 anchorId="attorney-lead-form"
+                defaultSegment="uses_contingency_firm"
                 intent="demo"
                 landingPage="sydra-vs-idr-attorney"
               />

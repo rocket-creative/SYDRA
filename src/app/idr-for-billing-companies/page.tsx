@@ -175,6 +175,7 @@ export default function IdrForBillingCompaniesPage() {
             <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
               <SharedLeadForm
                 anchorId="billing-lead-form"
+                defaultSegment="rcm_company"
                 intent="demo"
                 landingPage="idr-for-billing-companies"
               />

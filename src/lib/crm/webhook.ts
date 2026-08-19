@@ -3,6 +3,7 @@ import { DISPUTES_LABELS } from "@/lib/schemas/demo-request";
 import {
   LANDING_PRODUCT_LABELS,
   LANDING_ROLE_LABELS,
+  LANDING_SEGMENT_LABELS,
 } from "@/lib/schemas/postcard-lead";
 
 export type CrmWebhookResult = { ok: true } | { ok: false; error: string };
@@ -28,6 +29,10 @@ export async function sendCrmWebhook(lead: PostcardLead): Promise<CrmWebhookResu
     state: lead.state,
     monthly_oon_volume: DISPUTES_LABELS[lead.disputesPerMonth],
     product_interest: LANDING_PRODUCT_LABELS[lead.productInterest],
+    // Raw enum alongside the label: a CRM filters and routes on the value,
+    // and a human reading the record wants the sentence.
+    segment: lead.segment,
+    segment_label: LANDING_SEGMENT_LABELS[lead.segment],
     marketing_consent: lead.marketingConsent === true,
     consent_text_version: lead.consentTextVersion ?? "",
     tracking: {

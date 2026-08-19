@@ -44,7 +44,17 @@ const FORM_ROUTES = [
 ];
 
 const EXPECTED_STEP_ONE = ["email"];
-const EXPECTED_STEP_TWO = ["practiceName", "name", "role", "phone", "state", "disputesPerMonth"];
+const EXPECTED_STEP_TWO = [
+  "practiceName",
+  "name",
+  "role",
+  "phone",
+  "state",
+  "disputesPerMonth",
+  // segment is required by postcardFullLeadSchema, so a form that stops
+  // rendering it would post leads the API rejects.
+  "segment",
+];
 
 /**
  * Path sections must reach the page written for that audience. Mirrors

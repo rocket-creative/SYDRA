@@ -45,6 +45,8 @@ import {
   LANDING_PRODUCT_OPTIONS,
   LANDING_ROLE_LABELS,
   LANDING_ROLE_OPTIONS,
+  LANDING_SEGMENT_LABELS,
+  LANDING_SEGMENT_OPTIONS,
 } from "@/lib/schemas/postcard-lead";
 
 type LeadFormIntent = "demo" | "case-review";
@@ -69,6 +71,12 @@ type LeadFormProps = {
    * Primary "Submit lead form" (`MhI6CKKQz8scEKqpzPtD`) on thank-you.
    */
   intent?: LeadFormIntent;
+  /**
+   * Preselects "Where do you sit today?" on pages written for one audience
+   * path. The field stays visible and editable, because the page a reader
+   * landed on is a guess about them, not a fact.
+   */
+  defaultSegment?: (typeof LANDING_SEGMENT_OPTIONS)[number];
   /**
    * When false, do not call useSearchParams (avoids streaming the form after
    * the footer). Pass urlState/urlCode from the server instead.
@@ -199,6 +207,7 @@ function LeadFormInner({
   thankYouPath = DEFAULT_THANK_YOU_PATH,
   landingPage,
   intent = "demo",
+  defaultSegment,
   urlState = "",
   urlCode = "",
 }: LeadFormProps) {
@@ -396,6 +405,7 @@ function LeadFormInner({
         state: formData.get("state"),
         disputesPerMonth: formData.get("disputesPerMonth"),
         productInterest,
+        segment: formData.get("segment"),
         partialUpgraded: partialSent,
         website: formData.get("website") ?? "",
         marketingConsent: false,
@@ -693,6 +703,35 @@ function LeadFormInner({
               </select>
             </FormField>
           </div>
+
+          {/*
+            Outside the two column grid on purpose: the options are sentences,
+            and pairing them with a short field would wrap every one of them.
+          */}
+          <FormField
+            hint="It decides what we look at on the call."
+            id={fieldId("segment")}
+            label="Where do you sit today?"
+            required
+          >
+            <select
+              required
+              aria-required="true"
+              className={editorialSelectClass}
+              defaultValue={defaultSegment ?? ""}
+              id={fieldId("segment")}
+              name="segment"
+            >
+              <option disabled value="">
+                Select the closest fit
+              </option>
+              {LANDING_SEGMENT_OPTIONS.map((value) => (
+                <option key={value} value={value}>
+                  {LANDING_SEGMENT_LABELS[value]}
+                </option>
+              ))}
+            </select>
+          </FormField>
 
           {copy.showProductInterest ? (
             <fieldset>

@@ -6,6 +6,7 @@ import { LeadForm } from "@/components/landing/lead-form";
 import { US_STATES } from "@/lib/constants/us-states";
 import { CASE_REVIEW_THANK_YOU_PATH } from "@/lib/case-review";
 import { buildCampaignTracking, parseUtmFromSearchParams } from "@/lib/landing/tracking";
+import type { LANDING_SEGMENT_OPTIONS } from "@/lib/schemas/postcard-lead";
 
 /**
  * The one lead form. Every page that captures a lead mounts this, so the fields,
@@ -33,6 +34,8 @@ type SharedLeadFormProps = {
   intent?: LeadFormIntent;
   /** Overrides the per-intent default. */
   thankYouPath?: string;
+  /** Preselects the audience path on pages written for a single one. */
+  defaultSegment?: (typeof LANDING_SEGMENT_OPTIONS)[number];
   variant?: "section" | "card" | "band";
 };
 
@@ -41,6 +44,7 @@ export function SharedLeadForm({
   anchorId = "lead-form",
   intent = "case-review",
   thankYouPath,
+  defaultSegment,
   variant = "card",
 }: SharedLeadFormProps) {
   const searchParams = useSearchParams();
@@ -60,6 +64,7 @@ export function SharedLeadForm({
   return (
     <LeadForm
       anchorId={anchorId}
+      defaultSegment={defaultSegment}
       defaultState={stateCode}
       intent={intent}
       landingPage={landingPage}
