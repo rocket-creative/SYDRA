@@ -12,6 +12,8 @@
     "check:batching": "node scripts/check-batching-language.mjs",
     "check:homepage": "tsx scripts/check-homepage-spec.mjs",
     "check:forms": "node scripts/check-lead-forms.mjs",
+    "check:cta": "node scripts/verify-cta-coverage.mjs",
+    "check:forms:static": "node scripts/verify-forms-static.mjs",
     "seed": "tsx supabase/seed.ts",
     "test:mobile": "playwright test",
     "test:mobile:ui": "playwright test --ui",

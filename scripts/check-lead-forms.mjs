@@ -31,6 +31,16 @@ const FORM_ROUTES = [
   { path: "/idr-recovery-calculator", anchor: "calculator-lead-form" },
   { path: "/r", anchor: "lead-form" },
   { path: "/r/tx", anchor: "lead-form" },
+  /*
+   * The three audience pages. Each is a paid destination for keywords that name
+   * its audience, so it captures the lead in place rather than sending the
+   * visitor to /demo first. Unlike the routes above these are statically
+   * rendered, so the form only exists after hydration; that is exactly the
+   * failure a fetch-based check cannot see, which is why they belong here.
+   */
+  { path: "/idr-for-billing-companies", anchor: "billing-lead-form" },
+  { path: "/idr-for-contingency-firms", anchor: "contingency-lead-form" },
+  { path: "/sydra-vs-idr-attorney", anchor: "attorney-lead-form" },
 ];
 
 const EXPECTED_STEP_ONE = ["email"];
@@ -54,7 +64,7 @@ const REQUIRED_LINKS = [
   "/case-review",
   "/sydra-vs-idr-attorney",
   "/idr-for-billing-companies",
-  "/in-house-idr",
+  "/idr-for-contingency-firms",
   "#path-never-filed",
   "#path-contingency-client",
   "#path-rcm",
