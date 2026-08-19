@@ -21,7 +21,6 @@ type PageMetadataInput = {
   canonicalPath?: string;
   ogImageAlt?: string;
   ogImagePath?: string;
-  keywords?: string[];
   robots?: Metadata["robots"];
   /** When set, Open Graph is emitted as type article with these timestamps. */
   article?: {
@@ -37,7 +36,6 @@ export function buildPageMetadata({
   canonicalPath,
   ogImageAlt = DEFAULT_OG_IMAGE_ALT,
   ogImagePath,
-  keywords,
   robots = { index: true, follow: true },
   article,
 }: PageMetadataInput): Metadata {
@@ -69,7 +67,6 @@ export function buildPageMetadata({
   return {
     title: { absolute: title },
     description,
-    ...(keywords && keywords.length > 0 ? { keywords } : {}),
     /*
      * canonical: null rather than omitting the field. Metadata is inherited, so
      * an absent canonical falls back to the root layout's, which would point

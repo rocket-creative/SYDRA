@@ -37,13 +37,6 @@ export function buildPostcardMetadata(stateParam?: string): Metadata {
     title,
     description,
     path,
-    keywords: [
-      "NSA IDR software",
-      "No Surprises Act billing",
-      "federal IDR claims",
-      "out-of-network surgical billing",
-      "independent dispute resolution software",
-    ],
     ogImageAlt:
       "Sydra: surgeon built NSA IDR software for surgical practices. Five minutes per claim.",
     robots: { index: false, follow: true },
