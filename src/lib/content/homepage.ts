@@ -148,7 +148,7 @@ export const PATH_DETAILS: readonly PathDetail[] = [
  *   never-filed        -> the claim review, where Sydra identifies what qualifies
  *   contingency-client -> the three filing arrangements compared on cost
  *   rcm                -> multi tenant behaviour at billing company volume
- *   contingency-firm   -> the labor calculator, which is the per FTE argument
+ *   contingency-firm   -> the page written for firms, which argues per FTE
  *
  * never-filed previously pointed at /how-it-works. That page opens with the
  * reader drafting a submission in five minutes, which contradicts the promise
@@ -167,8 +167,8 @@ export const PATH_DETAIL_LINKS: Record<string, { href: string; label: string }> 
     label: "See Sydra at billing company volume",
   },
   "path-contingency-firm": {
-    href: "/in-house-idr",
-    label: "See what manual filing costs per claim",
+    href: "/idr-for-contingency-firms",
+    label: "See the per FTE argument",
   },
 };
 

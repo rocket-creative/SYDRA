@@ -92,6 +92,7 @@ function coreEntries(): Entry[] {
     { path: "/sydra-vs-idr-attorney", priority: 0.8, changeFrequency: "monthly" },
     { path: "/in-house-idr", priority: 0.8, changeFrequency: "monthly" },
     { path: "/idr-for-billing-companies", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/idr-for-contingency-firms", priority: 0.8, changeFrequency: "monthly" },
     { path: "/idr-filing-deadline", priority: 0.8, changeFrequency: "monthly" },
     { path: "/security", priority: 0.75, changeFrequency: "monthly" },
     { path: "/resources", priority: 0.7, changeFrequency: "weekly" },

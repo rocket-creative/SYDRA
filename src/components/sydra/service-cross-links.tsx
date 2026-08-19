@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/idr", label: "Federal IDR benchmarks" },
   { href: "/idr-filing-deadline", label: "IDR filing deadline" },
   { href: "/idr-for-billing-companies", label: "IDR for billing companies" },
+  { href: "/idr-for-contingency-firms", label: "IDR for contingency firms" },
   { href: "/in-house-idr", label: "In house IDR" },
   { href: "/sydra-vs-idr-attorney", label: "Compare your IDR options" },
   { href: "/how-it-works", label: "How Sydra works" },
