@@ -1,0 +1,35 @@
+---
+description: Dependency currency policy — staying on latest, upgrade protocol, Renovate
+globs: package.json,pnpm-lock.yaml,package-lock.json,yarn.lock,renovate.json
+alwaysApply: false
+---
+
+# Dependencies
+
+**Policy: stay on the latest version of everything.** Renovate handles routine currency automatically. Your job is the upgrades Renovate can't finish on its own.
+
+## What Renovate does without you
+Patches and minors batch weekly and auto-merge into `dev` on green CI. Security fixes bypass the schedule and merge immediately. Majors open one PR each after a soak period and auto-merge on green CI, into `dev` only. Nothing merges to `main` automatically — `dev` → `main` is always a human merge.
+
+Never hand-bump a version in `package.json` to do work Renovate already covers. If a Renovate PR is open for a package, don't touch that package.
+
+## When you upgrade manually
+Only on my explicit instruction, or when a Renovate PR fails CI and I ask you to fix it.
+
+Before any manual upgrade:
+1. Read the changelog and the migration guide. Not the release title — the actual breaking-change list.
+2. Read the version-matched docs in `node_modules/<pkg>/` where they exist. For Next.js: `node_modules/next/dist/docs/`.
+3. Say what breaks before you change anything.
+
+After: build, typecheck, lint, and test. Report the real result. A major that compiles is not a major that works — say which runtime paths you did not exercise.
+
+## Fixing a failed Renovate PR
+Fix forward on the Renovate branch. Never close the PR, never pin a version backwards, and never add an override or resolution to dodge the upgrade without telling me that's what you're doing.
+
+## Version claims
+State versions from the lockfile, never from memory. Check before citing:
+```bash
+node -p "require('next/package.json').version"
+pnpm outdated
+```
+When installed docs and your training data disagree, the installed docs win.

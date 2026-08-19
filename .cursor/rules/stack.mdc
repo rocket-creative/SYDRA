@@ -1,0 +1,63 @@
+---
+description: Approved stack and versions for new projects, dependency choices, and HIPAA/PHI work. Load when scaffolding, choosing a library, configuring the build, or handling protected health information.
+globs:
+alwaysApply: false
+---
+
+# Stack
+
+Verified August 2026. Check the lockfile before assuming a version — this file states the target, not what's installed.
+
+## Read the installed docs before writing Next.js code
+Next.js ships version-matched documentation inside the project. Before writing or changing anything that touches Next.js APIs — routing, caching, metadata, server actions, config — read the guides in `node_modules/next/dist/docs/`.
+
+Major versions of Next.js carry breaking changes. The installed docs are correct for the installed version; your training data is not. When the two disagree, the installed docs win.
+
+If `AGENTS.md` or `CLAUDE.md` exists at the repo root, read it first — it may point at additional version-specific guidance.
+
+## Standard
+- **Next.js 16.x**, App Router. Turbopack is the default bundler. Dev disk caching landed in 16.1; build disk caching in 16.3. Check the installed version before citing either.
+- **React 19+** (required by Next 16)
+- **TypeScript strict**. TypeScript 7 as the `next build` typechecker requires Next 16.3+. On 16.2 and below, stay on TypeScript 5.x.
+- **Tailwind CSS v4.x** — CSS-first config, see below
+- **Zod v4** for validation
+- **Vercel** for hosting
+- **Postgres via Vercel Marketplace (Neon)**. Vercel Postgres was discontinued and migrated to Neon in December 2024. Never scaffold `@vercel/postgres` for a new project.
+
+Config lives in `next.config.ts`, typed with `NextConfig`.
+
+## Tailwind v4
+No `tailwind.config.js`. JS config still loads but is not auto-detected — it requires an explicit `@config` line, so don't create one.
+
+```css
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-sm: 24.5rem;
+  --breakpoint-md: 50.5rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 90rem;
+  --breakpoint-2xl: 120rem;
+  --breakpoint-3xl: 240rem;
+}
+```
+
+Never emit `@tailwind base/components/utilities` — that is v3 syntax and fails in v4.
+
+Baseline: Safari 16.4+, Chrome 111+, Firefox 128+. v4 depends on `@property` and `color-mix()`.
+
+## Caching
+`'use cache'` is the caching primitive. No implicit caching, dynamic by default.
+
+`cacheComponents` and `partialPrefetching` are 16.3+ flags. Do not add either to a project below 16.3 — the key is ignored or errors. On 16.3+, ask before enabling: both change rendering behavior across the whole app.
+
+## HIPAA — only when handling PHI
+- AWS or Google Cloud under a signed BAA. Not Vercel.
+- Encrypted database (RDS or equivalent), encryption at rest and in transit
+- Auth0 Healthcare or AWS Cognito
+- 15 minute session timeout
+- MFA required
+- No PHI in logs, URLs, `localStorage`, `sessionStorage`, analytics, or error reports
+- Audit logging on every PHI read and write
+
+If a project touches PHI, say so before writing any storage or logging code.

@@ -1,0 +1,54 @@
+---
+description: SEO metadata, JSON-LD schema, sitemap and robots requirements
+globs: **/page.tsx,**/layout.tsx,**/sitemap.ts,**/robots.ts,**/opengraph-image.tsx
+alwaysApply: false
+---
+
+# SEO
+
+## Every page
+```typescript
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://domain.com'),
+  title: 'Primary Keyword | Brand',      // 50-60 chars
+  description: 'Compelling summary.',     // 150-160 chars
+  alternates: { canonical: '/page' },
+  openGraph: {
+    title: '...',
+    description: '...',
+    url: '/page',
+    type: 'website',
+    images: [{ url: '/og.png', width: 1200, height: 630 }],
+  },
+  twitter: { card: 'summary_large_image', title: '...', description: '...' },
+}
+```
+
+`metadataBase` set once in the root layout makes every relative canonical and OG URL resolve absolute. Set it there, then use relative paths on pages.
+
+Viewport and theme color go in a separate `export const viewport: Viewport`, not inside `metadata`.
+
+## JSON-LD
+- Homepage: `Organization` + `WebSite`
+- Service pages: `Service`
+- Every non-homepage: `BreadcrumbList`
+- Articles: `Article` with `datePublished` and `author`
+
+Render as `<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />` in the page body. Validate against schema.org before shipping — do not invent property names.
+
+## Files
+`app/sitemap.ts` and `app/robots.ts` as generated routes. Not static files in `public/`.
+
+## Banned meta tags
+`keywords` (ignored since 2009), `revisit-after` (never worked), `rating`, `generator`.
+
+## Check
+- [ ] Title 50-60 characters
+- [ ] Description 150-160 characters
+- [ ] Canonical resolves absolute
+- [ ] OG and Twitter tags present, OG image 1200×630
+- [ ] JSON-LD present and valid
+- [ ] BreadcrumbList on every non-homepage
+- [ ] Page appears in `sitemap.ts`

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "baseBranchPatterns": ["dev"],
+  "dependencyDashboard": true,
+  "prConcurrentLimit": 5,
+  "rangeStrategy": "bump",
+  "labels": ["dependencies"],
+  "timezone": "America/New_York",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on monday"],
+    "automerge": true
+  },
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "minimumReleaseAge": null,
+    "schedule": null,
+    "automerge": true,
+    "prPriority": 10
+  },
+  "packageRules": [
+    {
+      "description": "Patches: merge fast, grouped",
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "groupName": "patch updates",
+      "minimumReleaseAge": "3 days",
+      "automerge": true,
+      "automergeType": "branch",
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "description": "Minors: grouped weekly",
+      "matchUpdateTypes": ["minor"],
+      "groupName": "minor updates",
+      "minimumReleaseAge": "5 days",
+      "automerge": true,
+      "automergeType": "branch",
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "description": "Majors: one PR each, auto-merge on green CI",
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "14 days",
+      "automerge": true,
+      "automergeType": "pr",
+      "labels": ["dependencies", "major"]
+    },
+    {
+      "description": "Framework majors: same policy, longer soak",
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": [
+        "next",
+        "react",
+        "react-dom",
+        "tailwindcss",
+        "typescript",
+        "zod",
+        "@neondatabase/serverless"
+      ],
+      "minimumReleaseAge": "21 days",
+      "labels": ["dependencies", "major", "framework"]
+    },
+    {
+      "description": "Types packages follow their runtime package",
+      "matchPackageNames": ["@types/**"],
+      "groupName": "type definitions",
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
+}

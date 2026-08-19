@@ -1,0 +1,84 @@
+---
+description: Design system — color roles, magazine layout, components, responsive, accessibility, copy
+globs: **/*.tsx,**/*.jsx,**/*.css
+alwaysApply: false
+---
+
+# Design
+
+## Color architecture
+Four roles per palette:
+
+| Role | Usage |
+|---|---|
+| HERO | Full-bleed backgrounds, 25-35% of page |
+| TEXT | Headlines and body, darkest color |
+| NEUTRAL | Breathing room, alternating sections |
+| ACCENT | Small moments and hovers, 5% max |
+
+Section pattern: HERO → Neutral → HERO → Neutral → Footer
+
+One color dominates. Text color is for reading only. Accents are scalpels, not paintbrushes. One background per section — no color soup.
+
+## Layout
+Magazine presentation. Every page is a defined-width content area floating over a muted background (`stone-100`, `neutral-100`). Content has clear edges. The background frames it.
+
+```tsx
+<div className="min-h-screen bg-stone-100">
+  <div className="max-w-5xl mx-auto bg-white min-h-screen shadow-sm">
+    {/* content */}
+  </div>
+</div>
+```
+
+Editorial, not template:
+- Asymmetric compositions, not always centered
+- Text overlapping images, headlines breaking across boundaries
+- Images at varied scale, not equal grids
+- Large type with intentional line breaks
+- Uneven grids: 5/7 and 4/6 splits
+- Color blocking in full solid sections
+- Photography carries the page
+
+## Components
+**Buttons** — square or minimal radius. Uppercase, letter-spaced, light weight. Arrow shifts right on hover.
+
+**Product cards** — no shadow, no border. The image is the card. Name in small caps below. Price in lighter weight.
+
+**Scroll indicators** — "VIEW MORE" with a down arrow, small caps, `tracking-widest`, subtle bounce.
+
+## Responsive
+Mobile first. Design small, enhance upward. Breakpoints are defined in `@theme` (Tailwind v4) — see the stack rules.
+
+```tsx
+// correct — scales up
+<div className="text-sm md:text-base lg:text-lg xl:text-xl">
+
+// wrong — scales down
+<div className="text-2xl md:text-sm">
+```
+
+## Anti-patterns
+Purple or blue gradients on white. Generic stock photography. Inter everywhere. Too many colors. Too many boxes and borders. Icons on everything. Rounded-everything card grids.
+
+## Accessibility — WCAG 2.2 AA
+WCAG 2.2 is the current W3C Recommendation. WCAG 3.0 is still a Working Draft — do not target it.
+
+- Keyboard navigation on every interactive element
+- Visible focus states, and focus never obscured by sticky headers or overlays (2.2)
+- Interactive targets at least 24×24 CSS px (2.2)
+- Any drag interaction has a single-pointer alternative (2.2)
+- No cognitive-test authentication — allow paste into password fields (2.2)
+- Labels on all form inputs
+- Alt text on all images; empty `alt=""` for decorative
+- Contrast 4.5:1 body, 3:1 large text and UI components
+- Respect `prefers-reduced-motion`
+
+## Copy
+**No hyphens anywhere.** Rewrite to avoid them. Phone: (555) 123 4567, not 555-123-4567.
+
+**Ask for the source URL before writing body copy.** Design is one thing, voice is another. Get the URL so text matches the real brand.
+
+No AI giveaways: "I'd be happy to", "dive into", "it's important to note", "let's explore", "leverage", "utilize", "in order to", "due to the fact that".
+
+Active voice. Sentence case headings. Oxford comma always.

@@ -1,0 +1,52 @@
+---
+description: Security headers, input validation, secrets, Server Actions, and privacy/consent
+globs: **/api/**,**/route.ts,middleware.ts,proxy.ts,next.config.ts,next.config.js,**/actions/**,**/actions.ts
+alwaysApply: false
+---
+
+# Security
+
+## Required
+- Zod v4 validation on every endpoint, route handler, and Server Action — Server Actions are public HTTP endpoints, treat them as untrusted
+- Whitelist validation, never blacklist
+- CSP headers in `next.config.ts`
+- `server-only` imported in any module holding secrets, so a client import fails at build time
+- Auth check inside the Server Action itself, not only in the calling component
+- Rate limiting on auth, contact, and write endpoints
+
+## Forbidden
+- `eval()` or `Function()` with user input
+- `child_process.exec` with user input
+- Hardcoded API keys, tokens, or connection strings
+- Secrets in `NEXT_PUBLIC_*` — that prefix ships to the browser
+- Unvalidated path joins from user input
+- User input interpolated into SQL — parameterize
+
+## Headers
+```typescript
+const securityHeaders = [
+  { key: 'Content-Security-Policy', value: "default-src 'self'; ..." },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+]
+```
+
+Prefer a nonce-based CSP over `'unsafe-inline'`. If a third-party script forces `'unsafe-inline'`, say so and ask before adding it.
+
+## Privacy
+- No analytics, pixels, or non-essential cookies before explicit consent
+- Granular categories: Necessary, Preferences, Analytics, Marketing
+- No pre-checked boxes
+- Honor Global Privacy Control (`navigator.globalPrivacyControl` / `Sec-GPC` header) as an opt-out — legally binding in several US states
+- Withdrawing consent is as easy as giving it
+- No PII in analytics events, URLs, or error reports
+
+## Check
+- [ ] Every input validated with Zod
+- [ ] No hardcoded secrets, nothing sensitive under `NEXT_PUBLIC_`
+- [ ] Security headers configured
+- [ ] Server Actions authenticate and authorize independently
+- [ ] Consent gate blocks analytics until accepted

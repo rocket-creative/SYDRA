@@ -1,0 +1,56 @@
+---
+description: GSAP animation rules — CSS visibility conflicts, initial states, ScrollTrigger. Load when writing or debugging any GSAP, ScrollTrigger, or scroll animation.
+globs:
+alwaysApply: false
+---
+
+# GSAP
+
+GSAP is 100% free as of 2025, including SplitText, ScrollSmoother, MorphSVG, and DrawSVG. No Club membership, no plugin gating. Import them directly.
+
+## The core conflict
+Animations fail when CSS sets `opacity: 0`, `visibility: hidden`, or `display: none` and GSAP fights it — or when GSAP sets an initial state that CSS then overrides.
+
+**GSAP controls visibility, not CSS.** If GSAP animates opacity or visibility on an element, remove every CSS rule touching those properties on it.
+
+```tsx
+// correct
+gsap.set('.element', { opacity: 0, y: 20 })
+gsap.to('.element', { opacity: 1, y: 0 })
+
+// wrong — CSS fights GSAP
+// .element { opacity: 0; }
+```
+
+## Tailwind classes to strip
+`invisible`, `hidden`, `opacity-0` on any element GSAP will animate. Let `gsap.set()` establish the initial state instead.
+
+## ScrollTrigger
+```tsx
+ScrollTrigger.create({
+  trigger: '.element',
+  onEnter: () => gsap.to('.element', { opacity: 1 }),
+})
+```
+The element must exist in DOM flow. `display: none` breaks trigger detection. Parent containers must be visible.
+
+Call `ScrollTrigger.refresh()` after any layout change — font load, image load, route transition.
+
+## Debugging
+```tsx
+const el = document.querySelector('.element')
+console.log(getComputedStyle(el).opacity, getComputedStyle(el).visibility, getComputedStyle(el).display)
+```
+
+## React
+Use `useGSAP()` from `@gsap/react` for automatic cleanup. Scope selectors to a ref container so animations don't leak across components. Register plugins once: `gsap.registerPlugin(ScrollTrigger)`.
+
+Respect `prefers-reduced-motion` — gate or shorten animations, don't ship motion that can't be turned off.
+
+## Before animating
+- [ ] No CSS opacity/visibility on animated elements
+- [ ] No Tailwind `hidden`, `invisible`, `opacity-0`
+- [ ] `gsap.set()` used for initial states
+- [ ] Parent containers visible
+- [ ] ScrollTrigger elements in DOM flow
+- [ ] `prefers-reduced-motion` handled
