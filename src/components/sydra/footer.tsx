@@ -20,12 +20,13 @@ export function SydraFooter() {
   return (
     <footer className="border-t border-rule bg-white px-4 py-14 text-brand md:px-10">
       <div className="mx-auto max-w-[1280px]">
+        {/* Decorative: the brand name is announced by the paragraph below it. */}
         <Image
-          alt="Sydra"
+          alt=""
           className="h-auto w-[150px]"
           height={36}
           sizes="150px"
-          src="/sydra-logo-nav.svg"
+          src="/sydra_logo_nav.svg"
           width={220}
         />
         <p className="type-caption mt-8 text-body">Sydra</p>

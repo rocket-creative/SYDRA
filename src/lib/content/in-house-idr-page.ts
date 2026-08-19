@@ -3,7 +3,7 @@ import type { ContentFaq, ContentSection } from "@/lib/content/what-is-idr-page"
 export const IN_HOUSE_IDR_HERO = {
   title: "Your team can already file IDR. Time is the constraint.",
   subtitle: "Scale federal disputes with the team you already have.",
-  lead: "Building one federal IDR submission by hand takes 25 to 40 minutes. That is the ceiling on how many disputes a practice pursues — not the law, not eligibility, not the win rate. Sydra moves the ceiling, not the team.",
+  lead: "A payer's out of network payment is an opening offer, not the amount owed, and federal IDR is how you contest it. Building one submission by hand takes 25 to 40 minutes, and that is the ceiling on how many disputes a practice pursues. The law, eligibility, and the win rate are not what holds the volume down. Sydra moves the ceiling, not the team.",
 };
 
 export const IN_HOUSE_IDR_SECTIONS: ContentSection[] = [

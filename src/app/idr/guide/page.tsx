@@ -7,9 +7,11 @@ import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import { GUIDES } from "@/lib/idr/guides";
+import { EDITORIAL } from "@/lib/images";
 import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -73,6 +75,13 @@ export default function GuideIndexPage() {
               it. Written for billing teams and practice administrators, not patients.
             </p>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.seniorPartnerDocuments}
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section sidebarLabel="Guides" tone="neutral">

@@ -59,13 +59,19 @@ export const OPTIONS_COMPARED_SECTIONS = [
       "Where the percentage stops making sense is volume. A contingency rate that is reasonable on four claims a year is expensive on four hundred, because the cost grows with every dollar you recover while the work per claim does not.",
     ],
   },
+  /*
+   * Signpost, not a second argument. This page is written for a practice paying
+   * a contingency and weighing its options, and the case for the firms
+   * themselves turns on recoveries per FTE, a different reader entirely. It gets
+   * its own page rather than a competing section here.
+   */
   {
     id: "heading-if-you-are-a-firm",
-    title: "If you are a firm filing on behalf of clients",
+    title: "If you are the firm, not the practice",
     paragraphs: [
-      "Sydra is used by contingency firms, not only by practices. The constraint on an IDR practice is hours per case, which is why small disputes get declined. Sydra prepares a complete submission in about five minutes, which changes which cases are worth taking. Your fee structure does not change — your capacity does.",
+      "Firms filing on behalf of client practices use Sydra too, and for a different reason. The constraint on an IDR practice is reviewer hours per case, which is why small disputes get declined. The argument there is recoveries per FTE, not cost per recovery, and it is set out on its own page.",
     ],
-    ctaHref: "/idr-for-billing-companies",
-    ctaLabel: "See pricing for firms and billing companies",
+    ctaHref: "/idr-for-contingency-firms",
+    ctaLabel: "See the per FTE argument",
   },
 ] as const;

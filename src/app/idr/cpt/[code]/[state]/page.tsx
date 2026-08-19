@@ -14,6 +14,7 @@ import {
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
@@ -141,12 +142,12 @@ export default async function CptStatePage({ params }: PageProps) {
           ...medicallyReviewedWebPageJsonLd({
             path: idrCodeStatePath(code, stateCode),
             name: h1CptState(proc, stateName),
-            description: `Federal IDR for out of network ${proc} (CPT ${code}) denials in ${stateName}.`,
+            description: `Federal IDR for out of network ${proc} (CPT ${code}) denials in ${stateName}. That payment is an opening offer, and federal IDR exists to contest it.`,
           }),
           faqPageJsonLd(faqs),
           serviceJsonLd({
-            name: "Sydra NSA IDR software",
-            description: `Software that prepares the federal IDR submission for ${proc} disputes.`,
+            name: "Sydra federal IDR submissions",
+            description: `Sydra identifies which ${proc} claims qualify for federal IDR in ${stateName}, assembles the submission, holds every deadline, and can file on your behalf. Priced per claim or by subscription, never a percentage of recovery.`,
             serviceType: "Healthcare revenue cycle software",
           }),
         ]}
@@ -157,7 +158,7 @@ export default async function CptStatePage({ params }: PageProps) {
             eyebrow={`Federal IDR · ${stateName}`}
             title={h1CptState(proc, stateName)}
             subtitle="The denial, the code, and the path to recovery."
-            lead={`When an out of network ${proc} claim in ${stateName} is paid below the billed charge or denied outright, that gap is what federal independent dispute resolution exists to recover. We prepare the submission and you keep the recovery.`}
+            lead={`When an out of network ${proc} claim in ${stateName} is paid below the billed charge or denied outright, that payment is an opening offer, not the amount owed. Federal independent dispute resolution exists to contest it. We prepare the submission, and we can file it for you.`}
           />
         </Section>
 
@@ -201,6 +202,8 @@ export default async function CptStatePage({ params }: PageProps) {
           </div>
           <MedicalReviewBlock />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

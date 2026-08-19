@@ -6,9 +6,11 @@ import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import { RESOURCE_ARTICLES } from "@/lib/content/resources/articles";
+import { EDITORIAL } from "@/lib/images";
 import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -62,6 +64,13 @@ export default function ResourcesPage() {
               Surprises Act changed out of network payment.
             </p>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.billerKeyboardDashboard}
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section sidebarLabel="Guides" tone="neutral">

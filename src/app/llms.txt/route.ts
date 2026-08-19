@@ -57,6 +57,9 @@ export function GET(): Response {
     `- [IDR for billing companies](${base}/idr-for-billing-companies): federal IDR for RCM firms managing multiple client practices.`,
   );
   lines.push(
+    `- [IDR for contingency firms](${base}/idr-for-contingency-firms): automating mechanical assembly to raise recoveries per FTE.`,
+  );
+  lines.push(
     `- [IDR filing deadline](${base}/idr-filing-deadline): the 30 and 4 business day clocks that close a claim cycle.`,
   );
   lines.push(
@@ -78,7 +81,7 @@ export function GET(): Response {
     `- [Roadmap](${base}/roadmap): what Sydra ships today and what is in active development.`,
   );
   lines.push(
-    `- [Request a 15-minute demo](${base}/demo): see Sydra run on a real denied claim.`,
+    `- [Set up a 15-minute call](${base}/demo): we run one of your denied claims live.`,
   );
   lines.push("");
 

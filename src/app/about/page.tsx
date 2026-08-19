@@ -8,6 +8,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
+import { EDITORIAL } from "@/lib/images";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
 import { textStyles } from "@/lib/typography";
@@ -65,12 +66,11 @@ export default function AboutPage() {
         </header>
 
           <EditorialImage
-            alt="Sydra colleagues reviewing a document together in the office"
-            aspect="16/9"
+            aspect="3/2"
+            asset={EDITORIAL.colleaguesDocument}
             className="mt-10"
             eager
-            sizes="(max-width: 1024px) 100vw, 768px"
-            src="/images/editorial/colleagues-document.png"
+            sizes="(max-width: 1024px) 100vw, 1200px"
           />
         </Section>
 
@@ -134,7 +134,7 @@ export default function AboutPage() {
         <Section tone="neutral">
           <div className="prose-measure">
             <Button href="/demo" showArrow>
-              Request a 15-minute demo
+              Set up a 15-minute call
             </Button>
             <CtaTrustSignals className="mt-4" />
           </div>

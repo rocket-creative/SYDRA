@@ -4,7 +4,14 @@ import { siteUrl } from "@/lib/site";
 export const SYDRA_ORG_ID = () => `${siteUrl()}/#organization`;
 export const SYDRA_WEBSITE_ID = () => `${siteUrl()}/#website`;
 export const SYDRA_SOFTWARE_ID = () => `${siteUrl()}/#software`;
-export const SYDRA_LOGO_URL = () => `${siteUrl()}/sydra-logo-nav.svg`;
+/**
+ * Google's Organization logo and Article image fields reject SVG: the supported
+ * set is BMP, GIF, JPEG, PNG and WebP. Both point at App Router generated PNG
+ * routes rather than /sydra_logo_nav.svg, which is also a 1517x321 lockup and so
+ * fails the square-ish, 112px minimum Google applies to a logo.
+ */
+export const SYDRA_LOGO_URL = () => `${siteUrl()}/apple-icon`;
+export const SYDRA_OG_IMAGE_URL = () => `${siteUrl()}/opengraph-image`;
 
 const DEFAULT_SAME_AS = ["https://www.linkedin.com/company/sydra-health/"] as const;
 
@@ -130,6 +137,7 @@ export function articleJsonLd({
   datePublished,
   dateModified,
   reviewedBy,
+  image,
   type = "Article",
 }: {
   path: string;
@@ -139,6 +147,11 @@ export function articleJsonLd({
   dateModified?: string;
   /** When true, sets reviewedBy to Dr. Abrahams Person @id. */
   reviewedBy?: boolean;
+  /**
+   * Absolute URL of a 1200px wide raster image for the article. Defaults to the
+   * site Open Graph card; pass a route's own /opengraph-image when it has one.
+   */
+  image?: string;
   /** Use NewsArticle for dated regulatory updates that read as news. */
   type?: "Article" | "NewsArticle";
 }) {
@@ -157,7 +170,7 @@ export function articleJsonLd({
     isPartOf: { "@id": SYDRA_WEBSITE_ID() },
     author: { "@id": SYDRA_ORG_ID() },
     publisher: { "@id": SYDRA_ORG_ID() },
-    image: SYDRA_LOGO_URL(),
+    image: image ?? SYDRA_OG_IMAGE_URL(),
     ...(reviewedBy ? { reviewedBy: { "@id": DR_ABRAHAMS_PERSON_ID() } } : {}),
   };
 }

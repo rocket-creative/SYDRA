@@ -115,7 +115,10 @@ export default async function SpecialtyHubPage({ params }: PageProps) {
           <EntityHero
             title={h1Specialty(painLabel)}
             subtitle="The codes surgical teams dispute most."
-            lead={meta.blurb}
+            lead={[
+              "When a health plan pays one of these claims out of network, that payment is an opening offer, not the amount owed. Federal IDR exists to contest it.",
+              meta.blurb,
+            ]}
           />
         </Section>
 

@@ -363,7 +363,7 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
       list: [
         "In house with software: your billing team prepares and files submissions with a tool that does the heavy drafting. You keep the full recovery and control every submission.",
         "In house with support: your team operates the software, with specialist support available on edge cases and periodic account review.",
-        "Full service: an outside team handles every claim end to end. This fits practices without billing capacity to run the workflow themselves.",
+        "Done for you: an outside team identifies what qualifies, assembles the submissions, files them, and holds the deadlines. Nothing changes in how the practice bills.",
       ],
     },
     {
@@ -373,11 +373,17 @@ const IDR_ATTORNEY_VS_SOFTWARE: ResourceArticle = {
         "An attorney, a billing company, or your own team can all do this well. What separates good from bad is whether the six required elements get built properly and whether the deadlines get met. Both are process questions.",
       ],
     },
+    /*
+     * Pointer, not an argument. This article is written for a practice deciding
+     * between an attorney, a firm, and its own team. The case for firms turns on
+     * recoveries per FTE, which is a different reader and a different number, so
+     * it lives on its own page rather than competing for attention here.
+     */
     {
-      id: "contingency-firm",
-      heading: "If you run a contingency firm",
+      id: "if-you-are-the-firm",
+      heading: "If you are the firm, not the practice",
       paragraphs: [
-        "Same engine, aimed at a different number: recoveries per FTE. Automating the mechanical steps makes smaller dollar claims economical to pursue that currently are not worth a reviewer's time, and it lets your experienced people spend their hours on the disputes where judgment actually changes the outcome.",
+        "Firms filing on contingency use Sydra too, for a different reason: recoveries per FTE rather than cost per recovery. That argument is set out on the Sydra for contingency firms page.",
       ],
     },
   ],

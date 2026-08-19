@@ -5,6 +5,7 @@ import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { CtaLink } from "@/components/ui/cta-link";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import {
   CASE_REVIEW_PATH,
   CASE_REVIEW_SAMPLE_PATH,
@@ -15,6 +16,7 @@ import {
   FOUNDER_ORIGIN_LINE,
   FOUNDER_ORIGIN_ROLE,
 } from "@/lib/content/founder-lines";
+import { EDITORIAL } from "@/lib/images";
 import { webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -59,6 +61,12 @@ export default function CaseReviewPage() {
             <SharedLeadForm anchorId="case-review-form" landingPage="case-review" />
           </Suspense>
         </div>
+        <EditorialImage
+          aspect="3/2"
+          asset={EDITORIAL.clinicianAdvisorMeeting}
+          className="mt-8"
+          sizes="(max-width: 1024px) 100vw, 576px"
+        />
       </div>
     </SydraPageShell>
   );

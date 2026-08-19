@@ -4,6 +4,7 @@ import { PricingViewed } from "@/components/analytics/pricing-viewed";
 import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { PricingTiers } from "@/components/sydra/pricing-tiers";
 import { PricingPageJsonLd } from "@/components/sydra/pricing-json-ld";
@@ -16,6 +17,7 @@ import { Section } from "@/components/ui/section";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
 import { caseReviewUrl } from "@/lib/case-review";
 import { FOUR_OBJECTION_LINE } from "@/lib/content/founder-lines";
+import { EDITORIAL } from "@/lib/images";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -28,7 +30,8 @@ export default function PricingPage() {
       <PricingViewed />
       <SydraPageShell banded breadcrumb={[...BREADCRUMBS.pricing]}>
         <Section ariaLabelledby="heading-pricing" tone="white">
-          <header className="max-w-2xl">
+          <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-16">
+          <header className="min-w-0 max-w-2xl">
             <h1 className={textStyles.pageTitle} id="heading-pricing">
               Sydra pricing.
               <span className={textStyles.pageSubtitle}>
@@ -43,7 +46,7 @@ export default function PricingPage() {
               stops scaling against you at exactly the point your volume makes it most expensive.
             </p>
             <p className="mt-4 type-body text-body">
-              Request a 15-minute demo and we quote on the call. No commitment to proceed.
+              Set up a 15-minute call and we quote on that call. No commitment to proceed.
             </p>
             <div className="mt-6">
               <ConversionCtaPair placement="pricing-body" secondaryAs="link" />
@@ -56,6 +59,13 @@ export default function PricingPage() {
               .
             </p>
           </header>
+          <EditorialImage
+            aspect="4/5"
+            asset={EDITORIAL.attorneyWindowDusk}
+            className="lg:sticky lg:top-24"
+            sizes="(max-width: 1024px) 100vw, 40vw"
+          />
+          </div>
         </Section>
 
         <Section sidebarLabel="Compare" tone="neutral">
@@ -99,10 +109,10 @@ export default function PricingPage() {
           <PricingTiers variant="full" />
         </Section>
 
-        <Section sidebarLabel="The demo" tone="neutral">
+        <Section sidebarLabel="The call" tone="neutral">
         <section aria-labelledby="heading-demo-process" className="max-w-2xl">
           <h2 className="type-h2 text-brand" id="heading-demo-process">
-            What happens on the demo.
+            What happens on the call.
           </h2>
           <div className="mt-6 space-y-4 type-body text-body">
             <p>
@@ -130,11 +140,11 @@ export default function PricingPage() {
         <Section tone="neutral">
           <div className="max-w-xl">
             <Button href="/demo" showArrow>
-              Request a 15-minute demo
+              Set up a 15-minute call
             </Button>
             <p className="mt-6">
               <CtaLink href={caseReviewUrl()}>
-                Not ready to run software? Get a free claim review
+                Not ready to talk? Send one denied claim for a free review
               </CtaLink>
             </p>
             <CtaTrustSignals className="mt-6" />

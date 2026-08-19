@@ -28,7 +28,7 @@ export const COMPARISONS: Comparison[] = [
     metaTitle: "Sydra vs Filing Federal IDR by Hand | Sydra",
     metaDescription:
       "Filing federal IDR by hand takes 25 to 40 minutes per claim. Compare manual in house filing against Sydra, which prepares the submission in under 5 minutes.",
-    lead: "Filing federal IDR by hand takes 25 to 40 minutes per claim, so most teams file far fewer claims than they are entitled to. Sydra prepares the submission in under 5 minutes. The comparison is below, and the only row that changes anything is the last one.",
+    lead: "Every out of network payment a plan makes is an opening offer, and federal IDR is how you contest it. Filing by hand takes 25 to 40 minutes per claim, so most teams contest far fewer than they are entitled to. Sydra prepares the submission in under 5 minutes. The comparison is below, and the only row that changes anything is the last one.",
     belowTable: "Throughput is the row that matters. The other four are how it happens.",
     rows: [
       { label: "Time per claim", sydra: "Under 5 minutes", other: "25 to 40 minutes" },

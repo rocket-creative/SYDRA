@@ -2,7 +2,7 @@ import type { ContentFaq, ContentSection } from "@/lib/content/what-is-idr-page"
 
 export const IDR_RECOVERY_CALCULATOR_HERO = {
   title: "How much could properly filed federal IDR recover for your practice?",
-  lead: "Enter monthly out of network claim volume and average disputed amount. Uses the published CMS win rate on the amount already in dispute. Award multiples versus QPA are not applied — this estimate is deliberately conservative. Not a Sydra performance claim.",
+  lead: "Every payment a plan makes on an out of network claim is an opening offer, and the gap between it and the amount owed is what this estimates. Enter monthly out of network claim volume and average disputed amount. Uses the published CMS win rate on the amount already in dispute. Award multiples versus QPA are not applied, which keeps this estimate deliberately conservative. Not a Sydra performance claim.",
 };
 
 export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
@@ -22,7 +22,7 @@ export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
     paragraphs: [
       "We apply the published 88% provider win rate to the amount already in dispute, and we stop there. We do not apply award multiples, and recovery is capped so it can never exceed what you are disputing.",
       "Real determinations run higher. CMS reports that the prevailing offer exceeded the qualifying payment amount in approximately 87% of payment determinations in the second half of 2025. We leave that out of the estimate on purpose — a number you can defend to your CFO is worth more than a bigger one you cannot.",
-      "What this does not account for: your specialty's award patterns, your state's dynamics, or your payer mix. For a number specific to your practice, request a 15-minute demo and we will walk through it with your actual claims.",
+      "What this does not account for: your specialty's award patterns, your state's dynamics, or your payer mix. For a number specific to your practice, set up a 15-minute call and we will walk through it with your actual claims.",
       "Source: CMS, Federal IDR Supplemental Background, July–December 2025.",
     ],
   },
@@ -39,7 +39,7 @@ export const IDR_RECOVERY_CALCULATOR_FAQS: ContentFaq[] = [
   },
   {
     q: "What should I do with the estimate?",
-    a: "Use it to compare keeping recovery in house against paying a contingency fee. Request a 15-minute demo if you want to walk through a real denied claim from your specialty and see how Sydra prepares the submission.",
+    a: "Use it to compare keeping recovery in house against paying a contingency fee. Set up a 15-minute call if you want to walk through a real denied claim from your specialty and see what federal IDR would do with it.",
   },
 ];
 

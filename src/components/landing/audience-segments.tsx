@@ -1,11 +1,8 @@
 "use client";
 
-import { track } from "@vercel/analytics";
-
+import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
 import { HomepageBand } from "@/components/landing/homepage-band";
-import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
-import { PRIMARY_CTA_LABEL, caseReviewUrl } from "@/lib/case-review";
 
 const segments = [
   {
@@ -37,9 +34,8 @@ const segments = [
   {
     heading: "If you run a contingency firm",
     body: "Same engine, aimed at a different number: recoveries per FTE. Automating the mechanical steps makes smaller dollar claims economical to pursue that currently are not worth a reviewer's time, and it lets your experienced people spend their hours on the disputes where judgment actually changes the outcome.",
-    href: "/sydra-vs-idr-attorney",
-    link: "Compare your IDR options",
-    ariaLabel: "Compare your IDR options if you run a contingency firm",
+    href: "/idr-for-contingency-firms",
+    link: "Sydra for contingency firms",
   },
 ] as const;
 
@@ -71,16 +67,7 @@ export function AudienceSegments() {
         ))}
       </div>
       <div className="mt-12">
-        <Button
-          href={caseReviewUrl("homepage-segments")}
-          showArrow
-          variant="solid"
-          onClick={() => {
-            track("cta_primary_click", { placement: "homepage-segments" });
-          }}
-        >
-          {PRIMARY_CTA_LABEL}
-        </Button>
+        <ConversionCtaPair placement="homepage-segments" showSupportingLine={false} />
       </div>
     </HomepageBand>
   );

@@ -9,6 +9,8 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
+import { caseReviewUrl } from "@/lib/case-review";
 import { Section } from "@/components/ui/section";
 import {
   IDR_FILING_DEADLINE_CMS_HREF,
@@ -19,6 +21,7 @@ import {
   IDR_FILING_DEADLINE_SECTIONS,
   IDR_FILING_DEADLINE_WINDOWS,
 } from "@/lib/content/idr-filing-deadline-page";
+import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -81,7 +84,11 @@ export default function IdrFilingDeadlinePage() {
   return (
     <>
       <IdrFilingDeadlineJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.idrFilingDeadline]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.idrFilingDeadline]}
+        stickyCtaHref={caseReviewUrl("idr-filing-deadline-sticky")}
+      >
         <Section ariaLabelledby="heading-idr-filing-deadline" tone="white">
           <header className="prose-measure">
             <p className="type-caption mb-4 uppercase tracking-[0.12em] text-body/70">
@@ -108,6 +115,13 @@ export default function IdrFilingDeadlinePage() {
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.clinicianNightPaperwork}
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section

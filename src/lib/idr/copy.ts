@@ -6,7 +6,7 @@
  * interpolate a code, state, payer, win rate, or dollar figure into any of them.
  */
 
-export const PROMISE = `Sydra was built to change the economics of that work. It identifies which of your claims qualify, assembles the submissions, and manages every date. Nothing changes in how you practice or how you bill.`;
+export const PROMISE = `Sydra was built to change the economics of that work. We identify which of your claims qualify, assemble the submissions, and manage every date, and we can file them for you. Pricing is per claim or subscription, never a percentage of what you recover. Nothing changes in how you practice or how you bill.`;
 
 export const DISCLAIMER = `No outcome is guaranteed. Results vary by claim, payer, specialty, and documentation. Any general figures reflect the published federal record across all disputes, not a prediction about your claim. This is general information, not legal or financial advice.`;
 

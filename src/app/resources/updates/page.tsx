@@ -9,8 +9,16 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Button } from "@/components/ui/button";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
+import {
+  CALL_CTA_LABEL,
+  CALL_PATH,
+  CASE_REVIEW_PATH,
+  PRIMARY_CTA_LABEL,
+} from "@/lib/case-review";
 import { RESOURCE_UPDATES } from "@/lib/content/resources/updates";
+import { EDITORIAL } from "@/lib/images";
 import { itemListJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -68,12 +76,24 @@ export default function ResourcesUpdatesPage() {
               appear on Sydra with its source.
             </p>
             <div className="mt-8">
-              <Button href="/demo" showArrow>
-                Request a 15-minute demo
-              </Button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+                <Button href={CALL_PATH} showArrow>
+                  {CALL_CTA_LABEL}
+                </Button>
+                <Button href={CASE_REVIEW_PATH} variant="ghost">
+                  {PRIMARY_CTA_LABEL}
+                </Button>
+              </div>
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>
+          <EditorialImage
+            aspect="16/9"
+            asset={EDITORIAL.recoverHeroBilling}
+            className="mt-10"
+            eager
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section sidebarLabel="Feed" tone="neutral">

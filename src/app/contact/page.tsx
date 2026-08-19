@@ -15,6 +15,7 @@ import {
   supportMailtoHref,
 } from "@/lib/contact";
 import { caseReviewUrl } from "@/lib/case-review";
+import { EDITORIAL } from "@/lib/images";
 import {
   localBusinessJsonLd,
   organizationContactPoint,
@@ -75,19 +76,18 @@ export default function ContactPage() {
               </p>
             </header>
             <EditorialImage
-              alt="A practice manager and a surgeon shaking hands in a hospital lobby"
               aspect="16/9"
+              asset={EDITORIAL.attorneySurgeonHandshake}
               className="mt-10"
               eager
               sizes="(max-width: 1024px) 100vw, 1200px"
-              src="/images/editorial/attorney-surgeon-handshake.png"
             />
           </Section>
 
-          <Section className="order-2 lg:order-3" sidebarLabel="Demo" tone="white">
+          <Section className="order-2 lg:order-3" sidebarLabel="Get in touch" tone="white">
             <section aria-labelledby="heading-contact-form" className="prose-measure" id="contact-form">
               <h2 className={textStyles.sectionTitle} id="heading-contact-form">
-                Request a 15-minute demo or ask a question.
+                Set up a 15-minute call or ask a question.
               </h2>
               <div className="mt-6 border-t border-rule pt-8">
                 <ContactForm />
@@ -180,7 +180,7 @@ export default function ContactPage() {
               </ul>
               <p className="mt-6">
                 <Link className={textStyles.textLink} href="/demo">
-                  Or request a 15-minute demo directly
+                  Or set up a 15-minute call directly
                 </Link>
               </p>
             </section>

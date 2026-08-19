@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { PrivacyRequestForm } from "@/components/sydra/privacy-request-form";
@@ -63,6 +64,16 @@ export default function DoNotSellPage() {
             <PrivacyRequestForm />
           </div>
         </Section>
+
+        {/*
+          hideSecondary: the claim review asks for a denied EOB, which is the
+          opposite of what someone on this page came to do. One low pressure ask.
+        */}
+        <SydraCtaBand
+          hideSecondary
+          lead="If you landed here from an email and you were actually looking for what Sydra does, that is a fair question. A payer's out of network payment is an opening offer, not the amount owed, and federal IDR is how you contest it. Fifteen minutes is enough to tell whether it applies to your practice."
+          title="Here for something else?"
+        />
       </SydraPageShell>
     </>
   );

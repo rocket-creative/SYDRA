@@ -13,11 +13,13 @@ const AMOUNT_MIN = 1000;
 const AMOUNT_MAX = 200000;
 const AMOUNT_STEP = 1000;
 
+/**
+ * The estimate is followed by SharedLeadForm, not a button, so this takes no CTA
+ * props. Callers used to pass ctaHref and ctaLabel and they were silently
+ * ignored; do not reintroduce them.
+ */
 type RecoveryCalculatorProps = {
   variant?: "light" | "onDark";
-  ctaHref?: string;
-  ctaLabel?: string;
-  onCtaClick?: () => void;
   /** Optional prefill, e.g. from an entity page's benchmark data. */
   defaultClaimsPerMonth?: number;
   defaultAvgDisputedAmount?: number;

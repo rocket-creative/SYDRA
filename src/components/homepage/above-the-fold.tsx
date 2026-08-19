@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { HERO, PROOF_CELLS, THESIS } from "@/lib/content/homepage";
+import { EDITORIAL } from "@/lib/images";
 
 /**
  * The hero, proof strip and thesis line share one vertical budget with the path
@@ -48,12 +49,12 @@ export function Hero() {
            */}
           <div className="hero-image-in relative mt-5 h-[clamp(7rem,20dvh,9rem)] overflow-hidden rounded-[2px] bg-surface-muted md:col-span-4 md:mt-0 md:h-auto">
             <Image
-              alt="Surgeon reviewing a payer remittance in a hospital corridor"
+              alt={EDITORIAL.surgeonPaymentReview.alt}
               className="object-cover object-[55%_40%]"
               fill
               priority
               sizes="(min-width: 768px) 30vw, 100vw"
-              src="/images/editorial/surgeon-payment-review.png"
+              src={EDITORIAL.surgeonPaymentReview.src}
             />
           </div>
         </div>

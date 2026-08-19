@@ -16,7 +16,7 @@ export const CMS_RULE_BATCHING_VIDEO = {
     "As of the May 2026 federal rule, filing a federal IDR dispute costs fifteen dollars instead of a hundred and fifteen. CMS also started allowing practices to batch multiple claims into one submission, to speed things up and cut costs across the system.",
     "Here's what that means in practice. If you batch ten high value codes into one submission, the arbiter picks one offer for the whole batch. One offer. If it's not selected, all ten codes lose together. File them one at a time, and each code stands on its own. In my own practice, that's the difference between winning eight or nine out of ten, or risking all ten on one roll.",
     "That's why Sydra still files one claim per CPT by default. But batching is real now, it's sanctioned, and there are cases where it makes sense: lower value codes, claims from the same encounter with strong overlapping evidence. So we put the decision in your hands. Every submission, you choose.",
-    "See how it works on a real claim from your specialty. Free 15-minute demo, link below.",
+    "See how it works on a real claim from your specialty. Free 15-minute call, link below.",
   ].join(" "),
 } as const;
 

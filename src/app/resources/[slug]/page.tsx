@@ -168,7 +168,7 @@ export default async function ResourceArticlePage({ params }: PageProps) {
             ) : (
               <div className="mt-8">
                 <Button href="/demo" showArrow>
-                  Request a 15-minute demo
+                  Set up a 15-minute call
                 </Button>
               </div>
             )}

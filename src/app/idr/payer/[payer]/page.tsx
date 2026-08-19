@@ -89,11 +89,11 @@ export default async function PayerHubPage({ params }: PageProps) {
           ...medicallyReviewedWebPageJsonLd({
             path,
             name: `${payerName} out of network surgical denials`,
-            description: `Why ${payerName} underpays out of network surgical claims and how federal IDR recovers the gap.`,
+            description: `Why ${payerName} underpays out of network surgical claims and how federal IDR recovers the gap. What ${payerName} paid is an opening offer, not the amount owed.`,
           }),
           serviceJsonLd({
-            name: "Sydra NSA IDR software",
-            description: `Software that prepares the federal IDR submission for ${payerName} denials.`,
+            name: "Sydra federal IDR submissions",
+            description: `Sydra identifies which ${payerName} denials qualify for federal IDR, assembles the submission, holds every deadline, and can file on your behalf. Priced per claim or by subscription, never a percentage of recovery.`,
             serviceType: "Healthcare revenue cycle software",
           }),
         ]}
@@ -104,7 +104,7 @@ export default async function PayerHubPage({ params }: PageProps) {
             eyebrow={`${payerName} · Federal IDR`}
             title={`Denied or underpaid by ${payerName}?`}
             subtitle="Out of network surgical claims."
-            lead={`When ${payerName} pays an out of network surgical claim below the billed charge, that gap is what federal independent dispute resolution exists to recover. We build the submission, your billing team approves it, and you keep the recovery.`}
+            lead={`When ${payerName} pays an out of network surgical claim below the billed charge, that payment is an opening offer, not the amount owed, and federal independent dispute resolution exists to contest it. We identify what qualifies, build the submission, hold every deadline, and can file it for you. You keep the recovery.`}
           />
           {payerMeta.aka && payerMeta.aka.length > 0 ? (
             <p className={`${textStyles.meta} mt-6`}>

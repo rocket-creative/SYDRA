@@ -19,6 +19,7 @@ import {
   WHAT_IS_IDR_HERO,
   WHAT_IS_IDR_SECTIONS,
 } from "@/lib/content/what-is-idr-page";
+import { EDITORIAL } from "@/lib/images";
 import {
   faqPageJsonLd,
   medicallyReviewedWebPageJsonLd,
@@ -89,12 +90,11 @@ export default function WhatIsIdrPage() {
             ))}
           </header>
           <EditorialImage
-            alt="Clinician carrying claim paperwork through a hospital corridor"
             aspect="16/9"
+            asset={EDITORIAL.hospitalCorridorClaims}
             className="mt-10"
             eager
             sizes="(max-width: 1024px) 100vw, 1200px"
-            src="/images/editorial/hospital-corridor-claims.png"
           />
         </Section>
 

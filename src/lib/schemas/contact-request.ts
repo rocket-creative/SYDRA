@@ -11,7 +11,7 @@ export const CONTACT_INTENT_OPTIONS = [
 ] as const;
 
 export const CONTACT_INTENT_LABELS: Record<(typeof CONTACT_INTENT_OPTIONS)[number], string> = {
-  schedule_demo: "Request a 15-minute demo",
+  schedule_demo: "Set up a 15-minute call",
   pricing_question: "Pricing question",
   security_documentation: "Security and compliance documentation",
   partnership_inquiry: "Partnership inquiry",

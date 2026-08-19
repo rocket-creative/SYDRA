@@ -104,7 +104,7 @@ export default async function StateHubPage({ params }: PageProps) {
           <EntityHero
             title={h1State(stateName)}
             subtitle="Federal IDR for out of network surgical claims."
-            lead={`Out of network surgical claims in ${stateName} are routinely paid below the billed charge. The state pathway plus federal IDR is how surgical practices recover that gap, one denial at a time.`}
+            lead={`Out of network surgical claims in ${stateName} are routinely paid below the billed charge. That payment is an opening offer, not the amount owed. The state pathway plus federal IDR is how surgical practices contest it, one denial at a time.`}
           />
         </Section>
 

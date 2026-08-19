@@ -47,7 +47,7 @@ const initialStepOne: StepOneData = {
 };
 
 const RISK_STACK =
-  "Free demo. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.";
+  "Free 15-minute call. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.";
 
 type DemoFunnelFormProps = {
   intent?: "demo" | "security";
@@ -57,7 +57,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
   const searchParams = useSearchParams();
   const requestType = intent === "security" ? "security" : "demo";
   const submitLabel =
-    intent === "security" ? "Request security summary" : "Request demo";
+    intent === "security" ? "Request security summary" : "Set up my call";
   const [step, setStep] = useState<Step>(1);
   const [stepOne, setStepOne] = useState<StepOneData>(initialStepOne);
   const [phone, setPhone] = useState("");

@@ -20,6 +20,7 @@ import {
   IDR_RECOVERY_CALCULATOR_HERO,
   IDR_RECOVERY_CALCULATOR_SECTIONS,
 } from "@/lib/content/idr-recovery-calculator-page";
+import { EDITORIAL } from "@/lib/images";
 import {
   faqPageJsonLd,
   medicallyReviewedWebPageJsonLd,
@@ -73,12 +74,11 @@ export default function IdrRecoveryCalculatorPage() {
             </div>
           </header>
           <EditorialImage
-            alt="Two billing specialists reviewing recovery figures on screen"
             aspect="16/9"
+            asset={EDITORIAL.billingTeamScreenReview}
             className="mt-10"
             eager
             sizes="(max-width: 1024px) 100vw, 1200px"
-            src="/images/editorial/billing-team-screen-review.png"
           />
         </Section>
 
@@ -86,7 +86,7 @@ export default function IdrRecoveryCalculatorPage() {
           <h2 className="sr-only" id="heading-calculator-tool">
             Recovery estimate tool
           </h2>
-          <RecoveryCalculator ctaHref="/demo" ctaLabel="Request a 15-minute demo" />
+          <RecoveryCalculator />
         </Section>
 
         <Section tone="white">
@@ -121,10 +121,10 @@ export default function IdrRecoveryCalculatorPage() {
               {IDR_RECOVERY_CALCULATOR_CTA_LEAD}
             </h2>
             <p className={`${textStyles.body} mt-4 mb-6`}>
-              Free 15-minute demo. We look at your actual specialty, state, and payer mix.
+              Free 15-minute call. We look at your actual specialty, state, and payer mix.
             </p>
             <Button href="/demo" showArrow>
-              Request a 15-minute demo
+              Set up a 15-minute call
             </Button>
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>

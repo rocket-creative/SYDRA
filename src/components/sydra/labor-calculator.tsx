@@ -26,7 +26,7 @@ const hrs = (n: number) => `${Math.round(n)} hrs`;
 export function LaborCalculator({
   variant = "light",
   ctaHref = "/demo",
-  ctaLabel = "Request a 15-minute demo",
+  ctaLabel = "Set up a 15-minute call",
   onCtaClick,
 }: LaborCalculatorProps) {
   const [claimsPerMonth, setClaimsPerMonth] = useState(20);

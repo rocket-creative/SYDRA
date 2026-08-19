@@ -19,6 +19,7 @@ import {
   IN_HOUSE_IDR_HERO,
   IN_HOUSE_IDR_SECTIONS,
 } from "@/lib/content/in-house-idr-page";
+import { EDITORIAL } from "@/lib/images";
 import {
   faqPageJsonLd,
   medicallyReviewedWebPageJsonLd,
@@ -71,12 +72,11 @@ export default function InHouseIdrPage() {
             <p className={textStyles.pageLead}>{IN_HOUSE_IDR_HERO.lead}</p>
           </header>
           <EditorialImage
-            alt="Billing specialist reviewing an out of network claim at a standing desk"
             aspect="16/9"
+            asset={EDITORIAL.billerStandingDesk}
             className="mt-10"
             eager
             sizes="(max-width: 1024px) 100vw, 1200px"
-            src="/images/editorial/biller-standing-desk.png"
           />
         </Section>
 

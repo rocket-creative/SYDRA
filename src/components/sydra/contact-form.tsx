@@ -19,12 +19,12 @@ export function SydraContactForm() {
           Ready to see Sydra on a real claim?
         </h2>
         <p className="mt-6 type-body text-body">
-          Request a free 15-minute demo. We walk through Sydra live on a denied claim, recommend the
-          right tier, and quote on your volume. No pressure.
+          A free 15-minute call. We run a denied claim of yours live, recommend whether your team or
+          ours should file it, and quote on your volume. No pressure.
         </p>
         <div className="mt-10">
           <Button href="/demo" showArrow>
-            Request a 15-minute demo
+            Set up a 15-minute call
           </Button>
         </div>
         <p className="mt-6 text-sm text-body">

@@ -10,9 +10,11 @@ import { StickyConversionBar } from "@/components/sydra/sticky-conversion-bar";
 import { PRODUCT_SCREENS } from "@/components/sydra/product-screens";
 import { Section } from "@/components/ui/section";
 import { CtaLink } from "@/components/ui/cta-link";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { getSalesEmail } from "@/lib/contact";
 import { caseReviewUrl } from "@/lib/case-review";
 import { DEMO_RISK_REVERSAL } from "@/lib/content/founder-lines";
+import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -24,7 +26,7 @@ function pageTitle(): string {
   if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
     return String(meta.title.absolute);
   }
-  return "Request a 15-minute Sydra Demo";
+  return "Set Up a 15-minute Call with Sydra";
 }
 
 function DemoPageJsonLd() {
@@ -54,24 +56,28 @@ const callSteps = [
 
 const preBookingFaq = [
   {
-    q: "What does the demo cost and what am I committing to?",
-    a: "Nothing and nothing. The demo is free, there is no contract, no setup fee, and nothing installs in your EMR. We walk one real claim from your specialty and tell you whether IDR fits your practice. If it does not, we say so on the call.",
+    q: "What does the call cost and what am I committing to?",
+    a: "Nothing and nothing. The call is free, there is no contract, no setup fee, and nothing installs in your EMR. We walk one real claim from your specialty and tell you whether IDR fits your practice. If it does not, we say so on the call.",
   },
   {
-    q: "Do I have to buy anything to get the demo?",
+    q: "Do I have to buy anything to get the call?",
     a: "No. Free with no commitment.",
   },
   {
-    q: "Should my billing team attend?",
-    a: "Yes, ideally. The demo is most useful when the billing lead who would operate the software is on the call. We can accommodate up to three attendees.",
+    q: "Do I have to run software after this?",
+    a: "No. Two arrangements come out of the call. Your team can run Sydra and file in house, or we can identify the qualifying claims, assemble the submissions, and hold every deadline for you. We recommend one based on what your team has bandwidth for, and neither changes how you practice or bill.",
+  },
+  {
+    q: "Who should be on the call?",
+    a: "Whoever decides. If your billing lead would run the filings, they get the most out of it. If you would rather hand the work over entirely, you alone is enough. We can accommodate up to three attendees.",
   },
   {
     q: "Can I see Sydra on a claim type my practice actually files?",
-    a: "Yes. Send us an EOB before the call. We run the demo on your actual CPT code in your state.",
+    a: "Yes. Send us an EOB before the call and we run it on your actual CPT code in your state.",
   },
   {
-    q: "What if I just want pricing without a demo?",
-    a: `Email ${getSalesEmail()} with your specialty and estimated monthly OON volume. We'll send a pricing range.`,
+    q: "What if I just want pricing without a call?",
+    a: `Email ${getSalesEmail()} with your specialty and estimated monthly OON volume. We'll send a pricing range. Pricing is per claim or subscription, never a percentage of your recovery.`,
   },
   {
     q: "How long does setup take after we decide to proceed?",
@@ -92,11 +98,16 @@ export default function DemoPage() {
         <Section tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-demo">
-              See Sydra prepare a real NSA IDR submission.
+              Worth a 15-minute call?
               <span className={textStyles.pageSubtitle}>
-                15 minutes. Your specialty. Your actual CPT codes if you send one.
+                Bring one denied claim. We&apos;ll tell you what federal IDR would do with it.
               </span>
             </h1>
+            <p className={textStyles.pageLead}>
+              A payer&apos;s out of network payment is an opening offer, not the amount owed. Fifteen
+              minutes is enough to find out whether one of your claims is worth contesting, who
+              should file it, and what that costs.
+            </p>
           </header>
 
           <div className="mt-10 flex flex-col lg:grid lg:grid-cols-12 lg:items-start lg:gap-12">
@@ -123,6 +134,13 @@ export default function DemoPage() {
                 </p>
               </section>
 
+              <EditorialImage
+                aspect="1/1"
+                asset={EDITORIAL.surgeonLaptopReview}
+                className="mt-10"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+
               {/* Decorative UI mocks render 8-10px labels; illegible on a phone, so md and up only. */}
               <section aria-labelledby="heading-preview" className="mt-10 hidden prose-measure md:block">
                 <h2 className={textStyles.subsectionTitle} id="heading-preview">
@@ -140,7 +158,7 @@ export default function DemoPage() {
 
               <section aria-labelledby="heading-pre-faq" className="mt-10 prose-measure">
                 <h2 className={textStyles.subsectionTitle} id="heading-pre-faq">
-                  Before you request
+                  Before you book
                 </h2>
                 <div className="mt-4 divide-y divide-[var(--color-rule)] border-y border-rule">
                   {preBookingFaq.map((item) => (
@@ -166,7 +184,7 @@ export default function DemoPage() {
               </Suspense>
               <p className="prose-measure mt-4">
                 <CtaLink href={caseReviewUrl()}>
-                  Not ready for software? Get a free claim review
+                  Not ready to talk? Send one denied claim for a free review
                 </CtaLink>
               </p>
             </div>
@@ -177,7 +195,7 @@ export default function DemoPage() {
           <SourcesReferences />
         </Section>
       </SydraPageShell>
-      <StickyConversionBar primaryLabel="Request demo" scrollTargetId="demo-form" />
+      <StickyConversionBar scrollTargetId="demo-form" />
     </>
   );
 }

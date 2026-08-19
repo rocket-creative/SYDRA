@@ -44,7 +44,7 @@ export function ProcessProblemStatement() {
           is worth either of our time.
         </p>
         <p className="mt-8">
-          <CtaLink href="/demo">Request a 15-minute demo</CtaLink>
+          <CtaLink href="/demo">Set up a 15-minute call</CtaLink>
         </p>
       </div>
     </HomepageBand>

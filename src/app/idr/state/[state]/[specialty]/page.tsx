@@ -13,6 +13,7 @@ import {
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
@@ -146,7 +147,7 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
           <EntityHero
             title={h1SpecialtyState(painLabel, stateName)}
             subtitle={`${specialtyMeta.name} claims under the No Surprises Act.`}
-            lead={`When ${painLabel} in ${stateName} is paid below the billed charge, that gap is real money the practice has already earned. Federal IDR is how surgical teams recover it, denial by denial.`}
+            lead={`When ${painLabel} in ${stateName} is paid below the billed charge, that payment is an opening offer, not the amount owed. Federal IDR is how surgical teams contest it, denial by denial.`}
           />
         </Section>
 
@@ -185,6 +186,8 @@ export default async function SpecialtyStatePage({ params }: PageProps) {
           <EntityFaq items={faqs} />
           <MedicalReviewBlock />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

@@ -24,11 +24,11 @@ export default function CaseReviewThankYouPage() {
           recommendation for your practice.
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Button href="/" showArrow>
-            Back to homepage
+          <Button href="/demo" showArrow>
+            Set up a 15-minute call
           </Button>
-          <Button href="/demo" variant="ghost">
-            Prefer a software demo?
+          <Button href="/" variant="ghost">
+            Back to homepage
           </Button>
         </div>
       </div>

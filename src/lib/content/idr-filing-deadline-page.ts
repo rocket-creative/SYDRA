@@ -5,7 +5,8 @@ export const IDR_FILING_DEADLINE_HERO = {
   title: "You have 4 business days to file.",
   subtitle: "Not 4 weeks.",
   paragraphs: [
-    "Federal IDR runs on two clocks and neither one moves. The open negotiation period runs 30 business days. Once it closes, you have exactly 4 business days to initiate. Miss that window and the claim is closed for that cycle. Permanently. No extension, no appeal path.",
+    "A payer's out of network payment is an opening offer, not the amount owed. Federal IDR is how you contest it, and it runs on two clocks that never move.",
+    "The open negotiation period runs 30 business days. Once it closes, you have exactly 4 business days to initiate. Miss that window and the claim is closed for that cycle. Permanently. No extension, no appeal path.",
     "This is the part of the process that should never depend on anyone's judgment, because the deadline does not depend on anyone's judgment either.",
   ],
 };
@@ -55,7 +56,7 @@ export const IDR_FILING_DEADLINE_SECTIONS: ContentSection[] = [
     id: "heading-close-to-window",
     title: "If you think you might already be close to the window.",
     paragraphs: [
-      "Bring the claim to a free demo. Sydra runs an eligibility check that includes whether the filing window is still open before any packet is built.",
+      "Bring the claim to a free 15-minute call. Sydra runs an eligibility check that includes whether the filing window is still open before any packet is built.",
       "If the window is open, you see what a submission looks like on a real claim from your specialty. If it has already closed, you know that before spending time on documentation that cannot be filed this cycle.",
     ],
   },

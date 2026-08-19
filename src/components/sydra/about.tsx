@@ -4,6 +4,7 @@ import { EditorialImage } from "@/components/ui/editorial-image";
 import { FullServiceBanner } from "@/components/sydra/full-service-banner";
 import { CASE_REVIEW_CTA, caseReviewUrl } from "@/lib/case-review";
 import { FOUNDER_MARKETING_BYLINE } from "@/lib/content/founder-lines";
+import { EDITORIAL } from "@/lib/images";
 
 export function SydraAbout() {
   return (
@@ -48,11 +49,10 @@ export function SydraAbout() {
             </p>
           </div>
           <EditorialImage
-            alt="Sydra billing specialists reviewing claim paperwork at a workstation"
             aspect="4/5"
+            asset={EDITORIAL.teamPaperworkReview}
             className="lg:sticky lg:top-24"
             sizes="(max-width: 1024px) 100vw, 40vw"
-            src="/images/editorial/team-paperwork-review.png"
           />
         </div>
       </Section>

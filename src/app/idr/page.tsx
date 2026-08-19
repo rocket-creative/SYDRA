@@ -11,6 +11,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { RegulatoryAsOf } from "@/components/sydra/regulatory-as-of";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { US_STATES } from "@/lib/constants/us-states";
 import { DISCLAIMER } from "@/lib/idr/copy";
@@ -19,6 +20,7 @@ import { IDR_HUB_FAQS } from "@/lib/idr/pain-content";
 import { PROOF_POINTS } from "@/lib/idr/proof-points";
 import { idrSpecialtyPath, idrStatePath } from "@/lib/idr/seo";
 import { SPECIALTIES } from "@/lib/idr/taxonomy";
+import { EDITORIAL } from "@/lib/images";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { faqPageJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { textStyles } from "@/lib/typography";
@@ -79,10 +81,12 @@ export default function IdrIndexPage() {
         <Section tone="white">
           <EntityHero
             eyebrow="No Surprises Act"
+            image={null}
             title="That payment is an opening offer."
             subtitle="Federal IDR, by code, state, payer, and specialty."
             lead={[
               "Out of network surgical claims are routinely paid below the billed charge or denied outright. Most practices treat what arrives as the amount owed. Under the No Surprises Act it is not. It is an opening offer, and federal Independent Dispute Resolution exists specifically to contest it.",
+              "IDR is a process problem, not a legal mystery. The rules and the deadlines are fixed and published, which is exactly what makes the work automatable and why so few practices do it by hand.",
               "Find your procedure, state, and payer below to see why these claims get paid short and what the federal record says about recovering the gap.",
             ]}
           />
@@ -101,10 +105,18 @@ export default function IdrIndexPage() {
             </Link>
             , or{" "}
             <Link className={textStyles.textLink} href="/demo">
-              request a 15-minute demo
+              set up a 15-minute call
             </Link>
             .
           </p>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.billingManagerFiles}
+            className="mt-10"
+            eager
+            focus="upper"
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section tone="neutral">
@@ -113,6 +125,10 @@ export default function IdrIndexPage() {
               {
                 name: "Billing companies and RCM firms",
                 href: "/idr-for-billing-companies",
+              },
+              {
+                name: "Contingency firms",
+                href: "/idr-for-contingency-firms",
               },
               { name: "In house IDR teams", href: "/in-house-idr" },
               {

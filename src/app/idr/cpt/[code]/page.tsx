@@ -13,6 +13,7 @@ import {
 } from "@/components/idr/pain-sections";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
@@ -108,11 +109,11 @@ export default async function CptHubPage({ params }: PageProps) {
           ...medicallyReviewedWebPageJsonLd({
             path: idrCodePath(code),
             name: `${proc} (CPT ${code}) federal IDR`,
-            description: `Out of network ${proc} (CPT ${code}) is routinely paid below billed charges or denied. Federal IDR recovers that gap, and Sydra prepares the submission.`,
+            description: `Out of network ${proc} (CPT ${code}) is routinely paid below billed charges or denied. That payment is an opening offer, and federal IDR exists to contest it. Sydra identifies what qualifies, assembles the submission, and can file it for you.`,
           }),
           serviceJsonLd({
-            name: "Sydra NSA IDR software",
-            description: `Software that prepares the federal IDR submission for ${proc} disputes.`,
+            name: "Sydra federal IDR submissions",
+            description: `Sydra identifies which ${proc} claims qualify for federal IDR, assembles the submission, holds every deadline, and can file on your behalf. Priced per claim or by subscription, never a percentage of recovery.`,
             serviceType: "Healthcare revenue cycle software",
           }),
           faqPageJsonLd(faqs),
@@ -124,7 +125,7 @@ export default async function CptHubPage({ params }: PageProps) {
             eyebrow="Federal IDR · Code overview"
             title={h1Cpt(proc, code)}
             subtitle="The denial, the code, and the path to recovery."
-            lead={`Out of network ${proc} (CPT ${code}) is routinely paid below the billed charge or denied outright. That gap is what federal independent dispute resolution exists to recover. We prepare the submission and you keep the recovery.`}
+            lead={`Out of network ${proc} (CPT ${code}) is routinely paid below the billed charge or denied outright. Most practices treat what arrives as the amount owed. Under the No Surprises Act it is an opening offer, and federal independent dispute resolution exists to contest it. We prepare the submission, and we can file it for you.`}
           />
         </Section>
 
@@ -179,6 +180,8 @@ export default async function CptHubPage({ params }: PageProps) {
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

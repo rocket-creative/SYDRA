@@ -213,7 +213,7 @@ function pathwayFaqAnswer(stateCode: string, stateName: string): string {
 }
 
 const SYDRA_PROCESS_ANSWER =
-  "We build the federal IDR submission, your billing team approves it, and you keep the recovery. We do this every day and we win most of the time. No outcome is guaranteed, and we will not predict a result on a specific claim.";
+  "We identify what qualifies, build the federal IDR submission, and hold every deadline. You can approve and file it yourself, or we can file it for you. Either way you keep the recovery: we price per claim or by subscription, never a percentage. We do this every day and we win most of the time. No outcome is guaranteed, and we will not predict a result on a specific claim.";
 
 export function cptStatePayerFaqs(input: {
   proc: string;

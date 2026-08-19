@@ -10,6 +10,12 @@ import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
+import {
+  CALL_CTA_LABEL,
+  CALL_PATH,
+  CASE_REVIEW_PATH,
+  PRIMARY_CTA_LABEL,
+} from "@/lib/case-review";
 import { GLOSSARY_TERMS } from "@/lib/content/glossary";
 import { definedTermSetJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -63,9 +69,14 @@ export default function GlossaryPage() {
               links to the guide that owns the full explanation.
             </p>
             <div className="mt-8">
-              <Button href="/demo" showArrow>
-                Request a 15-minute demo
-              </Button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+                <Button href={CALL_PATH} showArrow>
+                  {CALL_CTA_LABEL}
+                </Button>
+                <Button href={CASE_REVIEW_PATH} variant="ghost">
+                  {PRIMARY_CTA_LABEL}
+                </Button>
+              </div>
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>

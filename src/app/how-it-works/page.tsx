@@ -22,6 +22,7 @@ import {
   SYDRA_ELEMENTS,
 } from "@/lib/content/how-it-works-page";
 import { HOW_IT_WORKS_FAQ } from "@/lib/content/service-faqs";
+import { EDITORIAL } from "@/lib/images";
 import {
   faqPageJsonLd,
   howToJsonLd,
@@ -94,12 +95,11 @@ export default function HowItWorksPage() {
             ))}
           </header>
           <EditorialImage
-            alt="Close view of a clinician signing a completed IDR submission"
             aspect="16/9"
+            asset={EDITORIAL.claimSignatureDetail}
             className="mt-10"
             eager
             sizes="(max-width: 1024px) 100vw, 1200px"
-            src="/images/editorial/claim-signature-detail.png"
           />
         </Section>
 

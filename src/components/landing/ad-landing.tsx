@@ -13,6 +13,7 @@ import { MagazineShell } from "@/components/ui/magazine-shell";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { Section } from "@/components/ui/section";
 import { CLAIM_REVIEW_OFFER } from "@/lib/case-review";
+import { EDITORIAL } from "@/lib/images";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import {
   breadcrumbJsonLd,
@@ -62,12 +63,12 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
       >
         <div className="relative h-[clamp(10rem,32dvh,16rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
           <Image
-            alt="A practice reviewing out of network claim options with advisors"
+            alt={EDITORIAL.boardroomAdvisorsReview.alt}
             className="object-cover object-[center_30%] md:object-right"
             fill
             priority
             sizes="100vw"
-            src="/images/editorial/boardroom-advisors-review.png"
+            src={EDITORIAL.boardroomAdvisorsReview.src}
           />
         </div>
 
@@ -81,7 +82,11 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
               <h1 className="type-display mt-4 text-brand" id="ad-landing-hero-heading">
                 <SplitHeadline text="Recover underpaid out of network claims." />
               </h1>
-              <p className="mt-5 type-body text-body">{CLAIM_REVIEW_OFFER}</p>
+              <p className="mt-5 type-body text-body">
+                When a plan pays an out of network claim, that payment is an opening offer, not the
+                amount owed. Federal IDR exists to contest it.
+              </p>
+              <p className="mt-4 type-body text-body">{CLAIM_REVIEW_OFFER}</p>
               <div className="mt-6">
                 <ConversionCtaPair placement="recover-hero" />
               </div>

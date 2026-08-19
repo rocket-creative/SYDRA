@@ -3,6 +3,7 @@ import Image from "next/image";
 import { HeroCtas } from "@/components/landing/hero-ctas";
 import { FOUNDER_ORIGIN_LINE } from "@/lib/content/founder-lines";
 import { HERO } from "@/lib/content/homepage";
+import { EDITORIAL } from "@/lib/images";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 
 type HeroProps = {
@@ -51,12 +52,12 @@ export function Hero({ stateDisplay }: HeroProps) {
     >
       <div className="relative h-[clamp(7.5rem,22dvh,10rem)] w-full shrink-0 md:absolute md:inset-0 md:h-auto md:min-h-full">
         <Image
-          alt="Surgeon at an office window overlooking the hospital campus"
+          alt={EDITORIAL.seniorSurgeonWindow.alt}
           className="object-cover object-[center_25%] md:object-right"
           fill
           priority
           sizes="100vw"
-          src="/images/editorial/senior-surgeon-window.png"
+          src={EDITORIAL.seniorSurgeonWindow.src}
         />
       </div>
 

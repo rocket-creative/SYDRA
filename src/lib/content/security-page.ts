@@ -103,6 +103,6 @@ export const SECURITY_SECTIONS: SecuritySection[] = [
 ];
 
 export const SECURITY_CTA = {
-  demoLabel: "Request a 15-minute demo",
+  demoLabel: "Set up a 15-minute call",
   mailtoLabel: "Email the security package request",
 };

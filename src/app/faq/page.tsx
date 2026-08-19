@@ -5,6 +5,7 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import {
   FAQ_BILLING_COMPANY_ITEMS,
@@ -12,6 +13,7 @@ import {
   FAQ_PAGE_ITEMS,
   type FaqItem,
 } from "@/lib/content/faq-page";
+import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -49,7 +51,7 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
             <p>{item.a}</p>
             {item.q.includes("cost") ? (
               <p className="mt-4">
-                <CtaLink href="/demo">Request a 15-minute demo</CtaLink>
+                <CtaLink href="/demo">Set up a 15-minute call</CtaLink>
               </p>
             ) : null}
             {item.q === JURISDICTION_FAQ_Q ? (
@@ -105,6 +107,14 @@ export default function FaqPage() {
               <span className="mt-4 block type-h2 text-body">Answered specifically.</span>
             </h1>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.billingTeamHuddle}
+            className="mt-10"
+            eager
+            focus="upper"
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section sidebarLabel="FAQ" tone="neutral">

@@ -9,6 +9,7 @@ export const HOW_IT_WORKS_HERO = {
   title: "What a federal IDR submission requires, and what Sydra does with each part.",
   subtitle: "Step by step, element by element.",
   paragraphs: [
+    "When a health plan pays an out of network claim, that payment is an opening offer, not the amount owed, and federal IDR is how you contest it. IDR is a process problem, not a legal mystery: the rules and the deadlines are fixed, which is exactly what makes the work automatable.",
     "Federal IDR is final offer arbitration. The entity picks one offer — yours or the plan's — based on which is better supported. Six elements decide that, and every one of them has to be built.",
     "Building them by hand takes 25 to 40 minutes per claim. That number, not the law, is what limits how many disputes a practice files. This page describes what each element requires and what Sydra does with it.",
   ],
@@ -83,6 +84,7 @@ export const DOCX_SECTION: HowItWorksSection = {
   title: "The export and the submission checklist.",
   paragraphs: [
     "Sydra produces a DOCX and PDF packet and a guided checklist for the IDRE portal. Nothing files itself. Your billing team reviews every decision and submits.",
+    "If your team does not have the bandwidth for that last step, it does not have to be your team. Sydra also runs the work end to end: we identify which claims qualify, assemble the submissions, file them, and manage every deadline, without changing how you practice or bill. Either arrangement is priced per claim or by subscription, never as a percentage of what you recover.",
   ],
 };
 
@@ -104,9 +106,14 @@ export const HOW_IT_WORKS_HOW_TO_STEPS: { name: string; text: string }[] = [
     name: "Review the offer",
     text: "Sydra calculates a recommended offer amount and assembles the supporting documentation",
   },
+  /*
+   * "You file" rather than "Sydra submits", because the body of the page says
+   * nothing files itself and the billing team submits. If the done-for-you
+   * arrangement ever becomes the default, change the body first and this after.
+   */
   {
     name: "Approve and file",
-    text: "You approve the offer, and Sydra submits it to the correct certified IDR entity for that payer and state",
+    text: "You review and approve the offer, then file it with the correct certified IDR entity for that payer and state using the guided portal checklist Sydra generates",
   },
   {
     name: "Track the case",

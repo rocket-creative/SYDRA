@@ -4,12 +4,14 @@ import { notFound } from "next/navigation";
 import { EntityFaq } from "@/components/idr/entity-faq";
 import { EntityHero } from "@/components/idr/entity-hero";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Section } from "@/components/ui/section";
 import { getComparison } from "@/lib/idr/comparisons";
+import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -63,6 +65,7 @@ export default async function ComparePage({ params }: PageProps) {
         <Section tone="white">
           <EntityHero
             eyebrow="Compare"
+            image={EDITORIAL.lobbyHandshake}
             title={comparison.title}
             lead={comparison.lead}
           />
@@ -135,6 +138,8 @@ export default async function ComparePage({ params }: PageProps) {
           <EntityFaq items={comparison.faqs} />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );
