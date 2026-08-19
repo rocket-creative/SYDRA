@@ -6,21 +6,18 @@ import { track } from "@vercel/analytics";
 
 import { MobileNavDrawer } from "@/components/sydra/mobile-nav-drawer";
 import { Button } from "@/components/ui/button";
-import { CASE_REVIEW_PATH, PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
+import { CALL_CTA_SHORT_LABEL, CALL_PATH } from "@/lib/case-review";
 
 /*
- * CONFLICT(homepage spec 3.1), resolved in favour of this header. The spec calls
- * for four nav links, "How it works", "Pricing", "Calculator" and "About", plus a
- * persistent CTA labelled "Request a 15-min demo" that shortens to "Demo" on
- * phones. This header is shared by every route, so applying that would rename
- * links, drop "Federal IDR guide", "Resources" and "Contact" from sitewide
- * internal linking, and swap the primary CTA on ~40 pages.
+ * CONFLICT(homepage spec 3.1), partially resolved in favour of this header. The
+ * spec calls for four nav links, "How it works", "Pricing", "Calculator" and
+ * "About". This header is shared by every route, so applying that would rename
+ * links and drop "Federal IDR guide", "Resources" and "Contact" from sitewide
+ * internal linking. The nav therefore stays as it is.
  *
- * The CTA stays PRIMARY_CTA_SHORT_LABEL to /case-review because there is no
- * booking provider yet. The homepage CTA block withheld its own demo button for
- * that reason, and a header promising a demo the site cannot book would
- * reintroduce exactly the problem that decision avoided. See the notes above
- * CTA_BLOCK in src/lib/content/homepage.ts; the two move together.
+ * The CTA does follow the spec's intent: the 15-minute call is the primary ask
+ * sitewide, so the header points at /demo. The claim review is reachable from
+ * every page's in-body CTA pair and from the sticky bar on long pages.
  *
  * Still open: the CTA is hidden below sm, so at 390px no CTA is visible in the
  * header. Phones reach it through the nav drawer and the sticky bottom bar.
@@ -76,7 +73,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
             height={36}
             loading="eager"
             sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 220px"
-            src="/sydra-logo-nav.svg"
+            src="/sydra_logo_nav.svg"
             width={220}
           />
           <span
@@ -108,12 +105,12 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
               <div className="hidden sm:block">
                 <Button
                   className={isCompact ? "lg:min-h-10 lg:py-2" : ""}
-                  href={CASE_REVIEW_PATH}
+                  href={CALL_PATH}
                   showArrow
                   variant="solid"
                   onClick={() => track("cta_primary_click", { placement: "header" })}
                 >
-                  {PRIMARY_CTA_SHORT_LABEL}
+                  {CALL_CTA_SHORT_LABEL}
                 </Button>
               </div>
               <MobileNavDrawer linkClass={linkClass} nav={PRIMARY_NAV} signInHref={SIGN_IN} />

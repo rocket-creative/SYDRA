@@ -12,6 +12,9 @@ type StickyPageCtaProps = {
   hideAt?: "md" | "lg";
   /** Analytics placement for the click event. */
   placement?: string;
+  /** Optional second slot, so the bar can offer the call and the claim review. */
+  secondaryHref?: string;
+  secondaryLabel?: string;
 };
 
 /**
@@ -24,6 +27,8 @@ export function StickyPageCta({
   label,
   hideAt = "lg",
   placement = "sticky-page-cta",
+  secondaryHref,
+  secondaryLabel,
 }: StickyPageCtaProps) {
   const [visible, setVisible] = useState(false);
 
@@ -64,12 +69,21 @@ export function StickyPageCta({
     <div className={`fixed inset-x-0 bottom-0 z-40 pb-safe-bottom ${hideClass}`} data-sticky-cta>
       <div className="flex h-14 items-center rounded-t-[4px] bg-[var(--color-hero)] text-white">
         <a
-          className="flex h-full flex-1 items-center justify-center px-4 text-center text-[13px] font-normal uppercase tracking-[0.08em] text-white"
+          className="flex h-full flex-1 items-center justify-center px-3 text-center text-[13px] font-normal uppercase tracking-[0.08em] text-white"
           href={href}
           onClick={() => track("cta_primary_click", { placement })}
         >
           {label}
         </a>
+        {secondaryHref && secondaryLabel ? (
+          <a
+            className="flex h-full flex-1 items-center justify-center border-l border-white/25 px-3 text-center text-[13px] font-normal uppercase tracking-[0.08em] text-white/90"
+            href={secondaryHref}
+            onClick={() => track("cta_secondary_click", { placement })}
+          >
+            {secondaryLabel}
+          </a>
+        ) : null}
         <button
           aria-label="Dismiss"
           className="flex h-full w-11 shrink-0 items-center justify-center text-white/80 hover:text-white"

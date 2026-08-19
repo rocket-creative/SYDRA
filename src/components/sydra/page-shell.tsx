@@ -3,7 +3,11 @@ import type { ReactNode } from "react";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { BreadcrumbNav } from "@/components/sydra/breadcrumb-nav";
 import { StickyPageCta } from "@/components/sydra/sticky-page-cta";
-import { PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
+import {
+  CALL_CTA_SHORT_LABEL,
+  CALL_PATH,
+  PRIMARY_CTA_SHORT_LABEL,
+} from "@/lib/case-review";
 
 type SydraPageShellProps = {
   children: ReactNode;
@@ -16,8 +20,9 @@ type SydraPageShellProps = {
   /** Programmatic pages: sticky "Send us this denial" bar under 768px. */
   stickyDemoHref?: string;
   /**
-   * Long content pages: sticky claim review bar under 1024px, so phones reach
-   * the ask without scrolling to the closing section.
+   * Long content pages: sticky bar under 1024px, so phones reach the ask without
+   * scrolling to the closing section. Leads with the 15-minute call and keeps
+   * this href as the second slot, which is the claim review.
    */
   stickyCtaHref?: string;
   /**
@@ -50,7 +55,12 @@ export function SydraPageShell({
       placement="programmatic-sticky"
     />
   ) : stickyCtaHref ? (
-    <StickyPageCta href={stickyCtaHref} label={PRIMARY_CTA_SHORT_LABEL} />
+    <StickyPageCta
+      href={CALL_PATH}
+      label={CALL_CTA_SHORT_LABEL}
+      secondaryHref={stickyCtaHref}
+      secondaryLabel={PRIMARY_CTA_SHORT_LABEL}
+    />
   ) : null;
 
   if (banded) {
@@ -106,7 +116,7 @@ export const BREADCRUMBS = {
   ],
   demo: [
     { name: "Home", path: "" },
-    { name: "Request a demo", path: "/demo" },
+    { name: "Set up a call", path: "/demo" },
   ],
   caseReview: [
     { name: "Home", path: "" },
@@ -131,6 +141,10 @@ export const BREADCRUMBS = {
   idrForBillingCompanies: [
     { name: "Home", path: "" },
     { name: "IDR for billing companies", path: "/idr-for-billing-companies" },
+  ],
+  idrForContingencyFirms: [
+    { name: "Home", path: "" },
+    { name: "IDR for contingency firms", path: "/idr-for-contingency-firms" },
   ],
   idrFilingDeadline: [
     { name: "Home", path: "" },

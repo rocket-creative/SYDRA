@@ -6,7 +6,12 @@ import { createPortal } from "react-dom";
 import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
-import { CASE_REVIEW_PATH, PRIMARY_CTA_SHORT_LABEL } from "@/lib/case-review";
+import {
+  CALL_CTA_SHORT_LABEL,
+  CALL_PATH,
+  CASE_REVIEW_PATH,
+  PRIMARY_CTA_SHORT_LABEL,
+} from "@/lib/case-review";
 
 type NavItem = { href: string; label: string };
 
@@ -181,15 +186,27 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
                   ))}
                   <li className="mt-4 border-t border-rule pt-4">
                     <Button
-                      href={CASE_REVIEW_PATH}
+                      href={CALL_PATH}
                       showArrow
                       onClick={() => {
                         track("cta_primary_click", { placement: "mobile-nav" });
                         close();
                       }}
                     >
-                      {PRIMARY_CTA_SHORT_LABEL}
+                      {CALL_CTA_SHORT_LABEL}
                     </Button>
+                  </li>
+                  <li className="mt-3">
+                    <Link
+                      className={`inline-flex min-h-12 w-full items-center text-sm transition-colors duration-300 ${linkClass}`}
+                      href={CASE_REVIEW_PATH}
+                      onClick={() => {
+                        track("cta_secondary_click", { placement: "mobile-nav" });
+                        close();
+                      }}
+                    >
+                      {PRIMARY_CTA_SHORT_LABEL}
+                    </Link>
                   </li>
                 </ul>
               </nav>

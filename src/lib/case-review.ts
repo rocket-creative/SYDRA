@@ -20,9 +20,26 @@ export const CASE_REVIEW_CTA = "Get a free claim review";
 export const CLAIM_REVIEW_OFFER =
   "Send us one denied out-of-network EOB. We'll tell you whether it qualifies for federal IDR and what it's worth, in writing, within one business day. No call required, and nothing to install.";
 
-/** Primary conversion CTA. Full label on desktop; shortLabel in header and on mobile. */
+/**
+ * The 15-minute call is the primary ask sitewide. The claim review below is the
+ * secondary: it stays on the page for visitors who will not book anything until
+ * they have seen Sydra read one of their own claims.
+ *
+ * Destination is /demo, which is the call booking page. It kept its old route
+ * because the URL is in circulation on ads and printed collateral.
+ */
+export const CALL_PATH = "/demo";
+export const CALL_CTA_LABEL = "Set up a 15-minute call";
+export const CALL_CTA_SHORT_LABEL = "Set up a call";
+
+/** Secondary conversion CTA. Full label on desktop; shortLabel in header and on mobile. */
 export const PRIMARY_CTA_LABEL = "See what one denied claim is worth";
 export const PRIMARY_CTA_SHORT_LABEL = "What's your claim worth?";
+
+export function callUrl(source?: string): string {
+  if (!source) return CALL_PATH;
+  return `${CALL_PATH}?source=${encodeURIComponent(source)}`;
+}
 
 export function caseReviewUrl(source?: string): string {
   if (!source) return CASE_REVIEW_PATH;

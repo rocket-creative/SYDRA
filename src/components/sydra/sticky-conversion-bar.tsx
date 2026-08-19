@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { Arrow } from "@/components/ui/arrow";
+import { CALL_CTA_SHORT_LABEL } from "@/lib/case-review";
 
 const PHONE_TEL = "tel:+19147056830";
 
@@ -15,7 +16,7 @@ type StickyConversionBarProps = {
 /** Sticky bottom CTA for high intent pages (demo, contact). Hides when target is in view. */
 export function StickyConversionBar({
   scrollTargetId,
-  primaryLabel = "Request a 15-minute demo",
+  primaryLabel = CALL_CTA_SHORT_LABEL,
 }: StickyConversionBarProps) {
   const [targetVisible, setTargetVisible] = useState(false);
   const [keyboardOpen, setKeyboardOpen] = useState(false);
