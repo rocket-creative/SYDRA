@@ -29,12 +29,36 @@ export function parseUtmFromSearchParams(
     return raw ?? "";
   };
 
-  const utm_source = get("utm_source") || get("src") || "";
-  const utm_medium = get("utm_medium") || "";
+  /*
+   * Google Ads auto-tagging appends gclid, or gbraid/wbraid when consent mode
+   * strips gclid, and it does not add utm parameters unless the campaign sets
+   * them by hand. Without this fallback a paid click lands with an empty source
+   * and gets filed as untracked, which is how paid leads end up indistinguishable
+   * from direct ones.
+   */
+  const hasPaidClickId = Boolean(get("gclid") || get("gbraid") || get("wbraid"));
+
+  const utm_source = get("utm_source") || get("src") || (hasPaidClickId ? "google" : "");
+  const utm_medium = get("utm_medium") || (hasPaidClickId ? "cpc" : "");
   const utm_campaign = get("utm_campaign") || "";
   const utm_content = get("utm_content") || "";
 
   return { utm_source, utm_medium, utm_campaign, utm_content };
+}
+
+const PAID_MEDIUMS = new Set(["cpc", "ppc", "paid", "paidsearch", "paid_search"]);
+const PAID_SOURCES = new Set(["google", "googleads", "google-ads", "adwords", "bing", "microsoft"]);
+
+/**
+ * Whether this visit arrived from a paid click. Used to label a lead by the
+ * channel that produced it on routes that serve more than one, so a page built
+ * for one campaign does not claim credit for another.
+ */
+export function isPaidTraffic(tracking: CampaignTracking): boolean {
+  return (
+    PAID_MEDIUMS.has(tracking.utm_medium.trim().toLowerCase()) ||
+    PAID_SOURCES.has(tracking.utm_source.trim().toLowerCase())
+  );
 }
 
 export function buildCampaignTracking(

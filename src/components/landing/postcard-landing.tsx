@@ -6,6 +6,7 @@ import { AudienceSegments } from "@/components/landing/audience-segments";
 import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { Hero } from "@/components/landing/hero";
 import { HomepageProofBand } from "@/components/landing/hero-proof-stack";
+import { HomepageBand } from "@/components/landing/homepage-band";
 import {
   ProcessProblemStatement,
   UnderuseStatement,
@@ -14,8 +15,10 @@ import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { RecoverySection } from "@/components/landing/recovery-section";
 import { RegulatoryCurrency } from "@/components/landing/regulatory-currency";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { MagazineShell } from "@/components/ui/magazine-shell";
-import type { CampaignTracking } from "@/lib/landing/tracking";
+import { EDITORIAL } from "@/lib/images";
+import { isPaidTraffic, type CampaignTracking } from "@/lib/landing/tracking";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import {
   breadcrumbJsonLd,
@@ -38,6 +41,15 @@ export function PostcardLanding({
   tracking,
   path,
 }: PostcardLandingProps) {
+  /*
+   * These routes answer to two channels: the printed postcard QR code they were
+   * built for, and any ad campaign pointed at them. Hardcoding "postcard" filed
+   * paid leads as print scans, which made the postcard look like it was working
+   * and hid the ad spend that actually produced the lead. The label follows the
+   * traffic; utm_campaign still separates individual campaigns.
+   */
+  const attribution = isPaidTraffic(tracking) ? "r-paid-search" : "postcard";
+
   /*
    * This page describes itself, not the homepage. It previously passed path ""
    * and the homepage's name to webPageJsonLd, so /r and /r/[state] emitted
@@ -83,14 +95,16 @@ export function PostcardLanding({
       {/*
        * Phones read the form straight after the hero, so the conversion ask
        * lands within the first two screens instead of ~7,000px down. From md up
-       * the eight-section editorial order applies and the form closes the page.
+       * the editorial order applies and the form closes the reading order. The
+       * photo band is ordered after the form at every breakpoint so decoration
+       * never pushes the form further down the page.
        */}
       <div className="flex flex-col">
         <div className="order-1">
           <Hero stateDisplay={stateDisplay} tracking={tracking} />
         </div>
         <HomepageReveal className="order-2 md:order-8">
-          <HomepageBandForm />
+          <HomepageBandForm attribution={attribution} />
         </HomepageReveal>
         <HomepageReveal className="order-3 md:order-2">
           <HomepageProofBand />
@@ -101,13 +115,16 @@ export function PostcardLanding({
         <HomepageReveal className="order-5 md:order-4">
           <AudienceSegments />
         </HomepageReveal>
-        <HomepageReveal className="order-6 md:order-5">
+        <HomepageReveal className="order-6 md:order-9">
+          <HomepagePhotoBand />
+        </HomepageReveal>
+        <HomepageReveal className="order-7 md:order-5">
           <RegulatoryCurrency />
         </HomepageReveal>
-        <HomepageReveal className="order-7 md:order-6">
+        <HomepageReveal className="order-8 md:order-6">
           <RecoverySection />
         </HomepageReveal>
-        <HomepageReveal className="order-8 md:order-7">
+        <HomepageReveal className="order-9 md:order-7">
           <ProcessProblemStatement />
         </HomepageReveal>
       </div>
@@ -116,13 +133,25 @@ export function PostcardLanding({
   );
 }
 
-function HomepageBandForm() {
+function HomepagePhotoBand() {
+  return (
+    <HomepageBand tone="white">
+      <EditorialImage
+        aspect="16/9"
+        asset={EDITORIAL.postcardHeroBilling}
+        sizes="(max-width: 1024px) 100vw, 1200px"
+      />
+    </HomepageBand>
+  );
+}
+
+function HomepageBandForm({ attribution }: { attribution: string }) {
   return (
     <section className="bg-neutral-section py-12 md:py-16 lg:py-24" id="lead-form-closing">
       <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8">
         <div className="max-w-2xl">
           <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
-            <SharedLeadForm landingPage="postcard" />
+            <SharedLeadForm landingPage={attribution} />
           </Suspense>
         </div>
       </div>

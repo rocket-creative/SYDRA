@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-
 import { Homepage } from "@/components/homepage/homepage";
 import { getLandingPageData } from "@/lib/landing/page-data";
-import { buildPostcardMetadata } from "@/lib/landing/metadata";
 
-export function generateMetadata(): Metadata {
-  return buildPostcardMetadata();
-}
+/*
+ * No generateMetadata here on purpose. The root layout already spreads
+ * HOME_METADATA, which canonicalises to / and is indexable. This route
+ * previously called buildPostcardMetadata(), the builder for the /r postcard
+ * landers, which left the homepage noindex with its canonical pointing at /r.
+ */
 
 type PageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

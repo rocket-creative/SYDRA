@@ -12,9 +12,11 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
  * results tables, while these routes kept the postcard layout. Pointing a
  * canonical at / now tells Google this content lives at a URL where it does not.
  *
- * So each route claims its own canonical and is marked noindex instead. They are
- * campaign destinations for a printed QR code, they are absent from the sitemap,
- * and they exist to convert scanned traffic rather than to rank. Titles and
+ * So these routes are noindexed and emit no canonical at all: buildPageMetadata
+ * drops the canonical for any noindexed page, because there is nothing left to
+ * consolidate once the page is out of the index. They are campaign destinations
+ * for a printed QR code and for any ad campaign pointed at them, they are absent
+ * from the sitemap, and they exist to convert rather than to rank. Titles and
  * descriptions stay state aware for social shares.
  */
 export function buildPostcardMetadata(stateParam?: string): Metadata {
@@ -26,24 +28,24 @@ export function buildPostcardMetadata(stateParam?: string): Metadata {
     : "NSA IDR Software for Surgical Practices | Sydra";
 
   const description = stateDisplay
-    ? `Federal IDR software for out-of-network surgical claims in ${stateDisplay}. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Request a 15-minute demo.`
-    : "Federal IDR software for out-of-network surgical claims. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Request a 15-minute demo.";
+    ? `Federal IDR software for out-of-network surgical claims in ${stateDisplay}. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Set up a 15-minute call.`
+    : "Federal IDR software for out-of-network surgical claims. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Set up a 15-minute call.";
 
-  return {
-    ...buildPageMetadata({
-      title,
-      description,
-      path,
-      keywords: [
-        "NSA IDR software",
-        "No Surprises Act billing",
-        "federal IDR claims",
-        "out-of-network surgical billing",
-        "independent dispute resolution software",
-      ],
-      ogImageAlt:
-        "Sydra: surgeon built NSA IDR software for surgical practices. Five minutes per claim.",
-    }),
+  // robots goes in, not on: buildPageMetadata drops the canonical for noindexed
+  // pages, so overriding robots after the call would leave the canonical behind.
+  return buildPageMetadata({
+    title,
+    description,
+    path,
+    keywords: [
+      "NSA IDR software",
+      "No Surprises Act billing",
+      "federal IDR claims",
+      "out-of-network surgical billing",
+      "independent dispute resolution software",
+    ],
+    ogImageAlt:
+      "Sydra: surgeon built NSA IDR software for surgical practices. Five minutes per claim.",
     robots: { index: false, follow: true },
-  };
+  });
 }
