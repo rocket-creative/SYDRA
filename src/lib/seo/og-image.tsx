@@ -9,7 +9,7 @@ export const OG_SIZE = {
 } as const;
 
 function sydraLogoDataUrl(): string {
-  const filePath = join(process.cwd(), "public", "icon-sydra.svg");
+  const filePath = join(process.cwd(), "public", "sydra_icon.svg");
   const buf = readFileSync(filePath);
   return `data:image/svg+xml;base64,${buf.toString("base64")}`;
 }
@@ -83,4 +83,21 @@ export const OG_TAGLINES = {
     "Federal IDR filing deadline: 30 business days, then 4 business days to initiate.",
   idrForBillingCompanies:
     "Sydra NSA IDR software for medical billing companies and RCM firms managing multiple client practices.",
+  whatIsIdr:
+    "What federal IDR means under the No Surprises Act, explained for surgical billing teams.",
+  sydraVsAttorney:
+    "Federal IDR options compared: a contingency firm, in house with Sydra, or Sydra files for you.",
+  inHouseIdr:
+    "Run federal IDR in house at scale without adding billing headcount.",
+  faq: "Common questions about Sydra NSA IDR software, answered for surgical billing teams.",
+  resources:
+    "Federal IDR and No Surprises Act guides written for surgical billing teams.",
+  resourcesUpdates:
+    "Dated federal IDR and No Surprises Act updates for surgical billing teams.",
+  idrRecoveryCalculator:
+    "Estimate federal IDR recovery on out of network surgical claims.",
+  contact: "Contact Sydra for sales, calls, and customer support.",
+  roadmap: "The Sydra product roadmap for NSA IDR software capabilities.",
+  glossary:
+    "Federal IDR and No Surprises Act terms defined for surgical billing teams.",
 } as const;

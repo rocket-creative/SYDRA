@@ -101,7 +101,7 @@ Add via Script strategy="beforeInteractive" in head
       "name": "Sydra",
       "legalName": "Kronos Health",
       "url": "https://www.sydrahealth.com",
-      "logo": "https://www.sydrahealth.com/sydra-logo-nav.svg",
+      "logo": "https://www.sydrahealth.com/sydra_logo_nav.svg",
       "description": "AI software for federal IDR and NSA disputes. Built by surgeons for surgical billing teams.",
       "email": "sales@kronosrevenue.health",
       "parentOrganization": {

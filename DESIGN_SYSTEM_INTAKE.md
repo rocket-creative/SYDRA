@@ -31,10 +31,10 @@ GitHub option: instead of dragging a folder, paste the repo URL (`https://github
 
 Drag into "Add fonts, logos and assets":
 
-- `SYDRA_LOGO_MASTER.svg` — primary logo
-- `SYDRA_LOGO_MASTER-no-tagline.svg` — logo without tagline
-- `public/sydra-logo-nav.svg` — nav lockup
-- `public/icon-sydra.svg` — icon / OG / manifest mark
+- `sydra_logo_master.svg` — primary logo
+- `sydra_logo_master_no_tagline.svg` — logo without tagline
+- `public/sydra_logo_nav.svg` — nav lockup
+- `public/sydra_icon.svg` — icon / OG / manifest mark
 
 Fonts: Geist Sans and Geist Mono. These load from Google Fonts via `next/font`, so there is no font file to upload. They are named in the notes below.
 
