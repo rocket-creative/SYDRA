@@ -1,4 +1,7 @@
+import { Suspense } from "react";
+
 import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
 import { SydraCtaBand } from "@/components/sydra/cta-band";
@@ -16,6 +19,7 @@ import {
   OPTIONS_COMPARISON_ROWS,
   SYDRA_VS_ATTORNEY_HERO,
 } from "@/lib/content/sydra-vs-attorney-page";
+import { EDITORIAL } from "@/lib/images";
 import { medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -113,12 +117,11 @@ export default function SydraVsAttorneyPage() {
             <p className={textStyles.pageLead}>{SYDRA_VS_ATTORNEY_HERO.lead}</p>
           </header>
           <EditorialImage
-            alt="An attorney reviewing an out of network claim file page by page"
             aspect="16/9"
+            asset={EDITORIAL.executiveDocumentReview}
             className="mt-10"
             eager
             sizes="(max-width: 1024px) 100vw, 1200px"
-            src="/images/editorial/executive-document-review.png"
           />
           <OptionsComparisonTable />
         </Section>
@@ -145,7 +148,32 @@ export default function SydraVsAttorneyPage() {
           </div>
         </Section>
 
-        <Section tone="white">
+        {/*
+          A reader comparing filing arrangements wants a number, and the number
+          depends on their specialty and volume, so the ask is the call. The form
+          is on the page because this route also serves paid traffic on attorney
+          and contingency keywords, where a second click costs conversions.
+        */}
+        <Section ariaLabelledby="heading-attorney-form" tone="white">
+          <h2 className={textStyles.sectionTitle} id="heading-attorney-form">
+            Get your number on a 15-minute call.
+          </h2>
+          <p className={`${textStyles.bodyMeasure} mt-4`}>
+            Bring your monthly out of network volume and what your current arrangement takes off the
+            top. You will see the per claim comparison on your own figures. Nothing to sign.
+          </p>
+          <div className="mt-10">
+            <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+              <SharedLeadForm
+                anchorId="attorney-lead-form"
+                intent="demo"
+                landingPage="sydra-vs-idr-attorney"
+              />
+            </Suspense>
+          </div>
+        </Section>
+
+        <Section tone="neutral">
           <div className="prose-measure">
             <ConversionCtaPair placement="options-compared" />
           </div>

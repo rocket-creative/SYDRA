@@ -1,6 +1,9 @@
+import { Suspense } from "react";
+
 import Link from "next/link";
 
 import { HeroProofStack } from "@/components/landing/hero-proof-stack";
+import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
@@ -23,6 +26,7 @@ import {
   IDR_FOR_BILLING_STATS,
   IDR_FOR_BILLING_VOLUME_SECTION,
 } from "@/lib/content/idr-for-billing-companies-page";
+import { EDITORIAL } from "@/lib/images";
 import {
   faqPageJsonLd,
   medicallyReviewedWebPageJsonLd,
@@ -76,19 +80,18 @@ export default function IdrForBillingCompaniesPage() {
               {IDR_FOR_BILLING_HERO.whiteLabelRest}
             </p>
             <div className="mt-8">
-              <Button href={IDR_FOR_BILLING_HERO.ctaHref} showArrow>
+              <Button href="#billing-lead-form" showArrow>
                 {IDR_FOR_BILLING_HERO.ctaLabel}
               </Button>
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>
           <EditorialImage
-            alt="Revenue cycle team tracking claim dashboards in an open office"
             aspect="16/9"
+            asset={EDITORIAL.rcmOfficeDashboards}
             className="mt-10"
             eager
             sizes="(max-width: 1024px) 100vw, 1200px"
-            src="/images/editorial/rcm-office-dashboards.png"
           />
           <HeroProofStack className="mt-12" items={[...IDR_FOR_BILLING_STATS]} />
         </Section>
@@ -113,7 +116,7 @@ export default function IdrForBillingCompaniesPage() {
             CMS win rates and Georgetown CHIR award benchmarks, not a Sydra performance claim.
           </p>
           <div className="mt-10 border-t border-rule pt-10">
-            <RecoveryCalculator ctaHref="/demo" ctaLabel="Request a 15-minute demo" />
+            <RecoveryCalculator />
             <p className={`${textStyles.bodyMeasure} mt-6`}>
               <Link className={textStyles.textLink} href="/idr-recovery-calculator">
                 Open the full calculator
@@ -155,10 +158,34 @@ export default function IdrForBillingCompaniesPage() {
           </div>
         </Section>
 
-        <Section tone="white">
+        {/*
+          On-page form rather than a link to /demo: this route is the destination
+          for billing company keywords, where an extra click before the first
+          field is the most expensive thing on the page.
+        */}
+        <Section ariaLabelledby="heading-billing-form" tone="white">
+          <h2 className={textStyles.sectionTitle} id="heading-billing-form">
+            Book the call from here.
+          </h2>
+          <p className={`${textStyles.bodyMeasure} mt-4`}>
+            Fifteen minutes on your own book: how many client practices carry out of network volume,
+            and what an IDR service line would add without new headcount. Nothing to sign.
+          </p>
+          <div className="mt-10">
+            <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+              <SharedLeadForm
+                anchorId="billing-lead-form"
+                intent="demo"
+                landingPage="idr-for-billing-companies"
+              />
+            </Suspense>
+          </div>
+        </Section>
+
+        <Section tone="neutral">
           <div className="prose-measure">
             <p className={`${textStyles.body} mb-6`}>{IDR_FOR_BILLING_CTA_LEAD}</p>
-            <Button href="/demo" showArrow>
+            <Button href="#billing-lead-form" showArrow>
               {IDR_FOR_BILLING_HERO.ctaLabel}
             </Button>
             <CtaTrustSignals className="mt-4" />

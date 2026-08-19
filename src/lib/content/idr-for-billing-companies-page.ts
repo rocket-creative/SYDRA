@@ -6,8 +6,9 @@ export const IDR_FOR_BILLING_HERO = {
   lead: "IDR is one of the last major revenue functions still handled largely by hand: eligibility screening, batch construction, deadline tracking, and submission assembly, all done claim by claim. That labor intensity is why most RCM firms either decline the work or price it painfully. Sydra supplies the automation layer underneath it, so you can open or expand an IDR service line without adding headcount in proportion to volume.",
   whiteLabelBold: "It can run white label under your own brand.",
   whiteLabelRest: "Your clients see your service, not ours.",
-  ctaLabel: "Request a 15-minute demo",
-  ctaHref: "/demo",
+  // No ctaHref: the page carries its own form, so its buttons scroll to
+  // #billing-lead-form rather than routing to /demo.
+  ctaLabel: "Set up a 15-minute call",
 };
 
 export const IDR_FOR_BILLING_STATS = [
@@ -55,15 +56,15 @@ export const IDR_FOR_BILLING_SECTIONS: ContentSection[] = [
     title: "One claim per CPT by default, across every client practice.",
     paragraphs: [
       "Sydra defaults to one claim per CPT, because filing individually generally protects win rate when high value codes would otherwise share one arbiter offer. Batching is CMS sanctioned as of the 2026 rule and available when your team chooses it for a specific submission. That discipline matters more, not less, at billing company scale: the more claims moving through your team every week, the more an unexamined batch decision compounds across every client's disputes.",
-      "Sydra's specialty coding covers orthopedics, neurosurgery, spine, plastics, anesthesia, and general surgery, the same specialty depth on every tier, whether it's one practice or ten.",
+      "Sydra's specialty coding covers orthopedics, neurosurgery, spine, plastics, anesthesia, and general surgery, at the same depth whether you bring one practice or ten.",
     ],
   },
   {
     id: "heading-pricing-volume",
     title: "Pricing that scales with volume, not a per seat model.",
     paragraphs: [
-      "Sydra doesn't publish list pricing because the right structure depends on specialty mix, state mix, and monthly out of network volume, all of which look different for a billing company aggregating several clients than for a single practice. Every tier is structured below a typical 20 percent contingency.",
-      "On the demo call, bring your actual client volume and specialty mix and get a real number instead of a generic estimate that doesn't reflect how your book is built.",
+      "Sydra doesn't publish list pricing because the right structure depends on specialty mix, state mix, and monthly out of network volume, all of which look different for a billing company aggregating several clients than for a single practice. Pricing is per claim or subscription, never a percentage of recovery, so your cost stops scaling against you as your book grows.",
+      "On the call, bring your actual client volume and specialty mix and get a real number instead of a generic estimate that doesn't reflect how your book is built.",
     ],
   },
 ];
@@ -71,15 +72,15 @@ export const IDR_FOR_BILLING_SECTIONS: ContentSection[] = [
 export const IDR_FOR_BILLING_FAQS: ContentFaq[] = [
   {
     q: "Can Sydra handle IDR for more than one practice at once?",
-    a: "Sydra's tenant isolation is built at the data layer for exactly this kind of separation. Each practice's claims, documents, and history stay scoped to that practice's tenant identifier. Bring your specific client structure to the demo call and we'll confirm the account setup that fits how your firm operates.",
+    a: "Sydra's tenant isolation is built at the data layer for exactly this kind of separation. Each practice's claims, documents, and history stay scoped to that practice's tenant identifier. Bring your specific client structure to the call and we'll confirm the account setup that fits how your firm operates.",
   },
   {
     q: "Do you offer a firm wide dashboard across all our client practices?",
-    a: "This depends on your specific setup. Ask on the demo call so we can show you accurately rather than guess here.",
+    a: "This depends on your specific setup. Ask on the call so we can show you accurately rather than guess here.",
   },
   {
     q: "Is pricing different for a billing company than for a single practice?",
-    a: "Sydra doesn't publish list pricing for any tier. The quote depends on specialty mix, state mix, and monthly out of network volume, which we walk through on the demo call.",
+    a: "Sydra doesn't publish list pricing. The quote depends on specialty mix, state mix, and monthly out of network volume, which we walk through on the call.",
   },
   {
     q: "Does Sydra replace our clearinghouse or EMR integrations across multiple client systems?",
@@ -92,10 +93,10 @@ export const IDR_FOR_BILLING_FAQS: ContentFaq[] = [
 ];
 
 export const IDR_FOR_BILLING_CTA_LEAD =
-  "Free 15-minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.";
+  "Free 15-minute call. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.";
 
 export const IDR_FOR_BILLING_CTA_BAND = {
-  title: "Ready to see Sydra on a real denied claim from one of your client practices?",
-  lead: "Free 15-minute demo. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.",
-  ctaLabel: "Request a 15-minute demo",
+  title: "Worth a 15-minute call?",
+  lead: IDR_FOR_BILLING_CTA_LEAD,
+  ctaLabel: "Set up a 15-minute call",
 };
