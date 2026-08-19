@@ -8,7 +8,7 @@ export const IDR_FOR_BILLING_HERO = {
   whiteLabelRest: "Your clients see your service, not ours.",
   // No ctaHref: the page carries its own form, so its buttons scroll to
   // #billing-lead-form rather than routing to /demo.
-  ctaLabel: "Set up a 15-minute call",
+  ctaLabel: "Set up a demo",
 };
 
 export const IDR_FOR_BILLING_STATS = [
@@ -98,5 +98,5 @@ export const IDR_FOR_BILLING_CTA_LEAD =
 export const IDR_FOR_BILLING_CTA_BAND = {
   title: "Worth a 15-minute call?",
   lead: IDR_FOR_BILLING_CTA_LEAD,
-  ctaLabel: "Set up a 15-minute call",
+  ctaLabel: "Set up a demo",
 };

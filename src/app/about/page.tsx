@@ -7,7 +7,7 @@ import { AboutPageJsonLd } from "@/components/sydra/about-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { Section } from "@/components/ui/section";
-import { caseReviewUrl } from "@/lib/case-review";
+import { caseReviewUrl, CALL_CTA_LABEL } from "@/lib/case-review";
 import { EDITORIAL } from "@/lib/images";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
@@ -134,7 +134,7 @@ export default function AboutPage() {
         <Section tone="neutral">
           <div className="prose-measure">
             <Button href="/demo" showArrow>
-              Set up a 15-minute call
+              {CALL_CTA_LABEL}
             </Button>
             <CtaTrustSignals className="mt-4" />
           </div>

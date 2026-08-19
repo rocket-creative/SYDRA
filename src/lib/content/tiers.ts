@@ -29,7 +29,7 @@ export const TIER_ROUTING_LINES = [
 ] as const;
 
 export const PRICING_SECTION_SUBHEAD =
-  "Same specialty depth whichever you pick. Set up a 15-minute call and we'll recommend the fit for your practice.";
+  "Same specialty depth whichever you pick. Set up a demo and we'll recommend the fit for your practice.";
 
 export function tierRoutingFaqAnswer(): string {
   return `${TIER_ROUTING_HEADLINE} ${TIER_ROUTING_LINES.join(". ")}.`;
@@ -146,8 +146,8 @@ export const TIER_COMPARISON: ComparisonRow[] = [
   },
   {
     feature: "How to start",
-    basic: "Set up a 15-minute call",
-    plus: "Set up a 15-minute call",
+    basic: "Set up a demo",
+    plus: "Set up a demo",
     pro: "Get a free claim review",
   },
 ];

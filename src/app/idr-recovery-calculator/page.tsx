@@ -14,6 +14,7 @@ import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 import {
   IDR_RECOVERY_CALCULATOR_CTA_LEAD,
   IDR_RECOVERY_CALCULATOR_FAQS,
@@ -124,7 +125,7 @@ export default function IdrRecoveryCalculatorPage() {
               Free 15-minute call. We look at your actual specialty, state, and payer mix.
             </p>
             <Button href="/demo" showArrow>
-              Set up a 15-minute call
+              {CALL_CTA_LABEL}
             </Button>
             <CtaTrustSignals className="mt-4" />
             <p className={`${textStyles.body} mt-8`}>

@@ -260,7 +260,7 @@ export const PAGE_METADATA = {
   contact: buildPageMetadata({
     title: "Contact Sydra: Sales, Demos, and Support | Sydra",
     description:
-      "Set up a 15-minute call, ask a pricing question, or reach customer support. Email sales@sydrahealth.com. Responses within one business day.",
+      "Set up a demo, ask a pricing question, or reach customer support. Email sales@sydrahealth.com. Responses within one business day.",
     path: "/contact",
     ogImagePath: "/contact",
     ogImageAlt: "Contact Sydra for sales, calls, and customer support.",

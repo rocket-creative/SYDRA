@@ -22,7 +22,7 @@ export const IDR_RECOVERY_CALCULATOR_SECTIONS: ContentSection[] = [
     paragraphs: [
       "We apply the published 88% provider win rate to the amount already in dispute, and we stop there. We do not apply award multiples, and recovery is capped so it can never exceed what you are disputing.",
       "Real determinations run higher. CMS reports that the prevailing offer exceeded the qualifying payment amount in approximately 87% of payment determinations in the second half of 2025. We leave that out of the estimate on purpose — a number you can defend to your CFO is worth more than a bigger one you cannot.",
-      "What this does not account for: your specialty's award patterns, your state's dynamics, or your payer mix. For a number specific to your practice, set up a 15-minute call and we will walk through it with your actual claims.",
+      "What this does not account for: your specialty's award patterns, your state's dynamics, or your payer mix. For a number specific to your practice, set up a demo and we will walk through it with your actual claims.",
       "Source: CMS, Federal IDR Supplemental Background, July–December 2025.",
     ],
   },
@@ -39,7 +39,7 @@ export const IDR_RECOVERY_CALCULATOR_FAQS: ContentFaq[] = [
   },
   {
     q: "What should I do with the estimate?",
-    a: "Use it to compare keeping recovery in house against paying a contingency fee. Set up a 15-minute call if you want to walk through a real denied claim from your specialty and see what federal IDR would do with it.",
+    a: "Use it to compare keeping recovery in house against paying a contingency fee. Set up a demo if you want to walk through a real denied claim from your specialty and see what federal IDR would do with it.",
   },
 ];
 

@@ -4,14 +4,10 @@ import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
 import { CTA_BLOCK } from "@/lib/content/homepage";
+import { CALL_PATH } from "@/lib/case-review";
 import { getSalesEmail, SALES_PHONE_DISPLAY, SALES_PHONE_TEL } from "@/lib/contact";
 
-/**
- * TODO(scheduler): the demo button is deliberately absent until Calendly or an
- * equivalent is provisioned. See the note above CTA_BLOCK for how to restore it.
- * "Set up a call" is the primary action in the meantime, because a phone number
- * is something a visitor can act on without a booking widget.
- */
+const DEMO_HREF = CALL_PATH;
 const CALL_HREF = SALES_PHONE_TEL;
 
 /**
@@ -46,9 +42,16 @@ export function CtaBlock({ headingLevel, headingId, placement, bordered = true }
       <p className="home-body mt-2 max-w-[54ch] text-body">{CTA_BLOCK.body}</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <Button
-          href={CALL_HREF}
+          href={DEMO_HREF}
           showArrow
           variant="solid"
+          onClick={() => track("cta_click", { label: "cta_set_up_demo", placement })}
+        >
+          {CTA_BLOCK.demo}
+        </Button>
+        <Button
+          href={CALL_HREF}
+          variant="ghost"
           onClick={() => track("cta_click", { label: "cta_set_up_call", placement })}
         >
           {`${CTA_BLOCK.call}: ${SALES_PHONE_DISPLAY}`}

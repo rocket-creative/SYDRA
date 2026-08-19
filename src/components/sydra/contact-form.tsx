@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 import {
   getContactPhoneDisplay,
   getContactPhoneTel,
@@ -24,7 +25,7 @@ export function SydraContactForm() {
         </p>
         <div className="mt-10">
           <Button href="/demo" showArrow>
-            Set up a 15-minute call
+            {CALL_CTA_LABEL}
           </Button>
         </div>
         <p className="mt-6 text-sm text-body">

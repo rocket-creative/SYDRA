@@ -12,6 +12,7 @@ import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 import {
   getArticleBySlug,
   RESOURCE_SLUGS,
@@ -168,7 +169,7 @@ export default async function ResourceArticlePage({ params }: PageProps) {
             ) : (
               <div className="mt-8">
                 <Button href="/demo" showArrow>
-                  Set up a 15-minute call
+                  {CALL_CTA_LABEL}
                 </Button>
               </div>
             )}

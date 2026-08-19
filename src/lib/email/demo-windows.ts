@@ -1,26 +1,24 @@
-/** Recurring demo windows. Used in founder emails so copy cannot drift. */
-export const DEMO_AVAILABILITY_WINDOWS =
-  "Tuesday and Thursday, 7-9am ET and Wednesday, 1-3pm ET";
+import { demoScheduleUrl } from "@/lib/calendly";
+import { SALES_PHONE_DISPLAY } from "@/lib/contact";
 
 export const DEMO_PHONE_EXPECT =
   "Anything else comes from (914) 705 6830, so you know it is us.";
 
-/** Founder demo auto-reply: name the windows, they pick a time, we send Zoom. */
+/** Founder demo auto-reply: book on the thank-you page, or call. */
 export function demoSchedulingBlock(): string {
   return [
-    `I hold ${DEMO_AVAILABILITY_WINDOWS} for these.`,
-    "Reply with any time in one of those windows and I will send the Zoom link.",
-    "If none of those work, send me two that do.",
+    `Set up a demo: ${demoScheduleUrl()}`,
+    `Set up a call: ${SALES_PHONE_DISPLAY}.`,
     DEMO_PHONE_EXPECT,
   ].join(" ");
 }
 
-/** Claim-review delivery email. Same windows, no booking URL. */
+/** Claim-review delivery email. Same booking URL as the demo auto-reply. */
 export function claimReviewDeliverySchedulingBlock(): string {
-  return `I hold ${DEMO_AVAILABILITY_WINDOWS} for these. Reply with any time in one of those windows and I will send the Zoom link.`;
+  return `Set up a demo: ${demoScheduleUrl()} Pick a time there and we will send the Zoom link.`;
 }
 
-/** Claim-review writeup. Same windows, no booking URL. */
+/** Claim-review writeup. Same booking URL as the demo auto-reply. */
 export function claimReviewWriteupSchedulingBlock(): string {
-  return `Reply with a time. Dr. Abrahams holds ${DEMO_AVAILABILITY_WINDOWS} for these calls. Name any time in one of those windows and it is yours.`;
+  return `Set up a demo: ${demoScheduleUrl()} Pick a time and it is yours.`;
 }

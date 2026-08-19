@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form-field";
 import { Section } from "@/components/ui/section";
 import { SALES_EMAIL_FALLBACK } from "@/lib/contact";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 import { CONSENT_TEXT_VERSION } from "@/lib/consent/marketing";
 import { US_STATES } from "@/lib/constants/us-states";
 import {
@@ -121,7 +122,7 @@ const COPY_BY_INTENT: Record<
     body: "Bring one denied EOB. We will tell you on the call whether it qualifies and show you the dollar figure on that claim. If it does not qualify, you have lost 15 minutes and nothing else.",
     riskStack:
       "Free 15-minute call. No contract, no setup fee, nothing installs in your EMR, and we never take a percentage of your recovery.",
-    stepOneCta: "Set up a 15-minute call",
+    stepOneCta: CALL_CTA_LABEL,
     stepTwoCta: "Set up my call",
     phoneError: "Enter a phone number so we can reach you about the call.",
     conversionAction: "free_demo",

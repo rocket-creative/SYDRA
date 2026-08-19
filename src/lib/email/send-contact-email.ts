@@ -2,6 +2,7 @@ import { Resend } from "resend";
 
 import { getSalesEmail } from "@/lib/contact";
 import { getLeadFromEmail, leadCopyBcc, leadTeamNotifyAddresses } from "@/lib/email/inbox-recipients";
+import { nextStepOptionsPlain } from "@/lib/email/lead-thank-you";
 import {
   CONTACT_INTENT_LABELS,
   type ContactRequest,
@@ -59,6 +60,10 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
       data.name.trim() ? `Hi ${data.name.trim()},` : "Hi,",
       "",
       "Thank you for contacting Sydra about Sydra. We received your message and will reply within one business day.",
+      "",
+      "If interested, would you like to:",
+      "",
+      ...nextStepOptionsPlain(),
       "",
       "Sydra",
       "244 Westchester Ave, Ste 209, West Harrison, NY 10604",

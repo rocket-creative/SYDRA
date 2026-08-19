@@ -81,7 +81,7 @@ export function GET(): Response {
     `- [Roadmap](${base}/roadmap): what Sydra ships today and what is in active development.`,
   );
   lines.push(
-    `- [Set up a 15-minute call](${base}/demo): we run one of your denied claims live.`,
+    `- [Set up a demo](${base}/demo): we run one of your denied claims live.`,
   );
   lines.push("");
 

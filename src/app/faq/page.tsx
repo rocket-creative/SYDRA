@@ -16,6 +16,7 @@ import {
 import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.faq;
@@ -51,7 +52,7 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
             <p>{item.a}</p>
             {item.q.includes("cost") ? (
               <p className="mt-4">
-                <CtaLink href="/demo">Set up a 15-minute call</CtaLink>
+                <CtaLink href="/demo">{CALL_CTA_LABEL}</CtaLink>
               </p>
             ) : null}
             {item.q === JURISDICTION_FAQ_Q ? (

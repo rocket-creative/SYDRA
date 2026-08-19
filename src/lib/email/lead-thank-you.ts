@@ -1,3 +1,4 @@
+import { demoScheduleUrl } from "@/lib/calendly";
 import { SALES_PHONE_DISPLAY, SALES_PHONE_TEL, getSalesEmail } from "@/lib/contact";
 
 export const LEAD_THANK_YOU_SUBJECT = "Thank you for your interest in Sydra";
@@ -32,6 +33,24 @@ const CLOSING =
 
 const CALL_ASK = "We'd welcome a short 15-minute call to see if this is worth pursuing.";
 
+export function nextStepOptionsPlain(): string[] {
+  return [
+    `Set up a demo - ${demoScheduleUrl()}`,
+    `Set up a call - ${SALES_PHONE_DISPLAY}`,
+    `Ask questions: email ${getSalesEmail()}`,
+    "Not sure yet — will reach out.",
+  ];
+}
+
+export function nextStepOptionsHtml(): string {
+  return `<ul style="margin:0 0 16px;padding-left:20px">
+<li style="margin-bottom:6px">Set up a demo - <a href="${demoScheduleUrl()}" style="color:#1A2B48">${demoScheduleUrl()}</a></li>
+<li style="margin-bottom:6px">Set up a call - <a href="${SALES_PHONE_TEL}" style="color:#1A2B48">${SALES_PHONE_DISPLAY}</a></li>
+<li style="margin-bottom:6px">Ask questions: email <a href="mailto:${getSalesEmail()}" style="color:#1A2B48">${getSalesEmail()}</a></li>
+<li>Not sure yet — will reach out.</li>
+</ul>`;
+}
+
 /** Immediate acknowledgment, sent the moment a work email is captured. */
 export function buildLeadThankYouPlain(): string {
   return [
@@ -48,9 +67,7 @@ export function buildLeadThankYouPlain(): string {
     "",
     "If interested, would you like to:",
     "",
-    `Set up a call - ${SALES_PHONE_DISPLAY}`,
-    `Ask questions: email ${getSalesEmail()}`,
-    "Not sure yet — will reach out.",
+    ...nextStepOptionsPlain(),
     "",
     BUSINESS_ADDRESS,
   ].join("\n");
@@ -70,11 +87,7 @@ ${audience}
 ${paragraph(CLOSING)}
 ${paragraph(CALL_ASK)}
 ${paragraph("If interested, would you like to:")}
-<ul style="margin:0 0 16px;padding-left:20px">
-<li style="margin-bottom:6px">Set up a call - <a href="${SALES_PHONE_TEL}" style="color:#1A2B48">${SALES_PHONE_DISPLAY}</a></li>
-<li style="margin-bottom:6px">Ask questions: email <a href="mailto:${getSalesEmail()}" style="color:#1A2B48">${getSalesEmail()}</a></li>
-<li>Not sure yet — will reach out.</li>
-</ul>
+${nextStepOptionsHtml()}
 <p style="margin:24px 0 0;font-size:12px;color:#94a3b8">${BUSINESS_ADDRESS}</p>
 </body></html>`;
 }

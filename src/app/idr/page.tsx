@@ -105,7 +105,7 @@ export default function IdrIndexPage() {
             </Link>
             , or{" "}
             <Link className={textStyles.textLink} href="/demo">
-              set up a 15-minute call
+              set up a demo
             </Link>
             .
           </p>

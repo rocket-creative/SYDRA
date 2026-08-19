@@ -5,6 +5,7 @@ import {
   buildFounderAutoReplyPlain,
   leadHasPhone,
 } from "@/lib/email/founder-auto-reply";
+import { nextStepOptionsPlain } from "@/lib/email/lead-thank-you";
 import {
   getFounderFromEmail,
   getLeadFromEmail,
@@ -121,6 +122,10 @@ function buildSecurityConfirmPlain(name: string): string {
     "Thank you for contacting Sydra about Sydra. We received your security summary and demo request.",
     "",
     "A member of our sales team will reply within one business day at the email address you provided.",
+    "",
+    "If interested, would you like to:",
+    "",
+    ...nextStepOptionsPlain(),
     "",
     "Sydra",
     "Sydra · NSA IDR software",

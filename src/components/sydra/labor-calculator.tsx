@@ -3,6 +3,7 @@
 import { useId, useMemo, useState } from "react";
 
 import { CtaLink } from "@/components/ui/cta-link";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 
 const SYDRA_MINUTES_PER_CLAIM = 5;
 
@@ -26,7 +27,7 @@ const hrs = (n: number) => `${Math.round(n)} hrs`;
 export function LaborCalculator({
   variant = "light",
   ctaHref = "/demo",
-  ctaLabel = "Set up a 15-minute call",
+  ctaLabel = CALL_CTA_LABEL,
   onCtaClick,
 }: LaborCalculatorProps) {
   const [claimsPerMonth, setClaimsPerMonth] = useState(20);

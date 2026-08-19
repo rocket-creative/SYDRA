@@ -2,7 +2,7 @@
  * Claim-review fulfillment copy.
  *
  * Funnel: form → auto-reply (sample + EOB ask) → they send a claim → writeup
- * → delivery email (reply with a time in the named windows). No booking link.
+ * → delivery email (book a demo on the thank-you page).
  *
  * SLA: personal follow-up within one business day of the form. Claim review
  * within one business day of the EOB (or the five details).
@@ -79,8 +79,8 @@ export function claimReviewDeliverySubject(practiceName: string, estimate: strin
 }
 
 /**
- * Sent after the review is done, attached to their number. They reply with a
- * time in the named windows. No booking URL.
+ * Sent after the review is done, attached to their number. They book a demo
+ * on the thank-you page.
  */
 export function buildClaimReviewDeliveryPlain(input: {
   firstName: string;
@@ -142,7 +142,7 @@ export function buildClaimReviewNudgePlain(): string {
 
 const FEES_PAGE = "https://www.sydrahealth.com/resources/idr-eligibility-deadlines-fees";
 
-/** Fill-in writeup sent as the one-page deliverable. No booking URL. */
+/** Fill-in writeup sent as the one-page deliverable. */
 export function buildClaimReviewWriteupPlain(input: {
   practiceName: string;
   date: string;

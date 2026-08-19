@@ -15,7 +15,7 @@ import { SourcesReferences } from "@/components/sydra/sources-references";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { Section } from "@/components/ui/section";
 import { PRICING_FAQ } from "@/lib/content/service-faqs";
-import { caseReviewUrl } from "@/lib/case-review";
+import { CALL_CTA_LABEL, caseReviewUrl } from "@/lib/case-review";
 import { FOUR_OBJECTION_LINE } from "@/lib/content/founder-lines";
 import { EDITORIAL } from "@/lib/images";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -46,7 +46,7 @@ export default function PricingPage() {
               stops scaling against you at exactly the point your volume makes it most expensive.
             </p>
             <p className="mt-4 type-body text-body">
-              Set up a 15-minute call and we quote on that call. No commitment to proceed.
+              Set up a demo and we quote on that call. No commitment to proceed.
             </p>
             <div className="mt-6">
               <ConversionCtaPair placement="pricing-body" secondaryAs="link" />
@@ -140,7 +140,7 @@ export default function PricingPage() {
         <Section tone="neutral">
           <div className="max-w-xl">
             <Button href="/demo" showArrow>
-              Set up a 15-minute call
+              {CALL_CTA_LABEL}
             </Button>
             <p className="mt-6">
               <CtaLink href={caseReviewUrl()}>

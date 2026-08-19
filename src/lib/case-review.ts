@@ -29,8 +29,8 @@ export const CLAIM_REVIEW_OFFER =
  * because the URL is in circulation on ads and printed collateral.
  */
 export const CALL_PATH = "/demo";
-export const CALL_CTA_LABEL = "Set up a 15-minute call";
-export const CALL_CTA_SHORT_LABEL = "Set up a call";
+export const CALL_CTA_LABEL = "Set up a demo";
+export const CALL_CTA_SHORT_LABEL = "Set up a demo";
 
 /** Secondary conversion CTA. Full label on desktop; shortLabel in header and on mobile. */
 export const PRIMARY_CTA_LABEL = "See what one denied claim is worth";

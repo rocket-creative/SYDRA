@@ -15,6 +15,7 @@ import {
 } from "@/lib/content/tiers";
 import {
   CASE_REVIEW_CTA,
+  CALL_CTA_LABEL,
   caseReviewUrl,
 } from "@/lib/case-review";
 import { textStyles } from "@/lib/typography";
@@ -97,7 +98,7 @@ function TierBlock({
               showArrow
               variant={isRecommended ? "solid" : "ghost"}
             >
-              Set up a 15-minute call
+              {CALL_CTA_LABEL}
             </Button>
           )
         ) : (
@@ -230,7 +231,7 @@ export function PricingTiers({ variant, headingLevel }: PricingTiersProps) {
             <p className="mt-3 type-body text-body">{DEMO_TRUST_BLOCK}</p>
             <div className="mt-8">
               <Button href="/demo" showArrow>
-                Set up a 15-minute call
+                {CALL_CTA_LABEL}
               </Button>
             </div>
           </div>

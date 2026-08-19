@@ -13,8 +13,8 @@ export function leadHasPhone(phone: string | null | undefined): boolean {
 }
 
 /**
- * Founder confirmation after a demo request. Scheduling is by email reply,
- * not a calendar link.
+ * Founder confirmation after a demo request. Scheduling is the Calendly
+ * page at /demo/thank-you, with the published number as the call option.
  */
 export function buildFounderAutoReplyPlain(
   name: string,

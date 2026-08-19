@@ -3,6 +3,7 @@ import { CtaLink } from "@/components/ui/cta-link";
 import { HOMEPAGE_FAQ_SCHEMA } from "@/lib/seo/json-ld";
 import {
   CASE_REVIEW_CTA,
+  CALL_CTA_LABEL,
   caseReviewUrl,
 } from "@/lib/case-review";
 
@@ -36,7 +37,7 @@ export function SydraFaq() {
               {item.q.includes("cost") || item.q.includes("difference") ? (
                 <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                   <CtaLink href="/pricing">See pricing</CtaLink>
-                  <CtaLink href="/demo">Set up a 15-minute call</CtaLink>
+                  <CtaLink href="/demo">{CALL_CTA_LABEL}</CtaLink>
                   <a
                     className="cta-link group inline-flex min-h-11 items-center gap-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-hero)] hover:text-[var(--color-accent)]"
                     href={caseReviewUrl()}

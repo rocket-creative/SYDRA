@@ -1,5 +1,6 @@
 import { HomepageBand } from "@/components/landing/homepage-band";
 import { CtaLink } from "@/components/ui/cta-link";
+import { CALL_CTA_LABEL } from "@/lib/case-review";
 import { THESIS } from "@/lib/content/homepage";
 
 export function UnderuseStatement() {
@@ -44,7 +45,7 @@ export function ProcessProblemStatement() {
           is worth either of our time.
         </p>
         <p className="mt-8">
-          <CtaLink href="/demo">Set up a 15-minute call</CtaLink>
+          <CtaLink href="/demo">{CALL_CTA_LABEL}</CtaLink>
         </p>
       </div>
     </HomepageBand>

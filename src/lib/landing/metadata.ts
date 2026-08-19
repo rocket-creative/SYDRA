@@ -28,8 +28,8 @@ export function buildPostcardMetadata(stateParam?: string): Metadata {
     : "NSA IDR Software for Surgical Practices | Sydra";
 
   const description = stateDisplay
-    ? `Federal IDR software for out-of-network surgical claims in ${stateDisplay}. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Set up a 15-minute call.`
-    : "Federal IDR software for out-of-network surgical claims. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Set up a 15-minute call.";
+    ? `Federal IDR software for out-of-network surgical claims in ${stateDisplay}. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Set up a demo.`
+    : "Federal IDR software for out-of-network surgical claims. Prepare No Surprises Act dispute submissions in five minutes per claim. Surgeon built. Set up a demo.";
 
   // robots goes in, not on: buildPageMetadata drops the canonical for noindexed
   // pages, so overriding robots after the call would leave the canonical behind.

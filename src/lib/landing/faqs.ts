@@ -31,7 +31,7 @@ export function buildFaqs(stateDisplay: string | null) {
     },
     {
       q: stateQuestion,
-      a: `We are live or rolling out in ${LAUNCH_STATES_DISPLAY} for 2026. Set up a 15-minute call and we will confirm pathway coverage for your practice location and payer mix.`,
+      a: `We are live or rolling out in ${LAUNCH_STATES_DISPLAY} for 2026. Set up a demo and we will confirm pathway coverage for your practice location and payer mix.`,
     },
   ] as const;
 }
