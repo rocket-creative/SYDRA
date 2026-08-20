@@ -84,6 +84,7 @@ function coreEntries(): Entry[] {
   const marketingPages: Entry[] = [
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/demo", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/schedule", priority: 0.85, changeFrequency: "monthly" },
     { path: "/case-review", priority: 0.9, changeFrequency: "monthly" },
     { path: "/case-review/sample", priority: 0.7, changeFrequency: "monthly" },
     { path: "/pricing", priority: 0.9, changeFrequency: "monthly" },

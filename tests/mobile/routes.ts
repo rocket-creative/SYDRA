@@ -47,6 +47,7 @@ const STATIC_ROUTES: MobileRoute[] = [
   { name: "recover-thank-you", path: "/recover/thank-you" },
   { name: "demo", path: "/demo" },
   { name: "demo-thank-you", path: "/demo/thank-you" },
+  { name: "schedule", path: "/schedule" },
   { name: "pricing", path: "/pricing" },
   { name: "how-it-works", path: "/how-it-works" },
   { name: "what-is-idr", path: "/what-is-idr" },

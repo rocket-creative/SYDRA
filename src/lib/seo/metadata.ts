@@ -138,6 +138,14 @@ export const PAGE_METADATA = {
     ogImagePath: "/demo",
     ogImageAlt: "Set up a 15-minute Sydra call on a real denied claim.",
   }),
+  schedule: buildPageMetadata({
+    title: "Book a Sydra Demo | Sydra",
+    description:
+      "Pick a time to see Sydra on one of your denied claims. Bring an EOB. Free demo, no contract, nothing installs in your EMR.",
+    path: "/schedule",
+    ogImagePath: "/demo",
+    ogImageAlt: "Book a Sydra demo on a real denied claim.",
+  }),
   howItWorks: buildPageMetadata({
     title: "How Sydra Prepares a Federal IDR Submission | Sydra",
     description:

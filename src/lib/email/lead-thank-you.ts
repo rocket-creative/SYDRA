@@ -35,7 +35,7 @@ const CALL_ASK = "We'd welcome a short 15-minute call to see if this is worth pu
 
 export function nextStepOptionsPlain(): string[] {
   return [
-    `Set up a demo - ${demoScheduleUrl()}`,
+    `Set up a demo: ${demoScheduleUrl()}`,
     `Set up a call - ${SALES_PHONE_DISPLAY}`,
     `Ask questions: email ${getSalesEmail()}`,
     "Not sure yet — will reach out.",
@@ -43,8 +43,14 @@ export function nextStepOptionsPlain(): string[] {
 }
 
 export function nextStepOptionsHtml(): string {
-  return `<ul style="margin:0 0 16px;padding-left:20px">
-<li style="margin-bottom:6px">Set up a demo - <a href="${demoScheduleUrl()}" style="color:#1A2B48">${demoScheduleUrl()}</a></li>
+  return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 16px">
+<tr>
+<td style="background:#1A2B48">
+<a href="${demoScheduleUrl()}" style="display:inline-block;padding:14px 22px;color:#ffffff;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase">Set up a demo</a>
+</td>
+</tr>
+</table>
+<ul style="margin:0 0 16px;padding-left:20px">
 <li style="margin-bottom:6px">Set up a call - <a href="${SALES_PHONE_TEL}" style="color:#1A2B48">${SALES_PHONE_DISPLAY}</a></li>
 <li style="margin-bottom:6px">Ask questions: email <a href="mailto:${getSalesEmail()}" style="color:#1A2B48">${getSalesEmail()}</a></li>
 <li>Not sure yet — will reach out.</li>

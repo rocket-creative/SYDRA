@@ -82,6 +82,7 @@ export function GET(): Response {
   );
   lines.push(
     `- [Set up a demo](${base}/demo): we run one of your denied claims live.`,
+    `- [Book a demo](${base}/schedule): pick a time on Sydra.`,
   );
   lines.push("");
 

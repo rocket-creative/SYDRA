@@ -4,7 +4,7 @@ import { SALES_PHONE_DISPLAY } from "@/lib/contact";
 export const DEMO_PHONE_EXPECT =
   "Anything else comes from (914) 705 6830, so you know it is us.";
 
-/** Founder demo auto-reply: book on the thank-you page, or call. */
+/** Founder demo auto-reply: book on /schedule, or call. */
 export function demoSchedulingBlock(): string {
   return [
     `Set up a demo: ${demoScheduleUrl()}`,
