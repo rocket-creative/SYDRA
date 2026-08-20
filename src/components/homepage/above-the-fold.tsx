@@ -1,60 +1,100 @@
-import Image from "next/image";
+"use client";
 
-import { HERO, PROOF_CELLS, THESIS } from "@/lib/content/homepage";
+import { track } from "@vercel/analytics";
+
+import { Button } from "@/components/ui/button";
+import { EditorialImage } from "@/components/ui/editorial-image";
+import { CALL_PATH } from "@/lib/case-review";
+import { CTA_BLOCK, HERO, PROOF_CELLS, THESIS } from "@/lib/content/homepage";
 import { EDITORIAL } from "@/lib/images";
 
 /**
- * The hero, proof strip and thesis line share one vertical budget with the path
- * cards. Padding is tighter than the sitewide --space-section rhythm and the
- * thesis heading uses the compact type-h2 step rather than the larger home-h2.
- * The hero H1 gets its own home-hero-h1 step, sized to the headroom the fold
- * budget leaves once the cards, proof strip and thesis are placed.
+ * Hero, proof strip and thesis line.
  *
- * Base classes are the phone layout, sized for legibility: 14px body copy, 16px
- * card padding, 12px floor on the proof strip. The lg: overrides then compress
- * the block to clear 660px at 1440x760. The 390x760 budget in the spec is not
- * reachable with this copy, so phones are not squeezed to chase it.
+ * The fold budget only covers the hero and the path cards now (spec 3). The
+ * proof strip and the thesis sit just below it, which is what buys the hero
+ * enough room for the CTAs and normal section rhythm. Before, all four bands
+ * had to clear 660px and the hero paid for it: 12px of top padding, a 110px
+ * letterbox photo, and no call to action above the fold at all.
  */
 const BAND = "px-4 md:px-6 lg:px-8";
 const INNER = "mx-auto w-full max-w-[1200px]";
 
+/** Same destinations as the closing block, so the two CTA surfaces cannot drift. */
+const CALCULATOR_HREF = "/idr-recovery-calculator";
+
 /**
- * Kept deliberately short on phones. The four path cards below it are the page's
- * primary navigation, so the hero should not eat half the first screen.
+ * Asymmetric 7/5 split from lg: copy left at ~57% of the row, the stat panel
+ * right. The split is deliberately not even, so the row still reads as a hero
+ * rather than a feature section.
  *
- * From md the hero is an 8/4 split, copy left and photo right. The photo is
- * absolutely positioned inside its column, so it contributes no intrinsic height
- * and the grid row is sized by the copy: the band stays 179px and the desktop
- * fold budget is unchanged. The 8 columns are also what keeps the H1 on one
- * line, which needs 752px at its 50px cap against 789px of column.
+ * It starts at lg, not md, because 7 of 12 columns at 820px leaves the copy
+ * 430px and both CTA labels wrap to two lines in it. Tablets get the stacked
+ * layout, which has the full 772px to place them side by side.
+ *
+ * The H1 breaks over two lines at the 50px desktop step. That is intended: the
+ * copy column is 680px against the ~750px the line needs unbroken.
  */
 export function Hero() {
   return (
-    <section className={`bg-white pt-5 pb-4 lg:pt-3 ${BAND}`} id="hero">
-      <div className={`${INNER} text-left`}>
-        <div className="md:grid md:grid-cols-12 md:gap-x-8">
-          <div className="md:col-span-8">
+    <section className={`bg-white pt-8 pb-8 md:pt-10 ${BAND}`} id="hero">
+      <div className={INNER}>
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-x-12">
+          <div className="lg:col-span-7">
             <p className="home-eyebrow home-eyebrow-strong text-[var(--color-accent)]">
               {HERO.kicker}
             </p>
-            <h1 className="home-hero-h1 mt-2 text-brand">{HERO.h1}</h1>
-            <p className="home-lead mt-3 max-w-[54ch] text-balance text-body lg:mt-2">
-              {HERO.subhead}
-            </p>
+            <h1 className="home-hero-h1 mt-3 text-balance text-brand">{HERO.h1}</h1>
+            <p className="home-lead mt-4 max-w-[52ch] text-body">{HERO.subhead}</p>
+            {/*
+             * Two actions, two buyer stages: the demo for anyone ready to talk,
+             * the calculator for anyone still sizing the problem. Both labels
+             * and both destinations come from the closing CTA block.
+             */}
+            <div className="cta-row mt-6">
+              <Button
+                href={CALL_PATH}
+                onClick={() => track("cta_click", { label: "cta_set_up_demo", placement: "homepage-hero" })}
+                showArrow
+                variant="solid"
+              >
+                {CTA_BLOCK.demo}
+              </Button>
+              <Button
+                href={CALCULATOR_HREF}
+                onClick={() => track("cta_click", { label: "cta_claim_worth", placement: "homepage-hero" })}
+                variant="ghost"
+              >
+                {CTA_BLOCK.calculator}
+              </Button>
+            </div>
           </div>
+
           {/*
-           * Phones get a fixed shallow band under the copy rather than the
-           * stretched column, so the headline still opens the page and the cards
-           * stay as close to the first screen as the copy allows.
+           * From lg the photo sets the row height rather than matching the copy
+           * column, which is what makes the band taller than the copy alone
+           * needs. Tablets need their own floor too: the stacked column is 772px
+           * wide, and a 4:1 crop of a 16:9 source cuts the subject's head off.
            */}
-          <div className="hero-image-in relative mt-5 h-[clamp(7rem,20dvh,9rem)] overflow-hidden rounded-[2px] bg-surface-muted md:col-span-4 md:mt-0 md:h-auto">
-            <Image
-              alt={EDITORIAL.surgeonPaymentReview.alt}
-              className="object-cover object-[55%_40%]"
-              fill
-              priority
-              sizes="(min-width: 768px) 30vw, 100vw"
-              src={EDITORIAL.surgeonPaymentReview.src}
+          <div className="relative lg:col-span-5">
+            <EditorialImage
+              asset={EDITORIAL.surgeonPaymentReview}
+              aspect="fill"
+              className="md:min-h-[17rem] lg:min-h-[24rem]"
+              eager
+              focus="upper"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+            {/*
+             * Feathers the photo's left edge into the white band so it reads as
+             * part of the spread rather than a rectangle parked beside the copy.
+             * Only in the split: stacked, there is nothing to its left to fade
+             * into. Fades to white/0 rather than transparent, which keeps the
+             * ramp from picking up grey.
+             */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-linear-to-r from-white to-white/0 lg:block"
             />
           </div>
         </div>
@@ -64,31 +104,23 @@ export function Hero() {
 }
 
 /**
- * Four cells, equal width, 1px rules between them from md up.
- *
- * Phones get 2x2 rather than 4-across: four cells at 390px would leave ~85px
- * each, below the 12px type floor the repo's mobile harness enforces. The
- * dividers only apply on the single-row layouts, because divide-x on a wrapped
- * grid draws a rule down the left of the second row's first cell.
+ * Four cells: stacked on phones, 2x2 from md, one row with 1px rules between
+ * them from lg. The dividers only apply to the single-row layout, because
+ * divide-x on a wrapped grid draws a rule down the left of the second row's
+ * first cell.
  */
 export function ProofStrip() {
   return (
-    <section className={`bg-neutral-section py-5 lg:py-1.5 ${BAND}`} id="proof">
+    <section className={`bg-neutral-section py-8 md:py-10 ${BAND}`} id="proof">
       <dl
-        className={`${INNER} grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-4 md:gap-0 md:divide-x md:divide-[var(--color-rule)]`}
+        className={`${INNER} grid gap-6 md:grid-cols-2 md:gap-x-12 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-[var(--color-rule)]`}
       >
         {PROOF_CELLS.map((cell) => (
-          <div className="min-w-0 md:px-4 md:first:pl-0 md:last:pr-0" key={cell.value}>
-            <dt className="text-[20px] font-medium leading-tight text-brand tabular-nums md:text-[24px]">
+          <div className="min-w-0 lg:px-6 lg:first:pl-0 lg:last:pr-0" key={cell.value}>
+            <dt className="text-[22px] font-medium leading-tight text-brand tabular-nums md:text-[26px]">
               {cell.value}
             </dt>
-            {/*
-             * Two across at 390px leaves ~175px a cell, but 12px stays the floor:
-             * it is where the repo's mobile harness and the spec both stop.
-             */}
-            <dd className="mt-1.5 text-[12px] leading-snug text-body md:text-[13px] lg:mt-1">
-              {cell.label}
-            </dd>
+            <dd className="mt-2 text-[14px] leading-snug text-body md:text-[15px]">{cell.label}</dd>
           </div>
         ))}
       </dl>
@@ -96,18 +128,34 @@ export function ProofStrip() {
   );
 }
 
+/**
+ * Copy left, photo right. The 5/7 split inverts the hero's 7/5 so the two bands
+ * do not read as the same template stamped twice, and the photo carries the
+ * width the short thesis copy cannot fill on its own.
+ *
+ * The image is below the fold, so it stays lazy rather than eager.
+ */
 export function Thesis() {
   return (
     <section
       aria-labelledby="thesis-heading"
-      className={`bg-white pt-7 pb-8 lg:pt-3 lg:pb-4 ${BAND}`}
+      className={`bg-white py-14 md:py-20 ${BAND}`}
       id="thesis"
     >
-      <div className={`${INNER} md:text-center`}>
-        <h2 className="type-h2 text-brand" id="thesis-heading">
-          {THESIS.heading}
-        </h2>
-        <p className="home-body mt-3 max-w-[64ch] text-body md:mx-auto lg:mt-2">{THESIS.body}</p>
+      <div className={`${INNER} grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-x-12`}>
+        <div className="lg:col-span-5">
+          <h2 className="home-h2 text-brand" id="thesis-heading">
+            {THESIS.heading}
+          </h2>
+          <p className="home-body mt-4 max-w-[46ch] text-body">{THESIS.body}</p>
+        </div>
+        <div className="lg:col-span-7">
+          <EditorialImage
+            asset={EDITORIAL.billerStandingDesk}
+            aspect="16/9"
+            sizes="(min-width: 1024px) 56vw, 100vw"
+          />
+        </div>
       </div>
     </section>
   );

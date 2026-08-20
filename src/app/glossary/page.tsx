@@ -69,7 +69,7 @@ export default function GlossaryPage() {
               links to the guide that owns the full explanation.
             </p>
             <div className="mt-8">
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              <div className="cta-row">
                 <Button href={CALL_PATH} showArrow>
                   {CALL_CTA_LABEL}
                 </Button>

@@ -17,8 +17,8 @@ import { PATH_GROUPS } from "@/lib/content/homepage";
  */
 export function Paths() {
   return (
-    <section className="bg-white px-4 pb-6 md:px-6 lg:px-8 lg:pb-4" id="paths">
-      <div className="mx-auto grid w-full max-w-[1200px] gap-4 md:grid-cols-2 md:gap-x-8">
+    <section className="bg-white px-4 pb-8 md:px-6 md:pb-10 lg:px-8" id="paths">
+      <div className="mx-auto grid w-full max-w-[1200px] gap-6 md:grid-cols-2 md:gap-x-12">
         {PATH_GROUPS.map((group) => (
           <div className="min-w-0" key={group.label}>
             {/*
@@ -26,20 +26,19 @@ export function Paths() {
              * above the fold is the thesis line. Sentence case is preserved rather
              * than styled with .home-eyebrow, which would uppercase approved copy.
              */}
-            <p className="text-[14px] font-medium leading-snug text-body md:text-[13px]">
+            <p className="text-[14px] font-semibold leading-snug text-body md:text-[13px]">
               {group.label}
             </p>
-            {/* Mobile gets 16px card padding and 14px body copy; lg tightens both to clear the fold. */}
-            <div className="mt-2 grid gap-3 lg:gap-2">
+            <div className="mt-2 grid gap-3">
               {group.cards.map((card) => (
                 <a
-                  className="path-card block min-w-0 rounded-[2px] p-4 lg:p-3"
+                  className="path-card block min-w-0 rounded-[2px] p-4"
                   href={card.href}
                   key={card.slug}
                   onClick={() => track("path_card_click", { label: card.slug })}
                 >
                   <span className="home-card-heading block text-brand">{card.heading}</span>
-                  <span className="mt-1.5 block text-[14px] leading-normal text-body lg:mt-1 lg:leading-snug">
+                  <span className="mt-1.5 block text-[14px] leading-normal text-body md:text-[15px]">
                     {card.body}
                   </span>
                 </a>

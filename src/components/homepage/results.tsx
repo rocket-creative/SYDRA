@@ -6,8 +6,16 @@ import {
   RESULTS_INTRO,
 } from "@/lib/content/homepage";
 
-const TH = "px-3 py-2.5 text-left align-bottom text-[13px] font-medium text-brand first:pl-0";
-const TD = "px-3 py-3 text-left align-top text-[14px] text-body first:pl-0";
+/**
+ * The tables are white cards, so the cells carry the card's inset: the outer
+ * columns get the wider first:/last: padding and the header row an extra step
+ * on top. Without it the first column reads flush against the white edge. The
+ * section itself is white, so each card is outlined rather than relying on fill
+ * to separate it from the background.
+ */
+const TH =
+  "px-4 pt-5 pb-3 text-left align-bottom text-[13px] font-medium text-brand first:pl-6 last:pr-6";
+const TD = "px-4 py-3.5 text-left align-top text-[14px] text-body first:pl-6 last:pr-6";
 
 /**
  * NOT SPEC COPY. The proof strip above the fold shows the published 88% federal
@@ -32,7 +40,7 @@ export function Results() {
   return (
     <section
       aria-labelledby="results-heading"
-      className="anchor-under-header bg-neutral-section px-4 py-12 md:px-6 md:py-16 lg:px-8"
+      className="anchor-under-header bg-white px-4 py-12 md:px-6 md:py-16 lg:px-8"
       id="results"
     >
       <div className="mx-auto w-full max-w-[1200px]">
@@ -47,7 +55,7 @@ export function Results() {
           </h3>
           <p className="mt-1 text-[13px] leading-snug text-body">{PRACTICE_A.subLabel}</p>
           <TableScroller labelledBy="practice-a-heading">
-            <table className="w-full min-w-[46rem] border-collapse bg-white">
+            <table className="w-full min-w-[46rem] border-collapse border border-rule bg-white">
               <caption className="sr-only">{PRACTICE_A.caption}</caption>
               <thead>
                 <tr className="border-b border-[var(--color-text)]">
@@ -96,7 +104,7 @@ export function Results() {
           </h3>
           <p className="mt-2 max-w-[80ch] type-note text-body">{FEDERAL_VS_CLIENT_BRIDGE}</p>
           <TableScroller labelledBy="practice-b-heading">
-            <table className="w-full min-w-[32rem] border-collapse bg-white">
+            <table className="w-full min-w-[32rem] border-collapse border border-rule bg-white">
               <caption className="sr-only">{PRACTICE_B.caption}</caption>
               <thead>
                 <tr className="border-b border-[var(--color-text)]">

@@ -26,8 +26,8 @@ export default function DemoThankYouPage() {
           <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
           <h1 className="type-h2 mt-4 text-brand">Request received</h1>
           <p className="mt-6 type-body text-body">
-            Check your email for a note from Dr. Abrahams. Pick a time below for your demo. Bring one
-            denied or underpaid out of network EOB and we will run it live.
+            Pick a time below for your demo. Bring one denied or underpaid out of network EOB and we
+            will run it live.
           </p>
           <p className="mt-4 type-body text-body">
             Or set up a call:{" "}

@@ -66,7 +66,7 @@ export function ConversionCtaPair({
 
   return (
     <div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+      <div className="cta-row">
         <Button
           href={callUrl(placement)}
           showArrow

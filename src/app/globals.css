@@ -258,6 +258,11 @@ h4 {
   color: var(--color-text);
 }
 
+/* Nothing here sits in a @layer, so a text-* utility loses to the rule above. */
+.page-subsection-title.on-dark {
+  color: #ffffff;
+}
+
 .page-body {
   font-size: var(--type-body);
   line-height: 1.7;
@@ -616,6 +621,28 @@ h4 {
 .cta-link:hover svg,
 .cta-link:hover [data-arrow] {
   transform: translateX(4px);
+}
+
+/*
+ * Row of CTA buttons. Grid rather than flex, because flex sizes each button to
+ * its own label and a row of three then reads as three different components.
+ * Grid tracks are equal, so every button in the row is as wide as the widest.
+ *
+ * Buttons carry `w-auto` from sm up, which in a grid cell resolves to the full
+ * track. The 17rem cap keeps a pair from stretching across a full width band,
+ * and minmax lets the tracks shrink below it inside a narrow column. Four
+ * buttons wrap to 2x2 on the same two tracks.
+ */
+.cta-row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .cta-row {
+    grid-template-columns: repeat(2, minmax(0, 17rem));
+    gap: 1rem;
+  }
 }
 
 /*

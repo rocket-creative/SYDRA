@@ -26,9 +26,9 @@ export default function RecoverThankYouPage() {
           <p className="type-caption text-[var(--color-accent)]">Confirmed</p>
           <h1 className="type-h2 mt-4 text-brand">Claim review request received</h1>
           <p className="mt-6 type-body text-body">
-            Check your email for a note from Dr. Abrahams. Our team reviews every request and will come
-            back within one business day with whether the claim qualifies for federal IDR and what it
-            is worth. If you want to see Sydra on a live claim, pick a time below.
+            Our team reviews every request and will come back within one business day with whether the
+            claim qualifies for federal IDR and what it is worth. If you want to see Sydra on a live
+            claim, pick a time below.
           </p>
           <p className="mt-4 type-body text-body">
             Or set up a call:{" "}

@@ -98,7 +98,7 @@ export default function DemoPage() {
         <Section tone="white">
           <header className="prose-measure">
             <h1 className={textStyles.pageTitle} id="heading-demo">
-              Worth a 15-minute call?
+              Book a demo
               <span className={textStyles.pageSubtitle}>
                 Bring one denied claim. We&apos;ll tell you what federal IDR would do with it.
               </span>

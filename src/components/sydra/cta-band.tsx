@@ -21,7 +21,7 @@ type SydraCtaBandProps = {
 };
 
 export function SydraCtaBand({
-  title = "Worth a 15-minute call?",
+  title = "Book a demo",
   lead = "We'd welcome a short call to see whether this is worth pursuing. Bring one denied out of network claim and you will see what federal IDR would do with it before the call ends.",
   ctaLabel = CALL_CTA_LABEL,
   ctaHref = CALL_PATH,
@@ -34,7 +34,7 @@ export function SydraCtaBand({
           {title}
         </h2>
         <p className="prose-measure mt-6 type-body text-white/85">{lead}</p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+        <div className="cta-row mt-10">
           <Button href={ctaHref} showArrow variant="solidOnDark">
             {ctaLabel}
           </Button>

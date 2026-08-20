@@ -279,7 +279,7 @@ export const RESULTS_DISCLAIMER =
  * nowhere.
  */
 export const CTA_BLOCK = {
-  heading: "Worth a 15-minute call?",
+  heading: "Book a demo",
   body: "We'd welcome a short call to see if this is worth pursuing.",
   demo: "Set up a demo",
   call: "Set up a call",

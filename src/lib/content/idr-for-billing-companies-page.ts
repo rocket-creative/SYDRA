@@ -96,7 +96,7 @@ export const IDR_FOR_BILLING_CTA_LEAD =
   "Free 15-minute call. No commitment. Bring a real claim from any specialty in your book and we'll show you what Sydra generates, and talk through how the account structure fits a multi client firm.";
 
 export const IDR_FOR_BILLING_CTA_BAND = {
-  title: "Worth a 15-minute call?",
+  title: "Book a demo",
   lead: IDR_FOR_BILLING_CTA_LEAD,
   ctaLabel: "Set up a demo",
 };

@@ -108,6 +108,8 @@ const COPY_BY_INTENT: Record<
   {
     headline: string;
     body: string;
+    /** Shorter body for the band variant, where the copy sets on a single line. */
+    bandBody?: string;
     riskStack: string;
     stepOneCta: string;
     stepTwoCta: string;
@@ -132,6 +134,8 @@ const COPY_BY_INTENT: Record<
   "case-review": {
     headline: "Get your free claim review",
     body: "Tell us about your practice and monthly out of network volume. Our team reviews your situation and follows up within one business day with a clear recommendation.",
+    bandBody:
+      "Tell us about your practice and monthly out of network volume. We follow up within one business day with a clear recommendation.",
     riskStack:
       "Free claim review. No contract, no setup fee, and we never take a percentage of your recovery.",
     stepOneCta: "Start free claim review",
@@ -486,7 +490,7 @@ function LeadFormInner({
       <p
         className={`mt-3 type-body text-body ${isCard || isBand ? "text-[15px] leading-relaxed" : "prose-measure mt-4"}`}
       >
-        {copy.body}
+        {isBand ? (copy.bandBody ?? copy.body) : copy.body}
       </p>
     </>
   );
@@ -559,9 +563,10 @@ function LeadFormInner({
             </p>
           ) : null}
 
-          <RiskStack text={copy.riskStack} />
-
-          <MarketingConsentFields />
+          <div className="space-y-2">
+            <RiskStack text={copy.riskStack} />
+            <MarketingConsentFields />
+          </div>
 
           {isBand ? null : stepOneSubmit}
         </form>
@@ -782,11 +787,12 @@ function LeadFormInner({
             </p>
           ) : null}
 
-          <RiskStack text={copy.riskStack} />
+          <div className="space-y-2">
+            <RiskStack text={copy.riskStack} />
+            <MarketingConsentFields />
+          </div>
 
-          <MarketingConsentFields />
-
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="cta-row">
             <Button
               className="w-full sm:w-auto"
               disabled={formStatus.status === "submitting"}
@@ -818,9 +824,15 @@ function LeadFormInner({
         className="border-y border-rule bg-neutral-section px-4 py-10 md:px-6 md:py-12 lg:px-8"
         id={anchorId}
       >
-        <div className="mx-auto grid w-full max-w-[1200px] gap-8 lg:grid-cols-12 lg:items-start lg:gap-x-12">
-          <div className="lg:col-span-5">{intro}</div>
-          <div className="lg:col-span-7">
+        {/*
+         * Stacked, not split into columns: the intro runs across the top and the
+         * form takes the band's full width underneath it. The intro copy is
+         * uncapped so it sets on one line at the full 1200px; it wraps on its own
+         * once the band is narrower than the sentence.
+         */}
+        <div className="mx-auto w-full max-w-[1200px]">
+          {intro}
+          <div className="mt-6">
             {stepLabel}
             {formElement}
           </div>

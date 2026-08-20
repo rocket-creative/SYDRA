@@ -15,6 +15,15 @@ const PHONE_TEL = SALES_PHONE_TEL;
 const footerLink =
   "underline decoration-rule underline-offset-4 transition-colors hover:text-[var(--color-hero)]";
 
+/**
+ * Phones keep the 44px tap target the mobile harness enforces. Pointer widths
+ * drop to 32px, which is still clear of the WCAG 2.5.8 24px floor and stops a
+ * 12px link from reserving 48px of height: at 48px the two wrapped rows sat
+ * four times their own type size apart and read as a gap rather than a list.
+ */
+const footerNavLink =
+  "inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)] md:min-h-8";
+
 export function SydraFooter() {
   const email = getSalesEmail();
   return (
@@ -45,87 +54,87 @@ export function SydraFooter() {
           Not legal or financial advice. Federal IDR applies to qualifying out of network claims under
           the No Surprises Act. Recovery amounts vary by claim.
         </p>
-        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-body">
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-0 text-xs text-body">
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/what-is-idr"
           >
             What is federal IDR?
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/sydra-vs-idr-attorney"
           >
             Compare the fees →
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/what-is-idr"
           >
             Read the full Federal IDR guide
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/idr"
           >
             Federal IDR
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/how-it-works"
           >
             How it works
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/faq"
           >
             FAQ
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/roadmap"
           >
             Roadmap
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/security"
           >
             Security
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/resources"
           >
             Resources
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/glossary"
           >
             Glossary
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/idr-recovery-calculator"
           >
             Recovery calculator
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/privacy"
           >
             Privacy
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/do-not-sell"
           >
             Do Not Sell or Share
           </Link>
           <Link
-            className="inline-flex min-h-12 items-center transition-colors hover:text-[var(--color-hero)]"
+            className={footerNavLink}
             href="/terms"
           >
             Terms

@@ -56,7 +56,7 @@ export default function ClaimReviewSamplePage() {
               window is, and what the gap is worth. Send one denied out of network EOB and you get
               this within one business day.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="cta-row mt-6">
               <Button href={CASE_REVIEW_PATH} showArrow>
                 {PRIMARY_CTA_SHORT_LABEL}
               </Button>

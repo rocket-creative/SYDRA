@@ -109,7 +109,7 @@ export const IDR_FOR_CONTINGENCY_CTA_LEAD =
   "Free 15-minute call. No commitment. Bring a matter you would normally have declined on size and we'll build the submission live, so you can judge the output against what your own reviewer would have produced.";
 
 export const IDR_FOR_CONTINGENCY_CTA_BAND = {
-  title: "Worth a 15-minute call?",
+  title: "Book a demo",
   lead: IDR_FOR_CONTINGENCY_CTA_LEAD,
   ctaLabel: "Set up a demo",
 };

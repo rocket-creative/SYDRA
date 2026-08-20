@@ -9,6 +9,7 @@ import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { MagazineShell } from "@/components/ui/magazine-shell";
+import { EDITORIAL } from "@/lib/images";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import {
   breadcrumbJsonLd,
@@ -95,9 +96,14 @@ export function Homepage({ tracking, path }: HomepageProps) {
         homepage has no way to convert a visitor who is ready now. Same
         SharedLeadForm as every other page, so it lands in the same place.
       */}
+      {/*
+        Navy, so the closing ask reads as its own surface rather than another
+        step in the white/grey alternation running down the page. The lead form
+        keeps its default white card variant and sits on the navy as a card.
+      */}
       <section
         aria-labelledby="closing-cta-heading"
-        className="anchor-under-header bg-white px-4 py-12 md:px-6 md:py-16 lg:px-8"
+        className="anchor-under-header bg-hero-gradient px-4 py-12 md:px-6 md:py-16 lg:px-8"
         id="cta"
       >
         <div className="mx-auto grid w-full max-w-[1200px] gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
@@ -106,11 +112,13 @@ export function Homepage({ tracking, path }: HomepageProps) {
               bordered={false}
               headingId="closing-cta-heading"
               headingLevel="h2"
+              image={EDITORIAL.clinicianAdvisorMeeting}
+              onDark
               placement="homepage-closing"
             />
           </div>
           <div className="lg:col-span-7">
-            <Suspense fallback={<div className="h-96 animate-pulse bg-surface-muted" />}>
+            <Suspense fallback={<div className="h-96 animate-pulse bg-white/10" />}>
               <SharedLeadForm landingPage="home" />
             </Suspense>
           </div>

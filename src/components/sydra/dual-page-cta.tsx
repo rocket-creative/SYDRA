@@ -18,7 +18,7 @@ export function DualPageCta({ lead, className = "" }: DualPageCtaProps) {
   return (
     <div className={className}>
       {lead ? <p className={`${textStyles.body} mb-6`}>{lead}</p> : null}
-      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+      <div className="cta-row">
         <Button href={CALL_PATH} showArrow variant="solid">
           {CALL_CTA_LABEL}
         </Button>
