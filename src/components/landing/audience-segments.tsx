@@ -42,10 +42,10 @@ const segments = [
 export function AudienceSegments() {
   return (
     <HomepageBand ariaLabelledby="heading-homepage-segments" id="homepage-segments" tone="alt">
-      <h2 className="home-h2 max-w-[720px] text-brand" id="heading-homepage-segments">
+      <h2 className="type-h2 max-w-[720px] text-brand" id="heading-homepage-segments">
         Sydra was built to change the economics of that work.
       </h2>
-      <p className="home-lead mt-6 max-w-[720px] text-body">
+      <p className="type-lead mt-6 max-w-[720px] text-body">
         Depending on where you sit, that means something different.
       </p>
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
@@ -54,8 +54,8 @@ export function AudienceSegments() {
             className="flex h-full min-w-0 flex-col rounded border border-rule bg-white p-5 transition-colors md:p-8 lg:hover:border-body/40"
             key={segment.heading}
           >
-            <h3 className="home-card-heading text-brand">{segment.heading}</h3>
-            <p className="home-body mt-4 max-w-[60ch] text-body">{segment.body}</p>
+            <h3 className="type-card-heading text-brand">{segment.heading}</h3>
+            <p className="type-body mt-4 max-w-[60ch] text-body">{segment.body}</p>
             <CtaLink
               aria-label={"ariaLabel" in segment ? segment.ariaLabel : undefined}
               className="mt-auto min-h-12 pt-4 !text-[15px] !font-medium !normal-case !tracking-normal !text-[var(--color-accent)] hover:!text-[var(--color-hero)]"

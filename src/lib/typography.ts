@@ -1,10 +1,10 @@
 /** Shared text styles — left aligned, readable measure, design tokens only. */
 export const textStyles = {
   pageTitle: "type-h1 w-full min-w-0 text-brand prose-measure",
-  pageSubtitle: "mt-4 block type-h2 font-normal text-body",
-  pageLead: "prose-measure mt-6 w-full min-w-0 type-body text-body",
+  pageSubtitle: "mt-4 block page-subtitle",
+  pageLead: "prose-measure mt-6 w-full min-w-0 type-lead text-body",
   sectionTitle: "type-h2 w-full min-w-0 text-brand prose-measure",
-  subsectionTitle: "text-lg font-medium text-brand",
+  subsectionTitle: "page-subsection-title",
   body: "type-body text-body",
   bodyMeasure: "prose-measure w-full min-w-0 type-body text-body",
   bodyStack: "prose-measure w-full min-w-0 space-y-4 type-body text-body",

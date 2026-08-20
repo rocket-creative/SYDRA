@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { AboutPageJsonLd } from "@/components/sydra/about-json-ld";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { Section } from "@/components/ui/section";
-import { caseReviewUrl, CALL_CTA_LABEL } from "@/lib/case-review";
+import { caseReviewUrl } from "@/lib/case-review";
 import { EDITORIAL } from "@/lib/images";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
@@ -132,14 +132,11 @@ export default function AboutPage() {
         </Section>
 
         <Section tone="neutral">
-          <div className="prose-measure">
-            <Button href="/demo" showArrow>
-              {CALL_CTA_LABEL}
-            </Button>
-            <CtaTrustSignals className="mt-4" />
-          </div>
+          <CtaTrustSignals />
           <ServiceCrossLinks current="/about" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

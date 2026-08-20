@@ -1,5 +1,6 @@
 import { CtaLink } from "@/components/ui/cta-link";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
@@ -141,6 +142,8 @@ export default function FaqPage() {
           <ServiceCrossLinks current="/faq" />
           <SourcesReferences />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

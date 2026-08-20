@@ -24,7 +24,7 @@ export function Paths() {
             {/*
              * Group labels are not headings: the page has one h1, and the only h2
              * above the fold is the thesis line. Sentence case is preserved rather
-             * than styled with .home-eyebrow, which would uppercase approved copy.
+             * than styled with .type-caption, which would uppercase approved copy.
              */}
             <p className="text-[14px] font-semibold leading-snug text-body md:text-[13px]">
               {group.label}
@@ -37,7 +37,7 @@ export function Paths() {
                   key={card.slug}
                   onClick={() => track("path_card_click", { label: card.slug })}
                 >
-                  <span className="home-card-heading block text-brand">{card.heading}</span>
+                  <span className="type-card-heading block text-brand">{card.heading}</span>
                   <span className="mt-1.5 block text-[14px] leading-normal text-body md:text-[15px]">
                     {card.body}
                   </span>

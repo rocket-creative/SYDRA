@@ -4,9 +4,11 @@ import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import { ROADMAP_FAQ, ROADMAP_HERO, ROADMAP_ITEMS } from "@/lib/content/roadmap-page";
+import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -56,6 +58,14 @@ export default function RoadmapPage() {
             </h1>
             <p className={textStyles.pageLead}>{ROADMAP_HERO.intro}</p>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.boardroomAdvisorsReview}
+            className="mt-10"
+            eager
+            focus="upper"
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         {ROADMAP_ITEMS.map((item, index) => (

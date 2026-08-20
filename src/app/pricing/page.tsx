@@ -2,10 +2,9 @@ import Link from "next/link";
 
 import { PricingViewed } from "@/components/analytics/pricing-viewed";
 import { ConversionCtaPair } from "@/components/landing/conversion-cta-pair";
-import { Button } from "@/components/ui/button";
-import { CtaLink } from "@/components/ui/cta-link";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PricingTiers } from "@/components/sydra/pricing-tiers";
 import { PricingPageJsonLd } from "@/components/sydra/pricing-json-ld";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
@@ -138,21 +137,18 @@ export default function PricingPage() {
         </Section>
 
         <Section tone="neutral">
-          <div className="max-w-xl">
-            <Button href="/demo" showArrow>
-              {CALL_CTA_LABEL}
-            </Button>
-            <p className="mt-6">
-              <CtaLink href={caseReviewUrl()}>
-                Not ready to talk? Send one denied claim for a free review
-              </CtaLink>
-            </p>
-            <CtaTrustSignals className="mt-6" />
-          </div>
+          <CtaTrustSignals className="max-w-xl" />
           <ServiceCrossLinks current="/pricing" />
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand
+          ctaLabel={CALL_CTA_LABEL}
+          ctaHref="/demo"
+          secondaryHref={caseReviewUrl()}
+          secondaryLabel="Send one denied claim for a free review"
+        />
       </SydraPageShell>
     </>
   );

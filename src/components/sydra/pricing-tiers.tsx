@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { CtaLink } from "@/components/ui/cta-link";
+import {
+  dataTableBodyRow,
+  dataTableClass,
+  dataTableHeadRow,
+  dataTableTd,
+  dataTableTh,
+} from "@/components/ui/data-table";
 import { Section } from "@/components/ui/section";
 import {
   DEMO_TRUST_BLOCK,
@@ -148,35 +155,35 @@ function ComparisonTable() {
       </div>
 
       {/* Desktop: full comparison table. */}
-      <div className="mt-8 hidden overflow-x-auto md:block">
-        <table className="w-full border-collapse text-left text-sm">
+      <div className="mt-8 hidden md:block">
+        <table className={dataTableClass}>
           <thead>
-            <tr className="border-b border-rule">
-              <th className="pb-4 pr-4 font-normal text-brand" scope="col">
+            <tr className={dataTableHeadRow}>
+              <th className={dataTableTh} scope="col">
                 Feature
               </th>
-              <th className="pb-4 px-4 text-left font-normal text-brand" scope="col">
+              <th className={dataTableTh} scope="col">
                 Self Serve
               </th>
-              <th className="pb-4 px-4 text-left font-normal text-[var(--color-accent)]" scope="col">
+              <th className={`${dataTableTh} text-[var(--color-accent)]`} scope="col">
                 + Support
               </th>
-              <th className="pb-4 pl-4 text-left font-normal text-brand" scope="col">
+              <th className={dataTableTh} scope="col">
                 Full Service
               </th>
             </tr>
           </thead>
           <tbody>
             {TIER_COMPARISON.map((row) => (
-              <tr key={row.feature} className="border-b border-rule">
-                <td className="py-4 pr-4 text-[15px] text-body">{row.feature}</td>
-                <td className="py-4 px-4">
+              <tr key={row.feature} className={dataTableBodyRow}>
+                <td className={dataTableTd}>{row.feature}</td>
+                <td className={dataTableTd}>
                   <ComparisonCellDisplay value={row.basic} />
                 </td>
-                <td className="py-4 px-4">
+                <td className={dataTableTd}>
                   <ComparisonCellDisplay value={row.plus} />
                 </td>
-                <td className="py-4 pl-4">
+                <td className={dataTableTd}>
                   <ComparisonCellDisplay value={row.pro} />
                 </td>
               </tr>

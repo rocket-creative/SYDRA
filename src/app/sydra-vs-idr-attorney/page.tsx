@@ -10,6 +10,13 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { CtaLink } from "@/components/ui/cta-link";
+import {
+  dataTableBodyRow,
+  dataTableClass,
+  dataTableHeadRow,
+  dataTableTd,
+  dataTableTh,
+} from "@/components/ui/data-table";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
@@ -62,19 +69,15 @@ function OptionsComparisonTable() {
         ))}
       </div>
 
-      <div className="hidden overflow-x-auto md:block">
-        <table className="w-full border-collapse text-left text-sm">
+      <div className="hidden md:block">
+        <table className={dataTableClass}>
           <thead>
-            <tr className="border-b border-rule">
-              <th className="pb-4 pr-4 font-normal text-brand" scope="col">
+            <tr className={dataTableHeadRow}>
+              <th className={dataTableTh} scope="col">
                 <span className="sr-only">Comparison</span>
               </th>
               {OPTIONS_COMPARISON_COLUMNS.map((column) => (
-                <th
-                  className="px-4 pb-4 text-left font-normal text-brand last:pl-4 last:pr-0"
-                  key={column}
-                  scope="col"
-                >
+                <th className={dataTableTh} key={column} scope="col">
                   {column}
                 </th>
               ))}
@@ -82,13 +85,13 @@ function OptionsComparisonTable() {
           </thead>
           <tbody>
             {OPTIONS_COMPARISON_ROWS.map((row) => (
-              <tr className="border-b border-rule" key={row.feature}>
-                <th className="py-4 pr-4 text-left text-[15px] font-medium text-body" scope="row">
+              <tr className={dataTableBodyRow} key={row.feature}>
+                <th className={`${dataTableTd} font-medium text-brand`} scope="row">
                   {row.feature}
                 </th>
                 {row.values.map((value, index) => (
-                  <td className="px-4 py-4 last:pl-4 last:pr-0" key={`${row.feature}-${index}`}>
-                    <span className="text-sm text-body">{value}</span>
+                  <td className={dataTableTd} key={`${row.feature}-${index}`}>
+                    {value}
                   </td>
                 ))}
               </tr>

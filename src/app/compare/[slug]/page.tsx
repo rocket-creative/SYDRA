@@ -9,6 +9,13 @@ import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { SydraPageShell } from "@/components/sydra/page-shell";
 import { SourcesReferences } from "@/components/sydra/sources-references";
+import {
+  dataTableBodyRow,
+  dataTableClass,
+  dataTableHeadRow,
+  dataTableTd,
+  dataTableTh,
+} from "@/components/ui/data-table";
 import { Section } from "@/components/ui/section";
 import { getComparison } from "@/lib/idr/comparisons";
 import { EDITORIAL } from "@/lib/images";
@@ -100,30 +107,30 @@ export default async function ComparePage({ params }: PageProps) {
           </div>
 
           {/* Desktop: full comparison table. */}
-          <div className="hidden overflow-x-auto md:block">
-            <table className="w-full border-collapse text-left">
+          <div className="hidden md:block">
+            <table className={dataTableClass}>
               <caption className="sr-only">{comparison.title}</caption>
               <thead>
-                <tr className="border-b border-rule">
-                  <th className="type-caption py-3 pr-4 font-normal text-body" scope="col">
+                <tr className={dataTableHeadRow}>
+                  <th className={dataTableTh} scope="col">
                     &nbsp;
                   </th>
-                  <th className="py-3 pr-4 text-sm font-medium text-brand" scope="col">
+                  <th className={dataTableTh} scope="col">
                     Sydra
                   </th>
-                  <th className="py-3 text-sm font-normal text-body" scope="col">
+                  <th className={dataTableTh} scope="col">
                     {comparison.alternative}
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {comparison.rows.map((row) => (
-                  <tr className="border-b border-rule" key={row.label}>
-                    <th className="py-4 pr-4 text-sm font-normal text-body" scope="row">
+                  <tr className={dataTableBodyRow} key={row.label}>
+                    <th className={`${dataTableTd} font-medium text-brand`} scope="row">
                       {row.label}
                     </th>
-                    <td className="py-4 pr-4 text-sm text-brand">{row.sydra}</td>
-                    <td className="py-4 text-sm text-body">{row.other}</td>
+                    <td className={dataTableTd}>{row.sydra}</td>
+                    <td className={dataTableTd}>{row.other}</td>
                   </tr>
                 ))}
               </tbody>

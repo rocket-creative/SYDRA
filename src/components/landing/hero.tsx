@@ -19,20 +19,20 @@ function HeroContent({
   return (
     <div className="w-full">
       <div aria-hidden className="mb-5 h-px w-16 bg-[var(--color-accent)]" />
-      <p className="home-eyebrow break-words text-body">{eyebrow}</p>
+      <p className="type-caption break-words text-body">{eyebrow}</p>
       {/*
        * Taken from HERO rather than restated. This page carried a longer second
        * wording of the same approved line, so the site said the one thing it
        * most wants to say in two different ways.
        */}
-      <h1 className="home-h1 mt-4 min-w-0 text-balance text-brand" id="landing-hero-heading">
+      <h1 className="type-h1 mt-4 min-w-0 text-balance text-brand" id="landing-hero-heading">
         {HERO.h1}
       </h1>
-      <p className="home-lead mt-4 text-body md:mt-5">{HERO.subhead}</p>
+      <p className="type-lead mt-4 text-body md:mt-5">{HERO.subhead}</p>
       <HeroCtas />
       <figure className="mt-5 max-w-[720px] md:mt-6">
-        <blockquote className="home-body text-body">{FOUNDER_ORIGIN_LINE}</blockquote>
-        <figcaption className="home-caption mt-3 text-body">
+        <blockquote className="type-body text-body">{FOUNDER_ORIGIN_LINE}</blockquote>
+        <figcaption className="type-note mt-3 text-body">
           Dr. John Abrahams, MD, board certified neurosurgeon and founder
         </figcaption>
       </figure>

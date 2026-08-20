@@ -45,10 +45,10 @@ export function HeroProofStack({
       >
         {items.map((item) => (
           <figure key={item.value} className="min-w-0">
-            <p className="home-stat whitespace-normal text-brand tabular-nums md:whitespace-nowrap">{item.value}</p>
+            <p className="type-stat whitespace-normal text-brand tabular-nums md:whitespace-nowrap">{item.value}</p>
             <div className="mt-3 h-[2px] w-8 bg-[var(--color-rule)]" aria-hidden />
-            <figcaption className="home-caption mt-3 text-body">{item.label}</figcaption>
-            {item.caption ? <p className="home-caption mt-3 text-body">{item.caption}</p> : null}
+            <figcaption className="type-note mt-3 text-body">{item.label}</figcaption>
+            {item.caption ? <p className="type-note mt-3 text-body">{item.caption}</p> : null}
           </figure>
         ))}
       </div>

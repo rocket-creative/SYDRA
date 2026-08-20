@@ -130,12 +130,12 @@ export default function ResourcesPage() {
           </div>
         </Section>
 
-        <SydraCtaBand />
-
         <Section tone="white">
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

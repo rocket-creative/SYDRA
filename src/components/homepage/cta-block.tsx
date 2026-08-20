@@ -65,7 +65,7 @@ export function CtaBlock({
       <Heading className={`page-subsection-title ${onDark ? "on-dark" : ""}`} id={headingId}>
         {CTA_BLOCK.heading}
       </Heading>
-      <p className={`home-body mt-2 max-w-[54ch] ${onDark ? "text-white/85" : "text-body"}`}>
+      <p className={`type-body mt-2 max-w-[54ch] ${onDark ? "text-white/85" : "text-body"}`}>
         {CTA_BLOCK.body}
       </p>
       <div className="cta-row mt-5">

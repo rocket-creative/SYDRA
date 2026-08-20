@@ -9,6 +9,7 @@ import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { Button } from "@/components/ui/button";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import {
   CALL_CTA_LABEL,
@@ -17,6 +18,7 @@ import {
   PRIMARY_CTA_LABEL,
 } from "@/lib/case-review";
 import { GLOSSARY_TERMS } from "@/lib/content/glossary";
+import { EDITORIAL } from "@/lib/images";
 import { definedTermSetJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { siteUrl } from "@/lib/site";
@@ -80,6 +82,14 @@ export default function GlossaryPage() {
               <CtaTrustSignals className="mt-4" />
             </div>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.billerKeyboardDashboard}
+            className="mt-10"
+            eager
+            focus="upper"
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section sidebarLabel="Terms" tone="neutral">
@@ -107,13 +117,13 @@ export default function GlossaryPage() {
           </dl>
         </Section>
 
-        <SydraCtaBand />
-
         <Section tone="white">
           <ServiceCrossLinks current="/glossary" />
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

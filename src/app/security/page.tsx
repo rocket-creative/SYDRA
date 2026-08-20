@@ -1,11 +1,12 @@
-import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
 import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
 import { caseReviewUrl } from "@/lib/case-review";
 import { salesMailtoHref } from "@/lib/contact";
@@ -16,6 +17,7 @@ import {
   SOC2_SECTION,
 } from "@/lib/content/security-page";
 import { SECURITY_FAQ } from "@/lib/content/service-faqs";
+import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, medicallyReviewedWebPageJsonLd, serviceJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
@@ -69,6 +71,14 @@ export default function SecurityPage() {
             </h1>
             <p className={textStyles.pageLead}>{SECURITY_HERO.intro}</p>
           </header>
+          <EditorialImage
+            aspect="3/2"
+            asset={EDITORIAL.executiveDocumentReview}
+            className="mt-10"
+            eager
+            focus="upper"
+            sizes="(max-width: 1024px) 100vw, 1200px"
+          />
         </Section>
 
         <Section sidebarLabel="SOC 2" tone="neutral">
@@ -125,18 +135,17 @@ export default function SecurityPage() {
         </Section>
 
         <Section tone="white">
-          <div className="prose-measure flex flex-col gap-4 sm:flex-row">
-            <Button href="/demo" showArrow>
-              {SECURITY_CTA.demoLabel}
-            </Button>
-            <Button href={salesMailtoHref()} variant="ghost">
-              {SECURITY_CTA.mailtoLabel}
-            </Button>
-          </div>
-          <CtaTrustSignals className="prose-measure mt-6" />
+          <CtaTrustSignals className="prose-measure" />
           <ServiceCrossLinks current="/security" />
           <MedicalReviewBlock />
         </Section>
+
+        <SydraCtaBand
+          ctaLabel={SECURITY_CTA.demoLabel}
+          ctaHref="/demo"
+          secondaryHref={salesMailtoHref()}
+          secondaryLabel={SECURITY_CTA.mailtoLabel}
+        />
       </SydraPageShell>
     </>
   );

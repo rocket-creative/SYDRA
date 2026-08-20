@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
@@ -191,6 +192,8 @@ export default function WhatIsIdrPage() {
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

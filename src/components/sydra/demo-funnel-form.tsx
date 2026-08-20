@@ -422,17 +422,11 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
 
           <p className="text-xs leading-relaxed text-body/80">{RISK_STACK}</p>
 
-          <div className="flex flex-col gap-4 sm:flex-row-reverse">
-            <Button
-              className="sm:flex-1"
-              disabled={state.status === "submitting"}
-              showArrow
-              type="submit"
-            >
+          <div className="cta-row">
+            <Button disabled={state.status === "submitting"} showArrow type="submit">
               {state.status === "submitting" ? "Submitting…" : submitLabel}
             </Button>
             <Button
-              className="sm:flex-1"
               disabled={state.status === "submitting"}
               type="button"
               variant="ghost"

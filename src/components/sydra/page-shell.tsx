@@ -74,7 +74,7 @@ export function SydraPageShell({
       >
         {breadcrumb ? (
           <div className="bg-white">
-            <div className="mx-auto max-w-[1280px] px-4 pt-8 md:px-10 md:pt-10">
+            <div className="mx-auto max-w-[1200px] px-4 pt-8 md:px-6 md:pt-10 lg:px-8">
               <BreadcrumbNav items={breadcrumb} />
             </div>
           </div>
@@ -92,13 +92,13 @@ export function SydraPageShell({
       headerVariant={headerVariant}
       mobileCtaBreakpoint={mobileCtaBreakpoint}
     >
-      <div className={mainClassName ?? "px-4 py-12 md:px-10 md:py-20"}>
+      <div className={mainClassName ?? "px-4 py-12 md:px-6 md:py-20 lg:px-8"}>
         {breadcrumb ? (
-          <div className="mx-auto mb-8 max-w-[1280px]">
+          <div className="mx-auto mb-8 max-w-[1200px]">
             <BreadcrumbNav items={breadcrumb} />
           </div>
         ) : null}
-        <div className="mx-auto max-w-[1280px]">{children}</div>
+        <div className="mx-auto max-w-[1200px]">{children}</div>
       </div>
       {sticky}
     </MagazineShell>

@@ -22,7 +22,7 @@ export default function NotFound() {
             That URL isn&apos;t on this site. Head back to the homepage, or set up a demo
             and we will run one of your denied claims live.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="cta-row mt-10">
             <Button href="/" showArrow>
               Back to homepage
             </Button>

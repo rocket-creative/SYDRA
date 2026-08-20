@@ -1,5 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { EditorialImage } from "@/components/ui/editorial-image";
+import { EDITORIAL, type EditorialAsset } from "@/lib/images";
 import {
   CALL_CTA_LABEL,
   CALL_PATH,
@@ -18,6 +20,14 @@ type SydraCtaBandProps = {
    * claim review ask, so the page does not offer the same thing twice.
    */
   hideSecondary?: boolean;
+  /** Overrides the claim review secondary on pages with their own second ask. */
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  /**
+   * Square photo above the heading. Defaults to the same asset the homepage
+   * closing block runs, so every page ends on the same composition.
+   */
+  image?: EditorialAsset;
 };
 
 export function SydraCtaBand({
@@ -26,10 +36,21 @@ export function SydraCtaBand({
   ctaLabel = CALL_CTA_LABEL,
   ctaHref = CALL_PATH,
   hideSecondary = false,
+  secondaryLabel = PRIMARY_CTA_LABEL,
+  secondaryHref = CASE_REVIEW_PATH,
+  image = EDITORIAL.clinicianAdvisorMeeting,
 }: SydraCtaBandProps = {}) {
   return (
     <Section ariaLabelledby="heading-cta-band" tone="hero">
       <div className="prose-measure">
+        {image ? (
+          <EditorialImage
+            aspect="1/1"
+            asset={image}
+            className="mb-8 sm:max-w-[320px] lg:max-w-[240px]"
+            sizes="(min-width: 1024px) 240px, (min-width: 640px) 320px, 100vw"
+          />
+        ) : null}
         <h2 className="type-h2 text-white" id="heading-cta-band">
           {title}
         </h2>
@@ -39,8 +60,8 @@ export function SydraCtaBand({
             {ctaLabel}
           </Button>
           {hideSecondary ? null : (
-            <Button href={CASE_REVIEW_PATH} variant="ghostOnDark">
-              {PRIMARY_CTA_LABEL}
+            <Button href={secondaryHref} variant="ghostOnDark">
+              {secondaryLabel}
             </Button>
           )}
         </div>

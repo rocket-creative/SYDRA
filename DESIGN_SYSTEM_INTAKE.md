@@ -48,11 +48,11 @@ Paste into the "Any other notes?" field:
 
 > Color roles. Hero navy #1a2b48 for full-bleed backgrounds (gradient #0a1525 to #152238 to #1a2b48 to #243a5c). Text #1a2b48. Body copy #4a5568. Warm stone page background #ebe8e2. Cool neutral alternating sections #e8eaef. Accent blue #0028b8 used sparingly for links, focus, and small moments. Rule lines #d4d0c8. One color dominates per section, no color soup.
 >
-> Typography. Geist Sans for everything, Geist Mono for code. Display, h1, and h2 use weight 500 with tight negative letter spacing. Large stat figures use weight 300. Body is 1.0625rem at line-height 1.7. Headings are sentence case. Readable column max width is 42rem.
+> Typography. Geist Sans for everything, Geist Mono for code. One scale, ramping from phone to desktop: h1 34 to 56, h2 26 to 36, card heading 19 to 20, stat figure 30 to 40, lead 17 to 19. Display, h1, h2, and card headings use weight 600 with tight negative letter spacing. Stat figures use weight 500. Body is 1.0625rem at line-height 1.7. Captions are uppercase weight 500 at 0.08em tracking. Headings are sentence case. Readable column max width is 42rem.
 >
-> Layout. Magazine over stone: a stone outer field framing a white content spread with clear edges. Content max width 1280px, shell max width 1440px. Section rhythm is clamp(80px, 10vw, 160px). Pattern alternates hero, neutral, hero, neutral, footer. Compositions are editorial and asymmetric, not centered template grids.
+> Layout. Magazine over stone: a stone outer field framing a white content spread with clear edges. Content max width 1200px, shell max width 1440px. Section rhythm is clamp(80px, 10vw, 160px). Pattern alternates hero, neutral, hero, neutral, footer. Compositions are editorial and asymmetric, not centered template grids.
 >
-> Components. Buttons are square (no rounded corners), uppercase, letter spaced, light weight, with an arrow that shifts right on hover. Product cards have no shadows or borders; the image is the card, with name in small caps and price in lighter weight. Nav links draw an underline left to right on hover. Scroll cues read "VIEW MORE" with a down arrow in small caps, tracking widest.
+> Components. Buttons are square (no rounded corners), uppercase, letter spaced, light weight, with an arrow that shifts right on hover. A CTA group is a two column grid so both buttons share a width. Every page closes on the same navy band: square photo, heading, lead, then the CTA pair. Data tables are outlined white cards with a dark rule under the header row. Product cards have no shadows or borders; the image is the card, with name in small caps and price in lighter weight. Nav links draw an underline left to right on hover. Scroll cues read "VIEW MORE" with a down arrow in small caps, tracking widest.
 >
 > Motion. Framer Motion entrance and scroll reveals. Primary easing cubic-bezier(0.16, 1, 0.3, 1). Durations 150ms to 700ms. All motion respects prefers-reduced-motion.
 >

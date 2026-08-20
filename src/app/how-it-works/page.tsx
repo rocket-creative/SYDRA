@@ -1,5 +1,6 @@
 import { BreadcrumbJsonLd } from "@/components/sydra/breadcrumb-json-ld";
 import { MedicalReviewBlock } from "@/components/sydra/clinical-trust";
+import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { CtaTrustSignals } from "@/components/sydra/cta-trust-signals";
 import { DualPageCta } from "@/components/sydra/dual-page-cta";
 import { FullServiceBanner } from "@/components/sydra/full-service-banner";
@@ -188,6 +189,8 @@ export default function HowItWorksPage() {
           <MedicalReviewBlock />
           <SourcesReferences className="mt-12" />
         </Section>
+
+        <SydraCtaBand />
       </SydraPageShell>
     </>
   );

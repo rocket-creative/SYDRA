@@ -41,11 +41,11 @@ export function Hero() {
       <div className={INNER}>
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-x-12">
           <div className="lg:col-span-7">
-            <p className="home-eyebrow home-eyebrow-strong text-[var(--color-accent)]">
+            <p className="type-caption type-caption-strong text-[var(--color-accent)]">
               {HERO.kicker}
             </p>
             <h1 className="home-hero-h1 mt-3 text-balance text-brand">{HERO.h1}</h1>
-            <p className="home-lead mt-4 max-w-[52ch] text-body">{HERO.subhead}</p>
+            <p className="type-lead mt-4 max-w-[52ch] text-body">{HERO.subhead}</p>
             {/*
              * Two actions, two buyer stages: the demo for anyone ready to talk,
              * the calculator for anyone still sizing the problem. Both labels
@@ -144,10 +144,10 @@ export function Thesis() {
     >
       <div className={`${INNER} grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-x-12`}>
         <div className="lg:col-span-5">
-          <h2 className="home-h2 text-brand" id="thesis-heading">
+          <h2 className="type-h2 text-brand" id="thesis-heading">
             {THESIS.heading}
           </h2>
-          <p className="home-body mt-4 max-w-[46ch] text-body">{THESIS.body}</p>
+          <p className="type-body mt-4 max-w-[46ch] text-body">{THESIS.body}</p>
         </div>
         <div className="lg:col-span-7">
           <EditorialImage

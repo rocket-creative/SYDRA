@@ -27,10 +27,10 @@ export function PathDetails() {
             key={detail.id}
           >
             <div className="mx-auto w-full max-w-[1200px]">
-              <h2 className="home-h2 max-w-[720px] text-brand" id={`${detail.id}-heading`}>
+              <h2 className="type-h2 max-w-[720px] text-brand" id={`${detail.id}-heading`}>
                 {detail.heading}
               </h2>
-              <p className="home-lead mt-5 max-w-[64ch] text-body">{detail.body}</p>
+              <p className="type-lead mt-5 max-w-[64ch] text-body">{detail.body}</p>
               {link ? (
                 <p className="mt-4">
                   <PathDetailLink href={link.href} label={link.label} placement={detail.id} />

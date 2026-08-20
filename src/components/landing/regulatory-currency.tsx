@@ -7,10 +7,10 @@ const CMS_RULE_URL =
 export function RegulatoryCurrency() {
   return (
     <HomepageBand ariaLabelledby="heading-regulatory-currency" id="built-for-the-rules" tone="white">
-      <h2 className="home-h2 max-w-[720px] text-brand" id="heading-regulatory-currency">
+      <h2 className="type-h2 max-w-[720px] text-brand" id="heading-regulatory-currency">
         Built for the rules as they are now.
       </h2>
-      <div className="home-body mt-6 max-w-[720px] space-y-5 text-body">
+      <div className="type-body mt-6 max-w-[720px] space-y-5 text-body">
         <p>The federal IDR process changed materially in June 2026. Most billing workflows still run the old one.</p>
         <p>
           <strong className="font-medium text-brand">
@@ -40,7 +40,7 @@ export function RegulatoryCurrency() {
       <p className="mt-8">
         <CtaLink href="/idr/guide">Read the full federal IDR guide</CtaLink>
       </p>
-      <p className="home-caption mt-6 text-body">
+      <p className="type-note mt-6 text-body">
         Source:{" "}
         <a
           className="underline decoration-rule underline-offset-2 transition-colors hover:text-[var(--color-hero)]"
