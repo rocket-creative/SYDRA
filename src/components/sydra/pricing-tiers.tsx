@@ -63,18 +63,25 @@ function TierBlock({
 
   return (
     <article
-      className={`flex h-full flex-col border-t border-rule pt-8 ${isExternal ? "opacity-90" : ""}`}
+      className={`relative flex h-full flex-col border-t border-rule pt-8 ${isExternal ? "opacity-90" : ""}`}
       id={tier.id}
     >
       {isRecommended ? (
-        <p className="type-caption mb-3 text-[var(--color-accent)]">Recommended</p>
+        <p
+          className={`type-caption absolute top-0 left-0 -translate-y-1/2 pr-3 text-[var(--color-accent)] ${
+            variant === "compact" ? "bg-[var(--color-neutral)]" : "bg-white"
+          }`}
+        >
+          Recommended
+        </p>
       ) : null}
+      <div>
+        <h3 className="text-xl font-normal text-brand">{tier.name}</h3>
+        <p className="mt-2 type-note text-[var(--color-accent)]">{tier.tagline}</p>
+        <p className="mt-4 type-body text-body">{tier.bestFor}</p>
+      </div>
 
-      <h3 className="text-xl font-normal text-brand">{tier.name}</h3>
-      <p className="mt-2 type-note text-[var(--color-accent)]">{tier.tagline}</p>
-      <p className="mt-4 type-body text-body">{tier.bestFor}</p>
-
-      <ul className="mt-6 flex-1 space-y-3">
+      <ul className="mt-6 flex min-h-0 flex-1 flex-col justify-between">
         {bullets.map((item) => (
           <li key={item} className="flex gap-3 type-body text-body">
             <span aria-hidden className="type-caption text-brand">
@@ -85,15 +92,19 @@ function TierBlock({
         ))}
       </ul>
 
-      {variant === "full" && tier.notIncluded ? (
-        <p className="mt-4 text-sm text-body/70">{tier.notIncluded}</p>
-      ) : null}
-
-      {variant === "full" && !isExternal ? (
-        <p className="mt-6 text-sm font-medium text-brand">{PRICING_QUALITATIVE_LINE}</p>
-      ) : null}
-
       <div className="mt-8">
+        {variant === "full" && tier.notIncluded ? (
+          <p className="mb-4 text-sm text-body/70">{tier.notIncluded}</p>
+        ) : null}
+        {variant === "full" ? (
+          <p
+            aria-hidden={isExternal || undefined}
+            className={`mb-6 text-sm font-medium text-brand ${isExternal ? "invisible" : ""}`}
+          >
+            {PRICING_QUALITATIVE_LINE}
+          </p>
+        ) : null}
+        <div className="grid">
         {variant === "full" ? (
           isExternal ? (
             <Button href={caseReviewUrl()} showArrow variant="ghost">
@@ -115,6 +126,7 @@ function TierBlock({
             {isExternal ? CASE_REVIEW_CTA : "Learn more"}
           </CtaLink>
         )}
+        </div>
       </div>
     </article>
   );

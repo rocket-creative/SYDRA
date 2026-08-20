@@ -3,7 +3,6 @@
 import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
-import { CtaLink } from "@/components/ui/cta-link";
 import {
   CALL_CTA_LABEL,
   CALL_CTA_SHORT_LABEL,
@@ -41,7 +40,7 @@ const CLAIM_REVIEW_LINE =
 type ConversionCtaPairProps = {
   placement: CtaPlacement;
   showSupportingLine?: boolean;
-  secondaryAs?: "button" | "link";
+  showClaimReviewLine?: boolean;
   /** Mobile label for the primary CTA. Same destination and tracking event. */
   shortLabel?: string;
   /** Override the default supporting line under the buttons. */
@@ -53,7 +52,7 @@ type ConversionCtaPairProps = {
 export function ConversionCtaPair({
   placement,
   showSupportingLine = true,
-  secondaryAs = "button",
+  showClaimReviewLine = true,
   shortLabel = CALL_CTA_SHORT_LABEL,
   supportingLine = SUPPORTING_LINE,
   onDark = false,
@@ -77,8 +76,10 @@ export function ConversionCtaPair({
           <span className="hidden sm:inline">{CALL_CTA_LABEL}</span>
         </Button>
         {placement === "homepage-two-paths" ? (
-          <CtaLink href="/pricing">See pricing</CtaLink>
-        ) : secondaryAs === "button" ? (
+          <Button href="/pricing" variant={onDark ? "ghostOnDark" : "ghost"}>
+            See pricing
+          </Button>
+        ) : (
           <Button
             href={caseReviewUrl(placement)}
             variant={onDark ? "ghostOnDark" : "ghost"}
@@ -87,8 +88,6 @@ export function ConversionCtaPair({
             <span className="sm:hidden">{PRIMARY_CTA_SHORT_LABEL}</span>
             <span className="hidden sm:inline">{PRIMARY_CTA_LABEL}</span>
           </Button>
-        ) : (
-          <CtaLink href={caseReviewUrl(placement)}>Or {PRIMARY_CTA_LABEL.toLowerCase()}</CtaLink>
         )}
       </div>
       {showSupportingLine ? (
@@ -96,13 +95,15 @@ export function ConversionCtaPair({
           {supportingLine}
         </p>
       ) : null}
-      <p className={`prose-measure mt-3 text-base leading-relaxed ${mutedClass}`}>
-        {CLAIM_REVIEW_LINE} Questions first? Email{" "}
-        <a className="underline underline-offset-2" href={`mailto:${getSalesEmail()}`}>
-          {getSalesEmail()}
-        </a>
-        .
-      </p>
+      {showClaimReviewLine ? (
+        <p className={`prose-measure mt-3 text-base leading-relaxed ${mutedClass}`}>
+          {CLAIM_REVIEW_LINE} Questions first? Email{" "}
+          <a className="underline underline-offset-2" href={`mailto:${getSalesEmail()}`}>
+            {getSalesEmail()}
+          </a>
+          .
+        </p>
+      ) : null}
       {placement === "homepage-hero" || placement === "homepage-closing" ? (
         <p className="prose-measure mt-4 text-base leading-relaxed text-body">{FOUR_OBJECTION_LINE}</p>
       ) : null}

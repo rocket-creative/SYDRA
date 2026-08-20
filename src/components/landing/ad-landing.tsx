@@ -111,7 +111,6 @@ export function AdLanding({ tracking, path = "/recover" }: AdLandingProps) {
       <Section id="recover-closing" tone="white">
         <ConversionCtaPair
           placement="recover-closing"
-          secondaryAs="link"
           showSupportingLine={false}
         />
       </Section>

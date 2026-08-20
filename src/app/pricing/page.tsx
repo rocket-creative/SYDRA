@@ -22,6 +22,10 @@ import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.pricing;
 
+const PRICING_TERMS = FOUR_OBJECTION_LINE.replace(/\.$/, "")
+  .split(". ")
+  .map((term) => `${term}.`);
+
 export default function PricingPage() {
   return (
     <>
@@ -37,20 +41,33 @@ export default function PricingPage() {
                 Quoted to your volume. Not a percentage of every recovery.
               </span>
             </h1>
-            <p className="mt-4 type-note text-body">{FOUR_OBJECTION_LINE}</p>
-            <p className="mt-6 type-body text-body">
-              We don&apos;t publish a list price because the right number depends on your specialty,
-              state, and monthly out of network claim volume. Sydra is priced on per claim and
-              subscription models rather than a percentage of recovery, so the cost of the service
-              stops scaling against you at exactly the point your volume makes it most expensive.
-            </p>
-            <p className="mt-4 type-body text-body">
-              Set up a demo and we quote on that call. No commitment to proceed.
-            </p>
-            <div className="mt-6">
-              <ConversionCtaPair placement="pricing-body" secondaryAs="link" />
+            <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
+              {PRICING_TERMS.map((term) => (
+                <li key={term} className="border-t border-rule pt-3 type-note text-body">
+                  {term}
+                </li>
+              ))}
+            </ul>
+            <div className={`${textStyles.bodyStack} mt-10`}>
+              <p>
+                We don&apos;t publish a list price because the right number depends on your specialty,
+                state, and monthly out of network claim volume.
+              </p>
+              <p>
+                Sydra is priced on per claim and subscription models rather than a percentage of
+                recovery, so the cost of the service stops scaling against you at exactly the point
+                your volume makes it most expensive.
+              </p>
+              <p>Set up a demo and we quote on that call. No commitment to proceed.</p>
             </div>
-            <p className="mt-4 type-body text-body">
+            <div className="mt-8">
+              <ConversionCtaPair
+                placement="pricing-body"
+                showClaimReviewLine={false}
+                showSupportingLine={false}
+              />
+            </div>
+            <p className="mt-8 type-note text-body">
               Running IDR for more than one practice? See{" "}
               <Link className={textStyles.textLink} href="/idr-for-billing-companies">
                 Sydra for billing companies and RCM firms
