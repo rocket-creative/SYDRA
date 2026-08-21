@@ -6,7 +6,7 @@ import { trackPageView } from "@/lib/landing/analytics-client";
 import {
   CAMPAIGN_COOKIE_NAME,
   type CampaignTracking,
-  parseCampaignCookie,
+  readCampaignCookie,
   serializeCampaignCookie,
 } from "@/lib/landing/tracking";
 import { persistUtmFirstTouch } from "@/lib/landing/utm-session";
@@ -22,21 +22,11 @@ function persistCookie(data: CampaignTracking): void {
   document.cookie = `${CAMPAIGN_COOKIE_NAME}=${value}; Path=/; Max-Age=${60 * 60 * 24 * 30}; SameSite=Lax${secure}`;
 }
 
-function readCookie(): CampaignTracking | null {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(`${CAMPAIGN_COOKIE_NAME}=`));
-  if (!match) return null;
-  const raw = match.slice(CAMPAIGN_COOKIE_NAME.length + 1);
-  return parseCampaignCookie(raw);
-}
-
 export function TrackingProvider({ tracking, path }: TrackingProviderProps) {
   const fired = useRef(false);
 
   useEffect(() => {
-    const existing = readCookie();
+    const existing = readCampaignCookie();
     const sessionUtm = persistUtmFirstTouch({
       utm_source: tracking.utm_source,
       utm_medium: tracking.utm_medium,
