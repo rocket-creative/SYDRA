@@ -56,6 +56,24 @@ export function persistRouteFirstTouch(incoming: PersistedRoute): PersistedRoute
   return next;
 }
 
+/**
+ * Pure read of the route context a form should submit: first touch session,
+ * then the current URL params, then campaign tracking. Writes nothing, so it is
+ * safe to call while rendering.
+ */
+export function resolveRouteContext(input: {
+  urlState: string;
+  urlCode: string;
+  trackingState: string;
+}): PersistedRoute {
+  const session = readRouteSession();
+  return {
+    state:
+      session.state || normalizeState(input.urlState) || normalizeState(input.trackingState),
+    code: session.code || normalizeCode(input.urlCode),
+  };
+}
+
 export function mergeRouteForSubmit(trackingState: string): PersistedRoute {
   const session = readRouteSession();
   return {

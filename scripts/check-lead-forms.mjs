@@ -84,11 +84,6 @@ const REQUIRED_LINKS = [
 const results = [];
 const record = (pass, name, detail = "") => results.push({ pass, name, detail });
 
-const visibleFieldNames = (scope, skip) =>
-  [...scope.querySelectorAll("input, select")]
-    .filter((el) => el.type !== "hidden" && !skip.includes(el.name))
-    .map((el) => el.name);
-
 async function main() {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });

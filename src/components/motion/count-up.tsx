@@ -33,7 +33,8 @@ export function CountUp({
   useIsomorphicLayoutEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-paint reset so the count-up has a starting point; SSR value stays correct
+    // Pre-paint reset so the count-up has a starting point; the SSR value stays
+    // correct because this runs after hydration, before the browser paints.
     setCount(0);
   }, []);
 

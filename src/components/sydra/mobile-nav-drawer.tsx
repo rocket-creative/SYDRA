@@ -5,6 +5,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { track } from "@vercel/analytics";
 
+import { useIsHydrated } from "@/hooks/use-is-hydrated";
 import { Button } from "@/components/ui/button";
 import {
   CALL_CTA_SHORT_LABEL,
@@ -23,14 +24,10 @@ type MobileNavDrawerProps = {
 
 export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerProps) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsHydrated();
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const close = useCallback(() => {
     setOpen(false);

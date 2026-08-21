@@ -33,6 +33,7 @@ import {
 import {
   mergeRouteForSubmit,
   persistRouteFirstTouch,
+  resolveRouteContext,
 } from "@/lib/landing/route-session";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import { mergeUtmForSubmit, persistUtmFirstTouch } from "@/lib/landing/utm-session";
@@ -227,16 +228,14 @@ function LeadFormInner({
   const [formStatus, setFormStatus] = useState<FormStatus>({ status: "idle" });
   const [phone, setPhone] = useState("");
   const [estimate, setEstimate] = useState<CalculatorEstimate | null>(null);
-  const [routeCtx, setRouteCtx] = useState(() =>
-    mergeRouteForSubmit(tracking.state),
+  // Resolved once on mount: first touch wins for the life of the session, so
+  // there is nothing to recompute on later renders.
+  const [routeCtx] = useState(() =>
+    resolveRouteContext({ urlState, urlCode, trackingState: tracking.state }),
   );
 
   useEffect(() => {
-    const persisted = persistRouteFirstTouch({ state: urlState, code: urlCode });
-    setRouteCtx({
-      state: persisted.state || mergeRouteForSubmit(tracking.state).state,
-      code: persisted.code,
-    });
+    persistRouteFirstTouch({ state: urlState, code: urlCode });
     persistUtmFirstTouch({
       utm_source: tracking.utm_source,
       utm_medium: tracking.utm_medium,

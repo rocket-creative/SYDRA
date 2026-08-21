@@ -1,12 +1,14 @@
 "use client";
 
 import {
-  useEffect,
-  useRef,
+  useCallback,
   useState,
   type CSSProperties,
   type ReactNode,
 } from "react";
+
+import { useIsHydrated } from "@/hooks/use-is-hydrated";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 type HomepageRevealProps = {
   children: ReactNode;
@@ -18,22 +20,11 @@ type HomepageRevealProps = {
  * 400ms ease-out, 12px translate, trigger at 15% viewport, once.
  */
 export function HomepageReveal({ children, className }: HomepageRevealProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [reduce, setReduce] = useState(false);
-  const [armed, setArmed] = useState(false);
+  const reduce = usePrefersReducedMotion();
+  const armed = useIsHydrated();
   const [inView, setInView] = useState(false);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => setReduce(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    setArmed(true);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    const el = ref.current;
+  const ref = useCallback((el: HTMLDivElement | null) => {
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
       setInView(true);

@@ -4,7 +4,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -12,63 +11,50 @@ import {
   type ReactNode,
 } from "react";
 
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+
 /** Primary entrances — smooth deceleration (no bounce). */
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 const EASE_EDITORIAL = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 /**
- * Tracks the user's reduced-motion preference. Starts `false` so the server and
- * first client render agree (no hydration mismatch); resolves to the real value
- * after mount.
- */
-function usePrefersReducedMotion(): boolean {
-  const [reduce, setReduce] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduce(mq.matches);
-    const onChange = () => setReduce(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return reduce;
-}
-
-/**
  * Reveal a node once when it first scrolls into view, using a lightweight
  * IntersectionObserver instead of an animation library. Falls back to visible
- * when IntersectionObserver is unavailable.
+ * when IntersectionObserver is unavailable. The observer attaches from a ref
+ * callback so it starts before paint and tears down when the node detaches.
  */
 function useInViewOnce<T extends Element>(options?: {
   amount?: number;
   rootMargin?: string;
 }) {
-  const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   const amount = options?.amount ?? 0.12;
   const rootMargin = options?.rootMargin ?? "0px 0px -8% 0px";
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setInView(true);
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setInView(true);
-            observer.disconnect();
-            break;
+  const ref = useCallback(
+    (el: T | null) => {
+      if (!el) return;
+      if (typeof IntersectionObserver === "undefined") {
+        setInView(true);
+        return;
+      }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              setInView(true);
+              observer.disconnect();
+              break;
+            }
           }
-        }
-      },
-      { threshold: amount, rootMargin },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [amount, rootMargin]);
+        },
+        { threshold: amount, rootMargin },
+      );
+      observer.observe(el);
+      return () => observer.disconnect();
+    },
+    [amount, rootMargin],
+  );
 
   return { ref, inView };
 }

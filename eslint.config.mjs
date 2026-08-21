@@ -20,6 +20,23 @@ const eslintConfig = defineConfig([
     "test-results/**",
     "playwright-report/**",
   ]),
+  {
+    rules: {
+      // A leading underscore marks a binding that exists only to satisfy a
+      // signature or to omit a key while spreading the rest.
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;
