@@ -22,7 +22,7 @@ import { isPaidTraffic, type CampaignTracking } from "@/lib/landing/tracking";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import {
   breadcrumbJsonLd,
-  personJsonLd,
+  drAbrahamsPersonJsonLd,
   serviceJsonLd,
   softwareApplicationJsonLd,
   sydraOrganizationJsonLd,
@@ -78,13 +78,7 @@ export function PostcardLanding({
         "Software that prepares federal independent dispute resolution submissions for out of network surgical claims under the No Surprises Act in about five minutes per claim.",
       serviceType: "NSA IDR claim preparation",
     }),
-    personJsonLd({
-      name: "Dr. John Abrahams, MD",
-      jobTitle: "Founder, Sydra",
-      description: "Board certified neurosurgeon and founder of Sydra.",
-      isPhysician: true,
-      medicalSpecialty: "Neurosurgery",
-    }),
+    drAbrahamsPersonJsonLd(),
   ];
 
   return (

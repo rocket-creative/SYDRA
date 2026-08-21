@@ -1,0 +1,27 @@
+---
+description: AEO entity graph, FAQ visibility, markdown twins, AI crawlers
+globs: **/page.tsx,**/layout.tsx,**/json-ld.ts,**/llms.txt/**,**/aeo/**
+alwaysApply: false
+---
+
+# AEO
+
+Sydra is software, not a clinic. Keep `Organization` + `SoftwareApplication`. Do not emit `MedicalOrganization` or `MedicalBusiness` for Sydra. Physician `reviewedBy` (Dr. Abrahams `@id`) carries medical E-E-A-T.
+
+## Entity graph
+- Organization and WebSite emit once in the root layout with stable `@id`s (`/#organization`, `/#website`).
+- Educational pages use `drAbrahamsPersonJsonLd()` (`/about#dr-abrahams`). Never mint a second Person node without that `@id`.
+- Article `author` is the physician `@id`. Organization stays `publisher`.
+- Do not invent `sameAs` URLs. Org: `NEXT_PUBLIC_ORG_SAME_AS` or LinkedIn default. Physician: `NEXT_PUBLIC_PHYSICIAN_SAME_AS` only.
+
+## FAQ
+Visible questions must match `FAQPage` JSON-LD 1:1 from the same constant. Render each question as `h2` or `h3`, not only a `<summary>` string.
+
+## Markdown twins
+Citation pages need a twin at the same path with `.md` (`/` → `/index.md`), generated from the same content module as the HTML. Advertise with `Link: rel=alternate; type=text/markdown` and `rel=describedby` → `/llms.txt`. `llms.txt` links to markdown URLs. Skip deep CPT and payer permutations.
+
+## Crawlers
+Keep GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, and the rest of the allowlist in `robots.ts`. Do not block AI crawlers on public pages.
+
+## Copy
+Answer-first: 40–60 word definition immediately after H1 on definitional pages. Do not rewrite legally frozen homepage H1 copy in `src/lib/content/homepage.ts`.

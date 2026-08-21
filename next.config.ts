@@ -97,7 +97,11 @@ const nextConfig: NextConfig = {
       // Serve the sitemap index at the canonical /sitemap.xml. Next reserves
       // that path for the generateSitemaps metadata route (which 404s the bare
       // path), so a beforeFiles rewrite intercepts it before app routing.
-      beforeFiles: [{ source: "/sitemap.xml", destination: "/sitemap-index.xml" }],
+      beforeFiles: [
+        { source: "/sitemap.xml", destination: "/sitemap-index.xml" },
+        { source: "/index.md", destination: "/aeo-markdown" },
+        { source: "/:path+.md", destination: "/aeo-markdown/:path+" },
+      ],
       afterFiles: [],
       fallback: [],
     };
@@ -144,7 +148,10 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/(.*)",
-        headers: securityHeaders,
+        headers: [
+          ...securityHeaders,
+          { key: "Link", value: '</llms.txt>; rel="describedby"' },
+        ],
       },
     ];
   },

@@ -53,7 +53,7 @@ export const OPTIONS_COMPARISON_ROWS: OptionsComparisonRow[] = [
 export const OPTIONS_COMPARED_SECTIONS = [
   {
     id: "heading-when-contingency-firm",
-    title: "When a contingency firm is the right answer",
+    title: "When is a contingency firm the right answer?",
     paragraphs: [
       "A firm is genuinely the better choice in three situations. If the dispute has escalated beyond IDR into litigation, you need counsel and software will not help. If you are fighting a broader contract or network fight with a payer, IDR is one front in a larger matter and it should be run by lawyers. And if you have no billing staff at all and want zero involvement, a firm that takes a percentage carries all of the risk — that is what the percentage buys.",
       "Where the percentage stops making sense is volume. A contingency rate that is reasonable on four claims a year is expensive on four hundred, because the cost grows with every dollar you recover while the work per claim does not.",
@@ -73,5 +73,20 @@ export const OPTIONS_COMPARED_SECTIONS = [
     ],
     ctaHref: "/idr-for-contingency-firms",
     ctaLabel: "See the per FTE argument",
+  },
+] as const;
+
+export const SYDRA_VS_ATTORNEY_FAQS = [
+  {
+    q: "When is a contingency firm the right answer?",
+    a: "A firm is genuinely the better choice in three situations. If the dispute has escalated beyond IDR into litigation, you need counsel and software will not help. If you are fighting a broader contract or network fight with a payer, IDR is one front in a larger matter and it should be run by lawyers. And if you have no billing staff at all and want zero involvement, a firm that takes a percentage carries all of the risk — that is what the percentage buys.",
+  },
+  {
+    q: "What is the difference between in house with Sydra and Sydra files for you?",
+    a: "In house with Sydra, your billing team spends about five minutes per claim and owns the submission. When Sydra files for you, Sydra owns the submission with your approval and your time per claim is minimal. Both are priced on per claim or subscription models rather than a percentage of recovery.",
+  },
+  {
+    q: "Does Sydra handle related litigation?",
+    a: "No. If the dispute has escalated beyond IDR into litigation, you need counsel and software will not help.",
   },
 ] as const;

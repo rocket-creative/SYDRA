@@ -14,7 +14,7 @@ export const WHAT_IS_IDR_HERO = {
   title: "That payment is an opening offer.",
   subtitle: "Federal IDR, explained for providers.",
   paragraphs: [
-    "When a health plan pays an out of network claim, most practices treat the amount that arrives as the amount owed. Under the No Surprises Act, it isn't. That payment is an opening offer, and federal Independent Dispute Resolution exists specifically to contest it.",
+    "Federal Independent Dispute Resolution is the No Surprises Act process that lets an out of network provider contest a health plan's payment. The patient pays only the in network cost share. The provider and the plan then submit competing offers, and a certified entity picks one. That payment is an opening offer, not the amount owed.",
     "Most practices have never used it. This page covers what it is, who qualifies, what the deadlines are, and what changed in 2026.",
   ],
 };
@@ -22,7 +22,7 @@ export const WHAT_IS_IDR_HERO = {
 export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
   {
     id: "heading-nsa",
-    title: "First, the No Surprises Act.",
+    title: "What is the No Surprises Act?",
     paragraphs: [
       "The No Surprises Act took effect in 2022. It removed the patient from the middle of out of network billing disputes: the patient pays only the in network cost share, and the provider and the plan resolve the balance between themselves.",
       "That second half is the part most practices never operationalized. The law did not simply cap what you can bill. It created a mechanism for recovering what the plan should have paid, and left it to providers to use.",
@@ -30,7 +30,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
   },
   {
     id: "heading-idr",
-    title: "Then, independent dispute resolution.",
+    title: "What is federal independent dispute resolution?",
     paragraphs: [
       "Federal IDR is final offer arbitration. You submit an offer, the plan submits an offer, and a certified independent dispute resolution entity picks one. There is no splitting the difference. The entity picks the offer better supported by evidence.",
       "That structure is why preparation determines outcome. The dispute is not argued; it is documented.",
@@ -38,7 +38,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
   },
   {
     id: "heading-who",
-    title: "Who can use it.",
+    title: "Who can file federal IDR?",
     paragraphs: [
       "Out of network claims that fall under the No Surprises Act qualify: emergency services, and non emergency services delivered by out of network providers at in network facilities where no valid notice and consent was obtained.",
       "You do not need a lawyer. The statute does not require one. A provider can file directly, and so can an authorized representative, whether that is an in house billing team or a billing company acting on the practice's behalf.",
@@ -46,7 +46,7 @@ export const WHAT_IS_IDR_SECTIONS: ContentSection[] = [
   },
   {
     id: "heading-deadlines",
-    title: "The deadlines that matter.",
+    title: "What are the federal IDR deadlines?",
     paragraphs: [
       "There is a defined federal pathway between a payer's underpayment and a binding arbitrated amount: an open negotiation window, an eligibility determination, a batching decision, then arbitration. Each step has a hard deadline, and missing one forfeits the claim.",
       "The open negotiation period runs 30 business days. Once it closes, you have 4 business days to initiate IDR. There is no cure for missing either one. That is the entire reason this work goes undone. Not that it is legally difficult, but that it is deadline driven, document heavy, and unforgiving of administrative error.",

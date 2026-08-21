@@ -11,6 +11,8 @@ export type GlossaryTerm = {
  * Copy is drawn from existing guides and resources; no new statistics.
  * Sorted alphabetically by display term.
  */
+export const GLOSSARY_LEAD =
+  "Federal IDR uses a small set of terms that decide eligibility, timing, and what an arbitrator may weigh. This glossary defines those terms in one or two sentences for surgical billing teams, including QPA, open negotiation, IDRE, batching, and the 2026 administrative fee. Each entry links to the guide that owns the full explanation.";
 export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     slug: "administrative-fee",

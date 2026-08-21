@@ -17,7 +17,6 @@ import {
 import { caseReviewUrl } from "@/lib/case-review";
 import { EDITORIAL } from "@/lib/images";
 import {
-  localBusinessJsonLd,
   organizationContactPoint,
   sydraOrganizationJsonLd,
   webPageJsonLd,
@@ -50,7 +49,6 @@ function ContactPageJsonLd() {
             ...sydraOrganizationJsonLd(),
             contactPoint: organizationContactPoint(),
           },
-          localBusinessJsonLd(),
         ]}
       />
     </>

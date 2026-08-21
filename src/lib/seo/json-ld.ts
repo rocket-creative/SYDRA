@@ -15,16 +15,23 @@ export const SYDRA_OG_IMAGE_URL = () => `${siteUrl()}/opengraph-image`;
 
 const DEFAULT_SAME_AS = ["https://www.linkedin.com/company/sydra-health/"] as const;
 
-/** Comma separated social profile URLs from NEXT_PUBLIC_ORG_SAME_AS when set. */
-export function organizationSameAs(): string[] {
-  const raw = process.env.NEXT_PUBLIC_ORG_SAME_AS?.trim();
-  if (!raw) {
-    return [...DEFAULT_SAME_AS];
-  }
+function splitUrlList(raw: string | undefined): string[] {
+  if (!raw?.trim()) return [];
   return raw
     .split(",")
     .map((url) => url.trim())
     .filter((url) => url.length > 0);
+}
+
+/** Comma separated social profile URLs from NEXT_PUBLIC_ORG_SAME_AS when set. */
+export function organizationSameAs(): string[] {
+  const fromEnv = splitUrlList(process.env.NEXT_PUBLIC_ORG_SAME_AS);
+  return fromEnv.length > 0 ? fromEnv : [...DEFAULT_SAME_AS];
+}
+
+/** Comma separated profile URLs for Dr. Abrahams. Empty unless NEXT_PUBLIC_PHYSICIAN_SAME_AS is set. */
+export function physicianSameAs(): string[] {
+  return splitUrlList(process.env.NEXT_PUBLIC_PHYSICIAN_SAME_AS);
 }
 
 type BreadcrumbItem = {
@@ -54,6 +61,7 @@ export const DR_ABRAHAMS_PERSON_ID = () => `${siteUrl()}/about#dr-abrahams`;
  * Credentials are limited to facts already stated on /about.
  */
 export function drAbrahamsPersonJsonLd() {
+  const sameAs = physicianSameAs();
   return {
     "@context": "https://schema.org",
     "@type": "Physician",
@@ -69,6 +77,7 @@ export function drAbrahamsPersonJsonLd() {
       name: "American Association of Neurological Surgeons",
     },
     url: `${siteUrl()}/about`,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 }
 
@@ -168,7 +177,7 @@ export function articleJsonLd({
     dateModified: dateModified ?? datePublished,
     inLanguage: "en-US",
     isPartOf: { "@id": SYDRA_WEBSITE_ID() },
-    author: { "@id": SYDRA_ORG_ID() },
+    author: { "@id": DR_ABRAHAMS_PERSON_ID() },
     publisher: { "@id": SYDRA_ORG_ID() },
     image: image ?? SYDRA_OG_IMAGE_URL(),
     ...(reviewedBy ? { reviewedBy: { "@id": DR_ABRAHAMS_PERSON_ID() } } : {}),
@@ -399,38 +408,6 @@ export function personJsonLd(person: PersonInput) {
     ...(person.isPhysician && person.medicalSpecialty
       ? { medicalSpecialty: person.medicalSpecialty }
       : {}),
-  };
-}
-
-export const SYDRA_LOCALBUSINESS_ID = () => `${siteUrl()}/#localbusiness`;
-
-/**
- * Contact-page LocalBusiness node. All fields mirror the NAP that already
- * renders on /contact and in the footer, linked to the organization.
- */
-export function localBusinessJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    "@id": SYDRA_LOCALBUSINESS_ID(),
-    name: "Sydra",
-    url: siteUrl(),
-    telephone: "+19147056830",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "244 Westchester Ave, Suite 209",
-      addressLocality: "West Harrison",
-      addressRegion: "NY",
-      postalCode: "10604",
-      addressCountry: "US",
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "17:00",
-    },
-    parentOrganization: { "@id": SYDRA_ORG_ID() },
   };
 }
 

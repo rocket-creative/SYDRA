@@ -1,8 +1,11 @@
+import { markdownHref } from "@/lib/aeo/markdown-paths";
 import { PATH_DETAILS } from "@/lib/content/homepage";
+import { RESOURCE_ARTICLES } from "@/lib/content/resources/articles";
 import { COMPARISONS } from "@/lib/idr/comparisons";
 import { GUIDES } from "@/lib/idr/guides";
+import { idrSpecialtyPath, idrStatePath } from "@/lib/idr/seo";
 import { SPECIALTIES } from "@/lib/idr/taxonomy";
-import { siteUrl } from "@/lib/site";
+import { US_STATES } from "@/lib/constants/us-states";
 
 export const dynamicParams = false;
 export const revalidate = 86400;
@@ -10,10 +13,10 @@ export const revalidate = 86400;
 /**
  * llms.txt corpus (playbook section 7). Publishes a structured map of the
  * highest-value pages so AI assistants can cite Sydra as the source for
- * "how do I file IDR for X" style questions.
+ * "how do I file IDR for X" style questions. Links point at markdown twins
+ * (llmstxt.org v2).
  */
 export function GET(): Response {
-  const base = siteUrl();
   const lines: string[] = [];
 
   lines.push("# Sydra");
@@ -23,15 +26,10 @@ export function GET(): Response {
   );
   lines.push("");
   lines.push(
-    "AI crawlers are welcome to read, index, and cite this site. The benchmark and guide surface is built to be the cited source for questions like \"out of network reimbursement for a CPT in a given state\" and \"how to file federal IDR.\" Every dollar figure is bound to sourced, dated public data, and pages without confirmed data are intentionally left out of the index.",
+    "AI crawlers are welcome to read, index, and cite this site. Prefer the markdown twins linked below over HTML. The benchmark and guide surface is built to be the cited source for questions like \"out of network reimbursement for a CPT in a given state\" and \"how to file federal IDR.\" Every dollar figure is bound to sourced, dated public data, and pages without confirmed data are intentionally left out of the index.",
   );
   lines.push("");
 
-  /*
-   * Derived from PATH_DETAILS rather than restated, so the four audience paths
-   * cannot drift out of step with the homepage. An earlier version of this file
-   * described "three ways to file", which contradicted the page.
-   */
   lines.push("## Who Sydra is for");
   for (const detail of PATH_DETAILS) {
     lines.push(`- ${detail.heading.replace(/\?$/, "")}: ${detail.body}`);
@@ -39,66 +37,72 @@ export function GET(): Response {
   lines.push("");
 
   lines.push("## Core");
-  lines.push(`- [Home](${base}/): NSA IDR software for surgical billing teams.`);
+  lines.push(`- [Home](${markdownHref("/")}): NSA IDR software for surgical billing teams.`);
   lines.push(
-    `- [What is federal IDR](${base}/what-is-idr): the No Surprises Act dispute path explained.`,
+    `- [What is federal IDR](${markdownHref("/what-is-idr")}): the No Surprises Act dispute path explained.`,
   );
   lines.push(
-    `- [How it works](${base}/how-it-works): from EOB upload to portal ready submission.`,
+    `- [How it works](${markdownHref("/how-it-works")}): from EOB upload to portal ready submission.`,
   );
-  lines.push(`- [Pricing](${base}/pricing): plans and the fee structure.`);
+  lines.push(`- [Pricing](${markdownHref("/pricing")}): plans and the fee structure.`);
   lines.push(
-    `- [Compare your IDR options](${base}/sydra-vs-idr-attorney): the cost of three filing arrangements compared, including when a contingency firm is the right answer.`,
-  );
-  lines.push(
-    `- [In house IDR](${base}/in-house-idr): scale federal disputes without added headcount.`,
+    `- [Compare your IDR options](${markdownHref("/sydra-vs-idr-attorney")}): the cost of three filing arrangements compared, including when a contingency firm is the right answer.`,
   );
   lines.push(
-    `- [IDR for billing companies](${base}/idr-for-billing-companies): federal IDR for RCM firms managing multiple client practices.`,
+    `- [In house IDR](${markdownHref("/in-house-idr")}): scale federal disputes without added headcount.`,
   );
   lines.push(
-    `- [IDR for contingency firms](${base}/idr-for-contingency-firms): automating mechanical assembly to raise recoveries per FTE.`,
+    `- [IDR for billing companies](${markdownHref("/idr-for-billing-companies")}): federal IDR for RCM firms managing multiple client practices.`,
   );
   lines.push(
-    `- [IDR filing deadline](${base}/idr-filing-deadline): the 30 and 4 business day clocks that close a claim cycle.`,
+    `- [IDR for contingency firms](${markdownHref("/idr-for-contingency-firms")}): automating mechanical assembly to raise recoveries per FTE.`,
   );
   lines.push(
-    `- [IDR recovery calculator](${base}/idr-recovery-calculator): estimate recovery and typical contingency cost at your volume.`,
+    `- [IDR filing deadline](${markdownHref("/idr-filing-deadline")}): the 30 and 4 business day clocks that close a claim cycle.`,
   );
   lines.push(
-    `- [IDR glossary](${base}/glossary): short definitions of QPA, IDRE, open negotiation, and related terms.`,
+    `- [IDR recovery calculator](${markdownHref("/idr-recovery-calculator")}): estimate recovery and typical contingency cost at your volume.`,
   );
   lines.push(
-    `- [Resource updates](${base}/resources/updates): dated notes on federal IDR process changes.`,
+    `- [IDR glossary](${markdownHref("/glossary")}): short definitions of QPA, IDRE, open negotiation, and related terms.`,
   );
   lines.push(
-    `- [Security](${base}/security): HIPAA controls, BAA, PHI handling.`,
+    `- [Security](${markdownHref("/security")}): HIPAA controls, BAA, PHI handling.`,
   );
   lines.push(
-    `- [FAQ](${base}/faq): common questions for practices and billing companies.`,
+    `- [FAQ](${markdownHref("/faq")}): common questions for practices and billing companies.`,
   );
   lines.push(
-    `- [Roadmap](${base}/roadmap): what Sydra ships today and what is in active development.`,
+    `- [Roadmap](${markdownHref("/roadmap")}): what Sydra ships today and what is in active development.`,
   );
   lines.push(
-    `- [Set up a demo](${base}/demo): we run one of your denied claims live.`,
-    `- [Book a demo](${base}/schedule): pick a time on Sydra.`,
+    `- [Set up a demo](${markdownHref("/demo")}): we run one of your denied claims live.`,
+  );
+  lines.push(
+    `- [Book a demo](${markdownHref("/schedule")}): pick a time on Sydra.`,
   );
   lines.push("");
 
   lines.push("## Federal IDR data");
   lines.push(
-    `- [Federal IDR hub](${base}/idr): benchmarks and eligibility by code, state, payer, and specialty.`,
+    `- [Federal IDR hub](${markdownHref("/idr")}): benchmarks and eligibility by code, state, payer, and specialty.`,
   );
   for (const s of SPECIALTIES) {
-    lines.push(`- [${s.name} IDR codes](${base}/idr/specialty/${s.slug}): ${s.blurb}`);
+    lines.push(
+      `- [${s.name} IDR codes](${markdownHref(idrSpecialtyPath(s.slug))}): ${s.blurb}`,
+    );
+  }
+  for (const s of US_STATES) {
+    lines.push(
+      `- [${s.name} IDR](${markdownHref(idrStatePath(s.code))}): federal IDR pathway for out of network surgical claims in ${s.name}.`,
+    );
   }
   lines.push("");
 
   lines.push("## Guides");
   for (const g of GUIDES) {
     lines.push(
-      `- [${g.title.replace(/\.$/, "")}](${base}/idr/guide/${g.slug}): ${g.metaDescription}`,
+      `- [${g.title.replace(/\.$/, "")}](${markdownHref(`/idr/guide/${g.slug}`)}): ${g.metaDescription}`,
     );
   }
   lines.push("");
@@ -106,9 +110,31 @@ export function GET(): Response {
   lines.push("## Comparisons");
   for (const c of COMPARISONS) {
     lines.push(
-      `- [${c.title.replace(/\.$/, "")}](${base}/compare/${c.slug}): ${c.metaDescription}`,
+      `- [${c.title.replace(/\.$/, "")}](${markdownHref(`/compare/${c.slug}`)}): ${c.metaDescription}`,
     );
   }
+  lines.push("");
+
+  lines.push("## Optional");
+  lines.push(`- [About](${markdownHref("/about")}): founder and the working RCM operation behind Sydra.`);
+  lines.push(`- [Contact](${markdownHref("/contact")}): sales, demos, and support.`);
+  lines.push(
+    `- [Claim review](${markdownHref("/case-review")}): send one denied EOB for a written eligibility check.`,
+  );
+  lines.push(`- [Resources hub](${markdownHref("/resources")}): federal IDR and No Surprises Act guides.`);
+  for (const article of RESOURCE_ARTICLES) {
+    lines.push(
+      `- [${article.title.replace(/\.$/, "")}](${markdownHref(`/resources/${article.slug}`)}): ${article.metaDescription}`,
+    );
+  }
+  lines.push(
+    `- [Resource updates](${markdownHref("/resources/updates")}): dated notes on federal IDR process changes.`,
+  );
+  lines.push(`- [Privacy](${markdownHref("/privacy")}): website data practices.`);
+  lines.push(`- [Terms](${markdownHref("/terms")}): website terms of use.`);
+  lines.push(
+    `- [Do not sell](${markdownHref("/do-not-sell")}): opt out of sale or sharing of personal information.`,
+  );
   lines.push("");
 
   lines.push("## Notes for citation");

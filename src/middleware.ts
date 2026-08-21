@@ -20,9 +20,33 @@ function isAuthorized(request: NextRequest, password: string): boolean {
   }
 }
 
+function markdownTwinPath(pathname: string): string | null {
+  if (pathname === "/") return "/index.md";
+  const hasTwin =
+    /^\/(what-is-idr|how-it-works|pricing|faq|glossary|security|about|contact|case-review|idr-filing-deadline|in-house-idr|idr-for-billing-companies|idr-for-contingency-firms|sydra-vs-idr-attorney|idr-recovery-calculator|demo|schedule|roadmap|privacy|terms|do-not-sell|idr)$/.test(
+      pathname,
+    ) ||
+    /^\/idr\/(guide|specialty)(?:\/[^/]+)?$/.test(pathname) ||
+    /^\/idr\/state\/[^/]+$/.test(pathname) ||
+    /^\/compare\/[^/]+$/.test(pathname) ||
+    /^\/resources(?:\/updates)?(?:\/[^/]+)?$/.test(pathname);
+  return hasTwin ? `${pathname}.md` : null;
+}
+
+function withMarkdownLink(request: NextRequest, response: NextResponse): NextResponse {
+  const twin = markdownTwinPath(request.nextUrl.pathname);
+  if (twin) {
+    response.headers.set(
+      "Link",
+      `<${twin}>; rel="alternate"; type="text/markdown", </llms.txt>; rel="describedby"`,
+    );
+  }
+  return response;
+}
+
 export function middleware(request: NextRequest) {
   if (!request.nextUrl.pathname.startsWith("/admin")) {
-    return NextResponse.next();
+    return withMarkdownLink(request, NextResponse.next());
   }
 
   const password = getLeadsAdminPassword();
@@ -47,5 +71,8 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/((?!_next/static|_next/image|favicon.ico|api/|.*\\..*).*)",
+  ],
 };

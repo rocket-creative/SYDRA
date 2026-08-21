@@ -17,7 +17,7 @@ import {
   CASE_REVIEW_PATH,
   PRIMARY_CTA_LABEL,
 } from "@/lib/case-review";
-import { GLOSSARY_TERMS } from "@/lib/content/glossary";
+import { GLOSSARY_LEAD, GLOSSARY_TERMS } from "@/lib/content/glossary";
 import { EDITORIAL } from "@/lib/images";
 import { definedTermSetJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
@@ -66,10 +66,7 @@ export default function GlossaryPage() {
                 Short definitions for the terms billing teams see most.
               </span>
             </h1>
-            <p className={textStyles.pageLead}>
-              Plain language definitions for the terms billing teams actually encounter. Each entry
-              links to the guide that owns the full explanation.
-            </p>
+            <p className={textStyles.pageLead}>{GLOSSARY_LEAD}</p>
             <div className="mt-8">
               <div className="cta-row">
                 <Button href={CALL_PATH} showArrow>

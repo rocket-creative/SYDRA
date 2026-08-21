@@ -28,6 +28,8 @@ export type Guide = {
    * near the top of the guide so the two pages reinforce rather than compete.
    */
   crossLink?: { href: string; anchor: string; intro: string };
+  datePublished: string;
+  dateModified: string;
 };
 
 export const GUIDES: Guide[] = [
@@ -43,31 +45,33 @@ export const GUIDES: Guide[] = [
     metaTitle: "No Surprises Act IDR: How the Law Works | Sydra",
     metaDescription:
       "How the No Surprises Act creates and governs federal IDR: the statutory basis, which plans route to the federal process, the QPA anchor, and the 2026 operations rule.",
+    datePublished: "2026-06-01",
+    dateModified: "2026-07-18",
     lead: "The No Surprises Act did more than end balance billing. It built a dispute path, and it wrote the rules that govern it: who is covered, which plans route to the federal forum, what an arbitrator may weigh, and the clocks that gate a filing. This page covers those mechanics.",
     sections: [
       {
-        heading: "The statute that created the process.",
+        heading: "What statute created federal IDR?",
         paragraphs: [
           "The No Surprises Act was enacted as part of the Consolidated Appropriations Act of 2021 and took effect in 2022. Alongside the patient protections, it directed federal agencies to build an independent dispute resolution process, and those agencies implemented it through regulations at 45 CFR Part 149. IDR is not a private service a provider opts into. It is the remedy the law wrote in place of balance billing.",
           "That distinction matters for how a claim is argued. Because IDR is a creature of the statute and its rules, eligibility, timing, and evidence all trace back to specific regulatory requirements rather than to negotiation custom.",
         ],
       },
       {
-        heading: "Which plans the federal process governs.",
+        heading: "Which plans does the federal process govern?",
         paragraphs: [
           "The federal IDR process governs disputes the No Surprises Act reaches: out of network emergency care, out of network care at an in network facility, and air ambulance services. Whether a specific claim uses the federal forum or a state one turns on plan type.",
           "Self funded employer plans are governed by federal law, so they route to federal IDR in every state. Fully insured plans can fall under a state surprise billing law where one exists, and in that case the state process controls and the federal one steps aside. Confirming plan type is the first regulatory question on any claim, because filing in the wrong forum wastes the window.",
         ],
       },
       {
-        heading: "What the arbitrator is allowed to weigh.",
+        heading: "What is the arbitrator allowed to weigh?",
         paragraphs: [
           "The rules define the qualifying payment amount, or QPA, as the plan's median contracted rate for the service in the area, and they make it the starting anchor in a dispute. The regulations also list the additional factors an arbitrator may consider, including the complexity of the service, the provider's training and experience, and prior determinations on the same code.",
           "This is the regulatory reason surgical awards run high. The statute does not cap the award at the QPA. It requires the arbitrator to weigh the QPA against credible evidence, and for complex operative work that evidence pulls the fair number well above the plan's anchor.",
         ],
       },
       {
-        heading: "The statutory gate and the 2026 rule.",
+        heading: "What is the statutory gate and the 2026 rule?",
         paragraphs: [
           "Before a claim can reach arbitration, the law requires a 30 business day open negotiation period, and once it closes a provider has four business days to initiate IDR. These are not soft targets. They are regulatory deadlines, and missing the four business day window forecloses the claim.",
           "A federal operations rule, the CMS final rule of May 28, 2026, effective June 11, 2026, tightened the mechanics further. Open negotiation moved into the federal portal, disputes now carry registration numbers, and a structured eligibility review happens early. The economics that favor providers did not change, but the documentation bar did.",
@@ -96,6 +100,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "How to file federal IDR step by step | Sydra",
     metaDescription:
       "The exact sequence to dispute an underpaid out of network claim through the No Surprises Act IDR process, with the deadlines that decide the outcome.",
+    datePublished: "2026-06-01",
+    dateModified: "2026-07-18",
     lead: "Confirm the claim is eligible. Run the 30 business day open negotiation period. Initiate IDR within four business days of that period closing. Select a certified dispute resolution entity, submit one offer with supporting evidence, and the arbitrator picks a final number.\n\nSix steps, and the fourth one is where claims die. Miss the four business day window and there is nothing left to file.",
     howToSteps: [
       {
@@ -169,10 +175,12 @@ export const GUIDES: Guide[] = [
     metaTitle: "IDR deadlines and the four business day window | Sydra",
     metaDescription:
       "The open negotiation period and the four business day window that decide whether an out of network claim can still be recovered, and how to track both.",
+    datePublished: "2026-06-08",
+    dateModified: "2026-07-18",
     lead: "Two clocks govern federal IDR and neither one moves. A 30 business day open negotiation period must run before you can file. Once it closes, you have four business days to initiate.\n\nTracking both across a full claim volume, by hand, is the single hardest part of running this in house. Not the arguments. The dates.",
     sections: [
       {
-        heading: "Two deadlines govern everything.",
+        heading: "Which two deadlines govern everything?",
         paragraphs: [
           "The federal IDR process lives and dies on two deadlines. Understand them and the rest is paperwork.",
         ],
@@ -214,6 +222,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "What the qualifying payment amount is and why it runs low | Sydra",
     metaDescription:
       "How the qualifying payment amount is calculated, why it often sits below true market value, and what that means for the size of surgical IDR awards.",
+    datePublished: "2026-06-08",
+    dateModified: "2026-07-18",
     lead: "The qualifying payment amount is the plan's median contracted rate for a service in a geographic area. It is the number the plan opens with.\n\nIt is not a cap, and the plan calculates it. Those two facts together are why surgical awards land so far above it, and why treating the QPA as the ceiling means negotiating against yourself.",
     sections: [
       {
@@ -263,6 +273,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "Self funded versus fully insured: your IDR path | Sydra",
     metaDescription:
       "How to tell whether an out of network claim routes to federal IDR or a state process, and why plan type is the first thing your team should check.",
+    datePublished: "2026-06-15",
+    dateModified: "2026-07-18",
     lead: "Plan type decides where your dispute goes. Self funded employer plans are governed by federal law and route to federal IDR in every state. Fully insured plans may route to a state process where one exists.\n\nAbout 65 percent of covered workers are in self funded plans, so federal IDR is in play almost everywhere. Answer this question first, because the wrong forum burns the filing window.",
     sections: [
       {
@@ -312,6 +324,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "What changed in the May 2026 IDR operations rule | Sydra",
     metaDescription:
       "The 2026 federal IDR operations rule explained, and what it means for how surgical practices file, register, and track disputes under tighter standards.",
+    datePublished: "2026-06-11",
+    dateModified: "2026-07-18",
     lead: "The operations rule finalized on May 28, 2026 and effective June 11, 2026 changed how practices file, not what awards look like. Open negotiation moved into the federal portal, disputes now carry registration numbers, and a structured eligibility review happens earlier in the sequence.\n\nThe award math is unchanged. The filing mechanics are not, and most workflows still describe the old process.",
     sections: [
       {
@@ -356,6 +370,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "Why surgical IDR awards run so far above the QPA | Sydra",
     metaDescription:
       "The specialty data behind surgical IDR, why surgery and neurology win the largest multiples over the QPA, and why the lane stays uncrowded for now.",
+    datePublished: "2026-06-15",
+    dateModified: "2026-07-18",
     lead: "Surgery and neurology are roughly 9 percent of federal IDR cases and they recover the most per claim.\n\nThat is the whole story in one line. The specialties with the widest gap between a plan's qualifying payment amount and the market rate for a complex procedure are the specialties filing least.",
     sections: [
       {
@@ -401,6 +417,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "New York lets you revive claims going back three years | Sydra",
     metaDescription:
       "How the New York surprise billing process and its three year lookback let surgical practices recover commercial underpayments they already wrote off.",
+    datePublished: "2026-06-22",
+    dateModified: "2026-07-18",
     lead: "New York lets providers challenge commercial payments going back three years. Claims a New York practice wrote off as dead two years ago may still be recoverable.\n\nThe state process uses baseball arbitration and references the FAIR Health 80th percentile benchmark. It is the most valuable and most overlooked angle in the state, and it starts with pulling a list you already have.",
     sections: [
       {
@@ -446,6 +464,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "Do you need an attorney to file IDR? | Sydra",
     metaDescription:
       "Whether the federal IDR process requires a lawyer, what a typical contingency really costs you, and the rare cases when hiring counsel is actually worth it.",
+    datePublished: "2026-06-22",
+    dateModified: "2026-07-18",
     lead: "No. The statute does not require one, and it never has. Federal IDR is administrative, not litigation, and a billing team can prepare and submit packets directly.\n\nThere are cases where counsel earns its keep: a genuinely novel dispute, a contested eligibility question, a claim headed toward litigation. Routine surgical underpayments are not those cases.",
     sections: [
       {
@@ -495,6 +515,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "The 30 business day open negotiation period explained | Sydra",
     metaDescription:
       "What the open negotiation period is, how to document it correctly, and why it is a required gate before any out of network IDR filing can begin.",
+    datePublished: "2026-06-29",
+    dateModified: "2026-07-18",
     lead: "Open negotiation is a required 30 business day period to settle a payment dispute before IDR can begin. Under the 2026 operations rule it is initiated through the federal IDR portal rather than as a direct exchange with the payer, and the dispute carries a registration number from that point forward.\n\nMost disputes do not settle here. It cannot be skipped, and its closing date starts the four business day clock to initiate.",
     sections: [
       {
@@ -545,6 +567,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "Batching vs Filing Individually in Federal IDR | Sydra",
     metaDescription:
       "CMS now allows batching claims into one IDR submission to cut fees and speed resolution. Here is the real tradeoff on win rate, and why Sydra defaults to per submission filing with the client deciding.",
+    datePublished: "2026-06-11",
+    dateModified: "2026-08-11",
     lead: "The CMS final rule of May 28, 2026, effective June 11, 2026, cut the administrative fee from $115 to $15 per dispute and formally sanctioned batching. Both are real changes and they pull in different directions.\n\nBatching lowers your fee per claim. It also means claims win or lose together on one offer. Sydra defaults to one claim per CPT because that protects win rate for most cases, and your billing team decides per submission.",
     sections: [
       {
@@ -601,6 +625,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "How practices recover out of network underpayments | Sydra",
     metaDescription:
       "A practical overview of recovering underpaid out of network surgical claims through federal IDR instead of quietly absorbing the loss year after year.",
+    datePublished: "2026-07-01",
+    dateModified: "2026-07-18",
     lead: "When a health plan pays a surgical claim below market, most practices absorb it. The claim is winnable and the route exists; filing by hand is slow and the deadlines are easy to miss.\n\nThat is a time problem wearing the costume of a revenue problem, and it is the reason the money stays on the table.",
     sections: [
       {
@@ -651,6 +677,8 @@ export const GUIDES: Guide[] = [
     metaTitle: "Federal vs State IDR Jurisdiction | Sydra",
     metaDescription:
       "How plan funding and specified state law decide whether an out of network dispute files in federal IDR or a state process, with NY, NJ, NH, and other examples.",
+    datePublished: "2026-07-01",
+    dateModified: "2026-07-18",
     lead: "Two questions decide where a dispute gets filed. Is the health plan self funded or fully insured, and does the state have a specified law covering the service?\n\nGet either wrong and you can burn the filing window in the wrong forum, which is a loss with no appeal and no relationship to the merits.",
     sections: [
       {

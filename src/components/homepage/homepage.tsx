@@ -7,17 +7,18 @@ import { Paths } from "@/components/homepage/paths";
 import { Results } from "@/components/homepage/results";
 import { SharedLeadForm } from "@/components/landing/shared-lead-form";
 import { TrackingProvider } from "@/components/landing/tracking-provider";
+import { SydraFaq } from "@/components/sydra/faq";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { MagazineShell } from "@/components/ui/magazine-shell";
 import { EDITORIAL } from "@/lib/images";
 import type { CampaignTracking } from "@/lib/landing/tracking";
 import {
   breadcrumbJsonLd,
-  personJsonLd,
+  drAbrahamsPersonJsonLd,
+  faqPageJsonLd,
+  HOMEPAGE_FAQ_SCHEMA,
   serviceJsonLd,
   softwareApplicationJsonLd,
-  sydraOrganizationJsonLd,
-  sydraWebsiteJsonLd,
   webPageJsonLd,
 } from "@/lib/seo/json-ld";
 
@@ -29,7 +30,8 @@ type HomepageProps = {
 /**
  * Homepage. Section order is fixed: hero, the four paths, proof strip and thesis
  * line above the fold, then the four path detail sections, the case study data
- * with its disclaimer, and the closing CTA. Do not reorder or insert sections.
+ * with its disclaimer, the FAQ, and the closing CTA. Do not reorder those
+ * sections. FAQ sits after results so the fold budget is unchanged.
  *
  * The postcard landing (src/components/landing/postcard-landing.tsx) still backs
  * /r and /r/[state], which are unchanged. This is the homepage only.
@@ -37,9 +39,7 @@ type HomepageProps = {
 export function Homepage({ tracking, path }: HomepageProps) {
   const jsonLd = [
     breadcrumbJsonLd([{ name: "Home", path: "" }]),
-    sydraOrganizationJsonLd(),
     softwareApplicationJsonLd(),
-    sydraWebsiteJsonLd(),
     webPageJsonLd({
       path: "",
       name: "That payment is an opening offer.",
@@ -52,13 +52,8 @@ export function Homepage({ tracking, path }: HomepageProps) {
         "Software that prepares federal independent dispute resolution submissions for out of network surgical claims under the No Surprises Act in about five minutes per claim.",
       serviceType: "NSA IDR claim preparation",
     }),
-    personJsonLd({
-      name: "Dr. John Abrahams, MD",
-      jobTitle: "Founder, Sydra",
-      description: "Board certified neurosurgeon and founder of Sydra.",
-      isPhysician: true,
-      medicalSpecialty: "Neurosurgery",
-    }),
+    drAbrahamsPersonJsonLd(),
+    faqPageJsonLd(HOMEPAGE_FAQ_SCHEMA),
   ];
 
   return (
@@ -89,6 +84,7 @@ export function Homepage({ tracking, path }: HomepageProps) {
 
       <PathDetails />
       <Results />
+      <SydraFaq />
 
       {/*
         Spec 8 describes this section as three buttons. The form below is an

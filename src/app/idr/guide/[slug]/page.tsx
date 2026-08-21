@@ -94,8 +94,8 @@ export default async function GuidePage({ params }: PageProps) {
             path,
             headline: guide.title.replace(/\.$/, ""),
             description: guide.metaDescription,
-            datePublished: "2026-06-01",
-            dateModified: isBatchingGuide ? "2026-08-11" : "2026-07-18",
+            datePublished: guide.datePublished,
+            dateModified: guide.dateModified,
             reviewedBy: true,
           }),
           ...(guide.howToSteps

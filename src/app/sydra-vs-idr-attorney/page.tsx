@@ -8,6 +8,7 @@ import { SydraCtaBand } from "@/components/sydra/cta-band";
 import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { BREADCRUMBS, SydraPageShell } from "@/components/sydra/page-shell";
 import { ServiceCrossLinks } from "@/components/sydra/service-cross-links";
+import { ServiceFaqSection } from "@/components/sydra/service-faq-section";
 import { SourcesReferences } from "@/components/sydra/sources-references";
 import { CtaLink } from "@/components/ui/cta-link";
 import {
@@ -24,10 +25,11 @@ import {
   OPTIONS_COMPARED_SECTIONS,
   OPTIONS_COMPARISON_COLUMNS,
   OPTIONS_COMPARISON_ROWS,
+  SYDRA_VS_ATTORNEY_FAQS,
   SYDRA_VS_ATTORNEY_HERO,
 } from "@/lib/content/sydra-vs-attorney-page";
 import { EDITORIAL } from "@/lib/images";
-import { medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
+import { faqPageJsonLd, medicallyReviewedWebPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -44,6 +46,7 @@ function SydraVsAttorneyJsonLd() {
             name: "Federal IDR: Your Options Compared",
             description: PAGE_METADATA.sydraVsAttorney.description ?? "",
           }),
+          faqPageJsonLd([...SYDRA_VS_ATTORNEY_FAQS]),
         ]}
       />
     </>
@@ -149,6 +152,10 @@ export default function SydraVsAttorneyPage() {
               </section>
             ))}
           </div>
+        </Section>
+
+        <Section tone="white">
+          <ServiceFaqSection items={[...SYDRA_VS_ATTORNEY_FAQS]} />
         </Section>
 
         {/*

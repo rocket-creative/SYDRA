@@ -6,7 +6,9 @@ import "./globals.css";
 import { GoogleAdsTag } from "@/components/analytics/google-ads";
 import { UtmFirstTouch } from "@/components/analytics/utm-first-touch";
 import { WebVitalsReporter } from "@/components/analytics/web-vitals-reporter";
+import { PageJsonLd } from "@/components/sydra/page-json-ld";
 import { HOME_METADATA } from "@/lib/seo/metadata";
+import { sydraOrganizationJsonLd, sydraWebsiteJsonLd } from "@/lib/seo/json-ld";
 import { siteUrl } from "@/lib/site";
 import { PageTransition } from "@/components/motion/page-transition";
 
@@ -53,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
+        <PageJsonLd data={[sydraOrganizationJsonLd(), sydraWebsiteJsonLd()]} />
         <PageTransition>{children}</PageTransition>
         <UtmFirstTouch />
         <WebVitalsReporter />
