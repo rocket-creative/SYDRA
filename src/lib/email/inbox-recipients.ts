@@ -12,7 +12,7 @@ export function getLeadCopyRecipients(): string[] {
   return [LEAD_COPY_EMAIL];
 }
 
-/** BCC on every outbound Resend message. */
+/** BCC on team notifications only. Customer auto replies never copy this inbox. */
 export function leadCopyBcc(): { bcc: string[] } {
   return { bcc: getLeadCopyRecipients() };
 }

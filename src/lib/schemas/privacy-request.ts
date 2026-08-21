@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { formTrackingFields } from "@/lib/schemas/tracking";
+
 export const PRIVACY_REQUEST_TYPES = [
   "do_not_sell_or_share",
   "unsubscribe_marketing",
@@ -18,6 +20,7 @@ export const privacyRequestSchema = z.object({
   requestType: z.enum(PRIVACY_REQUEST_TYPES),
   message: z.union([z.string().trim().max(2000), z.literal("")]).optional(),
   website: z.union([z.string().trim().max(200), z.literal("")]).optional(),
+  ...formTrackingFields,
 });
 
 export type PrivacyRequest = z.infer<typeof privacyRequestSchema>;

@@ -1,7 +1,12 @@
 import { Resend } from "resend";
 
 import { getSalesEmail } from "@/lib/contact";
-import { getLeadFromEmail, leadCopyBcc, leadTeamNotifyAddresses } from "@/lib/email/inbox-recipients";
+import { attributionLines } from "@/lib/email/attribution";
+import {
+  getLeadCopyRecipients,
+  getLeadFromEmail,
+  getLeadInboxRecipients,
+} from "@/lib/email/inbox-recipients";
 import {
   PRIVACY_REQUEST_LABELS,
   type PrivacyRequest,
@@ -24,36 +29,50 @@ export async function sendPrivacyRequestEmail(
   const name = data.name?.trim() || "(not provided)";
   const message = data.message?.trim() || "(none)";
 
-  const text = [
-    "Privacy request",
-    "",
-    `Type: ${typeLabel}`,
-    `Email: ${data.email}`,
-    `Name: ${name}`,
-    "",
-    `Message: ${message}`,
-    "",
-    `Submitted: ${new Date().toISOString()}`,
-    "",
-    "Action required: remove this contact from marketing lists and Google Customer Match uploads, and honor any deletion request within applicable deadlines.",
-  ].join("\n");
+  const subject = `[SYDRA PRIVACY] ${typeLabel} · ${data.email}`;
+  const submittedAt = new Date().toISOString();
+  const buildText = (includeAttribution: boolean) =>
+    [
+      "Privacy request",
+      "",
+      `Type: ${typeLabel}`,
+      `Email: ${data.email}`,
+      `Name: ${name}`,
+      "",
+      `Message: ${message}`,
+      ...attributionLines(data, includeAttribution),
+      "",
+      `Submitted: ${submittedAt}`,
+      "",
+      "Action required: remove this contact from marketing lists and Google Customer Match uploads, and honor any deletion request within applicable deadlines.",
+    ].join("\n");
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    ...leadTeamNotifyAddresses(),
+    to: getLeadInboxRecipients(),
     replyTo: data.email,
-    subject: `[SYDRA PRIVACY] ${typeLabel} · ${data.email}`,
-    text,
+    subject,
+    text: buildText(false),
   });
 
   if (error) {
     return { ok: false, error: error.message };
   }
 
+  const { error: copyError } = await resend.emails.send({
+    from: getLeadFromEmail(),
+    to: getLeadCopyRecipients(),
+    replyTo: data.email,
+    subject,
+    text: buildText(true),
+  });
+  if (copyError) {
+    console.error("Privacy request ops copy failed:", copyError.message);
+  }
+
   const { error: confirmError } = await resend.emails.send({
     from: getLeadFromEmail(),
     to: [data.email],
-    ...leadCopyBcc(),
     replyTo: getSalesEmail(),
     subject: "We received your privacy request, Sydra",
     text: [

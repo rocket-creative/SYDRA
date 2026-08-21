@@ -8,9 +8,9 @@ import {
 import { nextStepOptionsPlain } from "@/lib/email/lead-thank-you";
 import {
   getFounderFromEmail,
+  getLeadCopyRecipients,
   getLeadFromEmail,
-  leadCopyBcc,
-  leadTeamNotifyAddresses,
+  getLeadInboxRecipients,
 } from "@/lib/email/inbox-recipients";
 import {
   BEST_TIME_LABELS,
@@ -43,10 +43,44 @@ function requestLabel(requestType: LeadRequestType): string {
   return requestType === "security" ? "Security / compliance request" : "Demo request";
 }
 
+/** Only the ops copy carries attribution. The sales notification omits it. */
+function attributionLines(data: DemoRequest, include: boolean): string[] {
+  if (!include) return [];
+  return [
+    "",
+    "Attribution",
+    `Route state: ${formatOptional(data.routeState)}`,
+    `Route code: ${formatOptional(data.routeCode)}`,
+    `UTM source: ${formatOptional(data.utmSource)}`,
+    `UTM medium: ${formatOptional(data.utmMedium)}`,
+    `UTM campaign: ${formatOptional(data.utmCampaign)}`,
+    `UTM content: ${formatOptional(data.utmContent)}`,
+    `Landed at: ${formatOptional(data.landedAt)}`,
+  ];
+}
+
+function attributionRows(
+  data: DemoRequest,
+  include: boolean,
+  row: (label: string, value: string) => string,
+): string {
+  if (!include) return "";
+  return [
+    row("Route state", formatOptional(data.routeState)),
+    row("Route code", formatOptional(data.routeCode)),
+    row("UTM source", formatOptional(data.utmSource)),
+    row("UTM medium", formatOptional(data.utmMedium)),
+    row("UTM campaign", formatOptional(data.utmCampaign)),
+    row("UTM content", formatOptional(data.utmContent)),
+    row("Landed at", formatOptional(data.landedAt)),
+  ].join("");
+}
+
 function buildPlainBody(
   data: DemoRequest,
   score: LeadScoreResult,
   requestType: LeadRequestType,
+  includeAttribution: boolean,
 ): string {
   const lines = [
     `Type: ${requestLabel(requestType)}`,
@@ -74,14 +108,7 @@ function buildPlainBody(
     "",
     "Score breakdown",
     ...score.breakdown.map((line) => `  ${line}`),
-    "",
-    "Attribution",
-    `Route state: ${formatOptional(data.routeState)}`,
-    `Route code: ${formatOptional(data.routeCode)}`,
-    `UTM source: ${formatOptional(data.utmSource)}`,
-    `UTM medium: ${formatOptional(data.utmMedium)}`,
-    `UTM campaign: ${formatOptional(data.utmCampaign)}`,
-    `UTM content: ${formatOptional(data.utmContent)}`,
+    ...attributionLines(data, includeAttribution),
     "",
     `Submitted: ${new Date().toISOString()}`,
   ];
@@ -92,6 +119,7 @@ function buildHtmlBody(
   data: DemoRequest,
   score: LeadScoreResult,
   requestType: LeadRequestType,
+  includeAttribution: boolean,
 ): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:6px 12px 6px 0;color:#64748b;font-size:14px;vertical-align:top">${escapeHtml(label)}</td><td style="padding:6px 0;font-size:14px;color:#1A2B48">${escapeHtml(value)}</td></tr>`;
@@ -107,7 +135,7 @@ function buildHtmlBody(
 
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong style="color:${priorityColor}">[SYDRA ${typePrefix}]</strong> ${escapeHtml(requestLabel(requestType))} · ${escapeHtml(score.subjectSummary)}</p>
-<table style="border-collapse:collapse;width:100%">${row("Name", data.name)}${row("Email", data.email)}${row("Phone", formatOptional(data.phone))}${row("Best time to reach", BEST_TIME_LABELS[data.bestTimeToReach])}${row("Practice", data.practiceName)}${row("Specialty", SPECIALTY_LABELS[data.specialty])}${row("State", data.state)}${row("Disputes / month", DISPUTES_LABELS[data.disputesPerMonth])}${row("IDR approach", IDR_APPROACH_LABELS[data.idrApproach])}${row("Role", ROLE_LABELS[data.role])}${row("Timeline", TIMELINE_LABELS[data.timeline])}${row("Tier interest", data.tierInterest ? TIER_LABELS[data.tierInterest] : "n/a")}${row("Message", formatOptional(data.message))}${row("EOB file", formatOptional(data.eobFileName))}${row("Route state", formatOptional(data.routeState))}${row("Route code", formatOptional(data.routeCode))}${row("UTM source", formatOptional(data.utmSource))}${row("UTM medium", formatOptional(data.utmMedium))}${row("UTM campaign", formatOptional(data.utmCampaign))}${row("UTM content", formatOptional(data.utmContent))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Name", data.name)}${row("Email", data.email)}${row("Phone", formatOptional(data.phone))}${row("Best time to reach", BEST_TIME_LABELS[data.bestTimeToReach])}${row("Practice", data.practiceName)}${row("Specialty", SPECIALTY_LABELS[data.specialty])}${row("State", data.state)}${row("Disputes / month", DISPUTES_LABELS[data.disputesPerMonth])}${row("IDR approach", IDR_APPROACH_LABELS[data.idrApproach])}${row("Role", ROLE_LABELS[data.role])}${row("Timeline", TIMELINE_LABELS[data.timeline])}${row("Tier interest", data.tierInterest ? TIER_LABELS[data.tierInterest] : "n/a")}${row("Message", formatOptional(data.message))}${row("EOB file", formatOptional(data.eobFileName))}${attributionRows(data, includeAttribution, row)}</table>
 <p style="margin:16px 0 8px;font-size:13px;color:#64748b"><strong>Score:</strong> ${score.score} points</p>
 <ul style="margin:0 0 16px;padding-left:20px;font-size:13px;color:#64748b">${score.breakdown.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
@@ -154,6 +182,7 @@ export function demoLeadFallbackFields(
     utmMedium: data.utmMedium,
     utmCampaign: data.utmCampaign,
     utmContent: data.utmContent,
+    landedAt: data.landedAt,
   };
 }
 
@@ -173,22 +202,33 @@ export async function sendDemoLeadEmail(
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    ...leadTeamNotifyAddresses(),
+    to: getLeadInboxRecipients(),
     replyTo: data.email,
     subject,
-    text: buildPlainBody(data, score, requestType),
-    html: buildHtmlBody(data, score, requestType),
+    text: buildPlainBody(data, score, requestType, false),
+    html: buildHtmlBody(data, score, requestType, false),
   });
 
   if (error) {
     return { ok: false, error: error.message };
   }
 
+  const { error: copyError } = await resend.emails.send({
+    from: getLeadFromEmail(),
+    to: getLeadCopyRecipients(),
+    replyTo: data.email,
+    subject,
+    text: buildPlainBody(data, score, requestType, true),
+    html: buildHtmlBody(data, score, requestType, true),
+  });
+  if (copyError) {
+    console.error("Demo lead ops copy failed:", copyError.message);
+  }
+
   if (requestType === "demo") {
     const { error: confirmError } = await resend.emails.send({
       from: getFounderFromEmail(),
       to: [data.email],
-      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: "Your Sydra demo, and the one thing to have ready",
       text: buildFounderAutoReplyPlain(data.name, {
@@ -202,7 +242,6 @@ export async function sendDemoLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getLeadFromEmail(),
       to: [data.email],
-      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: "We received your Sydra security request",
       text: buildSecurityConfirmPlain(data.name),

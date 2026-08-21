@@ -8,7 +8,6 @@ import {
 import {
   getFounderFromEmail,
   getLeadFromEmail,
-  leadCopyBcc,
   leadTeamNotifyAddresses,
 } from "@/lib/email/inbox-recipients";
 
@@ -80,7 +79,6 @@ export async function deliverLead(lead: DeliverLeadInput): Promise<DeliverLeadRe
   const { error: confirmError } = await resend.emails.send({
     from: getFounderFromEmail(),
     to: [lead.email],
-    ...leadCopyBcc(),
     replyTo: salesAddress,
     subject: CLAIM_REVIEW_AUTO_REPLY_SUBJECT,
     text: buildClaimReviewAutoReplyPlain(lead.practiceName),

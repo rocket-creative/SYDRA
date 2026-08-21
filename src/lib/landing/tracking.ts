@@ -80,6 +80,16 @@ export function serializeCampaignCookie(data: CampaignTracking): string {
   return JSON.stringify(data);
 }
 
+/** Client side read of the campaign cookie. Null on the server. */
+export function readCampaignCookie(): CampaignTracking | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${CAMPAIGN_COOKIE_NAME}=`));
+  if (!match) return null;
+  return parseCampaignCookie(match.slice(CAMPAIGN_COOKIE_NAME.length + 1));
+}
+
 export function parseCampaignCookie(raw: string | undefined): CampaignTracking | null {
   if (!raw) return null;
   try {

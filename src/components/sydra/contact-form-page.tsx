@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form-field";
 import { CONSENT_TEXT_VERSION } from "@/lib/consent/marketing";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
+import { collectFormTracking } from "@/lib/landing/form-tracking";
 import {
   CONTACT_INTENT_OPTIONS,
   CONTACT_INTENT_LABELS,
@@ -43,6 +44,7 @@ export function ContactForm() {
       website: formData.get("website") ?? "",
       marketingConsent: false,
       consentTextVersion: CONSENT_TEXT_VERSION,
+      ...collectFormTracking(),
     };
 
     try {

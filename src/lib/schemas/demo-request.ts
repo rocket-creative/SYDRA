@@ -126,6 +126,7 @@ export const demoRequestSchema = z.object({
   utmContent: z.union([z.string().trim().max(200), z.literal("")]).optional(),
   routeState: z.union([z.string().trim().max(10), z.literal("")]).optional(),
   routeCode: z.union([z.string().trim().max(20), z.literal("")]).optional(),
+  landedAt: z.union([z.string().trim().max(50), z.literal("")]).optional(),
   website: z.union([z.string().trim().max(200), z.literal("")]).optional(),
 });
 

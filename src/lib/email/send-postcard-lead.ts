@@ -7,9 +7,9 @@ import {
 } from "@/lib/email/founder-auto-reply";
 import {
   getFounderFromEmail,
+  getLeadCopyRecipients,
   getLeadFromEmail,
-  leadCopyBcc,
-  leadTeamNotifyAddresses,
+  getLeadInboxRecipients,
 } from "@/lib/email/inbox-recipients";
 import {
   LEAD_THANK_YOU_SUBJECT,
@@ -81,15 +81,10 @@ function consentLines(data: PostcardLeadRequest): string[] {
   ];
 }
 
-function buildPartialPlainBody(data: PostcardPartialLead): string {
+/** Only the ops copy carries attribution. The sales notification omits it. */
+function attributionLines(data: PostcardLeadRequest, include: boolean): string[] {
+  if (!include) return [];
   return [
-    "Type: Postcard landing partial lead",
-    "",
-    "Qualifiers",
-    `Email: ${data.email}`,
-    `State: ${formatOptional(data.state)}`,
-    `Monthly OON volume: ${formatVolume(data.disputesPerMonth)}`,
-    ...consentLines(data),
     "",
     "Attribution",
     `Route state: ${routeState(data)}`,
@@ -99,13 +94,43 @@ function buildPartialPlainBody(data: PostcardPartialLead): string {
     `UTM campaign: ${formatOptional(data.utm_campaign)}`,
     `UTM content: ${formatOptional(data.utm_content)}`,
     `Landed at: ${formatOptional(data.landed_at)}`,
+  ];
+}
+
+function attributionRows(
+  data: PostcardLeadRequest,
+  include: boolean,
+  row: (label: string, value: string) => string,
+): string {
+  if (!include) return "";
+  return [
+    row("Route state", routeState(data)),
+    row("Route code", formatOptional(data.route_code)),
+    row("UTM source", formatOptional(data.utm_source)),
+    row("UTM medium", formatOptional(data.utm_medium)),
+    row("UTM campaign", formatOptional(data.utm_campaign)),
+    row("UTM content", formatOptional(data.utm_content)),
+    row("Landed at", formatOptional(data.landed_at)),
+  ].join("");
+}
+
+function buildPartialPlainBody(data: PostcardPartialLead, includeAttribution: boolean): string {
+  return [
+    "Type: Postcard landing partial lead",
+    "",
+    "Qualifiers",
+    `Email: ${data.email}`,
+    `State: ${formatOptional(data.state)}`,
+    `Monthly OON volume: ${formatVolume(data.disputesPerMonth)}`,
+    ...consentLines(data),
+    ...attributionLines(data, includeAttribution),
     ...calculatorBlock(data),
     "",
     `Submitted: ${new Date().toISOString()}`,
   ].join("\n");
 }
 
-function buildFullPlainBody(data: PostcardLead): string {
+function buildFullPlainBody(data: PostcardLead, includeAttribution: boolean): string {
   return [
     "Type: Postcard landing lead",
     // Top of the email: which of the four paths they picked is what decides
@@ -123,15 +148,7 @@ function buildFullPlainBody(data: PostcardLead): string {
     `Monthly OON volume: ${DISPUTES_LABELS[data.disputesPerMonth]}`,
     `Product interest: ${LANDING_PRODUCT_LABELS[data.productInterest]}`,
     ...consentLines(data),
-    "",
-    "Attribution",
-    `Route state: ${routeState(data)}`,
-    `Route code: ${formatOptional(data.route_code)}`,
-    `UTM source: ${formatOptional(data.utm_source)}`,
-    `UTM medium: ${formatOptional(data.utm_medium)}`,
-    `UTM campaign: ${formatOptional(data.utm_campaign)}`,
-    `UTM content: ${formatOptional(data.utm_content)}`,
-    `Landed at: ${formatOptional(data.landed_at)}`,
+    ...attributionLines(data, includeAttribution),
     ...calculatorBlock(data),
     "",
     `Submitted: ${new Date().toISOString()}`,
@@ -140,18 +157,18 @@ function buildFullPlainBody(data: PostcardLead): string {
     .join("\n");
 }
 
-function buildPartialHtmlBody(data: PostcardPartialLead): string {
+function buildPartialHtmlBody(data: PostcardPartialLead, includeAttribution: boolean): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:6px 12px 6px 0;color:#64748b;font-size:14px;vertical-align:top">${escapeHtml(label)}</td><td style="padding:6px 0;font-size:14px;color:#1A2B48">${escapeHtml(value)}</td></tr>`;
 
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong>[SYDRA POSTCARD]</strong> Partial lead</p>
-<table style="border-collapse:collapse;width:100%">${row("Email", data.email)}${row("State", formatOptional(data.state))}${row("Monthly OON volume", formatVolume(data.disputesPerMonth))}${row("Marketing + Customer Match", data.marketingConsent ? "yes" : "no")}${row("Consent text version", formatOptional(data.consentTextVersion))}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Email", data.email)}${row("State", formatOptional(data.state))}${row("Monthly OON volume", formatVolume(data.disputesPerMonth))}${row("Marketing + Customer Match", data.marketingConsent ? "yes" : "no")}${row("Consent text version", formatOptional(data.consentTextVersion))}${attributionRows(data, includeAttribution, row)}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
 }
 
-function buildFullHtmlBody(data: PostcardLead): string {
+function buildFullHtmlBody(data: PostcardLead, includeAttribution: boolean): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:6px 12px 6px 0;color:#64748b;font-size:14px;vertical-align:top">${escapeHtml(label)}</td><td style="padding:6px 0;font-size:14px;color:#1A2B48">${escapeHtml(value)}</td></tr>`;
 
@@ -162,7 +179,7 @@ function buildFullHtmlBody(data: PostcardLead): string {
   return `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;line-height:1.5;color:#1A2B48;max-width:560px">
 <p style="margin:0 0 16px"><strong>[SYDRA POSTCARD]</strong> New landing page lead · ${escapeHtml(data.practiceName)}</p>
 ${upgrade}
-<table style="border-collapse:collapse;width:100%">${row("Where they sit", formatSegment(data.segment))}${row("Practice", data.practiceName)}${row("Name", data.name)}${row("Role", LANDING_ROLE_LABELS[data.role])}${row("Email", data.email)}${row("Phone", data.phone)}${row("State", data.state)}${row("Monthly OON volume", DISPUTES_LABELS[data.disputesPerMonth])}${row("Product interest", LANDING_PRODUCT_LABELS[data.productInterest])}${row("Marketing + Customer Match", data.marketingConsent ? "yes" : "no")}${row("Consent text version", formatOptional(data.consentTextVersion))}${row("Route state", routeState(data))}${row("Route code", formatOptional(data.route_code))}${row("UTM source", formatOptional(data.utm_source))}${row("UTM medium", formatOptional(data.utm_medium))}${row("UTM campaign", formatOptional(data.utm_campaign))}${row("UTM content", formatOptional(data.utm_content))}${row("Landed at", formatOptional(data.landed_at))}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
+<table style="border-collapse:collapse;width:100%">${row("Where they sit", formatSegment(data.segment))}${row("Practice", data.practiceName)}${row("Name", data.name)}${row("Role", LANDING_ROLE_LABELS[data.role])}${row("Email", data.email)}${row("Phone", data.phone)}${row("State", data.state)}${row("Monthly OON volume", DISPUTES_LABELS[data.disputesPerMonth])}${row("Product interest", LANDING_PRODUCT_LABELS[data.productInterest])}${row("Marketing + Customer Match", data.marketingConsent ? "yes" : "no")}${row("Consent text version", formatOptional(data.consentTextVersion))}${attributionRows(data, includeAttribution, row)}${row("Calculator claims/mo", formatOptional(data.calculator_claims_per_month))}${row("Calculator avg amount", formatOptional(data.calculator_avg_disputed_amount))}${row("Calculator annual estimate", formatOptional(data.calculator_annual_estimate))}</table>
 <p style="font-size:12px;color:#94a3b8">Submitted ${escapeHtml(new Date().toISOString())}.</p>
 </body></html>`;
 }
@@ -190,15 +207,21 @@ export async function sendPostcardLeadEmail(
   const subject = postcardLeadSubject(data);
   const isPartial = data.leadKind === "partial";
   const text = isPartial
-    ? buildPartialPlainBody(data)
-    : buildFullPlainBody({ ...data, leadKind: "full" });
+    ? buildPartialPlainBody(data, false)
+    : buildFullPlainBody({ ...data, leadKind: "full" }, false);
   const html = isPartial
-    ? buildPartialHtmlBody(data)
-    : buildFullHtmlBody({ ...data, leadKind: "full" });
+    ? buildPartialHtmlBody(data, false)
+    : buildFullHtmlBody({ ...data, leadKind: "full" }, false);
+  const copyText = isPartial
+    ? buildPartialPlainBody(data, true)
+    : buildFullPlainBody({ ...data, leadKind: "full" }, true);
+  const copyHtml = isPartial
+    ? buildPartialHtmlBody(data, true)
+    : buildFullHtmlBody({ ...data, leadKind: "full" }, true);
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    ...leadTeamNotifyAddresses(),
+    to: getLeadInboxRecipients(),
     replyTo: data.email,
     subject,
     text,
@@ -209,11 +232,22 @@ export async function sendPostcardLeadEmail(
     return { ok: false, error: error.message };
   }
 
+  const { error: copyError } = await resend.emails.send({
+    from: getLeadFromEmail(),
+    to: getLeadCopyRecipients(),
+    replyTo: data.email,
+    subject,
+    text: copyText,
+    html: copyHtml,
+  });
+  if (copyError) {
+    console.error("Postcard lead ops copy failed:", copyError.message);
+  }
+
   if (isPartial) {
     const { error: thankYouError } = await resend.emails.send({
       from: getLeadFromEmail(),
       to: [data.email],
-      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: LEAD_THANK_YOU_SUBJECT,
       text: buildLeadThankYouPlain(),
@@ -228,7 +262,6 @@ export async function sendPostcardLeadEmail(
     const { error: confirmError } = await resend.emails.send({
       from: getFounderFromEmail(),
       to: [data.email],
-      ...leadCopyBcc(),
       replyTo: getSalesEmail(),
       subject: "Your Sydra demo, and the one thing to have ready",
       text: buildFounderAutoReplyPlain(data.name, {

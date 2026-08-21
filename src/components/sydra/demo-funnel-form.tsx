@@ -14,6 +14,7 @@ import {
 import { US_STATES } from "@/lib/constants/us-states";
 import { isValidTierId } from "@/lib/content/tiers";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
+import { collectFormTracking } from "@/lib/landing/form-tracking";
 import { mergeUtmForSubmit, persistUtmFirstTouch } from "@/lib/landing/utm-session";
 import {
   DISPUTES_PER_MONTH_OPTIONS,
@@ -146,6 +147,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
         utmContent: utm.utm_content,
         routeState: entityState,
         routeCode: entityCode,
+        landedAt: collectFormTracking().landed_at,
         website: formData.get("website") ?? "",
         request_type: requestType,
       };

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { CONSENT_TEXT_VERSION, parseMarketingConsent } from "@/lib/consent/marketing";
+import { formTrackingFields } from "@/lib/schemas/tracking";
 
 export const CONTACT_INTENT_OPTIONS = [
   "schedule_demo",
@@ -36,6 +37,7 @@ export const contactRequestSchema = z.object({
     .max(40)
     .optional()
     .transform((value) => (value && value.length > 0 ? value : CONSENT_TEXT_VERSION)),
+  ...formTrackingFields,
 });
 
 export type ContactRequest = z.infer<typeof contactRequestSchema>;

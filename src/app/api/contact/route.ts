@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { trackingFallbackFields } from "@/lib/email/attribution";
 import { sendContactEmail } from "@/lib/email/send-contact-email";
 import { logLeadFallback } from "@/lib/leads/fallback-log";
 import { CONTACT_INTENT_LABELS, contactRequestSchema } from "@/lib/schemas/contact-request";
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
       message: data.message ?? "",
       marketingConsent: data.marketingConsent,
       consentTextVersion: data.consentTextVersion,
+      ...trackingFallbackFields(data),
     },
     submittedAt,
   });

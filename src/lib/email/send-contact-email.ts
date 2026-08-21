@@ -1,7 +1,12 @@
 import { Resend } from "resend";
 
 import { getSalesEmail } from "@/lib/contact";
-import { getLeadFromEmail, leadCopyBcc, leadTeamNotifyAddresses } from "@/lib/email/inbox-recipients";
+import { attributionLines } from "@/lib/email/attribution";
+import {
+  getLeadCopyRecipients,
+  getLeadFromEmail,
+  getLeadInboxRecipients,
+} from "@/lib/email/inbox-recipients";
 import { nextStepOptionsPlain } from "@/lib/email/lead-thank-you";
 import {
   CONTACT_INTENT_LABELS,
@@ -21,39 +26,53 @@ export async function sendContactEmail(data: ContactRequest): Promise<SendContac
   const resend = new Resend(apiKey);
   const intentLabel = CONTACT_INTENT_LABELS[data.intent];
   const message = data.message?.trim() || "(none)";
-  const text = [
-    "Contact form submission",
-    "",
-    `Name: ${data.name}`,
-    `Email: ${data.email}`,
-    `Phone: ${data.phone}`,
-    `Practice: ${data.practiceName}`,
-    `Intent: ${intentLabel}`,
-    "",
-    `Message: ${message}`,
-    "",
-    `Marketing + Customer Match: ${data.marketingConsent ? "yes" : "no"}`,
-    `Consent text version: ${data.consentTextVersion || "n/a"}`,
-    "",
-    `Submitted: ${new Date().toISOString()}`,
-  ].join("\n");
+  const subject = `[SYDRA CONTACT] ${intentLabel} · ${data.practiceName}`;
+  const submittedAt = new Date().toISOString();
+  const buildText = (includeAttribution: boolean) =>
+    [
+      "Contact form submission",
+      "",
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      `Phone: ${data.phone}`,
+      `Practice: ${data.practiceName}`,
+      `Intent: ${intentLabel}`,
+      "",
+      `Message: ${message}`,
+      "",
+      `Marketing + Customer Match: ${data.marketingConsent ? "yes" : "no"}`,
+      `Consent text version: ${data.consentTextVersion || "n/a"}`,
+      ...attributionLines(data, includeAttribution),
+      "",
+      `Submitted: ${submittedAt}`,
+    ].join("\n");
 
   const { data: result, error } = await resend.emails.send({
     from: getLeadFromEmail(),
-    ...leadTeamNotifyAddresses(),
+    to: getLeadInboxRecipients(),
     replyTo: data.email,
-    subject: `[SYDRA CONTACT] ${intentLabel} · ${data.practiceName}`,
-    text,
+    subject,
+    text: buildText(false),
   });
 
   if (error) {
     return { ok: false, error: error.message };
   }
 
+  const { error: copyError } = await resend.emails.send({
+    from: getLeadFromEmail(),
+    to: getLeadCopyRecipients(),
+    replyTo: data.email,
+    subject,
+    text: buildText(true),
+  });
+  if (copyError) {
+    console.error("Contact ops copy failed:", copyError.message);
+  }
+
   const { error: confirmError } = await resend.emails.send({
     from: getLeadFromEmail(),
     to: [data.email],
-    ...leadCopyBcc(),
     replyTo: getSalesEmail(),
     subject: "We received your message, Sydra",
     text: [

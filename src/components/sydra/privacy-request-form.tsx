@@ -9,6 +9,7 @@ import {
   FormField,
 } from "@/components/ui/form-field";
 import { getSalesEmail, salesMailtoHref } from "@/lib/contact";
+import { collectFormTracking } from "@/lib/landing/form-tracking";
 import {
   PRIVACY_REQUEST_LABELS,
   PRIVACY_REQUEST_TYPES,
@@ -29,6 +30,7 @@ export function PrivacyRequestForm() {
       requestType: formData.get("requestType"),
       message: formData.get("message") ?? "",
       website: formData.get("website") ?? "",
+      ...collectFormTracking(),
     };
 
     try {
