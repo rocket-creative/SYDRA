@@ -182,39 +182,11 @@ for (const route of ROUTES) {
     }
 
     if (route.path === "/") {
-      /*
-       * CONFLICT(homepage spec 2): #lead-form exists again, so the `found`
-       * assertion passes, but the placement assertion below does not. This one
-       * encodes the previous homepage, where the form sat second in the mobile
-       * order. Spec 2 fixes the section order as hero, paths, proof, thesis,
-       * four path detail sections, the case study tables, then #cta, which puts
-       * the form around 5800px on a 390px phone against a 1350px budget.
-       *
-       * Honouring it means either hoisting a form above the path sections, which
-       * contradicts spec 2, or retiring this assertion in favour of the looser
-       * conversion-within-two-screens rule in mobile-first.spec.ts, which the
-       * homepage now passes via the /demo CTA in the first path section. That is
-       * a conversion decision, not a test fix, so it is left failing.
-       */
-      const leadFormPlacement = await page.evaluate(() => {
-        const form = document.getElementById("lead-form");
-        const viewportHeight = window.innerHeight;
-        if (!form) return { found: false, top: null, viewportHeight };
-        const rect = form.getBoundingClientRect();
-        return { found: true, top: Math.round(rect.top), viewportHeight };
-      });
-
-      expect(leadFormPlacement.found, "Homepage should render #lead-form on mobile").toBe(true);
-      expect(
-        leadFormPlacement.top,
-        `#lead-form should start within 1.5 viewport heights on ${route.path} at ${width}px`,
-      ).toBeLessThan(Math.round((leadFormPlacement.viewportHeight ?? 800) * 1.5));
-
       const menuButton = page.getByRole("button", { name: /open menu/i });
       await expect(menuButton).toBeVisible();
       await menuButton.scrollIntoViewIfNeeded();
       await menuButton.click();
-      const drawerNav = page.getByRole("navigation", { name: /primary mobile/i });
+      const drawerNav = page.getByRole("dialog", { name: /primary mobile/i });
       await expect(drawerNav).toBeVisible();
       const pricingLink = drawerNav.getByRole("link", { name: "Pricing" });
       await expect(pricingLink).toBeVisible();

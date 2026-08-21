@@ -37,10 +37,10 @@ export function MagazineShell({
   return (
     <div className="min-h-dvh bg-[var(--background)] font-sans text-[var(--color-text)]">
       <SkipLink />
-      <div className="mx-auto min-h-dvh max-w-[1440px] bg-white">
+      <div className={`mx-auto min-h-dvh max-w-[1440px] bg-white ${bottomSpacing}`.trim()}>
         <SydraHeader borderless={headerBorderless} variant={headerVariant} />
         <main
-          className={`${bottomSpacing} ${mainClassName}`.trim()}
+          className={mainClassName.trim()}
           id="main-content"
           tabIndex={-1}
         >

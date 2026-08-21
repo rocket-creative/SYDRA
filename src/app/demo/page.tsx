@@ -163,7 +163,7 @@ export default function DemoPage() {
                 <div className="mt-4 divide-y divide-[var(--color-rule)] border-y border-rule">
                   {preBookingFaq.map((item) => (
                     <details key={item.q} className="group py-0">
-                      <summary className="cursor-pointer list-none py-4 text-sm font-normal text-brand [&::-webkit-details-marker]:hidden">
+                      <summary className="cursor-pointer list-none py-6 text-base font-normal text-brand [&::-webkit-details-marker]:hidden">
                         {item.q}
                       </summary>
                       <p className={`${textStyles.body} border-t border-rule pb-4 pt-2 text-sm`}>

@@ -55,7 +55,7 @@ export default async function AdminLeadsPage() {
         ) : null}
 
         <details className="mt-12 border-t border-rule pt-8">
-          <summary className="cursor-pointer text-sm font-medium text-brand">
+          <summary className="flex min-h-12 cursor-pointer items-center text-sm font-medium text-brand">
             Full submission log ({rows.length})
           </summary>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-body">
@@ -90,7 +90,7 @@ export default async function AdminLeadsPage() {
                   {row.exported_at ? " · exported" : ""}
                 </p>
                 <details className="mt-3">
-                  <summary className="cursor-pointer text-xs uppercase tracking-[0.08em] text-body/70">
+                  <summary className="flex min-h-12 cursor-pointer items-center text-xs uppercase tracking-[0.08em] text-body/70">
                     Fields
                   </summary>
                   <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">

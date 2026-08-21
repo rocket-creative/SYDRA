@@ -8,28 +8,46 @@ type BreadcrumbNavProps = {
   items: readonly Crumb[];
 };
 
+const crumbLinkClass = `${textStyles.textLink} inline-flex min-h-12 min-w-0 items-center truncate font-normal`;
+
+function CrumbSeparator() {
+  return (
+    <span aria-hidden className="text-body/40">
+      /
+    </span>
+  );
+}
+
 export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
+  const truncated = items.length > 3;
+  const displayItems = truncated
+    ? ([items[0], { name: "…", path: "", ellipsis: true as const }, items[items.length - 1]] as const)
+    : items;
+
   return (
     <nav aria-label="Breadcrumb" className="mb-8">
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-body">
-        {items.map((item, index) => {
-          const isLast = index === items.length - 1;
+        {displayItems.map((item, index) => {
+          const isEllipsis = "ellipsis" in item && item.ellipsis;
+          const isLast = index === displayItems.length - 1;
+          const key = isEllipsis ? "ellipsis" : item.path || "home";
+
           return (
-            <li key={item.path || "home"} className="flex items-center gap-2">
-              {index > 0 ? (
+            <li key={key} className="flex min-w-0 items-center gap-2">
+              {index > 0 ? <CrumbSeparator /> : null}
+              {isEllipsis ? (
                 <span aria-hidden className="text-body/40">
-                  /
+                  …
                 </span>
-              ) : null}
-              {isLast ? (
+              ) : isLast ? (
                 <span
                   aria-current="page"
-                  className="line-clamp-2 min-w-0 font-medium text-brand"
+                  className="line-clamp-2 min-w-0 truncate font-medium text-brand"
                 >
                   {item.name}
                 </span>
               ) : (
-                <Link className={`${textStyles.textLink} font-normal`} href={item.path || "/"}>
+                <Link className={crumbLinkClass} href={item.path || "/"}>
                   {item.name}
                 </Link>
               )}

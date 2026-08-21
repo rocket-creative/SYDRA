@@ -3,10 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
-/**
- * Subtle opacity + upward fade on route change.
- * Wraps page content — not the nav.
- */
+/** Subtle opacity fade on route change. Wraps page content — not the nav. */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
@@ -22,11 +19,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
     <div
       style={{
         opacity: visible ? 1 : 0,
-        // Must settle on "none": any transform here would make this div the
-        // containing block for fixed descendants, unpinning the sticky CTA bars.
-        transform: visible ? "none" : "translateY(6px)",
-        transition:
-          "opacity 400ms cubic-bezier(0.16,1,0.3,1), transform 400ms cubic-bezier(0.16,1,0.3,1)",
+        transition: "opacity 400ms cubic-bezier(0.16,1,0.3,1)",
       }}
     >
       {children}

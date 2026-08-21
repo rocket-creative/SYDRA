@@ -150,7 +150,7 @@ const COPY_BY_INTENT: Record<
 };
 
 function RiskStack({ text }: { text: string }) {
-  return <p className="text-xs leading-relaxed text-body/80">{text}</p>;
+  return <p className="text-xs leading-relaxed text-body">{text}</p>;
 }
 
 function resolvePrefillState(

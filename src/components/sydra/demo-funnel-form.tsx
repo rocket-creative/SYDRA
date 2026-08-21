@@ -373,7 +373,7 @@ export function DemoFunnelForm({ intent = "demo" }: DemoFunnelFormProps) {
           >
             <input
               accept=".pdf,image/*"
-              className="mt-2 block w-full text-sm text-body file:mr-4 file:border file:border-rule file:bg-transparent file:px-4 file:py-2 file:text-[13px] file:uppercase file:tracking-[0.08em] file:text-brand hover:file:border-body/40"
+              className="mt-2 block w-full text-base text-body file:mr-4 file:min-h-11 file:border file:border-rule file:bg-transparent file:px-4 file:py-2 file:text-[13px] file:uppercase file:tracking-[0.08em] file:text-brand hover:file:border-body/40"
               id="eobFile"
               name="eobFile"
               type="file"

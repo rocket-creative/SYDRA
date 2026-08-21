@@ -26,7 +26,7 @@ export function Paths() {
              * above the fold is the thesis line. Sentence case is preserved rather
              * than styled with .type-caption, which would uppercase approved copy.
              */}
-            <p className="text-[14px] font-semibold leading-snug text-body md:text-[13px]">
+            <p className="text-[13px] font-semibold leading-snug text-body md:text-[14px]">
               {group.label}
             </p>
             <div className="mt-2 grid gap-3">

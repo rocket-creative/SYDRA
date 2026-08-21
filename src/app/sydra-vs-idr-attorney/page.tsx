@@ -17,6 +17,7 @@ import {
   dataTableHeadRow,
   dataTableTd,
   dataTableTh,
+  TableScroller,
 } from "@/components/ui/data-table";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { Section } from "@/components/ui/section";
@@ -73,34 +74,36 @@ function OptionsComparisonTable() {
       </div>
 
       <div className="hidden md:block">
-        <table className={dataTableClass}>
-          <thead>
-            <tr className={dataTableHeadRow}>
-              <th className={dataTableTh} scope="col">
-                <span className="sr-only">Comparison</span>
-              </th>
-              {OPTIONS_COMPARISON_COLUMNS.map((column) => (
-                <th className={dataTableTh} key={column} scope="col">
-                  {column}
+        <TableScroller labelledBy="heading-sydra-vs-attorney">
+          <table className={dataTableClass}>
+            <thead>
+              <tr className={dataTableHeadRow}>
+                <th className={dataTableTh} scope="col">
+                  <span className="sr-only">Comparison</span>
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {OPTIONS_COMPARISON_ROWS.map((row) => (
-              <tr className={dataTableBodyRow} key={row.feature}>
-                <th className={`${dataTableTd} font-medium text-brand`} scope="row">
-                  {row.feature}
-                </th>
-                {row.values.map((value, index) => (
-                  <td className={dataTableTd} key={`${row.feature}-${index}`}>
-                    {value}
-                  </td>
+                {OPTIONS_COMPARISON_COLUMNS.map((column) => (
+                  <th className={dataTableTh} key={column} scope="col">
+                    {column}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {OPTIONS_COMPARISON_ROWS.map((row) => (
+                <tr className={dataTableBodyRow} key={row.feature}>
+                  <th className={`${dataTableTd} font-medium text-brand`} scope="row">
+                    {row.feature}
+                  </th>
+                  {row.values.map((value, index) => (
+                    <td className={dataTableTd} key={`${row.feature}-${index}`}>
+                      {value}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </TableScroller>
       </div>
     </div>
   );

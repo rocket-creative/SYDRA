@@ -17,7 +17,7 @@ import {
 import { EDITORIAL } from "@/lib/images";
 import { faqPageJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
-import { CALL_CTA_LABEL } from "@/lib/case-review";
+import { CALL_CTA_LABEL, caseReviewUrl } from "@/lib/case-review";
 import { textStyles } from "@/lib/typography";
 
 export const metadata = PAGE_METADATA.faq;
@@ -103,7 +103,11 @@ export default function FaqPage() {
   return (
     <>
       <FaqPageJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.faq]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.faq]}
+        stickyCtaHref={caseReviewUrl("faq-sticky")}
+      >
         <Section ariaLabelledby="heading-faq" tone="white">
           <header className="max-w-2xl">
             <h1 className="type-h1 text-brand" id="heading-faq">

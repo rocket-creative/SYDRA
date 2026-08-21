@@ -66,10 +66,13 @@ export function StickyPageCta({
   const hideClass = hideAt === "md" ? "md:hidden" : "lg:hidden";
 
   return (
-    <div className={`fixed inset-x-0 bottom-0 z-40 pb-safe-bottom ${hideClass}`} data-sticky-cta>
-      <div className="flex h-14 items-center rounded-t-[4px] bg-[var(--color-hero)] text-white">
+    <div
+      className={`fixed inset-x-0 bottom-0 z-40 pb-safe-bottom pl-[max(0px,env(safe-area-inset-left))] pr-[max(0px,env(safe-area-inset-right))] ${hideClass}`}
+      data-sticky-cta
+    >
+      <div className="flex min-h-14 items-stretch rounded-t-[4px] bg-[var(--color-hero)] text-white">
         <a
-          className="flex h-full flex-1 items-center justify-center px-3 text-center text-[13px] font-normal uppercase tracking-[0.08em] text-white"
+          className="flex min-h-14 flex-1 items-center justify-center px-3 py-2 text-center text-[12px] font-normal uppercase leading-tight tracking-[0.08em] text-white sm:text-[13px]"
           href={href}
           onClick={() => track("cta_primary_click", { placement })}
         >
@@ -77,7 +80,7 @@ export function StickyPageCta({
         </a>
         {secondaryHref && secondaryLabel ? (
           <a
-            className="flex h-full flex-1 items-center justify-center border-l border-white/25 px-3 text-center text-[13px] font-normal uppercase tracking-[0.08em] text-white/90"
+            className="flex min-h-14 flex-1 items-center justify-center border-l border-white/25 px-3 py-2 text-center text-[12px] font-normal uppercase leading-tight tracking-[0.08em] text-white/90 sm:text-[13px]"
             href={secondaryHref}
             onClick={() => track("cta_secondary_click", { placement })}
           >
@@ -86,7 +89,7 @@ export function StickyPageCta({
         ) : null}
         <button
           aria-label="Dismiss"
-          className="flex h-full w-11 shrink-0 items-center justify-center text-white/80 hover:text-white"
+          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center text-white/80 hover:text-white"
           type="button"
           onClick={() => {
             try {

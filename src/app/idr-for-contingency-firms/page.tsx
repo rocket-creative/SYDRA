@@ -32,6 +32,7 @@ import {
   medicallyReviewedWebPageJsonLd,
   serviceJsonLd,
 } from "@/lib/seo/json-ld";
+import { caseReviewUrl } from "@/lib/case-review";
 import { PAGE_METADATA } from "@/lib/seo/metadata";
 import { textStyles } from "@/lib/typography";
 
@@ -65,7 +66,11 @@ export default function IdrForContingencyFirmsPage() {
   return (
     <>
       <IdrForContingencyFirmsJsonLd />
-      <SydraPageShell banded breadcrumb={[...BREADCRUMBS.idrForContingencyFirms]}>
+      <SydraPageShell
+        banded
+        breadcrumb={[...BREADCRUMBS.idrForContingencyFirms]}
+        stickyCtaHref={caseReviewUrl("idr-for-contingency-firms-sticky")}
+      >
         <Section ariaLabelledby="heading-idr-for-contingency" tone="white">
           <header className="prose-measure">
             <p className="type-caption mb-4 uppercase tracking-[0.12em] text-body/70">

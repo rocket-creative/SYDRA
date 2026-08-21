@@ -20,23 +20,27 @@ export function FullServiceBanner({ variant = "default" }: FullServiceBannerProp
 
   if (variant === "footer") {
     return (
-      <aside className="border-t border-white/15 px-6 py-8 md:px-10">
-        <p className={`${textStyles.bodyMeasure} text-[15px] text-white/85`}>
-          {PEER_LINE}{" "}
-          <CtaLink className="!text-white hover:!text-white/75" href={url}>
-            {CASE_REVIEW_CTA}
-          </CtaLink>
-        </p>
+      <aside className="border-t border-white/15 py-8">
+        <div className="mx-auto max-w-[1200px] px-4 md:px-6 lg:px-8">
+          <p className={`${textStyles.bodyMeasure} text-[15px] text-white/85`}>
+            {PEER_LINE}{" "}
+            <CtaLink className="!text-white hover:!text-white/75" href={url}>
+              {CASE_REVIEW_CTA}
+            </CtaLink>
+          </p>
+        </div>
       </aside>
     );
   }
 
   if (variant === "subtle") {
     return (
-      <aside className="border-t border-rule bg-neutral-section px-6 py-8 md:px-10">
-        <p className={`${textStyles.bodyMeasure}`}>
-          {PEER_LINE} <CtaLink href={url}>{CASE_REVIEW_CTA}</CtaLink>
-        </p>
+      <aside className="border-t border-rule bg-neutral-section py-8">
+        <div className="mx-auto max-w-[1200px] px-4 md:px-6 lg:px-8">
+          <p className={`${textStyles.bodyMeasure}`}>
+            {PEER_LINE} <CtaLink href={url}>{CASE_REVIEW_CTA}</CtaLink>
+          </p>
+        </div>
       </aside>
     );
   }
@@ -46,19 +50,21 @@ export function FullServiceBanner({ variant = "default" }: FullServiceBannerProp
       aria-labelledby="heading-full-service"
       className="border-y border-rule bg-hero-gradient py-10 md:py-12"
     >
-      <div className="prose-measure px-6 md:px-10">
-        <h2 className="text-lg font-medium text-white" id="heading-full-service">
-          Or have every claim handled for you.
-        </h2>
-        <p className="mt-3 type-body text-white/85">
-          {PEER_LINE} Sydra Full Service identifies what qualifies, assembles the submissions, files
-          them, and manages every deadline. Priced per claim or by subscription, never a percentage
-          of what you recover. Start with a free claim review.
-        </p>
-        <div className="mt-6">
-          <Button href={url} showArrow variant="solidOnDark">
-            {CASE_REVIEW_CTA}
-          </Button>
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6 lg:px-8">
+        <div className="prose-measure">
+          <h2 className="text-lg font-medium text-white" id="heading-full-service">
+            Or have every claim handled for you.
+          </h2>
+          <p className="mt-3 type-body text-white/85">
+            {PEER_LINE} Sydra Full Service identifies what qualifies, assembles the submissions, files
+            them, and manages every deadline. Priced per claim or by subscription, never a percentage
+            of what you recover. Start with a free claim review.
+          </p>
+          <div className="mt-6">
+            <Button href={url} showArrow variant="solidOnDark">
+              {CASE_REVIEW_CTA}
+            </Button>
+          </div>
         </div>
       </div>
     </aside>

@@ -27,7 +27,7 @@ const footerNavLink =
 export function SydraFooter() {
   const email = getSalesEmail();
   return (
-    <footer className="border-t border-rule bg-white px-4 py-14 text-brand md:px-10">
+    <footer className="border-t border-rule bg-white pt-14 pb-[calc(3.5rem+env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] text-brand md:pl-[max(2.5rem,env(safe-area-inset-left))] md:pr-[max(2.5rem,env(safe-area-inset-right))]">
       <div className="mx-auto max-w-[1280px]">
         {/* Decorative: the brand name is announced by the paragraph below it. */}
         <Image

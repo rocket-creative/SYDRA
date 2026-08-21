@@ -15,6 +15,7 @@ import {
   dataTableHeadRow,
   dataTableTd,
   dataTableTh,
+  TableScroller,
 } from "@/components/ui/data-table";
 import { Section } from "@/components/ui/section";
 import { getComparison } from "@/lib/idr/comparisons";
@@ -108,8 +109,11 @@ export default async function ComparePage({ params }: PageProps) {
 
           {/* Desktop: full comparison table. */}
           <div className="hidden md:block">
-            <table className={dataTableClass}>
-              <caption className="sr-only">{comparison.title}</caption>
+            <TableScroller labelledBy="heading-compare-table">
+              <table className={dataTableClass}>
+                <caption className="sr-only" id="heading-compare-table">
+                  {comparison.title}
+                </caption>
               <thead>
                 <tr className={dataTableHeadRow}>
                   <th className={dataTableTh} scope="col">
@@ -134,7 +138,8 @@ export default async function ComparePage({ params }: PageProps) {
                   </tr>
                 ))}
               </tbody>
-            </table>
+              </table>
+            </TableScroller>
           </div>
           {comparison.belowTable ? (
             <p className={`${textStyles.bodyMeasure} mt-8`}>{comparison.belowTable}</p>

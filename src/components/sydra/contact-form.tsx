@@ -30,7 +30,10 @@ export function SydraContactForm() {
         </div>
         <p className="mt-6 text-sm text-body">
           Prefer email?{" "}
-          <a className="text-brand underline decoration-rule underline-offset-4" href={salesMailtoHref()}>
+          <a
+            className="inline-flex min-h-12 items-center text-brand underline decoration-rule underline-offset-4"
+            href={salesMailtoHref()}
+          >
             {getSalesEmail()}
           </a>
         </p>
@@ -38,7 +41,7 @@ export function SydraContactForm() {
           <p className="mt-3 text-sm text-body">
             Or call{" "}
             <a
-              className="text-brand underline decoration-rule underline-offset-4"
+              className="inline-flex min-h-12 items-center text-brand underline decoration-rule underline-offset-4"
               href={phoneTel}
             >
               {phone}

@@ -35,7 +35,7 @@ const SUPPORTING_LINE =
  * they have seen Sydra read a claim of theirs.
  */
 const CLAIM_REVIEW_LINE =
-  "Not ready to talk? Send one denied out-of-network EOB instead and you'll get a written IDR eligibility check and a dollar estimate back within one business day.";
+  "Not ready to talk? Send one denied out of network EOB instead and you'll get a written IDR eligibility check and a dollar estimate back within one business day.";
 
 type ConversionCtaPairProps = {
   placement: CtaPlacement;

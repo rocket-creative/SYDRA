@@ -1,3 +1,4 @@
+import { TableScroller } from "@/components/ui/data-table";
 import { CLAIM_REVIEW_SAMPLE } from "@/lib/content/claim-review-sample";
 import { textStyles } from "@/lib/typography";
 
@@ -7,9 +8,17 @@ type FactRow = {
   emphasize?: boolean;
 };
 
-function FactList({ rows, caption }: { rows: readonly FactRow[]; caption: string }) {
+function FactList({
+  rows,
+  caption,
+  labelledBy,
+}: {
+  rows: readonly FactRow[];
+  caption: string;
+  labelledBy: string;
+}) {
   return (
-    <div className="overflow-x-auto">
+    <TableScroller labelledBy={labelledBy}>
       <table className="w-full min-w-[18rem] border-collapse text-left">
         <caption className="sr-only">{caption}</caption>
         <tbody>
@@ -30,7 +39,7 @@ function FactList({ rows, caption }: { rows: readonly FactRow[]; caption: string
           ))}
         </tbody>
       </table>
-    </div>
+    </TableScroller>
   );
 }
 
@@ -74,7 +83,11 @@ export function ClaimReviewSampleDocument() {
           The money
         </h2>
         <div className="mt-4">
-          <FactList caption="Sample claim money" rows={sample.money} />
+          <FactList
+            caption="Sample claim money"
+            labelledBy="heading-sample-money"
+            rows={sample.money}
+          />
         </div>
         <p className="mt-4 type-body text-body">{sample.moneyNote}</p>
       </section>
@@ -84,7 +97,11 @@ export function ClaimReviewSampleDocument() {
           The clock
         </h2>
         <div className="mt-4">
-          <FactList caption="Sample claim deadlines" rows={sample.clock} />
+          <FactList
+            caption="Sample claim deadlines"
+            labelledBy="heading-sample-clock"
+            rows={sample.clock}
+          />
         </div>
         <blockquote className="mt-6 border-l-2 border-[var(--color-accent)] pl-5">
           <p className="font-medium text-brand">{sample.clockCallout}</p>

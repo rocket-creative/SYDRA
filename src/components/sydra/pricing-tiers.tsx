@@ -6,6 +6,7 @@ import {
   dataTableHeadRow,
   dataTableTd,
   dataTableTh,
+  TableScroller,
 } from "@/components/ui/data-table";
 import { Section } from "@/components/ui/section";
 import {
@@ -135,7 +136,9 @@ function TierBlock({
 function ComparisonTable() {
   return (
     <div className="mt-16 border-t border-rule pt-12">
-      <h3 className={textStyles.subsectionTitle}>Compare plans</h3>
+      <h3 className={textStyles.subsectionTitle} id="heading-compare-plans">
+        Compare plans
+      </h3>
 
       {/* Mobile: stacked rows so a four column table never forces overflow at 360. */}
       <div className="mt-8 space-y-4 md:hidden">
@@ -167,41 +170,43 @@ function ComparisonTable() {
       </div>
 
       {/* Desktop: full comparison table. */}
-      <div className="mt-8 hidden md:block">
-        <table className={dataTableClass}>
-          <thead>
-            <tr className={dataTableHeadRow}>
-              <th className={dataTableTh} scope="col">
-                Feature
-              </th>
-              <th className={dataTableTh} scope="col">
-                Self Serve
-              </th>
-              <th className={`${dataTableTh} text-[var(--color-accent)]`} scope="col">
-                + Support
-              </th>
-              <th className={dataTableTh} scope="col">
-                Full Service
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {TIER_COMPARISON.map((row) => (
-              <tr key={row.feature} className={dataTableBodyRow}>
-                <td className={dataTableTd}>{row.feature}</td>
-                <td className={dataTableTd}>
-                  <ComparisonCellDisplay value={row.basic} />
-                </td>
-                <td className={dataTableTd}>
-                  <ComparisonCellDisplay value={row.plus} />
-                </td>
-                <td className={dataTableTd}>
-                  <ComparisonCellDisplay value={row.pro} />
-                </td>
+      <div className="hidden md:block">
+        <TableScroller labelledBy="heading-compare-plans">
+          <table className={dataTableClass}>
+            <thead>
+              <tr className={dataTableHeadRow}>
+                <th className={dataTableTh} scope="col">
+                  Feature
+                </th>
+                <th className={dataTableTh} scope="col">
+                  Self Serve
+                </th>
+                <th className={`${dataTableTh} text-[var(--color-accent)]`} scope="col">
+                  + Support
+                </th>
+                <th className={dataTableTh} scope="col">
+                  Full Service
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {TIER_COMPARISON.map((row) => (
+                <tr key={row.feature} className={dataTableBodyRow}>
+                  <td className={dataTableTd}>{row.feature}</td>
+                  <td className={dataTableTd}>
+                    <ComparisonCellDisplay value={row.basic} />
+                  </td>
+                  <td className={dataTableTd}>
+                    <ComparisonCellDisplay value={row.plus} />
+                  </td>
+                  <td className={dataTableTd}>
+                    <ComparisonCellDisplay value={row.pro} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </TableScroller>
       </div>
     </div>
   );

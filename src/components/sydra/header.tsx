@@ -58,7 +58,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       className={`animate-nav-in sticky top-0 z-[100] pt-[max(0.5rem,env(safe-area-inset-top))] transition-[background-color,border-color] duration-300 ${shellClass}`}
     >
       <div
-        className={`mx-auto flex max-w-[1280px] items-center gap-2 px-4 py-3 sm:gap-3 md:gap-6 md:px-10 md:py-4 ${
+        className={`mx-auto flex max-w-[1280px] items-center gap-2 py-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:gap-3 md:gap-6 md:py-4 md:pl-[max(2.5rem,env(safe-area-inset-left))] md:pr-[max(2.5rem,env(safe-area-inset-right))] ${
           isCompact ? "lg:py-1.5" : ""
         }`}
       >
@@ -122,7 +122,7 @@ export function SydraHeader({ variant = "default", borderless = false }: SydraHe
       {!isFunnel ? (
         <nav
           aria-label="Primary"
-          className={`mx-auto hidden max-w-[1280px] select-none gap-x-6 border-t border-rule px-4 py-1.5 md:px-10 lg:flex ${
+          className={`mx-auto hidden max-w-[1280px] select-none gap-x-6 border-t border-rule py-1.5 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] md:pl-[max(2.5rem,env(safe-area-inset-left))] md:pr-[max(2.5rem,env(safe-area-inset-right))] lg:flex ${
             isCompact ? "lg:py-0.5" : "lg:py-3"
           }`}
         >

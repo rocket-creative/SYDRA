@@ -27,6 +27,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
   const mounted = useIsHydrated();
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
 
   const close = useCallback(() => {
@@ -72,6 +73,15 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
       }
     };
 
+    const inerted: HTMLElement[] = [];
+    const main = document.getElementById("main-content");
+    const footer = document.querySelector("footer");
+    [main, footer].forEach((el) => {
+      if (!(el instanceof HTMLElement)) return;
+      el.setAttribute("inert", "");
+      inerted.push(el);
+    });
+
     document.addEventListener("keydown", handleKeyDown);
     const firstLink = panelRef.current?.querySelector<HTMLElement>("a[href]");
     firstLink?.focus();
@@ -81,6 +91,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
       if (header instanceof HTMLElement) {
         header.style.zIndex = previousHeaderZ;
       }
+      inerted.forEach((el) => el.removeAttribute("inert"));
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open, close]);
@@ -121,6 +132,7 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
         ? createPortal(
             <>
               <button
+                ref={overlayRef}
                 aria-hidden
                 className="fixed inset-0 z-[200] bg-black/30 lg:hidden"
                 onClick={close}
@@ -130,7 +142,9 @@ export function MobileNavDrawer({ nav, linkClass, signInHref }: MobileNavDrawerP
               <nav
                 ref={panelRef}
                 aria-label="Primary mobile"
-                className="fixed inset-y-0 right-0 z-[210] flex w-[min(100%,20rem)] flex-col border-l border-rule bg-white pt-[max(0.5rem,env(safe-area-inset-top))] pb-safe-bottom shadow-lg lg:hidden"
+                aria-modal="true"
+                role="dialog"
+                className="fixed inset-y-0 right-0 z-[210] flex w-[min(100%,20rem)] flex-col border-l border-rule bg-white pt-[max(0.5rem,env(safe-area-inset-top))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-safe-bottom shadow-lg lg:hidden"
                 id={panelId}
               >
                 <div className="flex items-center justify-between border-b border-rule px-5 py-4">

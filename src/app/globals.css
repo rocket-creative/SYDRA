@@ -150,7 +150,7 @@ textarea,
 button,
 summary,
 a {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: calc(6.5rem + env(safe-area-inset-top, 0px));
 }
 
 /*
@@ -160,12 +160,12 @@ a {
  * utility has equal specificity and would lose on source order.
  */
 .anchor-under-header {
-  scroll-margin-top: 7rem;
+  scroll-margin-top: calc(7.5rem + env(safe-area-inset-top, 0px));
 }
 
 @media (min-width: 1024px) {
   .anchor-under-header {
-    scroll-margin-top: 11rem;
+    scroll-margin-top: calc(11.5rem + env(safe-area-inset-top, 0px));
   }
 }
 
@@ -628,7 +628,7 @@ h4 {
 
 /*
  * Superscript footnote marker. The glyph has to stay small to read as a
- * footnote, so the tap area is widened to the WCAG 2.5.8 AA minimum of 24px with
+ * footnote, so the tap area is widened to the project 44px tap floor with
  * a centred pseudo-element instead of padding, which would shift the cell.
  */
 .footnote-marker {
@@ -641,8 +641,8 @@ h4 {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   transform: translate(-50%, -50%);
 }
 
